@@ -116,7 +116,7 @@ export function handleElectroFishConfirm(input) {
     const scale = { ...SPECIAL_ITEMS.lightning_scale };
     addItem(scale);
     storyMsg =
-      `Bạn thả 【${formatQualityText(fishDef.name, rarity)}】 nhẹ nhàng vào bể kính……\n\n` +
+      `Bạn thả [${formatQualityText(fishDef.name, rarity)}] nhẹ nhàng vào bể kính……\n\n` +
       `Ngay khi cá chạm nước, điện quang bắn tung tóe! Dòng điện xèo xèo quấn lấy thân cá, nhưng không điện chết nó.\n` +
       `${formatQualityText(fishDef.name, rarity)} rung lên dữ dội trong dòng điện, vảy bắt đầu khúc xạ ánh sáng xanh trắng chói lòa.\n` +
       `Một lát sau, cá chìm xuống đáy bể, một chiếc vảy lấp lánh tia điện từ từ nổi lên——\n\n` +
@@ -125,7 +125,7 @@ export function handleElectroFishConfirm(input) {
     const scale = { ...SPECIAL_ITEMS.thunder_scale };
     addItem(scale);
     storyMsg =
-      `Bạn thả 【${formatQualityText(fishDef.name, rarity)}】 vào bể kính……\n\n` +
+      `Bạn thả [${formatQualityText(fishDef.name, rarity)}] vào bể kính……\n\n` +
       `Ầm——!\n` +
       `Toàn bộ nước trong bể sôi sùng sục trong nháy mắt! Dòng điện cuồng bạo như rồng rắn múa wild trong nước, thân ${formatQualityText(fishDef.name, rarity)} bị sấm sét bao bọc.\n` +
       `Nó không những không chết, mà còn biến đổi trong sấm sét——vảy bong ra, ngưng tụ thành một chiếc vảy ánh kim sẫm.\n` +
@@ -133,7 +133,7 @@ export function handleElectroFishConfirm(input) {
       `⚡ Nhận được vật phẩm đặc biệt: ${formatQualityText(SPECIAL_ITEMS.thunder_scale.name, "legendary")}!`;
   } else {
     storyMsg =
-      `Bạn thả 【${formatQualityText(fishDef.name, rarity)}】 vào bể kính……\n\n` +
+      `Bạn thả [${formatQualityText(fishDef.name, rarity)}] vào bể kính……\n\n` +
       `Rắc! Dòng điện tức thì xuyên qua thân cá. ${formatQualityText(fishDef.name, rarity)} giật giật vài cái rồi lật trắng bụng.\n` +
       `Xem ra cần giống tốt hơn mới có thể sống sót trong nước có điện này.`;
   }

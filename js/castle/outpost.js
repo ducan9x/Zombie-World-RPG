@@ -33,13 +33,13 @@ export function handleCastleOutpost() {
     }
     setPhase("explore");
     refreshCastleOutpost();
-    getState().currentMap = MAPS.find(m => m.id === "末日城堡");
+    getState().currentMap = MAPS.find(m => m.id === "lau_dai_tan_the");
     return;
   }
   setPhase("explore");
   setStory("Một tòa thành hùng vĩ và uy nghiêm sừng sững ở cuối tầm mắt, tháp đá góc cạnh sắc nhọn đâm thủng bầu trời xám xịt ngày tận thế, tường thành khổng lồ bằng đá nguyên khối xây nên, trên tường còn lưu lại họa tiết chạm khắc tinh xảo từ trước ngày tận thế cùng vết bỏng chiến tranh, im lặng kể lại sự huy hoàng và quyền lực tột đỉnh ngày xưa. Cổng thành cao lớn trang nghiêm, cổng sắt đóng chặt, hai bên đứng nghiêm hai lính gác toàn trang bị. Họ mặc giáp tăng cường, cầm vũ khí sắc lạnh, dáng đứng thẳng như thông, mắt sắc như chim ưng, toát ra áp lực không thể xâm phạm, đang cẩn thận quan sát, phân biệt từng người sống sót dám lại gần, không dám lơ là chút nào. Bên ngoài tường thành, trên công trường rộng, bụi bay mù mịt, một nhóm người sống sót rách rưới, mặt vàng da bủng đang bị thúc ép lao động, khiêng đá đầm đất, tu sửa công sự, trong nắng gắt và mệt mỏi tê liệt lao đầu làm việc, mồ hôi thấm ướt quần áo mỏng manh, từng chút mồ hôi công sức đều đang đắp nên bức tường của vương quốc tận thế. Không xa, bảng hiệu mạ vàng *Ngân hàng Thành Lucius* đặc biệt chói mắt giữa trời đất xám xịt, kiến trúc đá kiểu Âu nghiêm chỉnh toát ra cảm giác trật tự nghiêm khắc. Trước cửa và trong sảnh, vài quý tộc ăn mặc hoa lệ, vải vóc tinh xảo ung dung xoay xở, họ đeo trang sức biểu tượng thân phận, khẽ trò chuyện, tính toán tiền bạc, trên phế tích tận thế vẫn tiến hành vay mượn, giao dịch và đấu tranh quyền lực, hố sâu giàu nghèo và giai cấp, ở đây được thể hiện đến tận cùng.");
   refreshCastleOutpost();
-  getState().currentMap = MAPS.find(m => m.id === "末日城堡");
+  getState().currentMap = MAPS.find(m => m.id === "lau_dai_tan_the");
 }
 
 export function refreshCastleOutpost() {
@@ -58,7 +58,7 @@ export function refreshCastleOutpost() {
     { text: "Làm thân phận", action: "castle_identity" },
     { text: "Làm việc tại thành", action: "castle_work" },
   ]);
-  getState().currentMap = MAPS.find(m => m.id === "末日城堡");
+  getState().currentMap = MAPS.find(m => m.id === "lau_dai_tan_the");
 }
 
 export function handleCastleExploreBlocked() {

@@ -35,12 +35,12 @@ export function triggerEnding(endingId) {
 
   state._lastTriggeredEnding = endingId;
 
-  const story = ENDING_STORIES[endingId] || `结局：${endingId}`;
+  const story = ENDING_STORIES[endingId] || `Kết cục: ${endingId}`;
   let finalStory = story;
   if (endingId === "ending_999") {
     const state2 = getState();
     if (state2.backpack && state2.backpack.capacity >= 68) {
-      finalStory = story.replace(/获得【次元收纳背包】（68格）！/, "");
+      finalStory = story.replace(/Nhận được [Balo Vũ Trụ] (68 ô)!/, "");
     }
   }
 
@@ -71,12 +71,12 @@ export function triggerEnding(endingId) {
   if (endingId === "ending_death" || endingId === "ending_space" || endingId === "ending_hope" || endingId === "ending_food" || endingId === "ending_elopement" || endingId === "ending_mermaid") {
     state.gameOver = true;
     setOptions([
-      { text: "重新开始", action: "ending_restart" },
+      { text: "Chơi lại", action: "ending_restart" },
     ]);
   } else {
     setOptions([
-      { text: "重新开始", action: "ending_restart" },
-      { text: "继续生存", action: "ending_continue" },
+      { text: "Chơi lại", action: "ending_restart" },
+      { text: "Tiếp tục sống sót", action: "ending_continue" },
     ]);
   }
 }
@@ -96,7 +96,7 @@ export function checkEndingTriggerAfterAction() {
     const allDone = state.nurseZombieRescued &&
       state.liuruyanRescued &&
       state.outlawKilled &&
-      state.stats && state.stats.bossesDefeated && state.stats.bossesDefeated.includes("黑影") &&
+      state.stats && state.stats.bossesDefeated && state.stats.bossesDefeated.includes("Hắc Ảnh") &&
       state.zombieKingDefeated &&
       state.doctorQuest3Done;
     if (allDone) {

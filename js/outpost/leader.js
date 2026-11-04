@@ -55,7 +55,7 @@ export function handleNpcLeader() {
   }
   const hasBadge = hasDawnBadge(state);
   const affinity = state.npcAffinity.leader || 0;
-  setStory(`【Thủ lĩnh căn cứ】\n\nThủ lĩnh căn cứ là một người đàn ông trung niên đầy gió sương, ánh mắt kiên nghị. Anh ấy đánh giá bạn, khẽ gật đầu.\n\nĐiểm thân mật: ${affinity}/${AFFINITY_MAX.leader}${hasBadge ? "\n\nBạn đã gia nhập Dawn Base, đang đeo huy chương Dawn." : ""}`);
+  setStory(`[Thủ lĩnh căn cứ]\n\nThủ lĩnh căn cứ là một người đàn ông trung niên đầy gió sương, ánh mắt kiên nghị. Anh ấy đánh giá bạn, khẽ gật đầu.\n\nĐiểm thân mật: ${affinity}/${AFFINITY_MAX.leader}${hasBadge ? "\n\nBạn đã gia nhập Dawn Base, đang đeo huy chương Dawn." : ""}`);
   showLeaderOptions();
 }
 
@@ -91,7 +91,7 @@ export function handleLeaderChat() {
   addNpcAffinity("leader", GAME_CONSTANTS.OUTPOST.LEADER_CHAT_AFFINITY);
   const chatLines = LEADER_DIALOGUES;
   const line = chatLines[Math.floor(Math.random() * chatLines.length)];
-  setStory(`Thủ lĩnh tranh thủ lúc bận rộn trò chuyện với bạn vài câu: ${line}\n\nĐiểm thân mật +1（Hiện tại ${state.npcAffinity.leader}）`);
+  setStory(`Thủ lĩnh tranh thủ lúc bận rộn trò chuyện với bạn vài câu: ${line}\n\nĐiểm thân mật +1(Hiện tại ${state.npcAffinity.leader})`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -137,11 +137,11 @@ Anh ấy nhắm mắt, hít sâu một hơi:
 Thủ lĩnh lấy từ ngăn kéo ra một phong bì đã ngả vàng:
 "Tờ thư này tôi viết ba năm rồi, vẫn chưa đủ can đảm gửi đi. Bạn... có thể giúp tôi đưa cho cô ấy không?"
 
-📖 Nhận được【Thư gửi em gái】
+📖 Nhận được[Thư gửi em gái]
 
-Thủ lĩnh điểm thân mật +10（Hiện tại ${state.npcAffinity.leader}/${AFFINITY_MAX.leader}）
+Thủ lĩnh điểm thân mật +10(Hiện tại ${state.npcAffinity.leader}/${AFFINITY_MAX.leader})
 
-（Gợi ý：Giao thư cho hoàng hậu của lâu đài）`);
+(Gợi ý: Giao thư cho hoàng hậu của lâu đài)`);
     showLeaderOptions();
     return;
   }
@@ -168,7 +168,7 @@ Thủ lĩnh điểm thân mật +10（Hiện tại ${state.npcAffinity.leader}/$
 export function handleLeaderQuest2() {
   const state = getState();
   const hasReply = state.other.some(i => i.id === "queen_reply");
-  const baijiuCount = state.drinks.filter(i => i.id === "高度白酒").reduce((sum, i) => sum + (i.count || 1), 0);
+  const baijiuCount = state.drinks.filter(i => i.id === "ruou_cao_do").reduce((sum, i) => sum + (i.count || 1), 0);
   const needBaijiu = 5;
 
   if (!hasReply || baijiuCount < needBaijiu) {
@@ -184,7 +184,7 @@ export function handleLeaderQuest2() {
 
   const replyIdx = state.other.findIndex(i => i.id === "queen_reply");
   if (replyIdx !== -1) state.other.splice(replyIdx, 1);
-  removeItemById("drinks", "高度白酒", needBaijiu);
+  removeItemById("drinks", "ruou_cao_do", needBaijiu);
   markQuestDone("leaderQuest2");
   addNpcAffinity("leader", 20);
   advanceTime(3);
@@ -208,7 +208,7 @@ Các bạn uống cả đêm. Anh ấy kể rất nhiều chuyện trước đâ
 
 "Anh, em không hận anh. Nhưng có những vết thương, thời gian cũng không chữa lành được."
 
-Thủ lĩnh điểm thân mật +20（Hiện tại ${state.npcAffinity.leader}/${AFFINITY_MAX.leader}）
+Thủ lĩnh điểm thân mật +20(Hiện tại ${state.npcAffinity.leader}/${AFFINITY_MAX.leader})
 
 Thời gian tiến 3 lượt.`);
   if (!state.gameOver) showLeaderOptions();
@@ -216,7 +216,7 @@ Thời gian tiến 3 lượt.`);
 
 export function handleLeaderQuest3() {
   const state = getState();
-  const serumCount = state.medicine.filter(i => i.id === "万能针剂").reduce((sum, i) => sum + (i.count || 1), 0);
+  const serumCount = state.medicine.filter(i => i.id === "tiem_van_nang").reduce((sum, i) => sum + (i.count || 1), 0);
   const needSerum = 3;
 
   if (serumCount < needSerum) {
@@ -225,7 +225,7 @@ export function handleLeaderQuest3() {
     return;
   }
 
-  removeItemById("medicine", "万能针剂", needSerum);
+  removeItemById("medicine", "tiem_van_nang", needSerum);
   markQuestDone("leaderQuest3");
   addNpcAffinity("leader", 30);
   addItem({ id: "9×19mm", name: "9×19mm", type: "ammo", count: 100 });
@@ -247,10 +247,10 @@ Anh ấy dừng lại:
 
 Bạn mở hộp, bên trong là một chiếc mặt dây chuyền tinh xảo, trên đó khắc một bông hoa hướng dương nhỏ.
 
-🏹 Nhận được【9×19mm】×100!
-📿 Nhận được【Vật đính ước】!
+🏹 Nhận được[9×19mm]×100!
+📿 Nhận được[Vật đính ước]!
 
-Thủ lĩnh điểm thân mật +30（Hiện tại ${state.npcAffinity.leader}/${AFFINITY_MAX.leader}）
+Thủ lĩnh điểm thân mật +30(Hiện tại ${state.npcAffinity.leader}/${AFFINITY_MAX.leader})
 
 Thời gian tiến 2 lượt.`);
   if (!state.gameOver) showLeaderOptions();
@@ -270,12 +270,12 @@ export function handleLeaderHonor() {
 
   if (!allMaxed) {
     const missing = [];
-    if (vAffinity < AFFINITY_MAX.v) missing.push(`Cô V（${vAffinity}/${AFFINITY_MAX.v}）`);
-    if (xiaohanAffinity < AFFINITY_MAX.xiaohan) missing.push(`Tô Tiểu Hàm（${xiaohanAffinity}/${AFFINITY_MAX.xiaohan}）`);
-    if (liliAffinity < AFFINITY_MAX.lili) missing.push(`Lilith（${liliAffinity}/${AFFINITY_MAX.lili}）`);
-    if ((state.npcAffinity.leader || 0) < AFFINITY_MAX.leader) missing.push(`Bản thân thủ lĩnh（${state.npcAffinity.leader || 0}/${AFFINITY_MAX.leader}）`);
+    if (vAffinity < AFFINITY_MAX.v) missing.push(`Cô V(${vAffinity}/${AFFINITY_MAX.v})`);
+    if (xiaohanAffinity < AFFINITY_MAX.xiaohan) missing.push(`Tô Tiểu Hàm(${xiaohanAffinity}/${AFFINITY_MAX.xiaohan})`);
+    if (liliAffinity < AFFINITY_MAX.lili) missing.push(`Lilith(${liliAffinity}/${AFFINITY_MAX.lili})`);
+    if ((state.npcAffinity.leader || 0) < AFFINITY_MAX.leader) missing.push(`Bản thân thủ lĩnh(${state.npcAffinity.leader || 0}/${AFFINITY_MAX.leader})`);
 
-    setStory(`Thủ lĩnh lắc đầu, giọng mang theo sự tiếc nuối: \"Người của căn cứ vẫn chưa đủ tin tưởng bạn. Bạn xem, ${missing.join("、")}——niềm tin của họ dành cho bạn vẫn chưa đủ. Vị trí Thuyền trưởng tiên phong Dawn, cần được mọi người trong căn cứ công nhận mới được. Hãy đi nói chuyện với họ đi, giúp đỡ từng người, để họ chân thành tiếp nhận bạn. Đợi đến khi tất cả đều tin tưởng bạn, hãy đến tìm tôi.\"`);
+    setStory(`Thủ lĩnh lắc đầu, giọng mang theo sự tiếc nuối: \"Người của căn cứ vẫn chưa đủ tin tưởng bạn. Bạn xem, ${missing.join(", ")}——niềm tin của họ dành cho bạn vẫn chưa đủ. Vị trí Thuyền trưởng tiên phong Dawn, cần được mọi người trong căn cứ công nhận mới được. Hãy đi nói chuyện với họ đi, giúp đỡ từng người, để họ chân thành tiếp nhận bạn. Đợi đến khi tất cả đều tin tưởng bạn, hãy đến tìm tôi.\"`);
     showLeaderOptions();
     return;
   }
@@ -295,7 +295,7 @@ export function handleLeaderHonor() {
 
   setStory(`Thủ lĩnh nhìn bạn, trong mắt lóe lên ánh sáng vui mừng. Anh ấy đứng dậy, trang trọng đi đến trước mặt bạn.
 
-"${state.name}，từ khi bạn đến Dawn Base, mỗi người ở đây đều bị bạn cảm động. Trái tim lạnh giá của Cô V được bạn sưởi ấm, nụ cười của Tô Tiểu Hàm vì bạn mà càng rạng rỡ, tính cách tinh nghịch của Lilith cũng nghe lời bạn... ngay cả tôi, một ông già, cũng nhìn thấy hy vọng của ngày tận thế trên người bạn."
+"${state.name}, từ khi bạn đến Dawn Base, mỗi người ở đây đều bị bạn cảm động. Trái tim lạnh giá của Cô V được bạn sưởi ấm, nụ cười của Tô Tiểu Hàm vì bạn mà càng rạng rỡ, tính cách tinh nghịch của Lilith cũng nghe lời bạn... ngay cả tôi, một ông già, cũng nhìn thấy hy vọng của ngày tận thế trên người bạn."
 
 Anh ấy dừng lại, lấy từ trong ngực ra một huy chương phát ánh bạc, lại từ chiếc hộp phía sau lấy ra một khẩu súng trường mới tinh và vài hộp đạn.
 
@@ -307,10 +307,10 @@ Anh ấy trang trọng gắn huy chương lên ngực bạn, nhét vũ khí vào
 
 "Đi đi, dẫn dắt chúng tôi tiến về bình minh thực sự."
 
-Nhận được【Huy chương Thuyền trưởng Dawn】!
-Nhận được【Vector】+【9×19mm×60】!
+Nhận được[Huy chương Thuyền trưởng Dawn]!
+Nhận được[Vector]+[9×19mm×60]!
 
-（Gợi ý：Sau khi sở hữu huy chương Thuyền trưởng Dawn, sản lượng làm công và ăn xin tăng gấp đôi, tất cả dịch vụ của Lilith giảm nửa giá vĩnh viễn, nhưng không thể có bất kỳ thân phận lâu đài nào.）`);
+(Gợi ý: Sau khi sở hữu huy chương Thuyền trưởng Dawn, sản lượng làm công và ăn xin tăng gấp đôi, tất cả dịch vụ của Lilith giảm nửa giá vĩnh viễn, nhưng không thể có bất kỳ thân phận lâu đài nào.)`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -355,7 +355,7 @@ export function handleLeaderJoin() {
   cleanDualIdentity(state);
   if (!state.unlockedAchievements) state.unlockedAchievements = [];
   if (!state.unlockedAchievements.includes("dawn_member")) state.unlockedAchievements.push("dawn_member");
-  setStory("Thủ lĩnh trang trọng gắn một huy chương Dawn lên ngực bạn: \"Chào mừng gia nhập Dawn Base. Từ nay về sau, chúng ta là một gia đình.\"\n\nNhận được【Huy chương Dawn】!\n\n（Lưu ý：Sau khi gia nhập Dawn Base, bạn sẽ không thể vay tiền ở ngân hàng lâu đài, làm công ở lâu đài, hoặc xử lý thân phận quý tộc.）");
+  setStory("Thủ lĩnh trang trọng gắn một huy chương Dawn lên ngực bạn: \"Chào mừng gia nhập Dawn Base. Từ nay về sau, chúng ta là một gia đình.\"\n\nNhận được[Huy chương Dawn]!\n\n(Lưu ý: Sau khi gia nhập Dawn Base, bạn sẽ không thể vay tiền ở ngân hàng lâu đài, làm công ở lâu đài, hoặc xử lý thân phận quý tộc.)");
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -387,7 +387,7 @@ export function handleLeaderClaim() {
     return;
   }
   if ((state.npcAffinity.leader || 0) < AFFINITY_MAX.leader) {
-    setStory(`Thủ lĩnh cười: \"Điểm thân mật của bạn chưa đủ（${state.npcAffinity.leader}/${AFFINITY_MAX.leader}）, hãy giúp tôi làm thêm việc đi.\"`);
+    setStory(`Thủ lĩnh cười: \"Điểm thân mật của bạn chưa đủ(${state.npcAffinity.leader}/${AFFINITY_MAX.leader}), hãy giúp tôi làm thêm việc đi.\"`);
     showLeaderOptions();
     return;
   }
@@ -405,7 +405,7 @@ export function handleLeaderClaim() {
     const stats = gift.type === "melee"
       ? `${giftWeapon.damage} sát thương/${giftWeapon.durability} độ bền/${Math.round(giftWeapon.comboRate * 100)}% tỷ lệ liên kích`
       : `${giftWeapon.damage} sát thương/${giftWeapon.ammoType}`;
-    setStory(`Thủ lĩnh lấy từ chiếc hộp phía sau một món vũ khí: \"Đây là ${giftWeapon.name} mà tôi dùng hồi còn trong quân ngũ, theo tôi nhiều năm rồi. Giờ nó là của bạn.\"\n\nNhận được【${giftWeapon.name}】(${stats})!`);
+    setStory(`Thủ lĩnh lấy từ chiếc hộp phía sau một món vũ khí: \"Đây là ${giftWeapon.name} mà tôi dùng hồi còn trong quân ngũ, theo tôi nhiều năm rồi. Giờ nó là của bạn.\"\n\nNhận được[${giftWeapon.name}](${stats})!`);
   } else {
     setStory(`Thủ lĩnh muốn tặng bạn một ${giftWeapon.name}, nhưng balo của bạn đã đầy. Hãydọn một ít chỗ đi.`);
   }
@@ -439,7 +439,7 @@ export function handleLeaderDoGift(input) {
   }
   state.lastLeaderGiftDay = state.day;
   addNpcAffinity("leader", GAME_CONSTANTS.OUTPOST.LEADER_GIFT_AFFINITY);
-  setStory(`Bạn tặng một ${getItemDisplayName(item)}. Thủ lĩnh nhận xong gật đầu: \"Ừm, tôi nhận tấm lòng.\"\n\nĐiểm thân mật +1（Hiện tại ${state.npcAffinity.leader}）`);
+  setStory(`Bạn tặng một ${getItemDisplayName(item)}. Thủ lĩnh nhận xong gật đầu: \"Ừm, tôi nhận tấm lòng.\"\n\nĐiểm thân mật +1(Hiện tại ${state.npcAffinity.leader})`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();

@@ -52,9 +52,9 @@ function calculateIslandInterest(debt, overdueDays) {
 
 export function handleEnterIsland() {
   const state = getState();
-  const islandMap = MAPS.find(m => m.id === "小型岛屿");
+  const islandMap = MAPS.find(m => m.id === "dao_nho");
   state.currentMap = islandMap;
-  setLocation("小型岛屿");
+  setLocation("dao_nho");
 
   if (state.islandDebt) {
     const daysLeft = state.islandDebt.dueDay - state.day;
@@ -206,7 +206,7 @@ export function handleIslandExplore() {
   }
 
   advanceTime(1);
-  const wasFoggy = state.weather === "大雾";
+  const wasFoggy = state.weather === "suong_mu";
   if (wasFoggy) advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -215,9 +215,9 @@ export function handleIslandExplore() {
 
 export function handleIslandLeave() {
   const state = getState();
-  const portMap = MAPS.find(m => m.id === "江边港口码头");
+  const portMap = MAPS.find(m => m.id === "cang_ben_song");
   state.currentMap = portMap;
-  setLocation("江边港口码头");
+  setLocation("cang_ben_song");
   setStory("Bạn lái du thuyền quay về bến cảng sông.");
   advanceTime(1);
   updateStatusEffects();
@@ -282,7 +282,7 @@ export function handleIslandBank() {
     }
   }
 
-  let info = "🏦 【Ngân hàng đảo】\nNgân hàng hoàng gia do hoàng hậu mở\n\n";
+  let info = "🏦 [Ngân hàng đảo]\nNgân hàng hoàng gia do hoàng hậu mở\n\n";
   if (state.islandDebt) {
     const daysLeft = state.islandDebt.dueDay - state.day;
     info += `Nợ hiện tại: ${state.islandDebt.amount} royalcoin (còn ${daysLeft} ngày để trả)\n\n`;
@@ -444,7 +444,7 @@ export function handleIslandWelfare() {
   state.lastIslandWelfareDay = state.day;
   addRoyalCoins(reward);
   const rankName = getCastleRankName(state);
-  setStory(`✅ 【Phúc lợi trợ cấp】\n\nNhân viên kiểm tra thẻ thân phận của bạn: \"${rankName} các hạ, đây là trợ cấp quý tộc của ngài.\"\nBạn nhận được ${reward} royalcoin.\n\nRoyalcoin hiện tại: ${state.royalCoins}\nLần nhận tiếp theo: Ngày ${state.day + IC.WELFARE_COOLDOWN_DAYS}`);
+  setStory(`✅ [Phúc lợi trợ cấp]\n\nNhân viên kiểm tra thẻ thân phận của bạn: \"${rankName} các hạ, đây là trợ cấp quý tộc của ngài.\"\nBạn nhận được ${reward} royalcoin.\n\nRoyalcoin hiện tại: ${state.royalCoins}\nLần nhận tiếp theo: Ngày ${state.day + IC.WELFARE_COOLDOWN_DAYS}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -455,7 +455,7 @@ export function handleIslandOilTanker() {
   const state = getState();
   const IC = GAME_CONSTANTS.ISLAND;
   setPhase("island");
-  setStory(`⛽ 【Tàu chở dầu vương quốc】\n\nMột tàu dầu hoàng gia khổng lồ neo tại bến đảo, trên thân in huy hiệu hoàng gia.\nThuyền trưởng nhiệt tình đón: \"Chào mừng! Đây là trạm giao dịch xăng dầu chính thức của vương quốc.\"\n\n💰 Mua xăng: ${IC.OIL_TANKER_BUY_PRICE} royalcoin → 1 xăng\n♻️ Thu hồi xăng: 1 xăng → ${IC.OIL_TANKER_SELL_PRICE} royalcoin\n\nHiện có: ${state.royalCoins} royalcoin | ${state.gasoline} xăng`);
+  setStory(`⛽ [Tàu chở dầu vương quốc]\n\nMột tàu dầu hoàng gia khổng lồ neo tại bến đảo, trên thân in huy hiệu hoàng gia.\nThuyền trưởng nhiệt tình đón: \"Chào mừng! Đây là trạm giao dịch xăng dầu chính thức của vương quốc.\"\n\n💰 Mua xăng: ${IC.OIL_TANKER_BUY_PRICE} royalcoin → 1 xăng\n♻️ Thu hồi xăng: 1 xăng → ${IC.OIL_TANKER_SELL_PRICE} royalcoin\n\nHiện có: ${state.royalCoins} royalcoin | ${state.gasoline} xăng`);
   setOptions([
     { text: `Mua xăng (${IC.OIL_TANKER_BUY_PRICE}coin→1 xăng)`, action: "oil_tanker_buy" },
     { text: `Thu hồi xăng (1 xăng→${IC.OIL_TANKER_SELL_PRICE}coin)`, action: "oil_tanker_sell" },

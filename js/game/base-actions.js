@@ -20,15 +20,15 @@ import {
 export function handleBaseBuild() {
   setPhase("base_build");
   const state = getState();
-  setStory(`[${getBaseName(state.baseLevel)}] 你开始规划基地的建设方案……`);
+  setStory(`[${getBaseName(state.baseLevel)}] Bạn bắt đầu phác thảo kế hoạch xây dựng căn cứ……`);
   setOptions([
-    { text: "改造基地", action: "upgrade_base" },
-    { text: "种植作物", action: "plant_crop" },
-    { text: "查看耕地", action: "view_crops" },
-    { text: "收获作物", action: "harvest_crops" },
-    { text: "建造仓库", action: "build_warehouse" },
-    { text: "打开仓库", action: "open_warehouse" },
-    { text: "返回", action: "back_to_home" },
+    { text: "Cải tạo căn cứ", action: "upgrade_base" },
+    { text: "Trồng trọt", action: "plant_crop" },
+    { text: "Xem đất canh tác", action: "view_crops" },
+    { text: "Thu hoạch", action: "harvest_crops" },
+    { text: "Xây kho", action: "build_warehouse" },
+    { text: "Mở kho", action: "open_warehouse" },
+    { text: "Quay lại", action: "back_to_home" },
   ]);
 }
 

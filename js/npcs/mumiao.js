@@ -45,7 +45,7 @@ export function showMumiaoOptions() {
   const greeting = lines[Math.floor(Math.random() * lines.length)];
 
   let desc = config.desc;
-  desc += `\n\nHiện tạiđiểm thân mật: ${affinity}/${AFFINITY_MAX.mumiao}（${friendshipLabel}）`;
+  desc += `\n\nHiện tạiđiểm thân mật: ${affinity}/${AFFINITY_MAX.mumiao}(${friendshipLabel})`;
   desc += `\n\n${greeting}`;
 
   setPhase("npc_mumiao");
@@ -94,7 +94,7 @@ export function handleMumiaoBuySeeds() {
     }
   }
   if (addedSeeds.length > 0) {
-    let msg = `Mộc Miêu Miêu nhận lấy thuốc lá, từ vườn ươm chọn vài hạt giống đưa cho bạn: \"Cầm kỹ nhé, mỗi hạt giống đều không dễ dàng có được.\"\n\nNhận được: ${addedSeeds.join("、")}`;
+    let msg = `Mộc Miêu Miêu nhận lấy thuốc lá, từ vườn ươm chọn vài hạt giống đưa cho bạn: \"Cầm kỹ nhé, mỗi hạt giống đều không dễ dàng có được.\"\n\nNhận được: ${addedSeeds.join(", ")}`;
     if (anyFailed) {
       msg += "\n\n⚠️ Một phần hạt giống không thể cho vào vì balo đã đầy.";
     }
@@ -122,7 +122,7 @@ export function handleMumiaoTendField() {
   updateStatusEffects();
   checkDeath();
   let msg = "Bạn đi theo Mộc Miêu Miêu vào đất thử nghiệm, giúp cô ấy nhổ cỏ, tưới nước, xới đất. Cô ấy vừa làm vừa giảng cho bạn kỹ thuật trồng trọt.\n\n";
-  msg += `Mộc Miêu Miêuđiểm thân mật +${affinityGain}（Hiện tại ${getNpcAffinity("mumiao")}/${AFFINITY_MAX.mumiao}）\n\n`;
+  msg += `Mộc Miêu Miêuđiểm thân mật +${affinityGain}(Hiện tại ${getNpcAffinity("mumiao")}/${AFFINITY_MAX.mumiao})\n\n`;
   msg += `Thời gian tiến ${2} lượt.`;
   if (added) {
     msg += `\n\nKhi rời đi, Mộc Miêu Miêu đưa cho bạn một hạt ${seed.name}: \"Cái này cho bạn, coi như tiền công.\"`;
@@ -172,7 +172,7 @@ Mộc Miêu Miêu dường như nhìn thấu sự do dự của bạn, cô ấy 
 Cô ấy hái một chiếc huy chương từ trong vườn hoa đưa cho bạn:
 "Đây làđạo sư để lại cho tôi. Giờ thì, nó thuộc về bạn rồi."
 
-🌾 Nhận được【Huy chương bậc thầy nông nghiệp】`);
+🌾 Nhận được[Huy chương bậc thầy nông nghiệp]`);
   showMumiaoOptions();
 }
 
@@ -253,11 +253,11 @@ export function handleMumiaoBuriedPast() {
   if (!isQuestDone("mumiaoQuest1")) {
     opts.push({ text: "Cùng nhau đi dã ngoại", action: "mumiao_quest1" });
   } else if (!isQuestDone("mumiaoQuest2")) {
-    opts.push({ text: "Cùng nhau đi dã ngoại（đã hoàn thành）", action: "mumiao_buried_past", disabled: true });
+    opts.push({ text: "Cùng nhau đi dã ngoại(đã hoàn thành)", action: "mumiao_buried_past", disabled: true });
     opts.push({ text: "Nỗi nhớ xuyên thời không", action: "mumiao_quest2" });
   } else if (!isQuestDone("mumiaoQuest3")) {
-    opts.push({ text: "Cùng nhau đi dã ngoại（đã hoàn thành）", action: "mumiao_buried_past", disabled: true });
-    opts.push({ text: "Nỗi nhớ xuyên thời không（đã hoàn thành）", action: "mumiao_buried_past", disabled: true });
+    opts.push({ text: "Cùng nhau đi dã ngoại(đã hoàn thành)", action: "mumiao_buried_past", disabled: true });
+    opts.push({ text: "Nỗi nhớ xuyên thời không(đã hoàn thành)", action: "mumiao_buried_past", disabled: true });
     opts.push({ text: "Mở rộng đất thử nghiệm", action: "mumiao_quest3" });
   } else {
     setStory("Mộc Miêu Miêu mỉm cười nhìn bạn: \"Cảm ơn bạn... những quá khứ đó, cuối cùng không còn chỉ do một mình tôi gánh vác nữa.\"");
@@ -306,7 +306,7 @@ Hoàng hôn buông xuống, hai người ngồi bên phế tích, uống canh n�
 
 "Cảm ơn bạn." Cô ấy khẽ nói, "Đây là bát canh ngon nhất tôi từng uống kể từ ngày tận thế."
 
-Mộc Miêu Miêuđiểm thân mật +20（Hiện tại ${getNpcAffinity("mumiao")}/${AFFINITY_MAX.mumiao}）
+Mộc Miêu Miêuđiểm thân mật +20(Hiện tại ${getNpcAffinity("mumiao")}/${AFFINITY_MAX.mumiao})
 
 Thời gian tiến ${3} lượt.`);
   if (!state.gameOver) {
@@ -321,7 +321,7 @@ export function handleMumiaoQuest2() {
     showMumiaoOptions();
     return;
   }
-  const baijiuCount = state.drinks.filter(i => i.id === "高度白酒").reduce((sum, i) => sum + (i.count || 1), 0);
+  const baijiuCount = state.drinks.filter(i => i.id === "ruou_cao_do").reduce((sum, i) => sum + (i.count || 1), 0);
   const ryeCount = state.food.filter(i => i.id === "heimai").reduce((sum, i) => sum + (i.count || 1), 0);
   const needBaijiu = 5;
   const needRye = 10;
@@ -335,7 +335,7 @@ export function handleMumiaoQuest2() {
     showMumiaoOptions();
     return;
   }
-  removeItemById("drinks", "高度白酒", needBaijiu);
+  removeItemById("drinks", "ruou_cao_do", needBaijiu);
   removeItemById("food", "heimai", needRye);
   markQuestDone("mumiaoQuest2");
   addNpcAffinity("mumiao", 30);
@@ -358,7 +358,7 @@ Mộc Miêu Miêu đứng dậy, lau nước mắt, bỗng cười:
 
 Bạn đứng bên cạnh cô ấy, nhìn những hạt lúa mạch lay động trong gió. Ánh mặt trời xuyên qua mây, rọi lên bức tranh, ba người trong tranh dường như đang mỉm cười.
 
-Mộc Miêu Miêuđiểm thân mật +30（Hiện tại ${getNpcAffinity("mumiao")}/${AFFINITY_MAX.mumiao}）
+Mộc Miêu Miêuđiểm thân mật +30(Hiện tại ${getNpcAffinity("mumiao")}/${AFFINITY_MAX.mumiao})
 
 Thời gian tiến ${3} lượt.`);
   if (!state.gameOver) {
@@ -385,7 +385,7 @@ export function handleMumiaoQuest3() {
     }
   }
   if (ownedCropIds.length < 15) {
-    setStory(`Mộc Miêu Miêu nhìn bạn nói: "Tôi muốn mở rộng đất thử nghiệm, trồng tất cả các loại cây có thể trồng được. Bạn có thể giúp tôi gom đủ 15 loại cây khác nhau không?"\n\nHiện đang có ${ownedCropIds.length}/15 loại cây.\n\nCòn thiếu: ${missingCrops.join("、")}`);
+    setStory(`Mộc Miêu Miêu nhìn bạn nói: "Tôi muốn mở rộng đất thử nghiệm, trồng tất cả các loại cây có thể trồng được. Bạn có thể giúp tôi gom đủ 15 loại cây khác nhau không?"\n\nHiện đang có ${ownedCropIds.length}/15 loại cây.\n\nCòn thiếu: ${missingCrops.join(", ")}`);
     showMumiaoOptions();
     return;
   }
@@ -394,11 +394,11 @@ export function handleMumiaoQuest3() {
   }
   markQuestDone("mumiaoQuest3");
   addNpcAffinity("mumiao", 50);
-  const bow = RANGED_WEAPONS.find(w => w.id === "原野之弓");
+  const bow = RANGED_WEAPONS.find(w => w.id === "cung_dong_que");
   if (bow) {
     addItem({ ...bow });
   }
-  addItem({ id: "箭矢", name: "Mũi tên", type: "ammo", count: 30 });
+  addItem({ id: "mui_ten", name: "Mũi tên", type: "ammo", count: 30 });
   advanceTime(3);
   updateStatusEffects();
   checkDeath();
@@ -415,10 +415,10 @@ Cô ấy lấy từ nhà kho một cây cung cổ xưa, trên thân cung khắc 
 
 Xa xa, cây cối trong đất thử nghiệm xào xạc trong gió, như đang vỗ tay cho một khởi đầu mới.
 
-Mộc Miêu Miêuđiểm thân mật +50（Hiện tại ${getNpcAffinity("mumiao")}/${AFFINITY_MAX.mumiao}）
+Mộc Miêu Miêuđiểm thân mật +50(Hiện tại ${getNpcAffinity("mumiao")}/${AFFINITY_MAX.mumiao})
 
-🏹 Nhận được【Cung đồng hoang】!
-🏹 Nhận được【Mũi tên】×30!
+🏹 Nhận được[Cung đồng hoang]!
+🏹 Nhận được[Mũi tên]×30!
 
 Thời gian tiến ${3} lượt.`);
   if (!state.gameOver) {

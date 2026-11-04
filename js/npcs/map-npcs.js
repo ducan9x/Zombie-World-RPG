@@ -45,7 +45,7 @@ export function handleMapNpcs(npcId) {
   const affinity = getNpcAffinity(npcId);
   const stage = getAffinityStage(affinity);
   const intro = npcData.desc;
-  setStory(intro + `\n\nHảo cảm：${affinity}/${AFFINITY_MAX[npcId]}`);
+  setStory(intro + `\n\nHảo cảm: ${affinity}/${AFFINITY_MAX[npcId]}`);
   setPhase("map_npc");
   setOptions([
     { text: "Giao dịch", action: "map_npc_trade" },
@@ -109,7 +109,7 @@ export function handleMapNpcsAction(input) {
       else if (gift.cat === "pureEnergy") removePureEnergy(1);
       addNpcAffinity(npcId, GAME_CONSTANTS.NPC.MAP_NPC_GIFT_AFFINITY);
       const affinity = getNpcAffinity(npcId);
-      setStory(`Bạn đưa lên một ${gift.name}. ${SURVIVOR_NPC.find(n => n.id === npcId)?.name || "đối phương"} lộ vẻ biết ơn, hảo cảm +${GAME_CONSTANTS.NPC.MAP_NPC_GIFT_AFFINITY}（hiện tại ${affinity}/${AFFINITY_MAX[npcId]}）。`);
+      setStory(`Bạn đưa lên một ${gift.name}. ${SURVIVOR_NPC.find(n => n.id === npcId)?.name || "đối phương"} lộ vẻ biết ơn, hảo cảm +${GAME_CONSTANTS.NPC.MAP_NPC_GIFT_AFFINITY}(hiện tại ${affinity}/${AFFINITY_MAX[npcId]}).`);
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
@@ -189,7 +189,7 @@ export function handleMapNpcGiftConfirm(input) {
 
   addNpcAffinity(npcId, GAME_CONSTANTS.NPC.MAP_NPC_GIFT_AFFINITY);
   const affinity = getNpcAffinity(npcId);
-  setStory(`Bạn đưa lên một ${gift.name}. ${SURVIVOR_NPC.find(n => n.id === npcId)?.name || "đối phương"} lộ vẻ biết ơn, hảo cảm +${GAME_CONSTANTS.NPC.MAP_NPC_GIFT_AFFINITY}（hiện tại ${affinity}/${AFFINITY_MAX[npcId]}）。`);
+  setStory(`Bạn đưa lên một ${gift.name}. ${SURVIVOR_NPC.find(n => n.id === npcId)?.name || "đối phương"} lộ vẻ biết ơn, hảo cảm +${GAME_CONSTANTS.NPC.MAP_NPC_GIFT_AFFINITY}(hiện tại ${affinity}/${AFFINITY_MAX[npcId]}).`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();

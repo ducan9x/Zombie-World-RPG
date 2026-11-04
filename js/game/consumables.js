@@ -64,7 +64,7 @@ export function handleEatSelect() {
   setPhase("eat_select");
   setStory("Chọn thức ăn muốn dùng:");
   const foodOptions = state.food.map((f, i) => {
-    let info = `（độ no+${f.hunger || 0}`;
+    let info = `(độ no+${f.hunger || 0}`;
     if (f.hydration) info += ` nước+${f.hydration}`;
     if (f.effects) {
       if (f.effects.health) info += ` HP+${f.effects.health}`;
@@ -72,7 +72,7 @@ export function handleEatSelect() {
       if (f.effects.crash) info += ` mệt${f.effects.crash > 0 ? "+" : ""}${f.effects.crash}`;
             if (f.effects.sanity) info += ` lý trí${f.effects.sanity > 0 ? "+" : ""}${f.effects.sanity}`;
     }
-    info += "）";
+    info += ")";
     return { text: getItemDisplayName(f) + info, action: "eat_food", index: i };
   });
   foodOptions.push({ text: "Quay lại", action: "back", index: -1 });
@@ -94,10 +94,10 @@ export function handleDrinkSelect() {
   setPhase("drink_select");
   setStory("Chọn đồ uống muốn dùng:");
   const drinkOptions = state.drinks.map((d, i) => {
-    let info = `（nước+${d.hydration}`;
+    let info = `(nước+${d.hydration}`;
     if (d.effects && d.effects.crash) info += ` mệt${d.effects.crash > 0 ? "+" : ""}${d.effects.crash}`;
         if (d.effects && d.effects.sanity) info += ` lý trí${d.effects.sanity > 0 ? "+" : ""}${d.effects.sanity}`;
-    info += "）";
+    info += ")";
     return { text: getItemDisplayName(d) + info, action: "drink_item", index: i };
   });
   drinkOptions.push({ text: "Quay lại", action: "back", index: -1 });
@@ -124,7 +124,7 @@ export function handleMedicineSelect() {
         if (m.effects.sanity) effects.push(`lý trí${m.effects.sanity > 0 ? "+" : ""}${m.effects.sanity}`);
         if (m.effects.hydration) effects.push(`nước+${m.effects.hydration}`);
       }
-      return { text: getItemDisplayName(m) + (effects.length > 0 ? `（${effects.join(" ")}）` : ""), action: "use_med", index: state.medicine.indexOf(m) };
+      return { text: getItemDisplayName(m) + (effects.length > 0 ? `(${effects.join(" ")})` : ""), action: "use_med", index: state.medicine.indexOf(m) };
     });
     medOptions.push({ text: "Quay lại", action: "back", index: -1 });
     setOptions(medOptions);
@@ -146,7 +146,7 @@ export function handleMedicineSelect() {
       if (m.effects.sanity) effects.push(`lý trí${m.effects.sanity > 0 ? "+" : ""}${m.effects.sanity}`);
       if (m.effects.hydration) effects.push(`nước+${m.effects.hydration}`);
     }
-    return { text: getItemDisplayName(m) + (effects.length > 0 ? `（${effects.join(" ")}）` : ""), action: "use_med", index: i };
+    return { text: getItemDisplayName(m) + (effects.length > 0 ? `(${effects.join(" ")})` : ""), action: "use_med", index: i };
   });
   medOptions.push({ text: "Quay lại", action: "back", index: -1 });
   setOptions(medOptions);

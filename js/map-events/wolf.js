@@ -90,7 +90,7 @@ export function handleWolfTrade() {
   const rarityWeights = GAME_CONSTANTS.LOOT.RARITY_WEIGHTS;
   const med = weightedRandom(laolangMeds, m => rarityWeights[m.rarity] || 1);
   const added = addItem({ ...med, type: "medicine" });
-  const foodNames = removedItems.map(f => f.name).join("、");
+  const foodNames = removedItems.map(f => f.name).join(", ");
   if (added) {
     setStory(`Bạn dùng ${foodNames} đổi với lão sói một hộp ${med.name}. Lão sói nhận đồ ăn, vội vàng gặm lên.`);
   } else {
@@ -132,9 +132,9 @@ function buildWolfOptions() {
     opts.push({ text: "Nhiệm vụ: chuẩn bị ra khơi", action: "wolf_quest3" });
   }
 
-  // Nhiệm vụ 4: hải thi khổng lồ
+  // Nhiệm vụ 4: Hải Zombie Khổng Lồ
   if (state.wolfQuest3Done && !state.wolfQuest4Done) {
-    opts.push({ text: "Nhiệm vụ: hải thi khổng lồ", action: "wolf_quest4" });
+    opts.push({ text: "Nhiệm vụ: Hải Zombie Khổng Lồ", action: "wolf_quest4" });
   }
 
   opts.push({ text: "Rời đi", action: "wolf_leave" });
@@ -154,7 +154,7 @@ export function handleWolfQuest1() {
     `Lão sói nheo mắt, trầm tư nhìn bạn: "Cậu trai, từng nghe về 'vảy sấm sét' chưa?\n` +
     `Nghe nói chỉ có trong vùng nước mang điện, do một loại cá đặc biệt mới sản xuất. Tôi gần đây đang nghiên cứu mấy thứ này,\n` +
     `nếu cậu có thể giúp tôi lấy ${cost} vảy sấm sét, tôi sẽ nợ cậu một món.\n\n` +
-    `（Gợi ý: có lẽ có thể thử ở bể kính rò điện trong trung tâm thương mại）`
+    `(Gợi ý: có lẽ có thể thử ở bể kính rò điện trong trung tâm thương mại)`
   );
 
   const lightningItem = state.other.find(i => i.id === "lightning_scale");
@@ -284,7 +284,7 @@ export function handleWolfQuest2Submit() {
     `Nhưng giờ đây, cậu đã chứng minh thành ý của mình——cậu có thể đi xem cô ấy.\n` +
     `Mang theo vảy của cậu, có lẽ……cậu có thể giúp được cô ấy."\n\n` +
     `✅ Nhiệm vụ "nhà sưu tầm" hoàn thành! Độ thiện cảm lão sói +15.\n` +
-    `🔓 【Kho vật nghiệp】 tại khu dân cư cũ đã mở!`
+    `🔓 [Kho vật nghiệp] tại khu dân cư cũ đã mở!`
   );
 
   advanceTime(1);
@@ -309,7 +309,7 @@ export function handleWolfQuest3() {
     `"Người cá nói cho tôi biết vài chuyện……trong biển sâu có một con quái vật, đáng sợ hơn bất kỳ zombie nào chúng ta từng thấy.\n` +
     `Nếu không xử lý nó, sớm muộn gì cũng đe dọa toàn bộ bờ biển."\n\n` +
     `Ông ấy xoay người, ánh mắt kiên định: "Tôi chuẩn bị ra khơi, đi gặp con quái vật đó. Nhưng tôi cần tiếp tế——\n` +
-    `${GAME_CONSTANTS.WOLF.QUEST3_GASOLINE_COST} thùng xăng、${GAME_CONSTANTS.WOLF.QUEST3_FOOD_COST} phần thực phẩm、${GAME_CONSTANTS.WOLF.QUEST3_DRINKS_COST} phần đồ uống.\n` +
+    `${GAME_CONSTANTS.WOLF.QUEST3_GASOLINE_COST} thùng xăng, ${GAME_CONSTANTS.WOLF.QUEST3_FOOD_COST} phần thực phẩm, ${GAME_CONSTANTS.WOLF.QUEST3_DRINKS_COST} phần đồ uống.\n` +
     `Sẽ không để cậu bận công toi, xong việc, thứ tôi cất giữ nhiều năm sẽ thuộc về cậu."`
   );
 
@@ -381,11 +381,11 @@ export function handleWolfQuest3Submit() {
 
   setStory(
     `Bạn chất đống vật tư lục soát từ khắp nơi trước mặt lão sói:\n` +
-    `${GAME_CONSTANTS.WOLF.QUEST3_GASOLINE_COST} thùng xăng、${GAME_CONSTANTS.WOLF.QUEST3_FOOD_COST} phần thực phẩm、${GAME_CONSTANTS.WOLF.QUEST3_DRINKS_COST} phần đồ uống.\n\n` +
+    `${GAME_CONSTANTS.WOLF.QUEST3_GASOLINE_COST} thùng xăng, ${GAME_CONSTANTS.WOLF.QUEST3_FOOD_COST} phần thực phẩm, ${GAME_CONSTANTS.WOLF.QUEST3_DRINKS_COST} phần đồ uống.\n\n` +
     `Lão sói im lặng một lúc, sau đó kéo từ dưới giường ra một chiếc hộp dài bọc vải dầu.\n` +
     `"Cầm lấy." ông ấy mở hộp——một khẩu Desert Eagle được bảo dưỡng sáng bóng nằm trong đó,\n` +
     `bên cạnh xếp ngay ngắn ${GAME_CONSTANTS.WOLF.QUEST3_REWARD_AMMO_COUNT} viên đạn .50 AE cỡ lớn.\n\n` +
-    `"Đây là thứ tôi mua ở chợ đen thời còn trẻ, tốn không ít công sức. Tầm bắn xa、sát thương lớn,\n` +
+    `"Đây là thứ tôi mua ở chợ đen thời còn trẻ, tốn không ít công sức. Tầm bắn xa, sát thương lớn,\n` +
     `đối phó con quái vật biển sâu đó, hẳn sẽ có tác dụng."\n\n` +
     `Ông ấy vỗ vai bạn: "Chuẩn bị xong thì tìm tôi. Đối thủ thực sự, ở dưới biển sâu."\n\n` +
     `✅ Nhiệm vụ "chuẩn bị ra khơi" hoàn thành! Độ thiện cảm lão sói +20.\n` +
@@ -401,7 +401,7 @@ export function handleWolfQuest3Submit() {
 }
 
 /* ============================================================
-   Nhiệm vụ 4: hải thi khổng lồ —— chỉ có thể tấn công từ xa BOSSchiến
+   Nhiệm vụ 4: Hải Zombie Khổng Lồ —— chỉ có thể tấn công từ xa BOSSchiến
    Chiến thắng → kết cục 13 "Truyền thuyết người cá"
    Thất bại → tử vong
    ============================================================ */
@@ -475,7 +475,7 @@ export function handleWolfQuest4Fight() {
   // Tạo BOSS
   const bossDef = NAMED_NPCS.sea_monster;
   if (!bossDef) {
-    setStory("【Lỗi】Dữ liệu BOSS chưa định nghĩa, vui lòng liên hệ nhà phát triển.");
+    setStory("[Lỗi]Dữ liệu BOSS chưa định nghĩa, vui lòng liên hệ nhà phát triển.");
     handleWolfInteract();
     return;
   }
@@ -501,10 +501,10 @@ export function handleWolfQuest4Fight() {
     `cuối mỗi xúc tu mọc một con mắt phát ánh sáng u ám.\n\n` +
     `"Là nó! " lão sói hét lớn. Người cá bị thương cất lên một khúc hát kỳ lạ mà bi thương,\n` +
     `một rào cản mỏng manh bao trùm thuyền cá——đó là chút che chở cuối cùng cô ấy có thể cung cấp.\n\n` +
-    `【Hải thi khổng lồ】HP:${npc.hp} Sát thương:${npc.damage}\n` +
+    `[Hải thi khổng lồ]HP:${npc.hp} Sát thương:${npc.damage}\n` +
     `⚠ Quái vật này chỉ có thể dùng vũ khí tầm xa để tấn công!\n\n` +
-    `【Cận chiến】${state.meleeWeapon.name}\n` +
-    `【Tầm xa】${state.rangedWeapon.name} (đạn:${ammo ? ammo.count : 0} viên hoàn chỉnh:${state.rangedWeapon.integrity}%)`
+    `[Cận chiến]${state.meleeWeapon.name}\n` +
+    `[Tầm xa]${state.rangedWeapon.name} (đạn:${ammo ? ammo.count : 0} viên hoàn chỉnh:${state.rangedWeapon.integrity}%)`
   );
 
   const options = [
@@ -528,7 +528,7 @@ export function handlePropertyWarehouse() {
       "Qua khe cửa nhìn vào, mơ hồ thấy một thân hình co ro……\n\n" +
       "Ngay lúc đó, lão sói không biết từ đâu xuất hiện, chặn trước mặt bạn:\n" +
       "\"Chỗ đó……bạn đừng đi thì hơn.\" ánh mắt ông ấy rất phức tạp.\n" +
-      "\"Đợi bạn giúp tôi làm xong những việc đó, tôi tự nhiên sẽ nói cho bạn bên trong có gì."\n\n" +
+      "\"Đợi bạn giúp tôi làm xong những việc đó, tôi tự nhiên sẽ nói cho bạn bên trong có gì.\n\n" +
       "Lão sói không muốn bạn đi chỗ đó, thôi vậy."
     );
     showExploreOptionsState();
@@ -580,12 +580,12 @@ export function handleMermaidInteract() {
       `không khí tràn ngập hơi thở tươi mới của biển cả.\n\n` +
       `"Cảm ơn bạn……người lạ. Không, bạn không còn là người lạ nữa."\n` +
       `Cô ấy vươn tay, một cây đinh ba kỳ lạ chậm rãi hiện ra từ trong sương nước——\n` +
-      `"Đây là đinh ba hải ca, thánh vật của tộc chúng tôi. Nó từng thuộc về mẹ tôi,\n` +
+      `"Đây là Đinh Ba Hải Ca, thánh vật của tộc chúng tôi. Nó từng thuộc về mẹ tôi,\n` +
       `giờ đây……thuộc về bạn."\n\n` +
       `Cô ấy trao đinh ba vào tay bạn, trong mắt lấp lánh nước mắt:\n` +
       `"Xin hãy giúp lão sói……giúp chúng tôi tiêu diệt con quái vật biển sâu đó.\n` +
       `Chỉ khi nó chết, tôi mới thực sự tự do quay về biển cả."\n\n` +
-      `🎁 Nhận được: 【Đinh ba hải ca】!\n` +
+      `🎁 Nhận được: [Đinh ba hải ca]!\n` +
       `🔓 Nhiệm vụ 3 của lão sói "chuẩn bị ra khơi" đã mở!` +
       affInfo;
   }
@@ -676,7 +676,7 @@ function handleMermaidSubmitScale(scaleId, affinityGain) {
           `"Đi nói với lão sói……về chuyện con quái vật biển sâu. Nó không nên tồn tại ở thế giới này.\n` +
           `Các bạn cần liên thủ——tôi sẽ dẫn đường cho các bạn trong biển."`;
       } else {
-        storyMsg += `\n\n⚠ Balo đã đầy, không thể nhận đinh ba hải ca! Vui lòng dọn dẹp balo rồi quay lại.`;
+        storyMsg += `\n\n⚠ Balo đã đầy, không thể nhận Đinh Ba Hải Ca! Vui lòng dọn dẹp balo rồi quay lại.`;
         // Độ thiện cảm giữ nguyên, nhưng lùi lại một chút để người chơi có thể kích hoạt lại
         state.npcAffinity.mermaid = GAME_CONSTANTS.WOLF.MERMAID_MAX_AFFINITY - 1;
         setStory(storyMsg);
@@ -684,7 +684,7 @@ function handleMermaidSubmitScale(scaleId, affinityGain) {
         return;
       }
     }
-    storyMsg += `\n\n🎁 Nhận được: 【Đinh ba hải ca】!\n🔓 Nhiệm vụ 3 của lão sói "chuẩn bị ra khơi" đã mở!`;
+    storyMsg += `\n\n🎁 Nhận được: [Đinh ba hải ca]!\n🔓 Nhiệm vụ 3 của lão sói "chuẩn bị ra khơi" đã mở!`;
   }
 
   setStory(storyMsg);
@@ -707,7 +707,7 @@ export function handleMermaidLeave() {
 }
 
 /* ============================================================
-   Xử lý sau chiến đấu hải thi khổng lồ —— kích hoạt trong combat.js qua cờ _wolfQuest4Combat
+   Xử lý sau chiến đấu Hải Zombie Khổng Lồ —— kích hoạt trong combat.js qua cờ _wolfQuest4Combat
    ============================================================ */
 
 export function checkWolfQuest4Victory() {

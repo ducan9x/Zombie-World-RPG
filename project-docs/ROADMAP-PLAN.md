@@ -7,18 +7,18 @@ Xem CHI TIET trang thai o bang tong quan va tung bang chi tiet duoi day.
 
 | Phase | Ten | Trang thai | Tinh nang da hoan thien / Tong so | Ghi chu |
 |-------|-----|------------|-----------------------------------|---------|
-| Phase 1 | Hoan thien Core | Da hoan thanh | 4 / 4 | |
-| Phase 1.5 | Tich hop PixiJS | Chua bat dau | 0 / 2 | |
+| Phase 1 | Hoan thien Core | Dang thuc hien | 3 / 4 | Con lai: Them SFX am thanh |
+| Phase 1.5 | Tich hop PixiJS | Dang thuc hien | 0 / 2 | Da tao js/pixi-renderer.js, ket noi CDN PixiJS, cap nhat js/main.js |
 | Phase 2 | Cai thien Gameplay | Chua bat dau | 0 / 4 | |
 | Phase 3 | Mo rong Content | Chua bat dau | 0 / 4 | |
 | Phase 4 | Advanced Systems | Chua bat dau | 0 / 4 | |
-| **Tong ket** | **Toan bo** | **Da hoan thanh mot phan** | **4 / 18** | Cap nhat khi moi tinh nang duoc thuc hien xong |
+| **Tong ket** | **Toan bo** | **Da hoan thanh mot phan** | **3 / 18** | Cap nhat khi moi tinh nang duoc thuc hien xong |
 
 Cach cap nhat: khi moi tinh nang duot code xong, thay "Chua bat dau" thanh "Da hoan thien" (hoac "Dang thuc hien" neu dang lam), va cap nhat so luong o cot "Tinh nang da hoan thien / Tong so".
 
 ---
 
-## Phase 1 - Hoan thien Core (Uu tien cao) - Da hoan thanh (4/4)
+## Phase 1 - Hoan thien Core (Uu tien cao) - Dang thuc hien (3/4)
 
 | Tinh nang | Muc tieu | Loi ich | Do phuc tap | He thong phu thuoc | File can thay doi | Rui ro regression | Trang thai thuc hien |
 |-----------|----------|---------|-------------|-------------------|-------------------|-------------------|---------------------|
@@ -31,7 +31,7 @@ Cach cap nhat: khi moi tinh nang duot code xong, thay "Chua bat dau" thanh "Da h
 
 | Tinh nang | Muc tieu | Loi ich | Do phuc tap | He thong phu thuoc | File can thay doi | Rui ro regression | Trang thai thuc hien |
 |-----------|----------|---------|-------------|-------------------|-------------------|-------------------|---------------------|
-| Tich hop PixiJS render | Render the gioi ban do/NPC/item bang WebGL/Canvas, giu menu/DOM hien tai | Tang chat luong tran trang, ho tro sprite/anh dong | Trung | js/ui.js, js/main.js, js/state.js | js/pixi-renderer.js (moi), index.html, js/main.js, js/ui.js | Trung (thay doi luong render) | Chua bat dau |
+| Tich hop PixiJS render | Render the gioi ban do/NPC/item bang WebGL/Canvas, giu menu/DOM hien tai | Tang chat luong tran trang, ho tro sprite/anh dong | Trung | js/ui.js, js/main.js, js/state.js | js/pixi-renderer.js (moi), index.html, js/main.js, js/ui.js | Trung (thay doi luong render) | Dang thuc hien (da tao js/pixi-renderer.js, ket noi CDN PixiJS, cap nhat js/main.js) |
 | Tai nguyen anh PixiJS | Them sprite ban do, avatar NPC, icon item vao public/assets/pixi/ | Co du lieu visual cho Pixi render | Thap | public/assets/pixi/ | public/assets/pixi/* (moi) | Thap | Chua bat dau |
 
 ## Phase 2 - Cai thien Gameplay (Uu tien cao)

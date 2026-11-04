@@ -60,7 +60,7 @@ export function getBaseUpgradeCost(level) {
 export function handleUpgradeBase() {
   const state = getState();
   if (state.baseLevel >= GAME_CONSTANTS.BASE.MAX_BASE_LEVEL) {
-    setStory("【Biệt thự người sống sót】 đã là căn cứ cấp cao nhất, vàng son lộng lẫy, vững như thành đồng. Bạn đứng trước cửa sổ sát đất nhìn xuống vùng phế tích tận thế, trong lòng bồi hồi khôn xiết.");
+    setStory("[Biệt thự người sống sót] đã là căn cứ cấp cao nhất, vàng son lộng lẫy, vững như thành đồng. Bạn đứng trước cửa sổ sát đất nhìn xuống vùng phế tích tận thế, trong lòng bồi hồi khôn xiết.");
     showHomeOptions();
     return;
   }
@@ -72,10 +72,10 @@ export function handleUpgradeBase() {
   const nextLevel = state.baseLevel + 1;
   const bonus = getBaseBonus(nextLevel) - getBaseBonus(state.baseLevel);
   const lines = [`🏠 ${getBaseName(state.baseLevel)} → ${getBaseName(nextLevel)}`];
-  lines.push(`Bổ sung hồi phục khi ngủ: ${getBaseBonus(state.baseLevel)} → ${getBaseBonus(nextLevel)}（+${bonus}HP）`);
-  lines.push(`⏱ Thời gian: ${GAME_CONSTANTS.BASE.UPGRADE_TIME_COST} lượt（1 ngày）`);
+  lines.push(`Bổ sung hồi phục khi ngủ: ${getBaseBonus(state.baseLevel)} → ${getBaseBonus(nextLevel)}(+${bonus}HP)`);
+  lines.push(`⏱ Thời gian: ${GAME_CONSTANTS.BASE.UPGRADE_TIME_COST} lượt(1 ngày)`);
   lines.push(`━━━━━━━━━━━━━━━━━`);
-  lines.push(`📦 Vật liệu cần：`);
+  lines.push(`📦 Vật liệu cần: `);
   const costNames = BUILDING_MATERIAL_NAMES;
   let canAfford = true;
   for (const [id, count] of Object.entries(cost)) {
@@ -111,7 +111,7 @@ export function handleConfirmUpgrade() {
   checkDeath();
   if (!state.gameOver) {
     const flavor = BASE_LEVELS[state.baseLevel]?.upgradeFlavor || "";
-    setStory(`【${oldName} → ${newName}】\n\n${flavor}\n\nHiệu quả hồi phục khi ngủ đã tăng（+${getBaseBonus(state.baseLevel)}HP）！`);
+    setStory(`[${oldName} → ${newName}]\n\n${flavor}\n\nHiệu quả hồi phục khi ngủ đã tăng(+${getBaseBonus(state.baseLevel)}HP)!`);
     if (state.baseLevel >= GAME_CONSTANTS.BASE.MAX_BASE_LEVEL) {
       if (!state.unlockedAchievements) state.unlockedAchievements = [];
       if (!state.unlockedAchievements.includes("base_upgrade")) state.unlockedAchievements.push("base_upgrade");
@@ -169,7 +169,7 @@ export function handleBuildWarehouse() {
   const state = getState();
   if (state.warehouseLevel >= GAME_CONSTANTS.BASE.MAX_WAREHOUSE_LEVEL) {
     const maxCap = getWarehouseCapacity(GAME_CONSTANTS.BASE.MAX_WAREHOUSE_LEVEL);
-    setStory(`Kho đã đạt sức chứa tối đa（${maxCap} ô），không cần mở rộng thêm.`);
+    setStory(`Kho đã đạt sức chứa tối đa(${maxCap} ô), không cần mở rộng thêm.`);
     showBaseBuildOptions();
     return;
   }
@@ -182,10 +182,10 @@ export function handleBuildWarehouse() {
   const costNames = BUILDING_MATERIAL_NAMES;
   const currentCap = getWarehouseCapacity(state.warehouseLevel);
   const nextCap = getWarehouseCapacity(nextLevel);
-  let lines = [`📦 【Mở rộng kho Lv${state.warehouseLevel} → Lv${nextLevel}】`];
-  lines.push(`Sức chứa: ${currentCap} ô → ${nextCap} ô（+${nextCap - currentCap} ô）`);
+  let lines = [`📦 [Mở rộng kho Lv${state.warehouseLevel} → Lv${nextLevel}]`];
+  lines.push(`Sức chứa: ${currentCap} ô → ${nextCap} ô(+${nextCap - currentCap} ô)`);
   lines.push(`━━━━━━━━━━━━━━━━━`);
-  lines.push(`📋 Vật liệu cần：`);
+  lines.push(`📋 Vật liệu cần: `);
   let canAfford = true;
   for (const [id, count] of Object.entries(cost)) {
     const have = countBuildingMaterial(state, id);
@@ -230,7 +230,7 @@ export function handleOpenWarehouse() {
   const cap = getWarehouseCapacity(state.warehouseLevel);
   const usage = state.warehouse.length;
   const pct = Math.round((usage / cap) * 100);
-  setStory(`📦 【Kho】Tình trạng sử dụng: ${usage}/${cap} ô（${pct}%）\n\nCất vật phẩm: chuyển vật phẩm trong ba lô vào kho\nLấy vật phẩm: lấy vật phẩm trong kho về ba lô`);
+  setStory(`📦 [Kho]Tình trạng sử dụng: ${usage}/${cap} ô(${pct}%)\n\nCất vật phẩm: chuyển vật phẩm trong ba lô vào kho\nLấy vật phẩm: lấy vật phẩm trong kho về ba lô`);
   setPhase("warehouse_menu");
   setOptions([
     { text: "Cất vật phẩm", action: "warehouse_deposit" },
@@ -291,11 +291,11 @@ export function handleDoDeposit(input) {
   if (item.cat === "cigarettes") {
     const depositCount = Math.min(item.count || state.cigarettes, state.cigarettes);
     removeCigarettes(depositCount);
-    state.warehouse.push({ id: "香烟", name: "Thuốc lá", type: "cigarette", count: depositCount });
+    state.warehouse.push({ id: "thuoc_la", name: "Thuốc lá", type: "cigarette", count: depositCount });
   } else if (item.cat === "pureEnergy") {
     const depositCount = Math.min(item.count || state.pureEnergy, state.pureEnergy);
     removePureEnergy(depositCount);
-    state.warehouse.push({ id: "纯净能源", name: "Năng lượng tinh khiết", type: "other", count: depositCount });
+    state.warehouse.push({ id: "nang_luong_tinh_khiet", name: "Năng lượng tinh khiết", type: "other", count: depositCount });
   } else {
     state.warehouse.push(item);
     const catMap = { food: state.food, drinks: state.drinks, medicine: state.medicine, other: state.other, seed: state.seeds };
@@ -303,7 +303,7 @@ export function handleDoDeposit(input) {
   }
   const cap = getWarehouseCapacity(state.warehouseLevel);
   const usage = state.warehouse.length;
-  setStory(`📦 Bạn cất ${getItemDisplayName(item)} vào kho.（${usage}/${cap} ô）`);
+  setStory(`📦 Bạn cất ${getItemDisplayName(item)} vào kho.(${usage}/${cap} ô)`);
   if (!state.gameOver) {
     const updatedState = getState();
     let hasMoreItems = false;
@@ -337,7 +337,7 @@ export function handleDoWithdraw(input) {
   }
   state.warehouse.splice(option.index, 1);
   const cap2 = getWarehouseCapacity(state.warehouseLevel);
-  setStory(`📦 Bạn lấy ${getItemDisplayName(item)} từ trong kho ra.（${state.warehouse.length}/${cap2} ô）`);
+  setStory(`📦 Bạn lấy ${getItemDisplayName(item)} từ trong kho ra.(${state.warehouse.length}/${cap2} ô)`);
   if (!state.gameOver) {
     const updatedState = getState();
     if (updatedState.warehouse.length > 0) {

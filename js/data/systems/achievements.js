@@ -28,7 +28,7 @@ export const ACHIEVEMENTS = [
 ];
 
 export const ENDING_STORIES = {
-  ending_death: `【Kết cục 1: Tử vong】
+  ending_death: `[Kết cục 1: Tử vong]
 
 Trên mảnh đất bị zombie tàn phá, lại một sinh mệnh vụt tắt.
 
@@ -40,7 +40,7 @@ Nguyện bạn ở một thế giới khác, không còn đói khát, sợ hãi 
 
 —— Câu chuyện của bạn, đến đây là hết.`,
 
-  ending_999: `【Kết cục 2: Tương lai chưa biết】
+  ending_999: `[Kết cục 2: Tương lai chưa biết]
 
 Ngày thứ 999.
 
@@ -54,15 +54,15 @@ Bạn đeo nó lên. Một dòng sức mạnh ấm áp chảy qua toàn thân, n
 
 Phương xa, mơ hồ truyền đến tiếng của những người sống sót khác. Ngọn lửa văn minh, chưa bao giờ tắt.
 
-—— Câu chuyện của bạn, vẫn đang tiếp tục.\n\nNhận được 【Balo chứa đồ đa chiều】 (68 ô)!`,
+—— Câu chuyện của bạn, vẫn đang tiếp tục.\n\nNhận được [Balo chứa đồ đa chiều] (68 ô)!`,
 
-  ending_prince: `【Kết cục 3: Đắm chìm quyền lực】
+  ending_prince: `[Kết cục 3: Đắm chìm quyền lực]
 
 Bạn trở về cơ sở, cởi bộ lễ phục đại diện cho thân phậnThái tử, mệt mỏi ngồi bên giường.
 
 Cuộc sống thành bảo xa hoa mà mục ruỗng. Sự ưu ái của quốc vương, sự nịnh nọt của đại thần, sự kính sợ của người hầu……tất cả đến quá nhanh. Bạn phát hiện mình bắt đầu đắm chìm trong khoái cảm mà quyền lực mang lại.
 
-Ngoài cửa sổ, hướng trận địa bình minh thấp thoáng có ánh lửa. Bạn nhớ vịthủ lĩnh đầy gió sương, nhớ ánh mắt lạnh lùng của V小姐, nhớ nụ cười ấm áp của 苏小涵, nhớ lời nói tinh nghịch của 莉莉丝.
+Ngoài cửa sổ, hướng trận địa bình minh thấp thoáng có ánh lửa. Bạn nhớ người thủ lĩnh sương gió, nhớ ánh mắt lạnh lùng của Cô V, nhớ nụ cười ấm áp của Tô Tiểu Hàm, nhớ lời nói tinh nghịch của Lilith.
 
 Nhưng những điều đó đã không còn liên quan đến bạn.
 
@@ -74,11 +74,11 @@ Quốc vương cuối cùng sẽ già đi. Còn bạn……sẵn sàng trở th�
 
 —— Đắm chìm quyền lực, có lẽ còn đáng sợ hơn zombie.`,
 
-  ending_captain: `【Kết cục 4: Phát sáng đi】
+  ending_captain: `[Kết cục 4: Phát sáng đi]
 
 Bạn trở về cơ sở, huy chương đội trưởng bình minh trên ngực lấp lánh ánh sáng yếu ớt dưới ánh đèn mờ.
 
-Mỗi người trong trận địa đều tin tưởng bạn, nương tựa vào bạn. V小姐 không còn lạnh nhạt, nụ cười của 苏小涵 vì bạn mà càng rạng rỡ, 莉莉丝 luôn quấn lấy bạn kể chuyện bên ngoài.
+Mỗi người trong trận địa đều tin tưởng bạn, nương tựa vào bạn. Cô V không còn lạnh nhạt, nụ cười của Tô Tiểu Hàm vì bạn mà càng rạng rỡ, Lilith luôn quấn lấy bạn kể chuyện bên ngoài.
 
 Trận địa bình minh, cuối cùng có một nhà lãnh đạo thực sự.
 
@@ -90,19 +90,19 @@ Giữa mạt thế, bạn là tia sáng ấm áp nhất.
 
 —— Tiếp tục phát sáng đi, đội trưởng tiền phong bình minh!`,
 
-  ending_newforce: `【Kết cục 5: Trở thành thế lực mới】
+  ending_newforce: `[Kết cục 5: Trở thành thế lực mới]
 
 Khi mảnh ghép cuối cùng trở về chỗ, một thời đại mới lặng lẽgiáng lâm.
 
 Lulu Wei đứng bên cạnh bạn, cô đã hoàn toàn thoát khỏi lời nguyền zombie, trở thành cầu nối giữa con người và thể biến dị. Liu Ruyan tựa vào bạn, trong mắt cô không còn sợ hãi, chỉ có kỳ vọng vào tương lai.
 
-Sự sụp đổ của Mã Tam, sự tiêu vong của Hắc Ảnh, sự vẫn lạc của zombie chi vương——những cái tên từng khiến người ta nghe tin đã sợ hãi, nay chỉ là những dòng chú thích trong câu chuyện huyền thoại của bạn. Thành quả nghiên cứu của tiến sĩ giúp bạn nắm giữ kỹ thuật then chốt để khống chế virus.
+Sự sụp đổ của Mã Tam, sự tiêu vong của Hắc Ảnh, sự vẫn lạc của Vua Zombie——những cái tên từng khiến người ta nghe tin đã sợ hãi, nay chỉ là những dòng chú thích trong câu chuyện huyền thoại của bạn. Thành quả nghiên cứu của tiến sĩ giúp bạn nắm giữ kỹ thuật then chốt để khống chế virus.
 
 Bạn sở hữu một đội "zombie tỉnh táo" được Lulu Wei cải tạo, tinh nhuệ chiến sĩ do Liu Ruyan huấn luyện, và công nghệ tiên tiến tiến sĩ để lại.
 
 Thành bảo và trận địa đều đang chờ quyết định của bạn. Để họ tiếp tục cát cứ, hay là……xây dựng một trật tự hoàn toàn mới?
 
-Bạn lấy ra lưỡi dao vô úy trong truyền thuyết. Nó lấp lánh ánh sáng chói mắt dưới ánh mặt trời, như tuyên bố một thời đại mới đã đến.
+Bạn lấy ra Kiếm Vô Uy trong truyền thuyết. Nó lấp lánh ánh sáng chói mắt dưới ánh mặt trời, như tuyên bố một thời đại mới đã đến.
 
 Thế lực cũ cuối cùng sẽ tiêu vong, huyền thoại mới đang được viết nên.
 
@@ -110,7 +110,7 @@ Còn bạn, chính là nhân vật chính của huyền thoại này.
 
 —— Từ nay về sau, trên mảnh phế thổ này thêm một lực lượng không thể bị bỏ qua.`,
 
-  ending_space: `【Kết cục 6: Bay vào vũ trụ】
+  ending_space: `[Kết cục 6: Bay vào vũ trụ]
 
 Khoảnh khắc đếm ngược về 0, cả tòa tháp phóng rung lên dữ dội. Bạn một mình ngồi trong buồng lái chật hẹp, dây an toàn siết chặt ngực.
 
@@ -128,17 +128,17 @@ Nhưng ít nhất——bạn đã chọn bay.
 
 —— Câu chuyện của bạn, bay về phía những vì sao chưa biết.`,
 
-  ending_hope: `【Kết cục 7: Hạt giống hy vọng】
+  ending_hope: `[Kết cục 7: Hạt giống hy vọng]
 
 Khoảnh khắc đếm ngược về 0, cả tòa tháp phóng rung lên dữ dội.
 
-" mọi người nắm chặt!" bạn hét lớn. V小姐 im lặng siết chặt tay vịn, 苏小涵 ôm chặt cánh tay bạn, 莉莉丝 co rúm trong góc, hốc mắt đỏ hoe nhưng vẫn bướng bỉnh cắn môi.
+" mọi người nắm chặt!" bạn hét lớn. Cô V im lặng siết chặt tay vịn, Tô Tiểu Hàm ôm chặt cánh tay bạn, Lilith co rúm trong góc, hốc mắt đỏ hoe nhưng vẫn bướng bỉnh cắn môi.
 
 Ba, hai, một——
 
 Bạn và các đồng hành chen chúc trong buồng lái chật hẹp, tên lửa rung chuyển bay lên. Ngoài cửa sổ là mạt thế, phía trước là chưa biết. Nhưng ít nhất, các bạn ở bên nhau.
 
-Qua cửa sổ, bạn thấy mảnh đất bị zombie tàn phá ngày càng nhỏ. V小姐 cuối cùng buông tay vịn đang siết chặt, khẽ nói một câu: "Đi thôi." 苏小涵 tựa vào vai bạn, nước mắt lặng lẽ lăn xuống. 莉莉丝 lau mắt, bỗng cười: "Này, chúng ta thật sự sắp lên trời rồi!"
+Qua cửa sổ, bạn thấy mảnh đất bị zombie tàn phá ngày càng nhỏ. Cô V cuối cùng buông tay vịn đang siết chặt, khẽ nói một câu: "Đi thôi." Tô Tiểu Hàm tựa vào vai bạn, nước mắt lặng lẽ lăn xuống. Lilith lau mắt, bỗng cười: "Này, chúng ta thật sự sắp lên trời rồi!"
 
 Ngoài buồng là bóng tối vô tận và các vì sao. Nhưng trong buồng, có nhiệt độ, có hơi thở, có nhau.
 
@@ -148,15 +148,15 @@ Nhưng chỉ cần ở bên nhau, hy vọng sẽ không tắt.
 
 —— Các bạn là hạt giống cuối cùng của mạt thế, cũng là ánh sao sáng nhất.`,
 
-  ending_stay: `【Kết cục 8: Ở lại đi】
+  ending_stay: `[Kết cục 8: Ở lại đi]
 
-Bạn nhìn Trần tiến sĩ từng bước đi lên thang máy, bóng lưng ông ấy trong bóng tên lửa đặc biệt nhỏ bé. Ông ấy quay đầu, đẩy gọng kính dày, khóe miệng nở nụ cười: "Cảm ơn bạn. Thay tôi……sống cho tốt."
+Bạn nhìn Tiến Sĩ Trần từng bước đi lên thang máy, bóng lưng ông ấy trong bóng tên lửa đặc biệt nhỏ bé. Ông ấy quay đầu, đẩy gọng kính dày, khóe miệng nở nụ cười: "Cảm ơn bạn. Thay tôi……sống cho tốt."
 
 Cửa buồng đóng lại. Đếm ngược bắt đầu.
 
 Bạn quay người đi ra khỏi trung tâm phóng, tiếng gầm tên lửa phía sau ngày càng lớn. Bạn ngẩng đầu nhìn, một vệt sáng trắng chói lóa xé toạc bầu trời xám xịt, như một vệt sao băng đi ngược, bay về phía vũ trụ vô tận.
 
-Trần tiến sĩ mang theo hy vọng bay vào vũ trụ. Còn bạn, chọn ở lại.
+Tiến Sĩ Trần mang theo hy vọng bay vào vũ trụ. Còn bạn, chọn ở lại.
 
 Bạn siết chặt vũ khí trong tay. Thế giới này chưa kết thúc, bạn còn phải tiếp tục chiến đấu.
 
@@ -164,7 +164,7 @@ Mảnh đất dưới chân đầy thương tích, nhưng trong mắt bạn vẫ
 
 —— Chỉ cần còn một hơi thở, câu chuyện sẽ không kết thúc.`,
 
-  ending_farming: `【Kết cục 9: Tôi không phải thần nông】
+  ending_farming: `[Kết cục 9: Tôi không phải thần nông]
 
 Bạn đứng bên ruộng thí nghiệm, nhìn mảnh đất từng hoang vu nay mọc đầy các loại cây trồng. Gió thổi qua sóng lúa, phát ra tiếng xào xạc, như đại địa đang thì thầm.
 
@@ -188,7 +188,7 @@ Bạn cũng vậy. Các bạn đều vậy.
 
 —— Trên mảnh phế thổ này, kỳ tích vĩ đại nhất không phải vũ khí, không phải quyền lực, mà là âm thanh của một hạt giống phá đất vươn lên.`,
 
-  ending_love_hate: `【Kết cục 10: Yêu hận tình thù】
+  ending_love_hate: `[Kết cục 10: Yêu hận tình thù]
 
 Bạn đứng trên ban công thành bảo, nhìn ánh đèn của trận địa và thành bảo phương xa. Hai thế giới, hai trật tự, đan xen trước mắt bạn thành một mảnh.
 
@@ -212,7 +212,7 @@ Còn bạn, đứng giữa yêu và hận, cuối cùng hiểu ra: điều xa x�
 
 —— Yêu hận tình thù, đơn giản là vì, chúng ta vẫn còn sống.`,
 
-  ending_food: `【Kết cục 11: Trở thành món ăn】
+  ending_food: `[Kết cục 11: Trở thành món ăn]
 
 Ý thức bạn chìm nổi trong bóng tối.
 
@@ -238,7 +238,7 @@ Câu chuyện của bạn, trong một gian nhà hàng tối tăm tại khu dị
 
 —— Trở thành món ăn, trở thành một "món mới" nữa của Mã Tam.`,
 
-  ending_elopement: `【Kết cục 12: Tư bôn】
+  ending_elopement: `[Kết cục 12: Tư bôn]
 
 Tiếng gầm động cơ xe việt dã xé toạc sự tĩnh lặng của mạt thế.
 
@@ -274,7 +274,7 @@ Con đường vươn về phía trước, thông đến phương xa chưa biết
 
 —— Tư bôn đến tận cùng thế giới, dù mạt thế cũng không quay đầu.`,
 
-  ending_used: `【Kết cục 14: Bị người khác dùng làm súng】
+  ending_used: `[Kết cục 14: Bị người khác dùng làm súng]
 
 Không khí trong đường hầm tàu điện ngầm dưới đất lạnh lẽo ẩm ướt, giọt nước trên tường tí tách rơi xuống đường ray rỉ sét.
 
@@ -288,7 +288,7 @@ Bạn thậm chí còn chưa kịpnhìn rõ động tác ông ấy rút súng.
 
 Một tiếng súng vang vọng lâu trong đường hầm. Bạn cúi đầu, thấy máu trào từ ngực.
 
-Lão Mã khom người, trước mắt bạn đang dần mờ, khẽ nói: "Hắc Ảnh, Mã Tam, quốc vương, Lão Zhao, Trần tiến sĩ……bạn đã gánh quá nhiều mạng người. Mỗi cái chết của họ, tôi đều ghi trong sổ của mình. Tôi chỉ là……thay trời hành đạo."
+Lão Mã khom người, trước mắt bạn đang dần mờ, khẽ nói: "Hắc Ảnh, Mã Tam, quốc vương, Lão Triệu, Tiến Sĩ Trần……bạn đã gánh quá nhiều mạng người. Mỗi cái chết của họ, tôi đều ghi trong sổ của mình. Tôi chỉ là……thay trời hành đạo."
 
 Ông ấy móc những điếu thuốc còn lại từ túi bạn, ngậm một điếu, châm lửa. Khói thuốc từ từ bốc lên trong đường hầm tối tăm.
 
@@ -298,7 +298,7 @@ Tiếng bước chân dần xa. Sâu trong đường hầm, chỉ còn tiếng n
 
 —— Bạn chẳng qua chỉ là một khẩu súng trong tay người khác.`,
 
-  ending_mermaid: `【Kết cục 13: Truyền thuyết người cá】
+  ending_mermaid: `[Kết cục 13: Truyền thuyết người cá]
 
 Thân thể khổng lồ của hải thi chìm dần xuống đáy biển sâu. Gợn sóng cuối cùng trên mặt biển cũng tan đi, thế giới đột nhiên trở nên khác thường yên tĩnh.
 

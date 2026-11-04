@@ -22,13 +22,13 @@ import {
 export function handleNurseZombieInteract() {
   const state = getState();
   if (state.nurseZombieRescued) {
-    setStory("Ở đây đã không còn gì nữa, Rutile đã đi với bạn về nhà rồi。");
+    setStory("Ở đây đã không còn gì nữa, Rutile đã đi với bạn về nhà rồi.");
     showExploreOptionsState();
     return;
   }
   setPhase("explore");
   const affinity = state.npcAffinity.nurseZombie || 0;
-  const affinityText = `[Tình cảm：${affinity}/${GAME_CONSTANTS.NURSE_ZOMBIE.MAX_AFFINITY}]`;
+  const affinityText = `[Tình cảm: ${affinity}/${GAME_CONSTANTS.NURSE_ZOMBIE.MAX_AFFINITY}]`;
   const intro = NURSE_ZOMBIE_INTRO;
   const feedResult = state._lastFeedResult;
   delete state._lastFeedResult;
@@ -46,7 +46,7 @@ export function handleNurseZombieInteract() {
 export function handleNurseZombieFeedSelect() {
   const state = getState();
   if (state.food.length === 0) {
-    setStory("Bạn không có thức ăn nào để cho cô ấy ăn。");
+    setStory("Bạn không có thức ăn nào để cho cô ấy ăn.");
     handleNurseZombieInteract();
     return;
   }
@@ -54,7 +54,7 @@ export function handleNurseZombieFeedSelect() {
   const foodList = state.food.map((f, i) =>
     `${i + 1}. ${getItemDisplayName(f)}`
   ).join("\n");
-  setStory(`Vui lòng chọn một loại thức ăn để cho cô ấy ăn：\n\n${foodList}`);
+  setStory(`Vui lòng chọn một loại thức ăn để cho cô ấy ăn: \n\n${foodList}`);
   const opts = state.food.map((f, i) => ({
     text: getItemDisplayName(f),
     action: "nurse_feed_confirm",
@@ -82,9 +82,9 @@ export function handleNurseZombieFeedConfirm(input) {
   if (isCanned) {
     const gain = Math.floor(Math.random() * (GAME_CONSTANTS.NURSE_ZOMBIE.CANNED_AFFINITY_MAX - GAME_CONSTANTS.NURSE_ZOMBIE.CANNED_AFFINITY_MIN + 1)) + GAME_CONSTANTS.NURSE_ZOMBIE.CANNED_AFFINITY_MIN;
     state.npcAffinity.nurseZombie = Math.min(GAME_CONSTANTS.NURSE_ZOMBIE.MAX_AFFINITY, (state.npcAffinity.nurseZombie || 0) + gain);
-    state._lastFeedResult = `Cô ấy dường như rất thích ăn thực phẩm đóng hộp！Tình cảm +${gain}。[Tình cảm：${state.npcAffinity.nurseZombie}/${GAME_CONSTANTS.NURSE_ZOMBIE.MAX_AFFINITY}]`;
+    state._lastFeedResult = `Cô ấy dường như rất thích ăn thực phẩm đóng hộp!Tình cảm +${gain}.[Tình cảm: ${state.npcAffinity.nurseZombie}/${GAME_CONSTANTS.NURSE_ZOMBIE.MAX_AFFINITY}]`;
   } else {
-    state._lastFeedResult = `Cô ấy dường như không thích ăn cái này…… có lẽ nên thử thực phẩm đóng hộp？[Tình cảm：${state.npcAffinity.nurseZombie || 0}/${GAME_CONSTANTS.NURSE_ZOMBIE.MAX_AFFINITY}]`;
+    state._lastFeedResult = `Cô ấy dường như không thích ăn cái này…… có lẽ nên thử thực phẩm đóng hộp?[Tình cảm: ${state.npcAffinity.nurseZombie || 0}/${GAME_CONSTANTS.NURSE_ZOMBIE.MAX_AFFINITY}]`;
   }
   handleNurseZombieInteract();
 }
@@ -94,13 +94,13 @@ export function handleNurseZombieBringHome() {
   state.nurseZombieRescued = true;
   if (!state.unlockedAchievements) state.unlockedAchievements = [];
   if (!state.unlockedAchievements.includes("companion_recruit")) state.unlockedAchievements.push("companion_recruit");
-  setStory("Rutile đi theo bạn về lều lưu sinh，cô ấy hiện là đồng minh trung thành của bạn。");
+  setStory("Rutile đi theo bạn về lều lưu sinh, cô ấy hiện là đồng minh trung thành của bạn.");
   advanceTime(1);
   updateStatusEffects();
   showHomeOptions();
 }
 
 export function handleNurseZombieLeave() {
-  setStory("Bạn quyết định không mang Rutile theo, rời đi một mình。");
+  setStory("Bạn quyết định không mang Rutile theo, rời đi một mình.");
   showExploreOptionsState();
 }

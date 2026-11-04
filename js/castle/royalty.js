@@ -83,9 +83,9 @@ Cô ấy trầm mặc rất lâu, lâu đến mức bạn tưởng cô ấy sẽ
 Cô ấy lấy từ bàn trang điểm một tờ giấy thư, nhấc bút viết vài dòng:
 "Giao cái này cho anh ấy. Nói với anh ấy, tôi không hận anh ấy. Nhưng có những vết thương, thời gian cũng không chữa lành được."
 
-📖 Nhận được【Thưhồi âm của hoàng hậu】
+📖 Nhận được[Thưhồi âm của hoàng hậu]
 
-（Gợi ý：Giao thưhồi âm cho thủ lĩnh căn cứ）`);
+(Gợi ý: Giao thưhồi âm cho thủ lĩnh căn cứ)`);
   refreshCastleInterior();
 }
 
@@ -93,7 +93,7 @@ export function handleCastleBanquet() {
   const state = getState();
   const hasId = hasCastleIdentity(state);
   if (!hasId) {
-    setStory("Bạn vừa đi đến cửa đại sảnh yến tiệc, thị tùng đã chặn lại: \"Vui lòng xuất trình thẻ thân phận quý tộc.\" Bạn không có thẻ thân phận, bị đuổi ra ngoài.\n\nBạn bị phát hiện không có thân phận quý tộc, bị đuổi ra ngoài！");
+    setStory("Bạn vừa đi đến cửa đại sảnh yến tiệc, thị tùng đã chặn lại: \"Vui lòng xuất trình thẻ thân phận quý tộc.\" Bạn không có thẻ thân phận, bị đuổi ra ngoài.\n\nBạn bị phát hiện không có thân phận quý tộc, bị đuổi ra ngoài!");
     state.currentSubMap = null;
     refreshCastleOutpost();
     return;
@@ -106,7 +106,7 @@ export function handleCastleBanquet() {
   state.lastBanquetDay = state.day;
   state.hunger = Math.min(100, state.hunger + GAME_CONSTANTS.CASTLE.BANQUET_HUNGER_RESTORE);
   state.hydration = Math.min(100, state.hydration + GAME_CONSTANTS.CASTLE.BANQUET_HYDRATION_RESTORE);
-  setStory(`Bạn ngồi vào bàn yến tiệc dài, thưởng thức bữa đại tiệc phong phú——gà tây nướng, rượu vang đỏ, súp kem……trong ngày tận thế mà được ăn một bữa như vậy quả là xa xỉ！
+  setStory(`Bạn ngồi vào bàn yến tiệc dài, thưởng thức bữa đại tiệc phong phú——gà tây nướng, rượu vang đỏ, súp kem……trong ngày tận thế mà được ăn một bữa như vậy quả là xa xỉ!
 
 Độ no và nước uống mỗi thứ hồi phục +${GAME_CONSTANTS.CASTLE.BANQUET_HUNGER_RESTORE}%.`);
   advanceTime(GAME_CONSTANTS.CASTLE.BANQUET_TIME_COST);
@@ -129,16 +129,16 @@ export function handleQueenPast() {
   if (!isQuestDone("queenQuest1")) {
     opts.push({ text: "Giải sầu", action: "queen_quest1" });
   } else if (!isQuestDone("queenQuest2")) {
-    opts.push({ text: "Giải sầu（Đã hoàn thành）", action: "queen_past", disabled: true });
+    opts.push({ text: "Giải sầu(Đã hoàn thành)", action: "queen_past", disabled: true });
     opts.push({ text: "Tình hình nhà vua", action: "queen_quest2" });
   } else if (!isQuestDone("queenQuest3")) {
-    opts.push({ text: "Giải sầu（Đã hoàn thành）", action: "queen_past", disabled: true });
-    opts.push({ text: "Tình hình nhà vua（Đã hoàn thành）", action: "queen_past", disabled: true });
+    opts.push({ text: "Giải sầu(Đã hoàn thành)", action: "queen_past", disabled: true });
+    opts.push({ text: "Tình hình nhà vua(Đã hoàn thành)", action: "queen_past", disabled: true });
     opts.push({ text: "Luyện kiếm", action: "queen_quest3" });
   } else if (!isQuestDone("queenQuest4")) {
-    opts.push({ text: "Giải sầu（Đã hoàn thành）", action: "queen_past", disabled: true });
-    opts.push({ text: "Tình hình nhà vua（Đã hoàn thành）", action: "queen_past", disabled: true });
-    opts.push({ text: "Luyện kiếm（Đã hoàn thành）", action: "queen_past", disabled: true });
+    opts.push({ text: "Giải sầu(Đã hoàn thành)", action: "queen_past", disabled: true });
+    opts.push({ text: "Tình hình nhà vua(Đã hoàn thành)", action: "queen_past", disabled: true });
+    opts.push({ text: "Luyện kiếm(Đã hoàn thành)", action: "queen_past", disabled: true });
     opts.push({ text: "Kỷ niệm ngày cưới", action: "queen_quest4" });
   }
 
@@ -156,7 +156,7 @@ export function handleQueenQuest1() {
   const needDongli = 5;
 
   if (baiweiCount < needBaiwei || dongliCount < needDongli) {
-    let msg = "Hoàng hậu thở dài: \"Nhìn thấy chiếc mặt dây chuyền này, lại nhớ đến những chuyện không vui. Giúp tôi lấy chút rượu để giải sầu。\"\n\nVật phẩm cần:";
+    let msg = "Hoàng hậu thở dài: \"Nhìn thấy chiếc mặt dây chuyền này, lại nhớ đến những chuyện không vui. Giúp tôi lấy chút rượu để giải sầu.\"\n\nVật phẩm cần:";
     if (baiweiCount < needBaiwei) msg += `\n  Bai Wei beer ${baiweiCount}/${needBaiwei}`;
     else msg += `\n  Bai Wei beer ${baiweiCount}/${needBaiwei} ✓`;
     if (dongliCount < needDongli) msg += `\n  Dong Li beer ${dongliCount}/${needDongli}`;
@@ -182,7 +182,7 @@ Cô ấy lại uống một ngụm:
 
 Bạn không trả lời. Có những câu hỏi, đáp án không nằm trong rượu.
 
-🪙 Nhận được【Royal coin】×10`);
+🪙 Nhận được[Royal coin]×10`);
   refreshCastleInterior();
 }
 
@@ -192,7 +192,7 @@ export function handleQueenQuest2() {
   const needGouqi = 10;
 
   if (gouqiCount < needGouqi) {
-    setStory(`Hoàng hậu ưu tư nói："Gần đây nhà vua sức khỏe không tốt, hoài hoài. Tôi nghe nói kỷ tử có ích cho cơ thể, bạn có thể giúp tôi tìm một ít không？"\n\nVật phẩm cần：\n  kỷ tử ${gouqiCount}/${needGouqi}`);
+    setStory(`Hoàng hậu ưu tư nói: "Gần đây nhà vua sức khỏe không tốt, hoài hoài. Tôi nghe nói kỷ tử có ích cho cơ thể, bạn có thể giúp tôi tìm một ít không?\"\n\nVật phẩm cần: \n  kỷ tử ${gouqiCount}/${needGouqi}`);
     refreshCastleInterior();
     return;
   }
@@ -212,23 +212,23 @@ Cô ấy dừng lại, cười khổ:
 
 Bạn nhìn vào mắt cô ấy, nơi đó có ánh sáng, cũng có bóng tối.
 
-🪙 Nhận được【Royal coin】×20`);
+🪙 Nhận được[Royal coin]×20`);
   refreshCastleInterior();
 }
 
 export function handleQueenQuest3() {
   const state = getState();
-  const swordCount = state.other.filter(i => i.id === "kiếm西洋").length;
+  const swordCount = state.other.filter(i => i.id === "kiem_tay").length;
   const needSwords = 3;
 
   if (swordCount < needSwords) {
-    setStory(`Hoàng hậu nói："Kiếm ở thao trường lâu đài đều hỏng rồi, rất cần mới. Bạn có thể kiếm được 3 thanhkiếm西洋 không? Nhà vua thích luyện kiếm, đó là sở thích duy nhất của anh ấy。"\n\nVật phẩm cần：\n  kiếm西洋 ${swordCount}/${needSwords}`);
+    setStory(`Hoàng hậu nói: "Kiếm ở thao trường lâu đài đều hỏng rồi, rất cần mới. Bạn có thể kiếm được 3 thanh Kiếm Tây không? Nhà vua thích luyện kiếm, đó là sở thích duy nhất của anh ấy.\"\n\nVật phẩm cần: \n  Kiếm Tây ${swordCount}/${needSwords}`);
     refreshCastleInterior();
     return;
   }
 
   for (let i = 0; i < needSwords; i++) {
-    const idx = state.other.findIndex(item => item.id === "kiếm西洋");
+    const idx = state.other.findIndex(item => item.id === "kiem_tay");
     if (idx !== -1) state.other.splice(idx, 1);
   }
   markQuestDone("queenQuest3");
@@ -236,14 +236,14 @@ export function handleQueenQuest3() {
   updateStatusEffects();
   checkDeath();
   addItem({ id: "Royal coin", name: "Royal coin", type: "royal_coin", count: 30 });
-  setStory(`Bạn giao 3 thanhkiếm西洋 cho hoàng hậu. Cô ấy tự tay kiểm tra từng thanh, hài lòng gật đầu.
+  setStory(`Bạn giao 3 thanh Kiếm Tây cho hoàng hậu. Cô ấy tự tay kiểm tra từng thanh, hài lòng gật đầu.
 
-"Anh ấy luyện kiếm mỗi ngày." Hoàng hậu nhìn lưỡi kiếm lóehàn quang, "Anh ấy nói, chỉ khi tay có kiếm, mới có thể bảo vệ người muốn bảo vệ。"
+"Anh ấy luyện kiếm mỗi ngày." Hoàng hậu nhìn lưỡi kiếm lóehàn quang, "Anh ấy nói, chỉ khi tay có kiếm, mới có thể bảo vệ người muốn bảo vệ."
 
 Cô ấy bỗng khẽ nói:
-"Nhưng anh ấy bảo vệ tất cả mọi người, chỉ không bảo vệ được bản thân. Sức khỏe của anh ấy……ngày càng tệ。"
+"Nhưng anh ấy bảo vệ tất cả mọi người, chỉ không bảo vệ được bản thân. Sức khỏe của anh ấy……ngày càng tệ."
 
-🪙 Nhận được【Royal coin】×30`);
+🪙 Nhận được[Royal coin]×30`);
   refreshCastleInterior();
 }
 
@@ -253,7 +253,7 @@ export function handleQueenQuest4() {
   const m700InBag = state.other.some(i => i.id === "M700");
 
   if (!hasM700 && !m700InBag) {
-    setStory("Hoàng hậu do dự một chút, rồi nói：\"Hôm nay là kỷ niệm ngày cưới của chúng tôi. Anh ấy thích đi săn và sưu tầm vũ khí……tôi muốn tặng anh ấy một khẩu súng tốt. Bạn có thể giúp tôi kiếm một khẩu M700 không？\"\n\nVật phẩm cần：\n  M700 ×1\n\n（Gợi ý：M700 cần trang bị làm vũ khí tầm xa hoặc đặt trong balo）");
+    setStory("Hoàng hậu do dự một chút, rồi nói: \"Hôm nay là kỷ niệm ngày cưới của chúng tôi. Anh ấy thích đi săn và sưu tầm vũ khí……tôi muốn tặng anh ấy một khẩu súng tốt. Bạn có thể giúp tôi kiếm một khẩu M700 không?\"\n\nVật phẩm cần: \n  M700 ×1\n\n(Gợi ý: M700 cần trang bị làm vũ khí tầm xa hoặc đặt trong balo)");
     refreshCastleInterior();
     return;
   }
@@ -272,29 +272,29 @@ export function handleQueenQuest4() {
   addItem({ ...pass });
   setStory(`Bạn đưa M700 cho hoàng hậu. Cô ấy nhận lấy khẩu súng, khẽ vuốt ve các hoa văn trên báng súng, trong mắt thoáng qua một tia dịu dàng.
 
-"Anh ấy chắc chắn sẽ thích。" Cô ấy đặt súng sang một bên, lấy từ dưới ghế dài ra một phong bì tinh xảo, đưa cho bạn.
+"Anh ấy chắc chắn sẽ thích." Cô ấy đặt súng sang một bên, lấy từ dưới ghế dài ra một phong bì tinh xảo, đưa cho bạn.
 
-"Đây là thẻ thông hành lâu đài. Có nó, bạn có thể ra vào lâu đài bất cứ lúc nào, không cần thẻ thân phận, cũng không cần hối lộ vệ binh。"
+"Đây là thẻ thông hành lâu đài. Có nó, bạn có thể ra vào lâu đài bất cứ lúc nào, không cần thẻ thân phận, cũng không cần hối lộ vệ binh."
 
 Cô ấy nhìn ra cửa sổ về phía đêm, khẽ nói:
-"Anh biết không? Anh ấy chưa bao giờ để em chịu chútuất ức nào。Trong ngày tận thế này, anh ấy cho em một ngôi nhà, một vương miện, và……toàn bộ chân tâm của anh ấy。"
+"Anh biết không? Anh ấy chưa bao giờ để em chịu chútuất ức nào.Trong ngày tận thế này, anh ấy cho em một ngôi nhà, một vương miện, và……toàn bộ chân tâm của anh ấy."
 
-"Nhưng chân tâm thứ này, đôi khi cònthương người hơn cả đạn。"
+"Nhưng chân tâm thứ này, đôi khi cònthương người hơn cả đạn."
 
 Cô ấy quay lại nhìn bạn, nụ cười mang theo sự giải thoát:
-"Thay tôi chăm sóc anh ấy。Cũng thay tôi……chăm sóc anh trai tôi。"
+"Thay tôi chăm sóc anh ấy.Cũng thay tôi……chăm sóc anh trai tôi."
 
-🪙 Nhận được【Royal coin】×40！
-🎫 Nhận được【Thẻ thông hành lâu đài】！
+🪙 Nhận được[Royal coin]×40!
+🎫 Nhận được[Thẻ thông hành lâu đài]!
 
-（Gợi ý：Sở hữu thẻ thông hành lâu đài có thể tự do ra vào lâu đài）`);
+(Gợi ý: Sở hữu thẻ thông hành lâu đài có thể tự do ra vào lâu đài)`);
   refreshCastleInterior();
 }
 
 export function handleKingUnderground() {
   const state = getState();
   if (state.undergroundKeyObtained) {
-    setStory("Nhà vua xua tay：\"Chìa khóa không phải đã đưa bạn rồi sao? Mau đi đi。\"");
+    setStory("Nhà vua xua tay: \"Chìa khóa không phải đã đưa bạn rồi sao? Mau đi đi.\"");
     refreshCastleInterior();
     return;
   }
@@ -305,7 +305,7 @@ export function handleKingUnderground() {
   if (hasAWM || hasAWMInBag) {
     opts.push({ text: "Nộp AWM", action: "king_trade_awm" });
   } else {
-    opts.push({ text: "Nộp AWM（Bạn không có AWM）", action: "king_trade_awm", disabled: true });
+    opts.push({ text: "Nộp AWM(Bạn không có AWM)", action: "king_trade_awm", disabled: true });
   }
   opts.push({ text: "Rời đi", action: "castle_back" });
   setOptions(opts);
@@ -321,14 +321,14 @@ export function handleKingTradeAWM() {
     if (awmIdx !== -1) {
       state.other.splice(awmIdx, 1);
     } else {
-      setStory("Bạn không có AWM để nộp。");
+      setStory("Bạn không có AWM để nộp.");
       refreshCastleInterior();
       return;
     }
   }
   state.undergroundKeyObtained = true;
   state.other.push({ ...SPECIAL_ITEMS.underground_key });
-  setStory("Nhà vua nhận lấy AWM, yêu thích vuốt ve thân súng："Súng tốt！Súng tốt a！" Anh ấy lấy từ dưới ngai vàng ra một chiếc chìa khóa rỉ sét ném cho bạn："Cầm đi, chìa khóa khu vực ngầm. Đừng có mà tháo hết thiết bị hạt nhân của tôi！\"");
+  setStory("Nhà vua nhận lấy AWM, yêu thích vuốt ve thân súng: \"Súng tốt!Súng tốt a!\" Anh ấy lấy từ dưới ngai vàng ra một chiếc chìa khóa rỉ sét ném cho bạn: \"Cầm đi, chìa khóa khu vực ngầm. Đừng có mà tháo hết thiết bị hạt nhân của tôi!\"");
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -339,19 +339,19 @@ export function handleCastleBall() {
   const state = getState();
   const hasId = hasCastleIdentity(state);
   if (!hasId) {
-    setStory("Vệ binh vũ hội chặn bạn lại ở cửa："Vui lòng xuất trình thẻ thân phận quý tộc。" Bạn không có thẻ thân phận, bị đuổi ra ngoài。\n\nBạn bị phát hiện không có thân phận quý tộc, bị đuổi ra ngoài！");
+    setStory("Vệ binh vũ hội chặn bạn lại ở cửa: \"Vui lòng xuất trình thẻ thân phận quý tộc.\" Bạn không có thẻ thân phận, bị đuổi ra ngoài.\n\nBạn bị phát hiện không có thân phận quý tộc, bị đuổi ra ngoài!");
     state.currentSubMap = null;
     refreshCastleOutpost();
     return;
   }
   if (state.lastBallDay === state.day) {
-    setStory("Hôm nay bạn đã tham dự vũ hội rồi, chân cũng nhảy mỏi rồi. Lần sau hãy đến。");
+    setStory("Hôm nay bạn đã tham dự vũ hội rồi, chân cũng nhảy mỏi rồi. Lần sau hãy đến.");
     refreshCastleInterior();
     return;
   }
   state.lastBallDay = state.day;
   state.crash = Math.max(0, (state.crash || 0) - GAME_CONSTANTS.CASTLE.BALL_FATIGUE_REDUCTION);
-  setStory(`Bạn nhảy múa trong đại sảnh lộng lẫy, điệu waltz du dương khiến bạn tạm thời quên đi sự tàn khốc của ngày tận thế. Một khúc nhạc kết thúc, bạn cảm thấy cả thân thể lẫn tâm hồn đều được thư giãn。\n\nMệt mỏi -${GAME_CONSTANTS.CASTLE.BALL_FATIGUE_REDUCTION}。`);
+  setStory(`Bạn nhảy múa trong đại sảnh lộng lẫy, điệu waltz du dương khiến bạn tạm thời quên đi sự tàn khốc của ngày tận thế. Một khúc nhạc kết thúc, bạn cảm thấy cả thân thể lẫn tâm hồn đều được thư giãn.\n\nMệt mỏi -${GAME_CONSTANTS.CASTLE.BALL_FATIGUE_REDUCTION}.`);
   advanceTime(GAME_CONSTANTS.CASTLE.BALL_TIME_COST);
   updateStatusEffects();
   checkDeath();
@@ -362,13 +362,13 @@ export function handleCastleRoom() {
   const state = getState();
   const hasId = hasCastleIdentity(state);
   if (!hasId) {
-    setStory("Quản gia phòng khách chặn bạn lại："nơi đây chỉ dành cho quý tộc mở cửa。" Bạn không có thẻ thân phận, bị đuổi ra ngoài。\n\nBạn bị phát hiện không có thân phận quý tộc, bị đuổi ra ngoài！");
+    setStory("Quản gia phòng khách chặn bạn lại: \"nơi đây chỉ dành cho quý tộc mở cửa.\" Bạn không có thẻ thân phận, bị đuổi ra ngoài.\n\nBạn bị phát hiện không có thân phận quý tộc, bị đuổi ra ngoài!");
     state.currentSubMap = null;
     refreshCastleOutpost();
     return;
   }
   if (state.lastRoomDay >= state.day) {
-    setStory("Hôm nay đã nghỉ ngơi rồi, mai hãy đến nhé。");
+    setStory("Hôm nay đã nghỉ ngơi rồi, mai hãy đến nhé.");
     refreshCastleInterior();
     return;
   }
@@ -377,7 +377,7 @@ export function handleCastleRoom() {
   state.sanity = Math.min(GAME_CONSTANTS.SANITY_MAX, state.sanity + GAME_CONSTANTS.CASTLE.ROOM_SANITY_RECOVERY);
   const fatigueReduction = Math.min(GAME_CONSTANTS.CASTLE.ROOM_FATIGUE_REDUCTION, state.crash);
   state.crash = Math.max(state.crash - GAME_CONSTANTS.CASTLE.ROOM_FATIGUE_REDUCTION, 0);
-  setStory(`Bạn nghỉ ngơi thoải mái trong phòng khách quý tộc. Sau khi tỉnh dậy tinh thần sảng khoái。\n\nMáu +${GAME_CONSTANTS.CASTLE.ROOM_HEALTH_RESTORE}（Hiện tại ${state.health}/${GAME_CONSTANTS.MAX_HEALTH}）, lý trí hồi phục ${GAME_CONSTANTS.CASTLE.ROOM_SANITY_RECOVERY} điểm, mệt mỏi giảm ${fatigueReduction} điểm。`);
+  setStory(`Bạn nghỉ ngơi thoải mái trong phòng khách quý tộc. Sau khi tỉnh dậy tinh thần sảng khoái.\n\nMáu +${GAME_CONSTANTS.CASTLE.ROOM_HEALTH_RESTORE}(Hiện tại ${state.health}/${GAME_CONSTANTS.MAX_HEALTH}), lý trí hồi phục ${GAME_CONSTANTS.CASTLE.ROOM_SANITY_RECOVERY} điểm, mệt mỏi giảm ${fatigueReduction} điểm.`);
   advanceTime(GAME_CONSTANTS.CASTLE.ROOM_TIME_COST);
   updateStatusEffects();
   checkDeath();
@@ -388,12 +388,12 @@ export function handleCastleSalary() {
   const state = getState();
   const rank = getCastleRank(state);
   if (rank < 2) {
-    setStory("Bạn chưa đáp ứng điều kiện nhận lương。");
+    setStory("Bạn chưa đáp ứng điều kiện nhận lương.");
     refreshCastleInterior();
     return;
   }
   if (state.lastSalaryDay === state.day) {
-    setStory("Hôm nay bạn đã nhận lương rồi, mai hãy đến nhé。");
+    setStory("Hôm nay bạn đã nhận lương rồi, mai hãy đến nhé.");
     refreshCastleInterior();
     return;
   }
@@ -408,7 +408,7 @@ export function handleCastleSalary() {
     addItem(item);
     received.push(getItemDisplayName(item));
   }
-  setStory(`Thân phận hiện tại của bạn là ${rankName}, nhận được ${received.join("、")}。`);
+  setStory(`Thân phận hiện tại của bạn là ${rankName}, nhận được ${received.join(", ")}.`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -416,18 +416,18 @@ export function handleCastleSalary() {
 }
 
 const ROYAL_SHOP_ITEMS = [
-  { name: "Quân lương đóng hộp", price: 2, type: "food", itemId: "军粮罐头" },
-  { name: "Nước điện giải", price: 2, type: "drink", itemId: "电解质水" },
-  { name: "Huyết thanh kháng nhiễm", price: 3, type: "medicine", itemId: "抗感染血清" },
-  { name: "Túi cấp cứu y tế", price: 5, type: "medicine", itemId: "医用急救包" },
-  { name: "Hộp y tế chiến trường", price: 10, type: "medicine", itemId: "战地医疗箱" },
-  { name: "Súng ngắn hoàng gia", price: 100, type: "ranged", itemId: "皇家短枪" },
-  { name: "Kiếm bạc hoàng gia", price: 100, type: "melee", itemId: "皇家银剑" },
+  { name: "Quân lương đóng hộp", price: 2, type: "food", itemId: "hop_quan_luong" },
+  { name: "Nước điện giải", price: 2, type: "drink", itemId: "nuoc_dien_giai" },
+  { name: "Huyết thanh kháng nhiễm", price: 3, type: "medicine", itemId: "huyet_thanh" },
+  { name: "Túi cấp cứu y tế", price: 5, type: "medicine", itemId: "goi_cap_cuu" },
+  { name: "Hộp y tế chiến trường", price: 10, type: "medicine", itemId: "hop_y_te" },
+  { name: "Súng ngắn hoàng gia", price: 100, type: "ranged", itemId: "sung_hoang_gia" },
+  { name: "Kiếm bạc hoàng gia", price: 100, type: "melee", itemId: "kiem_bac_hoang_gia" },
 ];
 
 export function handleRoyalTrade() {
   const state = getState();
-  setStory(`Hoàng hậu khẽ gật đầu："Giao dịch hoàng gia? Đương nhiên. Royal coin trong tay bạn có thể đổi được không ít đồ tốt ở đây。"\n\nRoyal coin hiện tại：${state.royalCoins}`);
+  setStory(`Hoàng hậu khẽ gật đầu: "Giao dịch hoàng gia? Đương nhiên. Royal coin trong tay bạn có thể đổi được không ít đồ tốt ở đây.\"\n\nRoyal coin hiện tại: ${state.royalCoins}`);
   setPhase("castle_interior");
   setOptions([
     { text: "Đổi Royal coin", action: "queen_royal_exchange" },
@@ -439,12 +439,12 @@ export function handleRoyalTrade() {
 export function handleRoyalExchange() {
   const state = getState();
   const gouqiCount = state.food.filter(i => i.id === "gouqi").reduce((sum, i) => sum + (i.count || 1), 0);
-  const swordCount = state.other.filter(i => i.id === "kiếm西洋").length;
-  setStory(`Hoàng hậu："Bạn có thể dùng vật tư để đổi Royal coin。"\n\nRoyal coin hiện tại：${state.royalCoins}\n\nCó thể đổi：\n  Kỷ tử ×${gouqiCount}（2 kỷ tử = 1 Royal coin）\n  Kiếm西洋 ×${swordCount}（1 kiếm西洋 = 5 Royal coin）`);
+  const swordCount = state.other.filter(i => i.id === "kiem_tay").length;
+  setStory(`Hoàng hậu: "Bạn có thể dùng vật tư để đổi Royal coin.\"\n\nRoyal coin hiện tại: ${state.royalCoins}\n\nCó thể đổi: \n  Kỷ tử ×${gouqiCount}(2 kỷ tử = 1 Royal coin)\n  Kiếm Tây ×${swordCount}(1 Kiếm Tây = 5 Royal coin)`);
   setPhase("castle_interior");
   setOptions([
-    { text: `Nộp kỷ tử（2→1 coin）×${gouqiCount}`, action: "queen_exchange_gouqi" },
-    { text: `Nộp kiếm西洋（1→5 coin）×${swordCount}`, action: "queen_exchange_sword" },
+    { text: `Nộp kỷ tử(2→1 coin)×${gouqiCount}`, action: "queen_exchange_gouqi" },
+    { text: `Nộp Kiếm Tây(1→5 coin)×${swordCount}`, action: "queen_exchange_sword" },
     { text: "Quay lại", action: "queen_royal_trade" },
   ]);
 }
@@ -453,27 +453,27 @@ export function handleExchangeGouqi() {
   const state = getState();
   const gouqiCount = state.food.filter(i => i.id === "gouqi").reduce((sum, i) => sum + (i.count || 1), 0);
   if (gouqiCount < 2) {
-    setStory("Kỷ tử của bạn không đủ, ít nhất cần 2 cái mới đổi được 1 Royal coin。");
+    setStory("Kỷ tử của bạn không đủ, ít nhất cần 2 cái mới đổi được 1 Royal coin.");
     refreshCastleInterior();
     return;
   }
   removeItemById("food", "gouqi", 2);
   addItem({ id: "Royal coin", name: "Royal coin", type: "royal_coin", count: 1 });
-  setStory(`Bạn nộp 2 kỷ tử, nhận được 1 Royal coin。\n\nRoyal coin hiện tại：${state.royalCoins}`);
+  setStory(`Bạn nộp 2 kỷ tử, nhận được 1 Royal coin.\n\nRoyal coin hiện tại: ${state.royalCoins}`);
   refreshCastleInterior();
 }
 
 export function handleExchangeSword() {
   const state = getState();
-  const swordIdx = state.other.findIndex(i => i.id === "kiếm西洋");
+  const swordIdx = state.other.findIndex(i => i.id === "kiem_tay");
   if (swordIdx === -1) {
-    setStory("Bạn không có kiếm西洋 để nộp。");
+    setStory("Bạn không có Kiếm Tây để nộp.");
     refreshCastleInterior();
     return;
   }
   state.other.splice(swordIdx, 1);
   addItem({ id: "Royal coin", name: "Royal coin", type: "royal_coin", count: 5 });
-  setStory(`Bạn nộp 1 kiếm西洋, nhận được 5 Royal coin。\n\nRoyal coin hiện tại：${state.royalCoins}`);
+  setStory(`Bạn nộp 1 Kiếm Tây, nhận được 5 Royal coin.\n\nRoyal coin hiện tại: ${state.royalCoins}`);
   refreshCastleInterior();
 }
 
@@ -483,11 +483,11 @@ export function handleRoyalShop() {
   ROYAL_SHOP_ITEMS.forEach((item, idx) => {
     shopList += `  ${idx + 1}. ${item.name} — ${item.price} Royal coin\n`;
   });
-  shopList += `\nRoyal coin hiện tại：${state.royalCoins}`;
+  shopList += `\nRoyal coin hiện tại: ${state.royalCoins}`;
   setStory(shopList);
   setPhase("castle_interior");
   const opts = ROYAL_SHOP_ITEMS.map(item => ({
-    text: `${item.name}（${item.price} coin）`,
+    text: `${item.name}(${item.price} coin)`,
     action: `queen_buy_${item.itemId}`,
   }));
   opts.push({ text: "Quay lại", action: "queen_royal_trade" });
@@ -502,7 +502,7 @@ export function handleRoyalShopBuy(itemId) {
     return;
   }
   if (state.royalCoins < shopItem.price) {
-    setStory(`Royal coin của bạn không đủ。Cần ${shopItem.price} Royal coin, hiện tại chỉ có ${state.royalCoins}。`);
+    setStory(`Royal coin của bạn không đủ.Cần ${shopItem.price} Royal coin, hiện tại chỉ có ${state.royalCoins}.`);
     refreshCastleInterior();
     return;
   }
@@ -528,11 +528,11 @@ export function handleRoyalShopBuy(itemId) {
     const added = addItem(itemToAdd);
     if (!added) {
       addItem({ id: "Royal coin", name: "Royal coin", type: "royal_coin", count: shopItem.price });
-      setStory("Balo của bạn đã đầy, không thể mua vật phẩm này。Royal coin đã được hoàn lại。");
+      setStory("Balo của bạn đã đầy, không thể mua vật phẩm này.Royal coin đã được hoàn lại.");
       refreshCastleInterior();
       return;
     }
   }
-  setStory(`Bạn đã tiêu ${shopItem.price} Royal coin, mua được【${shopItem.name}】。\n\nRoyal coin hiện tại：${state.royalCoins}`);
+  setStory(`Bạn đã tiêu ${shopItem.price} Royal coin, mua được[${shopItem.name}].\n\nRoyal coin hiện tại: ${state.royalCoins}`);
   refreshCastleInterior();
 }

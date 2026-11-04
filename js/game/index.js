@@ -155,8 +155,8 @@ function handleChooseAction(input) {
       handleEquipSelect();
       break;
     case "goOut":
-      if (getState().weather === "酸雨") {
-        setStory("外面下着腐蚀性的酸雨，根本无法出门。");
+      if (getState().weather === "mua_axit") {
+        setStory("Ngoài trời đang mưa axit ăn mòn, căn bản không thể ra ngoài.");
         return;
       }
       handleGoOut();
@@ -230,7 +230,7 @@ export function handleAction(input) {
   if (state.options && state.options.length > 0) {
     const optIdx = input - 1;
     if (optIdx >= 0 && optIdx < state.options.length && state.options[optIdx].disabled) {
-      setStory("条件未满足，无法执行此操作");
+      setStory("Điều kiện chưa đáp ứng, không thể thực hiện thao tác này");
       return;
     }
   }
@@ -556,7 +556,7 @@ export function handleAction(input) {
       const rs = getState();
       const rOptIdx = input - 1;
       if (rOptIdx >= 0 && rOptIdx < rs.options.length && rs.options[rOptIdx].action === "robber_continue") {
-        if (rs.currentMap && rs.currentMap.id === "小型岛屿") {
+        if (rs.currentMap && rs.currentMap.id === "dao_nho") {
           refreshIslandMenu();
         } else {
           showExploreOptionsState();

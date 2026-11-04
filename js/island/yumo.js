@@ -25,8 +25,8 @@ export function handleNpcYumo() {
   const pool = YUMO_DIALOGUES[stage] || YUMO_DIALOGUES.stranger;
   const dialogue = randomDialogue(pool);
 
-  let desc = `【Công tước Yu Mo】\nMột quý tộc mặc hoa phục, cử chỉ toát lên uy nghi trời sinh. Trong ánh mắt ông vừa có sự thong dong của kẻ bề trên, vừa ẩn giấu một tia lo lắng khó nhận ra.`;
-  desc += `\n\nHảo cảm hiện tại: ${affinity}/${AFFINITY_MAX.yumo}（${friendshipLabel}）`;
+  let desc = `[Công tước Yu Mo]\nMột quý tộc mặc hoa phục, cử chỉ toát lên uy nghi trời sinh. Trong ánh mắt ông vừa có sự thong dong của kẻ bề trên, vừa ẩn giấu một tia lo lắng khó nhận ra.`;
+  desc += `\n\nHảo cảm hiện tại: ${affinity}/${AFFINITY_MAX.yumo}(${friendshipLabel})`;
   desc += `\n\n${dialogue}`;
 
   setPhase("island_yumo");
@@ -40,25 +40,25 @@ export function handleNpcYumo() {
   if (!isQuestDone("yumoQuest1")) {
     opts.push({ text: "Nỗi phiền của công tước", action: "yumo_quest1" });
   } else if (!isQuestDone("yumoQuest2")) {
-    opts.push({ text: "Nỗi phiền của công tước（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Nỗi phiền của công tước(đã hoàn thành)", action: "yumo_quest_done", disabled: true });
     opts.push({ text: "Thí nghiệm vương quốc", action: "yumo_quest2" });
   } else if (!isQuestDone("yumoQuest3")) {
-    opts.push({ text: "Nỗi phiền của công tước（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "Thí nghiệm vương quốc（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Nỗi phiền của công tước(đã hoàn thành)", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Thí nghiệm vương quốc(đã hoàn thành)", action: "yumo_quest_done", disabled: true });
     opts.push({ text: "Quái vật biển đổ bộ", action: "yumo_quest3" });
   } else if (!isQuestDone("yumoQuest4")) {
-    opts.push({ text: "Nỗi phiền của công tước（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "Thí nghiệm vương quốc（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "Quái vật biển đổ bộ（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Nỗi phiền của công tước(đã hoàn thành)", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Thí nghiệm vương quốc(đã hoàn thành)", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Quái vật biển đổ bộ(đã hoàn thành)", action: "yumo_quest_done", disabled: true });
     opts.push({ text: "Xây dựng đảo", action: "yumo_quest4" });
   } else if (!isQuestDone("yumoQuest5")) {
-    opts.push({ text: "Nỗi phiền của công tước（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "Thí nghiệm vương quốc（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "Quái vật biển đổ bộ（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "Xây dựng đảo（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Nỗi phiền của công tước(đã hoàn thành)", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Thí nghiệm vương quốc(đã hoàn thành)", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Quái vật biển đổ bộ(đã hoàn thành)", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Xây dựng đảo(đã hoàn thành)", action: "yumo_quest_done", disabled: true });
     opts.push({ text: "Yến tiệc khánh công", action: "yumo_quest5" });
   } else {
-    opts.push({ text: "Yến tiệc khánh công（đã hoàn thành）", action: "yumo_quest5_done", disabled: true });
+    opts.push({ text: "Yến tiệc khánh công(đã hoàn thành)", action: "yumo_quest5_done", disabled: true });
   }
 
   opts.push({ text: "Rời đi", action: "yumo_leave" });
@@ -149,10 +149,10 @@ export function handleYumoGift() {
   const hasMedicine = state.medicine && state.medicine.length > 0;
   const hasCigs = state.cigarettes > 0;
 
-  if (hasFood) opts.push({ text: "Tặng thực phẩm（+3 hảo cảm）", action: "yumo_gift_food" });
-  if (hasDrinks) opts.push({ text: "Tặng đồ uống（+3 hảo cảm）", action: "yumo_gift_drinks" });
-  if (hasMedicine) opts.push({ text: "Tặng vật phẩm y tế（+5 hảo cảm）", action: "yumo_gift_medicine" });
-  if (hasCigs) opts.push({ text: "Tặng thuốc lá（+2 hảo cảm）", action: "yumo_gift_cigs" });
+  if (hasFood) opts.push({ text: "Tặng thực phẩm(+3 hảo cảm)", action: "yumo_gift_food" });
+  if (hasDrinks) opts.push({ text: "Tặng đồ uống(+3 hảo cảm)", action: "yumo_gift_drinks" });
+  if (hasMedicine) opts.push({ text: "Tặng vật phẩm y tế(+5 hảo cảm)", action: "yumo_gift_medicine" });
+  if (hasCigs) opts.push({ text: "Tặng thuốc lá(+2 hảo cảm)", action: "yumo_gift_cigs" });
   opts.push({ text: "Quay lại", action: "yumo_gift_back" });
 
   if (opts.length === 1) {
@@ -185,7 +185,7 @@ function handleYumoGiftConfirm(type, affinityGain) {
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
-  setStory(`Bạn đem ${itemName} tặng cho Công tước Yu Mo. Ông khẽ gật đầu: 'Cảm ơn tấm lòng của bạn.'\n\nHảo cảm Công tước Yu Mo +${affinityGain}（hiện tại ${getNpcAffinity("yumo")}/${AFFINITY_MAX.yumo}）`);
+  setStory(`Bạn đem ${itemName} tặng cho Công tước Yu Mo. Ông khẽ gật đầu: 'Cảm ơn tấm lòng của bạn.'\n\nHảo cảm Công tước Yu Mo +${affinityGain}(hiện tại ${getNpcAffinity("yumo")}/${AFFINITY_MAX.yumo})`);
   if (!state.gameOver) {
     setPhase("island_yumo");
     setOptions([{ text: "Tiếp tục", action: "yumo_gift_continue" }]);
@@ -204,7 +204,7 @@ function handleYumoGiftCigs() {
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
-  setStory(`Bạn đưa cho Công tước Yu Mo một điếu thuốc lá. Ông nhận lấy, khẽ ngửi: 'Chất lượng không tệ.'\n\nHảo cảm Công tước Yu Mo +2（hiện tại ${getNpcAffinity("yumo")}/${AFFINITY_MAX.yumo}）`);
+  setStory(`Bạn đưa cho Công tước Yu Mo một điếu thuốc lá. Ông nhận lấy, khẽ ngửi: 'Chất lượng không tệ.'\n\nHảo cảm Công tước Yu Mo +2(hiện tại ${getNpcAffinity("yumo")}/${AFFINITY_MAX.yumo})`);
   if (!state.gameOver) {
     setPhase("island_yumo");
     setOptions([{ text: "Tiếp tục", action: "yumo_gift_continue" }]);
@@ -331,7 +331,7 @@ export function handleYumoQuest4() {
 
 export function handleYumoQuest5() {
   const state = getState();
-  const baijiuCount = state.drinks.filter(i => i.id === "高度白酒").reduce((sum, i) => sum + (i.count || 1), 0);
+  const baijiuCount = state.drinks.filter(i => i.id === "ruou_cao_do").reduce((sum, i) => sum + (i.count || 1), 0);
 
   if (baijiuCount < 1) {
     setStory(YUMO_QUEST_STORIES.quest5_intro + "\n\nVật phẩm cần: rượu trắng độ cao 0/1");
@@ -342,7 +342,7 @@ export function handleYumoQuest5() {
     return;
   }
 
-  removeItemById("drinks", "高度白酒", 1);
+  removeItemById("drinks", "ruou_cao_do", 1);
   markQuestDone("yumoQuest5");
   setStory(YUMO_QUEST_STORIES.quest5_accept);
   advanceTime(1);

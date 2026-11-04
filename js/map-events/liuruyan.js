@@ -46,7 +46,7 @@ export function handleInfectedWoman() {
     setPhase("explore");
     setStory(MAP_NPC_INTROS.infected_woman_zombie);
     setOptions([
-      { text: "Tiêu diệt cô ấy（cô ấy đã biến thành zombie）", action: "kill_zombie_woman" },
+      { text: "Tiêu diệt cô ấy(cô ấy đã biến thành zombie)", action: "kill_zombie_woman" },
     ]);
   }
 }
@@ -176,7 +176,7 @@ export function handleLiuruyanQuestAccept() {
   setPhase("explore");
   const state = getState();
   if (!state.liuruyanQuest1Done) {
-    addItem({ id: "万能针剂", name: "Thuốc Tiêm Đa Năng", type: "medicine" });
+    addItem({ id: "tiem_van_nang", name: "Thuốc Tiêm Đa Năng", type: "medicine" });
     state.liuruyanQuest1Done = true;
     setStory(MAP_NPC_INTROS.liuruyan_quest1_accept);
     advanceTime(1);
@@ -191,7 +191,7 @@ export function handleLiuruyanQuestAccept() {
   }
   if (state.liuruyanQuest2Done && !state.liuruyanQuest3Done) {
     const stateRef = getState();
-    const hasCrowbar = stateRef.meleeWeapon?.id === "撬棍";
+    const hasCrowbar = stateRef.meleeWeapon?.id === "cay_nay";
     if (!hasCrowbar) {
       setStory(MAP_NPC_INTROS.liuruyan_quest3_need_crowbar);
       setOptions([

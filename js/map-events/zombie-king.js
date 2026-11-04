@@ -17,7 +17,7 @@ import {
 export function handleZombieKingInteract() {
   const state = getState();
   if (state.zombieKingDefeated) {
-    setStory("丧尸之王的尸体倒在地上，巢穴里恢复了死寂。这里已经没有什么值得挑战的了。");
+    setStory("Xác của Vua Zombie đổ gục trên đất, hang ổ trở về sự tĩnh lặng tuyệt đối. Nơi này đã không còn gì đáng thử thách.");
     showExploreOptionsState();
     return;
   }
@@ -32,8 +32,8 @@ export function handleZombieKingInteract() {
   setPhase("pre_combat_npc");
   setStory(ZOMBIE_KING_INTRO);
   setOptions([
-    { text: "近战作战", action: "combat_npc_melee" },
-    { text: "远程射击", action: "combat_npc_ranged" },
-    { text: "逃跑", action: "combat_npc_flee" },
+    { text: "Chiến đấu cận chiến", action: "combat_npc_melee" },
+    { text: "Bắn tầm xa", action: "combat_npc_ranged" },
+    { text: "Chạy trốn", action: "combat_npc_flee" },
   ]);
 }

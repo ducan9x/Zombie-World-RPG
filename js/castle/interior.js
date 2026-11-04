@@ -11,15 +11,15 @@ import { handleCastleKingQuest, handleKingQuestSubmit } from './king-quest.js';
 
 export function enterCastleInterior() {
   const state = getState();
-  state.currentSubMap = "城堡内部";
+  state.currentSubMap = "noi_that_lau_dai";
   showCastleInterior();
 }
 
 export function showCastleInterior() {
   const state = getState();
-  state.currentSubMap = "城堡内部";
+  state.currentSubMap = "noi_that_lau_dai";
   setPhase("castle_interior");
-  const acidBlock = state.weather === "酸雨";
+  const acidBlock = state.weather === "mua_axit";
   setStory("Xuyên qua cánh cổng thành dày nặng, bạn bước vào bên trong thành, đại sảnh chính rộng lớn hùng vĩ sáng trưng ánh đèn, ánh sáng ấm áp lung linh chiếu rọi mọi chi tiết chạm trổ, sàn đá marble bóng loáng như gương, vòm trần treo đèn chùm pha lê khổng lồ, khí phái xa hoa không hề kém thời kỳ đỉnh thịnh trước ngày tận thế, quý tộc và quan chức cấp cao ăn mặc hoa lệ tụ tập tại đây, mặc lễ phục cắt may tinh xảo, đeo vàng bạc châu báu và huy hiệu biểu tượng quyền lực, nâng chén cười nói, rượu và món ăn tinh xảo bày đầy bàn dài, tiếng cười nói vang vọng trong đại sảnh, bầu không khí xa hoa lười biếng tràn ngập, như thể lũ xác sống hoành hành bên ngoài, thế giới hoang tàn tuyệt vọng, chưa từng giáng xuống mảnh đất được tường cao che chở này.");
   refreshCastleInterior();
 }
@@ -27,7 +27,7 @@ export function showCastleInterior() {
 export function refreshCastleInterior() {
   const state = getState();
   setPhase("castle_interior");
-  const acidBlock = state.weather === "酸雨";
+  const acidBlock = state.weather === "mua_axit";
   const opts = [
     { text: "Khám phá", action: "castle_interior_explore" },
     { text: "Ăn uống", action: "eat" },
@@ -49,9 +49,9 @@ export function refreshCastleInterior() {
   }
   opts.push({ text: "Điều trị nhiễm trùng", action: "castle_treatment" });
   opts.push({ text: "Cấp lại tước vị", action: "castle_reissue" });
-  const meetingCooldown = state.lastMeetingDay === state.day ? "（Hôm nay đã tham dự）" : "";
+  const meetingCooldown = state.lastMeetingDay === state.day ? "(Hôm nay đã tham dự)" : "";
   opts.push({ text: `Tham dự hội nghị thành${meetingCooldown}`, action: "castle_meeting", disabled: state.lastMeetingDay === state.day });
-  const gardenCooldown = state.lastGardenDay >= state.day - (GAME_CONSTANTS.CASTLE.GARDEN_COOLDOWN_DAYS - 1) ? `（${GAME_CONSTANTS.CASTLE.GARDEN_COOLDOWN_DAYS - (state.day - state.lastGardenDay)} ngày nữa mới có thể quay lại）` : "";
+  const gardenCooldown = state.lastGardenDay >= state.day - (GAME_CONSTANTS.CASTLE.GARDEN_COOLDOWN_DAYS - 1) ? `(${GAME_CONSTANTS.CASTLE.GARDEN_COOLDOWN_DAYS - (state.day - state.lastGardenDay)} ngày nữa mới có thể quay lại)` : "";
   const gardenDisabled = state.day - state.lastGardenDay < GAME_CONSTANTS.CASTLE.GARDEN_COOLDOWN_DAYS;
   opts.push({ text: `Dạo vườn sau${gardenCooldown}`, action: "castle_garden", disabled: gardenDisabled });
   opts.push({ text: "Khu vực ngầm", action: "castle_underground" });
@@ -118,7 +118,7 @@ export function handleCastleInteriorAction(input) {
   if (option.action === "discard") { handleDiscardSelect(); return; }
   if (option.action === "castle_interior_explore") { handleCastleInteriorExplore(); return; }
   if (option.action === "leave_castle_interior") {
-    if (getState().weather === "酸雨") {
+    if (getState().weather === "mua_axit") {
       setStory("Bên ngoài đang mưa axit ăn mòn, bạn không thể ra ngoài. Tốt nhất tìm chỗ nào đó trú đã.");
       return;
     }
@@ -322,7 +322,7 @@ export function handleAssassinateKingFight() {
   const meleeName = state.meleeWeapon.name;
   const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "Không";
   const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Cơ thể bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường! Nên nghỉ ngơi trước." : "";
-  setStory(`Bạn rút vũ khí, xông về phía ngai vàng! Quốc vương giật mình tỉnh giấc, trong mắt thoáng qua một tia sợ hãi, rồi hóa thành ngọn lửa giận lạnh lùng. Hắn rút thanh kiếm bên hông, cận vệ quốc vương cũng xông ra từ chỗ tối——nhưng mục tiêu của bạn chỉ có quốc vương một người!\n\n⚔️ ${king.name}\n❤️ HP:${king.hp} | ⚡ Sát thương:${king.damage}\n\n【Cận chiến】${meleeName}\n【Tầm xa】${rangedName}${crashWarning}`);
+  setStory(`Bạn rút vũ khí, xông về phía ngai vàng! Quốc vương giật mình tỉnh giấc, trong mắt thoáng qua một tia sợ hãi, rồi hóa thành ngọn lửa giận lạnh lùng. Hắn rút thanh kiếm bên hông, cận vệ quốc vương cũng xông ra từ chỗ tối——nhưng mục tiêu của bạn chỉ có quốc vương một người!\n\n⚔️ ${king.name}\n❤️ HP:${king.hp} | ⚡ Sát thương:${king.damage}\n\n[Cận chiến]${meleeName}\n[Tầm xa]${rangedName}${crashWarning}`);
   const opts = [
     { text: "Chiến đấu cận chiến", action: "combat_npc_melee" }
   ];

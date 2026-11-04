@@ -68,18 +68,18 @@ export const SURVIVOR_NPC = [
       ]
     },
     tips: [
-      "【Gợi ý】Bệnh viện có rất nhiều vật tư y tế, nhưng zombie cũng rất nhiều.",
-      "【Gợi ý】Gần sở cảnh sát có vũ khí xuất hiện, nhưng phải cẩn thận zombie quân cảnh.",
-      "【Gợi ý】Balo quân dụng xuất hiện với xác suất cao nhất tại trạm kiểm soát quân sự.",
-      "【Gợi ý】Khi độ bền vũ khí cận chiến dưới 10 phải cẩn thận khi dùng.",
-      "【Gợi ý】Giá trị nhiễm trên 50 sẽ liên tục mất máu, nhanh chóng tìm huyết thanh kháng nhiễm."
+      "[Gợi ý]Bệnh viện có rất nhiều vật tư y tế, nhưng zombie cũng rất nhiều.",
+      "[Gợi ý]Gần sở cảnh sát có vũ khí xuất hiện, nhưng phải cẩn thận zombie quân cảnh.",
+      "[Gợi ý]Balo quân dụng xuất hiện với xác suất cao nhất tại trạm kiểm soát quân sự.",
+      "[Gợi ý]Khi độ bền vũ khí cận chiến dưới 10 phải cẩn thận khi dùng.",
+      "[Gợi ý]Giá trị nhiễm trên 50 sẽ liên tục mất máu, nhanh chóng tìm huyết thanh kháng nhiễm."
     ],
     quests: {
-      v1: { name: "Nhiệm vụ gặp đầu", desc: "Nộp 1 thực phẩm + 1 đồ uống", reqAffection: 0, require: { food: 1, drinks: 1 }, reward: { item: "小匕首", desc: "Tiểu đao×1" }, story: "\"Đói bụng không thể chiến đấu. Cho tôi đồ ăn, tôi cho bạn vũ khí.\" cô ấy dùng dao găm chỉ vào bạn." },
-      v2: { name: "Huấn luyện cầm máu", desc: "Nộp 5 băng gạc", reqAffection: 30, require: { medicine: 5, medicineId: "止血带" }, reward: { item: "指虎刀", desc: "Chỉ hổ đao×1" }, story: "\"Bạn chưa tính là quá yếu.\" cô ấy ném cho bạn một con chỉ hổ đao. \"Con dao này đi theo tôi giết không ít zombie, đừng làm nó mất mặt.\"" },
-      v3: { name: "Nhiệm vụ huyết thanh", desc: "Nộp 8 huyết thanh kháng nhiễm", reqAffection: 60, require: { medicine: 8, medicineId: "抗感染血清" }, reward: { item: "龙抄剑", desc: "Long抄 kiếm×1" }, story: "\"Huyết thanh là một trong những tài nguyên quý giá nhất mạt thế.\" cô ấy đưa bạn một thanh long抄 kiếm. \"Bạn xứng đáng dùng cái này rồi.\"" },
-      v4: { name: "Thử thách khó", desc: "Nộp 8 hộp y tế chiến địa", reqAffection: 90, require: { medicine: 8, medicineId: "战地医疗箱" }, reward: { item: "P226", ammo: { type: "9×19mm", count: 50 }, desc: "P226×1 + 9×19mm×50" }, story: "\"Bạn là người sống sót ngoan cường nhất tôi từng thấy.\" cô ấy cuối cùng nở nụ cười chân thành. \"Con P226 này, là bảo bối cuối cùng của tôi. Đừng làm tôi thất vọng.\"" },
-      v5: { name: "Vật tư cấp cứu", desc: "Nộp 6 gói cấp cứu y tế + 6 huyết thanh kháng nhiễm", reqAffection: 120, require: { items: [{ type: "medicine", id: "gói cấp cứu y tế", count: 6 }, { type: "medicine", id: "huyết thanh kháng nhiễm", count: 6 }] }, reward: { item: "UZI", ammo: { type: "9×19mm", count: 50 }, desc: "UZI×1 + 9×19mm×50" }, story: "\"Bạn lớn nhanh thật.\" cô ấy đưa bạn một khẩu UZI và vài hộp đạn. \"Con súng này hỏa lực mạnh, phù hợp đối phó zombie thành đàn. Đừng lãng phí đạn.\"" },
+      v1: { name: "Nhiệm vụ gặp đầu", desc: "Nộp 1 thực phẩm + 1 đồ uống", reqAffection: 0, require: { food: 1, drinks: 1 }, reward: { item: "dao_gam_nho", desc: "Tiểu đao×1" }, story: "\"Đói bụng không thể chiến đấu. Cho tôi đồ ăn, tôi cho bạn vũ khí.\" cô ấy dùng dao găm chỉ vào bạn." },
+      v2: { name: "Huấn luyện cầm máu", desc: "Nộp 5 băng gạc", reqAffection: 30, require: { medicine: 5, medicineId: "day_bo_mau" }, reward: { item: "dao_chi_ho", desc: "Chỉ hổ đao×1" }, story: "\"Bạn chưa tính là quá yếu.\" cô ấy ném cho bạn một con Dao Chỉ Hổ. \"Con dao này đi theo tôi giết không ít zombie, đừng làm nó mất mặt.\"" },
+      v3: { name: "Nhiệm vụ huyết thanh", desc: "Nộp 8 huyết thanh kháng nhiễm", reqAffection: 60, require: { medicine: 8, medicineId: "huyet_thanh" }, reward: { item: "kiem_long_thao", desc: "Kiếm Long Thảo×1" }, story: "\"Huyết thanh là một trong những tài nguyên quý giá nhất mạt thế.\" cô ấy đưa bạn một thanh Kiếm Long Thảo. \"Bạn xứng đáng dùng cái này rồi.\"" },
+      v4: { name: "Thử thách khó", desc: "Nộp 8 hộp y tế chiến địa", reqAffection: 90, require: { medicine: 8, medicineId: "hop_y_te" }, reward: { item: "P226", ammo: { type: "9×19mm", count: 50 }, desc: "P226×1 + 9×19mm×50" }, story: "\"Bạn là người sống sót ngoan cường nhất tôi từng thấy.\" cô ấy cuối cùng nở nụ cười chân thành. \"Con P226 này, là bảo bối cuối cùng của tôi. Đừng làm tôi thất vọng.\"" },
+      v5: { name: "Vật tư cấp cứu", desc: "Nộp 6 gói cấp cứu y tế + 6 huyết thanh kháng nhiễm", reqAffection: 120, require: { items: [{ type: "medicine", id: "gói cấp cứu y tế", count: 6 }, { type: "medicine", id: "huyet_thanh", count: 6 }] }, reward: { item: "UZI", ammo: { type: "9×19mm", count: 50 }, desc: "UZI×1 + 9×19mm×50" }, story: "\"Bạn lớn nhanh thật.\" cô ấy đưa bạn một khẩu UZI và vài hộp đạn. \"Con súng này hỏa lực mạnh, phù hợp đối phó zombie thành đàn. Đừng lãng phí đạn.\"" },
       v6: { name: "Thử thách cuối cùng", desc: "Nộp tất cả thuốc mỗi loại 2 cái", reqAffection: 150, require: { allMedicine: 2 }, reward: { item: "M4A1", ammo: { type: "5.56×45mm NATO", count: 50 }, desc: "M4A1×1 + 5.56×45mm NATO×50" }, story: "\"Bạn đã vượt qua tôi rồi.\" cô ấy trang trọng đưa bạn một khẩu M4A1. \"Đây là khẩu súng tôi cất giữ nhiều năm, giờ thuộc về bạn. Hãy đi tạo ra một thế giới không còn zombie.\"" }
     }
   },
@@ -125,25 +125,25 @@ export const SURVIVOR_NPC = [
       ]
     },
     tips: [
-      "【Gợi ý】Trái cây vừa bổ sung no vừa bổ sung nước, là thực phẩm khẩn cấp rất tốt.",
-      "【Gợi ý】Uống nước sẽ giảm giá trị khát, nhưng chú ý đừng uống quá nhiều!",
-      "【Gợi ý】Sữa tươi và sữa chua là đồ uống tôi thích nhất!",
-      "【Gợi ý】Bánh quy nén tuy không ngon, nhưng giá trị no rất cao.",
-      "【Gợi ý】Chú ý giữ đói và nước trên 0%, nếu không sẽ mất máu đó!"
+      "[Gợi ý]Trái cây vừa bổ sung no vừa bổ sung nước, là thực phẩm khẩn cấp rất tốt.",
+      "[Gợi ý]Uống nước sẽ giảm giá trị khát, nhưng chú ý đừng uống quá nhiều!",
+      "[Gợi ý]Sữa tươi và sữa chua là đồ uống tôi thích nhất!",
+      "[Gợi ý]Bánh quy nén tuy không ngon, nhưng giá trị no rất cao.",
+      "[Gợi ý]Chú ý giữ đói và nước trên 0%, nếu không sẽ mất máu đó!"
     ],
     quests: {
-      xh0: { name: "Mới đến", desc: "Nộp bất kỳ 1 đồ uống", reqAffection: 0, require: { drinks: 1 }, reward: { itemStack: [{ id: "创可贴", count: 3 }], desc: "Băng gạc cầm máu×3" }, story: "\"Bạn mới đến đúng không? Này, đây là quà gặp mặt!\" cô ấy lấy từ túi ra mấy miếng băng gạc đưa bạn. \"Sau này có cần thì đến nhà bếp trận địa tìm tôi!\"" },
-      xh1: { name: "Dự trữ sữa", desc: "Nộp 10 hộp sữa tươi", reqAffection: 30, require: { drinks: 10, drinkId: "纯牛奶" }, reward: { itemStack: [{ id: "手术包", count: 3 }], desc: "Gói phẫu thuật×3" }, story: "\"Tuyệt quá, có những sữa này, bọn trẻ trong trận địa sẽ không phải đói.\" cô ấy lấy từ hộp y tế ra mấy gói phẫu thuật. \"Đây là bác sĩ cho tôi trước đây, tôi dùng không hết, đưa bạn!\"" },
-      xh2: { name: "Mua sắm đồ uống", desc: "Nộp 15 hộp sữa chua", reqAffection: 60, require: { drinks: 15, drinkId: "优酸乳" }, reward: { itemStack: [{ id: "抗生素", count: 5 }], desc: "Kháng sinh×5" }, story: "\"Trời ơi, nhiều sữa chua vậy!\" cô ấy xúc động ôm bạn một cái. \"Kháng sinh tôi tìm lâu rồi cũng đưa bạn, xem như quà cảm ơn!\"" },
-      xh3: { name: "Thu thập đồ hộp", desc: "Nộp tất cả đồ hộp mỗi loại 1 cái", reqAffection: 90, require: { allCanned: 1 }, reward: { itemStack: [{ id: "huyết thanh kháng nhiễm", count: 3 }], desc: "Huyết thanh kháng nhiễm×3" }, story: "\"Oa, nhiều đồ hộp vậy!\" 苏小涵 vui vẻ phân loại đồ hộp. \"Đủ để mọi người trong trận địa ăn mấy ngày rồi! Những huyết thanh này tôi tích trước đây, đưa bạn!\"" },
-      xh4: { name: "Tiệc trái cây", desc: "Nộp tất cả trái cây mỗi loại 1 cái", reqAffection: 120, require: { allFruits: 1 }, reward: { itemStack: [{ id: "医用急救包", count: 3 }], desc: "Gói cấp cứu y tế×3" }, story: "\"Trời ơi! Trái cây!\" mắt 苏小涵 sáng lên. \"Lâu rồi không ăn trái cây tươi! Tôi phải làm đĩa trái cây cho mọi người! Mấy gói cấp cứu này bạn giữ đi!\"" },
-      xh5: { name: "Mua sắm lớn", desc: "Nộp tất cả đồ uống mỗi loại 1 cái + tất cả thực phẩm mỗi loại 1 cái", reqAffection: 150, require: { allDrinks: 1, allFoods: 1 }, reward: { itemStack: [{ id: "战地医疗箱", count: 3 }], desc: "Hộp y tế chiến địa×3" }, story: "\"Cái này, nhiều quá rồi!\" 苏小涵 xúc động đến đỏ vành mắt. \"Bạn dọn cả siêu thị về đây à? Tôi……tôi không biết cảm ơn thế nào! Mấy hộp y tế chiến địa này bạn nhất định phải nhận!\"" }
+      xh0: { name: "Mới đến", desc: "Nộp bất kỳ 1 đồ uống", reqAffection: 0, require: { drinks: 1 }, reward: { itemStack: [{ id: "bang_keo", count: 3 }], desc: "Băng gạc cầm máu×3" }, story: "\"Bạn mới đến đúng không? Này, đây là quà gặp mặt!\" cô ấy lấy từ túi ra mấy miếng băng gạc đưa bạn. \"Sau này có cần thì đến nhà bếp trận địa tìm tôi!\"" },
+      xh1: { name: "Dự trữ sữa", desc: "Nộp 10 hộp sữa tươi", reqAffection: 30, require: { drinks: 10, drinkId: "sua_tuoi" }, reward: { itemStack: [{ id: "goi_phau_thuat", count: 3 }], desc: "Gói phẫu thuật×3" }, story: "\"Tuyệt quá, có những sữa này, bọn trẻ trong trận địa sẽ không phải đói.\" cô ấy lấy từ hộp y tế ra mấy gói phẫu thuật. \"Đây là bác sĩ cho tôi trước đây, tôi dùng không hết, đưa bạn!\"" },
+      xh2: { name: "Mua sắm đồ uống", desc: "Nộp 15 hộp sữa chua", reqAffection: 60, require: { drinks: 15, drinkId: "sua_chua" }, reward: { itemStack: [{ id: "khang_sinh", count: 5 }], desc: "Kháng sinh×5" }, story: "\"Trời ơi, nhiều sữa chua vậy!\" cô ấy xúc động ôm bạn một cái. \"Kháng sinh tôi tìm lâu rồi cũng đưa bạn, xem như quà cảm ơn!\"" },
+      xh3: { name: "Thu thập đồ hộp", desc: "Nộp tất cả đồ hộp mỗi loại 1 cái", reqAffection: 90, require: { allCanned: 1 }, reward: { itemStack: [{ id: "huyet_thanh", count: 3 }], desc: "Huyết thanh kháng nhiễm×3" }, story: "\"Oa, nhiều đồ hộp vậy!\" Tô Tiểu Hàm vui vẻ phân loại đồ hộp. \"Đủ để mọi người trong trận địa ăn mấy ngày rồi! Những huyết thanh này tôi tích trước đây, đưa bạn!\"" },
+      xh4: { name: "Tiệc trái cây", desc: "Nộp tất cả trái cây mỗi loại 1 cái", reqAffection: 120, require: { allFruits: 1 }, reward: { itemStack: [{ id: "goi_cap_cuu", count: 3 }], desc: "Gói cấp cứu y tế×3" }, story: "\"Trời ơi! Trái cây!\" mắt Tô Tiểu Hàm sáng lên. \"Lâu rồi không ăn trái cây tươi! Tôi phải làm đĩa trái cây cho mọi người! Mấy gói cấp cứu này bạn giữ đi!\"" },
+      xh5: { name: "Mua sắm lớn", desc: "Nộp tất cả đồ uống mỗi loại 1 cái + tất cả thực phẩm mỗi loại 1 cái", reqAffection: 150, require: { allDrinks: 1, allFoods: 1 }, reward: { itemStack: [{ id: "hop_y_te", count: 3 }], desc: "Hộp y tế chiến địa×3" }, story: "\"Cái này, nhiều quá rồi!\" Tô Tiểu Hàm xúc động đến đỏ vành mắt. \"Bạn dọn cả siêu thị về đây à? Tôi……tôi không biết cảm ơn thế nào! Mấy hộp y tế chiến địa này bạn nhất định phải nhận!\"" }
     }
   },
   {
     id: "lili",
     name: "Lili",
-    desc: "Một cô gái tinh nghịch, luôn thíchbày弄各种废弃武器和机械零件. Cô ấy tinh thông thu hồi và sửa chữa vũ khí, còn có thể pha chế thuốc chữa nhiễm. Cô ấy nói cô có một kho, bên trong chất đầy các loại bảo bối.",
+    desc: "Một cô gái tinh nghịch, luôn thích bày vẽ với vũ khí phế liệu và các chi tiết máy móc. Cô ấy tinh thông thu hồi và sửa chữa vũ khí, còn có thể pha chế thuốc chữa nhiễm. Cô ấy nói cô có một kho, bên trong chất đầy các loại bảo bối.",
     canRecycle: true,
     canCureInfection: true,
     dialogues: {
@@ -184,11 +184,11 @@ export const SURVIVOR_NPC = [
       ]
     },
     tips: [
-      "【Gợi ý】Vũ khí cận chiến có thể tìm thấy rất nhiều trong nhà máy và sở cảnh sát!",
-      "【Gợi ý】Điếu thuốc là tiền tệ giao dịch rất tốt, nhớ thu thập nhiều!",
-      "【Gợi ý】Tại thương nhân chợ đen có thể dùng điếu thuốc đổi vũ khí đó!",
-      "【Gợi ý】Thu hồi vũ khí cận chiến có thể nhận điếu thuốc, tìm tôi là đúng rồi!",
-      "【Gợi ý】Gậy bóng chày và rìu cứu hỏa là vũ khí cận chiến rất dễ dùng!"
+      "[Gợi ý]Vũ khí cận chiến có thể tìm thấy rất nhiều trong nhà máy và sở cảnh sát!",
+      "[Gợi ý]Điếu thuốc là tiền tệ giao dịch rất tốt, nhớ thu thập nhiều!",
+      "[Gợi ý]Tại thương nhân chợ đen có thể dùng điếu thuốc đổi vũ khí đó!",
+      "[Gợi ý]Thu hồi vũ khí cận chiến có thể nhận điếu thuốc, tìm tôi là đúng rồi!",
+      "[Gợi ý]Gậy bóng chày và rìu cứu hỏa là vũ khí cận chiến rất dễ dùng!"
     ],
     recycleQuest: { name: "Thu hồi vũ khí cận chiến (vĩnh viễn)", desc: "Thu hồi bất kỳ vũ khí cận chiến, nhận 1 điếu thuốc ngẫu nhiên", reward: { cigarette: true }, story: "\"Đồ tốt!\" cô ấy cẩn thận xem xét vũ khí bạn đưa, rồi lấy từ túi ra một điếu thuốc. \"Điếu này cho bạn, hào phóng chứ?\"" },
     recycleRangedQuest: { name: "Thu hồi vũ khí tầm xa (vĩnh viễn)", desc: "Thu hồi bất kỳ vũ khí tầm xa, nhận 2 điếu thuốc", reward: 2, story: "\"Oa, thứ này không tệ!\" mắt cô ấy sáng lên, thành thạo nghịch vũ khí tầm xa của bạn. \"Tôi đang thiếu linh kiện, hai điếu thuốc này thuộc về bạn!\"" },
@@ -242,11 +242,11 @@ export const SURVIVOR_NPC = [
       ]
     },
     tips: [
-      "【Gợi ý】Hạt giống có thể mua tại Miao Miao, cũng có thể nhận được qua chăm sóc ruộng thí nghiệm.",
-      "【Gợi ý】Các loại cây khác nhau thời gian chín và sản lượng khác nhau, lập kế hoạch trồng hợp lý rất quan trọng.",
-      "【Gợi ý】Thương nhân chợ đen thỉnh thoảng cũng bán hạt giống, nhưng giá đắt hơn.",
-      "【Gợi ý】Trồng gì được nấy, chọn cây trồng sản lượng cao có thể sử dụng ruộng hiệu quả hơn.",
-      "【Gợi ý】Thường xuyên đến chăm sóc ruộng thí nghiệm, có thể tích lũy độ thiện cảm còn nhận hạt giống miễn phí."
+      "[Gợi ý]Hạt giống có thể mua tại Miao Miao, cũng có thể nhận được qua chăm sóc ruộng thí nghiệm.",
+      "[Gợi ý]Các loại cây khác nhau thời gian chín và sản lượng khác nhau, lập kế hoạch trồng hợp lý rất quan trọng.",
+      "[Gợi ý]Thương nhân chợ đen thỉnh thoảng cũng bán hạt giống, nhưng giá đắt hơn.",
+      "[Gợi ý]Trồng gì được nấy, chọn cây trồng sản lượng cao có thể sử dụng ruộng hiệu quả hơn.",
+      "[Gợi ý]Thường xuyên đến chăm sóc ruộng thí nghiệm, có thể tích lũy độ thiện cảm còn nhận hạt giống miễn phí."
     ]
   }
 ];

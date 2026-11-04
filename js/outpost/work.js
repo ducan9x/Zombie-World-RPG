@@ -24,12 +24,12 @@ export function handleWork() {
   const state = getState();
   cleanDualIdentity(state);
   if (hasCastleIdentity(state)) {
-    setStory("Quản lý trận địa nhíu mày：\"Bạn đều là người Lâu Đại Cítol rồi, còn đến tranh việc làm của người nghèo？Đi đi đi！\" Bạn bị đuổi đi。");
+    setStory("Quản lý trận địa nhíu mày: \"Bạn đều là người Lâu Đại Cítol rồi, còn đến tranh việc làm của người nghèo?Đi đi đi!\" Bạn bị đuổi đi.");
     showOutpostOptions();
     return;
   }
   if (state.phaseIndex < 1 || state.phaseIndex > 4) {
-    setStory("Người ở trận địa đã hết giờ làm, hãy quay lại làm việc ngày mai。");
+    setStory("Người ở trận địa đã hết giờ làm, hãy quay lại làm việc ngày mai.");
     showOutpostOptions();
     return;
   }
@@ -38,17 +38,17 @@ export function handleWork() {
   state.crash = Math.min(100, state.crash + GAME_CONSTANTS.OUTPOST.WORK_FATIGUE_GAIN);
   const fruit = FRUITS[Math.floor(Math.random() * FRUITS.length)];
   const added1 = addItem({ ...fruit });
-  let story = `你干了几个小时的活，获得了${fruit.name}。`;
+  let story = `Bạn làm việc vài tiếng đồng hồ, nhận được ${fruit.name}.`;
 
   const hasCaptain = hasDawnCaptainBadge(state);
   if (hasCaptain) {
     const fruit2 = FRUITS[Math.floor(Math.random() * FRUITS.length)];
     const added2 = addItem({ ...fruit2 });
-    story = `曙光先锋队长的身份让你获得了双倍报酬！你干了几个小时的活，获得了${fruit.name}和${fruit2.name}。`;
-    if (!added2) story += " 但背包已满，部分物品掉落在地上了。";
+    story = `Danh tính Đội Trưởng Tiên Phong giúp bạn nhận gấp đôi thu hoạch! Bạn làm việc vài tiếng đồng hồ, nhận được ${fruit.name} và ${fruit2.name}.`;
+    if (!added2) story += " Nhưng balo đã đầy, một phần vật phẩm rơi vãi xuống đất.";
   }
 
-  if (!added1) story += " 但背包已满，物品掉落在地上了。";
+  if (!added1) story += " Nhưng balo đã đầy, vật phẩm rơi vãi xuống đất.";
   setStory(story);
   advanceTime(1);
   updateStatusEffects();

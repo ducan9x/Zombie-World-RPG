@@ -17,12 +17,12 @@ function getInvestorTitle(state) {
   }
   const rankName = getCastleRankName(state);
   const titleMap = {
-    "贵族": "Quý tộc",
-    "子爵": "Tử tước",
-    "伯爵": "Bá tước",
-    "侯爵": "Hầu tước",
-    "公爵": "Công tước",
-    "储君": "Trữ quân",
+    "Quý tộc": "Quý tộc",
+    "Tử tước": "Tử tước",
+    "Bá tước": "Bá tước",
+    "Hầu tước": "Hầu tước",
+    "Công tước": "Công tước",
+    "Trữ quân": "Trữ quân",
   };
   return titleMap[rankName] || "Ngài";
 }

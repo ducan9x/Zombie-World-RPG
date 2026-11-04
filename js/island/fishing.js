@@ -9,7 +9,7 @@ import { FISH, FISH_RARITY_WEIGHTS } from '../data/items/fish.js';
 
 import { refreshIslandMenu } from './index.js';
 
-const RARITY_LABELS = { common: "普通", uncommon: "优秀", rare: "稀有", epic: "史诗", legendary: "传说" };
+const RARITY_LABELS = { common: "Thường", uncommon: "Tốt", rare: "Hiếm", epic: "Sử thi", legendary: "Huyền thoại" };
 
 function pickRandomFish() {
   const roll = Math.random() * 1000;
@@ -25,25 +25,25 @@ function pickRandomFish() {
 
 export function handleFishingArea() {
   if (!isQuestDone("yumoQuest5")) {
-    setStory("这里是余墨公爵的专属钓场，你还没办法进入。");
+    setStory("Đây là khu câu cá riêng của Công tước Dư Mặc, bạn tạm chưa có cách nào để vào.");
     refreshIslandMenu();
     return;
   }
   setPhase("island_fishing");
-  setStory("你来到了岛屿的钓鱼区域，海风轻拂，水面波光粼粼。");
+  setStory("Bạn đến khu câu cá của hòn đảo, gió biển phất tới, mặt nước lấp lánh ánh sáng.");
   setOptions([
-    { text: "钓鱼", action: "island_fish" },
-    { text: "离开", action: "island_fishing_leave" },
+    { text: "Câu cá", action: "island_fish" },
+    { text: "Rời đi", action: "island_fishing_leave" },
   ]);
 }
 
 export function handleFishAction() {
   const state = getState();
   if (state.fishingCount >= GAME_CONSTANTS.FISHING.DAILY_FISH_LIMIT) {
-    setStory("今天已经钓了太久了，明天再来吧。");
+    setStory("Hôm nay đã câu quá lâu rồi, mai quay lại nhé.");
     setPhase("island_fishing");
     setOptions([
-      { text: "离开", action: "island_fishing_leave" },
+      { text: "Rời đi", action: "island_fishing_leave" },
     ]);
     return;
   }
@@ -53,17 +53,17 @@ export function handleFishAction() {
   state.fishingCount++;
   const rarityLabel = RARITY_LABELS[fish.rarity] || fish.rarity;
   if (added) {
-    setStory(`你甩出鱼线，耐心等待……\n钓到了一条【${rarityLabel}】${formatQualityText(fish.name, fish.rarity)}！`);
+    setStory(`Bạn tung lưỡi câu, kiên nhẫn chờ đợi……\nCâu được một con[${rarityLabel}]${formatQualityText(fish.name, fish.rarity)}!`);
   } else {
-    setStory(`你甩出鱼线，耐心等待……\n钓到了一条【${rarityLabel}】${formatQualityText(fish.name, fish.rarity)}，但背包已满，无法携带。`);
+    setStory(`Bạn tung lưỡi câu, kiên nhẫn chờ đợi……\nCâu được một con[${rarityLabel}]${formatQualityText(fish.name, fish.rarity)}, nhưng balo đã đầy, không thể mang theo.`);
   }
   updateStatusEffects();
   checkDeath();
   if (!state.gameOver) {
     setPhase("island_fishing");
     setOptions([
-      { text: "钓鱼", action: "island_fish" },
-      { text: "离开", action: "island_fishing_leave" },
+      { text: "Câu cá", action: "island_fish" },
+      { text: "Rời đi", action: "island_fishing_leave" },
     ]);
   }
 }

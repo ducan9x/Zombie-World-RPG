@@ -40,7 +40,7 @@ export const KING_QUESTS = [
     desc: "Nộp 10 dung dịch glucose",
     story: "Quốc vương thở dài, hạ giọng nói với bạn: \"Hoàng hậu dạo này luôn chóng mặt, bác sĩ của thành nói cô ấy bị hạ đường huyết. Trong ngày tận thế này, nơi có thể kiếm được dung dịch glucose không nhiều……Bạn giúp tôi ra ngoài thu thập 10 dung dịch glucose về, xong việc tôi sẽ phong bạn làm Tử tước.\"",
     submitStory: "Quốc vương nhận 10 ống dung dịch glucose, hài lòng gật đầu: \"Tuyệt quá! Hoàng hậu được cứu rồi! Bạn quả nhiên là nhân tài. Người đâu, ban cho hắn thẻ thân phận Tử tước!\"",
-    require: { medicine: 10, medicineId: "葡萄糖服液" },
+    require: { medicine: 10, medicineId: "dich_gluco" },
     reward: { item: "Thẻ thân phận Tử tước", rankItemId: "viscount_id", rank: 2 },
     prereqQuest: null,
   },
@@ -50,7 +50,7 @@ export const KING_QUESTS = [
     desc: "Nộp 10 chai rượu mạnh",
     story: "Quốc vương xoa tay, mắt lóe lên tia hứng thú: \"Cô vương muốn tổ chức một yến tiệc lớn! Những lão già trong thành ngày nào cũng nhăn nhó, cô vương phải cho họ mở rộng tầm mắt! Rượu mạnh, càng mạnh càng tốt! Đi kiếm cho tôi 10 chai! Xong việc bạn sẽ là Bá tước!\"",
     submitStory: "Quốc vương nhìn 10 chai rượu mạnh, cười ha hả: \"Tốt! Tốt! Đây mới là thứ đàn ông thực sự uống! Yến tiệc tối nay, tôi muốn cả thành đều uống cho đã! Từ hôm nay, bạn là Bá tước!\"",
-    require: { drinks: 10, drinkId: "高度白酒" },
+    require: { drinks: 10, drinkId: "ruou_cao_do" },
     reward: { item: "Thẻ thân phận Bá tước", rankItemId: "count_id", rank: 3 },
     prereqQuest: "king_1",
   },
@@ -63,8 +63,8 @@ export const KING_QUESTS = [
     require: {
       items: [
         { type: "cigarettes", count: 10 },
-        { type: "drinks", id: "百味啤酒", count: 5 },
-        { type: "drinks", id: "动力啤酒", count: 5 },
+        { type: "drinks", id: "bia_tram_vi", count: 5 },
+        { type: "drinks", id: "bia_nang_luong", count: 5 },
       ]
     },
     reward: { item: "Thẻ thân phận Hầu tước", rankItemId: "marquis_id", rank: 4 },
@@ -76,7 +76,7 @@ export const KING_QUESTS = [
     desc: "Nộp 3 ống thuốc vạn năng",
     story: "Mắt quốc vương ánh lên tia cuồng nhiệt: \"Cô vương dạo này nghiên cứu một đề tài——bất tử. Nghe nói có một loại thuốc vạn năng, có thể chữa mọi bệnh tật, thậm chí đảo ngược lão hóa. Cô vương cần 3 ống để nghiên cứu. Nếu bạn kiếm được, chức Công tước là của bạn!\"",
     submitStory: "Quốc vương run run hai tay nhận 3 ống thuốc vạn năng, giọng cũng đổi điệu: \"Cái này……chính là thuốc vạn năng trong truyền thuyết?! Truyền thuyết quả nhiên là thật! Giấc mộng trường sinh bất lão của cô vương không còn xa! Bạn sẽ là Công tước mà cô vương tin tưởng nhất!\"",
-    require: { medicine: 3, medicineId: "万能针剂" },
+    require: { medicine: 3, medicineId: "tiem_van_nang" },
     reward: { item: "Thẻ thân phận Công tước", rankItemId: "duke_id", rank: 5 },
     prereqQuest: "king_3",
   },

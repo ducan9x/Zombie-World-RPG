@@ -23,7 +23,7 @@ import { FOODS, XIAOHAN_REWARD_FOOD_IDS } from '../config.js';
 export function handleXiaohanTrade(input) {
   const state = getState();
   if (state.lastXiaohanTradeDay >= state.day) {
-    setStory("Tiểu Hàn lắc đầu：\"Hôm nay đã giao dịch rồi，hẹn ngày khác nhé。\"");
+    setStory("Tiểu Hàn lắc đầu: \"Hôm nay đã giao dịch rồi, hẹn ngày khác nhé.\"");
     handleNpcAction("chat");
     return;
   }
@@ -53,9 +53,9 @@ export function handleXiaohanTrade(input) {
   const reward = rewardFoods[Math.floor(Math.random() * rewardFoods.length)];
   const added = addItem({ ...reward, type: "food" });
   if (added) {
-    setStory(`Tiểu Hàn vui vẻ nhận lấy${getItemDisplayName(item)}，để đổi lại，cô ấy đưa cho bạn một phần${reward.name}。`);
+    setStory(`Tiểu Hàn vui vẻ nhận lấy${getItemDisplayName(item)}, để đổi lại, cô ấy đưa cho bạn một phần${reward.name}.`);
   } else {
-    setStory(`Tiểu Hàn vui vẻ nhận lấy${getItemDisplayName(item)}，muốn đưa cho bạn một phần${reward.name}，nhưng túi đồ bạn đã đầy，không thể mang theo。`);
+    setStory(`Tiểu Hàn vui vẻ nhận lấy${getItemDisplayName(item)}, muốn đưa cho bạn một phần${reward.name}, nhưng túi đồ bạn đã đầy, không thể mang theo.`);
   }
   state.lastXiaohanTradeDay = state.day;
   advanceTime(1);
@@ -69,7 +69,7 @@ export function handleXiaohanTrade(input) {
 export function handleXiaohanTradeConfirm(input) {
   const state = getState();
   if (state.lastXiaohanTradeDay >= state.day) {
-    setStory("Hôm nay đã giao dịch với Tiểu Hàn rồi，ngày mai hãy quay lại。");
+    setStory("Hôm nay đã giao dịch với Tiểu Hàn rồi, ngày mai hãy quay lại.");
     showExploreOptionsState();
     return;
   }
@@ -99,9 +99,9 @@ export function handleXiaohanTradeConfirm(input) {
   const reward = rewardFoods[Math.floor(Math.random() * rewardFoods.length)];
   const added = addItem({ ...reward, type: "food" });
   if (added) {
-    setStory(`Tiểu Hàn vui vẻ nhận lấy${getItemDisplayName(item)}，để đổi lại，cô ấy đưa cho bạn một phần${reward.name}。`);
+    setStory(`Tiểu Hàn vui vẻ nhận lấy${getItemDisplayName(item)}, để đổi lại, cô ấy đưa cho bạn một phần${reward.name}.`);
   } else {
-    setStory(`Tiểu Hàn vui vẻ nhận lấy${getItemDisplayName(item)}，muốn đưa cho bạn một phần${reward.name}，nhưng túi đồ bạn đã đầy，không thể mang theo。`);
+    setStory(`Tiểu Hàn vui vẻ nhận lấy${getItemDisplayName(item)}, muốn đưa cho bạn một phần${reward.name}, nhưng túi đồ bạn đã đầy, không thể mang theo.`);
   }
   state.lastXiaohanTradeDay = state.day;
   advanceTime(1);

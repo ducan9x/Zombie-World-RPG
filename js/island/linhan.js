@@ -49,16 +49,16 @@ export function handleNpcLinhan() {
   const friendshipLabel = getAffinityLabel(affinity);
   const dialogue = randomDialogue(LINHAN_DIALOGUES);
 
-  let desc = `【岛民林寒】\n一位面容冷峻的中年男子，目光锐利而沉稳。他身上带着海风的咸腥味，双手因常年处理海鱼而布满伤痕。`;
-  desc += `\n\n当前好感：${affinity}/${AFFINITY_MAX.linhan}（${friendshipLabel}）`;
+  let desc = `[Dân đảo Lâm Hàn]\nMột gã đàn ông trung niên gương mặt lạnh lùng, ánh mắt sắc bén mà trầm tĩnh. Người anh mang theo vị mặn của gió biển, hai tay đầy sẹo vì nhiều năm xử lý cá biển.`;
+  desc += `\n\nThiện cảm hiện tại: ${affinity}/${AFFINITY_MAX.linhan}(${friendshipLabel})`;
   desc += `\n\n${dialogue}`;
 
   setPhase("island_linhan");
   setStory(desc);
   setOptions([
-    { text: "对话", action: "linhan_chat" },
-    { text: "毒海鱼处理", action: "linhan_cook" },
-    { text: "离开", action: "linhan_leave" },
+    { text: "Trò chuyện", action: "linhan_chat" },
+    { text: "Chế biến cá biển độc", action: "linhan_cook" },
+    { text: "Rời đi", action: "linhan_leave" },
   ]);
 }
 
@@ -96,7 +96,7 @@ export function handleLinhanAction(input) {
 export function handleLinhanChat() {
   const state = getState();
   if (!canChatToday("linhan")) {
-    setStory("林寒摆了摆手：'今天已经聊了很多了，改日再叙吧。'");
+    setStory("Lâm Hàn vẫy tay: 'Hôm nay đã trò chuyện rất nhiều rồi, bữa khác tâm sự tiếp.'");
     handleNpcLinhan();
     return;
   }
@@ -119,16 +119,16 @@ export function handleLinhanCook() {
     const rarityLabel = RARITY_LABELS[recipe.fishRarity] || recipe.fishRarity;
     const canCook = fishCount >= fishCost;
     opts.push({
-      text: `${formatQualityText(meal.name, meal.rarity)}（${rarityLabel}鱼 ${fishCount}/${fishCost}）`,
+      text: `${formatQualityText(meal.name, meal.rarity)}(${rarityLabel} cá ${fishCount}/${fishCost})`,
       action: "linhan_cook_meal",
       cookRecipe: recipe.mealId,
       disabled: !canCook,
     });
   }
-  opts.push({ text: "返回", action: "linhan_cook_back" });
+  opts.push({ text: "Quay lại", action: "linhan_cook_back" });
 
   setPhase("island_linhan");
-  setStory("林寒可以帮你处理有毒的海鱼，制作成可食用的海鲜套餐。选择要制作的套餐：");
+  setStory("Lâm Hàn có thể giúp bạn xử lý cá biển độc, chế biến thành món hải sản ăn được. Chọn món bạn muốn làm:");
   setOptions(opts);
 }
 
@@ -150,7 +150,7 @@ export function handleLinhanCookMeal(input) {
 
   if (fishCount < fishCost) {
     const rarityLabel = RARITY_LABELS[recipe.fishRarity] || recipe.fishRarity;
-    setStory(`${rarityLabel}鱼不够，需要${fishCost}条，当前只有${fishCount}条。`);
+    setStory(`${rarityLabel} cá không đủ, cần ${fishCost} con, hiện chỉ có ${fishCount} con.`);
     handleLinhanCook();
     return;
   }
@@ -164,9 +164,9 @@ export function handleLinhanCookMeal(input) {
   updateStatusEffects();
   checkDeath();
 
-  setStory(`林寒熟练地处理了${fishCost}条${RARITY_LABELS[recipe.fishRarity] || recipe.fishRarity}品质的毒海鱼，制作了1份${formatQualityText(meal.name, meal.rarity)}。`);
+  setStory(`Lâm Hàn xử lý thành thạo ${fishCost} con${RARITY_LABELS[recipe.fishRarity] || recipe.fishRarity} cá biển độc, làm ra 1 phần${formatQualityText(meal.name, meal.rarity)}.`);
   if (!state.gameOver) {
     setPhase("island_linhan");
-    setOptions([{ text: "继续", action: "linhan_cook_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "linhan_cook_continue" }]);
   }
 }

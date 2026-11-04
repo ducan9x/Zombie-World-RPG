@@ -37,7 +37,7 @@ export function handleRobberEncounter() {
   const eventText = GAME_CONSTANTS.ROBBER.EVENT_TEXT.replace('{amount}', robbedAmount);
   setPhase("robber_event");
   setStory(eventText);
-  setOptions([{ text: "继续", action: "robber_continue" }]);
+  setOptions([{ text: "Tiếp tục", action: "robber_continue" }]);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();

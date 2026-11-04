@@ -1,5 +1,5 @@
 /* ============================================================
-   阵营身份工具模块
+   Module công cụ định danh phe phái
    ============================================================ */
 
 import { getState, setStory } from './state.js';
@@ -50,9 +50,9 @@ export function getIdentityDisplayName(state) {
       return rank.displayName;
     }
   }
-  if (state.other.some(i => i.id === SPECIAL_ITEMS.dawn_captain_badge.id)) return "曙光先锋队长";
-  if (state.other.some(i => i.id === SPECIAL_ITEMS.dawn_badge.id)) return "曙光阵地队员";
-  return "普通幸存者";
+  if (state.other.some(i => i.id === SPECIAL_ITEMS.dawn_captain_badge.id)) return "Đội Trưởng Tiên Phong Dawn";
+  if (state.other.some(i => i.id === SPECIAL_ITEMS.dawn_badge.id)) return "Thành Viên Trận Địa Dawn";
+  return "Người Sống Sót Thường";
 }
 
 export function removeLowerCastleRanks(state, newRank) {
@@ -69,7 +69,7 @@ export function removeLowerCastleRanks(state, newRank) {
   }
   if (removedCount > 0) {
     const newRankName = CASTLE_RANKS.find(r => r.rank === newRankValue)?.name || "";
-    setStory(`你的旧身份牌已自动失效，新的${newRankName}身份牌取而代之。`);
+    setStory(`Thẻ danh tính cũ của bạn đã tự động mất hiệu lực, thẻ danh tính ${newRankName} mới thế vào.`);
   }
   return removedCount;
 }
@@ -101,7 +101,7 @@ export function cleanDualIdentity(state) {
         state.other.splice(i, 1);
       }
     }
-    setStory("你的城堡身份牌因与曙光阵营冲突而自动销毁了。你感到一阵恍惚——你只能效忠一方。");
+    setStory("Thẻ danh tính lâu đài của bạn tự động tiêu hủy do xung đột với phe Trận Địa Bình Minh. Bạn chợt cảm thấy lâng lâng — bạn chỉ có thể trung thành với một bên.");
     return true;
   }
   return false;

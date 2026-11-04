@@ -1,6 +1,6 @@
 /* ============================================================
-   交易系统模块
-   组织顺序：交易类型选择 → 交易数量确认
+   Module hệ thống giao dịch
+   Trình tự tổ chức: chọn loại giao dịch → xác nhận số lượng giao dịch
    ============================================================ */
 
 import {
@@ -27,7 +27,7 @@ export function handleTradeChoice(input) {
 
   if (action === "trade_back") {
     state._trade = null;
-    setStory("你放弃了交易。");
+    setStory("Bạn từ bỏ giao dịch.");
     advanceTime(1);
     updateStatusEffects();
     checkDeath();
@@ -39,12 +39,12 @@ export function handleTradeChoice(input) {
   if (!trade) return;
 
   const type = action === "trade_food" ? "food" : "drink";
-  const label = action === "trade_food" ? "食物" : "饮品";
+  const label = action === "trade_food" ? "đồ ăn" : "đồ uống";
   const inventory = state[type];
 
   const totalItems = inventory.reduce((sum, item) => sum + (item.count || 1), 0);
   if (totalItems === 0) {
-    setStory(`你没有可交易的${label}。`);
+    setStory(`Bạn không có ${label} nào để giao dịch.`);
     advanceTime(1);
     updateStatusEffects();
     checkDeath();
@@ -55,14 +55,14 @@ export function handleTradeChoice(input) {
   state._tradeType = type;
 
   setPhase("trade_input");
-  setStory(`你有${totalItems}个${label}。请输入你要交易的${label}数量：`);
+  setStory(`Bạn có ${totalItems} đồ ${label}. Nhập số lượng ${label} bạn muốn giao dịch:`);
 
   const inputOptions = [];
   for (let i = 1; i <= totalItems; i++) {
     const ammoCount = i * trade.ammoPerItem;
-    inputOptions.push({ text: `交易${i}个${label}（获得${ammoCount}发${trade.ammoType}）`, action: "confirm", count: i });
+    inputOptions.push({ text: `Đổi ${i} đồ ${label} (nhận ${ammoCount} viên ${trade.ammoType})`, action: "confirm", count: i });
   }
-  inputOptions.push({ text: "返回", action: "back" });
+  inputOptions.push({ text: "Quay lại", action: "back" });
   setOptions(inputOptions);
 }
 
@@ -75,11 +75,11 @@ export function handleTradeInput(input) {
 
   if (option.action === "back") {
     setPhase("trade_choice");
-    setStory("幸存者愿意用子弹交换你的物资。");
+    setStory("Người sống sót sẵn sàng đổi đạn lấy vật tư của bạn.");
     setOptions([
-      { text: "用食物换子弹", action: "trade_food" },
-      { text: "用饮品换子弹", action: "trade_drink" },
-      { text: "返回", action: "trade_back" },
+      { text: "Đổi đồ ăn lấy đạn", action: "trade_food" },
+      { text: "Đổi đồ uống lấy đạn", action: "trade_drink" },
+      { text: "Quay lại", action: "trade_back" },
     ]);
     return;
   }
@@ -91,7 +91,7 @@ export function handleTradeInput(input) {
   const ammoCount = count * trade.ammoPerItem;
   const added = addItem({ id: trade.ammoType, name: trade.ammoType, type: "ammo", count: ammoCount });
   if (!added) {
-    setStory(`背包已满！你无法带走更多的弹药。`);
+    setStory(`Balo đã đầy! Bạn không thể mang thêm đạn.`);
     showExploreOptionsState();
     return;
   }
@@ -109,7 +109,7 @@ export function handleTradeInput(input) {
     }
   }
 
-  setStory(`你用${count}个${type === "food" ? "食物" : "饮品"}换取了${ammoCount}发${trade.ammoType}。`);
+  setStory(`Bạn dùng ${count} đồ ${type === "food" ? "đồ ăn" : "đồ uống"} để đổi lấy ${ammoCount} viên ${trade.ammoType}.`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();

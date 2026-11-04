@@ -386,7 +386,7 @@ export function handleKillDoctor() {
   const meleeName = state.meleeWeapon.name;
   const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "Không";
   const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Cơ thể bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường!" : "";
-  setStory(`Bạn lạnh lùng nhìn Tiến sĩ Trần. Anh vẫn bận rộn trước kính hiển vi, hoàn toàn không nhận ra nguy hiểm đang đến gần.\n\n"Lão Mã bảo tôi gửi lời." Bạn chậm rãi giơ vũ khí lên.\n\nTiến sĩ Trần cuối cùng cũng ngẩng đầu, đẩy gọng kính, trong mắt đầu tiên là bối rối, rồi biến thành sợ hãi: "Ngươi……ngươi là người hắn phái tới?! Tôi biết mà……hắn sớm muộn cũng tìm đến tôi……"\n\n⚔️ ${doctor.name}\n❤️ HP:${doctor.hp} | ⚡ Sát thương:${doctor.damageMin}-${doctor.damageMax}\n\n【Cận chiến】${meleeName}\n【Tầm xa】${rangedName}${crashWarning}`);
+  setStory(`Bạn lạnh lùng nhìn Tiến sĩ Trần. Anh vẫn bận rộn trước kính hiển vi, hoàn toàn không nhận ra nguy hiểm đang đến gần.\n\n"Lão Mã bảo tôi gửi lời." Bạn chậm rãi giơ vũ khí lên.\n\nTiến sĩ Trần cuối cùng cũng ngẩng đầu, đẩy gọng kính, trong mắt đầu tiên là bối rối, rồi biến thành sợ hãi: "Ngươi……ngươi là người hắn phái tới?! Tôi biết mà……hắn sớm muộn cũng tìm đến tôi……"\n\n⚔️ ${doctor.name}\n❤️ HP:${doctor.hp} | ⚡ Sát thương:${doctor.damageMin}-${doctor.damageMax}\n\n[Cận chiến]${meleeName}\n[Tầm xa]${rangedName}${crashWarning}`);
   const opts = [
     { text: "Chiến đấu cận chiến", action: "combat_npc_melee" }
   ];

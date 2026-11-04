@@ -13,7 +13,7 @@ const INITIAL_STATE = {
   name: "",
   day: 1,
   phaseIndex: 0,
-  location: "幸存者帐篷",
+  location: "Lều Người Sống Sót",
   health: GAME_CONSTANTS.MAX_HEALTH,
   crash: 0,
   crashTurns: 0,
@@ -26,14 +26,14 @@ const INITIAL_STATE = {
   meleeWeapon: { ...MELEE_WEAPONS.find(w => w.id === DEFAULT_ITEM_IDS.melee), currentDurability: MELEE_WEAPONS.find(w => w.id === DEFAULT_ITEM_IDS.melee).durability },
   rangedWeapon: null,
   ammo: [],
-  backpack: { ...BACKPACK_TYPES.口袋 },
+  backpack: { ...BACKPACK_TYPES.tui },
   food: [
     { ...FOODS.find(f => f.id === DEFAULT_ITEM_IDS.food), count: 2 }
   ],
   drinks: [
     { ...DRINKS.find(d => d.id === DEFAULT_ITEM_IDS.drink), count: 2 }
   ],
-  medicine: [{ ...MEDICINES.find(m => m.id === "创可贴"), count: 1 }],
+  medicine: [{ ...MEDICINES.find(m => m.id === "bang_keo"), count: 1 }],
   other: [],
   cigarettes: 0,
   royalCoins: 0,
@@ -83,7 +83,7 @@ const INITIAL_STATE = {
   warehouseLevel: 0,
   warehouse: [],
   crops: Array(GAME_CONSTANTS.BASE.FARMING_CROP_SLOTS).fill(null),
-  weather: "晴天",
+  weather: "troi_nang",
   castleDebt: null,
   islandDebt: null,
   islandDebtTriggered: false,
@@ -956,11 +956,11 @@ export function normalizeState(state) {
   if (state.warehouseLevel === undefined) state.warehouseLevel = 0;
   if (!Array.isArray(state.warehouse)) state.warehouse = [];
   if (!Array.isArray(state.crops)) state.crops = [null, null, null, null, null];
-  if (state.weather === undefined) state.weather = "晴天";
+  if (state.weather === undefined) state.weather = "troi_nang";
   if (state.npcAffinity && state.npcAffinity.nurseZombie === undefined) state.npcAffinity.nurseZombie = 0;
   if (state.crashTurns === undefined) state.crashTurns = 0;
   if (state.lastBegDay === undefined) state.lastBegDay = 0;
-  if (!state.backpack) state.backpack = { ...BACKPACK_TYPES.口袋 };
+  if (!state.backpack) state.backpack = { ...BACKPACK_TYPES.tui };
   if (!Array.isArray(state.food)) state.food = [{ ...FOODS.find(f => f.id === DEFAULT_ITEM_IDS.food) }];
   if (!Array.isArray(state.drinks)) state.drinks = [{ ...DRINKS.find(d => d.id === DEFAULT_ITEM_IDS.drink) }];
   if (!Array.isArray(state.medicine)) state.medicine = [];
@@ -1167,7 +1167,7 @@ export function generateWeather() {
       return;
     }
   }
-  gameState.weather = "晴天";
+  gameState.weather = "troi_nang";
 }
 
 /**

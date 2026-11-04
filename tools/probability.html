@@ -221,13 +221,13 @@ function renderAll(data) {
   const qGroups = groupBy(qRows, 1);
   let qHtml = `<h2>📦 Tỷ lệ rơi phẩm chất (trọng số độ hiếm)</h2><div class="info-box"><strong>Giải thích:</strong> Khi khám phá rơi vật phẩm, trước tiên theo trọng số ở trên để quyết định phẩm chất. Thuốc, ba lô, vũ khí cận chiến, vũ khí tầm xa đều dùng trọng số này.<br><strong>Câu cá</strong> dùng trọng số riêng (Thường 60%, Tốt 24%, Hiếm 12%, Sử thi 3.5%, Huyền thoại 0.5%).</div><div class="sub-table">`;
   for (const [label, items] of Object.entries(qGroups)) {
-    const isHeader = items.length === 1 && items[0][3] === '权重';
+    const isHeader = items.length === 1 && items[0][3] === 'Trọng số';
     if (isHeader) continue;
-    const hRow = qGroups[label].find(r => r[3] === '权重');
+    const hRow = qGroups[label].find(r => r[3] === 'Trọng số');
     qHtml += `<h3>${label}</h3><table><thead><tr><th>Phẩm chất</th><th class="num">Trọng số</th><th class="num">Xác suất</th><th class="num">Tích lũy</th></tr></thead><tbody>`;
     let acc = 0;
     for (const r of items) {
-      if (r[3] === '权重') continue;
+      if (r[3] === 'Trọng số') continue;
       const pct = r[4];
       acc += parseFloat(pct);
       const css = r[6] || 'pct-low';
@@ -354,7 +354,7 @@ function renderAll(data) {
     </tbody></table>
     <h2>❤️ Phạm vi ngẫu nhiên độ hảo cảm</h2>
     <table><thead><tr><th>NPC</th><th>Hành vi</th><th class="num">Thay đổi độ hảo cảm</th></tr></thead>
-    <tbody>${affinity.map(r => `<tr><td>${r[3] || r[1].replace(/好感.*/, '')}</td><td>${r[1].includes('露露薇') ? 'Cho ăn đồ hộp' : r[1].includes('沐苗苗') ? 'Chăm sóc ruộng' : r[1]}</td><td class="num pct">${r[2]}</td></tr>`).join('')}</tbody></table>
+    <tbody>${affinity.map(r => `<tr><td>${r[3] || r[1].replace(/Thiện cảm.*/, '')}</td><td>${r[1].includes('Lộ Lộ Vy') ? 'Cho ăn đồ hộp' : r[1].includes('Mộc Miêu Miêu') ? 'Chăm sóc ruộng' : r[1]}</td><td class="num pct">${r[2]}</td></tr>`).join('')}</tbody></table>
     <h2>📦 Phạm vi ngẫu nhiên khác</h2>
     <table><thead><tr><th>Mục</th><th class="num">Phạm vi</th><th>Giải thích</th></tr></thead>
     <tbody>${rest.map(r => `<tr><td>${r[1]}</td><td class="num pct">${r[2]}</td><td>${r[3] || ''}</td></tr>`).join('')}</tbody></table>`;

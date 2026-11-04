@@ -26,7 +26,7 @@ export function handlePartnerHarvest() {
   const hasNurse = state.nurseZombieRescued;
 
   if (!hasLiuruyan && !hasNurse) {
-    setStory("你还没有伙伴加入你。");
+    setStory("Bạn vẫn chưa có đồng hành nào theo bạn.");
     showHomeOptions();
     return;
   }
@@ -35,7 +35,7 @@ export function handlePartnerHarvest() {
   const nurseReady = hasNurse && state.lastNurseHarvestDay < state.day;
 
   if (!liuruyanReady && !nurseReady) {
-    setStory("你的伙伴们今天已经都出去过了，明天再来吧。");
+    setStory("Các đồng hành của bạn hôm nay đã ra ngoài hết rồi, mai quay lại nhé.");
     showHomeOptions();
     return;
   }
@@ -63,14 +63,14 @@ export function handlePartnerHarvest() {
       }
     }
     state.lastPartnerHarvestDay = state.day;
-    storyLines.push(`柳如烟今天给你带来了${liruyanItems.join("和")}。`);
+    storyLines.push(`Lưu Như Yên hôm nay mang đến cho bạn${liruyanItems.join(", ")}.`);
   }
 
   if (nurseReady) {
     const med = NURSE_MEDICINE_POOL[Math.floor(Math.random() * NURSE_MEDICINE_POOL.length)];
     addItem({ ...med, type: "medicine" });
     state.lastNurseHarvestDay = state.day;
-    storyLines.push(`露露薇今天给你带来了${med.name}。`);
+    storyLines.push(`Lộ Lộ Vy hôm nay mang đến cho bạn${med.name}.`);
   }
 
   advanceTime(1);

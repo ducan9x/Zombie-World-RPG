@@ -7,13 +7,13 @@ export function handleCastleKingQuest() {
   const state = getState();
   const rank = getCastleRank(state);
   if (rank < 1) {
-    setStory("Vua không nhẫn nén vẫy tay：\"Bạn thậm chí không phải quý tộc, còn muốn nhiệm vụ？Hãy đi làm thẻ thân phận trước rồi đến！\"");
+    setStory("Vua không nhẫn nén vẫy tay: \"Bạn thậm chí không phải quý tộc, còn muốn nhiệm vụ?Hãy đi làm thẻ thân phận trước rồi đến!\"");
     setPhase("castle_interior");
     setOptions([{ text: "Quay lại đại điện", action: "castle_back" }]);
     return;
   }
   if (rank < 2 && !hasNobleId(state)) {
-    setStory("Vua không nhẫn nén vẫy tay：\"Bạn thậm chí không phải quý tộc, còn muốn nhiệm vụ？Hãy đi làm thẻ thân phận trước rồi đến！\"");
+    setStory("Vua không nhẫn nén vẫy tay: \"Bạn thậm chí không phải quý tộc, còn muốn nhiệm vụ?Hãy đi làm thẻ thân phận trước rồi đến!\"");
     setPhase("castle_interior");
     setOptions([{ text: "Quay lại đại điện", action: "castle_back" }]);
     return;
@@ -28,21 +28,21 @@ export function handleCastleKingQuest() {
     break;
   }
   if (!availableQuest) {
-    setStory("Vua gật đầu hài lòng：\"Bạn đã hoàn thành mọi nhiệm vụ của vua！Không phải là một tay đắc lực của vua sao！Hiện không còn nhiệm vụ mới。\"");
+    setStory("Vua gật đầu hài lòng: \"Bạn đã hoàn thành mọi nhiệm vụ của vua!Không phải là một tay đắc lực của vua sao!Hiện không còn nhiệm vụ mới.\"");
     setPhase("castle_interior");
     setOptions([{ text: "Quay lại đại điện", action: "castle_back" }]);
     return;
   }
   const q = availableQuest;
-  let desc = `👑 【${q.name}】\n━━━━━━━━━━━━━━━━━\n📝 ${q.desc}\n\n💬 ${q.story}\n\n`;
+  let desc = `👑 [${q.name}]\n━━━━━━━━━━━━━━━━━\n📝 ${q.desc}\n\n💬 ${q.story}\n\n`;
   const check = checkKingQuestRequire(state, q);
-  desc += `📊 进度：${check.current}/${check.target}`;
+  desc += `📊 Tiến độ: ${check.current}/${check.target}`;
   setStory(desc);
   const opts = [];
   if (check.met) {
     opts.push({ text: "✅ Nộp nhiệm vụ", action: "king_quest_submit" });
   }
-  opts.push({ text: "返回大厅", action: "king_quest_back" });
+  opts.push({ text: "Quay về sảnh chính", action: "king_quest_back" });
   setOptions(opts);
 }
 
@@ -96,9 +96,9 @@ export function handleKingQuestSubmit() {
   const state = getState();
   const rank = getCastleRank(state);
   if (rank < 1) {
-    setStory("Vua không nhẫn nén：\"Bạn không có thẻ thân phận còn dám đến nộp nhiệm vụ？\"");
+    setStory("Vua không nhẫn nén: \"Bạn không có thẻ thân phận còn dám đến nộp nhiệm vụ?\"");
     setPhase("castle_interior");
-    setOptions([{ text: "返回大厅", action: "king_quest_back" }]);
+    setOptions([{ text: "Quay về sảnh chính", action: "king_quest_back" }]);
     return;
   }
   const quests = KING_QUESTS;
@@ -110,9 +110,9 @@ export function handleKingQuestSubmit() {
     break;
   }
   if (!quest || !checkKingQuestRequire(state, quest).met) {
-    setStory("Điều kiện nhiệm vụ chưa đạt được。");
+    setStory("Điều kiện nhiệm vụ chưa đạt được.");
     setPhase("castle_interior");
-    setOptions([{ text: "返回大厅", action: "king_quest_back" }]);
+    setOptions([{ text: "Quay về sảnh chính", action: "king_quest_back" }]);
     return;
   }
   removeKingQuestItems(state, quest);

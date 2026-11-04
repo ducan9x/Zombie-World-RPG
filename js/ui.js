@@ -51,7 +51,7 @@ function formatAmmo(state) {
   if (state.ammo.length === 0) {
     return 'Không';
   }
-  return state.ammo.map(a => `${a.name}×${a.count}`).join('、');
+  return state.ammo.map(a => `${a.name}×${a.count}`).join(', ');
 }
 
 function getBaseDisplayName(state) {
@@ -129,7 +129,7 @@ export function renderWeapons(state) {
   panel.innerHTML = `
 <div class="weapon-panel">
   <div class="panel-title">⚔️ Vũ khí</div>
-  <div class="stat-row"><span class="stat-label">🔪 Cận chiến</span><span class="stat-value">${state.meleeWeapon.name}（sát thương${state.meleeWeapon.damage} liên kích${Math.round((state.meleeWeapon.comboRate || 0) * 100)}%）</span></div>
+  <div class="stat-row"><span class="stat-label">🔪 Cận chiến</span><span class="stat-value">${state.meleeWeapon.name}(sát thương${state.meleeWeapon.damage} liên kích${Math.round((state.meleeWeapon.comboRate || 0) * 100)}%)</span></div>
   <div class="stat-row"><span class="stat-label">🛡️ Độ bền</span><span class="stat-value">${meleeDurability}</span></div>
   <div class="stat-row"><span class="stat-label">🏹 Tầm xa</span><span class="stat-value">${state.rangedWeapon ? state.rangedWeapon.name : 'Không'}</span></div>
   <div class="stat-row"><span class="stat-label">⚙️ Độ nguyên vẹn</span><span class="stat-value">${state.rangedWeapon ? state.rangedWeapon.integrity : 'Không'}</span></div>
@@ -158,16 +158,16 @@ export function renderInventory(state) {
   panel.innerHTML = `
 <div class="inventory-panel">
   <div class="panel-title">🎒 Ba lô</div>
-  <div class="stat-row"><span class="stat-label">Ba lô</span><span class="stat-value">${state.backpack.name}（sức chứa${count}/${state.backpack.capacity}）</span></div>
-  <div class="stat-row"><span class="stat-label">🍞 Thực phẩm</span><span class="stat-value">${foods.map(f => getItemDisplayName(f)).join('、') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">🥤 Đồ uống</span><span class="stat-value">${state.drinks.map(d => getItemDisplayName(d)).join('、') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">💊 Y tế</span><span class="stat-value">${state.medicine.map(m => getItemDisplayName(m)).join('、') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">🐟 Cá</span><span class="stat-value">${fish.map(f => getItemDisplayName(f)).join('、') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">⚔️ Vũ khí</span><span class="stat-value">${meleeItems.map(o => getItemDisplayName(o)).join('、') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">🔫 Súng</span><span class="stat-value">${rangedItems.map(o => getItemDisplayName(o)).join('、') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">🧱 Vật liệu xây dựng</span><span class="stat-value">${buildingItems.map(o => getItemDisplayName(o)).join('、') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">🌱 Hạt giống</span><span class="stat-value">${state.seeds ? state.seeds.map(s => getItemDisplayName(s)).join('、') || 'Không' : 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">🧰 Khác</span><span class="stat-value">${otherItems.map(o => getItemDisplayName(o)).join('、') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">Ba lô</span><span class="stat-value">${state.backpack.name}(sức chứa${count}/${state.backpack.capacity})</span></div>
+  <div class="stat-row"><span class="stat-label">🍞 Thực phẩm</span><span class="stat-value">${foods.map(f => getItemDisplayName(f)).join(', ') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">🥤 Đồ uống</span><span class="stat-value">${state.drinks.map(d => getItemDisplayName(d)).join(', ') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">💊 Y tế</span><span class="stat-value">${state.medicine.map(m => getItemDisplayName(m)).join(', ') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">🐟 Cá</span><span class="stat-value">${fish.map(f => getItemDisplayName(f)).join(', ') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">⚔️ Vũ khí</span><span class="stat-value">${meleeItems.map(o => getItemDisplayName(o)).join(', ') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">🔫 Súng</span><span class="stat-value">${rangedItems.map(o => getItemDisplayName(o)).join(', ') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">🧱 Vật liệu xây dựng</span><span class="stat-value">${buildingItems.map(o => getItemDisplayName(o)).join(', ') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">🌱 Hạt giống</span><span class="stat-value">${state.seeds ? state.seeds.map(s => getItemDisplayName(s)).join(', ') || 'Không' : 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">🧰 Khác</span><span class="stat-value">${otherItems.map(o => getItemDisplayName(o)).join(', ') || 'Không'}</span></div>
 </div>`;
 }
 
@@ -190,7 +190,7 @@ export function renderCargo(state) {
   <div class="stat-row"><span class="stat-label">🔋 Năng lượng tinh khiết</span><span class="stat-value">${pureDisplay}</span></div>
   <div class="stat-row"><span class="stat-label">🏰 Nợ lâu đài</span><span class="stat-value">${state.castleDebt ? (() => { const d = state.castleDebt.dueDay - state.day; return d > 0 ? `${state.castleDebt.amount} điếu thuốc lá, còn ${d} ngày` : `${state.castleDebt.amount} điếu thuốc lá, quá hạn ${-d} ngày!`; })() : "Không"}</span></div>
   <div class="stat-row"><span class="stat-label">🏝️ Nợ đảo</span><span class="stat-value">${state.islandDebt ? (() => { const d = state.islandDebt.dueDay - state.day; return d > 0 ? `${state.islandDebt.amount} tiền hoàng gia, còn ${d} ngày` : `${state.islandDebt.amount} tiền hoàng gia, quá hạn ${-d} ngày!`; })() : "Không"}</span></div>
-  <div class="stat-row"><span class="stat-label">📈 Đầu tư</span><span class="stat-value">${state.investment ? (() => { const dir = INVEST_DIRECTIONS.find(d => d.id === state.investment.directionId); const daysLeft = state.investment.dueDay - state.day; return daysLeft > 0 ? `${dir ? dir.name : state.investment.directionId}，${state.investment.amount} xu, còn ${daysLeft} ngày` : `${dir ? dir.name : state.investment.directionId}，${state.investment.amount} xu, đã đáo hạn!`; })() : "Không"}</span></div>
+  <div class="stat-row"><span class="stat-label">📈 Đầu tư</span><span class="stat-value">${state.investment ? (() => { const dir = INVEST_DIRECTIONS.find(d => d.id === state.investment.directionId); const daysLeft = state.investment.dueDay - state.day; return daysLeft > 0 ? `${dir ? dir.name : state.investment.directionId}, ${state.investment.amount} xu, còn ${daysLeft} ngày` : `${dir ? dir.name : state.investment.directionId}, ${state.investment.amount} xu, đã đáo hạn!`; })() : "Không"}</span></div>
 </div>`;
 }
 
@@ -328,15 +328,15 @@ export function renderBestRecordPage() {
   const backpackCapacity = s.backpack ? s.backpack.capacity : 0;
   const meleeName = s.meleeWeapon ? s.meleeWeapon.name : 'Không';
   const rangedName = s.rangedWeapon ? s.rangedWeapon.name : 'Không';
-  const foodNames = (s.food && s.food.length > 0) ? s.food.map(f => getItemDisplayName(f)).join('、') : 'Không';
-  const drinkNames = (s.drinks && s.drinks.length > 0) ? s.drinks.map(d => getItemDisplayName(d)).join('、') : 'Không';
-  const medicineNames = (s.medicine && s.medicine.length > 0) ? s.medicine.map(m => getItemDisplayName(m)).join('、') : 'Không';
-  const otherNames = (s.other && s.other.length > 0) ? s.other.map(o => getItemDisplayName(o)).join('、') : 'Không';
+  const foodNames = (s.food && s.food.length > 0) ? s.food.map(f => getItemDisplayName(f)).join(', ') : 'Không';
+  const drinkNames = (s.drinks && s.drinks.length > 0) ? s.drinks.map(d => getItemDisplayName(d)).join(', ') : 'Không';
+  const medicineNames = (s.medicine && s.medicine.length > 0) ? s.medicine.map(m => getItemDisplayName(m)).join(', ') : 'Không';
+  const otherNames = (s.other && s.other.length > 0) ? s.other.map(o => getItemDisplayName(o)).join(', ') : 'Không';
   const cigDisplay = (s.cigarettes && s.cigarettes > 0) ? '(' + s.cigarettes + ') thuốc lá' : 'Không';
   const gasDisplay = (s.gasoline && s.gasoline > 0) ? '(' + s.gasoline + ') xăng' : 'Không';
   const royalDisplay = (s.royalCoins && s.royalCoins > 0) ? '(' + s.royalCoins + ') tiền hoàng gia' : 'Không';
   const pureDisplay = (s.pureEnergy && s.pureEnergy > 0) ? '(' + s.pureEnergy + ') năng lượng tinh khiết' : 'Không';
-  const ammoNames = (s.ammo && s.ammo.length > 0) ? s.ammo.map(a => `${a.name}×${a.count}`).join('、') : 'Không';
+  const ammoNames = (s.ammo && s.ammo.length > 0) ? s.ammo.map(a => `${a.name}×${a.count}`).join(', ') : 'Không';
 
   area.innerHTML = `
 <div>Sống sót lâu nhất: Ngày ${record.day}</div>
@@ -348,7 +348,7 @@ export function renderBestRecordPage() {
 <div>Vị trí: ${s.location}</div>
 <div>Vũ khí cận chiến: ${meleeName}</div>
 <div>Vũ khí tầm xa: ${rangedName}</div>
-<div>Ba lô: ${backpackName}（${backpackCapacity} ô）</div>
+<div>Ba lô: ${backpackName}(${backpackCapacity} ô)</div>
 <div>Thực phẩm: ${foodNames}</div>
 <div>Đồ uống: ${drinkNames}</div>
 <div>Thuốc: ${medicineNames}</div>

@@ -8,6 +8,7 @@ import { handleAction } from './game/index.js';
 import { processCheatCommand } from './cheats.js';
 import { getState, setStory, setAutoSaveCallback } from './state.js';
 import { saveGame } from './save.js';
+import { pixiRenderer } from './pixi-renderer.js';
 
 // ---------- Ràng buộc đầu vào ----------
 
@@ -31,6 +32,7 @@ function setupActionInput() {
         setStory((state.story || "") + "\n\n[Mã gian lận] " + cheatResult.message);
       }
       renderAll();
+      if (pixiRenderer.enabled) pixiRenderer.render(getState());
       input.value = '';
       input.focus();
       return;
@@ -45,6 +47,7 @@ function setupActionInput() {
     }
     handleAction(value);
     renderAll();
+    if (pixiRenderer.enabled) pixiRenderer.render(getState());
     input.value = '';
     input.focus();
   }
@@ -55,19 +58,27 @@ function setupActionInput() {
   });
 }
 
-// ---------- 初始化 ----------
+// ---------- Khởi tạo (Initialization) ----------
 
 /**
- * 初始化游戏
- * 初始化 UI（含开始界面按钮绑定）、绑定操作输入、渲染所有界面
+ * Khởi tạo trò chơi
+ * Khởi tạo UI (gắn nút màn hình bắt đầu), gắn thao tác nhập, vẽ tất cả giao diện
  */
-function init() {
+async function init() {
   setAutoSaveCallback((state) => saveGame(0, state, state.name));
   initUI();
   setupPagination();
   setupActionInput();
   renderAll();
+
+  // Khoi tao PixiJS renderer (Phase 1.5) va hien thi lan dau
+  try {
+    await pixiRenderer.init();
+    pixiRenderer.render(getState());
+  } catch (err) {
+    console.warn('[PixiRenderer] Khoi tao that bo, game van chay boi DOM:', err.message);
+  }
 }
 
-// ---------- 启动 ----------
+// ---------- Chạy phần khởi động ----------
 init();

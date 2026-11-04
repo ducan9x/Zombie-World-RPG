@@ -264,7 +264,7 @@ export function handleExplore() {
         handleBanditEncounter();
         break;
     }
-    const wasFoggy1 = getState().weather === "大雾";
+    const wasFoggy1 = getState().weather === "suong_mu";
     advanceTime(1);
     if (wasFoggy1) advanceTime(1);
     updateStatusEffects();
@@ -279,26 +279,26 @@ export function handleExplore() {
     const meleeName = state.meleeWeapon.name;
     const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "không";
     const ammoInfo = getRangedAmmoInfo(state);
-    const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Thể chất bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường! Khuyên nghỉ ngơi trước khi khám phá。" : "";
-    setStory(`Bạn gặp phải ${zombieDef.name}（HP:${zombieDef.hp} Sát thương:${zombieDef.damage}）！\n\n【Cận chiến】${meleeName}\n【Tầm xa】${rangedName} ${ammoInfo}${crashWarning}`);
+    const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Thể chất bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường! Khuyên nghỉ ngơi trước khi khám phá." : "";
+    setStory(`Bạn gặp phải ${zombieDef.name}(HP:${zombieDef.hp} Sát thương:${zombieDef.damage})!\n\n[Cận chiến]${meleeName}\n[Tầm xa]${rangedName} ${ammoInfo}${crashWarning}`);
     const options = [
       { text: "Trận chiến cận chiến", action: "combat_melee" }
     ];
     if (canRangedCombat(state)) {
       options.push({ text: "Trận chiến tầm xa", action: "combat_ranged" });
     } else {
-      options.push({ text: "Trận chiến tầm xa（không thể dùng：không có đạn）", action: "combat_ranged", disabled: true });
+      options.push({ text: "Trận chiến tầm xa(không thể dùng: không có đạn)", action: "combat_ranged", disabled: true });
     }
     options.push({ text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_flee" });
     setOptions(options);
     return;
   }
 
-  if (map.id === "绝密航天基地" && !state._spaceCrateLooted && Math.random() < GAME_CONSTANTS.MAP_EVENTS.SPACE_CRATE_RATE) {
+  if (map.id === "co_so_vu_tru_tuyet_mat" && !state._spaceCrateLooted && Math.random() < GAME_CONSTANTS.MAP_EVENTS.SPACE_CRATE_RATE) {
     state._spaceCrateLooted = true;
     const spaceDrop = FIXED_LOOT_DROPS.space_crate;
     if (!spaceDrop) {
-      setStory("Bạn khám phá sâu trong cơ sở hàng không vũ trụ, tìm thấy một tàu không gian rơi xuống, nhưng bên trong đã trống rỗng。");
+      setStory("Bạn khám phá sâu trong cơ sở hàng không vũ trụ, tìm thấy một tàu không gian rơi xuống, nhưng bên trong đã trống rỗng.");
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
@@ -309,19 +309,19 @@ export function handleExplore() {
     const spaceAmmo = AMMO.find(a => a.id === spaceDrop.ammoId);
     const addedWeapon = spaceWeapon ? addItem({ ...spaceWeapon }) : false;
     const addedAmmo = spaceAmmo ? addItem({ id: spaceAmmo.id, name: spaceAmmo.name, type: "ammo", count: spaceDrop.ammoCount }) : false;
-    let msg = `Bạn khám phá sâu trong cơ sở hàng không vũ trụ, tìm thấy một tàu không gian rơi xuống！Thân tàu đã bị biến dạng nghiêm trọng, nhưng bạn từ mảnh vụn`;
+    let msg = `Bạn khám phá sâu trong cơ sở hàng không vũ trụ, tìm thấy một tàu không gian rơi xuống!Thân tàu đã bị biến dạng nghiêm trọng, nhưng bạn từ mảnh vụn`;
     if (spaceWeapon && spaceAmmo) {
-      msg += `Tìm thấy một phát hiện kinh ngạc——một cây${spaceWeapon.name} và${spaceDrop.ammoCount} viên${spaceAmmo.name} dân dược！`;
+      msg += `Tìm thấy một phát hiện kinh ngạc——một cây${spaceWeapon.name} và${spaceDrop.ammoCount} viên${spaceAmmo.name} dân dược!`;
     } else if (spaceWeapon) {
-      msg += `Tìm thấy một cây${spaceWeapon.name}！`;
+      msg += `Tìm thấy một cây${spaceWeapon.name}!`;
     } else if (spaceAmmo) {
-      msg += `Tìm thấy${spaceDrop.ammoCount} viên${spaceAmmo.name} dân dược！`;
+      msg += `Tìm thấy${spaceDrop.ammoCount} viên${spaceAmmo.name} dân dược!`;
     } else {
-      msg += "Không tìm thấy gì cả。";
+      msg += "Không tìm thấy gì cả.";
     }
-    if ((addedWeapon && addedAmmo === false) || (addedWeapon === false && addedAmmo)) msg += "\nNhưng túi đồ đã đầy, một số vật phẩm không thể mang theo。";
+    if ((addedWeapon && addedAmmo === false) || (addedWeapon === false && addedAmmo)) msg += "\nNhưng túi đồ đã đầy, một số vật phẩm không thể mang theo.";
     setStory(msg);
-    const wasFoggy2 = getState().weather === "大雾";
+    const wasFoggy2 = getState().weather === "suong_mu";
     advanceTime(1);
     if (wasFoggy2) advanceTime(1);
     updateStatusEffects();
@@ -333,18 +333,18 @@ export function handleExplore() {
   {
     const loot = pickRandomLoot(map);
     if (!loot) {
-      setStory("Bạn đã tìm kỹ, không tìm thấy gì。");
+      setStory("Bạn đã tìm kỹ, không tìm thấy gì.");
     } else {
       const added = addItem(loot);
       if (!added) {
-        setStory(`Bạn đã tìm thấy${loot.name}，nhưng túi đồ đã đầy, không thể mang theo。`);
+        setStory(`Bạn đã tìm thấy${loot.name}, nhưng túi đồ đã đầy, không thể mang theo.`);
       } else {
-        setStory(`Bạn đã tìm thấy${loot.name}！`);
+        setStory(`Bạn đã tìm thấy${loot.name}!`);
       }
     }
   }
 
-  const wasFoggy2 = getState().weather === "大雾";
+  const wasFoggy2 = getState().weather === "suong_mu";
   advanceTime(1);
   if (wasFoggy2) advanceTime(1);
   updateStatusEffects();

@@ -160,7 +160,7 @@ export function handleHarvestCrops() {
           } else {
             crop.yield = yieldCount - addedCount;
           }
-          setStory(`⚠️ Túi đã đầy! Chỉ thu hoạch được một phần cây trồng.\n\nĐã thu hoạch: ${foodNames.join("、")}\nHãy dọn chỗ túi rồi quay lại thu hoạch phần còn lại.`);
+          setStory(`⚠️ Túi đã đầy! Chỉ thu hoạch được một phần cây trồng.\n\nĐã thu hoạch: ${foodNames.join(", ")}\nHãy dọn chỗ túi rồi quay lại thu hoạch phần còn lại.`);
           showBaseBuildOptions();
           return;
         }
@@ -174,7 +174,7 @@ export function handleHarvestCrops() {
   if (harvested.length === 0) {
     setStory("🌾 Trong đất không có cây trồng nào để thu hoạch. Hoặc chưa chín, hoặc chưa trồng. Hãy xem [Xem đất trồng].");
   } else {
-    setStory(`🌾 Bạn mang giỏ bước vào ruộng, cẩn thận hái những quả đã chín.\n\nDanh sách thu hoạch: ${harvested.join("、")}\nTổng cộng ${foodNames.length} phần thức ăn đã cất vào túi.`);
+    setStory(`🌾 Bạn mang giỏ bước vào ruộng, cẩn thận hái những quả đã chín.\n\nDanh sách thu hoạch: ${harvested.join(", ")}\nTổng cộng ${foodNames.length} phần thức ăn đã cất vào túi.`);
   }
   showBaseBuildOptions();
 }

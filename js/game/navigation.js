@@ -40,12 +40,12 @@ export function handleGoHome() {
   if (checkGoHomeEnding()) return;
 
   // Khi tâm trí về 0, xuất hiện ảo giác bên ngoài, không thể về nhà
-  if (state.sanity <= 0 && state.location !== "幸存者帐篷") {
+  if (state.sanity <= 0 && state.location !== "Lều Người Sống Sót") {
     setStory("Thế giới trước mắt trở nên méo mó và xa lạ——đường nét tòa nhà không ngừng nhúc nhích, màu sắc bầu trời chớp nháy điên cuồng, mặt đất như chao đảo dưới chân……\n\nBạn cố gắng nhận biết phương hướng, nhưng mỗi lần nhìn thấy đều là cảnh tượng khác nhau. Con đường quen thuộc kéo dài vào bóng tối lạ lẫm, phương hướng về nhà bị xóa sạch trong ảo giác.\n\n(Tâm trí về 0 xuất hiện ảo giác nghiêm trọng, không thể nhận biết đường về nhà. Hãy dùng thuốc an thần để khôi phục tâm trí.)");
     return;
   }
 
-  setLocation("幸存者帐篷");
+  setLocation("Lều Người Sống Sót");
   setCurrentMap(null);
   state.currentSubMap = null;
   advanceTime(1);
@@ -82,7 +82,7 @@ export function handleMapAction(input) {
     state.stats.mapsExplored.push(mapId);
   }
 
-  if (map.id === "末日城堡") {
+  if (map.id === "lau_dai_tan_the") {
     setStory("Bạn đã đến trước cổng Lâu đài Tận thế.");
     advanceTime(1);
     updateStatusEffects();

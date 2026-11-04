@@ -1,9 +1,9 @@
 export const AFFINITY_THRESHOLDS = [
-  { min: 150, label: "生死之交", stage: "soulmate" },
-  { min: 80, label: "挚友", stage: "close" },
-  { min: 30, label: "朋友", stage: "friend" },
-  { min: 10, label: "熟人", stage: "acquaintance" },
-  { min: 0, label: "陌生人", stage: "stranger" },
+  { min: 150, label: "Tri Kỷ", stage: "soulmate" },
+  { min: 80, label: "Bạn Thân", stage: "close" },
+  { min: 30, label: "Bạn Bè", stage: "friend" },
+  { min: 10, label: "Người Quen", stage: "acquaintance" },
+  { min: 0, label: "Người Lạ", stage: "stranger" },
 ];
 
 export const AFFINITY_MAX = {

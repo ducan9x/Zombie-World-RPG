@@ -17,7 +17,7 @@ function getNewforceProgress(state) {
     { label: "Cứu Rutile", done: !!state.nurseZombieRescued },
     { label: "Cứu Liu Ruyan", done: !!state.liuruyanRescued },
     { label: "Đánh bại tên cướp", done: !!state.outlawKilled },
-    { label: "Đánh bại Hắc Ảnh", done: !!(state.stats && state.stats.bossesDefeated && state.stats.bossesDefeated.includes("黑影")) },
+    { label: "Đánh bại Hắc Ảnh", done: !!(state.stats && state.stats.bossesDefeated && state.stats.bossesDefeated.includes("Hắc Ảnh")) },
     { label: "Đánh bại Vua Zombie", done: !!state.zombieKingDefeated },
     { label: "Hoàn thành nhiệm vụ vật tư của Tiến sĩ Chen", done: !!state.doctorQuest3Done },
   ];
@@ -52,17 +52,17 @@ export function buildSurvivalNotes() {
   }));
   const { doneCount } = getNewforceProgress(state);
   if (doneCount > 0) {
-    opts.push({ text: `Sức Mới Mới（${doneCount}/6）`, action: "note_newforce" });
+    opts.push({ text: `Sức Mới Mới(${doneCount}/6)`, action: "note_newforce" });
   }
   if (state.liuruyanDiscovered && !state.liuruyanRescued) {
     const remaining = GAME_CONSTANTS.LIURUYAN.RESCUE_DEADLINE_DAYS - state.day;
     if (remaining > 0) {
-      opts.push({ text: `Cứu Liu Ruyan（còn ${remaining} ngày）`, action: "note_liuruyan" });
+      opts.push({ text: `Cứu Liu Ruyan(còn ${remaining} ngày)`, action: "note_liuruyan" });
     } else {
-      opts.push({ text: "Cứu Liu Ruyan（đã hết hạn）", action: "note_liuruyan" });
+      opts.push({ text: "Cứu Liu Ruyan(đã hết hạn)", action: "note_liuruyan" });
     }
   }
-  opts.push({ text: "返回", action: "note_back" });
+  opts.push({ text: "Quay lại", action: "note_back" });
   setPhase("survival_notes");
   setStory(story);
   setOptions(opts);
@@ -100,7 +100,7 @@ export function handleSurvivalNotesAction(input) {
     if (doneCount > 0) {
       opts.push({ text: "Sức Mới Mới", action: "note_newforce" });
     }
-    opts.push({ text: "→ Cứu Liu Ruyan（hiện tại）", action: "note_liuruyan" });
+    opts.push({ text: "→ Cứu Liu Ruyan(hiện tại)", action: "note_liuruyan" });
     opts.push({ text: "Quay lại", action: "note_back" });
     setPhase("survival_notes");
     setStory(story);
@@ -114,7 +114,7 @@ export function handleSurvivalNotesAction(input) {
       action: "note_category",
       catIndex: i
     }));
-    opts.push({ text: "→ 新生力量（当前）", action: "note_newforce" });
+    opts.push({ text: "→ Lực lượng mới (hiện tại)", action: "note_newforce" });
     if (state.liuruyanDiscovered && !state.liuruyanRescued) {
       opts.push({ text: "Cứu Liu Ruyan", action: "note_liuruyan" });
     }
@@ -132,7 +132,7 @@ export function handleSurvivalNotesAction(input) {
       story += `🔹 ${entry.title}\n${entry.content}\n\n`;
     });
     const opts = SURVIVAL_NOTES.map((c, i) => ({
-      text: i === catIndex ? `→ ${c.name}（当前）` : c.name,
+      text: i === catIndex ? `→ ${c.name}(hiện tại)` : c.name,
       action: "note_category",
       catIndex: i
     }));

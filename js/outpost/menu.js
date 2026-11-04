@@ -105,22 +105,22 @@ export function handleTradingPost() {
   const state = getState();
   const OC = GAME_CONSTANTS.OUTPOST;
   setPhase("explore");
-  let info = "🏪 【Trạm giao dịch Dawn】\n\nHậu cần trận địa quản lý một trạm giao dịch vật tư nhỏ: \"Đây đều là đồ chúng tôi lục lọi từ khắp nơi, chỉ thu thuốc lá.\"\n\n";
+  let info = "🏪 [Trạm giao dịch Dawn]\n\nHậu cần trận địa quản lý một trạm giao dịch vật tư nhỏ: \"Đây đều là đồ chúng tôi lục lọi từ khắp nơi, chỉ thu thuốc lá.\"\n\n";
   info += `Thuốc lá hiện tại: ${state.cigarettes}\n\n`;
   info += "Danh sách hàng hóa:\n";
   const prices = OC.TRADING_POST;
   const ammoAmounts = OC.TRADING_POST_AMMO;
   for (const [name, price] of Object.entries(prices)) {
     const ammoAmount = ammoAmounts[name];
-    const extra = ammoAmount ? `（${ammoAmount} viên）` : "";
+    const extra = ammoAmount ? `(${ammoAmount} viên)` : "";
     info += `  ${name}${extra} - ${price} thuốc lá\n`;
   }
   setStory(info);
   const opts = [];
   for (const [name, price] of Object.entries(prices)) {
     const ammoAmount = ammoAmounts[name];
-    const extra = ammoAmount ? `（${ammoAmount} viên）` : "";
-    opts.push({ text: `Mua ${name}${extra}（${price} thuốc lá）`, action: "trading_post_buy", item: name, price });
+    const extra = ammoAmount ? `(${ammoAmount} viên)` : "";
+    opts.push({ text: `Mua ${name}${extra}(${price} thuốc lá)`, action: "trading_post_buy", item: name, price });
   }
   opts.push({ text: "Rời đi", action: "trading_post_back" });
   setOptions(opts);
@@ -184,7 +184,7 @@ export function handleCollectionPoint() {
       cropCount += (item.count || 1);
     }
   }
-  setStory(`📦 【Điểm trưng thu vật tư】\n\nTrận địa Dawn đang trưng thu vật tư dân gian, có thể dùng nông sản đổi thuốc lá.\n\n📌 Quy tắc đổi:\n  ${OC.COLLECTION_FRUIT_COST} trái cây → ${OC.COLLECTION_REWARD} thuốc lá\n  ${OC.COLLECTION_CROP_COST} nông sản → ${OC.COLLECTION_REWARD} thuốc lá\n\n📦 Đang giữ:\n  Trái cây: ${fruitCount} quả\n  Nông sản: ${cropCount} cái\n  Thuốc lá: ${state.cigarettes} điếu`);
+  setStory(`📦 [Điểm trưng thu vật tư]\n\nTrận địa Dawn đang trưng thu vật tư dân gian, có thể dùng nông sản đổi thuốc lá.\n\n📌 Quy tắc đổi:\n  ${OC.COLLECTION_FRUIT_COST} trái cây → ${OC.COLLECTION_REWARD} thuốc lá\n  ${OC.COLLECTION_CROP_COST} nông sản → ${OC.COLLECTION_REWARD} thuốc lá\n\n📦 Đang giữ:\n  Trái cây: ${fruitCount} quả\n  Nông sản: ${cropCount} cái\n  Thuốc lá: ${state.cigarettes} điếu`);
   setOptions([
     { text: `Nộp ${OC.COLLECTION_FRUIT_COST} trái cây → ${OC.COLLECTION_REWARD} thuốc lá`, action: "collection_fruit" },
     { text: `Nộp ${OC.COLLECTION_CROP_COST} nông sản → ${OC.COLLECTION_REWARD} thuốc lá`, action: "collection_crop" },

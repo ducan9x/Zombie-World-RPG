@@ -24,7 +24,7 @@ export function handleBar() {
     return;
   }
   const opts = BAR_MENU.map((item, i) => ({
-    text: `${item.name}（${item.price} xu）`,
+    text: `${item.name}(${item.price} xu)`,
     action: "bar_order",
     menuIndex: i,
   }));

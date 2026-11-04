@@ -26,8 +26,8 @@ export function handleNpcGuyue() {
   const friendshipLabel = getAffinityLabel(affinity);
   const dialogue = randomDialogue(GUYUE_DIALOGUES);
 
-  let desc = `【Đảo dân Cố Nguyệt】\nMột đảo dân tràn đầy kính ngưỡng đối với đức vua, trong mắt luôn lóe lên cuồng nhiệt đối với vương quyền.`;
-  desc += `\n\nHảo cảm hiện tại：${affinity}/${AFFINITY_MAX.guyue}（${friendshipLabel}）`;
+  let desc = `[Đảo dân Cố Nguyệt]\nMột đảo dân tràn đầy kính ngưỡng đối với đức vua, trong mắt luôn lóe lên cuồng nhiệt đối với vương quyền.`;
+  desc += `\n\nHảo cảm hiện tại: ${affinity}/${AFFINITY_MAX.guyue}(${friendshipLabel})`;
   desc += `\n\n${dialogue}`;
 
   setPhase("island_guyue");
@@ -117,7 +117,7 @@ export function handleGuyueRecycleSelect() {
     const rarity = f.rarity || "common";
     const price = FISH_RECYCLE_PRICES[rarity] || 1;
     const label = RARITY_LABELS[rarity] || "Thường";
-    return { text: `${formatQualityText(f.name, rarity)}【${label}】→ ${price} xu hoàng gia`, action: "guyue_recycle_one", index: i };
+    return { text: `${formatQualityText(f.name, rarity)}[${label}]→ ${price} xu hoàng gia`, action: "guyue_recycle_one", index: i };
   });
   opts.push({ text: "Quay lại", action: "guyue_recycle_back" });
   setPhase("island_guyue");
@@ -151,7 +151,7 @@ export function handleGuyueRecycleOne(input) {
   }
 
   addRoyalCoins(price);
-  setStory(`Bạn đã thu hồi ${formatQualityText(fish.name, rarity)}【${label}】, nhận ${price} xu hoàng gia.\n\nXu hoàng gia hiện tại：${getState().royalCoins}`);
+  setStory(`Bạn đã thu hồi ${formatQualityText(fish.name, rarity)}[${label}], nhận ${price} xu hoàng gia.\n\nXu hoàng gia hiện tại: ${getState().royalCoins}`);
   setPhase("island_guyue");
   setOptions([{ text: "Tiếp tục", action: "guyue_recycle_one_continue" }]);
 }
@@ -173,13 +173,13 @@ export function handleGuyueRecycleAll() {
     const price = FISH_RECYCLE_PRICES[rarity] || 1;
     const label = RARITY_LABELS[rarity] || "Thường";
     totalCoins += price;
-    summary.push(`${formatQualityText(fish.name, rarity)}【${label}】→ ${price} xu hoàng gia`);
+    summary.push(`${formatQualityText(fish.name, rarity)}[${label}]→ ${price} xu hoàng gia`);
   }
 
   state.food = state.food.filter(i => i.type !== "fish");
   addRoyalCoins(totalCoins);
 
-  setStory(`Bạn đã thu hồi tất cả cá biển, tổng ${fishes.length} con：\n${summary.join("\n")}\n\nTổng nhận ${totalCoins} xu hoàng gia.\nXu hoàng gia hiện tại：${getState().royalCoins}`);
+  setStory(`Bạn đã thu hồi tất cả cá biển, tổng ${fishes.length} con: \n${summary.join("\n")}\n\nTổng nhận ${totalCoins} xu hoàng gia.\nXu hoàng gia hiện tại: ${getState().royalCoins}`);
   setPhase("island_guyue");
   setOptions([{ text: "Tiếp tục", action: "guyue_recycle_all_continue" }]);
 }

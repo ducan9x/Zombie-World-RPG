@@ -32,15 +32,15 @@
     overlay.innerHTML = `
       <div class="devtools-modal">
         <div class="devtools-modal-icon">🔧</div>
-        <h2 class="devtools-modal-title">开发者工具</h2>
-        <p class="devtools-modal-desc">请输入访问密码</p>
+        <h2 class="devtools-modal-title">Công Cụ Nhà Phát Triển</h2>
+        <p class="devtools-modal-desc">Vui lòng nhập mật khẩu truy cập</p>
         <div class="devtools-modal-input-wrap">
-          <input type="password" id="devtools-password" placeholder="输入密码..." autocomplete="off">
+          <input type="password" id="devtools-password" placeholder="Nhập mật khẩu..." autocomplete="off">
         </div>
-        <div class="devtools-modal-error" id="devtools-error">密码错误，请重试</div>
+        <div class="devtools-modal-error" id="devtools-error">Mật khẩu sai, hãy thử lại</div>
         <div class="devtools-modal-btns">
-          <button class="devtools-btn devtools-btn-cancel" id="devtools-cancel">取消</button>
-          <button class="devtools-btn devtools-btn-confirm" id="devtools-confirm">确认</button>
+          <button class="devtools-btn devtools-btn-cancel" id="devtools-cancel">Hủy</button>
+          <button class="devtools-btn devtools-btn-confirm" id="devtools-confirm">Xác Nhận</button>
         </div>
       </div>
     `;
@@ -59,20 +59,20 @@
     async function handleConfirm() {
       const pw = input.value.trim();
       if (!pw) {
-        error.textContent = '请输入密码';
+        error.textContent = 'Vui lòng nhập mật khẩu';
         error.classList.add('show');
         return;
       }
       confirmBtn.disabled = true;
-      confirmBtn.textContent = '验证中...';
+      confirmBtn.textContent = 'Đang xác minh...';
       const ok = await verifyPassword(pw);
       if (ok) {
         close();
         window.open('tools/index.html', '_blank');
       } else {
         confirmBtn.disabled = false;
-        confirmBtn.textContent = '确认';
-        error.textContent = '密码错误，请重试';
+        confirmBtn.textContent = 'Xác Nhận';
+        error.textContent = 'Mật khẩu sai, hãy thử lại';
         error.classList.add('show');
         input.value = '';
         input.focus();

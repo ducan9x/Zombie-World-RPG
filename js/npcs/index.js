@@ -94,7 +94,7 @@ function npcHeader(npcId) {
   const stage = getAffinityStage(affinity);
   const friendshipLabel = getAffinityLabel(affinity);
   let description = config.desc;
-  description += `\n\nHiện tại thân mật: ${affinity}/${AFFINITY_MAX[npcId]}（${friendshipLabel}）`;
+  description += `\n\nHiện tại thân mật: ${affinity}/${AFFINITY_MAX[npcId]}(${friendshipLabel})`;
   if (npcId === "lili") {
     description += `\n\n💡 Lilith có thể giúp bạn: Thu hồi vũ khí đổi thuốc lá | Thu hồi balo dư | Sửa chữa súng | Sửa chữa cung nỏ | Chữa trị nhiễm trùng | Giao dịch vật tư y tế`;
     if (affinity >= AFFINITY_MAX[npcId] && !isQuestDone("llGift")) {
@@ -355,7 +355,7 @@ export function handleNpcChat() {
   incrementChatCount(npcId);
   addNpcAffinity(npcId, GAME_CONSTANTS.NPC.CHAT_AFFINITY);
   const newAffinity = getNpcAffinity(npcId);
-  setStory(line + `\n\nĐiểm thân mật +${GAME_CONSTANTS.NPC.CHAT_AFFINITY}（Hiện tại ${newAffinity}/${AFFINITY_MAX[npcId]}）`);
+  setStory(line + `\n\nĐiểm thân mật +${GAME_CONSTANTS.NPC.CHAT_AFFINITY}(Hiện tại ${newAffinity}/${AFFINITY_MAX[npcId]})`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -454,9 +454,9 @@ export function handleNpcGiftConfirm(input) {
   addNpcAffinity(npcId, affinityGain);
   let affinity = getNpcAffinity(npcId);
   if (npcId === "lili") {
-    setStory(`Bạn đã tặng ${giftName}. ${giftName} được Lilith yêu thích. Điểm thân mật +${affinityGain}（Hiện tại ${affinity}/${AFFINITY_MAX.lili}）`);
+    setStory(`Bạn đã tặng ${giftName}. ${giftName} được Lilith yêu thích. Điểm thân mật +${affinityGain}(Hiện tại ${affinity}/${AFFINITY_MAX.lili})`);
   } else {
-    setStory(`Bạn đã tặng ${giftName}. Điểm thân mật +${affinityGain}（Hiện tại ${affinity}/${AFFINITY_MAX[npcId]}）`);
+    setStory(`Bạn đã tặng ${giftName}. Điểm thân mật +${affinityGain}(Hiện tại ${affinity}/${AFFINITY_MAX[npcId]})`);
   }
   advanceTime(1);
   updateStatusEffects();
@@ -717,11 +717,11 @@ export function handleNpcQuest() {
   }
   const check = checkQuestRequire(state, quest);
   const npcName = SURVIVOR_NPC.find(n => n.id === npcId)?.name || "NPC";
-  let desc = `📋 【${quest.name}】\n`;
+  let desc = `📋 [${quest.name}]\n`;
   desc += `━━━━━━━━━━━━━━━━━\n`;
   desc += `📝 ${quest.desc}\n\n`;
-  desc += `📊 Tiến độ：${check.current}/${check.target}\n`;
-  desc += `🏆 Phần thưởng：${quest.reward?.desc || "Không"}`;
+  desc += `📊 Tiến độ: ${check.current}/${check.target}\n`;
+  desc += `🏆 Phần thưởng: ${quest.reward?.desc || "Không"}`;
   if (quest.story) {
     desc += `\n\n💬 ${quest.story}`;
   }
@@ -751,7 +751,7 @@ export function handleNpcQuestConfirm() {
   const newAffinity = getNpcAffinity(npcId);
   markQuestDone(quest.id);
   const npcName = SURVIVOR_NPC.find(n => n.id === npcId)?.name || "NPC";
-  setStory(`🎉 Bạn đã hoàn thành treo thưởng【${quest.name}】của ${npcName}!\n\n🏆 Nhận phần thưởng：${quest.reward?.desc || "Không"}\n💝 Điểm thân mật +${GAME_CONSTANTS.NPC.QUEST_AFFINITY_REWARD}（Hiện tại ${newAffinity}/${AFFINITY_MAX[npcId]}）`);
+  setStory(`🎉 Bạn đã hoàn thành treo thưởng[${quest.name}]của ${npcName}!\n\n🏆 Nhận phần thưởng: ${quest.reward?.desc || "Không"}\n💝 Điểm thân mật +${GAME_CONSTANTS.NPC.QUEST_AFFINITY_REWARD}(Hiện tại ${newAffinity}/${AFFINITY_MAX[npcId]})`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -771,14 +771,14 @@ export function handleNpcQuestPreview() {
   }
   const check = checkQuestRequire(state, quest);
   const detailLines = [];
-  detailLines.push(`📋 【${quest.name}】`);
+  detailLines.push(`📋 [${quest.name}]`);
   detailLines.push(`━━━━━━━━━━━━━━━━━`);
   detailLines.push(`📝 ${quest.desc}`);
   detailLines.push(``);
-  detailLines.push(`📊 Tiến độ hiện tại：${check.current}/${check.target}`);
+  detailLines.push(`📊 Tiến độ hiện tại: ${check.current}/${check.target}`);
   detailLines.push(``);
-  detailLines.push(`🏆 Phần thưởng nhiệm vụ：${quest.reward?.desc || "Không"}`);
-  detailLines.push(`💝 Điểm thân mật thêm：+${GAME_CONSTANTS.NPC.QUEST_AFFINITY_REWARD}`);
+  detailLines.push(`🏆 Phần thưởng nhiệm vụ: ${quest.reward?.desc || "Không"}`);
+  detailLines.push(`💝 Điểm thân mật thêm: +${GAME_CONSTANTS.NPC.QUEST_AFFINITY_REWARD}`);
   if (quest.story) {
     detailLines.push(``);
     detailLines.push(`💬 ${quest.story}`);
@@ -808,7 +808,7 @@ export function handleNpcRecycle() {
   }
   setPhase("npc_recycle");
   const opts = meleeItems.map((item, i) => ({
-    text: `${item.name}（Sát thương:${item.damage} Độ bền hiện tại:${item.currentDurability}/${item.durability}）`,
+    text: `${item.name}(Sát thương:${item.damage} Độ bền hiện tại:${item.currentDurability}/${item.durability})`,
     action: "recycle_confirm",
     index: i
   }));
@@ -863,7 +863,7 @@ export function handleNpcRecycleRanged() {
   }
   setPhase("npc_recycle_ranged");
   const opts = rangedItems.map((item, i) => ({
-    text: `${item.name}（Sát thương:${item.damage} Đạn dược:${item.ammoType}）`,
+    text: `${item.name}(Sát thương:${item.damage} Đạn dược:${item.ammoType})`,
     action: "recycle_ranged_confirm",
     index: i
   }));
@@ -919,7 +919,7 @@ export function handleNpcRecycleBackpack() {
   const opts = backpackItems.map((item, i) => {
     const price = 1 + Math.round(item.capacity / 20);
     return {
-      text: `${item.name}（Dung lượng:${item.capacity} → ${price} điếu thuốc lá）`,
+      text: `${item.name}(Dung lượng:${item.capacity} → ${price} điếu thuốc lá)`,
       action: "recycle_backpack_confirm",
       index: i
     };
@@ -947,7 +947,7 @@ export function handleRecycleBackpackConfirm(input) {
   removeItem("other", state.other.indexOf(item));
   const npcId = state._currentNpc;
   if (npcId === "lili") {
-    setStory(`Lilith nhận lấy ${item.name}, cân nặng: \"Balo dung lượng ${item.capacity}, đáng ${price} điếu thuốc!\" Cô ấy nhét balo vào kho, đưa cho bạn ${price} điếu thuốc lá: \"Lần sau tìm được balo dung lượng lớn hơn hãy đến tìm tôi nhé~"`);
+    setStory(`Lilith nhận lấy ${item.name}, cân nặng: \"Balo dung lượng ${item.capacity}, đáng ${price} điếu thuốc!\" Cô ấy nhét balo vào kho, đưa cho bạn ${price} điếu thuốc lá: \"Lần sau tìm được balo dung lượng lớn hơn hãy đến tìm tôi nhé~`);
   } else {
     setStory(`Bạn thu hồi ${item.name}, nhận được ${price} điếu thuốc lá.`);
   }
@@ -973,9 +973,9 @@ export function handleNpcRepair() {
   const cost = getCaptainDiscountCost(state, npcId, rawCost);
   const cigCount = state.cigarettes;
   setPhase("npc_repair");
-  setStory(`Sửa chữa ${state.meleeWeapon.name} cần ${cost} điếu thuốc lá${npcId === "lili" && hasDawnCaptainBadge(state) ? "（Giảm giá 50% cho Thuyền trưởng Dawn）" : ""}（Độ bền hồi đầy）。\nBạn có ${cigCount} điếu thuốc lá。`);
+  setStory(`Sửa chữa ${state.meleeWeapon.name} cần ${cost} điếu thuốc lá${npcId === "lili" && hasDawnCaptainBadge(state) ? "(Giảm giá 50% cho Thuyền trưởng Dawn)" : ""}(Độ bền hồi đầy).\nBạn có ${cigCount} điếu thuốc lá.`);
   setOptions([
-    { text: cigCount >= cost ? "🔧 Xác nhận sửa chữa" : "🔧 Xác nhận sửa chữa（Thiếu thuốc lá）", action: "repair_confirm", disabled: cigCount < cost },
+    { text: cigCount >= cost ? "🔧 Xác nhận sửa chữa" : "🔧 Xác nhận sửa chữa(Thiếu thuốc lá)", action: "repair_confirm", disabled: cigCount < cost },
     { text: "Quay lại", action: "repair_back" },
   ]);
 }
@@ -1013,9 +1013,9 @@ export function handleNpcRepairBow() {
   const cost = getCaptainDiscountCost(state, npcId, rawCost);
   const cigCount = state.cigarettes;
   setPhase("npc_repair_bow");
-  setStory(`Sửa chữa ${state.rangedWeapon.name} cần ${cost} điếu thuốc lá${npcId === "lili" && hasDawnCaptainBadge(state) ? "（Giảm giá 50% cho Thuyền trưởng Dawn）" : ""}（Độ nguyên vẹn hồi về 100%）。\nBạn có ${cigCount} điếu thuốc lá。`);
+  setStory(`Sửa chữa ${state.rangedWeapon.name} cần ${cost} điếu thuốc lá${npcId === "lili" && hasDawnCaptainBadge(state) ? "(Giảm giá 50% cho Thuyền trưởng Dawn)" : ""}(Độ nguyên vẹn hồi về 100%).\nBạn có ${cigCount} điếu thuốc lá.`);
   setOptions([
-    { text: cigCount >= cost ? "🔧 Xác nhận sửa chữa" : "🔧 Xác nhận sửa chữa（Thiếu thuốc lá）", action: "repair_bow_confirm", disabled: cigCount < cost },
+    { text: cigCount >= cost ? "🔧 Xác nhận sửa chữa" : "🔧 Xác nhận sửa chữa(Thiếu thuốc lá)", action: "repair_bow_confirm", disabled: cigCount < cost },
     { text: "Quay lại", action: "repair_bow_back" },
   ]);
 }
@@ -1053,7 +1053,7 @@ function handleLiliRepairGun() {
     handleNpcAction("chat");
     return;
   }
-  if (state.rangedWeapon.ammoType === "箭矢") {
+  if (state.rangedWeapon.ammoType === "mui_ten") {
     setStory("Lilith xua tay: \"Đây là cung nỏ, không phải súng! Sửa cung nỏ chọn tùy chọn khác nhé~\"");
     handleNpcAction("chat");
     return;
@@ -1065,9 +1065,9 @@ function handleLiliRepairGun() {
   const repairAmount = questCfg.repair;
   const cigCount = state.cigarettes;
   setPhase("lili_repair_gun");
-  setStory(`Lilith nhận lấy ${state.rangedWeapon.name} của bạn kiểm tra kỹ: \"Ừm... độ nguyên vẹn còn ${state.rangedWeapon.integrity}%. Giao cho tôi đi!\"\n\n${questCfg.desc.replace(`消耗${rawCost}根香烟`, `消耗${cost}根香烟`)}${hasDawnCaptainBadge(state) ? "\n\n💡 Giảm giá Thuyền trưởng Dawn: giá giảm một nửa!" : ""}\nBạn có ${cigCount} điếu thuốc lá。`);
+  setStory(`Lilith nhận lấy ${state.rangedWeapon.name} của bạn kiểm tra kỹ: \"Ừm... độ nguyên vẹn còn ${state.rangedWeapon.integrity}%. Giao cho tôi đi!\"\n\n${questCfg.desc.replace(`${rawCost} điếu`, `${cost} điếu`)}${hasDawnCaptainBadge(state) ? "\n\n💡 Giảm giá Thuyền trưởng Dawn: giá giảm một nửa!" : ""}\nBạn có ${cigCount} điếu thuốc lá.`);
   setOptions([
-    { text: cigCount >= cost ? "🔧 Xác nhận sửa chữa" : "🔧 Xác nhận sửa chữa（Thiếu thuốc lá）", action: "lili_repair_gun_confirm", disabled: cigCount < cost },
+    { text: cigCount >= cost ? "🔧 Xác nhận sửa chữa" : "🔧 Xác nhận sửa chữa(Thiếu thuốc lá)", action: "lili_repair_gun_confirm", disabled: cigCount < cost },
     { text: "Quay lại", action: "lili_repair_gun_back" },
   ]);
 }
@@ -1117,7 +1117,7 @@ function handleLiliRepairBow() {
     handleNpcAction("chat");
     return;
   }
-  if (state.rangedWeapon.ammoType !== "箭矢") {
+  if (state.rangedWeapon.ammoType !== "mui_ten") {
     setStory("Lilith nghiêng đầu: \"Đây là súng, không phải cung nỏ! Sửa súng chọn tùy chọn khác nhé~\"");
     handleNpcAction("chat");
     return;
@@ -1129,9 +1129,9 @@ function handleLiliRepairBow() {
   const repairAmount = questCfg.repair;
   const cigCount = state.cigarettes;
   setPhase("lili_repair_bow");
-  setStory(`Lilith nhận lấy ${state.rangedWeapon.name} của bạn kiểm tra kỹ: \"Cung nỏ là thế mạnh của tôi!\"\n\n${questCfg.desc.replace(`消耗${rawCost}根香烟`, `消耗${cost}根香烟`)}${hasDawnCaptainBadge(state) ? "\n\n💡 Giảm giá Thuyền trưởng Dawn: giá giảm một nửa!" : ""}\nBạn có ${cigCount} điếu thuốc lá。`);
+  setStory(`Lilith nhận lấy ${state.rangedWeapon.name} của bạn kiểm tra kỹ: \"Cung nỏ là thế mạnh của tôi!\"\n\n${questCfg.desc.replace(`${rawCost} điếu`, `${cost} điếu`)}${hasDawnCaptainBadge(state) ? "\n\n💡 Giảm giá Thuyền trưởng Dawn: giá giảm một nửa!" : ""}\nBạn có ${cigCount} điếu thuốc lá.`);
   setOptions([
-    { text: cigCount >= cost ? "🔧 Xác nhận sửa chữa" : "🔧 Xác nhận sửa chữa（Thiếu thuốc lá）", action: "lili_repair_bow_confirm", disabled: cigCount < cost },
+    { text: cigCount >= cost ? "🔧 Xác nhận sửa chữa" : "🔧 Xác nhận sửa chữa(Thiếu thuốc lá)", action: "lili_repair_bow_confirm", disabled: cigCount < cost },
     { text: "Quay lại", action: "lili_repair_bow_back" },
   ]);
 }
@@ -1199,12 +1199,12 @@ export function handleNpcCureInfection() {
   const cigCount = state.cigarettes;
   setPhase("npc_cure");
   if (npcId === "lili" && questCfg) {
-    setStory(`Lilith cau mày đánh giá bạn: \"Nhiễm trùng không phải chuyện đùa!\" Cô ấy lấy từ hộp thuốc ra một ống thuốc màu vàng nhạt.\n\n${questCfg.desc}${hasDawnCaptainBadge(state) ? "\n\n💡 Giảm giá Thuyền trưởng Dawn: giá chữa trị giảm một nửa!" : ""}\nBạn có ${cigCount} điếu thuốc lá。`);
+    setStory(`Lilith cau mày đánh giá bạn: \"Nhiễm trùng không phải chuyện đùa!\" Cô ấy lấy từ hộp thuốc ra một ống thuốc màu vàng nhạt.\n\n${questCfg.desc}${hasDawnCaptainBadge(state) ? "\n\n💡 Giảm giá Thuyền trưởng Dawn: giá chữa trị giảm một nửa!" : ""}\nBạn có ${cigCount} điếu thuốc lá.`);
   } else {
-    setStory(`Chữa trị nhiễm trùng cần ${cost} điếu thuốc lá${npcId === "lili" && hasDawnCaptainBadge(state) ? "（Giảm giá 50% cho Thuyền trưởng Dawn）" : ""}（Giá trị nhiễm trùng hiện tại：${state.infection}%）。\nBạn có ${cigCount} điếu thuốc lá。`);
+    setStory(`Chữa trị nhiễm trùng cần ${cost} điếu thuốc lá${npcId === "lili" && hasDawnCaptainBadge(state) ? "(Giảm giá 50% cho Thuyền trưởng Dawn)" : ""}(Giá trị nhiễm trùng hiện tại: ${state.infection}%).\nBạn có ${cigCount} điếu thuốc lá.`);
   }
   setOptions([
-    { text: cigCount >= cost ? "💊 Xác nhận chữa trị" : "💊 Xác nhận chữa trị（Thiếu thuốc lá）", action: "cure_confirm", disabled: cigCount < cost },
+    { text: cigCount >= cost ? "💊 Xác nhận chữa trị" : "💊 Xác nhận chữa trị(Thiếu thuốc lá)", action: "cure_confirm", disabled: cigCount < cost },
     { text: "Quay lại", action: "cure_back" },
   ]);
 }
@@ -1237,9 +1237,9 @@ export function handleCureConfirm() {
   removeCigarettes(cost);
   state.infection = Math.max(0, state.infection - cureAmount);
   if (npcId === "lili" && questCfg) {
-    setStory(`${questCfg.story}\n\nGiá trị nhiễm trùng đã giảm ${cureAmount}%（Giá trị nhiễm trùng hiện tại：${state.infection}%）。Lilith thở phào: \"Sợ chết tôi, sau này cẩn thận hơn nhé!\"`);
+    setStory(`${questCfg.story}\n\nGiá trị nhiễm trùng đã giảm ${cureAmount}%(Giá trị nhiễm trùng hiện tại: ${state.infection}%).Lilith thở phào: \"Sợ chết tôi, sau này cẩn thận hơn nhé!\"`);
   } else {
-    setStory(`Chữa trị hoàn tất! Giá trị nhiễm trùng đã giảm ${cureAmount}%（Giá trị nhiễm trùng hiện tại：${state.infection}%）。`);
+    setStory(`Chữa trị hoàn tất! Giá trị nhiễm trùng đã giảm ${cureAmount}%(Giá trị nhiễm trùng hiện tại: ${state.infection}%).`);
   }
   advanceTime(1);
   updateStatusEffects();
@@ -1265,7 +1265,7 @@ function handleLiliGiftClaim() {
 
   const affinity = getNpcAffinity(npcId);
   if (affinity < config.giftQuest.reqAffection) {
-    setStory(`Lilith nghiêng đầu nhìn bạn: \"Ừm... mối quan hệ của chúng ta chưa đủ tốt đâu（điểm thân mật${affinity}/${config.giftQuest.reqAffection}）, hãy cùng tôi nói chuyện thêm nhé~\"`);
+    setStory(`Lilith nghiêng đầu nhìn bạn: \"Ừm... mối quan hệ của chúng ta chưa đủ tốt đâu(điểm thân mật${affinity}/${config.giftQuest.reqAffection}), hãy cùng tôi nói chuyện thêm nhé~\"`);
     handleNpcAction("chat");
     return;
   }
@@ -1289,7 +1289,7 @@ function handleLiliGiftClaim() {
   }
 
   const storyText = config.giftQuest.story || "Lilith đưa cho bạn một món quà.";
-  setStory(`${storyText}\n\n🎁 Nhận phần thưởng：${rewardNames.join("、")}`);
+  setStory(`${storyText}\n\n🎁 Nhận phần thưởng: ${rewardNames.join(", ")}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();

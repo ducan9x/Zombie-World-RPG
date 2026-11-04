@@ -68,13 +68,13 @@ export function handleSavePageAction(input) {
   if (slotId === 0) {
     setPhase("save_confirm");
     if (state._saveSlotData) {
-      setStory(`🔄 Tự động lưu：${state._saveSlotData.nickname} | Ngày ${state._saveSlotData.day} | ${state._saveSlotData.timestamp}\n(Tự động lưu mỗi 5 ngày tự ghi đè, không thể sửa thủ công)`);
+      setStory(`🔄 Tự động lưu: ${state._saveSlotData.nickname} | Ngày ${state._saveSlotData.day} | ${state._saveSlotData.timestamp}\n(Tự động lưu mỗi 5 ngày tự ghi đè, không thể sửa thủ công)`);
       setOptions([
         { text: "Tải lưu", action: "load" },
         { text: "Quay lại", action: "back" }
       ]);
     } else {
-      setStory(`🔄 Tự động lưu：Chưa có tự động lưu`);
+      setStory(`🔄 Tự động lưu: Chưa có tự động lưu`);
       setOptions([
         { text: "Quay lại", action: "back" }
       ]);
@@ -85,7 +85,7 @@ export function handleSavePageAction(input) {
   setPhase("save_confirm");
 
   if (state._saveSlotData) {
-    setStory(`Ô ${slotId}：${state._saveSlotData.nickname} | Ngày ${state._saveSlotData.day} | ${state._saveSlotData.timestamp}\n⚠ Chọn "Ghi đè lưu" sẽ vĩnh viễn ghi đè lưu này!`);
+    setStory(`Ô ${slotId}: ${state._saveSlotData.nickname} | Ngày ${state._saveSlotData.day} | ${state._saveSlotData.timestamp}\n⚠ Chọn "Ghi đè lưu" sẽ vĩnh viễn ghi đè lưu này!`);
     setOptions([
       { text: "Tải lưu", action: "load" },
       { text: "Ghi đè lưu", action: "overwrite" },
@@ -93,7 +93,7 @@ export function handleSavePageAction(input) {
       { text: "Quay lại", action: "back" }
     ]);
   } else {
-    setStory(`Ô ${slotId}：Trống`);
+    setStory(`Ô ${slotId}: Trống`);
     setOptions([
       { text: "Lưu vào đây", action: "save" },
       { text: "Quay lại", action: "back" }

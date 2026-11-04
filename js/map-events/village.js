@@ -74,7 +74,7 @@ export function handleMoldySeeds() {
   }
   let msg = "Những ngày làm việc trên ruộng thí nghiệm, học theo Miêu Miêu, đã giúp bạn nắm được khả năng tái sử dụng hạt giống hỏng.";
   if (addedSeeds.length > 0) {
-    msg += `\n\n你获得了：${addedSeeds.join("、")}`;
+    msg += `\n\nBạn nhận được: ${addedSeeds.join(", ")}`;
   } else {
     msg += "\n\nNhưng balo của bạn đã đầy, hạt giống không cho vào được.";
   }

@@ -22,7 +22,7 @@ export const GAME_CONSTANTS = {
   },
   COMBAT: {
     FLEE_RATE: 0.30,
-    FLEE_RATE_TEXT: "Chạy trốn（30%）",
+    FLEE_RATE_TEXT: "Chạy trốn(30%)",
     RANGED_DODGE_RATE: 0.6,
     LIURUYAN_ASSIST_DAMAGE: 20,
     LIURUYAN_ASSIST_RATE: 0.3,
@@ -144,7 +144,7 @@ export const GAME_CONSTANTS = {
     OIL_TANKER_SELL_PRICE: 5,
   },
   ROBBER: {
-    SAFE_MAP_IDS: ["末日城堡", "曙光阵地"],
+    SAFE_MAP_IDS: ["lau_dai_tan_the", "tran_dia_binh_minh"],
     THRESHOLDS: [
       { minCoins: 0, maxCoins: 200, rate: 0 },
       { minCoins: 201, maxCoins: 400, rate: 0.05 },
@@ -180,16 +180,16 @@ export const GAME_CONSTANTS = {
     QUEST3_DRINKS_COST: 10,
     IMPROVED_SERUM_INFECTION_REDUCTION: 90,
     HOPE_AFFINITY_REQUIRED: 150,
-    DISMANTLE_WEAPON_ID: "大扳手",
-    DISMANTLE_BACKPACK_ID: "次元收纳背包",
+    DISMANTLE_WEAPON_ID: "can_xich_lon",
+    DISMANTLE_BACKPACK_ID: "balo_vu_tru",
     AWM_ID: "AWM",
   },
   WEATHER: {
-    PROBABILITIES: { 晴天: 0.40, 阴天: 0.30, 雨天: 0.10, 酷暑: 0.05, 大雾: 0.05, 酸雨: 0.05, 沙暴: 0.05 },
+    PROBABILITIES: { troi_nang: 0.40, troi_may: 0.30, troi_mua: 0.10, troi_nong: 0.05, suong_mu: 0.05, mua_axit: 0.05, bao_cat: 0.05 },
     EFFECTS: {
-      雨天: { fatigue: 2 },
-      酷暑: { hydration: -5 },
-      沙暴: { health: -2 },
+      troi_mua: { fatigue: 2 },
+      troi_nong: { hydration: -5 },
+      bao_cat: { health: -2 },
     },
   },
   ENCOUNTER: {
@@ -214,10 +214,10 @@ export const GAME_CONSTANTS = {
     LEADER_CHAT_AFFINITY: 1,
     LEADER_GIFT_AFFINITY: 1,
     TRADING_POST: {
-      "纯牛奶": 2,
-      "优酸乳": 2,
-      "止血带": 3,
-      "抗感染血清": 8,
+      "sua_tuoi": 2,
+      "sua_chua": 2,
+      "day_bo_mau": 3,
+      "huyet_thanh": 8,
       "9×19mm": 1,
       "5.56×45mm NATO": 1,
     },
@@ -240,9 +240,9 @@ export const GAME_CONSTANTS = {
   },
   ENDINGS: {
     DAY_999_THRESHOLD: 999,
-    NEWFORCE_WEAPON_ID: "无畏之刃",
-    ENDING_999_BACKPACK_ID: "次元收纳背包",
-    NEWFORCE_BOSS_NAME: "新势力首领",
+    NEWFORCE_WEAPON_ID: "kiem_vo_uy",
+    ENDING_999_BACKPACK_ID: "balo_vu_tru",
+    NEWFORCE_BOSS_NAME: "Thủ Lĩnh Thế Lực Mới",
     ALL_IDS: ["ending_death", "ending_999", "ending_prince", "ending_captain", "ending_newforce", "ending_space", "ending_hope", "ending_stay", "ending_farming", "ending_love_hate", "ending_food", "ending_elopement", "ending_mermaid", "ending_used"],
   },
   FISHING: {
@@ -270,14 +270,14 @@ export const GAME_CONSTANTS = {
     QUEST3_GASOLINE_COST: 5,
     QUEST3_FOOD_COST: 5,
     QUEST3_DRINKS_COST: 5,
-    QUEST3_REWARD_DEAGLE: "沙漠之鹰",
+    QUEST3_REWARD_DEAGLE: "sung_sa_mac",
     QUEST3_REWARD_AMMO: ".50 AE",
     QUEST3_REWARD_AMMO_COUNT: 30,
     MERMAID_LIGHTNING_AFFINITY: 2,
     MERMAID_THUNDER_AFFINITY: 5,
     MERMAID_MAX_AFFINITY: 150,
-    MERMAID_REWARD_WEAPON: "海歌渔叉",
-    BOSS_SEA_MONSTER: "巨型海尸",
+    MERMAID_REWARD_WEAPON: "dinh_ba_hai_ca",
+    BOSS_SEA_MONSTER: "Hải Zombie Khổng Lồ",
   },
   NURSE_ZOMBIE: {
     BRING_HOME_AFFINITY: 150,
@@ -344,20 +344,20 @@ export const GAME_CONSTANTS = {
   TURNS_PER_DAY: 8,
   MAP: {
     DANGER_MESSAGES: {
-      "★轻松": "Nơi này trông rất an toàn, thích hợp lục soát vật tư.",
-      "★★低危": "Thỉnh thoảng có zombie xuất hiện, giữ cảnh giác.",
-      "★★★中危": "Zombie hoạt động thường xuyên, cần cẩn thận.",
-      "★★★★高危": "Rất nhiều zombie tụ tập, cực kỳ nguy hiểm!",
-      "★★★★★绝境": "Nơi này đúng là địa ngục, không có chuẩn bị đầy đủ thì đừng đến!",
-      "★★★★★★炼狱": "Vùng cấm tử vong, chỉ có kẻ mạnh nhất mới có thể sống sót rời đi.",
+      "★Nhẹ nhàng": "Nơi này trông rất an toàn, thích hợp lục soát vật tư.",
+      "★★Nguy hiểm thấp": "Thỉnh thoảng có zombie xuất hiện, giữ cảnh giác.",
+      "★★★Trung bình": "Zombie hoạt động thường xuyên, cần cẩn thận.",
+      "★★★★Nguy hiểm cao": "Rất nhiều zombie tụ tập, cực kỳ nguy hiểm!",
+      "★★★★★Tuyệt cảnh": "Nơi này đúng là địa ngục, không có chuẩn bị đầy đủ thì đừng đến!",
+      "★★★★★★Luyện ngục": "Vùng cấm tử vong, chỉ có kẻ mạnh nhất mới có thể sống sót rời đi.",
     },
   },
 };
 
 export const DEFAULT_ITEM_IDS = {
-  melee: "拳头",
-  food: "压缩饼干",
-  drink: "矿泉水",
+  melee: "dam",
+  food: "banh_quy_nen",
+  drink: "nuoc_khoang",
   seed: "seed",
-  serum: "抗感染血清",
+  serum: "huyet_thanh",
 };

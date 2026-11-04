@@ -1,7 +1,7 @@
 export const LEADER_DIALOGUES = [
-  "\"曙光阵地虽然简陋，但至少能让大家活下去。\"",
-  "\"末世之中，守望相助才是正道。那些城堡贵族只顾自己享乐。\"",
-  "\"你干得不错，继续保持。\"",
-  "\"唉，物资越来越紧张了，但我们会挺过去的。\"",
-  "\"别偷懒，去干活！阵地不养闲人！\"",
+  "\"Trận địa Bình Minh tuy sơ sài, nhưng ít ra cũng giúp mọi người sống sót.\"",
+  "\"Trong mạt thế, tương ái tương trợ mới là chính đạo. Gã quý tộc lâu đài chỉ biết tự mình hưởng lạc.\"",
+  "\"Cậu làm không tệ, tiếp tục duy trì nhé.\"",
+  "\"Trời ơi, vật tư ngày càng căng thẳng, nhưng chúng ta sẽ vượt qua thôi.\"",
+  "\"Đừng lười biếng, đi làm việc! Trận địa không nuôi kẻ nhàn rỗi!\"",
 ];

@@ -16,3 +16,11 @@ export const FISH = [
   { id: "wreck_ghost_shark", name: "Cá m Ong hutdown", type: "fish", rarity: "epic" },
   { id: "abyss_core_fish", name: "Cá lõi vực thẳm", type: "fish", rarity: "legendary" },
 ];
+
+export const FISH_RARITY_WEIGHTS = {
+  common: 40,
+  uncommon: 25,
+  rare: 20,
+  epic: 10,
+  legendary: 5,
+};

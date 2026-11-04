@@ -10,11 +10,11 @@
    - Xu Hoàng Gia: royalcoin_xxx (ví dụ royalcoin_10)
    - Xăng: gasoline_xxx (ví dụ gasoline_5)
    - Dân dược: ammo_xxx (ví dụ ammo_9mm, ammo_magnum)
-   - Vũ khí cận chiến: melee_xxx (ví dụ melee_平底锅, melee_武士刀)
+   - Vũ khí cận chiến: melee_xxx (ví dụ chao_ap, dao_samurai)
    - Vũ khí tầm xa: ranged_xxx (ví dụ ranged_G17, ranged_AWM)
-   - Balo: backpack_xxx (ví dụ backpack_战术背包, backpack_超大旅行背包)
+   - Balo: backpack_xxx (ví dụ balo_quan_doi, balo_du_lich_lon)
    - Hạt giống: seed_xxx (ví dụ seed_seed_luobo, seed_seed_gouqi)
-   - Trồng trọt: crop_xxx (ví dụ crop_牛皮菜, crop_胡萝卜)
+   - Trồng trọt: crop_xxx (ví dụ crop_niupicai, crop_luobo)
    - Cá: fish_xxx (ví dụ fish_grey_mullet, fish_abyss_core_fish)
    - Bữa ăn hải sản: seafood_xxx (ví dụ seafood_bad_seafood_meal, seafood_top_seafood_meal)
    - Đồ uống quán bar: bar_xxx (ví dụ bar_rainbow_beer, bar_king_special)
@@ -25,7 +25,7 @@ import { FOODS, DRINKS, MEDICINES, FRUITS, CIGARETTES, AMMO, MELEE_WEAPONS, RANG
 import { BAR_MENU } from './data/island/bar-menu.js';
 
 const AMMO_ALIASES = {
-  'arrow': '箭矢',
+  'arrow': 'mui_ten',
   '9mm': '9×19mm',
   'magnum': '.357 Magnum',
   '45acp': '.45 ACP',
@@ -37,7 +37,7 @@ const AMMO_ALIASES = {
   '76254': '7.62×54mmR',
   '792': '7.92×57mm',
   '300': '.300 Winchester Magnum',
-  'shotgun': '12号霰弹'
+  'shotgun': 'dan_12'
 };
 
 const BUILDING_ALIASES = {};
@@ -67,7 +67,7 @@ function getFruitByName(name) {
 }
 
 function getCigaretteByName(name) {
-  return name.includes("香烟") ? { id: "香烟", name: "Thuốc lá", type: "cigarette" } : undefined;
+  return name.includes("thuoc_la") ? { id: "thuoc_la", name: "Thuốc lá", type: "cigarette" } : undefined;
 }
 
 function getAmmoByName(name) {

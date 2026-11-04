@@ -50,7 +50,7 @@ export function handleMechanicTrade() {
   const state = getState();
   if (state.lastMechanicTradeDay >= state.day) {
     const daysLeft = Math.max(0, state.lastMechanicTradeDay + 1 - state.day);
-    setStory(`Hôm nay đã giao dịch với Vương Thiết Trụ rồi. Còn lại ${daysLeft} ngày mới có thể giao dịch lại。`);
+    setStory(`Hôm nay đã giao dịch với Vương Thiết Trụ rồi. Còn lại ${daysLeft} ngày mới có thể giao dịch lại.`);
     showMechanicMenu();
     return;
   }
@@ -114,7 +114,7 @@ export function handleMechanicGasTrade() {
   const state = getState();
   if (state.lastMechanicGasDay >= state.day) {
     const daysLeft = Math.max(0, state.lastMechanicGasDay + 1 - state.day);
-    setStory(`Hôm nay đã đổi xăng rồi. Còn lại ${daysLeft} ngày mới có thể đổi lại。`);
+    setStory(`Hôm nay đã đổi xăng rồi. Còn lại ${daysLeft} ngày mới có thể đổi lại.`);
     showMechanicMenu();
     return;
   }

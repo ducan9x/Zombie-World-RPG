@@ -16,7 +16,7 @@ import { handleNpcAction } from './index.js';
 export function handleLiliTrade(input) {
   const state = getState();
   if (state.lastLiliTradeDay >= state.day) {
-    setStory("莉莉丝摆了摆手：\"今天的交易已经完成了，明天再来吧。\"");
+    setStory("Lilith vẫy tay: \"Giao dịch hôm nay đã hoàn thành, mai quay lại nhé.\"");
     handleNpcAction("chat");
     return;
   }
@@ -45,9 +45,9 @@ export function handleLiliTrade(input) {
     if (added) rewards.push(med.name);
   }
   if (rewards.length > 0) {
-    setStory(`莉莉丝接过你的物品，熟练地调配了一番。她给了你：${rewards.join("、")}。`);
+    setStory(`Lilith nhận đồ của bạn, khéo léo pha chế cẩn thận rồi đưa cho bạn:${rewards.join(", ")}.`);
   } else {
-    setStory("莉莉丝接过你的物品，但背包已满，无法接收更多药品。");
+    setStory("Lilith nhận đồ của bạn nhưng balo đã đầy, không thể tiếp nhận thêm thuốc.");
   }
   state.lastLiliTradeDay = state.day;
   advanceTime(1);

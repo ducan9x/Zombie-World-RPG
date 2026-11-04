@@ -24,17 +24,17 @@ export function handleYacht() {
   const hasId = hasCastleIdentity(state);
   const hasPass = state.other.some(i => i.id === SPECIAL_ITEMS.castle_pass.id);
   if (!hasId && !hasPass) {
-    setStory("这是一个带有末日城堡标识的游艇，还是不要乱动吧。（需要城堡身份牌或城堡通行证）");
+    setStory("Đây là chiếc du thuyền mang biểu tượng Lâu Đài Tận Thế, đừng na ná nghịch với nó. (Cần thẻ danh tính lâu đài hoặc thẻ thông hành)");
     showExploreOptionsState();
     return;
   }
   if (state.gasoline < 1) {
-    setStory("它需要1个汽油才能开动。（可以通过王铁柱用香烟兑换汽油）");
+    setStory("Nó cần 1 bình xăng mới nổ máy được. (Có thể đổi xăng bằng thuốc lá qua Vương Thiết Trụ)");
     showExploreOptionsState();
     return;
   }
   removeGasoline(1);
-  setStory("你消耗了1个汽油，按照航线前往岛屿。");
+  setStory("Bạn tiêu hao 1 bình xăng, theo tuyến đường để đến hòn đảo.");
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -46,13 +46,13 @@ export function handleYacht() {
 export function handleViewRiver() {
   const state = getState();
   if (state.lastViewRiverDay >= state.day) {
-    setStory("今天已经欣赏过江景了，明天再来吧。");
+    setStory("Hôm nay đã ngắm cảnh ven sông rồi, mai quay lại nhé.");
     showExploreOptionsState();
     return;
   }
   state.lastViewRiverDay = state.day;
   state.crash = Math.max(0, state.crash - GAME_CONSTANTS.MAP_EVENTS.RIVER_FATIGUE_REDUCTION);
-  setStory("秋水共长天一色～你的心情更好了，疲惫度降低了。");
+  setStory("Biển xanh nối liền trời một sắc ~ Tâm trạng tốt hơn, độ mệt mỏi giảm.");
   advanceTime(1);
   updateStatusEffects();
   checkDeath();

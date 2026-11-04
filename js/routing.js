@@ -35,7 +35,7 @@ export function showHomeOptions() {
     { text: "Uống", action: "drink" },
     { text: "Y tế", action: "medicine" },
     { text: "Trang bị", action: "equip" },
-    { text: state.weather === "酸雨" ? "Ra ngoài (mưa axit không thể ra)" : "Ra ngoài", action: "goOut", disabled: state.weather === "酸雨" },
+    { text: state.weather === "mua_axit" ? "Ra ngoài (mưa axit không thể ra)" : "Ra ngoài", action: "goOut", disabled: state.weather === "mua_axit" },
     { text: "Vứt bỏ", action: "discard" },
     { text: "Lưu", action: "save_game" },
     { text: "Thu hoạch đồng đội", action: "partner_harvest" },
@@ -52,12 +52,12 @@ export function showHomeOptions() {
 export function showExploreOptionsState() {
   if (getState().gameOver) return;
   const state = getState();
-  if (state.currentMap && state.currentMap.id === "曙光阵地") {
+  if (state.currentMap && state.currentMap.id === "tran_dia_binh_minh") {
     showOutpostOptions();
     return;
   }
-  if (state.currentMap && state.currentMap.id === "末日城堡") {
-    if (state.currentSubMap === "城堡内部") {
+  if (state.currentMap && state.currentMap.id === "lau_dai_tan_the") {
+    if (state.currentSubMap === "noi_that_lau_dai") {
       refreshCastleInterior();
       return;
     }
@@ -82,7 +82,7 @@ export function showExploreOptionsState() {
       }
     }
     // Nhiệm vụ Lão Mã bảy: tùy chọn ẩn đường hầm tàu điện ngầm
-    if (state.currentMap.id === "地下地铁隧道" && state.oldMaStep >= 7) {
+    if (state.currentMap.id === "ham_tau_dien_ngam" && state.oldMaStep >= 7) {
       opts.push({ text: "Chờ Lão Mã", action: "wait_old_ma" });
     }
   }

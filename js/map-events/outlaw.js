@@ -142,7 +142,7 @@ export function handleOutlawFoodChat() {
 export function handleOutlawFoodAccept() {
   const state = getState();
   if (!state.maSanQuest1Done) {
-    const beerCount = state.drinks.filter(d => d.id === "动力啤酒").reduce((sum, d) => sum + (d.count || 1), 0);
+    const beerCount = state.drinks.filter(d => d.id === "bia_nang_luong").reduce((sum, d) => sum + (d.count || 1), 0);
     if (beerCount < 3) {
       setStory(`Bạn cần 3 chai bia động lực, nhưng chỉ có ${beerCount} chai.`);
       showOutlawMenu();
@@ -150,7 +150,7 @@ export function handleOutlawFoodAccept() {
     }
     let remaining = 3;
     for (let i = state.drinks.length - 1; i >= 0 && remaining > 0; i--) {
-      if (state.drinks[i].id === "动力啤酒") {
+      if (state.drinks[i].id === "bia_nang_luong") {
         const available = state.drinks[i].count || 1;
         if (available <= remaining) {
           state.drinks.splice(i, 1);
