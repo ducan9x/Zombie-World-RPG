@@ -20,7 +20,7 @@ export function showCastleInterior() {
   state.currentSubMap = "城堡内部";
   setPhase("castle_interior");
   const acidBlock = state.weather === "酸雨";
-  setStory("穿过厚重的城堡城门，你踏入了城堡内部，开阔宏伟的主大厅灯火通明，摇曳的暖光将每一处雕梁画栋尽数照亮，精致的大理石地面光洁如镜，穹顶悬挂着巨型水晶吊灯，奢华气派丝毫不减末日前的鼎盛，衣着华贵的贵族与身居高位的高官们齐聚于此，身着剪裁考究的华丽礼服，佩戴着金银珠宝与象征权位的徽章，推杯换盏、谈笑风生，精致的酒水与餐点摆满长桌，欢声笑语在大厅内回荡，奢靡慵懒的氛围扑面而来，仿佛外面肆虐的丧尸、绝望的废土世界，从未降临过这片被高墙隔绝的天地。");
+  setStory("Xuyên qua cánh cổng thành dày nặng, bạn bước vào bên trong thành, đại sảnh chính rộng lớn hùng vĩ sáng trưng ánh đèn, ánh sáng ấm áp lung linh chiếu rọi mọi chi tiết chạm trổ, sàn đá marble bóng loáng như gương, vòm trần treo đèn chùm pha lê khổng lồ, khí phái xa hoa không hề kém thời kỳ đỉnh thịnh trước ngày tận thế, quý tộc và quan chức cấp cao ăn mặc hoa lệ tụ tập tại đây, mặc lễ phục cắt may tinh xảo, đeo vàng bạc châu báu và huy hiệu biểu tượng quyền lực, nâng chén cười nói, rượu và món ăn tinh xảo bày đầy bàn dài, tiếng cười nói vang vọng trong đại sảnh, bầu không khí xa hoa lười biếng tràn ngập, như thể lũ xác sống hoành hành bên ngoài, thế giới hoang tàn tuyệt vọng, chưa từng giáng xuống mảnh đất được tường cao che chở này.");
   refreshCastleInterior();
 }
 
@@ -29,39 +29,39 @@ export function refreshCastleInterior() {
   setPhase("castle_interior");
   const acidBlock = state.weather === "酸雨";
   const opts = [
-    { text: "探索", action: "castle_interior_explore" },
-    { text: "进食", action: "eat" },
-    { text: "饮水", action: "drink" },
-    { text: "医疗", action: "medicine" },
-    { text: "装备", action: "equip" },
-    { text: "丢弃", action: "discard" },
-    { text: acidBlock ? "离开（酸雨无法离开）" : "离开", action: "leave_castle_interior", disabled: acidBlock },
-    { text: "见城堡国王", action: "castle_king" },
-    { text: "见城堡皇后", action: "castle_queen" },
-    { text: "参加贵族宴会", action: "castle_banquet" },
-    { text: "参加贵族舞会", action: "castle_ball" },
-    { text: "在贵族客房休息", action: "castle_room" },
+    { text: "Khám phá", action: "castle_interior_explore" },
+    { text: "Ăn uống", action: "eat" },
+    { text: "Uống nước", action: "drink" },
+    { text: "Y tế", action: "medicine" },
+    { text: "Trang bị", action: "equip" },
+    { text: "Vứt bỏ", action: "discard" },
+    { text: acidBlock ? "Rời đi (Mưa axit không thể rời đi)" : "Rời đi", action: "leave_castle_interior", disabled: acidBlock },
+    { text: "Gặp quốc vương thành", action: "castle_king" },
+    { text: "Gặp hoàng hậu thành", action: "castle_queen" },
+    { text: "Tham dự yến tiệc quý tộc", action: "castle_banquet" },
+    { text: "Tham dự vũ hội quý tộc", action: "castle_ball" },
+    { text: "Nghỉ tại phòng quý tộc", action: "castle_room" },
   ];
   const rank = getCastleRank(state);
-  const rankName = getCastleRankName(state) || "平民";
+  const rankName = getCastleRankName(state) || "Bình dân";
   if (rank >= 2) {
-    opts.push({ text: "领取爵位俸禄", action: "castle_salary" });
+    opts.push({ text: "Nhận lương bổng tước vị", action: "castle_salary" });
   }
-  opts.push({ text: "进行感染治疗", action: "castle_treatment" });
-  opts.push({ text: "爵位补办", action: "castle_reissue" });
-  const meetingCooldown = state.lastMeetingDay === state.day ? "（今日已参加）" : "";
-  opts.push({ text: `参加城堡会议${meetingCooldown}`, action: "castle_meeting", disabled: state.lastMeetingDay === state.day });
-  const gardenCooldown = state.lastGardenDay >= state.day - (GAME_CONSTANTS.CASTLE.GARDEN_COOLDOWN_DAYS - 1) ? `（${GAME_CONSTANTS.CASTLE.GARDEN_COOLDOWN_DAYS - (state.day - state.lastGardenDay)}天后可再来）` : "";
+  opts.push({ text: "Điều trị nhiễm trùng", action: "castle_treatment" });
+  opts.push({ text: "Cấp lại tước vị", action: "castle_reissue" });
+  const meetingCooldown = state.lastMeetingDay === state.day ? "（Hôm nay đã tham dự）" : "";
+  opts.push({ text: `Tham dự hội nghị thành${meetingCooldown}`, action: "castle_meeting", disabled: state.lastMeetingDay === state.day });
+  const gardenCooldown = state.lastGardenDay >= state.day - (GAME_CONSTANTS.CASTLE.GARDEN_COOLDOWN_DAYS - 1) ? `（${GAME_CONSTANTS.CASTLE.GARDEN_COOLDOWN_DAYS - (state.day - state.lastGardenDay)} ngày nữa mới có thể quay lại）` : "";
   const gardenDisabled = state.day - state.lastGardenDay < GAME_CONSTANTS.CASTLE.GARDEN_COOLDOWN_DAYS;
-  opts.push({ text: `在后花园闲逛${gardenCooldown}`, action: "castle_garden", disabled: gardenDisabled });
-  opts.push({ text: "地下区域", action: "castle_underground" });
-  opts.push({ text: "王国任务", action: "castle_king_quest" });
+  opts.push({ text: `Dạo vườn sau${gardenCooldown}`, action: "castle_garden", disabled: gardenDisabled });
+  opts.push({ text: "Khu vực ngầm", action: "castle_underground" });
+  opts.push({ text: "Nhiệm vụ vương quốc", action: "castle_king_quest" });
 
-  // 老马任务链：刺杀国王
+  // Chuỗi nhiệm vụ Lão Mã: ám sát quốc vương
   if (state.oldMaStep >= 4 && !state.kingKilled) {
     const hasId = hasCastleIdentity(state);
     if (!hasId) {
-      opts.push({ text: "🔪 刺杀国王", action: "assassinate_king" });
+      opts.push({ text: "🔪 Ám sát quốc vương", action: "assassinate_king" });
     }
   }
 
@@ -73,7 +73,7 @@ export function handleCastleInteriorExplore() {
   const hasId = hasCastleIdentity(state);
 
   if (!hasId) {
-    setStory("你正想搜刮点东西，巡逻的守卫注意到了你！你被赶了出去！");
+    setStory("Bạn vừa định lục soát thứ gì đó, lính gác tuần tra đã chú ý đến bạn! Bạn bị đuổi ra ngoài!");
     advanceTime(1);
     updateStatusEffects();
     checkDeath();
@@ -85,7 +85,7 @@ export function handleCastleInteriorExplore() {
   }
 
   if (state.lastCastleExploreDay >= state.day) {
-    setStory("今天已经探索过了，明天再来吧。");
+    setStory("Hôm nay đã khám phá rồi, mai hãy quay lại.");
     refreshCastleInterior();
     return;
   }
@@ -96,9 +96,9 @@ export function handleCastleInteriorExplore() {
   const item = pool[Math.floor(Math.random() * pool.length)];
   const added = addItem({ ...item });
   if (added) {
-    setStory(`你在城堡的角落发现了一些别人遗落的东西：${getItemDisplayName(item)}。`);
+    setStory(`Bạn phát hiện ở góc thành vài thứ người khác bỏ lại: ${getItemDisplayName(item)}.`);
   } else {
-    setStory("你在城堡里转了转，但背包已经满了，什么也拿不了。");
+    setStory("Bạn đi loanh quanh trong thành, nhưng balo đã đầy, không thể mang thêm gì.");
   }
   advanceTime(1);
   updateStatusEffects();
@@ -119,7 +119,7 @@ export function handleCastleInteriorAction(input) {
   if (option.action === "castle_interior_explore") { handleCastleInteriorExplore(); return; }
   if (option.action === "leave_castle_interior") {
     if (getState().weather === "酸雨") {
-      setStory("外面下着腐蚀性的酸雨，你根本没法出去。还是找个地方待着吧。");
+      setStory("Bên ngoài đang mưa axit ăn mòn, bạn không thể ra ngoài. Tốt nhất tìm chỗ nào đó trú đã.");
       return;
     }
     handleLeaveCastleInterior(); return;
@@ -160,8 +160,8 @@ export function handleCastleInteriorAction(input) {
   if (option.action === "treat_10") {
     const rank = getCastleRank(getState());
     if (rank < GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[0]) {
-      const rn = getCastleRankName(getState()) || "平民";
-      setStory(`这位${rn}大人，不好意思，医疗资源有限，我们只给每位伯爵以上的大人安排见习医生。`);
+      const rn = getCastleRankName(getState()) || "Bình dân";
+      setStory(`Vị ${rn} đại nhân, xin lỗi, nguồn y tế có hạn, chúng tôi chỉ sắp xếp bác sĩ thực tập cho các vị Bá tước trở lên.`);
       return;
     }
     handleTreatConfirm(GAME_CONSTANTS.CASTLE.TREATMENT_AMOUNTS[0]); return;
@@ -169,8 +169,8 @@ export function handleCastleInteriorAction(input) {
   if (option.action === "treat_30") {
     const rank = getCastleRank(getState());
     if (rank < GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[1]) {
-      const rn = getCastleRankName(getState()) || "平民";
-      setStory(`这位${rn}大人，不好意思，医疗资源有限，我们只给每位侯爵以上的大人安排正式医生。`);
+      const rn = getCastleRankName(getState()) || "Bình dân";
+      setStory(`Vị ${rn} đại nhân, xin lỗi, nguồn y tế có hạn, chúng tôi chỉ sắp xếp bác sĩ chính thức cho các vị Hầu tước trở lên.`);
       return;
     }
     handleTreatConfirm(GAME_CONSTANTS.CASTLE.TREATMENT_AMOUNTS[1]); return;
@@ -178,8 +178,8 @@ export function handleCastleInteriorAction(input) {
   if (option.action === "treat_50") {
     const rank = getCastleRank(getState());
     if (rank < GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[2]) {
-      const rn = getCastleRankName(getState()) || "平民";
-      setStory(`这位${rn}大人，不好意思，医疗资源有限，我们只给每位公爵以上的大人安排主治医生。`);
+      const rn = getCastleRankName(getState()) || "Bình dân";
+      setStory(`Vị ${rn} đại nhân, xin lỗi, nguồn y tế có hạn, chúng tôi chỉ sắp xếp bác sĩ trưởng khoa cho các vị Công tước trở lên.`);
       return;
     }
     handleTreatConfirm(GAME_CONSTANTS.CASTLE.TREATMENT_AMOUNTS[2]); return;
@@ -187,8 +187,8 @@ export function handleCastleInteriorAction(input) {
   if (option.action === "treat_80") {
     const rank = getCastleRank(getState());
     if (rank < GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[3]) {
-      const rn = getCastleRankName(getState()) || "平民";
-      setStory(`这位${rn}大人，不好意思，医疗资源有限，我们只给每位储君以上的大人安排宫廷医生。`);
+      const rn = getCastleRankName(getState()) || "Bình dân";
+      setStory(`Vị ${rn} đại nhân, xin lỗi, nguồn y tế có hạn, chúng tôi chỉ sắp xếp bác sĩ hoàng cung cho các vị Trữ quân trở lên.`);
       return;
     }
     handleTreatConfirm(GAME_CONSTANTS.CASTLE.TREATMENT_AMOUNTS[3]); return;
@@ -203,12 +203,12 @@ export function handleCastleInteriorAction(input) {
 export function handleLeaveCastleInterior() {
   const state = getState();
   state.currentSubMap = null;
-  setStory("你离开了城堡。");
+  setStory("Bạn rời khỏi thành.");
   showExploreOptionsState();
 }
 
 export function handleLeaveCastle() {
-  setStory("你离开了末日城堡，回到了野外。");
+  setStory("Bạn rời khỏi Thành tận thế, quay về hoang dã.");
   handleGoOut();
 }
 
@@ -217,15 +217,15 @@ export function handleCastleUnderground() {
   if (!state.undergroundKeyObtained) {
     const hasKey = state.other.some(i => i.id === "underground_key");
     if (!hasKey) {
-      setStory("厚重的铁门紧锁着，你没有钥匙，无法进入地下区域。");
+      setStory("Cánh cổng sắt dày nặng khóa chặt, bạn không có chìa khóa, không thể vào khu vực ngầm.");
       refreshCastleInterior();
       return;
     }
   }
   if (state.generatorObtained) {
-    setStory(UNDERGROUND_STORY + "\n\n部分核电装置已经被拆除了，剩下的还在安静地运转。再拆的话，城堡恐怕就要停电了。");
+    setStory(UNDERGROUND_STORY + "\n\nMột phần thiết bị hạt nhân đã bị tháo dỡ, phần còn lại vẫn đang vận hành. Nếu tháo thêm nữa, thành e rằng sẽ mất điện.");
     const opts = [
-      { text: "返回大厅", action: "castle_back" },
+      { text: "Quay về đại sảnh", action: "castle_back" },
     ];
     setOptions(opts);
     setPhase("castle_interior");
@@ -233,8 +233,8 @@ export function handleCastleUnderground() {
   }
   setStory(UNDERGROUND_STORY);
   const opts = [
-    { text: "拆下设备", action: "underground_dismantle" },
-    { text: "离开", action: "underground_leave" },
+    { text: "Tháo thiết bị", action: "underground_dismantle" },
+    { text: "Rời đi", action: "underground_leave" },
   ];
   setOptions(opts);
   setPhase("castle_interior");
@@ -243,24 +243,24 @@ export function handleCastleUnderground() {
 export function handleDismantleEquipment() {
   const state = getState();
   if (state.generatorObtained) {
-    setStory("再拆城堡就停电了！");
+    setStory("Tháo thêm nữa thì thành mất điện!");
     refreshCastleInterior();
     return;
   }
   const hasWrench = state.meleeWeapon && state.meleeWeapon.id === GAME_CONSTANTS.ROCKET.DISMANTLE_WEAPON_ID;
   const hasDimBag = state.backpack && state.backpack.id === GAME_CONSTANTS.ROCKET.DISMANTLE_BACKPACK_ID;
   if (!hasWrench && !hasDimBag) {
-    setStory("你既没有扳手，也没有合适的背包，什么都做不了。");
+    setStory("Bạn không có cờ lê, cũng không có balo phù hợp, chẳng làm được gì.");
     refreshCastleInterior();
     return;
   }
   if (!hasWrench) {
-    setStory("你没有扳手，无法卸下这些核电装置的固定螺栓。");
+    setStory("Bạn không có cờ lê, không thể vặn các bu lông cố định thiết bị hạt nhân này.");
     refreshCastleInterior();
     return;
   }
   if (!hasDimBag) {
-    setStory("你没有合适的背包装得下它，看来需要传说中的次元背包了。");
+    setStory("Bạn không có balo phù hợp để chứa nó, xem ra cần balo chiều không gian trong truyền thuyết.");
     refreshCastleInterior();
     return;
   }
@@ -269,9 +269,9 @@ export function handleDismantleEquipment() {
     const added = addItem({ ...generator });
     if (added) {
       state.generatorObtained = true;
-      setStory("你用大扳手小心翼翼地卸下固定螺栓，将小核能发电机从基座上拆了下来。次元收纳背包的空间刚好能装下这个大家伙。你感到背包微微发热——发电机还在运转。");
+      setStory("Bạn dùng cờ lê lớn thận trọng vặn lỏng các bu lông cố định, tháo máy phát điện hạt nhân nhỏ khỏi bệ. Không gian của balo chiều không gian vừa đủ chứa vật to lớn này. Bạn cảm thấy balo hơi nóng lên——máy phát vẫn đang vận hành.");
     } else {
-      setStory("你试图拆下设备，但背包空间不足，无法携带！");
+      setStory("Bạn cố tháo thiết bị, nhưng balo không đủ chỗ, không thể mang theo!");
     }
   }
   advanceTime(1);
@@ -280,12 +280,12 @@ export function handleDismantleEquipment() {
   if (!state.gameOver) refreshCastleInterior();
 }
 
-// ========== 老马任务：刺杀国王 ==========
+// ========== Chuỗi nhiệm vụ Lão Mã: ám sát quốc vương ==========
 
 export function handleAssassinateKing() {
   const state = getState();
   if (state.kingKilled) {
-    setStory("国王已经不在了，王座上空空如也。");
+    setStory("Quốc vương đã không còn, ngai vàng trống không.");
     refreshCastleInterior();
     return;
   }
@@ -295,15 +295,15 @@ export function handleAssassinateKing() {
   }
   const hasId = hasCastleIdentity(state);
   if (hasId) {
-    setStory("你身上还带着城堡的身份，守卫们对你虎视眈眈。你无法在这里动手。");
+    setStory("Bạn vẫn mang theo thân phận của thành, lính gác đang dòm ngó bạn. Bạn không thể động thủ ở đây.");
     refreshCastleInterior();
     return;
   }
   setPhase("castle_interior");
-  setStory("你装作若无其事地靠近王座。国王正倚靠在镶金的扶手上打盹，华丽的王袍上绣着末世前就已绝迹的珍禽异兽。\n\n大厅里的贵族们还在远处觥筹交错，没有人注意到你。你的手摸向腰间的武器——这是最好的时机。\n\n动手吗？");
+  setStory("Bạn giả vờ thản nhiên tiến đến ngai vàng. Quốc vương đang tựa vào tay vịn dát vàng chợp mắt, áo choàng hoa lệ thêu chim thú quý hiếm đã tuyệt tích từ trước ngày tận thế.\n\nCác quý tộc trong đại sảnh vẫn còn nâng chén nói cười ở xa, không ai chú ý đến bạn. Tay bạn sờ đến vũ khí bên hông——đây là thời cơ tốt nhất.\n\nĐộng thủ không?");
   setOptions([
-    { text: "动手！", action: "assassinate_king_fight" },
-    { text: "再等等……", action: "castle_back" },
+    { text: "Động thủ!", action: "assassinate_king_fight" },
+    { text: "Đợi thêm……", action: "castle_back" },
   ]);
 }
 
@@ -320,16 +320,16 @@ export function handleAssassinateKingFight() {
   state._pendingNpcCallback = "assassinate_king_result";
   setPhase("pre_combat_npc");
   const meleeName = state.meleeWeapon.name;
-  const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "无";
-  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ 你的身体极度疲惫，无法正常战斗！建议先休息。" : "";
-  setStory(`你拔出武器，冲向王座！国王猛然惊醒，眼中闪过一丝惊恐，随即化作了冷酷的怒火。他拔出腰间的长剑，国王近卫也从暗处冲了出来——但你的目标只有国王一人！\n\n⚔️ ${king.name}\n❤️ HP:${king.hp} | ⚡ 伤害:${king.damage}\n\n【近战】${meleeName}\n【远程】${rangedName}${crashWarning}`);
+  const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "Không";
+  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Cơ thể bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường! Nên nghỉ ngơi trước." : "";
+  setStory(`Bạn rút vũ khí, xông về phía ngai vàng! Quốc vương giật mình tỉnh giấc, trong mắt thoáng qua một tia sợ hãi, rồi hóa thành ngọn lửa giận lạnh lùng. Hắn rút thanh kiếm bên hông, cận vệ quốc vương cũng xông ra từ chỗ tối——nhưng mục tiêu của bạn chỉ có quốc vương một người!\n\n⚔️ ${king.name}\n❤️ HP:${king.hp} | ⚡ Sát thương:${king.damage}\n\n【Cận chiến】${meleeName}\n【Tầm xa】${rangedName}${crashWarning}`);
   const opts = [
-    { text: "近战作战", action: "combat_npc_melee" }
+    { text: "Chiến đấu cận chiến", action: "combat_npc_melee" }
   ];
   if (state.rangedWeapon && state.ammo.some(a => a.id === state.rangedWeapon.ammoType && a.count > 0)) {
-    opts.push({ text: "远程作战", action: "combat_npc_ranged" });
+    opts.push({ text: "Chiến đấu tầm xa", action: "combat_npc_ranged" });
   } else {
-    opts.push({ text: "远程作战（不可用：无弹药）", action: "combat_npc_ranged", disabled: true });
+    opts.push({ text: "Chiến đấu tầm xa (Không khả dụng: Hết đạn)", action: "combat_npc_ranged", disabled: true });
   }
   opts.push({ text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_npc_flee" });
   setOptions(opts);

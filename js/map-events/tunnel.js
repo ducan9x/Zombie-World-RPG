@@ -23,7 +23,7 @@ import { triggerEnding } from '../game/endings.js';
 export function handleExploreTunnel() {
   const state = getState();
   if (state.lastTunnelDay >= state.day) {
-    setStory("今天已经探索过隧道了，明天再来吧。");
+    setStory("Hôm nay đã khám phá đường hầm rồi, ngày mai hãy quay lại.");
     showExploreOptionsState();
     return;
   }
@@ -34,17 +34,17 @@ export function handleExploreTunnel() {
     const ammo = addItem({ id: ammo9mm.id, name: ammo9mm.name, type: "ammo", count: tunnelDrop.ammoCount });
     const biscuit = FOODS.find(f => f.id === tunnelDrop.foodId);
     const food = addItem({ ...biscuit });
-    setStory("你冒着风险深入隧道，在断裂的铁轨旁竟然发现了一个被遗落的物资箱！里面有一些弹药和食物。" + (ammo && food ? "" : "\n不过你的背包空间不足，部分物品无法携带。"));
+    setStory("Bạn mạo hiểm đi sâu vào đường hầm, bên cạnh đường ray bị gãy lại phát hiện một thùng vật tư bị bỏ lại! Bên trong có một ít đạn dược và thức ăn." + (ammo && food ? "" : "\nTuy nhiên balo không đủ chỗ, một phần vật phẩm không thể mang theo."));
   } else if (roll < GAME_CONSTANTS.MAP_EVENTS.TUNNEL_COLLAPSE_RATE) {
     state.health = Math.max(0, state.health - GAME_CONSTANTS.MAP_EVENTS.TUNNEL_COLLAPSE_DAMAGE);
-    setStory(`隧道深处传来一声巨响，顶部的水泥板一块块砸了下来！你被塌方的石块砸中，生命值 -${GAME_CONSTANTS.MAP_EVENTS.TUNNEL_COLLAPSE_DAMAGE}。`);
+    setStory(`Sâu trong đường hầm vang lên tiếng nổ lớn, tấm xi măng trên đỉnh rơi xuống từng khối! Bạn bị đá sập đè trúng, sinh mệnh -${GAME_CONSTANTS.MAP_EVENTS.TUNNEL_COLLAPSE_DAMAGE}.`);
   } else if (roll < GAME_CONSTANTS.MAP_EVENTS.TUNNEL_GAS_RATE) {
     state.health = Math.max(0, state.health - GAME_CONSTANTS.MAP_EVENTS.TUNNEL_GAS_DAMAGE);
     state.infection = Math.min(100, state.infection + GAME_CONSTANTS.MAP_EVENTS.TUNNEL_GAS_INFECTION);
-    setStory(`你深入隧道，空气中弥漫着刺鼻的化学气味。有毒气体泄漏了！你剧烈咳嗽，生命值 -${GAME_CONSTANTS.MAP_EVENTS.TUNNEL_GAS_DAMAGE}，感染值 +${GAME_CONSTANTS.MAP_EVENTS.TUNNEL_GAS_INFECTION}。`);
+    setStory(`Bạn đi sâu vào đường hầm, trong không khí tràn ngập mùi hóa chất xộc mũi. Khí độc đã rò rỉ! Bạn ho dữ dội, sinh mệnh -${GAME_CONSTANTS.MAP_EVENTS.TUNNEL_GAS_DAMAGE}, lây nhiễm +${GAME_CONSTANTS.MAP_EVENTS.TUNNEL_GAS_INFECTION}.`);
   } else {
     state.health = Math.max(0, state.health - GAME_CONSTANTS.MAP_EVENTS.TUNNEL_ZOMBIE_SWARM_DAMAGE);
-    setStory(`隧道中传来密密麻麻的脚步声——一群丧尸突然从暗处冲了出来！你被围攻，生命值 -${GAME_CONSTANTS.MAP_EVENTS.TUNNEL_ZOMBIE_SWARM_DAMAGE}。`);
+    setStory(`Trong đường hầm vang lên tiếng bước chân dày đặc——một đàn zombie bất ngờ xông ra từ chỗ tối! Bạn bị vây công, sinh mệnh -${GAME_CONSTANTS.MAP_EVENTS.TUNNEL_ZOMBIE_SWARM_DAMAGE}.`);
   }
   state.lastTunnelDay = state.day;
   advanceTime(1);
@@ -60,12 +60,12 @@ export function handleExploreTunnel() {
   }
 }
 
-// ========== 老马任务：结局14 ==========
+// ========== Nhiệm vụ Lão Mã: Kết thúc 14 ==========
 
 export function handleWaitOldMa() {
   const state = getState();
   if (state.oldMaStep < 7) {
-    setStory("隧道里空无一人。你等了一会儿，什么也没发生。也许还没到时候。");
+    setStory("Trong đường hầm không một bóng người. Bạn chờ một lúc, không có chuyện gì xảy ra. Có lẽ chưa đến lúc.");
     showExploreOptionsState();
     return;
   }

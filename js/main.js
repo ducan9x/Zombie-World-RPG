@@ -1,6 +1,6 @@
 /* ============================================================
-   游戏入口模块
-   组织顺序：导入 → 输入绑定 → 初始化
+   Módul nhập game
+   Thứ tự sắp xếp: Nhập → Ràng buộc đầu vào → Khởi tạo
    ============================================================ */
 
 import { renderAll, initUI, setupPagination } from './ui.js';
@@ -9,12 +9,12 @@ import { processCheatCommand } from './cheats.js';
 import { getState, setStory, setAutoSaveCallback } from './state.js';
 import { saveGame } from './save.js';
 
-// ---------- 输入绑定 ----------
+// ---------- Ràng buộc đầu vào ----------
 
 /**
- * 设置操作输入监听
- * 绑定输入框的提交按钮点击和回车键事件
- * 所有游戏操作（包括存档页面的槽位选择）都通过此入口路由
+ * Thiết lập trình lắng nghe thao tác nhập
+ * Ràng buộc nút submit của ô nhập và sự kiện phím Enter
+ * Tất cả hoạt động game (bao gồm chọn vị trí trang lưu) đều được điều hướng qua cổng nhập này
  */
 function setupActionInput() {
   const input = document.getElementById('action-input');
@@ -28,7 +28,7 @@ function setupActionInput() {
     if (cheatResult !== null) {
       if (cheatResult.success && cheatResult.message) {
         const state = getState();
-        setStory((state.story || "") + "\n\n【作弊】" + cheatResult.message);
+        setStory((state.story || "") + "\n\n[Mã gian lận] " + cheatResult.message);
       }
       renderAll();
       input.value = '';
@@ -38,7 +38,7 @@ function setupActionInput() {
 
     const value = parseInt(rawValue, 10);
     if (isNaN(value) || value < 1) {
-      alert('请正确输入选项');
+      alert('Vui lòng nhập đúng lựa chọn');
       input.value = '';
       input.focus();
       return;

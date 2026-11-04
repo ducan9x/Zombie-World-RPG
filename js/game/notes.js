@@ -14,29 +14,29 @@ import { showHomeOptions } from '../routing.js';
 
 function getNewforceProgress(state) {
   const conditions = [
-    { label: "救出露露薇", done: !!state.nurseZombieRescued },
-    { label: "救出柳如烟", done: !!state.liuruyanRescued },
-    { label: "击败匪徒", done: !!state.outlawKilled },
-    { label: "击败黑影", done: !!(state.stats && state.stats.bossesDefeated && state.stats.bossesDefeated.includes("黑影")) },
-    { label: "击败丧尸王", done: !!state.zombieKingDefeated },
-    { label: "完成陈博士物资任务", done: !!state.doctorQuest3Done },
+    { label: "Cứu Rutile", done: !!state.nurseZombieRescued },
+    { label: "Cứu Liu Ruyan", done: !!state.liuruyanRescued },
+    { label: "Đánh bại tên cướp", done: !!state.outlawKilled },
+    { label: "Đánh bại Hắc Ảnh", done: !!(state.stats && state.stats.bossesDefeated && state.stats.bossesDefeated.includes("黑影")) },
+    { label: "Đánh bại Vua Zombie", done: !!state.zombieKingDefeated },
+    { label: "Hoàn thành nhiệm vụ vật tư của Tiến sĩ Chen", done: !!state.doctorQuest3Done },
   ];
   const doneCount = conditions.filter(c => c.done).length;
   return { conditions, doneCount };
 }
 
 function buildLiuruyanStory(state) {
-  let story = "📖 柳如烟救援\n━━━━━━━━━━━━━━━━━\n\n";
+  let story = "📖 Cứu Liu Ruyan\n━━━━━━━━━━━━━━━━━\n\n";
   if (state.liuruyanRescued) {
-    story += "✅ 柳如烟已被救出，她现在是你忠实的伙伴。";
+    story += "✅ Liu Ruyan đã được cứu, cô ấy hiện là đồng minh trung thành của bạn.";
   } else if (state.day > GAME_CONSTANTS.LIURUYAN.RESCUE_DEADLINE_DAYS) {
-    story += "❌ 救援期限已过，柳如烟已经变成了丧尸……";
+    story += "❌ Hạn cứu đã hết, Liu Ruyan đã biến thành zombie……";
   } else {
     const remaining = GAME_CONSTANTS.LIURUYAN.RESCUE_DEADLINE_DAYS - state.day;
-    story += `⚠ 在高校大学城发现了一名感染的女人——柳如烟。\n\n`;
-    story += `救援期限：还剩 ${remaining} 天\n`;
-    story += `所需物品：抗感染药剂×${GAME_CONSTANTS.LIURUYAN.SERUM_COST}\n\n`;
-    story += `如果不在期限内救治，她将变成丧尸。`;
+    story += `⚠ Tại trường đại học phát hiện một người phụ nữ bị nhiễm——Liu Ruyan.\n\n`;
+    story += `Hạn cứu: Còn ${remaining} ngày\n`;
+    story += `Vật tư cần: Thuốc kháng nhiễm×${GAME_CONSTANTS.LIURUYAN.SERUM_COST}\n\n`;
+    story += `Nếu không được cứu trong thời hạn, cô ấy sẽ biến thành zombie.`;
   }
   return story;
 }
@@ -44,7 +44,7 @@ function buildLiuruyanStory(state) {
 export function buildSurvivalNotes() {
   const state = getState();
   const notes = SURVIVAL_NOTES;
-  const story = "📖 生存笔记\n━━━━━━━━━━━━━━━━━\n选择分类查看提示：\n\n";
+  const story = "📖 Ghi Chép Sinh Tồn\n━━━━━━━━━━━━━━━━━\nChọn danh mục xem mẹo:\n\n";
   const opts = notes.map((cat, i) => ({
     text: cat.name,
     action: "note_category",
@@ -52,14 +52,14 @@ export function buildSurvivalNotes() {
   }));
   const { doneCount } = getNewforceProgress(state);
   if (doneCount > 0) {
-    opts.push({ text: `新生力量（${doneCount}/6）`, action: "note_newforce" });
+    opts.push({ text: `Sức Mới Mới（${doneCount}/6）`, action: "note_newforce" });
   }
   if (state.liuruyanDiscovered && !state.liuruyanRescued) {
     const remaining = GAME_CONSTANTS.LIURUYAN.RESCUE_DEADLINE_DAYS - state.day;
     if (remaining > 0) {
-      opts.push({ text: `柳如烟救援（剩余${remaining}天）`, action: "note_liuruyan" });
+      opts.push({ text: `Cứu Liu Ruyan（còn ${remaining} ngày）`, action: "note_liuruyan" });
     } else {
-      opts.push({ text: "柳如烟救援（已过期）", action: "note_liuruyan" });
+      opts.push({ text: "Cứu Liu Ruyan（đã hết hạn）", action: "note_liuruyan" });
     }
   }
   opts.push({ text: "返回", action: "note_back" });
@@ -70,15 +70,15 @@ export function buildSurvivalNotes() {
 
 function buildNewforceStory(state) {
   const { conditions, doneCount } = getNewforceProgress(state);
-  let story = "📖 新生力量\n━━━━━━━━━━━━━━━━━\n\n";
-  story += "传闻中，当所有关键事件都被解决后，一种新的力量将会觉醒…\n\n";
-  story += "进度：\n";
+  let story = "📖 Sức Mới Mới\n━━━━━━━━━━━━━━━━━\n\n";
+  story += "Dịp truyền thuyết, khi tất cả sự kiện chốt lệnh được giải quyết, một sức lực mới sẽ thức dậy…\n\n";
+  story += "Tiến độ:\n";
   conditions.forEach(c => {
     story += `${c.done ? "✅" : "⬜"} ${c.label}\n`;
   });
-  story += `\n已完成 ${doneCount}/6`;
+  story += `\nĐã hoàn thành ${doneCount}/6`;
   if (doneCount === 6) {
-    story += "\n\n所有条件已满足，新的力量即将觉醒…";
+    story += "\n\nTất cả điều kiện đã thỏa mãn, sức lực mới sắp thức dậy…";
   }
   return story;
 }
@@ -98,10 +98,10 @@ export function handleSurvivalNotesAction(input) {
     }));
     const { doneCount } = getNewforceProgress(state);
     if (doneCount > 0) {
-      opts.push({ text: "新生力量", action: "note_newforce" });
+      opts.push({ text: "Sức Mới Mới", action: "note_newforce" });
     }
-    opts.push({ text: "→ 柳如烟救援（当前）", action: "note_liuruyan" });
-    opts.push({ text: "返回", action: "note_back" });
+    opts.push({ text: "→ Cứu Liu Ruyan（hiện tại）", action: "note_liuruyan" });
+    opts.push({ text: "Quay lại", action: "note_back" });
     setPhase("survival_notes");
     setStory(story);
     setOptions(opts);
@@ -116,9 +116,9 @@ export function handleSurvivalNotesAction(input) {
     }));
     opts.push({ text: "→ 新生力量（当前）", action: "note_newforce" });
     if (state.liuruyanDiscovered && !state.liuruyanRescued) {
-      opts.push({ text: "柳如烟救援", action: "note_liuruyan" });
+      opts.push({ text: "Cứu Liu Ruyan", action: "note_liuruyan" });
     }
-    opts.push({ text: "返回", action: "note_back" });
+    opts.push({ text: "Quay lại", action: "note_back" });
     setPhase("survival_notes");
     setStory(story);
     setOptions(opts);
@@ -128,8 +128,7 @@ export function handleSurvivalNotesAction(input) {
     const catIndex = opt.catIndex;
     const cat = SURVIVAL_NOTES[catIndex];
     if (!cat) { showHomeOptions(); return; }
-    let story = `📖 ${cat.name}\n━━━━━━━━━━━━━━━━━\n\n`;
-    cat.entries.forEach((entry) => {
+    let story = `📖 ${cat.name}\n━━━━━━━━━━━━━━━━━\n\n`;    cat.entries.forEach((entry) => {
       story += `🔹 ${entry.title}\n${entry.content}\n\n`;
     });
     const opts = SURVIVAL_NOTES.map((c, i) => ({
@@ -139,12 +138,12 @@ export function handleSurvivalNotesAction(input) {
     }));
     const { doneCount } = getNewforceProgress(state);
     if (doneCount > 0) {
-      opts.push({ text: "新生力量", action: "note_newforce" });
+      opts.push({ text: "Sức Mới Mới", action: "note_newforce" });
     }
     if (state.liuruyanDiscovered && !state.liuruyanRescued) {
-      opts.push({ text: "柳如烟救援", action: "note_liuruyan" });
+      opts.push({ text: "Cứu Liu Ruyan", action: "note_liuruyan" });
     }
-    opts.push({ text: "返回", action: "note_back" });
+    opts.push({ text: "Quay lại", action: "note_back" });
     setPhase("survival_notes");
     setStory(story);
     setOptions(opts);

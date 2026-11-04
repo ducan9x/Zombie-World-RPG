@@ -1,0 +1,3 @@
+Dòng 1: Hãy chọn địa điểm bạn muốn đến:
+Dòng 2: Thế giới trước mắt trở nên méo mó và xa lạ——đường nét tòa nhà không ngừng nhúc nhích, màu sắc bầu trời chớp nháy điên cuồng.
+Dòng 3: Sau vài giờ đi đường và tránh zombie trên đường, bạn cuối cùng cũng an toàn trở về căn nhà nhỏ của người sống sót.

@@ -14,7 +14,7 @@ import { FISH, FISH_RARITY_WEIGHTS } from '../data/items/fish.js';
 
 import { refreshIslandMenu } from './index.js';
 
-const RARITY_LABELS = { common: "普通", uncommon: "优秀", rare: "稀有", epic: "史诗", legendary: "传说" };
+const RARITY_LABELS = { common: "Thường", uncommon: "Ưu tú", rare: "Hiếm", epic: "Sử thi", legendary: "Huyền thoại" };
 
 function randomDialogue(pool) {
   return pool[Math.floor(Math.random() * pool.length)];
@@ -26,16 +26,16 @@ export function handleNpcGuyue() {
   const friendshipLabel = getAffinityLabel(affinity);
   const dialogue = randomDialogue(GUYUE_DIALOGUES);
 
-  let desc = `【岛民顾月】\n一个对国王陛下充满崇敬的岛民，眼中总是闪烁着对王权的狂热。`;
-  desc += `\n\n当前好感：${affinity}/${AFFINITY_MAX.guyue}（${friendshipLabel}）`;
+  let desc = `【Đảo dân Cố Nguyệt】\nMột đảo dân tràn đầy kính ngưỡng đối với đức vua, trong mắt luôn lóe lên cuồng nhiệt đối với vương quyền.`;
+  desc += `\n\nHảo cảm hiện tại：${affinity}/${AFFINITY_MAX.guyue}（${friendshipLabel}）`;
   desc += `\n\n${dialogue}`;
 
   setPhase("island_guyue");
   setStory(desc);
   setOptions([
-    { text: "对话", action: "guyue_chat" },
-    { text: "回收海鱼", action: "guyue_recycle" },
-    { text: "离开", action: "guyue_leave" },
+    { text: "Trò chuyện", action: "guyue_chat" },
+    { text: "Thu hồi cá biển", action: "guyue_recycle" },
+    { text: "Rời đi", action: "guyue_leave" },
   ]);
 }
 
@@ -82,7 +82,7 @@ export function handleGuyueAction(input) {
 export function handleGuyueChat() {
   const state = getState();
   if (!canChatToday("guyue")) {
-    setStory("顾月摆了摆手：'今天已经聊了很多了，改日再叙吧。'");
+    setStory("Cố Nguyệt xua tay: 'Hôm nay đã nói chuyện nhiều rồi, ngày khác hãy trò chuyện tiếp nhé.'");
     handleNpcGuyue();
     return;
   }
@@ -98,7 +98,7 @@ export function handleGuyueRecycle() {
   const state = getState();
   const fishCount = state.food.filter(i => i.type === "fish").length;
   if (fishCount === 0) {
-    setStory("你身上没有海鱼可以回收。");
+    setStory("Bạn không có cá biển nào để thu hồi.");
     handleNpcGuyue();
     return;
   }
@@ -109,19 +109,19 @@ export function handleGuyueRecycleSelect() {
   const state = getState();
   const fishes = state.food.filter(i => i.type === "fish");
   if (fishes.length === 0) {
-    setStory("你身上没有海鱼可以回收。");
+    setStory("Bạn không có cá biển nào để thu hồi.");
     showGuyueRecycleMenu();
     return;
   }
   const opts = fishes.map((f, i) => {
     const rarity = f.rarity || "common";
     const price = FISH_RECYCLE_PRICES[rarity] || 1;
-    const label = RARITY_LABELS[rarity] || "普通";
-    return { text: `${formatQualityText(f.name, rarity)}【${label}】→ ${price}皇家币`, action: "guyue_recycle_one", index: i };
+    const label = RARITY_LABELS[rarity] || "Thường";
+    return { text: `${formatQualityText(f.name, rarity)}【${label}】→ ${price} xu hoàng gia`, action: "guyue_recycle_one", index: i };
   });
-  opts.push({ text: "返回", action: "guyue_recycle_back" });
+  opts.push({ text: "Quay lại", action: "guyue_recycle_back" });
   setPhase("island_guyue");
-  setStory("选择要回收的海鱼：");
+  setStory("Chọn cá biển muốn thu hồi:");
   setOptions(opts);
 }
 
@@ -135,7 +135,7 @@ export function handleGuyueRecycleOne(input) {
   const fishIdx = option.index;
   const fishes = state.food.filter(i => i.type === "fish");
   if (fishIdx < 0 || fishIdx >= fishes.length) {
-    setStory("找不到该海鱼。");
+    setStory("Không tìm thấy cá biển đó.");
     showGuyueRecycleMenu();
     return;
   }
@@ -143,7 +143,7 @@ export function handleGuyueRecycleOne(input) {
   const fish = fishes[fishIdx];
   const rarity = fish.rarity || "common";
   const price = FISH_RECYCLE_PRICES[rarity] || 1;
-  const label = RARITY_LABELS[rarity] || "普通";
+  const label = RARITY_LABELS[rarity] || "Thường";
 
   const realIdx = state.food.indexOf(fish);
   if (realIdx !== -1) {
@@ -151,16 +151,16 @@ export function handleGuyueRecycleOne(input) {
   }
 
   addRoyalCoins(price);
-  setStory(`你回收了${formatQualityText(fish.name, rarity)}【${label}】，获得 ${price} 皇家币。\n\n当前皇家币：${getState().royalCoins}`);
+  setStory(`Bạn đã thu hồi ${formatQualityText(fish.name, rarity)}【${label}】, nhận ${price} xu hoàng gia.\n\nXu hoàng gia hiện tại：${getState().royalCoins}`);
   setPhase("island_guyue");
-  setOptions([{ text: "继续", action: "guyue_recycle_one_continue" }]);
+  setOptions([{ text: "Tiếp tục", action: "guyue_recycle_one_continue" }]);
 }
 
 export function handleGuyueRecycleAll() {
   const state = getState();
   const fishes = state.food.filter(i => i.type === "fish");
   if (fishes.length === 0) {
-    setStory("你身上没有海鱼可以回收。");
+    setStory("Bạn không có cá biển nào để thu hồi.");
     showGuyueRecycleMenu();
     return;
   }
@@ -171,27 +171,27 @@ export function handleGuyueRecycleAll() {
   for (const fish of fishes) {
     const rarity = fish.rarity || "common";
     const price = FISH_RECYCLE_PRICES[rarity] || 1;
-    const label = RARITY_LABELS[rarity] || "普通";
+    const label = RARITY_LABELS[rarity] || "Thường";
     totalCoins += price;
-    summary.push(`${formatQualityText(fish.name, rarity)}【${label}】→ ${price}皇家币`);
+    summary.push(`${formatQualityText(fish.name, rarity)}【${label}】→ ${price} xu hoàng gia`);
   }
 
   state.food = state.food.filter(i => i.type !== "fish");
   addRoyalCoins(totalCoins);
 
-  setStory(`你回收了所有海鱼，共 ${fishes.length} 条：\n${summary.join("\n")}\n\n总计获得 ${totalCoins} 皇家币。\n当前皇家币：${getState().royalCoins}`);
+  setStory(`Bạn đã thu hồi tất cả cá biển, tổng ${fishes.length} con：\n${summary.join("\n")}\n\nTổng nhận ${totalCoins} xu hoàng gia.\nXu hoàng gia hiện tại：${getState().royalCoins}`);
   setPhase("island_guyue");
-  setOptions([{ text: "继续", action: "guyue_recycle_all_continue" }]);
+  setOptions([{ text: "Tiếp tục", action: "guyue_recycle_all_continue" }]);
 }
 
 function showGuyueRecycleMenu() {
   const state = getState();
   const fishCount = state.food.filter(i => i.type === "fish").length;
   setPhase("island_guyue");
-  setStory(fishCount > 0 ? `你身上有${fishCount}条海鱼可以回收。` : "你身上没有海鱼可以回收。");
+  setStory(fishCount > 0 ? `Bạn có ${fishCount} con cá biển có thể thu hồi.` : "Bạn không có cá biển nào để thu hồi.");
   setOptions([
-    { text: "选择海鱼", action: "guyue_recycle_select", disabled: fishCount === 0 },
-    { text: "回收全部", action: "guyue_recycle_all", disabled: fishCount === 0 },
-    { text: "离开", action: "guyue_recycle_back" },
+    { text: "Chọn cá biển", action: "guyue_recycle_select", disabled: fishCount === 0 },
+    { text: "Thu hồi tất cả", action: "guyue_recycle_all", disabled: fishCount === 0 },
+    { text: "Rời đi", action: "guyue_recycle_back" },
   ]);
 }

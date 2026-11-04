@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zombie-World 作弊码查找工具</title>
+<title>Zombie-World Công cụ tra cứu mã gian lận</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
 
@@ -178,10 +178,8 @@ body::before {
 .stats-bar strong { color: var(--text-secondary); }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 12px;
-  padding-bottom: 40px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px; padding-bottom: 40px;
 }
 
 .card {
@@ -352,7 +350,6 @@ body::before {
 .tab-content.active { display: block; }
 
 
-
 @media (max-width: 1024px) {
   .grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
 }
@@ -378,20 +375,20 @@ body::before {
   <header class="header">
     <div class="logo">
       <div class="logo-icon">🧟</div>
-      <h1>Zombie-World 作弊码查找工具</h1>
+      <h1>Zombie-World Công cụ tra cứu mã gian lận</h1>
     </div>
-    <p class="subtitle">末日生存文字游戏 · 开发者测试辅助工具</p>
+    <p class="subtitle">Trò chơi chữ sinh tồn ngày tận thế · Công cụ hỗ trợ thử nghiệm dành cho nhà phát triển</p>
   </header>
 
   <div class="tab-nav">
-    <button class="tab-btn active" data-tab="cheats">🔍 作弊码查找</button>
+    <button class="tab-btn active" data-tab="cheats">🔍 Tra cứu mã gian lận</button>
   </div>
 
   <div class="tab-content active" id="tab-cheats">
   <div class="search-section">
     <div class="search-box">
       <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput" placeholder="搜索物品名称、ID或命令... 例如：寰宇之剑、AWM、抗感染血清" autofocus>
+      <input type="text" id="searchInput" placeholder="Tìm kiếm tên vật phẩm, ID hoặc lệnh... Ví dụ: Hạm Vũ Trụ, AWM, Huyết thanh kháng nhiễm" autofocus>
       <button class="search-clear" id="clearBtn">✕</button>
     </div>
   </div>
@@ -402,7 +399,7 @@ body::before {
 
   <div id="loading" class="loading">
     <div class="spinner"></div>
-    <p>正在加载作弊码数据...</p>
+    <p>Đang tải dữ liệu mã gian lận...</p>
   </div>
 
   <div class="grid" id="grid"></div>
@@ -411,7 +408,7 @@ body::before {
 
 </div>
 
-<div class="toast" id="toast">✅ 已复制到剪贴板</div>
+<div class="toast" id="toast">✅ Đã sao chép vào clipboard</div>
 
 <script>
 const state = { all: [], filtered: [], category: 'all' };
@@ -441,11 +438,11 @@ async function loadCSV() {
 
 function getRarity(item) {
   const extra = item.extra_info || '';
-  if (extra.includes('(传说)') || extra.includes('(传奇)') || extra.includes('传奇')) return 'legendary';
-  if (extra.includes('(史诗)') || extra.includes('史诗')) return 'epic';
-  if (extra.includes('(稀有)') || extra.includes('稀有')) return 'rare';
-  if (extra.includes('(优秀)') || extra.includes('优秀')) return 'uncommon';
-  if (extra.includes('(普通)')) return 'common';
+  if (extra.includes('(Huyền thoại)') || extra.includes('(Huyền thoại)') || extra.includes('Huyền thoại')) return 'legendary';
+  if (extra.includes('(Sử thi)') || extra.includes('Sử thi')) return 'epic';
+  if (extra.includes('(Hiếm)') || extra.includes('Hiếm')) return 'rare';
+  if (extra.includes('(Ưu tú)') || extra.includes('Ưu tú')) return 'uncommon';
+  if (extra.includes('(Thường)')) return 'common';
   return '';
 }
 
@@ -477,7 +474,7 @@ function filter() {
 function renderCategories() {
   const cats = getCategories();
   const container = document.getElementById('categories');
-  let html = `<button class="cat-btn ${state.category === 'all' ? 'active' : ''}" data-cat="all">全部 <span class="cat-count">${state.all.length}</span></button>`;
+  let html = `<button class="cat-btn ${state.category === 'all' ? 'active' : ''}" data-cat="all">Tất cả <span class="cat-count">${state.all.length}</span></button>`;
   for (const [cat, count] of Object.entries(cats)) {
     html += `<button class="cat-btn ${state.category === cat ? 'active' : ''}" data-cat="${cat}">${cat} <span class="cat-count">${count}</span></button>`;
   }
@@ -498,13 +495,13 @@ function render() {
   const total = state.all.length;
   const showing = state.filtered.length;
 
-  stats.innerHTML = `<span>共 <strong>${total}</strong> 条作弊码${state.category !== 'all' ? `，分类：${state.category}` : ''}</span><span>当前显示：<strong>${showing}</strong> 条</span>`;
+  stats.innerHTML = `<span>Tổng cộng <strong>${total}</strong> mã gian lận${state.category !== 'all' ? `, danh mục：${state.category}` : ''}</span><span>Hiện đang hiển thị：<strong>${showing}</strong> mã</span>`;
 
   if (showing === 0) {
     grid.innerHTML = `<div class="empty">
       <div class="empty-icon">🔎</div>
-      <h3>没有找到匹配的作弊码</h3>
-      <p>试试其他关键词，或点击"全部"查看所有指令</p>
+      <h3>Không tìm thấy mã gian lận phù hợp</h3>
+      <p>Thử từ khóa khác, hoặc nhấn "Tất cả" để xem mọi lệnh</p>
     </div>`;
     return;
   }
@@ -512,7 +509,7 @@ function render() {
   let html = '';
   for (const item of state.filtered) {
     const rarity = getRarity(item);
-    const rarityLabel = rarity ? rarity.replace('common','普通').replace('uncommon','优秀').replace('rare','稀有').replace('epic','史诗').replace('legendary','传奇') : '';
+    const rarityLabel = rarity ? rarity.replace('common','Thường').replace('uncommon','Ưu tú').replace('rare','Hiếm').replace('epic','Sử thi').replace('legendary','Huyền thoại') : '';
     html += `<div class="card">
       <div class="card-header">
         <span class="card-name">${item.item_name}</span>
@@ -521,7 +518,7 @@ function render() {
       <div class="card-extra">${item.extra_info || item.category}</div>
       <div class="card-command">
         <code>${item.command}</code>
-        <button class="copy-btn" data-cmd="${item.command}">📋 复制</button>
+        <button class="copy-btn" data-cmd="${item.command}">📋 Sao chép</button>
       </div>
     </div>`;
   }
@@ -532,15 +529,15 @@ function render() {
       const cmd = btn.dataset.cmd;
       navigator.clipboard.writeText(cmd).then(() => {
         btn.classList.add('copied');
-        btn.textContent = '✅ 已复制';
-        showToast(`已复制: ${cmd}`);
-        setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '📋 复制'; }, 2000);
+        btn.textContent = '✅ Đã sao chép';
+        showToast(`Đã sao chép: ${cmd}`);
+        setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '📋 Sao chép'; }, 2000);
       }).catch(() => {
         const ta = document.createElement('textarea');
         ta.value = cmd; document.body.appendChild(ta);
         ta.select(); document.execCommand('copy');
         document.body.removeChild(ta);
-        showToast(`已复制: ${cmd}`);
+        showToast(`Đã sao chép: ${cmd}`);
       });
     });
   });
@@ -565,7 +562,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderCategories();
     filter();
   } catch (e) {
-    document.getElementById('loading').innerHTML = `<p style="color:var(--accent)">❌ 加载失败：${e.message}</p>`;
+    document.getElementById('loading').innerHTML = `<p style="color:var(--accent)">❌ Tải thất bại：${e.message}</p>`;
   }
 
   const input = document.getElementById('searchInput');

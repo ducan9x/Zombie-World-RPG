@@ -23,30 +23,30 @@ export function handlePlantCrop() {
   const state = getState();
   const emptySlot = state.crops.findIndex(c => c === null);
   if (emptySlot === -1) {
-    setStory("🌱 你的五块耕地都种满了！等作物成熟收获后，空出位置再来吧。");
+    setStory("🌱 Cả 5 ô đất của bạn đều đã trồng đầy! Đợi cây trồng chín thu hoạch xong, có chỗ trống rồi hãy quay lại.");
     showBaseBuildOptions();
     return;
   }
   if (!state.seeds || state.seeds.length === 0) {
-    setStory("🌱 你翻遍了背包，一颗种子都没有。\n\n去沐苗苗那里购买种子，或者照看实验田获得种子吧。");
+    setStory("🌱 Bạn lục khắp túi, không có hạt giống nào.\n\nHãy đi mua hạt giống chỗ Mục Miêu Miêu, hoặc chăm sóc ruộng thí nghiệm để nhận hạt giống.");
     showBaseBuildOptions();
     return;
   }
   const availableSeeds = state.seeds.filter(s => (s.count || 1) > 0);
   if (availableSeeds.length === 0) {
-    setStory("🌱 你翻遍了背包，一颗种子都没有。\n\n去沐苗苗那里购买种子，或者照看实验田获得种子吧。");
+    setStory("🌱 Bạn lục khắp túi, không có hạt giống nào.\n\nHãy đi mua hạt giống chỗ Mục Miêu Miêu, hoặc chăm sóc ruộng thí nghiệm để nhận hạt giống.");
     showBaseBuildOptions();
     return;
   }
   setPhase("seed_select");
-  setStory("🌱 选择要种植的种子：\n\n每种种子对应不同的作物，种什么得什么。");
+  setStory("🌱 Chọn hạt giống muốn trồng:\n\nMỗi loại hạt giống tương ứng một loại cây trồng, trồng gì được nấy.");
   const opts = availableSeeds.map((seed, i) => ({
     text: `${getItemDisplayName(seed)}`,
     action: "seed_plant",
     index: i,
     seedItem: seed,
   }));
-  opts.push({ text: "返回", action: "seed_back", index: -1 });
+  opts.push({ text: "Quay lại", action: "seed_back", index: -1 });
   setOptions(opts);
 }
 
@@ -78,7 +78,7 @@ export function handleSeedSelect(input) {
   }
   const emptySlot = state.crops.findIndex(c => c === null);
   if (emptySlot === -1) {
-    setStory("🌱 没有空余的耕地了！");
+    setStory("🌱 Không còn ô đất trống nào!");
     showBaseBuildOptions();
     return;
   }
@@ -96,7 +96,7 @@ export function handleSeedSelect(input) {
     cropId: cropData.id,
   };
   const daysLeft = Math.ceil(cropData.matureTurns / GAME_CONSTANTS.TURNS_PER_DAY);
-  setStory(`🌱 你蹲在耕地[${emptySlot + 1}]前，小心翼翼地将${cropData.seedName}埋进土里，轻轻覆土、浇水。\n\n预计 ${cropData.matureTurns} 回合后就能收获了（大约${daysLeft}天）。收获时可获得 ${cropData.yield} 份${cropData.name}。`);
+  setStory(`🌱 Bạn ngồi xổm trước ô đất [${emptySlot + 1}], cẩn thận chôn ${cropData.seedName} xuống đất, phủ đất nhẹ nhàng, tưới nước.\n\nDự kiến sau ${cropData.matureTurns} lượt có thể thu hoạch (khoảng ${daysLeft} ngày). Khi thu hoạch sẽ nhận ${cropData.yield} phần ${cropData.name}.`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -107,29 +107,29 @@ export function handleSeedSelect(input) {
 
 export function handleViewCrops() {
   const state = getState();
-  let lines = [`🌾 【耕地状态】`];
+  let lines = [`🌾 [Trạng thái đất trồng]`];
   lines.push(`━━━━━━━━━━━━━━━━━`);
   let hasAny = false;
   for (let i = 0; i < state.crops.length; i++) {
     const crop = state.crops[i];
     if (crop === null) {
-      lines.push(`[${i + 1}] ⬜ 空位`);
+      lines.push(`[${i + 1}] ⬜ Trống`);
     } else if (crop.matureTurns <= 0) {
-      lines.push(`[${i + 1}] ✅ ${crop.name} —— 已成熟，快来收获吧！`);
+      lines.push(`[${i + 1}] ✅ ${crop.name} —— Đã chín, nhanh tay thu hoạch!`);
       hasAny = true;
     } else {
       const turnsLeft = crop.matureTurns;
       const daysLeft = Math.ceil(turnsLeft / GAME_CONSTANTS.TURNS_PER_DAY);
       const progress = Math.round((1 - turnsLeft / crop.totalTurns) * 100);
-      lines.push(`[${i + 1}] 🌱 ${crop.name} —— 还需 ${turnsLeft} 回合（约${daysLeft}天）[${progress}%]`);
+      lines.push(`[${i + 1}] 🌱 ${crop.name} —— Còn ${turnsLeft} lượt (khoảng ${daysLeft} ngày) [${progress}%]`);
       hasAny = true;
     }
   }
   lines.push(`━━━━━━━━━━━━━━━━━`);
   if (!hasAny) {
-    lines.push(`💡 所有耕地都空着，种点东西吧！去搞些种子来。`);
+    lines.push(`💡 Tất cả ô đất đều trống, hãy trồng gì đó! Đi kiếm hạt giống đi.`);
   }
-  lines.push(`💡 背包最多同时种5块，收获后自动空出位置。`);
+  lines.push(`💡 Túi tối đa trồng cùng lúc 5 ô, sau thu hoạch tự động trống chỗ.`);
   setStory(lines.join("\n"));
   showBaseBuildOptions();
 }
@@ -160,7 +160,7 @@ export function handleHarvestCrops() {
           } else {
             crop.yield = yieldCount - addedCount;
           }
-          setStory(`⚠️ 背包已满！只收获了一部分作物。\n\n已收获：${foodNames.join("、")}\n请先清理背包空间再来收获剩余作物。`);
+          setStory(`⚠️ Túi đã đầy! Chỉ thu hoạch được một phần cây trồng.\n\nĐã thu hoạch: ${foodNames.join("、")}\nHãy dọn chỗ túi rồi quay lại thu hoạch phần còn lại.`);
           showBaseBuildOptions();
           return;
         }
@@ -172,9 +172,9 @@ export function handleHarvestCrops() {
     }
   }
   if (harvested.length === 0) {
-    setStory("🌾 地里没有可以收获的作物。要么还没成熟，要么根本没种。去【查看耕地】看看吧。");
+    setStory("🌾 Trong đất không có cây trồng nào để thu hoạch. Hoặc chưa chín, hoặc chưa trồng. Hãy xem [Xem đất trồng].");
   } else {
-    setStory(`🌾 你挎着篮子走进田地，小心翼翼地摘下成熟的果实。\n\n收获清单：${harvested.join("、")}\n共计 ${foodNames.length} 份食物已存入背包。`);
+    setStory(`🌾 Bạn mang giỏ bước vào ruộng, cẩn thận hái những quả đã chín.\n\nDanh sách thu hoạch: ${harvested.join("、")}\nTổng cộng ${foodNames.length} phần thức ăn đã cất vào túi.`);
   }
   showBaseBuildOptions();
 }

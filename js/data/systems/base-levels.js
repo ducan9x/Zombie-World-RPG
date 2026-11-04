@@ -1,9 +1,9 @@
 export const BASE_LEVELS = [
-  { name: "幸存者帐篷", bonus: 0, cost: null },
-  { name: "幸存者木屋", bonus: 5, cost: { wood: 15, building_mat: 5 }, upgradeFlavor: "你挥汗如雨地搬运木材、敲打铁钉。简陋的帐篷在你手中一点一点地变了模样——墙壁立起来了，屋顶盖上了。当最后一块木板钉牢时，一座结实的小木屋矗立在你面前！" },
-  { name: "幸存者石屋", bonus: 10, cost: { wood: 25, building_mat: 10, stone: 10 }, upgradeFlavor: "你拆掉木屋的旧墙，用石头和水泥重新砌筑。锤声叮当响了一整天，灰尘弥漫中，一座厚重的石屋拔地而起。墙壁厚实得连丧尸都撞不塌！" },
-  { name: "幸存者房子", bonus: 15, cost: { wood: 40, building_mat: 20, stone: 20, nails: 10 }, upgradeFlavor: "你在石屋的基础上加盖二层，安装玻璃窗，铺设木地板。钢筋水泥间，一座像样的乡间小楼落成了！推开窗，微风吹进来，你恍惚觉得回到了文明世界。" },
-  { name: "幸存者别墅", bonus: 20, cost: { wood: 60, building_mat: 35, stone: 35, nails: 25, glass: 10 }, upgradeFlavor: "你一砖一瓦地扩建、装修、造花园。当最后一块琉璃瓦铺上屋顶时，这座气派的别墅终于完工了！在末日废墟中，你拥有了一片属于自己的豪华避风港。" },
+  { name: "Lều Lưu Sinh", bonus: 0, cost: null, upgradeFlavor: "Bạn vã mồ hôi hột vận chuyển gỗ, đóng đinh sắt. Ngôi lều tồi tàn trong tay bạn từng chút một thay đổi hình dạng——tường đứng lên, mái nhà được lợp. Khi tấm ván cuối cùng được đóng chặt, một ngôi nhà gỗ nhỏ chắc chắn sừng sững trước mặt bạn!" },
+  { name: "Nhà Gỗ Lưu Sinh", bonus: 5, cost: { wood: 15, building_mat: 5 }, upgradeFlavor: "Bạn tháo dỡ những bức tường cũ của nhà gỗ, dùng đá và xi măng xây lại. Tiếng búa vang cả ngày, trong bụi mù mịt, một ngôi nhà đá nặng nề mọc lên. Bức tường dày đến mức ngay cả zombie cũng không đâm sập được!" },
+  { name: "Nhà Đá Lưu Sinh", bonus: 10, cost: { wood: 25, building_mat: 10, stone: 10 }, upgradeFlavor: "Bạn xây thêm tầng hai trên nền nhà đá, lắp cửa sổ kính, lát sàn gỗ. Giữa sắt thép và xi măng, một ngôi nhà cấp bốn đàng hoàng đã hoàn thành! Mở cửa sổ, gió nhẹ thổi vào, bạn như mơ hồ trở về thế giới văn minh." },
+  { name: "Nhà Cấp Bốn Lưu Sinh", bonus: 15, cost: { wood: 40, building_mat: 20, stone: 20, nails: 10 }, upgradeFlavor: "Bạn xây thêm tầng hai trên nền nhà đá, lắp cửa sổ kính, lát sàn gỗ. Giữa sắt thép và xi măng, một ngôi nhà cấp bốn đàng hoàng đã hoàn thành! Mở cửa sổ, gió nhẹ thổi vào, bạn như mơ hồ trở về thế giới văn minh." },
+  { name: "Biệt Thự Lưu Sinh", bonus: 20, cost: { wood: 60, building_mat: 35, stone: 35, nails: 25, glass: 10 }, upgradeFlavor: "Bạn từng viên gạch một mở rộng, trang trí, làm vườn. Khi tấm ngói lưu ly cuối cùng được lợp lên mái, ngôi biệt thự hoành tráng này cuối cùng cũng hoàn thành! Trong đống đổ nát ngày tận thế, bạn sở hữu một bến cảng an toàn sang trọng thuộc về riêng mình." },
 ];
 
 export const WAREHOUSE_LEVELS = [

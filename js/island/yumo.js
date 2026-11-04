@@ -25,43 +25,43 @@ export function handleNpcYumo() {
   const pool = YUMO_DIALOGUES[stage] || YUMO_DIALOGUES.stranger;
   const dialogue = randomDialogue(pool);
 
-  let desc = `【余墨公爵】\n一位身着华服的贵族，举手投足间透着与生俱来的威仪。他的目光中既有上位者的从容，也藏着一丝不易察觉的忧虑。`;
-  desc += `\n\n当前好感：${affinity}/${AFFINITY_MAX.yumo}（${friendshipLabel}）`;
+  let desc = `【Công tước Yu Mo】\nMột quý tộc mặc hoa phục, cử chỉ toát lên uy nghi trời sinh. Trong ánh mắt ông vừa có sự thong dong của kẻ bề trên, vừa ẩn giấu một tia lo lắng khó nhận ra.`;
+  desc += `\n\nHảo cảm hiện tại: ${affinity}/${AFFINITY_MAX.yumo}（${friendshipLabel}）`;
   desc += `\n\n${dialogue}`;
 
   setPhase("island_yumo");
   setStory(desc);
 
   const opts = [
-    { text: "对话", action: "yumo_chat" },
-    { text: "送礼", action: "yumo_gift" },
+    { text: "Đối thoại", action: "yumo_chat" },
+    { text: "Tặng quà", action: "yumo_gift" },
   ];
 
   if (!isQuestDone("yumoQuest1")) {
-    opts.push({ text: "公爵的烦恼", action: "yumo_quest1" });
+    opts.push({ text: "Nỗi phiền của công tước", action: "yumo_quest1" });
   } else if (!isQuestDone("yumoQuest2")) {
-    opts.push({ text: "公爵的烦恼（已完成）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "王国实验", action: "yumo_quest2" });
+    opts.push({ text: "Nỗi phiền của công tước（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Thí nghiệm vương quốc", action: "yumo_quest2" });
   } else if (!isQuestDone("yumoQuest3")) {
-    opts.push({ text: "公爵的烦恼（已完成）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "王国实验（已完成）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "海怪登陆", action: "yumo_quest3" });
+    opts.push({ text: "Nỗi phiền của công tước（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Thí nghiệm vương quốc（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Quái vật biển đổ bộ", action: "yumo_quest3" });
   } else if (!isQuestDone("yumoQuest4")) {
-    opts.push({ text: "公爵的烦恼（已完成）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "王国实验（已完成）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "海怪登陆（已完成）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "海岛建设", action: "yumo_quest4" });
+    opts.push({ text: "Nỗi phiền của công tước（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Thí nghiệm vương quốc（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Quái vật biển đổ bộ（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Xây dựng đảo", action: "yumo_quest4" });
   } else if (!isQuestDone("yumoQuest5")) {
-    opts.push({ text: "公爵的烦恼（已完成）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "王国实验（已完成）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "海怪登陆（已完成）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "海岛建设（已完成）", action: "yumo_quest_done", disabled: true });
-    opts.push({ text: "庆功宴", action: "yumo_quest5" });
+    opts.push({ text: "Nỗi phiền của công tước（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Thí nghiệm vương quốc（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Quái vật biển đổ bộ（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Xây dựng đảo（đã hoàn thành）", action: "yumo_quest_done", disabled: true });
+    opts.push({ text: "Yến tiệc khánh công", action: "yumo_quest5" });
   } else {
-    opts.push({ text: "庆功宴（已完成）", action: "yumo_quest5_done", disabled: true });
+    opts.push({ text: "Yến tiệc khánh công（đã hoàn thành）", action: "yumo_quest5_done", disabled: true });
   }
 
-  opts.push({ text: "离开", action: "yumo_leave" });
+  opts.push({ text: "Rời đi", action: "yumo_leave" });
 
   setOptions(opts);
 }
@@ -95,7 +95,7 @@ export function handleYumoAction(input) {
       handleYumoQuest5();
       break;
     case "yumo_quest5_done":
-      setStory("余墨公爵微笑着举起酒杯：'那天的庆功宴真是令人难忘……谢谢你，我的朋友。'");
+      setStory("Công tước Yu Mo mỉm cười nâng ly: 'Yến tiệc khánh công ngày đó thật khó quên…… Cảm ơn bạn, bạn của tôi.'");
       handleNpcYumo();
       break;
     case "yumo_gift_food":
@@ -129,7 +129,7 @@ export function handleYumoAction(input) {
 export function handleYumoChat() {
   const state = getState();
   if (!canChatToday("yumo")) {
-    setStory("余墨公爵摆了摆手：'今天已经聊了很多了，改日再叙吧。'");
+    setStory("Công tước Yu Mo xua tay: 'Hôm nay đã nói chuyện rất nhiều rồi, ngày khác lại tự.'");
     handleNpcYumo();
     return;
   }
@@ -149,20 +149,20 @@ export function handleYumoGift() {
   const hasMedicine = state.medicine && state.medicine.length > 0;
   const hasCigs = state.cigarettes > 0;
 
-  if (hasFood) opts.push({ text: "赠送食物（+3好感）", action: "yumo_gift_food" });
-  if (hasDrinks) opts.push({ text: "赠送饮品（+3好感）", action: "yumo_gift_drinks" });
-  if (hasMedicine) opts.push({ text: "赠送医疗品（+5好感）", action: "yumo_gift_medicine" });
-  if (hasCigs) opts.push({ text: "赠送香烟（+2好感）", action: "yumo_gift_cigs" });
-  opts.push({ text: "返回", action: "yumo_gift_back" });
+  if (hasFood) opts.push({ text: "Tặng thực phẩm（+3 hảo cảm）", action: "yumo_gift_food" });
+  if (hasDrinks) opts.push({ text: "Tặng đồ uống（+3 hảo cảm）", action: "yumo_gift_drinks" });
+  if (hasMedicine) opts.push({ text: "Tặng vật phẩm y tế（+5 hảo cảm）", action: "yumo_gift_medicine" });
+  if (hasCigs) opts.push({ text: "Tặng thuốc lá（+2 hảo cảm）", action: "yumo_gift_cigs" });
+  opts.push({ text: "Quay lại", action: "yumo_gift_back" });
 
   if (opts.length === 1) {
-    setStory("你翻遍了背包，发现没什么能送人的东西……");
+    setStory("Bạn lục khắp ba lô, phát hiện không có gì để tặng người……");
     handleNpcYumo();
     return;
   }
 
   setPhase("island_yumo");
-  setStory("你想送余墨公爵什么？");
+  setStory("Bạn muốn tặng Công tước Yu Mo thứ gì?");
   setOptions(opts);
 }
 
@@ -170,7 +170,7 @@ function handleYumoGiftConfirm(type, affinityGain) {
   const state = getState();
   const arr = type === "food" ? state.food : type === "drinks" ? state.drinks : state.medicine;
   if (!arr || arr.length === 0) {
-    setStory("你没有可以赠送的物品。");
+    setStory("Bạn không có vật phẩm nào để tặng.");
     handleNpcYumo();
     return;
   }
@@ -185,17 +185,17 @@ function handleYumoGiftConfirm(type, affinityGain) {
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
-  setStory(`你把${itemName}送给了余墨公爵。他微微点头：'多谢你的心意。'\n\n余墨公爵好感度 +${affinityGain}（当前 ${getNpcAffinity("yumo")}/${AFFINITY_MAX.yumo}）`);
+  setStory(`Bạn đem ${itemName} tặng cho Công tước Yu Mo. Ông khẽ gật đầu: 'Cảm ơn tấm lòng của bạn.'\n\nHảo cảm Công tước Yu Mo +${affinityGain}（hiện tại ${getNpcAffinity("yumo")}/${AFFINITY_MAX.yumo}）`);
   if (!state.gameOver) {
     setPhase("island_yumo");
-    setOptions([{ text: "继续", action: "yumo_gift_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "yumo_gift_continue" }]);
   }
 }
 
 function handleYumoGiftCigs() {
   const state = getState();
   if (state.cigarettes <= 0) {
-    setStory("你没有香烟可以赠送。");
+    setStory("Bạn không có thuốc lá nào để tặng.");
     handleNpcYumo();
     return;
   }
@@ -204,10 +204,10 @@ function handleYumoGiftCigs() {
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
-  setStory(`你递给余墨公爵一根香烟。他接过，轻轻嗅了嗅：'不错的品质。'\n\n余墨公爵好感度 +2（当前 ${getNpcAffinity("yumo")}/${AFFINITY_MAX.yumo}）`);
+  setStory(`Bạn đưa cho Công tước Yu Mo một điếu thuốc lá. Ông nhận lấy, khẽ ngửi: 'Chất lượng không tệ.'\n\nHảo cảm Công tước Yu Mo +2（hiện tại ${getNpcAffinity("yumo")}/${AFFINITY_MAX.yumo}）`);
   if (!state.gameOver) {
     setPhase("island_yumo");
-    setOptions([{ text: "继续", action: "yumo_gift_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "yumo_gift_continue" }]);
   }
 }
 
@@ -217,10 +217,10 @@ export function handleYumoQuest1() {
   const need = GAME_CONSTANTS.YUMO.QUEST1_GEL_COST;
 
   if (gelCount < need) {
-    setStory(YUMO_QUEST_STORIES.quest1_intro + `\n\n所需物品：丧尸凝胶 ${gelCount}/${need}`);
+    setStory(YUMO_QUEST_STORIES.quest1_intro + `\n\nVật phẩm cần: gel zombie ${gelCount}/${need}`);
     setPhase("island_yumo");
     setOptions([
-      { text: "去收集凝胶", action: "yumo_leave" },
+      { text: "Đi thu thập gel", action: "yumo_leave" },
     ]);
     return;
   }
@@ -228,13 +228,13 @@ export function handleYumoQuest1() {
   removeItemById("medicine", "zombie_gel", need);
   markQuestDone("yumoQuest1");
   addRoyalCoins(GAME_CONSTANTS.YUMO.QUEST1_REWARD);
-  setStory(YUMO_QUEST_STORIES.quest1_accept + `\n\n获得 ${GAME_CONSTANTS.YUMO.QUEST1_REWARD} 皇家币\n当前皇家币：${getState().royalCoins}`);
+  setStory(YUMO_QUEST_STORIES.quest1_accept + `\n\nNhận ${GAME_CONSTANTS.YUMO.QUEST1_REWARD} tiền hoàng gia\nTiền hoàng gia hiện tại: ${getState().royalCoins}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
   if (!state.gameOver) {
     setPhase("island_yumo");
-    setOptions([{ text: "继续", action: "yumo_quest_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "yumo_quest_continue" }]);
   }
 }
 
@@ -244,10 +244,10 @@ export function handleYumoQuest2() {
   const need = GAME_CONSTANTS.YUMO.QUEST2_GEL_COST;
 
   if (gelCount < need) {
-    setStory(YUMO_QUEST_STORIES.quest2_intro + `\n\n所需物品：丧尸凝胶 ${gelCount}/${need}`);
+    setStory(YUMO_QUEST_STORIES.quest2_intro + `\n\nVật phẩm cần: gel zombie ${gelCount}/${need}`);
     setPhase("island_yumo");
     setOptions([
-      { text: "去收集凝胶", action: "yumo_leave" },
+      { text: "Đi thu thập gel", action: "yumo_leave" },
     ]);
     return;
   }
@@ -255,13 +255,13 @@ export function handleYumoQuest2() {
   removeItemById("medicine", "zombie_gel", need);
   markQuestDone("yumoQuest2");
   addRoyalCoins(GAME_CONSTANTS.YUMO.QUEST2_REWARD);
-  setStory(YUMO_QUEST_STORIES.quest2_accept + `\n\n获得 ${GAME_CONSTANTS.YUMO.QUEST2_REWARD} 皇家币\n当前皇家币：${getState().royalCoins}`);
+  setStory(YUMO_QUEST_STORIES.quest2_accept + `\n\nNhận ${GAME_CONSTANTS.YUMO.QUEST2_REWARD} tiền hoàng gia\nTiền hoàng gia hiện tại: ${getState().royalCoins}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
   if (!state.gameOver) {
     setPhase("island_yumo");
-    setOptions([{ text: "继续", action: "yumo_quest_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "yumo_quest_continue" }]);
   }
 }
 
@@ -271,23 +271,23 @@ export function handleYumoQuest3() {
   const need = GAME_CONSTANTS.YUMO.QUEST3_DIVING_KILLS;
 
   if (kills < need) {
-    setStory(YUMO_QUEST_STORIES.quest3_intro + `\n\n当前进度：已击杀 ${kills}/${need} 只潜水丧尸`);
+    setStory(YUMO_QUEST_STORIES.quest3_intro + `\n\nTiến độ hiện tại: đã hạ ${kills}/${need} zombie lặn`);
     setPhase("island_yumo");
     setOptions([
-      { text: "去清理丧尸", action: "yumo_leave" },
+      { text: "Đi dọn zombie", action: "yumo_leave" },
     ]);
     return;
   }
 
   markQuestDone("yumoQuest3");
   addRoyalCoins(GAME_CONSTANTS.YUMO.QUEST3_REWARD);
-  setStory(YUMO_QUEST_STORIES.quest3_complete + `\n\n获得 ${GAME_CONSTANTS.YUMO.QUEST3_REWARD} 皇家币\n当前皇家币：${getState().royalCoins}`);
+  setStory(YUMO_QUEST_STORIES.quest3_complete + `\n\nNhận ${GAME_CONSTANTS.YUMO.QUEST3_REWARD} tiền hoàng gia\nTiền hoàng gia hiện tại: ${getState().royalCoins}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
   if (!state.gameOver) {
     setPhase("island_yumo");
-    setOptions([{ text: "继续", action: "yumo_quest_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "yumo_quest_continue" }]);
   }
 }
 
@@ -299,17 +299,17 @@ export function handleYumoQuest4() {
   const need = GAME_CONSTANTS.YUMO.QUEST4_MATERIAL_COST;
 
   if (matCount < need || woodCount < need || stoneCount < need) {
-    let msg = YUMO_QUEST_STORIES.quest4_intro + "\n\n所需物品：";
-    if (matCount < need) msg += `\n  建筑材料 ${matCount}/${need}`;
-    else msg += `\n  建筑材料 ${matCount}/${need} ✓`;
-    if (woodCount < need) msg += `\n  木材 ${woodCount}/${need}`;
-    else msg += `\n  木材 ${woodCount}/${need} ✓`;
-    if (stoneCount < need) msg += `\n  石头 ${stoneCount}/${need}`;
-    else msg += `\n  石头 ${stoneCount}/${need} ✓`;
+    let msg = YUMO_QUEST_STORIES.quest4_intro + "\n\nVật phẩm cần:";
+    if (matCount < need) msg += `\n  Vật liệu xây dựng ${matCount}/${need}`;
+    else msg += `\n  Vật liệu xây dựng ${matCount}/${need} ✓`;
+    if (woodCount < need) msg += `\n  Gỗ ${woodCount}/${need}`;
+    else msg += `\n  Gỗ ${woodCount}/${need} ✓`;
+    if (stoneCount < need) msg += `\n  Đá ${stoneCount}/${need}`;
+    else msg += `\n  Đá ${stoneCount}/${need} ✓`;
     setStory(msg);
     setPhase("island_yumo");
     setOptions([
-      { text: "去收集建材", action: "yumo_leave" },
+      { text: "Đi thu thập vật liệu", action: "yumo_leave" },
     ]);
     return;
   }
@@ -319,13 +319,13 @@ export function handleYumoQuest4() {
   removeItemById("other", "stone", need);
   markQuestDone("yumoQuest4");
   addRoyalCoins(GAME_CONSTANTS.YUMO.QUEST4_REWARD);
-  setStory(YUMO_QUEST_STORIES.quest4_accept + `\n\n获得 ${GAME_CONSTANTS.YUMO.QUEST4_REWARD} 皇家币\n当前皇家币：${getState().royalCoins}`);
+  setStory(YUMO_QUEST_STORIES.quest4_accept + `\n\nNhận ${GAME_CONSTANTS.YUMO.QUEST4_REWARD} tiền hoàng gia\nTiền hoàng gia hiện tại: ${getState().royalCoins}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
   if (!state.gameOver) {
     setPhase("island_yumo");
-    setOptions([{ text: "继续", action: "yumo_quest_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "yumo_quest_continue" }]);
   }
 }
 
@@ -334,10 +334,10 @@ export function handleYumoQuest5() {
   const baijiuCount = state.drinks.filter(i => i.id === "高度白酒").reduce((sum, i) => sum + (i.count || 1), 0);
 
   if (baijiuCount < 1) {
-    setStory(YUMO_QUEST_STORIES.quest5_intro + "\n\n所需物品：高度白酒 0/1");
+    setStory(YUMO_QUEST_STORIES.quest5_intro + "\n\nVật phẩm cần: rượu trắng độ cao 0/1");
     setPhase("island_yumo");
     setOptions([
-      { text: "去找酒", action: "yumo_leave" },
+      { text: "Đi tìm rượu", action: "yumo_leave" },
     ]);
     return;
   }
@@ -350,6 +350,6 @@ export function handleYumoQuest5() {
   checkDeath();
   if (!state.gameOver) {
     setPhase("island_yumo");
-    setOptions([{ text: "继续", action: "yumo_quest_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "yumo_quest_continue" }]);
   }
 }

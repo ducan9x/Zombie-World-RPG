@@ -43,41 +43,41 @@ export function handleDoctorInteract() {
     setPhase("explore");
     const opts = [];
     if (state.lastImprovedSerumDay !== state.day) {
-      opts.push({ text: "领取产出", action: "doctor_harvest_serum" });
+      opts.push({ text: "Nhận sản lượng", action: "doctor_harvest_serum" });
     } else {
-      opts.push({ text: "领取产出（今日已领取）", action: "doctor_harvest_serum", disabled: true });
+      opts.push({ text: "Nhận sản lượng (Hôm nay đã nhận)", action: "doctor_harvest_serum", disabled: true });
     }
-    // 老马任务链：除掉博士
+    // Chuỗi nhiệm vụ Lão Mã: xử lý bác sĩ
     if (state.oldMaStep >= 6 && !state.doctorKilled) {
-      opts.push({ text: "🔪 除掉博士", action: "kill_doctor" });
+      opts.push({ text: "🔪 Xử lý bác sĩ", action: "kill_doctor" });
     }
-    opts.push({ text: "离开", action: "doctor_leave" });
+    opts.push({ text: "Rời đi", action: "doctor_leave" });
     setOptions(opts);
     return;
   }
   if (state.doctorTradeDone) {
     setPhase("explore");
-    setStory("陈博士正忙着整理实验数据。看到你走来，他推了推眼镜点了点头。");
+    setStory("Tiến sĩ Trần đang bận rộn sắp xếp dữ liệu thí nghiệm. Thấy bạn đi tới, anh đẩy gọng kính gật đầu.");
     const opts = [];
-    opts.push({ text: "对话", action: "doctor_chat" });
+    opts.push({ text: "Đối thoại", action: "doctor_chat" });
     if (state.giantPuppetDefeated && !state.doctorQuest1Accepted && !state.doctorQuest1Done) {
-      opts.push({ text: "火箭维修咨询", action: "doctor_rocket_consult" });
+      opts.push({ text: "Tư vấn sửa chữa tên lửa", action: "doctor_rocket_consult" });
     } else if (!state.giantPuppetDefeated && !state.doctorQuest1Accepted && !state.doctorQuest1Done) {
-      opts.push({ text: "火箭维修咨询（需要先击败航天基地的巨型傀儡）", action: "doctor_rocket_consult", disabled: true });
+      opts.push({ text: "Tư vấn sửa chữa tên lửa (Cần đánh bại cỗ rối khổng lồ ở căn cứ hàng không vũ trụ trước)", action: "doctor_rocket_consult", disabled: true });
     }
     if (state.doctorQuest1Accepted && !state.doctorQuest1Done) {
       const hasGenerator = state.other.some(i => i.id === "small_nuclear_generator");
       if (hasGenerator) {
-        opts.push({ text: "上交小核能发电机", action: "doctor_quest1_submit" });
+        opts.push({ text: "Nộp máy phát điện hạt nhân nhỏ", action: "doctor_quest1_submit" });
       } else {
-        opts.push({ text: "小核能发电机（未获取）", action: "doctor_quest1_submit", disabled: true });
+        opts.push({ text: "Máy phát điện hạt nhân nhỏ (Chưa có)", action: "doctor_quest1_submit", disabled: true });
       }
     }
     if (state.doctorQuest1Done && !state.doctorQuest2Done) {
       if (state.pureEnergy >= GAME_CONSTANTS.ROCKET.QUEST2_ENERGY_COST) {
-        opts.push({ text: `上交${GAME_CONSTANTS.ROCKET.QUEST2_ENERGY_COST}个纯净能源`, action: "doctor_quest2_submit" });
+        opts.push({ text: `Nộp ${GAME_CONSTANTS.ROCKET.QUEST2_ENERGY_COST} năng lượng tinh khiết`, action: "doctor_quest2_submit" });
       } else {
-        opts.push({ text: `上交${GAME_CONSTANTS.ROCKET.QUEST2_ENERGY_COST}个纯净能源（你有${state.pureEnergy}个）`, action: "doctor_quest2_submit", disabled: true });
+        opts.push({ text: `Nộp ${GAME_CONSTANTS.ROCKET.QUEST2_ENERGY_COST} năng lượng tinh khiết (Bạn có ${state.pureEnergy})`, action: "doctor_quest2_submit", disabled: true });
       }
     }
     if (state.doctorQuest2Done && !state.doctorQuest3Done) {
@@ -86,19 +86,19 @@ export function handleDoctorInteract() {
       const drinkCount = state.drinks.reduce((sum, d) => sum + (d.count || 1), 0);
       const canSubmit = medCount >= GAME_CONSTANTS.ROCKET.QUEST3_MEDICINE_COST && foodCount >= GAME_CONSTANTS.ROCKET.QUEST3_FOOD_COST && drinkCount >= GAME_CONSTANTS.ROCKET.QUEST3_DRINKS_COST;
       if (canSubmit) {
-        opts.push({ text: "上交物资储备", action: "doctor_quest3_submit" });
+        opts.push({ text: "Nộp dự trữ vật tư", action: "doctor_quest3_submit" });
       } else {
-        opts.push({ text: `物资储备（医疗${medCount}/${GAME_CONSTANTS.ROCKET.QUEST3_MEDICINE_COST} 食物${foodCount}/${GAME_CONSTANTS.ROCKET.QUEST3_FOOD_COST} 饮品${drinkCount}/${GAME_CONSTANTS.ROCKET.QUEST3_DRINKS_COST}）`, action: "doctor_quest3_submit", disabled: true });
+        opts.push({ text: `Dự trữ vật tư (Y tế${medCount}/${GAME_CONSTANTS.ROCKET.QUEST3_MEDICINE_COST} Thực phẩm${foodCount}/${GAME_CONSTANTS.ROCKET.QUEST3_FOOD_COST} Đồ uống${drinkCount}/${GAME_CONSTANTS.ROCKET.QUEST3_DRINKS_COST})`, action: "doctor_quest3_submit", disabled: true });
       }
     }
     if (state.doctorQuest3Done) {
-      opts.push({ text: "关于火箭…", action: "doctor_rocket_status" });
+      opts.push({ text: "Về tên lửa…", action: "doctor_rocket_status" });
     }
-    // 老马任务链：除掉博士
+    // Chuỗi nhiệm vụ Lão Mã: xử lý bác sĩ
     if (state.oldMaStep >= 6 && !state.doctorKilled) {
-      opts.push({ text: "🔪 除掉博士", action: "kill_doctor" });
+      opts.push({ text: "🔪 Xử lý bác sĩ", action: "kill_doctor" });
     }
-    opts.push({ text: "离开", action: "doctor_leave" });
+    opts.push({ text: "Rời đi", action: "doctor_leave" });
     setOptions(opts);
     return;
   }
@@ -107,17 +107,17 @@ export function handleDoctorInteract() {
   const serumCount = state.medicine.filter(m => m.id === DEFAULT_ITEM_IDS.serum).reduce((sum, m) => sum + (m.count || 1), 0);
   const opts = [];
   if (serumCount >= GAME_CONSTANTS.DOCTOR.SERUM_TRADE_COST) {
-    opts.push({ text: `上交${GAME_CONSTANTS.DOCTOR.SERUM_TRADE_COST}支${MEDICINES.find(m => m.id === DEFAULT_ITEM_IDS.serum).name}`, action: "doctor_trade" });
+    opts.push({ text: `Nộp ${GAME_CONSTANTS.DOCTOR.SERUM_TRADE_COST} ống ${MEDICINES.find(m => m.id === DEFAULT_ITEM_IDS.serum).name}`, action: "doctor_trade" });
   } else {
-    opts.push({ text: `上交${GAME_CONSTANTS.DOCTOR.SERUM_TRADE_COST}支${MEDICINES.find(m => m.id === DEFAULT_ITEM_IDS.serum).name}（你仅有${serumCount}支）`, action: "doctor_trade", disabled: true });
+    opts.push({ text: `Nộp ${GAME_CONSTANTS.DOCTOR.SERUM_TRADE_COST} ống ${MEDICINES.find(m => m.id === DEFAULT_ITEM_IDS.serum).name} (Bạn chỉ có ${serumCount} ống)`, action: "doctor_trade", disabled: true });
   }
-  opts.push({ text: "对话", action: "doctor_chat" });
-  opts.push({ text: "火箭维修咨询（需要先完成陈博士的血清交易）", action: "doctor_rocket_consult", disabled: true });
-  // 老马任务链：除掉博士
+  opts.push({ text: "Đối thoại", action: "doctor_chat" });
+  opts.push({ text: "Tư vấn sửa chữa tên lửa (Cần hoàn thành giao dịch huyết thanh với Tiến sĩ Trần trước)", action: "doctor_rocket_consult", disabled: true });
+  // Chuỗi nhiệm vụ Lão Mã: xử lý bác sĩ
   if (state.oldMaStep >= 6 && !state.doctorKilled) {
-    opts.push({ text: "🔪 除掉博士", action: "kill_doctor" });
+    opts.push({ text: "🔪 Xử lý bác sĩ", action: "kill_doctor" });
   }
-  opts.push({ text: "离开", action: "doctor_leave" });
+  opts.push({ text: "Rời đi", action: "doctor_leave" });
   setOptions(opts);
 }
 
@@ -148,9 +148,9 @@ export function handleDoctorTrade() {
   const addedAmmo = addItem({ id: doctorAmmo.id, name: doctorAmmo.name, type: "ammo", count: doctorDrop.ammoCount });
   state.doctorTradeDone = true;
   if (addedGun && addedAmmo) {
-    setStory(`博士接过${GAME_CONSTANTS.DOCTOR.SERUM_TRADE_COST}支血清，双手微微颤抖。"太感谢了……这足以让我完成研究了！"他递给你一把${doctorWeapon.name}和${doctorDrop.ammoCount}发${doctorAmmo.name}子弹。"这是我最后的私人物品，希望能帮到你。"`);
+    setStory(`Tiến sĩ nhận ${GAME_CONSTANTS.DOCTOR.SERUM_TRADE_COST} ống huyết thanh, hai tay run nhẹ. "Cảm ơn nhiều……đủ để tôi hoàn thành nghiên cứu rồi!" Anh đưa cho bạn một khẩu ${doctorWeapon.name} và ${doctorDrop.ammoCount} viên ${doctorAmmo.name} đạn. "Đây là đồ dùng riêng cuối cùng của tôi, hy vọng có thể giúp được bạn."`);
   } else {
-    setStory(`博士接过${GAME_CONSTANTS.DOCTOR.SERUM_TRADE_COST}支血清，递给你${doctorWeapon.name}和子弹。但你的背包空间不足，部分物品无法携带！`);
+    setStory(`Tiến sĩ nhận ${GAME_CONSTANTS.DOCTOR.SERUM_TRADE_COST} ống huyết thanh, đưa cho bạn ${doctorWeapon.name} và đạn. Nhưng balo bạn không đủ chỗ, một phần vật phẩm không thể mang theo!`);
   }
   advanceTime(1);
   updateStatusEffects();
@@ -168,32 +168,32 @@ export function handleDoctorChat() {
   if (state.doctorLeftInEnding8) {
     const opts = [];
     if (state.lastImprovedSerumDay !== state.day) {
-      opts.push({ text: "领取产出", action: "doctor_harvest_serum" });
+      opts.push({ text: "Nhận sản lượng", action: "doctor_harvest_serum" });
     } else {
-      opts.push({ text: "领取产出（今日已领取）", action: "doctor_harvest_serum", disabled: true });
+      opts.push({ text: "Nhận sản lượng (Hôm nay đã nhận)", action: "doctor_harvest_serum", disabled: true });
     }
-    opts.push({ text: "离开", action: "doctor_leave" });
+    opts.push({ text: "Rời đi", action: "doctor_leave" });
     setOptions(opts);
     return;
   }
   const opts = [];
-  opts.push({ text: "对话", action: "doctor_chat" });
+  opts.push({ text: "Đối thoại", action: "doctor_chat" });
   if (state.doctorTradeDone && state.giantPuppetDefeated && !state.doctorQuest1Accepted && !state.doctorQuest1Done) {
-    opts.push({ text: "火箭维修咨询", action: "doctor_rocket_consult" });
+    opts.push({ text: "Tư vấn sửa chữa tên lửa", action: "doctor_rocket_consult" });
   }
   if (state.doctorTradeDone && state.doctorQuest1Accepted && !state.doctorQuest1Done) {
     const hasGenerator = state.other.some(i => i.id === "small_nuclear_generator");
     if (hasGenerator) {
-      opts.push({ text: "上交小核能发电机", action: "doctor_quest1_submit" });
+      opts.push({ text: "Nộp máy phát điện hạt nhân nhỏ", action: "doctor_quest1_submit" });
     } else {
-      opts.push({ text: "小核能发电机（未获取）", action: "doctor_quest1_submit", disabled: true });
+      opts.push({ text: "Máy phát điện hạt nhân nhỏ (Chưa có)", action: "doctor_quest1_submit", disabled: true });
     }
   }
   if (state.doctorTradeDone && state.doctorQuest1Done && !state.doctorQuest2Done) {
     if (state.pureEnergy >= GAME_CONSTANTS.ROCKET.QUEST2_ENERGY_COST) {
-      opts.push({ text: `上交${GAME_CONSTANTS.ROCKET.QUEST2_ENERGY_COST}个纯净能源`, action: "doctor_quest2_submit" });
+      opts.push({ text: `Nộp ${GAME_CONSTANTS.ROCKET.QUEST2_ENERGY_COST} năng lượng tinh khiết`, action: "doctor_quest2_submit" });
     } else {
-      opts.push({ text: `上交${GAME_CONSTANTS.ROCKET.QUEST2_ENERGY_COST}个纯净能源（你有${state.pureEnergy}个）`, action: "doctor_quest2_submit", disabled: true });
+      opts.push({ text: `Nộp ${GAME_CONSTANTS.ROCKET.QUEST2_ENERGY_COST} năng lượng tinh khiết (Bạn có ${state.pureEnergy})`, action: "doctor_quest2_submit", disabled: true });
     }
   }
   if (state.doctorTradeDone && state.doctorQuest2Done && !state.doctorQuest3Done) {
@@ -202,24 +202,24 @@ export function handleDoctorChat() {
     const drinkCount = state.drinks.reduce((sum, d) => sum + (d.count || 1), 0);
     const canSubmit = medCount >= GAME_CONSTANTS.ROCKET.QUEST3_MEDICINE_COST && foodCount >= GAME_CONSTANTS.ROCKET.QUEST3_FOOD_COST && drinkCount >= GAME_CONSTANTS.ROCKET.QUEST3_DRINKS_COST;
     if (canSubmit) {
-      opts.push({ text: "上交物资储备", action: "doctor_quest3_submit" });
+      opts.push({ text: "Nộp dự trữ vật tư", action: "doctor_quest3_submit" });
     } else {
-      opts.push({ text: `物资储备（医疗${medCount}/${GAME_CONSTANTS.ROCKET.QUEST3_MEDICINE_COST} 食物${foodCount}/${GAME_CONSTANTS.ROCKET.QUEST3_FOOD_COST} 饮品${drinkCount}/${GAME_CONSTANTS.ROCKET.QUEST3_DRINKS_COST}）`, action: "doctor_quest3_submit", disabled: true });
+      opts.push({ text: `Dự trữ vật tư (Y tế${medCount}/${GAME_CONSTANTS.ROCKET.QUEST3_MEDICINE_COST} Thực phẩm${foodCount}/${GAME_CONSTANTS.ROCKET.QUEST3_FOOD_COST} Đồ uống${drinkCount}/${GAME_CONSTANTS.ROCKET.QUEST3_DRINKS_COST})`, action: "doctor_quest3_submit", disabled: true });
     }
   }
   if (state.doctorTradeDone && state.doctorQuest3Done) {
-    opts.push({ text: "关于火箭…", action: "doctor_rocket_status" });
+    opts.push({ text: "Về tên lửa…", action: "doctor_rocket_status" });
   }
-  // 老马任务链：除掉博士
+  // Chuỗi nhiệm vụ Lão Mã: xử lý bác sĩ
   if (state.oldMaStep >= 6 && !state.doctorKilled) {
-    opts.push({ text: "🔪 除掉博士", action: "kill_doctor" });
+    opts.push({ text: "🔪 Xử lý bác sĩ", action: "kill_doctor" });
   }
-  opts.push({ text: "离开", action: "doctor_leave" });
+  opts.push({ text: "Rời đi", action: "doctor_leave" });
   setOptions(opts);
 }
 
 export function handleDoctorLeave() {
-  setStory("你告别了博士，离开了研究所。");
+  setStory("Bạn chào tạm biệt bác sĩ, rời khỏi viện nghiên cứu.");
   showExploreOptionsState();
 }
 
@@ -227,15 +227,15 @@ export function handleDoctorRocketConsult() {
   setPhase("explore");
   setStory(DOCTOR_QUEST1_STORY);
   setOptions([
-    { text: "接受任务", action: "doctor_quest1_accept" },
-    { text: "拒绝", action: "doctor_quest1_reject" },
+    { text: "Nhận nhiệm vụ", action: "doctor_quest1_accept" },
+    { text: "Từ chối", action: "doctor_quest1_reject" },
   ]);
 }
 
 export function handleDoctorQuest1Accept() {
   const state = getState();
   state.doctorQuest1Accepted = true;
-  setStory("你点了点头。陈博士露出了久违的笑容：\"太好了！去城堡找国王吧，祝你好运。记住，你需要的是小核能发电机。\"");
+  setStory("Bạn gật đầu. Tiến sĩ Trần lộ ra nụ cười hiếm hoi: \"Tuyệt quá! Đi tìm quốc vương ở thành đi, chúc may mắn. Nhớ nhé, bạn cần máy phát điện hạt nhân nhỏ.\"");
   showExploreOptionsState();
 }
 
@@ -264,7 +264,7 @@ export function handleDoctorQuest2Submit() {
   const state = getState();
   const cost = GAME_CONSTANTS.ROCKET.QUEST2_ENERGY_COST;
   if (state.pureEnergy < cost) {
-    setStory("纯净能源数量不足。");
+    setStory("Năng lượng tinh khiết không đủ.");
     handleDoctorInteract();
     return;
   }
@@ -314,14 +314,14 @@ export function handleDoctorQuest3Submit() {
 }
 
 export function handleDoctorRocketStatus() {
-  setStory("陈博士推了推眼镜：\"火箭已经准备就绪，所有系统运行正常。去航天基地的发射中心吧，在那里你将做出最后的选择。\"");
+  setStory("Tiến sĩ Trần đẩy gọng kính: \"Tên lửa đã sẵn sàng, mọi hệ thống hoạt động bình thường. Hãy đến trung tâm phóng ở căn cứ hàng không vũ trụ, ở đó bạn sẽ đưa ra lựa chọn cuối cùng.\"");
   showExploreOptionsState();
 }
 
 export function handleDoctorHarvestSerum() {
   const state = getState();
   if (state.lastImprovedSerumDay === state.day) {
-    setStory("今天的改良抗体针已经领取过了，明天再来吧。");
+    setStory("Hôm nay đã nhận kháng thể cải tiến rồi, mai hãy quay lại.");
     handleDoctorInteract();
     return;
   }
@@ -330,9 +330,9 @@ export function handleDoctorHarvestSerum() {
   if (improvedSerum) {
     const added = addItem({ ...improvedSerum });
     if (added) {
-      setStory("你从博士留下的制造仪器中取出了一支改良抗体针。淡蓝色的液体在针管中微微发光。");
+      setStory("Bạn lấy ra một ống kháng thể cải tiến từ thiết bị chế tạo mà bác sĩ để lại. Chất lỏng màu xanh nhạt hơi phát sáng trong ống.");
     } else {
-      setStory("制造仪器产出了一支改良抗体针，但你的背包已满，无法携带！");
+      setStory("Thiết bị chế tạo cho ra một ống kháng thể cải tiến, nhưng balo bạn đã đầy, không thể mang theo!");
     }
   }
   handleDoctorInteract();
@@ -341,31 +341,31 @@ export function handleDoctorHarvestSerum() {
 export function handleEnergyWell() {
   const state = getState();
   if (!state.doctorQuest1Done) {
-    setStory("研究所深处似乎有什么装置，但目前还无法使用。也许需要陈博士的帮助才能启动。");
+    setStory("Sâu trong viện nghiên cứu dường như có thiết bị gì đó, nhưng hiện chưa thể sử dụng. Có lẽ cần sự giúp đỡ của Tiến sĩ Trần mới khởi động được.");
     showExploreOptionsState();
     return;
   }
   if (state.lastEnergyWellDay === state.day) {
-    setStory(ENERGY_WELL_STORY + "\n\n开采井今天已经提取过了，明天再来吧。");
+    setStory(ENERGY_WELL_STORY + "\n\nGiếng khai thác hôm nay đã lấy rồi, mai hãy quay lại.");
     showExploreOptionsState();
     return;
   }
   state.lastEnergyWellDay = state.day;
-  const progressHint = `\n\n当前纯净能源数量：${state.pureEnergy + 1}/${GAME_CONSTANTS.ROCKET.QUEST2_ENERGY_COST}`;
+  const progressHint = `\n\nSố lượng năng lượng tinh khiết hiện tại: ${state.pureEnergy + 1}/${GAME_CONSTANTS.ROCKET.QUEST2_ENERGY_COST}`;
   addPureEnergy(1);
-  setStory(ENERGY_WELL_STORY + "\n\n你从开采井中提取了一份纯净能源。淡蓝色的能量液体在容器中微微发光。" + progressHint);
+  setStory(ENERGY_WELL_STORY + "\n\nBạn trích xuất được một phần năng lượng tinh khiết từ giếng khai thác. Chất lỏng năng lượng màu xanh nhạt hơi phát sáng trong bình chứa." + progressHint);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
   if (!state.gameOver) showExploreOptionsState();
 }
 
-// ========== 老马任务：除掉博士 ==========
+// ========== Chuỗi nhiệm vụ Lão Mã: xử lý bác sĩ ==========
 
 export function handleKillDoctor() {
   const state = getState();
   if (state.doctorKilled) {
-    setStory("陈博士已经不在了，实验室里只剩仪器运转的嗡嗡声。");
+    setStory("Tiến sĩ Trần không còn ở đây nữa, trong phòng thí nghiệm chỉ còn tiếng vo vo của thiết bị.");
     showExploreOptionsState();
     return;
   }
@@ -384,16 +384,16 @@ export function handleKillDoctor() {
   state._pendingNpcCallback = "kill_doctor_result";
   setPhase("pre_combat_npc");
   const meleeName = state.meleeWeapon.name;
-  const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "无";
-  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ 你的身体极度疲惫，无法正常战斗！" : "";
-  setStory(`你冷冷地看着陈博士。他还在显微镜前忙碌，完全没注意到危险的逼近。\n\n"老马让我带句话。"你缓缓举起了武器。\n\n陈博士终于抬起头，推了推眼镜，眼中先是困惑，随即变成了恐惧："你……你是他派来的？！我就知道……他早晚会来找我……"\n\n⚔️ ${doctor.name}\n❤️ HP:${doctor.hp} | ⚡ 伤害:${doctor.damageMin}-${doctor.damageMax}\n\n【近战】${meleeName}\n【远程】${rangedName}${crashWarning}`);
+  const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "Không";
+  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Cơ thể bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường!" : "";
+  setStory(`Bạn lạnh lùng nhìn Tiến sĩ Trần. Anh vẫn bận rộn trước kính hiển vi, hoàn toàn không nhận ra nguy hiểm đang đến gần.\n\n"Lão Mã bảo tôi gửi lời." Bạn chậm rãi giơ vũ khí lên.\n\nTiến sĩ Trần cuối cùng cũng ngẩng đầu, đẩy gọng kính, trong mắt đầu tiên là bối rối, rồi biến thành sợ hãi: "Ngươi……ngươi là người hắn phái tới?! Tôi biết mà……hắn sớm muộn cũng tìm đến tôi……"\n\n⚔️ ${doctor.name}\n❤️ HP:${doctor.hp} | ⚡ Sát thương:${doctor.damageMin}-${doctor.damageMax}\n\n【Cận chiến】${meleeName}\n【Tầm xa】${rangedName}${crashWarning}`);
   const opts = [
-    { text: "近战作战", action: "combat_npc_melee" }
+    { text: "Chiến đấu cận chiến", action: "combat_npc_melee" }
   ];
   if (state.rangedWeapon && state.ammo.some(a => a.id === state.rangedWeapon.ammoType && a.count > 0)) {
-    opts.push({ text: "远程作战", action: "combat_npc_ranged" });
+    opts.push({ text: "Chiến đấu tầm xa", action: "combat_npc_ranged" });
   } else {
-    opts.push({ text: "远程作战（不可用：无弹药）", action: "combat_npc_ranged", disabled: true });
+    opts.push({ text: "Chiến đấu tầm xa (Không khả dụng: Hết đạn)", action: "combat_npc_ranged", disabled: true });
   }
   opts.push({ text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_npc_flee" });
   setOptions(opts);

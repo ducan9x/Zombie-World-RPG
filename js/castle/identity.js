@@ -7,34 +7,34 @@ export function handleCastleIdentity() {
   setPhase("castle_identity");
   const state = getState();
   const hasId = state.other.some(i => i.id === SPECIAL_ITEMS.noble_id.id);
-  setStory(`🏛️ 【城堡身份办理处】\n\n${hasId ? "你目前持有贵族身份牌。" : "你目前没有贵族身份牌。"}\n\n办理贵族身份牌需要 ${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST} 根香烟。注意：身份牌一旦丢失需要重新办理，注销身份牌不会退还香烟。`);
+  setStory(`🏛️ [Nơi xử lý thẻ thân phận lâu đài]\n\n${hasId ? "Hiện bạn đang giữ thẻ quý tộc." : "Hiện bạn không có thẻ quý tộc."}\n\nLàm thẻ quý tộc cần ${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST} điếu thuốc lá. Lưu ý: mất thẻ phải làm lại, hủy thẻ sẽ không hoàn trả thuốc lá.`);
   setOptions([
-    { text: `办理身份（${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST}根香烟）`, action: "identity_apply", disabled: state.other.some(i => i.id === "noble_id") },
-    { text: hasId ? "注销身份" : "注销身份（未办理）", action: "identity_cancel", disabled: !hasId },
-    { text: "离开", action: "identity_leave" },
+    { text: `Làm thẻ (${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST} điếu thuốc lá)`, action: "identity_apply", disabled: state.other.some(i => i.id === "noble_id") },
+    { text: hasId ? "Hủy thẻ" : "Hủy thẻ (chưa làm)", action: "identity_cancel", disabled: !hasId },
+    { text: "Rời đi", action: "identity_leave" },
   ]);
 }
 
 export function handleIdentityApply() {
   const state = getState();
   if (state.other.some(i => i.id === "noble_id")) {
-    setStory("你已经持有贵族身份牌了，无需重复办理。");
+    setStory("Bạn đã có thẻ quý tộc rồi, không cần làm lại.");
     setPhase("castle_identity");
     setOptions([
-      { text: `办理身份（${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST}根香烟）`, action: "identity_apply", disabled: true },
-      { text: "注销身份", action: "identity_cancel" },
-      { text: "离开", action: "identity_leave" },
+      { text: `Làm thẻ (${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST} điếu thuốc lá)`, action: "identity_apply", disabled: true },
+      { text: "Hủy thẻ", action: "identity_cancel" },
+      { text: "Rời đi", action: "identity_leave" },
     ]);
     return;
   }
   cleanDualIdentity(state);
   if (hasAnyDawnIdentity(state)) {
-    setStory("办事员狐疑地打量着你：\"曙光阵地的人来办贵族身份？你是在逗我吗？\" 两个卫兵走了过来，你只好离开。");
+    setStory("Nhân viên nghi ngờ đánh giá bạn: \"Người của Dawn Garrison đến làm thẻ quý tộc? Ngươi đang đùa ta sao?\" Hai vệ binh đi tới, bạn đành phải rời đi.");
     refreshCastleIdentity();
     return;
   }
   if (state.cigarettes < GAME_CONSTANTS.CASTLE.NOBLE_ID_COST) {
-      setStory(`❌ 你需要 ${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST} 根香烟才能办理贵族身份牌。你只有 ${state.cigarettes} 根。还是去攒点钱再来吧。`);
+      setStory(`❌ Bạn cần ${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST} điếu thuốc lá để làm thẻ quý tộc. Bạn chỉ có ${state.cigarettes} điếu. Hãy đi kiếm thêm rồi quay lại.`);
     refreshCastleIdentity();
     return;
   }
@@ -42,7 +42,7 @@ export function handleIdentityApply() {
   state.other.push({ ...SPECIAL_ITEMS.noble_id });
   if (!state.unlockedAchievements) state.unlockedAchievements = [];
   if (!state.unlockedAchievements.includes("noble_status")) state.unlockedAchievements.push("noble_status");
-  setStory(`✅ 你缴纳了 ${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST} 根香烟，办事员在一张烫金卡片上刻下了你的名字，郑重地交到你手中。\n\n获得【贵族身份牌】！现在你可以自由出入末日城堡的贵族区域了。`);
+  setStory(`✅ Bạn đã nộp ${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST} điếu thuốc lá, nhân viên khắc tên bạn lên một tấm thẻ dát vàng, trịnh trọng trao cho bạn.\n\nNhận được [Thẻ quý tộc]! Giờ bạn có thể tự do ra vào khu vực quý tộc của Lâu đài Tận Thế.`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -55,7 +55,7 @@ export function handleIdentityCancel() {
   if (idx !== -1) {
     state.other.splice(idx, 1);
   }
-  setStory(`你交回了贵族身份牌，办事员面无表情地收下，一句话没说。${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST}根香烟打了水漂……`);
+  setStory(`Bạn trả lại thẻ quý tộc, nhân viên mặt không biểu cảm thu nhận, không nói một lời. ${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST} điếu thuốc lá coi như mất trắng……`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -67,9 +67,9 @@ export function refreshCastleIdentity() {
   const state = getState();
   const hasId = hasNobleId(state);
   setOptions([
-    { text: `办理身份（${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST}根香烟）`, action: "identity_apply", disabled: state.other.some(i => i.id === "noble_id") },
-    { text: hasId ? "注销身份" : "注销身份（未办理）", action: "identity_cancel", disabled: !hasId },
-    { text: "离开", action: "identity_leave" },
+    { text: `Làm thẻ (${GAME_CONSTANTS.CASTLE.NOBLE_ID_COST} điếu thuốc lá)`, action: "identity_apply", disabled: state.other.some(i => i.id === "noble_id") },
+    { text: hasId ? "Hủy thẻ" : "Hủy thẻ (chưa làm)", action: "identity_cancel", disabled: !hasId },
+    { text: "Rời đi", action: "identity_leave" },
   ]);
 }
 

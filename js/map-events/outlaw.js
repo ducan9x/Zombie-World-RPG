@@ -26,15 +26,15 @@ import { triggerEnding } from '../game/endings.js';
 export function handleRestaurantEat() {
   const state = getState();
   if (state.lastRestaurantEatDay >= state.day) {
-    setStory("今天已经吃过餐厅的食物了，明天再来吧。");
+    setStory("Hôm nay đã ăn đồ nhà hàng rồi, mai hãy quay lại.");
     showExploreOptionsState();
     return;
   }
   setPhase("explore");
   setStory(MAP_NPC_INTROS.restaurant_intro);
   setOptions([
-    { text: "食用桌上的杂肉", action: "restaurant_consume" },
-    { text: "离开", action: "restaurant_leave" },
+    { text: "Ăn tạp nhục trên bàn", action: "restaurant_consume" },
+    { text: "Rời đi", action: "restaurant_leave" },
   ]);
 }
 
@@ -52,13 +52,13 @@ export function handleRestaurantConsume() {
   if (state.gameOver) return;
   setStory(MAP_NPC_INTROS.restaurant_eat);
   setOptions([
-    { text: "食用桌上的杂肉", action: "restaurant_consume" },
-    { text: "离开", action: "restaurant_leave" },
+    { text: "Ăn tạp nhục trên bàn", action: "restaurant_consume" },
+    { text: "Rời đi", action: "restaurant_leave" },
   ]);
 }
 
 export function handleRestaurantLeave() {
-  setStory("你离开了服务区餐厅，那股诡异的肉味还萦绕在鼻尖。");
+  setStory("Bạn rời khỏi nhà hàng khu phục vụ, mùi thịt quái dị đó vẫn còn vương vấn ở mũi.");
   showExploreOptionsState();
 }
 
@@ -78,10 +78,10 @@ function showOutlawMenu() {
   const state = getState();
   setPhase("explore");
   const opts = [
-    { text: "对话", action: "outlaw_chat" },
-    { text: "关于餐厅的食物", action: "outlaw_food_chat" },
-    { text: "挑战", action: "outlaw_fight" },
-    { text: "离开", action: "outlaw_leave" },
+    { text: "Trò chuyện", action: "outlaw_chat" },
+    { text: "Về đồ ăn nhà hàng", action: "outlaw_food_chat" },
+    { text: "Thách đấu", action: "outlaw_fight" },
+    { text: "Rời đi", action: "outlaw_leave" },
   ];
   setOptions(opts);
 }
@@ -103,8 +103,8 @@ export function handleOutlawFoodChat() {
     setStory(MAP_NPC_INTROS.outlaw_food_quest1);
     setPhase("explore");
     setOptions([
-      { text: "接受（需要3瓶动力啤酒）", action: "outlaw_food_accept" },
-      { text: "拒绝", action: "outlaw_food_refuse" },
+      { text: "Chấp nhận (cần 3 chai bia động lực)", action: "outlaw_food_accept" },
+      { text: "Từ chối", action: "outlaw_food_refuse" },
     ]);
     return;
   }
@@ -112,8 +112,8 @@ export function handleOutlawFoodChat() {
     setStory(MAP_NPC_INTROS.outlaw_food_quest2);
     setPhase("explore");
     setOptions([
-      { text: "接受（需要提交3份作物）", action: "outlaw_food_accept" },
-      { text: "拒绝", action: "outlaw_food_refuse" },
+      { text: "Chấp nhận (cần nộp 3 phần cây trồng)", action: "outlaw_food_accept" },
+      { text: "Từ chối", action: "outlaw_food_refuse" },
     ]);
     return;
   }
@@ -121,8 +121,8 @@ export function handleOutlawFoodChat() {
     setStory(MAP_NPC_INTROS.outlaw_food_quest3);
     setPhase("explore");
     setOptions([
-      { text: "接受（需要10根香烟）", action: "outlaw_food_accept" },
-      { text: "拒绝", action: "outlaw_food_refuse" },
+      { text: "Chấp nhận (cần 10 điếu thuốc lá)", action: "outlaw_food_accept" },
+      { text: "Từ chối", action: "outlaw_food_refuse" },
     ]);
     return;
   }
@@ -130,12 +130,12 @@ export function handleOutlawFoodChat() {
     setStory(MAP_NPC_INTROS.outlaw_food_quest4);
     setPhase("explore");
     setOptions([
-      { text: "接受马三的邀请（⚠ 这将改变你的命运）", action: "outlaw_food_accept" },
-      { text: "拒绝", action: "outlaw_food_refuse" },
+      { text: "Chấp nhận lời mời của Mã Tam (⚠ Điều này sẽ thay đổi số phận bạn)", action: "outlaw_food_accept" },
+      { text: "Từ chối", action: "outlaw_food_refuse" },
     ]);
     return;
   }
-  setStory("马三已经没什么好说的了。");
+  setStory("Mã Tam không còn gì để nói.");
   showOutlawMenu();
 }
 
@@ -144,7 +144,7 @@ export function handleOutlawFoodAccept() {
   if (!state.maSanQuest1Done) {
     const beerCount = state.drinks.filter(d => d.id === "动力啤酒").reduce((sum, d) => sum + (d.count || 1), 0);
     if (beerCount < 3) {
-      setStory(`你需要3瓶动力啤酒，但只有${beerCount}瓶。`);
+      setStory(`Bạn cần 3 chai bia động lực, nhưng chỉ có ${beerCount} chai.`);
       showOutlawMenu();
       return;
     }
@@ -173,7 +173,7 @@ export function handleOutlawFoodAccept() {
     const cropIds = Object.keys(CROP_FOOD_MAP);
     const cropCount = state.food.filter(f => cropIds.includes(f.id)).reduce((sum, f) => sum + (f.count || 1), 0);
     if (cropCount < 3) {
-      setStory(`你需要提交3份作物，但你只有${cropCount}份。`);
+      setStory(`Bạn cần nộp 3 phần cây trồng, nhưng bạn chỉ có ${cropCount} phần.`);
       showOutlawMenu();
       return;
     }
@@ -199,7 +199,7 @@ export function handleOutlawFoodAccept() {
   }
   if (!state.maSanQuest3Done) {
     if (state.cigarettes < 10) {
-      setStory(`你需要10根香烟，但你只有${state.cigarettes}根。`);
+      setStory(`Bạn cần 10 điếu thuốc lá, nhưng bạn chỉ có ${state.cigarettes} điếu.`);
       showOutlawMenu();
       return;
     }
@@ -248,8 +248,8 @@ export function handleOutlawFoodRefuse() {
     setPhase("pre_combat_npc");
     setStory(MAP_NPC_INTROS.outlaw_food_quest4_reject);
     setOptions([
-      { text: "近战作战", action: "combat_npc_melee" },
-      { text: "远程射击", action: "combat_npc_ranged" },
+      { text: "Cận chiến", action: "combat_npc_melee" },
+      { text: "Bắn tầm xa", action: "combat_npc_ranged" },
       { text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_npc_flee" },
     ]);
     return;
@@ -269,8 +269,8 @@ export function handleOutlawFight() {
   setPhase("pre_combat_npc");
   setStory(MAP_NPC_INTROS.outlaw_fight);
   setOptions([
-    { text: "近战作战", action: "combat_npc_melee" },
-    { text: "远程射击", action: "combat_npc_ranged" },
+    { text: "Cận chiến", action: "combat_npc_melee" },
+    { text: "Bắn tầm xa", action: "combat_npc_ranged" },
     { text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_npc_flee" },
   ]);
 }
@@ -284,7 +284,7 @@ export function handleSearchFoodLocker() {
   const state = getState();
   if (state.lastFoodLockerDay > 0 && state.day - state.lastFoodLockerDay < GAME_CONSTANTS.MAP_EVENTS.CORPSE_COOLDOWN_DAYS) {
     const remaining = GAME_CONSTANTS.MAP_EVENTS.CORPSE_COOLDOWN_DAYS - (state.day - state.lastFoodLockerDay);
-    setStory(`食物储物柜已经翻过了，再过 ${remaining} 天再来吧。`);
+    setStory(`Tủ trữ thức ăn đã lục rồi, ${remaining} ngày nữa hãy quay lại.`);
     showExploreOptionsState();
     return;
   }
@@ -297,7 +297,7 @@ export function handleSearchFoodLocker() {
     updateStatusEffects();
     checkDeath();
     if (!state.gameOver) {
-      setStory("你翻找了服务区的食物储物柜，找到了一些看起来还算新鲜的食物和水。饱腹度和水分恢复了。");
+      setStory("Bạn lục tủ trữ thức ăn khu phục vụ, tìm được một số thức ăn và nước còn khá tươi. Độ no và nước đã hồi phục.");
       showExploreOptionsState();
     }
   } else {
@@ -306,7 +306,7 @@ export function handleSearchFoodLocker() {
     updateStatusEffects();
     checkDeath();
     if (!state.gameOver) {
-      setStory("你翻找了食物储物柜，但里面的食物都已经发霉变质了。看着那些腐烂的食物，你感到一阵恶心，疲惫度增加了。");
+      setStory("Bạn lục tủ trữ thức ăn, nhưng đồ bên trong đã mốc meo biến chất. Nhìn những thức ăn thối rữa đó, bạn cảm thấy buồn nôn, độ mệt mỏi tăng lên.");
       showExploreOptionsState();
     }
   }

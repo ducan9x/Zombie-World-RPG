@@ -48,31 +48,31 @@ export function handleBlackMarket() {
 
   const bm = state.blackMarket;
   if (!bm || !bm.weaponId) {
-    setStory("🏴‍☠️ 皇家黑市\n\n一个戴着面具的商人站在阴影中，低声说：\"今天没有好货，改天再来吧。\"");
-    setOptions([{ text: "离开", action: "bm_leave" }]);
+    setStory("🏴‍☠️ Thị trường đen Hoàng Gia\n\nMột thương nhân đội mặt nạ đứng trong bóng tối, nói nhỏ: \"Hôm nay không có hàng tốt, hẹn ngày khác nhé。\"");
+    setOptions([{ text: "Rời khỏi", action: "bm_leave" }]);
     return;
   }
 
   const weapon = RANGED_WEAPONS.find(w => w.id === bm.weaponId);
   if (!weapon) {
-    setStory("🏴‍☠️ 皇家黑市\n\n商人摇了摇头：\"货出了点问题，改天再来吧。\"");
-    setOptions([{ text: "离开", action: "bm_leave" }]);
+    setStory("🏴‍☠️ Thị trường đen Hoàng Gia\n\nThương nhân lắc đầu: \"Hàng có chút vấn đề, hẹn ngày khác nhé。\"");
+    setOptions([{ text: "Rời khỏi", action: "bm_leave" }]);
     return;
   }
 
-  let desc = "🏴‍☠️ 皇家黑市\n\n";
-  desc += `一个戴着面具的商人从阴影中走出，低声说：\"看看这个，好货不等人。\"\n\n`;
+  let desc = "🏴‍☠️ Thị trường đen Hoàng Gia\n\n";
+  desc += `Một thương nhân đội mặt nạ đi ra từ bóng tối, nói nhỏ: \"Xem cái này, hàng tốt không chờ ai。\"\n\n`;
   desc += `【${weapon.name}】\n`;
-  desc += `伤害：${weapon.damage}\n`;
-  desc += `弹药类型：${weapon.ammoType}\n`;
-  desc += `暴击率：${Math.round(weapon.critRate * 100)}%\n`;
-  desc += `一口价：${bm.price}皇家币\n\n`;
-  desc += `当前皇家币：${state.royalCoins}`;
+  desc += `Sát thương：${weapon.damage}\n`;
+  desc += `Loại đạn：${weapon.ammoType}\n`;
+  desc += `Tỷ lệ chí mạng：${Math.round(weapon.critRate * 100)}%\n`;
+  desc += `Giá bán：${bm.price} Xu Hoàng Gia\n\n`;
+  desc += `Xu Hoàng Gia hiện tại：${state.royalCoins}`;
 
   setStory(desc);
   setOptions([
-    { text: `购买（${bm.price}币）`, action: "bm_buy" },
-    { text: "离开", action: "bm_leave" },
+    { text: `Mua（${bm.price} xu）`, action: "bm_buy" },
+    { text: "Rời khỏi", action: "bm_leave" },
   ]);
 }
 
@@ -108,9 +108,9 @@ function handleBlackMarketBuy() {
   }
 
   if (state.royalCoins < bm.price) {
-    setStory(`你的皇家币不足。需要${bm.price}币，当前只有${state.royalCoins}币。`);
+    setStory(`Xu Hoàng Gia của bạn không đủ. Cần${bm.price} xu, hiện chỉ có${state.royalCoins} xu。`);
     setPhase("island_black_market");
-    setOptions([{ text: "继续", action: "bm_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "bm_continue" }]);
     return;
   }
 
@@ -118,10 +118,10 @@ function handleBlackMarketBuy() {
   const weaponCopy = { ...weapon, integrity: weapon.integrity };
   addItem(weaponCopy);
 
-  setStory(`商人将${weapon.name}递给你：\"好眼光，这把不会让你失望的。记住，我们没见过面。\"\n\n花费 ${bm.price} 皇家币，获得 ${weapon.name}\n当前皇家币：${getState().royalCoins}`);
+  setStory(`Thương nhân đưa cho bạn ${weapon.name}: \"Có mắt, cây này sẽ không làm bạn thất vọng. Nhớ rằng, chúng ta chưa từng gặp mặt。\"\n\nChi phí ${bm.price} Xu Hoàng Gia, nhận ${weapon.name}\nXu Hoàng Gia hiện tại：${getState().royalCoins}`);
 
   state.blackMarket = { refreshDay: bm.refreshDay };
 
   setPhase("island_black_market");
-  setOptions([{ text: "继续", action: "bm_continue" }]);
+  setOptions([{ text: "Tiếp tục", action: "bm_continue" }]);
 }

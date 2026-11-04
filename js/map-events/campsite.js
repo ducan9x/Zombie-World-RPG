@@ -24,30 +24,30 @@ export function handleStinkyTent() {
   setPhase("explore");
   const hasCaptain = state.other.some(i => i.id === "dawn_captain_badge");
   if (!hasCaptain) {
-    setStory("这个帐篷看起来太危险了，还是不进去了。（需要曙光先锋队长徽章）帐篷入口处挂着破烂的布帘，隐约能闻到一股腐烂的气味，令人作呕。");
+    setStory("Cái lều này có vẻ quá nguy hiểm, tốt nhất đừng vào. (Cần huy hiệu đội trưởng tiên phong Dawn) Cửa lều phủ rèm rách nát, thoang thoảng mùi thối rữa khiến người ta buồn nôn.");
     showExploreOptionsState();
     return;
   }
-  setStory("带领曙光阵地成员作战这么久，什么风浪没见过，进去看看吧。\n\n你掀开布帘，一股浓烈的尸臭味扑面而来。");
+  setStory("Dẫn dắt thành viên Dawn chiến đấu bao lâu, sóng gió nào chưa từng thấy, vào xem thử thôi.\n\nBạn vén rèm lên, một luồng mùi thối xác chết nồng nặc ùa vào mặt.");
   setOptions([
-    { text: "进入", action: "stinky_tent_enter" },
-    { text: "离开", action: "stinky_tent_leave" },
+    { text: "Vào", action: "stinky_tent_enter" },
+    { text: "Rời đi", action: "stinky_tent_leave" },
   ]);
 }
 
 export function handleStinkyTentEnter() {
   setPhase("explore");
-  setStory("帐篷里昏暗潮湿，角落里躺着一具散发尸臭味的女尸。她的衣着虽然已经破旧，但依稀能看出曾经体面。她的手边散落着一些文件和一支录音笔，似乎在临死前还在试图记录什么。\n\n空气中弥漫着令人窒息的腐臭，苍蝇在尸体周围嗡嗡作响。");
+  setStory("Trong lều tối tăm ẩm ướt, góc phòng nằm một thi thể nữ bốc mùi thối. Quần áo tuy đã rách nát nhưng vẫn có thể nhận ra từng có vẻ chỉnh tề. Bên tay cô ấy vương vãi vài tài liệu và một chiếc bút ghi âm, dường như trước khi chết vẫn cố gắng ghi lại điều gì đó.\n\nKhông khí tràn ngập mùi thối khiến người ta nghẹt thở, ruồi bu quanh xác chết vo ve.");
   setOptions([
-    { text: "翻找", action: "stinky_tent_search" },
-    { text: "离开", action: "stinky_tent_leave" },
+    { text: "Lục soát", action: "stinky_tent_search" },
+    { text: "Rời đi", action: "stinky_tent_leave" },
   ]);
 }
 
 export function handleStinkyTentSearch() {
   const state = getState();
   if (state.tentSearched) {
-    setStory("你已经翻找过了，除了那支录音笔，这里没有其他有价值的东西了。尸臭味让你一刻也不想多待。");
+    setStory("Bạn đã lục soát rồi, ngoài chiếc bút ghi âm kia ra không còn gì có giá trị. Mùi thối khiến bạn không muốn lưu lại dù một khắc.");
     showExploreOptionsState();
     return;
   }
@@ -57,7 +57,7 @@ export function handleStinkyTentSearch() {
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
-  setStory(`你在女尸的手边找到了一支录音笔，按下了播放键——\n\n🎙️ 录音内容：\n\n熟悉的男声："念在我们是老朋友，你最好远离阵地那个首领。在末日，真正的秩序本就是要严格整合资源，大家才能活命。"\n\n女声："为什么？"\n\n熟悉的男声："因为他太愚蠢了！只有整合资源才能获取最大的利益，才能对抗尸潮！所以我需要有人为我卖命！"\n\n女声："你一个做房地产的知道什么？"\n\n熟悉的男声："我亲眼看着他那冰冷的态度！我为那阵地首领的妹妹做了那么多，明明她和我是两情相悦的。可他呢？拆散了我们，还不允许我自己出去单干，说什么以集体为中心。"\n\n女声："强扭的瓜不甜，是你太自私了。我要回露营地了。"\n\n女声："报告首领，经过间谍交流，已经收集到了目标对您妹妹的不利言论。"\n\n砰——录音中传来手枪枪声。\n\n熟悉的男声："去你的阵地！老子要自封为王！你们阵地的人一个也别想好过，连你这女人也要背叛我！相信那个断人缘分的首领！"\n\n录音到此结束。你握着录音笔，手心全是冷汗。\n\n📖 获得【奇怪录音笔】\n\n时间推进了1个回合。`);
+  setStory(`Bạn lục soát bên tay nữ thi tìm được một chiếc bút ghi âm, nhấn nút phát——\n\n🎙️ Nội dung ghi âm:\n\nGiọng nam quen thuộc: "Nể tình chúng ta là bạn cũ, tốt nhất ngươi tránh xa thủ lĩnh của trận địa đó đi. Trong ngày tận thế, trật tự thực sự chính là phải tích hợp tài nguyên nghiêm ngặt, mọi người mới sống sót được."\n\nGiọng nữ: "Tại sao?"\n\nGiọng nam quen thuộc: "Vì hắn quá ngu xuẩn! Chỉ có tích hợp tài nguyên mới thu được lợi ích lớn nhất, mới đối phó được thủy triều xác sống! Vì vậy ta cần có người bán mạng cho ta!"\n\nGiọng nữ: "Ngươi làm bất động sản thì biết cái gì?"\n\nGiọng nam quen thuộc: "Ta tận mắt chứng kiến thái độ lạnh lùng của hắn! Ta đã làm nhiều như vậy cho em gái của thủ lĩnh trận địa đó, rõ ràng hai ta tình đầu ý hợp. Nhưng hắn thì sao? Chia rẽ chúng ta, còn không cho ta tự mình ra ngoài làm riêng, nói gì mà lấy tập thể làm trung tâm."\n\nGiọng nữ: "Quả dưa vặn không ngọt, là ngươi quá ích kỷ. Ta phải về doanh địa rồi."\n\nGiọng nữ: "Báo cáo thủ lĩnh, qua trao đổi gián điệp, đã thu thập được những lời bất lợi của mục tiêu về em gái của ngài."\n\nBịch—— trong ghi âm vang lên tiếng súng lục.\n\nGiọng nam quen thuộc: "Đi chết đi trận địa của ngươi! Lão tử tự xưng là vua! Người của trận địa các ngươi không một ai được yên, kể cả ngươi đàn bà này cũng dám phản bội ta! Tin cái tên thủ lĩnh cắt đứt nhân duyên đó đi!"\n\nGhi âm đến đây kết thúc. Bạn nắm chặt bút ghi âm, lòng bàn tay toàn mồ hôi lạnh.\n\n📖 Nhận được 【Bút ghi âm kỳ lạ】\n\nThời gian tiến thêm 1 lượt.`);
   if (!state.gameOver) {
     showExploreOptionsState();
   }
@@ -67,7 +67,7 @@ export function handleLootCorpse() {
   const state = getState();
   if (state.lastLootCorpseDay > 0 && state.day - state.lastLootCorpseDay < GAME_CONSTANTS.MAP_EVENTS.CORPSE_COOLDOWN_DAYS) {
     const remaining = GAME_CONSTANTS.MAP_EVENTS.CORPSE_COOLDOWN_DAYS - (state.day - state.lastLootCorpseDay);
-    setStory(`已经翻找得差不多了，再过 ${remaining} 天再来吧`);
+    setStory(`Đã lục soát gần hết rồi, ${remaining} ngày nữa hãy quay lại`);
     showExploreOptionsState();
     return;
   }
@@ -75,16 +75,16 @@ export function handleLootCorpse() {
   const pickId = backpackIds[Math.floor(Math.random() * backpackIds.length)];
   const bp = LOOT_BACKPACKS.find(b => b.id === pickId);
   if (!bp) {
-    setStory("搜刮尸体时出现了问题。");
+    setStory("Có vấn đề khi lục soát xác chết.");
     showExploreOptionsState();
     return;
   }
   state.lastLootCorpseDay = state.day;
   const added = addItem({ ...bp });
   if (added) {
-    setStory(`你从尸体上搜刮到了一个${bp.name}（容量${bp.capacity}），已放入背包。可通过"装备→更换背包"来装备。`);
+    setStory(`Bạn lục soát từ xác chết được một ${bp.name} (sức chứa ${bp.capacity}), đã cho vào balo. Có thể qua "Trang bị → Đổi balo" để trang bị.`);
   } else {
-    setStory(`你从尸体上搜刮到了一个${bp.name}（容量${bp.capacity}），但背包已满，无法携带。`);
+    setStory(`Bạn lục soát từ xác chết được một ${bp.name} (sức chứa ${bp.capacity}), nhưng balo đã đầy, không thể mang theo.`);
   }
   advanceTime(1);
   updateStatusEffects();

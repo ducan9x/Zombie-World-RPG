@@ -1,13 +1,13 @@
 /* ============================================================
-   游戏状态管理模块
-   组织顺序：导入 → 常量 → 初始状态 → 状态访问器
-   → 生存属性（时间/饥饿/水分）→ 背包/物品/货物
-   → 装备（近战/远程/弹药）→ 状态检查 → NPC 好感度/任务
+   Mô-đun quản lý trạng thái trò chơi
+   Thứ tự tổ chức: Nhập → Hằng số → Trạng thái ban đầu → Truy cập trạng thái
+   → Thuộc tính sinh tồn (thời gian/đói/khát) → Balo/Vật phẩm/Hàng hóa
+   → Trang bị (cận chiến/tầm xa/đạn) → Kiểm tra trạng thái → Độ thân thiện/ nhiệm vụ NPC
    ============================================================ */
- 
+  
 import { TIME_PHASES, MELEE_WEAPONS, FOODS, DRINKS, MEDICINES, BACKPACK_TYPES, AFFINITY_THRESHOLDS, AFFINITY_MAX, GAME_CONSTANTS, DEFAULT_ITEM_IDS, GAME_INTRO, SEEDS, AMMO } from './config.js';
 
-// ---------- 初始状态 ----------
+// ---------- Trạng thái ban đầu ----------
 
 const INITIAL_STATE = {
   name: "",
@@ -21,7 +21,7 @@ const INITIAL_STATE = {
   infection: 0,
   hunger: 100,
   hydration: 100,
-  status: "正常",
+  status: "Bình thường",
   currentMap: null,
   meleeWeapon: { ...MELEE_WEAPONS.find(w => w.id === DEFAULT_ITEM_IDS.melee), currentDurability: MELEE_WEAPONS.find(w => w.id === DEFAULT_ITEM_IDS.melee).durability },
   rangedWeapon: null,
@@ -132,7 +132,7 @@ const INITIAL_STATE = {
   unlockedEndings: [],
   _playerDied: false,
   _optionPage: 0,
-  // 老马任务链
+  // Chuỗi nhiệm vụ Lão Mã
   oldMaContrabandUsed: false,
   oldMaStep: 0,
   crimeDataCount: 0,
@@ -144,18 +144,18 @@ const INITIAL_STATE = {
   lastChatDay: 0,
   story: GAME_INTRO,
   options: [
-    { text: "睡觉", action: "sleep" },
-    { text: "进食", action: "eat" },
-    { text: "饮水", action: "drink" },
-    { text: "医疗", action: "medicine" },
-    { text: "装备", action: "equip" },
-    { text: "出门", action: "goOut" },
-    { text: "丢弃", action: "discard" },
-    { text: "存档", action: "save_game" },
-    { text: "伙伴收获", action: "partner_harvest" },
-    { text: "基地建设", action: "base_build" },
-    { text: "生存笔记", action: "survival_notes" },
-    { text: "返回菜单", action: "back_to_main_menu" },],
+    { text: "Ngủ", action: "sleep" },
+    { text: "Ăn uống", action: "eat" },
+    { text: "Uống nước", action: "drink" },
+    { text: "Y tế", action: "medicine" },
+    { text: "Trang bị", action: "equip" },
+    { text: "Ra ngoài", action: "goOut" },
+    { text: "Vứt bỏ", action: "discard" },
+    { text: "Lưu trữ", action: "save_game" },
+    { text: "Thu hoạch đồng bạn", action: "partner_harvest" },
+    { text: "Xây dựng căn cứ", action: "base_build" },
+    { text: "Ghi chú sinh tồn", action: "survival_notes" },
+    { text: "Quay về menu", action: "back_to_main_menu" },],
   phase: "choose",
   gameOver: false,
   combatState: null,
@@ -166,7 +166,7 @@ let gameState = JSON.parse(JSON.stringify(INITIAL_STATE));
 let _autoSaveCallback = null;
 export function setAutoSaveCallback(cb) { _autoSaveCallback = cb; }
 
-// 内部工具：将值限制在 [min, max] 范围内
+// Công cụ nội bộ: giới hạn giá trị trong khoảng [min, max]
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
@@ -190,9 +190,9 @@ export function getItemDisplayName(item) {
 }
 
 /**
- * 根据物品品质返回带颜色 HTML 的名称
- * @param {Object} item - 物品对象（含 rarity 属性）
- * @returns {string} 带颜色 span 包裹的名称
+ * Trả về tên với màu HTML theo phẩm chất vật phẩm
+ * @param {Object} item - Đối tượng vật phẩm (chứa thuộc tính rarity)
+ * @returns {string} Tên bọc trong span có màu
  */
 export function formatQualityName(item) {
   const rarity = item.rarity;
@@ -202,36 +202,36 @@ export function formatQualityName(item) {
 }
 
 /**
- * 根据名称和品质返回带颜色 HTML 的文本
- * @param {string} name - 物品名称
- * @param {string} rarity - 品质等级
- * @returns {string} 带颜色 span 包裹的名称
+ * Trả về văn bản với màu HTML theo tên và phẩm chất
+ * @param {string} name - Tên vật phẩm
+ * @param {string} rarity - Cấp phẩm chất
+ * @returns {string} Tên bọc trong span có màu
  */
 export function formatQualityText(name, rarity) {
   if (!rarity) return name;
   return `<span class="quality-${rarity}">${name}</span>`;
 }
 
-// ---------- 状态访问器 ----------
+// ---------- Truy cập trạng thái ----------
 
-/** 获取当前游戏状态对象的引用 */
+/** Lấy tham chiếu đến đối tượng trạng thái trò chơi hiện tại */
 export function getState() {
   return gameState;
 }
 
-/** 将游戏状态重置为初始值 */
+/** Đặt lại trạng thái trò chơi về giá trị ban đầu */
 export function resetState() {
   gameState = JSON.parse(JSON.stringify(INITIAL_STATE));
 }
 
-/** 设置玩家角色名称 */
+/** Đặt tên nhân vật người chơi */
 export function setName(name) {
   gameState.name = name;
 }
 
-// ---------- 生存属性（时间/饥饿/水分）----------
+// ---------- Thuộc tính sinh tồn (thời gian/đói/khát) ----------
 
-/** 时间推进指定步数，同时更新饥饿、水分和疲惫值 */
+/** Tiến thời gian theo số bước, đồng thời cập nhật đói, khát và mệt mỏi */
 export function advanceTime(steps = 1) {
   const messages = [];
 
@@ -242,7 +242,7 @@ export function advanceTime(steps = 1) {
     gameState.crashTurns -= GAME_CONSTANTS.SURVIVAL.FATIGUE_THRESHOLD_TURNS;
     if (gameState.crash < GAME_CONSTANTS.FATIGUE_MAX) {
       gameState.crash = Math.min(gameState.crash + GAME_CONSTANTS.SURVIVAL.FATIGUE_PER_CYCLE, GAME_CONSTANTS.FATIGUE_MAX);
-      messages.push(`你已经太久没休息了，身体越来越疲惫！疲惫+${GAME_CONSTANTS.SURVIVAL.FATIGUE_PER_CYCLE}%`);
+      messages.push(`Bạn đã quá lâu chưa nghỉ ngơi, cơ thể càng lúc càng mệt mỏi! Mệt mỏi +${GAME_CONSTANTS.SURVIVAL.FATIGUE_PER_CYCLE}%`);
     }
   }
 
@@ -251,7 +251,7 @@ export function advanceTime(steps = 1) {
     gameState.phaseIndex -= TIME_PHASES.length;
     gameState.fishingCount = 0;
     generateWeather();
-    messages.push(`新的一天开始了！第 ${gameState.day} 天`);
+    messages.push(`Một ngày mới bắt đầu! Ngày thứ ${gameState.day}`);
     for (const entry of GAME_CONSTANTS.ACHIEVEMENTS.SURVIVAL_DAYS) {
       if (gameState.day === entry.threshold) {
         if (!gameState.unlockedAchievements) gameState.unlockedAchievements = [];
@@ -277,14 +277,14 @@ export function advanceTime(steps = 1) {
   return messages;
 }
 
-/** 重置疲惫计时器（休息后调用） */
+/** Đặt lại bộ đếm mệt mỏi (gọi sau khi nghỉ ngơi) */
 export function resetCrashTurns() {
   gameState.crashTurns = 0;
 }
 
-// ---------- 背包/物品 ----------
+// ---------- Balo/Vật phẩm ----------
 
-/** 向背包中添加物品，返回是否添加成功 */
+/** Thêm vật phẩm vào balo, trả về có thêm thành công không */
 export function addItem(item) {
   if (item.type === "cigarette") {
     gameState.cigarettes += (item.count || 1);
@@ -349,18 +349,18 @@ export function addItem(item) {
   return true;
 }
 
-/** 从背包中移除指定类型和索引的物品，返回被移除的物品 */
+/** Xóa vật phẩm theo loại và chỉ số trong balo, trả về vật phẩm đã xóa */
 export function removeItem(type, index, count = 1) {
   if (type === "cigarette") {
     const removed = Math.min(count, gameState.cigarettes);
     gameState.cigarettes -= removed;
-    return { type: "cigarette", name: "香烟", count: removed };
+    return { type: "cigarette", name: "Thuốc lá", count: removed };
   }
 
   if (type === "gasoline") {
     const removed = Math.min(count, gameState.gasoline);
     gameState.gasoline -= removed;
-    return { type: "gasoline", name: "汽油", count: removed };
+    return { type: "gasoline", name: "Xăng", count: removed };
   }
 
   const typeMap = {
@@ -419,7 +419,7 @@ export function removeItemById(type, itemId, count = 1) {
   return remaining <= 0;
 }
 
-/** 消耗背包中指定物品并应用其效果 */
+/** Tiêu thụ vật phẩm trong balo và áp dụng hiệu quả */
 export function consumeItem(type, index) {
   const typeMap = {
     food: gameState.food,
@@ -482,9 +482,9 @@ export function consumeItem(type, index) {
   return consumed;
 }
 
-// ---------- 装备（近战/远程/弹药）----------
+// ---------- Trang bị (cận chiến/tầm xa/đạn) ----------
 
-/** 装备近战武器，返回装备的武器信息 */
+/** Trang bị vũ khí cận chiến, trả về thông tin vũ khí đã trang bị */
 export function equipMelee(itemId) {
   if (itemId === DEFAULT_ITEM_IDS.melee) {
     if (gameState.meleeWeapon.id !== DEFAULT_ITEM_IDS.melee) {
@@ -512,7 +512,7 @@ export function equipMelee(itemId) {
   return gameState.meleeWeapon;
 }
 
-/** 装备远程武器，返回装备的武器信息 */
+/** Trang bị vũ khí tầm xa, trả về thông tin vũ khí đã trang bị */
 export function equipRanged(itemId) {
   const index = gameState.other.findIndex(
     (item) => item.id === itemId && item.type === "ranged"
@@ -532,7 +532,7 @@ export function equipRanged(itemId) {
   return gameState.rangedWeapon;
 }
 
-/** 向弹药槽中添加指定类型和数量的弹药 */
+/** Thêm đạn theo loại và số lượng vào khe đạn */
 export function addAmmo(ammoId, count) {
   if (!count || count <= 0) return;
   const existing = gameState.ammo.find((a) => a.id === ammoId);
@@ -545,7 +545,7 @@ export function addAmmo(ammoId, count) {
   }
 }
 
-/** 消耗一枚指定类型的弹药，返回是否消耗成功 */
+/** Tiêu thụ một viên đạn loại chỉ định, trả về có tiêu thụ thành công không */
 export function useAmmo(ammoId) {
   const existing = gameState.ammo.find((a) => a.id === ammoId);
   if (!existing || existing.count <= 0) {
@@ -559,7 +559,7 @@ export function useAmmo(ammoId) {
   return true;
 }
 
-/** 减少当前近战武器耐久度，返回武器损坏提示或 null */
+/** Giảm độ bền vũ khí cận chiến hiện tại, trả về thông báo hỏng hoặc null */
 export function reduceMeleeDurability() {
   if (gameState.meleeWeapon.currentDurability === Infinity) {
     return null;
@@ -570,13 +570,13 @@ export function reduceMeleeDurability() {
   if (gameState.meleeWeapon.currentDurability <= 0) {
     const brokenName = gameState.meleeWeapon.name;
     gameState.meleeWeapon = { ...MELEE_WEAPONS.find(w => w.id === DEFAULT_ITEM_IDS.melee), currentDurability: MELEE_WEAPONS.find(w => w.id === DEFAULT_ITEM_IDS.melee).durability };
-    return `${brokenName} 已经损坏，你只能用${MELEE_WEAPONS.find(w => w.id === DEFAULT_ITEM_IDS.melee).name}了。`;
+    return `${brokenName} đã bị hỏng, bạn chỉ có thể dùng ${MELEE_WEAPONS.find(w => w.id === DEFAULT_ITEM_IDS.melee).name} thôi.`;
   }
 
   return null;
 }
 
-/** 减少当前远程武器完整性，返回武器损坏提示或 null */
+/** Giảm độ nguyên vẹn vũ khí tầm xa hiện tại, trả về thông báo hỏng hoặc null */
 export function reduceRangedIntegrity() {
   if (!gameState.rangedWeapon) {
     return null;
@@ -587,15 +587,15 @@ export function reduceRangedIntegrity() {
   if (gameState.rangedWeapon.integrity <= 0) {
     const brokenName = gameState.rangedWeapon.name;
     gameState.rangedWeapon = null;
-    return `${brokenName} 已经损坏，无法再使用。`;
+    return `${brokenName} đã bị hỏng, không thể dùng nữa.`;
   }
 
   return null;
 }
 
-// ---------- 状态检查 ----------
+// ---------- Kiểm tra trạng thái ----------
 
-/** 检查玩家是否死亡，返回是否已死亡 */
+/** Kiểm tra người chơi có chết không, trả về đã chết chưa */
 export function checkDeath() {
   if (gameState.health <= 0 || gameState.infection >= GAME_CONSTANTS.INFECTION_MAX) {
     gameState._playerDied = true;
@@ -605,71 +605,71 @@ export function checkDeath() {
   return false;
 }
 
-/** 根据当前饥饿/水分/感染/疲惫/理智状态更新玩家状态并返回提示消息 */
+/** Cập nhật trạng thái người chơi theo tình trạng đói/khát/nhiễm/mệt/lý trí và trả về thông báo */
 export function updateStatusEffects() {
   const messages = [];
 
   if (gameState.hunger <= 0) {
     gameState.health = clamp(gameState.health - GAME_CONSTANTS.SURVIVAL.STARVATION_DAMAGE, 0, GAME_CONSTANTS.MAX_HEALTH);
-    messages.push("你极度饥饿，生命值下降！");
+    messages.push("Bạn cực kỳ đói, sinh lực giảm!");
   }
   if (gameState.hydration <= 0) {
     gameState.health = clamp(gameState.health - GAME_CONSTANTS.SURVIVAL.STARVATION_DAMAGE, 0, GAME_CONSTANTS.MAX_HEALTH);
-    messages.push("你极度口渴，生命值下降！");
+    messages.push("Bạn cực kỳ khát, sinh lực giảm!");
   }
 
   if (gameState.hunger > 0 && gameState.hunger <= GAME_CONSTANTS.SURVIVAL.HUNGER_WARN_THRESHOLD) {
-    messages.push("你感到有些饿了，需要尽快进食。");
+    messages.push("Bạn thấy hơi đói, cần ăn uống sớm.");
   }
   if (gameState.hydration > 0 && gameState.hydration <= GAME_CONSTANTS.SURVIVAL.HYDRATION_WARN_THRESHOLD) {
-    messages.push("你感到有些渴了，需要尽快饮水。");
+    messages.push("Bạn thấy hơi khát, cần uống nước sớm.");
   }
 
   const statusList = [];
 
   if (gameState.hunger <= 0) {
-    statusList.push("饥饿");
+    statusList.push("Đói");
   }
   if (gameState.hydration <= 0) {
-    statusList.push("口渴");
+    statusList.push("Khát");
   }
   if (gameState.infection > GAME_CONSTANTS.SURVIVAL.INFECTION_THRESHOLD) {
-    statusList.push("感染");
-    messages.push("你感到身体在被病毒侵蚀……");
+    statusList.push("Nhiễm trùng");
+    messages.push("Bạn cảm thấy cơ thể đang bị virus xâm thực……");
   }
   if (gameState.crash > GAME_CONSTANTS.SURVIVAL.FATIGUE_STATUS_THRESHOLD) {
-    statusList.push("疲惫");
-    messages.push("你的身体已经极度疲惫……");
+    statusList.push("Mệt mỏi");
+    messages.push("Cơ thể bạn đã cực kỳ mệt mỏi……");
   }
   if (gameState.sanity < GAME_CONSTANTS.SURVIVAL.SANITY_STATUS_THRESHOLD) {
-    statusList.push("理智");
-    messages.push("你感到精神恍惚，理智正在流失……");
+    statusList.push("Rối loạn");
+    messages.push("Bạn cảm thấy tinh thần hoảng hốt, lý trí đang trôi đi……");
   }
   if (gameState.sanity <= 0) {
-    statusList.push("幻觉");
-    messages.push("严重的幻觉和认知混乱正在吞噬你！你无法辨别回家的路，战斗中攻击经常落空！");
+    statusList.push("Ảo giác");
+    messages.push("Ảo giác và rối loạn nhận thức nghiêm trọng đang nuốt chửng bạn! Bạn không thể phân biệt đường về nhà, trong chiến đấu đòn đánh thường xuyên trượt!");
   }
   if (gameState.health < GAME_CONSTANTS.SURVIVAL.SEVERE_INJURY_THRESHOLD) {
-    statusList.push("重伤");
-    messages.push("你身受重伤，需要尽快治疗！");
+    statusList.push("Trọng thương");
+    messages.push("Bạn bị thương nặng, cần điều trị sớm!");
   }
 
   if (statusList.length > 0) {
     gameState.status = statusList.join("·");
   } else {
-    gameState.status = "正常";
+    gameState.status = "Bình thường";
   }
 
   return messages;
 }
 
-// ---------- NPC 好感度/任务 ----------
+// ---------- Độ thân thiện NPC / Nhiệm vụ ----------
 
 /**
- * 增加指定 NPC 的好感度（最大 150）
- * @param {string} npcId - NPC 标识：v/xiaohan/lili
- * @param {number} amount - 增加的好感度数值
- * @returns {number} 新的好感度值
+ * Tăng độ thân thiện của NPC chỉ định (tối đa 150)
+ * @param {string} npcId - Mã NPC: v/xiaohan/lili
+ * @param {number} amount - Lượng thân thiện tăng
+ * @returns {number} Giá trị thân thiện mới
  */
 export function addNpcAffinity(npcId, amount) {
   if (gameState.npcAffinity[npcId] !== undefined) {
@@ -679,28 +679,28 @@ export function addNpcAffinity(npcId, amount) {
 }
 
 /**
- * 获取指定 NPC 的当前好感度
- * @param {string} npcId - NPC 标识
- * @returns {number} 好感度值
+ * Lấy độ thân thiện hiện tại của NPC chỉ định
+ * @param {string} npcId - Mã NPC
+ * @returns {number} Giá trị thân thiện
  */
 export function getNpcAffinity(npcId) {
   return gameState.npcAffinity[npcId] || 0;
 }
 
 /**
- * 根据好感度数值返回对应的关系称谓
- * @param {number} affinity - 好感度（0-150）
- * @returns {string} 关系称谓
+ * Trả về danh xưng quan hệ theo giá trị thân thiện
+ * @param {number} affinity - Thân thiện (0-150)
+ * @returns {string} Danh xưng quan hệ
  */
 export function getAffinityLabel(affinity) {
   for (const t of AFFINITY_THRESHOLDS) {
     if (affinity >= t.min) return t.label;
   }
-  return "陌生人";
+  return "Người lạ";
 }
 
 /**
- * 判断今天是否还可以乞讨物资
+ * Kiểm tra hôm nay còn có thể xin vật tư không
  * @returns {boolean}
  */
 export function canBegToday() {
@@ -708,16 +708,16 @@ export function canBegToday() {
 }
 
 /**
- * 标记当天已乞讨过物资
+ * Đánh dấu hôm nay đã xin vật tư
  */
 export function markBegDone() {
   gameState.lastBegDay = gameState.day;
 }
 
 /**
- * 检查今天是否还可以与指定NPC对话
- * @param {string} npcId - NPC 标识
- * @param {number} maxChats - 每日最大对话次数，默认为4
+ * Kiểm tra hôm nay còn có thể đối thoại với NPC chỉ định không
+ * @param {string} npcId - Mã NPC
+ * @param {number} maxChats - Số lần đối thoại tối đa mỗi ngày, mặc định 4
  * @returns {boolean}
  */
 export function canChatToday(npcId, maxChats = GAME_CONSTANTS.NPC.DAILY_CHAT_LIMIT) {
@@ -728,8 +728,8 @@ export function canChatToday(npcId, maxChats = GAME_CONSTANTS.NPC.DAILY_CHAT_LIM
 }
 
 /**
- * 增加与指定NPC的对话次数
- * @param {string} npcId - NPC 标识
+ * Tăng số lần đối thoại với NPC chỉ định
+ * @param {string} npcId - Mã NPC
  */
 export function incrementChatCount(npcId) {
   if (gameState.lastChatDay < gameState.day) {
@@ -741,7 +741,7 @@ export function incrementChatCount(npcId) {
 }
 
 /**
- * 重置所有NPC的对话计数（新的一天）
+ * Đặt lại số lần đối thoại của tất cả NPC (ngày mới)
  */
 export function resetChatCounts() {
   gameState.lastChatDay = gameState.day;
@@ -749,8 +749,8 @@ export function resetChatCounts() {
 }
 
 /**
- * 获取今天与指定NPC的对话次数
- * @param {string} npcId - NPC 标识
+ * Lấy số lần đối thoại hôm nay với NPC chỉ định
+ * @param {string} npcId - Mã NPC
  * @returns {number}
  */
 export function getChatCount(npcId) {
@@ -761,9 +761,9 @@ export function getChatCount(npcId) {
 }
 
 /**
- * 获取好感度阶段
- * @param {number} affinity - 好感度
- * @returns {string} 阶段名称
+ * Lấy giai đoạn thân thiện
+ * @param {number} affinity - Thân thiện
+ * @returns {string} Tên giai đoạn
  */
 export function getAffinityStage(affinity) {
   for (const t of AFFINITY_THRESHOLDS) {
@@ -773,8 +773,8 @@ export function getAffinityStage(affinity) {
 }
 
 /**
- * 检查指定任务是否已完成
- * @param {string} questId - 任务 ID（v1/v2/v3/v4/xh1/xh2/llGift）
+ * Kiểm tra nhiệm vụ chỉ định đã hoàn thành chưa
+ * @param {string} questId - ID nhiệm vụ (v1/v2/v3/v4/xh1/xh2/llGift)
  * @returns {boolean}
  */
 export function isQuestDone(questId) {
@@ -782,8 +782,8 @@ export function isQuestDone(questId) {
 }
 
 /**
- * 标记指定任务为已完成
- * @param {string} questId - 任务 ID
+ * Đánh dấu nhiệm vụ chỉ định là đã hoàn thành
+ * @param {string} questId - ID nhiệm vụ
  */
 export function markQuestDone(questId) {
   if (gameState.npcQuestsDone[questId] !== undefined) {
@@ -791,24 +791,24 @@ export function markQuestDone(questId) {
   }
 }
 
-// ---------- 界面辅助 ----------
+// ---------- Hỗ trợ giao diện ----------
 
-/** 设置当前位置描述 */
+/** Đặt mô tả vị trí hiện tại */
 export function setLocation(location) {
   gameState.location = location;
 }
 
-/** 设置当前探索地图 */
+/** Đặt bản đồ khám phá hiện tại */
 export function setCurrentMap(map) {
   gameState.currentMap = map;
 }
 
-/** 设置当前游戏阶段 */
+/** Đặt giai đoạn trò chơi hiện tại */
 export function setPhase(phase) {
   gameState.phase = phase;
 }
 
-/** 设置当前剧情文本 */
+/** Đặt văn bản cốt truyện hiện tại */
 export function setStory(text) {
   gameState.story = text;
 }
@@ -823,13 +823,13 @@ export function removePureEnergy(count) {
   return removed;
 }
 
-/** 设置当前可选操作列表 */
+/** Đặt danh sách thao tác có thể chọn hiện tại */
 export function setOptions(options) {
   gameState._optionPage = 0;
   gameState.options = options;
 }
 
-/** 获取当前背包已占用格数 */
+/** Lấy số ô balo đã chiếm */
 export function getBackpackCount() {
   return (
     getStackableCount(gameState.food) +
@@ -871,8 +871,8 @@ export function removeGasoline(count) {
 }
 
 /**
- * 标准化游戏状态，确保所有必要字段都存在
- * @param {Object} state - 游戏状态对象
+ * Chuẩn hóa trạng thái trò chơi, đảm bảo mọi trường cần thiết đều tồn tại
+ * @param {Object} state - Đối tượng trạng thái trò chơi
  */
 export function normalizeState(state) {
   if (state.meleeWeapon && state.meleeWeapon.currentDurability == null) {
@@ -884,7 +884,7 @@ export function normalizeState(state) {
     }
   }
 
-  // 标准化背包中其他物品栏里的近战武器
+  // Chuẩn hóa vũ khí cận chiến trong ô vật phẩm khác của balo
   if (state.other && Array.isArray(state.other)) {
     state.other.forEach(item => {
       if (item && item.type === "melee" && item.currentDurability == null) {
@@ -898,7 +898,7 @@ export function normalizeState(state) {
     });
   }
 
-  // 确保其他必要字段存在
+  // Đảm bảo các trường cần thiết khác tồn tại
   if (state.npcChatCount === undefined) {
     state.npcChatCount = { ...INITIAL_STATE.npcChatCount };
   } else {
@@ -1129,19 +1129,19 @@ export function normalizeState(state) {
   if (state.lastIslandWelfareDay === undefined) state.lastIslandWelfareDay = 0;
   if (state._optionPage === undefined) state._optionPage = 0;
 
-  // 老狼任务链兼容
+  // Tương thích chuỗi nhiệm vụ Lão Lang
   if (state.wolfQuest1Done === undefined) state.wolfQuest1Done = false;
   if (state.wolfQuest2Done === undefined) state.wolfQuest2Done = false;
   if (state.wolfQuest3Done === undefined) state.wolfQuest3Done = false;
   if (state.wolfQuest4Done === undefined) state.wolfQuest4Done = false;
 
-  // 老狼/人鱼亲和度兼容
+  // Tương thích thân thiện Lão Lang/Người cá
   if (state.npcAffinity && state.npcAffinity.wolf === undefined) state.npcAffinity.wolf = 0;
   if (state.npcAffinity && state.npcAffinity.mermaid === undefined) state.npcAffinity.mermaid = 0;
   if (state.npcChatCount && state.npcChatCount.wolf === undefined) state.npcChatCount.wolf = 0;
   if (state.npcChatCount && state.npcChatCount.mermaid === undefined) state.npcChatCount.mermaid = 0;
 
-  // 老马任务链兼容
+  // Tương thích chuỗi nhiệm vụ Lão Mã
   if (state.oldMaContrabandUsed === undefined) state.oldMaContrabandUsed = false;
   if (state.oldMaStep === undefined) state.oldMaStep = 0;
   if (state.crimeDataCount === undefined) state.crimeDataCount = 0;
@@ -1154,7 +1154,7 @@ export function normalizeState(state) {
 }
 
 /**
- * 每天开始时随机生成天气
+ * Mỗi ngày bắt đầu ngẫu nhiên tạo thời tiết
  */
 export function generateWeather() {
   const probs = GAME_CONSTANTS.WEATHER.PROBABILITIES;
@@ -1171,8 +1171,8 @@ export function generateWeather() {
 }
 
 /**
- * 应用天气每回合效果（在 advanceTime 中调用）
- * @param {number} steps - 前进的回合数
+ * Áp dụng hiệu quả mỗi lượt của thời tiết (gọi trong advanceTime)
+ * @param {number} steps - Số lượt tiến
  */
 export function applyWeatherEffects(steps) {
   const effects = GAME_CONSTANTS.WEATHER.EFFECTS[gameState.weather];

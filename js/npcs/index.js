@@ -1,6 +1,6 @@
 /* ============================================================
-   NPC 核心逻辑模块
-   组织顺序：NPC配置 → 交互/对话 → 任务投放 → 回收/修理/治疗
+   Mô-đun logic cốt lõi của NPC
+   Thứ tự tổ chức: Cấu hình NPC → Tương tác/Đối thoại → Giao nhiệm vụ → Thu hồi/Sửa chữa/Chữa trị
    ============================================================ */
 
 import {
@@ -71,7 +71,7 @@ function getCaptainDiscountCost(state, npcId, baseCost) {
   return baseCost;
 }
 
-// ---------- NPC 配置 ----------
+// ---------- Cấu hình NPC ----------
 
 function getNpcConfig() {
   const state = getState();
@@ -79,14 +79,14 @@ function getNpcConfig() {
   return SURVIVOR_NPC.find(n => n.id === npcId);
 }
 
-// ---------- NPC 交互入口 ----------
+// ---------- Lối vào tương tác NPC ----------
 
 function npcHeader(npcId) {
   const state = getState();
   state._currentNpc = npcId;
   const config = SURVIVOR_NPC.find(n => n.id === npcId);
   if (!config) {
-    setStory("这个人已经不在了……");
+    setStory("Người này không còn ở đây nữa...");
     returnToMenu();
     return;
   }
@@ -94,14 +94,14 @@ function npcHeader(npcId) {
   const stage = getAffinityStage(affinity);
   const friendshipLabel = getAffinityLabel(affinity);
   let description = config.desc;
-  description += `\n\n当前好感：${affinity}/${AFFINITY_MAX[npcId]}（${friendshipLabel}）`;
+  description += `\n\nHiện tại thân mật: ${affinity}/${AFFINITY_MAX[npcId]}（${friendshipLabel}）`;
   if (npcId === "lili") {
-    description += `\n\n💡 莉莉丝可以帮你：回收武器换香烟 | 回收多余背包 | 维修枪支 | 修复弓弩 | 治疗感染 | 医疗物资交易`;
+    description += `\n\n💡 Lilith có thể giúp bạn: Thu hồi vũ khí đổi thuốc lá | Thu hồi balo dư | Sửa chữa súng | Sửa chữa cung nỏ | Chữa trị nhiễm trùng | Giao dịch vật tư y tế`;
     if (affinity >= AFFINITY_MAX[npcId] && !isQuestDone("llGift")) {
-      description += `\n\n🎁 莉莉丝似乎有东西想给你……`;
+      description += `\n\n🎁 Lilith dường như có thứ gì đó muốn đưa cho bạn...`;
     }
   } else if (npcId !== "v") {
-    description += `\n\n你也把你的背包拿过去说：\"你看下我的装备，可以回收/交易等\"`;
+    description += `\n\nBạn cũng mang balo của mình qua nói: \"Xem qua trang bị của tôi, có thể thu hồi/giao dịch v.v.\"`;
   }
   return description;
 }
@@ -110,19 +110,19 @@ export function handleNpcInteract(npcId) {
   const state = getState();
   const config = SURVIVOR_NPC.find(n => n.id === npcId);
   if (!config) {
-    setStory("这个人已经不在这里了……");
+    setStory("Người này không còn ở đây nữa...");
     returnToMenu();
     return;
   }
 
   const hasCastle = hasCastleIdentity(state);
   if (hasCastle && (npcId === "v" || npcId === "xiaohan" || npcId === "lili")) {
-    const npcNames = { v: "V小姐", xiaohan: "苏小涵", lili: "莉莉丝" };
+    const npcNames = { v: "Cô V", xiaohan: "Tô Tiểu Hàm", lili: "Lilith" };
     const name = npcNames[npcId] || "NPC";
-    setStory(CASTLE_REJECTION_DIALOGUES[npcId] || `${name}看到你的城堡身份牌后，态度立刻变得冷淡：\"城堡的人来这里做什么？请离开。\"`);
+    setStory(CASTLE_REJECTION_DIALOGUES[npcId] || `${name} thấy thẻ thân phận lâu đài của bạn, thái độ lập tức lạnh đi: "Người của lâu đài đến đây làm gì? Mời rời đi."`);
     setPhase("npc_" + npcId);
     state._currentNpc = npcId;
-    setOptions([{ text: "返回", action: "return" }]);
+    setOptions([{ text: "Quay lại", action: "return" }]);
     return;
   }
 
@@ -179,11 +179,11 @@ export function handleNpcAction(input) {
   const npcId = state._currentNpc;
   const hasCastle = hasCastleIdentity(state);
   if (hasCastle && npcId && (npcId === "v" || npcId === "xiaohan" || npcId === "lili")) {
-    const npcNames = { v: "V小姐", xiaohan: "苏小涵", lili: "莉莉丝" };
+    const npcNames = { v: "Cô V", xiaohan: "Tô Tiểu Hàm", lili: "Lilith" };
     const name = npcNames[npcId] || "NPC";
-    setStory(CASTLE_REJECTION_DIALOGUES[npcId] || `${name}看到你的城堡身份牌后，态度立刻变得冷淡：\"城堡的人来这里做什么？请离开。\"`);
+    setStory(CASTLE_REJECTION_DIALOGUES[npcId] || `${name} thấy thẻ thân phận lâu đài của bạn, thái độ lập tức lạnh đi: "Người của lâu đài đến đây làm gì? Mời rời đi."`);
     setPhase("npc_" + npcId);
-    setOptions([{ text: "返回", action: "return" }]);
+    setOptions([{ text: "Quay lại", action: "return" }]);
     return;
   }
 
@@ -208,25 +208,25 @@ export function handleNpcAction(input) {
       const npcId = state._currentNpc;
       if (npcId === "v") {
         const offerings = [];
-        state.food.forEach((item, i) => offerings.push({ cat: "food", idx: i, name: getItemDisplayName(item), label: `[食物] ${getItemDisplayName(item)}` }));
-        state.drinks.forEach((item, i) => offerings.push({ cat: "drinks", idx: i, name: getItemDisplayName(item), label: `[饮品] ${getItemDisplayName(item)}` }));
-        if (state.cigarettes > 0) offerings.push({ cat: "cigarettes", idx: 0, name: "香烟", label: `[货物] (${state.cigarettes})香烟` });
-        if (state.gasoline > 0) offerings.push({ cat: "gasoline", idx: 0, name: "汽油", label: `[货物] (${state.gasoline})汽油` });
-        if (state.pureEnergy > 0) offerings.push({ cat: "pureEnergy", idx: 0, name: "纯净能源", label: `[货物] (${state.pureEnergy})纯净能源` });
+        state.food.forEach((item, i) => offerings.push({ cat: "food", idx: i, name: getItemDisplayName(item), label: `[Thức ăn] ${getItemDisplayName(item)}` }));
+        state.drinks.forEach((item, i) => offerings.push({ cat: "drinks", idx: i, name: getItemDisplayName(item), label: `[Đồ uống] ${getItemDisplayName(item)}` }));
+        if (state.cigarettes > 0) offerings.push({ cat: "cigarettes", idx: 0, name: "Thuốc lá", label: `[Hàng hóa] (${state.cigarettes})Thuốc lá` });
+        if (state.gasoline > 0) offerings.push({ cat: "gasoline", idx: 0, name: "Xăng", label: `[Hàng hóa] (${state.gasoline})Xăng` });
+        if (state.pureEnergy > 0) offerings.push({ cat: "pureEnergy", idx: 0, name: "Năng lượng tinh khiết", label: `[Hàng hóa] (${state.pureEnergy})Năng lượng tinh khiết` });
         if (offerings.length === 0) {
-          setStory("V小姐瞥了你一眼：\"你两手空空，拿什么交易？\"");
+          setStory("Cô V liếc bạn một cái: \"Bạn hai tay trống trơn, lấy gì để giao dịch?\"");
           handleNpcAction("chat");
           return;
         }
         setPhase("v_trade");
-        setStory("V小姐把你的背包拿过去翻了翻，挑选她要的东西：");
+        setStory("Cô V cầm balo của bạn lật qua lật lại, chọn những thứ cô ấy muốn:");
         const opts = offerings.map((item, i) => ({
           text: item.label,
           action: "v_trade_confirm",
           index: i,
           vItem: item,
         }));
-        opts.push({ text: "返回", action: "v_back", index: -1 });
+        opts.push({ text: "Quay lại", action: "v_back", index: -1 });
         setOptions(opts);
       } else if (npcId === "xiaohan") {
         const offerings = [];
@@ -234,41 +234,41 @@ export function handleNpcAction(input) {
         state.drinks.forEach((item, i) => offerings.push({ cat: "drinks", idx: i, name: getItemDisplayName(item) }));
         state.medicine.forEach((item, i) => offerings.push({ cat: "medicine", idx: i, name: getItemDisplayName(item) }));
         state.other.forEach((item, i) => offerings.push({ cat: "other", idx: i, name: getItemDisplayName(item) }));
-        if (state.cigarettes > 0) offerings.push({ cat: "cigarettes", idx: 0, name: "香烟" });
-        if (state.gasoline > 0) offerings.push({ cat: "gasoline", idx: 0, name: "汽油" });
-        if (state.pureEnergy > 0) offerings.push({ cat: "pureEnergy", idx: 0, name: "纯净能源" });
+        if (state.cigarettes > 0) offerings.push({ cat: "cigarettes", idx: 0, name: "Thuốc lá" });
+        if (state.gasoline > 0) offerings.push({ cat: "gasoline", idx: 0, name: "Xăng" });
+        if (state.pureEnergy > 0) offerings.push({ cat: "pureEnergy", idx: 0, name: "Năng lượng tinh khiết" });
         if (offerings.length === 0) {
-          setStory("苏小涵歪着头看了看你：\"你没有东西可以给我呢……\"");
+          setStory("Tô Tiểu Hàm nghiêng đầu nhìn bạn: \"Bạn không có thứ gì để đưa tôi nhỉ...\"");
           handleNpcAction("chat");
           return;
         }
         setPhase("xiaohan_trade");
-        setStory("苏小涵好奇地翻看着你的背包，最后停在了一件物品上：\"这个！我可以拿东西跟你换吗？\"\n请选择要交易的物品：");
+        setStory("Tô Tiểu Hàm tò mò lật xem balo của bạn, cuối cùng dừng lại ở một món đồ: \"Cái này! Tôi có thể lấy đồ đổi với bạn không?\"\nVui lòng chọn vật phẩm muốn giao dịch:");
         const opts = offerings.map((item, i) => ({
           text: item.label || `[${item.cat}] ${item.name}`,
           action: "xiaohan_trade_confirm",
           index: i,
           tradeItem: item,
         }));
-        opts.push({ text: "返回", action: "xiaohan_back", index: -1 });
+        opts.push({ text: "Quay lại", action: "xiaohan_back", index: -1 });
         setOptions(opts);
       } else if (npcId === "lili") {
         const offerings = [];
-        state.medicine.forEach((item, i) => offerings.push({ cat: "medicine", idx: i, name: getItemDisplayName(item), label: `[医疗] ${getItemDisplayName(item)}` }));
+        state.medicine.forEach((item, i) => offerings.push({ cat: "medicine", idx: i, name: getItemDisplayName(item), label: `[Y tế] ${getItemDisplayName(item)}` }));
         if (offerings.length === 0) {
-          setStory("莉莉丝摇了摇头：\"你没有医疗物资可以交易……\"");
+          setStory("Lilith lắc đầu: \"Bạn không có vật tư y tế để giao dịch...\"");
           handleNpcAction("chat");
           return;
         }
         setPhase("lili_trade");
-        setStory("莉莉丝翻了翻你的医疗包：\"嗯……这些我可以帮你换成药品。\"\n请选择要交易的物品：");
+        setStory("Lilith lật xem túi y tế của bạn: \"Ừm... những thứ này tôi có thể giúp bạn đổi thành thuốc.\"\nVui lòng chọn vật phẩm muốn giao dịch:");
         const opts = offerings.map((item, i) => ({
           text: item.label,
           action: "lili_trade_confirm",
           index: i,
           tradeItem: item,
         }));
-        opts.push({ text: "返回", action: "lili_back", index: -1 });
+        opts.push({ text: "Quay lại", action: "lili_back", index: -1 });
         setOptions(opts);
       }
       return;
@@ -279,34 +279,34 @@ export function handleNpcAction(input) {
   if (!config) { returnToMenu(); return; }
 
   const actions = [
-    { text: "对话", action: "chat" },
+    { text: "Đối thoại", action: "chat" },
   ];
 
   if (config.canTrade !== false) {
-    actions.push({ text: "交易", action: "trade" });
+    actions.push({ text: "Giao dịch", action: "trade" });
   }
 
   const availableQuest = getAvailableQuest(npcId);
   if (availableQuest) {
-    actions.push({ text: "查看悬赏", action: "quest" });
+    actions.push({ text: "Xem treo thưởng", action: "quest" });
   }
 
   if (config.canGift !== false) {
-    actions.push({ text: "赠送物品", action: "gift" });
+    actions.push({ text: "Tặng vật phẩm", action: "gift" });
   }
 
   if (config.canRecycle) {
-    actions.push({ text: config.recycleQuest?.name || "回收近战武器", action: "recycle" });
-    actions.push({ text: config.recycleRangedQuest?.name || "回收远程武器", action: "recycle_ranged" });
+    actions.push({ text: config.recycleQuest?.name || "Thu hồi vũ khí cận chiến", action: "recycle" });
+    actions.push({ text: config.recycleRangedQuest?.name || "Thu hồi vũ khí tầm xa", action: "recycle_ranged" });
     if (config.recycleBackpackQuest) {
       actions.push({ text: config.recycleBackpackQuest.name, action: "recycle_backpack" });
     }
   }
 
   if (config.canRepair) {
-    actions.push({ text: "修理近战武器", action: "repair" });
+    actions.push({ text: "Sửa chữa vũ khí cận chiến", action: "repair" });
     if (config.canRepairBow) {
-      actions.push({ text: "修理远程武器", action: "repair_bow" });
+      actions.push({ text: "Sửa chữa vũ khí tầm xa", action: "repair_bow" });
     }
   }
 
@@ -318,23 +318,23 @@ export function handleNpcAction(input) {
   }
 
   if (config.canCureInfection || config.cureInfectionQuest) {
-    actions.push({ text: config.cureInfectionQuest?.name || "治疗感染", action: "cure_infection" });
+    actions.push({ text: config.cureInfectionQuest?.name || "Chữa trị nhiễm trùng", action: "cure_infection" });
   }
 
   if (npcId === "lili" && config.giftQuest) {
     const giftAffinity = getNpcAffinity(npcId);
     if (giftAffinity >= config.giftQuest.reqAffection && !isQuestDone("llGift")) {
-      actions.push({ text: "领取神秘礼物", action: "lili_gift_claim" });
+      actions.push({ text: "Nhận quà bí ẩn", action: "lili_gift_claim" });
     }
   }
 
-  actions.push({ text: "返回", action: "return" });
+  actions.push({ text: "Quay lại", action: "return" });
 
   setPhase("npc_" + npcId);
   setOptions(actions);
 }
 
-// ---------- 对话 ----------
+// ---------- Đối thoại ----------
 
 export function handleNpcChat() {
   const state = getState();
@@ -343,7 +343,7 @@ export function handleNpcChat() {
   if (!config) { returnToMenu(); return; }
 
   if (!canChatToday(npcId)) {
-    setStory("今天已经聊得够多了，明天再来吧。");
+    setStory("Hôm nay đã nói chuyện đủ rồi, mai hãy đến nhé.");
     handleNpcAction("chat");
     return;
   }
@@ -355,7 +355,7 @@ export function handleNpcChat() {
   incrementChatCount(npcId);
   addNpcAffinity(npcId, GAME_CONSTANTS.NPC.CHAT_AFFINITY);
   const newAffinity = getNpcAffinity(npcId);
-  setStory(line + `\n\n好感度 +${GAME_CONSTANTS.NPC.CHAT_AFFINITY}（当前 ${newAffinity}/${AFFINITY_MAX[npcId]}）`);
+  setStory(line + `\n\nĐiểm thân mật +${GAME_CONSTANTS.NPC.CHAT_AFFINITY}（Hiện tại ${newAffinity}/${AFFINITY_MAX[npcId]}）`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -364,29 +364,29 @@ export function handleNpcChat() {
   }
 }
 
-// ---------- 赠送 ----------
+// ---------- Tặng ----------
 
 export function handleNpcGift() {
   const state = getState();
   const npcId = state._currentNpc;
   let items = [];
-  state.food.forEach((item, i) => items.push({ ...item, cat: "food", idx: i, label: `[食物] ${getItemDisplayName(item)}` }));
-  state.drinks.forEach((item, i) => items.push({ ...item, cat: "drinks", idx: i, label: `[饮品] ${getItemDisplayName(item)}` }));
-  state.medicine.forEach((item, i) => items.push({ ...item, cat: "medicine", idx: i, label: `[医疗] ${getItemDisplayName(item)}` }));
-  state.other.forEach((item, i) => items.push({ ...item, cat: "other", idx: i, label: `[其他] ${getItemDisplayName(item)}` }));
-  if (state.seeds) state.seeds.forEach((item, i) => items.push({ ...item, cat: "seed", idx: i, label: `[种子] ${getItemDisplayName(item)}` }));
-  if (state.cigarettes > 0) items.push({ cat: "cigarettes", idx: 0, name: "香烟", label: `[货物] (${state.cigarettes})香烟` });
-  if (state.gasoline > 0) items.push({ cat: "gasoline", idx: 0, name: "汽油", label: `[货物] (${state.gasoline})汽油` });
-  if (state.pureEnergy > 0) items.push({ cat: "pureEnergy", idx: 0, name: "纯净能源", label: `[货物] (${state.pureEnergy})纯净能源` });
+  state.food.forEach((item, i) => items.push({ ...item, cat: "food", idx: i, label: `[Thức ăn] ${getItemDisplayName(item)}` }));
+  state.drinks.forEach((item, i) => items.push({ ...item, cat: "drinks", idx: i, label: `[Đồ uống] ${getItemDisplayName(item)}` }));
+  state.medicine.forEach((item, i) => items.push({ ...item, cat: "medicine", idx: i, label: `[Y tế] ${getItemDisplayName(item)}` }));
+  state.other.forEach((item, i) => items.push({ ...item, cat: "other", idx: i, label: `[Khác] ${getItemDisplayName(item)}` }));
+  if (state.seeds) state.seeds.forEach((item, i) => items.push({ ...item, cat: "seed", idx: i, label: `[Hạt giống] ${getItemDisplayName(item)}` }));
+  if (state.cigarettes > 0) items.push({ cat: "cigarettes", idx: 0, name: "Thuốc lá", label: `[Hàng hóa] (${state.cigarettes})Thuốc lá` });
+  if (state.gasoline > 0) items.push({ cat: "gasoline", idx: 0, name: "Xăng", label: `[Hàng hóa] (${state.gasoline})Xăng` });
+  if (state.pureEnergy > 0) items.push({ cat: "pureEnergy", idx: 0, name: "Năng lượng tinh khiết", label: `[Hàng hóa] (${state.pureEnergy})Năng lượng tinh khiết` });
   if (items.length === 0) {
-    setStory("你翻遍了背包，发现没什么能送人的东西……");
+    setStory("Bạn lục tung balo, phát hiện không có gì để tặng...");
     handleNpcAction("chat");
     return;
   }
   setPhase("npc_gift");
-  setStory("请选择要赠送的物品（不同物品好感提升不同）：");
+  setStory("Vui lòng chọn vật phẩm muốn tặng (các vật phẩm khác nhau tăng điểm thân mật khác nhau):");
   const opts = items.map((item, i) => ({ text: item.label, action: "gift_confirm", index: i, giftItem: item }));
-  opts.push({ text: "返回", action: "gift_back", index: -1 });
+  opts.push({ text: "Quay lại", action: "gift_back", index: -1 });
   setOptions(opts);
 }
 
@@ -417,19 +417,19 @@ export function handleNpcGiftConfirm(input) {
   };
 
   let affinityGain = 1;
-  let giftName = item.name || "香烟";
+  let giftName = item.name || "Thuốc lá";
   if (item.cat === "cigarettes") {
     removeCigarettes(1);
     affinityGain = GAME_CONSTANTS.NPC.GIFT_AFFINITY_CARGO;
-    giftName = "香烟";
+    giftName = "Thuốc lá";
   } else if (item.cat === "gasoline") {
     removeGasoline(1);
     affinityGain = GAME_CONSTANTS.NPC.GIFT_AFFINITY_CARGO;
-    giftName = "汽油";
+    giftName = "Xăng";
   } else if (item.cat === "pureEnergy") {
     removePureEnergy(1);
     affinityGain = GAME_CONSTANTS.NPC.GIFT_AFFINITY_CARGO;
-    giftName = "纯净能源";
+    giftName = "Năng lượng tinh khiết";
   } else {
     const arr = catMap[item.cat];
     const targetItem = arr[item.idx];
@@ -454,9 +454,9 @@ export function handleNpcGiftConfirm(input) {
   addNpcAffinity(npcId, affinityGain);
   let affinity = getNpcAffinity(npcId);
   if (npcId === "lili") {
-    setStory(`你送出了${giftName}。${giftName}受到了莉莉丝的喜欢。好感度 +${affinityGain}（当前 ${affinity}/${AFFINITY_MAX.lili}）`);
+    setStory(`Bạn đã tặng ${giftName}. ${giftName} được Lilith yêu thích. Điểm thân mật +${affinityGain}（Hiện tại ${affinity}/${AFFINITY_MAX.lili}）`);
   } else {
-    setStory(`你送出了${giftName}。好感度 +${affinityGain}（当前 ${affinity}/${AFFINITY_MAX[npcId]}）`);
+    setStory(`Bạn đã tặng ${giftName}. Điểm thân mật +${affinityGain}（Hiện tại ${affinity}/${AFFINITY_MAX[npcId]}）`);
   }
   advanceTime(1);
   updateStatusEffects();
@@ -466,7 +466,7 @@ export function handleNpcGiftConfirm(input) {
   }
 }
 
-// ---------- 悬赏任务 ----------
+// ---------- Nhiệm vụ treo thưởng ----------
 
 function checkQuestRequire(state, quest) {
   const req = quest.require;
@@ -711,7 +711,7 @@ export function handleNpcQuest() {
   const npcId = state._currentNpc;
   const quest = getAvailableQuest(npcId);
   if (!quest) {
-    setStory("目前没有可接取的悬赏任务。");
+    setStory("Hiện tại không có nhiệm vụ treo thưởng nào có thể nhận.");
     handleNpcAction("chat");
     return;
   }
@@ -720,8 +720,8 @@ export function handleNpcQuest() {
   let desc = `📋 【${quest.name}】\n`;
   desc += `━━━━━━━━━━━━━━━━━\n`;
   desc += `📝 ${quest.desc}\n\n`;
-  desc += `📊 进度：${check.current}/${check.target}\n`;
-  desc += `🏆 奖励：${quest.reward?.desc || "无"}`;
+  desc += `📊 Tiến độ：${check.current}/${check.target}\n`;
+  desc += `🏆 Phần thưởng：${quest.reward?.desc || "Không"}`;
   if (quest.story) {
     desc += `\n\n💬 ${quest.story}`;
   }
@@ -729,10 +729,10 @@ export function handleNpcQuest() {
   setStory(desc);
   const opts = [];
   if (check.met) {
-    opts.push({ text: "✅ 提交任务", action: "quest_confirm" });
+    opts.push({ text: "✅ Nộp nhiệm vụ", action: "quest_confirm" });
   }
-  opts.push({ text: "📋 查看任务详解", action: "quest_preview" });
-  opts.push({ text: "下次再来", action: "quest_back" });
+  opts.push({ text: "📋 Xem chi tiết nhiệm vụ", action: "quest_preview" });
+  opts.push({ text: "Lần sau hãy đến", action: "quest_back" });
   setOptions(opts);
 }
 
@@ -741,7 +741,7 @@ export function handleNpcQuestConfirm() {
   const npcId = state._currentNpc;
   const quest = getAvailableQuest(npcId);
   if (!quest || !canSubmitQuest(state, quest)) {
-    setStory("任务条件未达成。");
+    setStory("Điều kiện nhiệm vụ chưa đạt.");
     handleNpcAction("chat");
     return;
   }
@@ -751,7 +751,7 @@ export function handleNpcQuestConfirm() {
   const newAffinity = getNpcAffinity(npcId);
   markQuestDone(quest.id);
   const npcName = SURVIVOR_NPC.find(n => n.id === npcId)?.name || "NPC";
-  setStory(`🎉 你完成了${npcName}的悬赏【${quest.name}】！\n\n🏆 获得奖励：${quest.reward?.desc || "无"}\n💝 好感度 +${GAME_CONSTANTS.NPC.QUEST_AFFINITY_REWARD}（当前 ${newAffinity}/${AFFINITY_MAX[npcId]}）`);
+  setStory(`🎉 Bạn đã hoàn thành treo thưởng【${quest.name}】của ${npcName}!\n\n🏆 Nhận phần thưởng：${quest.reward?.desc || "Không"}\n💝 Điểm thân mật +${GAME_CONSTANTS.NPC.QUEST_AFFINITY_REWARD}（Hiện tại ${newAffinity}/${AFFINITY_MAX[npcId]}）`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -765,7 +765,7 @@ export function handleNpcQuestPreview() {
   const npcId = state._currentNpc;
   const quest = getAvailableQuest(npcId);
   if (!quest) {
-    setStory("目前没有可接取的悬赏任务。");
+    setStory("Hiện tại không có nhiệm vụ treo thưởng nào có thể nhận.");
     handleNpcAction("chat");
     return;
   }
@@ -775,10 +775,10 @@ export function handleNpcQuestPreview() {
   detailLines.push(`━━━━━━━━━━━━━━━━━`);
   detailLines.push(`📝 ${quest.desc}`);
   detailLines.push(``);
-  detailLines.push(`📊 当前进度：${check.current}/${check.target}`);
+  detailLines.push(`📊 Tiến độ hiện tại：${check.current}/${check.target}`);
   detailLines.push(``);
-  detailLines.push(`🏆 任务奖励：${quest.reward?.desc || "无"}`);
-  detailLines.push(`💝 额外好感度：+${GAME_CONSTANTS.NPC.QUEST_AFFINITY_REWARD}`);
+  detailLines.push(`🏆 Phần thưởng nhiệm vụ：${quest.reward?.desc || "Không"}`);
+  detailLines.push(`💝 Điểm thân mật thêm：+${GAME_CONSTANTS.NPC.QUEST_AFFINITY_REWARD}`);
   if (quest.story) {
     detailLines.push(``);
     detailLines.push(`💬 ${quest.story}`);
@@ -787,9 +787,9 @@ export function handleNpcQuestPreview() {
   setStory(detailLines.join("\n"));
   const opts = [];
   if (check.met) {
-    opts.push({ text: "✅ 提交任务", action: "quest_confirm" });
+    opts.push({ text: "✅ Nộp nhiệm vụ", action: "quest_confirm" });
   }
-  opts.push({ text: "返回", action: "quest_back" });
+  opts.push({ text: "Quay lại", action: "quest_back" });
   setOptions(opts);
 }
 
@@ -799,25 +799,25 @@ export function handleNpcRecycle() {
   const meleeItems = state.other.filter(item => item.type === "melee" && item.id !== DEFAULT_ITEM_IDS.melee);
   if (meleeItems.length === 0) {
     if (npcId === "lili") {
-      setStory("莉莉丝翻了翻你的背包：\"没有废旧武器呀……你去工厂找找看？\"");
+      setStory("Lilith lật xem balo của bạn: \"Không có vũ khí phế liệu nào cả... bạn đi nhà máy tìm xem?\"");
     } else {
-      setStory("你没有任何可回收的近战武器。");
+      setStory("Bạn không có vũ khí cận chiến nào có thể thu hồi.");
     }
     handleNpcAction("chat");
     return;
   }
   setPhase("npc_recycle");
   const opts = meleeItems.map((item, i) => ({
-    text: `${item.name}（伤害:${item.damage} 当前耐久:${item.currentDurability}/${item.durability}）`,
+    text: `${item.name}（Sát thương:${item.damage} Độ bền hiện tại:${item.currentDurability}/${item.durability}）`,
     action: "recycle_confirm",
     index: i
   }));
-  opts.push({ text: "返回", action: "recycle_back", index: -1 });
+  opts.push({ text: "Quay lại", action: "recycle_back", index: -1 });
   const price = meleeItems[0] ? Math.max(1, Math.floor(meleeItems[0].damage / 10)) : 1;
   if (npcId === "lili") {
-    setStory(`莉莉丝眼睛一亮：\"让我看看你的武器！\" 她熟练地翻看着你的近战装备。\n\n选择要回收的近战武器（按伤害定价）：\n普通武器：${price} 香烟/件`);
+    setStory(`Lilith mắt sáng lên: \"Để tôi xem vũ khí của bạn!\" Cô ấy thành thạo lật xem trang bị cận chiến của bạn.\n\nChọn vũ khí cận chiến muốn thu hồi (tính giá theo sát thương):\nVũ khí thường: ${price} điếu thuốc lá/món`);
   } else {
-    setStory(`选择要回收的近战武器（按伤害定价）：\n\n普通武器：${price} 香烟/件`);
+    setStory(`Chọn vũ khí cận chiến muốn thu hồi (tính giá theo sát thương):\n\nVũ khí thường: ${price} điếu thuốc lá/món`);
   }
   setOptions(opts);
 }
@@ -836,9 +836,9 @@ export function handleRecycleConfirm(input) {
   removeItem("other", state.other.indexOf(item));
   const npcId = state._currentNpc;
   if (npcId === "lili") {
-    setStory(`莉莉丝接过${item.name}，爱不释手地端详了一番，然后从兜里掏出${price}根香烟递给你：\"好东西！这个归我了，烟给你~\"`);
+    setStory(`Lilith nhận lấy ${item.name}, yêu thích ngắm nghía một hồi, rồi lấy từ túi ra ${price} điếu thuốc lá đưa cho bạn: \"Đồ tốt! Cái này thuộc về tôi, thuốc lá cho bạn~\"`);
   } else {
-    setStory(`你回收了${item.name}，获得${price}根香烟。`);
+    setStory(`Bạn thu hồi ${item.name}, nhận được ${price} điếu thuốc lá.`);
   }
   advanceTime(1);
   updateStatusEffects();
@@ -854,24 +854,24 @@ export function handleNpcRecycleRanged() {
   const rangedItems = state.other.filter(item => item.type === "ranged");
   if (rangedItems.length === 0) {
     if (npcId === "lili") {
-      setStory("莉莉丝翻了翻你的背包：\"没有远程武器可以回收呀……去警察局或军事检查站找找？\"");
+      setStory("Lilith lật xem balo của bạn: \"Không có vũ khí tầm xa nào để thu hồi cả... đi đồn cảnh sát hoặc trạm kiểm soát quân sự tìm xem?\"");
     } else {
-      setStory("你没有任何可回收的远程武器。");
+      setStory("Bạn không có vũ khí tầm xa nào có thể thu hồi.");
     }
     handleNpcAction("chat");
     return;
   }
   setPhase("npc_recycle_ranged");
   const opts = rangedItems.map((item, i) => ({
-    text: `${item.name}（伤害:${item.damage} 弹药:${item.ammoType}）`,
+    text: `${item.name}（Sát thương:${item.damage} Đạn dược:${item.ammoType}）`,
     action: "recycle_ranged_confirm",
     index: i
   }));
-  opts.push({ text: "返回", action: "recycle_ranged_back", index: -1 });
+  opts.push({ text: "Quay lại", action: "recycle_ranged_back", index: -1 });
   if (npcId === "lili") {
-    setStory("莉莉丝兴奋地搓着手：\"远程武器的零件最值钱了！\" 她仔细检查着你的远程武器。\n\n选择要回收的远程武器：");
+    setStory("Lilith hào hứng xoa tay: \"Linh kiện vũ khí tầm xa đáng giá nhất!\" Cô ấy cẩn thận kiểm tra vũ khí tầm xa của bạn.\n\nChọn vũ khí tầm xa muốn thu hồi:");
   } else {
-    setStory("选择要回收的远程武器：");
+    setStory("Chọn vũ khí tầm xa muốn thu hồi:");
   }
   setOptions(opts);
 }
@@ -890,9 +890,9 @@ export function handleRecycleRangedConfirm(input) {
   removeItem("other", state.other.indexOf(item));
   const npcId = state._currentNpc;
   if (npcId === "lili") {
-    setStory(`莉莉丝小心翼翼地拆解了${item.name}，把零件收进仓库，然后递给你${price}根香烟：\"这些零件能做好多东西呢！烟你拿着~\"`);
+    setStory(`Lilith cẩn thận tháo dỡ ${item.name}, cất linh kiện vào kho, rồi đưa cho bạn ${price} điếu thuốc lá: "Những linh kiện này có thể làm được rất nhiều thứ! Thuốc lá bạn cầm đi~"`);
   } else {
-    setStory(`你回收了${item.name}，获得${price}根香烟。`);
+    setStory(`Bạn thu hồi ${item.name}, nhận được ${price} điếu thuốc lá.`);
   }
   advanceTime(1);
   updateStatusEffects();
@@ -908,9 +908,9 @@ export function handleNpcRecycleBackpack() {
   const backpackItems = state.other.filter(item => item.type === "backpack");
   if (backpackItems.length === 0) {
     if (npcId === "lili") {
-      setStory("莉莉丝翻了翻你的背包：\"没有多余的背包可以回收呀……去探索的时候多留意吧~\"");
+      setStory("Lilith lật xem balo của bạn: \"Không có balo dư nào để thu hồi cả... khi đi thám hiểm hãy chú ý hơn nhé~\"");
     } else {
-      setStory("你没有多余的可回收背包。");
+      setStory("Bạn không có balo dư nào có thể thu hồi.");
     }
     handleNpcAction("chat");
     return;
@@ -919,16 +919,16 @@ export function handleNpcRecycleBackpack() {
   const opts = backpackItems.map((item, i) => {
     const price = 1 + Math.round(item.capacity / 20);
     return {
-      text: `${item.name}（容量:${item.capacity} → ${price}香烟）`,
+      text: `${item.name}（Dung lượng:${item.capacity} → ${price} điếu thuốc lá）`,
       action: "recycle_backpack_confirm",
       index: i
     };
   });
-  opts.push({ text: "返回", action: "recycle_backpack_back", index: -1 });
+  opts.push({ text: "Quay lại", action: "recycle_backpack_back", index: -1 });
   if (npcId === "lili") {
-    setStory("莉莉丝拍了拍你的背包：\"多余的背包也能换烟哦！容量越大的包越值钱呢~\"\n\n选择要回收的背包（按1+容量÷20四舍五入计算香烟）：");
+    setStory("Lilith vỗ vỗ balo của bạn: \"Balo dư cũng có thể đổi thuốc lá này! Balo dung lượng càng lớn càng đáng giá nhé~\"\n\nChọn balo muốn thu hồi (tính theo 1+dung lượng÷20 làm tròn):");
   } else {
-    setStory("选择要回收的背包（按1+容量÷20四舍五入计算香烟）：");
+    setStory("Chọn balo muốn thu hồi (tính theo 1+dung lượng÷20 làm tròn):");
   }
   setOptions(opts);
 }
@@ -947,9 +947,9 @@ export function handleRecycleBackpackConfirm(input) {
   removeItem("other", state.other.indexOf(item));
   const npcId = state._currentNpc;
   if (npcId === "lili") {
-    setStory(`莉莉丝接过${item.name}，掂了掂分量：\"容量${item.capacity}的包，值${price}根烟！\" 她把背包塞进仓库，递给你${price}根香烟：\"下次找到大容量的包再来找我~"`);
+    setStory(`Lilith nhận lấy ${item.name}, cân nặng: \"Balo dung lượng ${item.capacity}, đáng ${price} điếu thuốc!\" Cô ấy nhét balo vào kho, đưa cho bạn ${price} điếu thuốc lá: \"Lần sau tìm được balo dung lượng lớn hơn hãy đến tìm tôi nhé~"`);
   } else {
-    setStory(`你回收了${item.name}，获得${price}根香烟。`);
+    setStory(`Bạn thu hồi ${item.name}, nhận được ${price} điếu thuốc lá.`);
   }
   advanceTime(1);
   updateStatusEffects();
@@ -959,13 +959,13 @@ export function handleRecycleBackpackConfirm(input) {
   }
 }
 
-// ---------- 修理 ----------
+// ---------- Sửa chữa ----------
 
 export function handleNpcRepair() {
   const state = getState();
   const npcId = state._currentNpc;
   if (state.meleeWeapon.id === DEFAULT_ITEM_IDS.melee) {
-    setStory("你目前没有可修理的武器。");
+    setStory("Hiện tại bạn không có vũ khí nào có thể sửa chữa.");
     handleNpcAction("chat");
     return;
   }
@@ -973,10 +973,10 @@ export function handleNpcRepair() {
   const cost = getCaptainDiscountCost(state, npcId, rawCost);
   const cigCount = state.cigarettes;
   setPhase("npc_repair");
-  setStory(`修理${state.meleeWeapon.name}需要${cost}根香烟${npcId === "lili" && hasDawnCaptainBadge(state) ? "（曙光队长折扣50%）" : ""}（耐久回复至满）。\n你有${cigCount}根香烟。`);
+  setStory(`Sửa chữa ${state.meleeWeapon.name} cần ${cost} điếu thuốc lá${npcId === "lili" && hasDawnCaptainBadge(state) ? "（Giảm giá 50% cho Thuyền trưởng Dawn）" : ""}（Độ bền hồi đầy）。\nBạn có ${cigCount} điếu thuốc lá。`);
   setOptions([
-    { text: cigCount >= cost ? "🔧 确认修理" : "🔧 确认修理（香烟不足）", action: "repair_confirm", disabled: cigCount < cost },
-    { text: "返回", action: "repair_back" },
+    { text: cigCount >= cost ? "🔧 Xác nhận sửa chữa" : "🔧 Xác nhận sửa chữa（Thiếu thuốc lá）", action: "repair_confirm", disabled: cigCount < cost },
+    { text: "Quay lại", action: "repair_back" },
   ]);
 }
 
@@ -986,13 +986,13 @@ export function handleRepairConfirm() {
   const rawCost = Math.max(1, Math.floor((state.meleeWeapon.durability - state.meleeWeapon.currentDurability) / GAME_CONSTANTS.NPC.REPAIR_MELEE_DIVISOR) + 1);
   const cost = getCaptainDiscountCost(state, npcId, rawCost);
   if (state.cigarettes < cost) {
-    setStory("你没有足够的香烟来支付修理费用。");
+    setStory("Bạn không có đủ thuốc lá để trả phí sửa chữa.");
     handleNpcAction("chat");
     return;
   }
   removeCigarettes(cost);
   state.meleeWeapon.currentDurability = state.meleeWeapon.durability;
-  setStory(`${state.meleeWeapon.name}修复完毕，耐久已回满。`);
+  setStory(`${state.meleeWeapon.name} đã sửa xong, độ bền đã hồi đầy.`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -1005,7 +1005,7 @@ export function handleNpcRepairBow() {
   const state = getState();
   const npcId = state._currentNpc;
   if (!state.rangedWeapon) {
-    setStory("你目前没有装备远程武器。");
+    setStory("Hiện tại bạn chưa trang bị vũ khí tầm xa.");
     handleNpcAction("chat");
     return;
   }
@@ -1013,10 +1013,10 @@ export function handleNpcRepairBow() {
   const cost = getCaptainDiscountCost(state, npcId, rawCost);
   const cigCount = state.cigarettes;
   setPhase("npc_repair_bow");
-  setStory(`修理${state.rangedWeapon.name}需要${cost}根香烟${npcId === "lili" && hasDawnCaptainBadge(state) ? "（曙光队长折扣50%）" : ""}（完整度回复至100%）。\n你有${cigCount}根香烟。`);
+  setStory(`Sửa chữa ${state.rangedWeapon.name} cần ${cost} điếu thuốc lá${npcId === "lili" && hasDawnCaptainBadge(state) ? "（Giảm giá 50% cho Thuyền trưởng Dawn）" : ""}（Độ nguyên vẹn hồi về 100%）。\nBạn có ${cigCount} điếu thuốc lá。`);
   setOptions([
-    { text: cigCount >= cost ? "🔧 确认修理" : "🔧 确认修理（香烟不足）", action: "repair_bow_confirm", disabled: cigCount < cost },
-    { text: "返回", action: "repair_bow_back" },
+    { text: cigCount >= cost ? "🔧 Xác nhận sửa chữa" : "🔧 Xác nhận sửa chữa（Thiếu thuốc lá）", action: "repair_bow_confirm", disabled: cigCount < cost },
+    { text: "Quay lại", action: "repair_bow_back" },
   ]);
 }
 
@@ -1026,13 +1026,13 @@ export function handleRepairBowConfirm() {
   const rawCost = Math.max(1, Math.floor((100 - state.rangedWeapon.integrity) / GAME_CONSTANTS.NPC.REPAIR_RANGED_DIVISOR) + 1);
   const cost = getCaptainDiscountCost(state, npcId, rawCost);
   if (state.cigarettes < cost) {
-    setStory("你没有足够的香烟来支付修理费用。");
+    setStory("Bạn không có đủ thuốc lá để trả phí sửa chữa.");
     handleNpcAction("chat");
     return;
   }
   removeCigarettes(cost);
   state.rangedWeapon.integrity = 100;
-  setStory(`${state.rangedWeapon.name}修复完毕，完整度已回满。`);
+  setStory(`${state.rangedWeapon.name} đã sửa xong, độ nguyên vẹn đã hồi đầy.`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -1041,7 +1041,7 @@ export function handleRepairBowConfirm() {
   }
 }
 
-// ---------- 莉莉丝维修枪支 ----------
+// ---------- Lilith sửa chữa súng ----------
 
 function handleLiliRepairGun() {
   const state = getState();
@@ -1049,12 +1049,12 @@ function handleLiliRepairGun() {
   if (!config?.repairQuest) { handleNpcAction("chat"); return; }
 
   if (!state.rangedWeapon) {
-    setStory("莉莉丝看了看你的装备：\"你还没装备远程武器呢，怎么修？\"");
+    setStory("Lilith xem trang bị của bạn: \"Bạn còn chưa trang bị vũ khí tầm xa, sửa thế nào?\"");
     handleNpcAction("chat");
     return;
   }
   if (state.rangedWeapon.ammoType === "箭矢") {
-    setStory("莉莉丝摆了摆手：\"这是弓弩，不是枪！修弓弩选另一个选项啦~\"");
+    setStory("Lilith xua tay: \"Đây là cung nỏ, không phải súng! Sửa cung nỏ chọn tùy chọn khác nhé~\"");
     handleNpcAction("chat");
     return;
   }
@@ -1065,10 +1065,10 @@ function handleLiliRepairGun() {
   const repairAmount = questCfg.repair;
   const cigCount = state.cigarettes;
   setPhase("lili_repair_gun");
-  setStory(`莉莉丝接过你的${state.rangedWeapon.name}仔细检查：\"嗯……完整度还剩${state.rangedWeapon.integrity}%。交给我吧！\"\n\n${questCfg.desc.replace(`消耗${rawCost}根香烟`, `消耗${cost}根香烟`)}${hasDawnCaptainBadge(state) ? "\n\n💡 曙光队长折扣：价格减半！" : ""}\n你有${cigCount}根香烟。`);
+  setStory(`Lilith nhận lấy ${state.rangedWeapon.name} của bạn kiểm tra kỹ: \"Ừm... độ nguyên vẹn còn ${state.rangedWeapon.integrity}%. Giao cho tôi đi!\"\n\n${questCfg.desc.replace(`消耗${rawCost}根香烟`, `消耗${cost}根香烟`)}${hasDawnCaptainBadge(state) ? "\n\n💡 Giảm giá Thuyền trưởng Dawn: giá giảm một nửa!" : ""}\nBạn có ${cigCount} điếu thuốc lá。`);
   setOptions([
-    { text: cigCount >= cost ? "🔧 确认维修" : "🔧 确认维修（香烟不足）", action: "lili_repair_gun_confirm", disabled: cigCount < cost },
-    { text: "返回", action: "lili_repair_gun_back" },
+    { text: cigCount >= cost ? "🔧 Xác nhận sửa chữa" : "🔧 Xác nhận sửa chữa（Thiếu thuốc lá）", action: "lili_repair_gun_confirm", disabled: cigCount < cost },
+    { text: "Quay lại", action: "lili_repair_gun_back" },
   ]);
 }
 
@@ -1088,15 +1088,15 @@ export function handleLiliRepairGunConfirm(input) {
   const repairAmount = questCfg.repair;
 
   if (state.cigarettes < cost) {
-    setStory("莉莉丝摊了摊手：\"香烟不够呀……去回收点武器换烟吧！\"");
+    setStory("Lilith mở tay: \"Thiếu thuốc lá rồi... đi thu hồi vũ khí đổi thuốc lá đi!\"");
     handleNpcAction("chat");
     return;
   }
   removeCigarettes(cost);
   state.rangedWeapon.integrity = Math.min(100, state.rangedWeapon.integrity + repairAmount);
 
-  const storyText = (questCfg.story || "莉莉丝修好了你的武器。").replace("{weapon}", state.rangedWeapon.name);
-  setStory(`${storyText}\n\n${state.rangedWeapon.name}完整度恢复至${state.rangedWeapon.integrity}%。`);
+  const storyText = (questCfg.story || "Lilith đã sửa xong vũ khí của bạn.").replace("{weapon}", state.rangedWeapon.name);
+  setStory(`${storyText}\n\n${state.rangedWeapon.name} độ nguyên vẹn hồi về ${state.rangedWeapon.integrity}%.`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -1105,7 +1105,7 @@ export function handleLiliRepairGunConfirm(input) {
   }
 }
 
-// ---------- 莉莉丝修复弓弩 ----------
+// ---------- Lilith sửa chữa cung nỏ ----------
 
 function handleLiliRepairBow() {
   const state = getState();
@@ -1113,12 +1113,12 @@ function handleLiliRepairBow() {
   if (!config?.repairBowQuest) { handleNpcAction("chat"); return; }
 
   if (!state.rangedWeapon) {
-    setStory("莉莉丝看了看你的装备：\"你还没装备远程武器呢，怎么修？\"");
+    setStory("Lilith xem trang bị của bạn: \"Bạn còn chưa trang bị vũ khí tầm xa, sửa thế nào?\"");
     handleNpcAction("chat");
     return;
   }
   if (state.rangedWeapon.ammoType !== "箭矢") {
-    setStory("莉莉丝歪着头：\"这是枪，不是弓弩！修枪选另一个选项啦~\"");
+    setStory("Lilith nghiêng đầu: \"Đây là súng, không phải cung nỏ! Sửa súng chọn tùy chọn khác nhé~\"");
     handleNpcAction("chat");
     return;
   }
@@ -1129,10 +1129,10 @@ function handleLiliRepairBow() {
   const repairAmount = questCfg.repair;
   const cigCount = state.cigarettes;
   setPhase("lili_repair_bow");
-  setStory(`莉莉丝接过你的${state.rangedWeapon.name}仔细检查：\"弓弩我最拿手了！\"\n\n${questCfg.desc.replace(`消耗${rawCost}根香烟`, `消耗${cost}根香烟`)}${hasDawnCaptainBadge(state) ? "\n\n💡 曙光队长折扣：价格减半！" : ""}\n你有${cigCount}根香烟。`);
+  setStory(`Lilith nhận lấy ${state.rangedWeapon.name} của bạn kiểm tra kỹ: \"Cung nỏ là thế mạnh của tôi!\"\n\n${questCfg.desc.replace(`消耗${rawCost}根香烟`, `消耗${cost}根香烟`)}${hasDawnCaptainBadge(state) ? "\n\n💡 Giảm giá Thuyền trưởng Dawn: giá giảm một nửa!" : ""}\nBạn có ${cigCount} điếu thuốc lá。`);
   setOptions([
-    { text: cigCount >= cost ? "🔧 确认修复" : "🔧 确认修复（香烟不足）", action: "lili_repair_bow_confirm", disabled: cigCount < cost },
-    { text: "返回", action: "lili_repair_bow_back" },
+    { text: cigCount >= cost ? "🔧 Xác nhận sửa chữa" : "🔧 Xác nhận sửa chữa（Thiếu thuốc lá）", action: "lili_repair_bow_confirm", disabled: cigCount < cost },
+    { text: "Quay lại", action: "lili_repair_bow_back" },
   ]);
 }
 
@@ -1152,15 +1152,15 @@ export function handleLiliRepairBowConfirm(input) {
   const repairAmount = questCfg.repair;
 
   if (state.cigarettes < cost) {
-    setStory("莉莉丝摊了摊手：\"香烟不够呀……去回收点武器换烟吧！\"");
+    setStory("Lilith mở tay: \"Thiếu thuốc lá rồi... đi thu hồi vũ khí đổi thuốc lá đi!\"");
     handleNpcAction("chat");
     return;
   }
   removeCigarettes(cost);
   state.rangedWeapon.integrity = Math.min(100, state.rangedWeapon.integrity + repairAmount);
 
-  const storyText = (questCfg.story || "莉莉丝修好了你的弓弩。").replace("{weapon}", state.rangedWeapon.name);
-  setStory(`${storyText}\n\n${state.rangedWeapon.name}完整度恢复至${state.rangedWeapon.integrity}%。`);
+  const storyText = (questCfg.story || "Lilith đã sửa xong cung nỏ của bạn.").replace("{weapon}", state.rangedWeapon.name);
+  setStory(`${storyText}\n\n${state.rangedWeapon.name} độ nguyên vẹn hồi về ${state.rangedWeapon.integrity}%.`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -1169,7 +1169,7 @@ export function handleLiliRepairBowConfirm(input) {
   }
 }
 
-// ---------- 治疗感染 ----------
+// ---------- Chữa trị nhiễm trùng ----------
 
 export function handleNpcCureInfection() {
   const state = getState();
@@ -1179,9 +1179,9 @@ export function handleNpcCureInfection() {
 
   if (state.infection <= 0) {
     if (npcId === "lili") {
-      setStory("莉莉丝看了看你的手臂：\"你没有感染呀，别吓自己啦~\"");
+      setStory("Lilith xem cánh tay bạn: \"Bạn không bị nhiễm trùng đâu, đừng dọa mình nhé~\"");
     } else {
-      setStory("你没有感染，不需要治疗。");
+      setStory("Bạn không bị nhiễm trùng, không cần chữa trị.");
     }
     handleNpcAction("chat");
     return;
@@ -1199,13 +1199,13 @@ export function handleNpcCureInfection() {
   const cigCount = state.cigarettes;
   setPhase("npc_cure");
   if (npcId === "lili" && questCfg) {
-    setStory(`莉莉丝皱起眉头打量着你：\"感染可不是闹着玩的！\" 她从药箱里取出一支淡黄色的药剂。\n\n${questCfg.desc}${hasDawnCaptainBadge(state) ? "\n\n💡 曙光队长折扣：治疗价格减半！" : ""}\n你有${cigCount}根香烟。`);
+    setStory(`Lilith cau mày đánh giá bạn: \"Nhiễm trùng không phải chuyện đùa!\" Cô ấy lấy từ hộp thuốc ra một ống thuốc màu vàng nhạt.\n\n${questCfg.desc}${hasDawnCaptainBadge(state) ? "\n\n💡 Giảm giá Thuyền trưởng Dawn: giá chữa trị giảm một nửa!" : ""}\nBạn có ${cigCount} điếu thuốc lá。`);
   } else {
-    setStory(`治疗感染需要${cost}根香烟${npcId === "lili" && hasDawnCaptainBadge(state) ? "（曙光队长折扣50%）" : ""}（当前感染值：${state.infection}%）。\n你有${cigCount}根香烟。`);
+    setStory(`Chữa trị nhiễm trùng cần ${cost} điếu thuốc lá${npcId === "lili" && hasDawnCaptainBadge(state) ? "（Giảm giá 50% cho Thuyền trưởng Dawn）" : ""}（Giá trị nhiễm trùng hiện tại：${state.infection}%）。\nBạn có ${cigCount} điếu thuốc lá。`);
   }
   setOptions([
-    { text: cigCount >= cost ? "💊 确认治疗" : "💊 确认治疗（香烟不足）", action: "cure_confirm", disabled: cigCount < cost },
-    { text: "返回", action: "cure_back" },
+    { text: cigCount >= cost ? "💊 Xác nhận chữa trị" : "💊 Xác nhận chữa trị（Thiếu thuốc lá）", action: "cure_confirm", disabled: cigCount < cost },
+    { text: "Quay lại", action: "cure_back" },
   ]);
 }
 
@@ -1227,9 +1227,9 @@ export function handleCureConfirm() {
 
   if (state.cigarettes < cost) {
     if (npcId === "lili") {
-      setStory("莉莉丝叹了口气：\"香烟不够……我需要的药材也得用烟去换呢。\"");
+      setStory("Lilith thở dài: \"Thiếu thuốc lá rồi... dược liệu tôi cần cũng phải dùng thuốc lá để đổi đấy.\"");
     } else {
-      setStory("你没有足够的香烟来支付治疗费用。");
+      setStory("Bạn không có đủ thuốc lá để trả phí chữa trị.");
     }
     handleNpcAction("chat");
     return;
@@ -1237,9 +1237,9 @@ export function handleCureConfirm() {
   removeCigarettes(cost);
   state.infection = Math.max(0, state.infection - cureAmount);
   if (npcId === "lili" && questCfg) {
-    setStory(`${questCfg.story}\n\n感染值降低了${cureAmount}%（当前感染值：${state.infection}%）。莉莉丝松了口气：\"吓死我了，以后小心点！\"`);
+    setStory(`${questCfg.story}\n\nGiá trị nhiễm trùng đã giảm ${cureAmount}%（Giá trị nhiễm trùng hiện tại：${state.infection}%）。Lilith thở phào: \"Sợ chết tôi, sau này cẩn thận hơn nhé!\"`);
   } else {
-    setStory(`治疗完成！感染值降低了${cureAmount}%（当前感染值：${state.infection}%）。`);
+    setStory(`Chữa trị hoàn tất! Giá trị nhiễm trùng đã giảm ${cureAmount}%（Giá trị nhiễm trùng hiện tại：${state.infection}%）。`);
   }
   advanceTime(1);
   updateStatusEffects();
@@ -1249,7 +1249,7 @@ export function handleCureConfirm() {
   }
 }
 
-// ---------- 莉莉丝神秘礼物 ----------
+// ---------- Lilith quà bí ẩn ----------
 
 function handleLiliGiftClaim() {
   const state = getState();
@@ -1258,14 +1258,14 @@ function handleLiliGiftClaim() {
   if (!config || !config.giftQuest) { handleNpcAction("chat"); return; }
 
   if (isQuestDone("llGift")) {
-    setStory("莉莉丝摇了摇头：\"礼物你已经领过了，别贪心哦~\"");
+    setStory("Lilith lắc đầu: \"Quà bạn đã nhận rồi, đừng tham lam nhé~\"");
     handleNpcAction("chat");
     return;
   }
 
   const affinity = getNpcAffinity(npcId);
   if (affinity < config.giftQuest.reqAffection) {
-    setStory(`莉莉丝歪着头看你：\"嗯……我们的关系还不够好呢（好感度${affinity}/${config.giftQuest.reqAffection}），再陪我聊聊天吧~\"`);
+    setStory(`Lilith nghiêng đầu nhìn bạn: \"Ừm... mối quan hệ của chúng ta chưa đủ tốt đâu（điểm thân mật${affinity}/${config.giftQuest.reqAffection}）, hãy cùng tôi nói chuyện thêm nhé~\"`);
     handleNpcAction("chat");
     return;
   }
@@ -1277,7 +1277,7 @@ function handleLiliGiftClaim() {
 
   if (reward.cigarettes) {
     addCigarettes(reward.cigarettes);
-    rewardNames.push(`香烟×${reward.cigarettes}`);
+    rewardNames.push(`Thuốc lá×${reward.cigarettes}`);
   }
 
   if (reward.ammo) {
@@ -1288,8 +1288,8 @@ function handleLiliGiftClaim() {
     }
   }
 
-  const storyText = config.giftQuest.story || "莉莉丝递给你一份礼物。";
-  setStory(`${storyText}\n\n🎁 获得奖励：${rewardNames.join("、")}`);
+  const storyText = config.giftQuest.story || "Lilith đưa cho bạn một món quà.";
+  setStory(`${storyText}\n\n🎁 Nhận phần thưởng：${rewardNames.join("、")}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();

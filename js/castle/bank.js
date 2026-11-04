@@ -6,49 +6,49 @@ import { handleCastleOutpost } from './outpost.js';
 export function handleCastleBank() {
   setPhase("castle_bank");
   const state = getState();
-  let info = "🏦 【城堡银行】\n\n";
+  let info = "🏦 【Ngân hàng lâu đài】\n\n";
   if (state.bankerKilled) {
-    info += "城堡银行员工不愿意接待你，因为你刺杀了行长。\n\n";
+    info += "Nhân viên ngân hàng lâu đài không muốn tiếp đón bạn, vì bạn đã ám sát trưởng ngân hàng.\n\n";
     if (state.castleDebt) {
-      info += `当前债务：${state.castleDebt.amount}根香烟\n\n`;
+      info += `Nợ hiện tại：${state.castleDebt.amount} điếu thuốc lá\n\n`;
     }
     setStory(info);
     setOptions([
-      { text: state.castleDebt ? "还款" : "还款（无债务）", action: "bank_repay", disabled: !state.castleDebt },
-      { text: "离开", action: "bank_leave" },
+      { text: state.castleDebt ? "Trả nợ" : "Trả nợ（Không có nợ）", action: "bank_repay", disabled: !state.castleDebt },
+      { text: "Rời đi", action: "bank_leave" },
     ]);
     return;
   }
   if (state.castleDebt) {
     const daysLeft = state.castleDebt.dueDay - state.day;
     if (daysLeft > 0) {
-      info += `当前债务：${state.castleDebt.amount}根香烟（还剩 ${daysLeft} 天还款）\n\n`;
+      info += `Nợ hiện tại：${state.castleDebt.amount} điếu thuốc lá（Còn ${daysLeft} ngày để trả）\n\n`;
     } else {
-      info += `当前债务：${state.castleDebt.amount}根香烟（已逾期 ${-daysLeft} 天！）\n\n`;
+      info += `Nợ hiện tại：${state.castleDebt.amount} điếu thuốc lá（Đã quá hạn ${-daysLeft} ngày！）\n\n`;
     }
   } else {
-    info += "你目前没有债务。\n\n";
+    info += "Hiện tại bạn không có nợ.\n\n";
   }
-  info += `借贷：从银行借支香烟（最多25根）\n还款：偿还部分或全部债务`;
+  info += `Vay mượn：Vay thuốc lá từ ngân hàng（Tối đa 25 điếu）\nTrả nợ：Trả một phần hoặc toàn bộ nợ`;
   setStory(info);
   setOptions([
-    { text: "借贷", action: "bank_loan" },
-    { text: state.castleDebt ? "还款" : "还款（无债务）", action: "bank_repay", disabled: !state.castleDebt }, 
-    { text: "与行长见面", action: "bank_banker" },
-    { text: "离开", action: "bank_leave" },
+    { text: "Vay mượn", action: "bank_loan" },
+    { text: state.castleDebt ? "Trả nợ" : "Trả nợ（Không có nợ）", action: "bank_repay", disabled: !state.castleDebt },
+    { text: "Gặp trưởng ngân hàng", action: "bank_banker" },
+    { text: "Rời đi", action: "bank_leave" },
   ]);
 }
 
 export function handleBankLoan() {
   const state = getState();
   if (state.castleDebt) {
-    setStory("你已经有一笔未还清的债务，先还清再来借吧。");
+    setStory("Bạn đã có một khoản nợ chưa trả, hãy trả xong rồi hãy vay tiếp.");
     refreshCastleBank();
     return;
   }
   cleanDualIdentity(state);
   if (hasAnyDawnIdentity(state)) {
-    setStory("银行柜员冷冷地看着你：\"曙光阵地的？我们银行不招待你们这些反叛分子。请马上离开，否则我叫守卫了。\"");
+    setStory("Giao dịch viên ngân hàng lạnh lùng nhìn bạn: \"Người của Dawn Base? Ngân hàng chúng tôi không tiếp đãi các người phản loạn. Mời rời đi ngay, nếu không tôi sẽ gọi vệ binh。\"");
     refreshCastleBank();
     return;
   }
@@ -56,10 +56,10 @@ export function handleBankLoan() {
   const opts = [];
   const loanAmounts = [5, 10, 15, 20, 25];
   for (const amount of loanAmounts) {
-    opts.push({ text: `${amount}根香烟`, action: "loan_amount", amount });
+    opts.push({ text: `${amount} điếu thuốc lá`, action: "loan_amount", amount });
   }
-  opts.push({ text: "返回", action: "back" });
-  setStory("🏦 请输入要借贷的香烟数量：");
+  opts.push({ text: "Quay lại", action: "back" });
+  setStory("🏦 Vui lòng nhập số lượng thuốc lá muốn vay:");
   setOptions(opts);
 }
 
@@ -72,7 +72,7 @@ export function handleLoanSubmit(input) {
   const amount = option.amount;
   state.castleDebt = { amount: amount, dueDay: state.day + GAME_CONSTANTS.CASTLE.LOAN_TERM_DAYS, mercyCount: 0 };
   addCigarettes(amount);
-  setStory(`✅ 你从城堡银行借贷了 ${amount} 根香烟。行长笑眯眯地说："记得 ${GAME_CONSTANTS.CASTLE.LOAN_TERM_DAYS} 天内还清哦，不然……嘿嘿。"\n\n（没有告诉你的是，逾期要翻倍偿还。）`);
+  setStory(`✅ Bạn đã vay ${amount} điếu thuốc lá từ ngân hàng lâu đài. Trưởng ngân hàng cười híp mắt nói："Nhớ trả trong ${GAME_CONSTANTS.CASTLE.LOAN_TERM_DAYS} ngày nhé, nếu không thì……。"\n\n（Điều không nói cho bạn biết là, quá hạn phải trả gấp đôi。）`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -82,20 +82,20 @@ export function handleLoanSubmit(input) {
 export function handleBankRepay() {
   const state = getState();
   if (!state.castleDebt) {
-    setStory("你没有债务需要偿还。");
+    setStory("Bạn không có nợ nào cần trả.");
     refreshCastleBank();
     return;
   }
   const needed = state.castleDebt.amount;
   if (state.cigarettes < needed) {
-    setStory(`❌ 你需要 ${needed} 根香烟来还清债务，但你只有 ${state.cigarettes} 根。去凑够再来吧。`);
+    setStory(`❌ Bạn cần ${needed} điếu thuốc lá để trả nợ, nhưng bạn chỉ có ${state.cigarettes} điếu。 Hãy kiếm đủ rồi hãy đến。`);
     refreshCastleBank();
     return;
   }
   removeCigarettes(needed);
   state.castleDebt = null;
   state.castleDebtTriggered = false;
-  setStory(`✅ 你偿还了全部债务（${needed}根香烟）。行长满意地点了点头："不错不错，诚信经营，欢迎下次光临！"`);
+  setStory(`✅ Bạn đã trả toàn bộ nợ（${needed} điếu thuốc lá）。Trưởng ngân hàng hài lòng gật đầu："Tốt lắm tốt lắm, làm ăn chân chính, hoan nghênh lần sau ghé lại！"`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -106,60 +106,60 @@ export function handleBankBanker() {
   const state = getState();
   const rank = getCastleRank(state);
   const line = getDialogueByRank("banker", rank);
-  setStory(`城堡坐在宽大的办公桌后，翘着二郎腿：${line}\n\n你决定……`);
+  setStory(`Trưởng ngân hàng ngồi sau bàn làm việc rộng lớn, vắt chéo chân：${line}\n\nBạn quyết định……`);
   setPhase("castle_banker");
   setOptions([
-    { text: "申请免息", action: "banker_waiver" },
-    { text: "请求宽限五天", action: "banker_mercy" },
-    { text: "打死这个高利贷！", action: "banker_fight" },
-    { text: "离开", action: "banker_leave" },
+    { text: "Xin", action: "banker_waiver" },
+    { text: "Xin gia hạn 5 ngày", action: "banker_mercy" },
+    { text: "Đánh chết tên cho vay nặng lãi này！", action: "banker_fight" },
+    { text: "Rời đi", action: "banker_leave" },
   ]);
 }
 
 export function handleBankerWaiver() {
   const state = getState();
   if (!state.castleDebt) {
-    setStory("行长摆摆手：\"你又没欠钱，免什么息？别浪费我时间。\"");
+    setStory("Trưởng ngân hàng xua tay："Bạn lại không, miễn gì? Đừng phí thời gian của tôi。\"");
     refreshCastleBank();
     return;
   }
   const rank = getCastleRank(state);
-  const rankName = getCastleRankName(state) || "平民";
+  const rankName = getCastleRankName(state) || "Bình dân";
   setPhase("castle_banker_waiver");
-  setStory(`行长看了看你：\"哦？想申请免息？让我看看你的资格……\"\n\n当前债务：${state.castleDebt.amount}根香烟\n你的身份：${rankName}`);
+  setStory(`Trưởng ngân hàng nhìn bạn："Ồ? Muốn xin? Để tôi xem tư cách của bạn……"\n\nNợ hiện tại：${state.castleDebt.amount} điếu thuốc lá\nThân phận của bạn：${rankName}`);
   setOptions([
-    { text: rank >= 2 ? "免息三成并偿还" : "免息三成（子爵以上可享受）", action: "waiver_30", disabled: rank < 2 },
-    { text: rank >= 4 ? "免息一半并偿还" : "免息一半（侯爵以上可享受）", action: "waiver_50", disabled: rank < 4 },
-    { text: rank >= 6 ? "免息全部并偿还" : "免息全部（储君可享受）", action: "waiver_100", disabled: rank < 6 },
-    { text: "返回", action: "waiver_back" },
+    { text: rank >= 2 ? "Miễn ba và trả nợ" : "Miễn ba（Tử tước trở lên mới được hưởng）", action: "waiver_30", disabled: rank < 2 },
+    { text: rank >= 4 ? "Miễn một nửa và trả nợ" : "Miễn một nửa（Hầu tước trở lên mới được hưởng）", action: "waiver_50", disabled: rank < 4 },
+    { text: rank >= 6 ? "Miễn toàn bộ và trả nợ" : "Miễn toàn bộ（Trữ quân mới được hưởng）", action: "waiver_100", disabled: rank < 6 },
+    { text: "Quay lại", action: "waiver_back" },
   ]);
 }
 
 function executeWaiver(rate, rankRequired, successMsg, failMsg) {
   const state = getState();
   const rank = getCastleRank(state);
-  const rankName = getCastleRankName(state) || "平民";
+  const rankName = getCastleRankName(state) || "Bình dân";
   if (rank < rankRequired) {
     setStory(failMsg);
     setPhase("castle_banker_waiver");
     setOptions([
-      { text: rank >= 2 ? "免息三成并偿还" : "免息三成（子爵以上可享受）", action: "waiver_30", disabled: rank < 2 },
-      { text: rank >= 4 ? "免息一半并偿还" : "免息一半（侯爵以上可享受）", action: "waiver_50", disabled: rank < 4 },
-      { text: rank >= 6 ? "免息全部并偿还" : "免息全部（储君可享受）", action: "waiver_100", disabled: rank < 6 },
-      { text: "返回", action: "waiver_back" },
+      { text: rank >= 2 ? "Miễn ba và trả nợ" : "Miễn ba（Tử tước trở lên mới được hưởng）", action: "waiver_30", disabled: rank < 2 },
+      { text: rank >= 4 ? "Miễn một nửa và trả nợ" : "Miễn một nửa（Hầu tước trở lên mới được hưởng）", action: "waiver_50", disabled: rank < 4 },
+      { text: rank >= 6 ? "Miễn toàn bộ và trả nợ" : "Miễn toàn bộ（Trữ quân mới được hưởng）", action: "waiver_100", disabled: rank < 6 },
+      { text: "Quay lại", action: "waiver_back" },
     ]);
     return;
   }
   const debt = state.castleDebt.amount;
   const waiverAmount = debt * rate;
   if (waiverAmount < 1) {
-    setStory("行长翻了翻账本，摇了摇头：\"你贷的太少了，没办法给你免。\"");
+    setStory("Trưởng ngân hàng lật xem sổ sách, lắc đầu："Bạn vay quá ít, không thể miễn cho bạn。\"");
     setPhase("castle_banker_waiver");
     setOptions([
-      { text: rank >= 2 ? "免息三成并偿还" : "免息三成（子爵以上可享受）", action: "waiver_30", disabled: rank < 2 },
-      { text: rank >= 4 ? "免息一半并偿还" : "免息一半（侯爵以上可享受）", action: "waiver_50", disabled: rank < 4 },
-      { text: rank >= 6 ? "免息全部并偿还" : "免息全部（储君可享受）", action: "waiver_100", disabled: rank < 6 },
-      { text: "返回", action: "waiver_back" },
+      { text: rank >= 2 ? "Miễn ba và trả nợ" : "Miễn ba（Tử tước trở lên mới được hưởng）", action: "waiver_30", disabled: rank < 2 },
+      { text: rank >= 4 ? "Miễn một nửa và trả nợ" : "Miễn một nửa（Hầu tước trở lên mới được hưởng）", action: "waiver_50", disabled: rank < 4 },
+      { text: rank >= 6 ? "Miễn toàn bộ và trả nợ" : "Miễn toàn bộ（Trữ quân mới được hưởng）", action: "waiver_100", disabled: rank < 6 },
+      { text: "Quay lại", action: "waiver_back" },
     ]);
     return;
   }
@@ -168,7 +168,7 @@ function executeWaiver(rate, rankRequired, successMsg, failMsg) {
   if (newDebt <= 0) {
     state.castleDebt = null;
     state.castleDebtTriggered = false;
-    setStory(`${successMsg}\n\n免除了${roundedWaiver}根香烟，债务已全部清偿！`);
+    setStory(`${successMsg}\n\nĐã miễn ${roundedWaiver} điếu thuốc lá, nợ đã được thanh toán toàn bộ！`);
     advanceTime(1);
     updateStatusEffects();
     checkDeath();
@@ -176,7 +176,7 @@ function executeWaiver(rate, rankRequired, successMsg, failMsg) {
     return;
   }
   if (state.cigarettes < newDebt) {
-    setStory(`${successMsg}\n\n免除${roundedWaiver}根后，你还需要偿还${newDebt}根香烟，但你只有${state.cigarettes}根。去凑够再来吧。`);
+    setStory(`${successMsg}\n\nSau khi miễn ${roundedWaiver} điếu, bạn còn cần trả ${newDebt} điếu thuốc lá, nhưng bạn chỉ có ${state.cigarettes} điếu。 Hãy kiếm đủ rồi hãy đến。`);
     state.castleDebt.amount = newDebt;
     advanceTime(1);
     updateStatusEffects();
@@ -187,7 +187,7 @@ function executeWaiver(rate, rankRequired, successMsg, failMsg) {
   removeCigarettes(newDebt);
   state.castleDebt = null;
   state.castleDebtTriggered = false;
-  setStory(`${successMsg}\n\n免除${roundedWaiver}根，偿还${newDebt}根，债务已全部清偿！`);
+  setStory(`${successMsg}\n\nMiễn ${roundedWaiver} điếu, trả ${newDebt} điếu, nợ đã được thanh toán toàn bộ！`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -197,17 +197,17 @@ function executeWaiver(rate, rankRequired, successMsg, failMsg) {
 export function handleWaiver30() {
   const state = getState();
   const rank = getCastleRank(state);
-  const rankName = getCastleRankName(state) || "平民";
+  const rankName = getCastleRankName(state) || "Bình dân";
   if (rank >= 2) {
     executeWaiver(0.3, 2,
-      "行长掂量了一下你的身份，想到了国王好像也在关照你，所以答应了免除三成利息的要求\"先生，行吧，给你降三成\"",
+      "Trưởng ngân hàng cân nhắc thân phận của bạn, nghĩ đến nhà vua dường như cũng đang chiếu cố bạn, nên đồng ý miễn ba lãi suất\"，，\"",
       "");
   } else if (rank === 1) {
     executeWaiver(0.3, 2, "",
-      "行长冷笑了一声：\"降息，不可能的，这事免谈。\"");
+      "Trưởng ngân hàng cười lạnh："Giảm, , 。\"");
   } else {
     executeWaiver(0.3, 2, "",
-      "行长暴跳如雷：\"滚开，你个穷鬼！我们没有商量的余地！守卫，守卫在哪里？把他赶出去。\"");
+      "Trưởng ngân hàng nổi trận lôi đình："Cút đi, đồ！Chúng tôi không có chỗ thương lượng！Vệ binh, vệ binh ở đâu? Đuổi hắn ra ngoài。\"");
   }
 }
 
@@ -216,17 +216,17 @@ export function handleWaiver50() {
   const rank = getCastleRank(state);
   if (rank >= 4) {
     executeWaiver(0.5, 4,
-      "行长邀请你坐在松软的沙发上，边泡茶边说\"这位大人财务比较紧张吗？这样吧，利息我给您免除一半。\"",
+      "Trưởng ngân hàng mời bạn ngồi trên sofa mềm mại, vừa pha trà vừa nói\"Vị đại nhân này tài chính？Vậy thì, lãi tôi cho ngài。\"",
       "");
   } else if (rank === 2 || rank === 3) {
     executeWaiver(0.5, 4, "",
-      "行长面露难色：\"先生，我们最近经济形势不好，要不你还是再重新考虑考虑？\"");
+      "Trưởng ngân hàng lộ vẻ khó xử："，,？\"");
   } else if (rank === 1) {
     executeWaiver(0.5, 4, "",
-      "行长嗤笑了一声：\"呵呵，你是在开玩笑吗？让我给你免一半，没门。\"");
+      "Trưởng ngân hàng："，？,。\"");
   } else {
     executeWaiver(0.5, 4, "",
-      "行长怒目圆睁：\"别白日做梦，把这个穷酸小子拖出去！\"");
+      "Trưởng ngân hàng：",！\"");
   }
 }
 
@@ -235,38 +235,38 @@ export function handleWaiver100() {
   const rank = getCastleRank(state);
   if (rank >= 6) {
     executeWaiver(1.0, 6,
-      "行长准备了上好的茶水和零食特产，满脸堆笑地说道\"储君阁下您能来我们这里，是我们的荣幸，利息给你全免了，你只需要还本金就好。以后记得多多关照我们。\"",
+      "Trưởng ngân hàng chuẩn bị trà ngon và đồ ăn vặt đặc sản, cười tươi nói\"Trữ quân điện hạ ngài có thể đến chỗ chúng tôi, là vinh hạnh của chúng tôi, lãi cho ngài, ngài chỉ cần trả。Sau này nhớ。\"",
       "");
   } else if (rank === 5 || rank === 4) {
     executeWaiver(1.0, 6, "",
-      "行长为难地说：\"这位大人，免除全部对我们来说亏损太大了，要不您再考虑一下别的优惠？\"");
+      "Trưởng ngân hàng khó xử nói："Vị đại nhân này,,？\"");
   } else if (rank === 3 || rank === 2) {
     executeWaiver(1.0, 6, "",
-      "行长皱起眉头：\"先生，你这就狮子大开口了啊，可别和我开这种玩笑。\"");
+      "Trưởng ngân hàng nhíu mày："，,。\"");
   } else if (rank === 1) {
     executeWaiver(1.0, 6, "",
-      "行长瞪大了眼睛：\"你吃迷药了吗？犯什么糊涂。\"");
+      "Trưởng ngân hàng trừng lớn mắt："Bạn？。\"");
   } else {
     executeWaiver(1.0, 6, "",
-      "行长拍案而起：\"我感觉你这穷鬼有点欠揍啊？再不离开，我可要叫人打你了，给我滚。\"");
+      "Trưởng ngân hàng："？,,。\"");
   }
 }
 
 export function handleBankerMercy() {
   const state = getState();
   if (!state.castleDebt) {
-    setStory("行长摆摆手：\"你又没欠钱，宽限什么？别浪费我时间。\"");
+    setStory("Trưởng ngân hàng xua tay："Bạn lại không,? Đừng phí thời gian của tôi。\"");
     refreshCastleBank();
     return;
   }
   if (state.castleDebt.mercyCount >= 2) {
-    setStory("行长不耐烦地挥了挥手：\"我已经宽限你两次了，不能再宽限了！赶紧想办法还钱！\"");
+    setStory("Trưởng ngân hàng không kiên nhẫn vẫy tay："Tôi đã,！Hãy mau nghĩ cách trả tiền！\"");
     refreshCastleBank();
     return;
   }
   state.castleDebt.mercyCount = (state.castleDebt.mercyCount || 0) + 1;
   state.castleDebt.dueDay += GAME_CONSTANTS.CASTLE.MERCY_EXTENSION_DAYS;
-  setStory(`行长皱了皱眉："行吧行吧，看在你态度诚恳的份上，再给你 ${GAME_CONSTANTS.CASTLE.MERCY_EXTENSION_DAYS} 天。记住，${state.castleDebt.dueDay} 号之前必须还清！"\n\n还款期限延后 ${GAME_CONSTANTS.CASTLE.MERCY_EXTENSION_DAYS} 天。`);
+  setStory(`Trưởng ngân hàng nhíu mày："Hành đi hành đi, xem, ${GAME_CONSTANTS.CASTLE.MERCY_EXTENSION_DAYS} ngày。，${state.castleDebt.dueDay} ！"\n\nThời hạn trả nợ kéo dài ${GAME_CONSTANTS.CASTLE.MERCY_EXTENSION_DAYS} ngày。`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -278,16 +278,16 @@ export function refreshCastleBank() {
   const state = getState();
   if (state.bankerKilled) {
     setOptions([
-      { text: state.castleDebt ? "还款" : "还款（无债务）", action: "bank_repay", disabled: !state.castleDebt },
-      { text: "离开", action: "bank_leave" },
+      { text: state.castleDebt ? "Trả nợ" : "Trả nợ（Không có nợ）", action: "bank_repay", disabled: !state.castleDebt },
+      { text: "Rời đi", action: "bank_leave" },
     ]);
     return;
   }
   setOptions([
-    { text: "借贷", action: "bank_loan" },
-    { text: state.castleDebt ? "还款" : "还款（无债务）", action: "bank_repay", disabled: !state.castleDebt },
-    { text: "与行长见面", action: "bank_banker" },
-    { text: "离开", action: "bank_leave" },
+    { text: "Vay mượn", action: "bank_loan" },
+    { text: state.castleDebt ? "Trả nợ" : "Trả nợ（Không có nợ）", action: "bank_repay", disabled: !state.castleDebt },
+    { text: "Gặp trưởng ngân hàng", action: "bank_banker" },
+    { text: "Rời đi", action: "bank_leave" },
   ]);
 }
 
@@ -305,10 +305,10 @@ export function handleBankerFight() {
     ? RANGED_WEAPONS.find(w => w.id === FIXED_LOOT_DROPS.banker_kill.weaponId)
     : MELEE_WEAPONS.find(w => w.id === FIXED_LOOT_DROPS.banker_kill.weaponId);
   setPhase("pre_combat_npc");
-  setStory(`你一拍桌子，拔出武器！行长冷笑一声，从桌下抽出一把寒光闪闪的${bankerWeapon.name}："找死！"`);
+  setStory(`Bạn vỗ bàn, rút vũ khí ra！Trưởng ngân hàng cười lạnh, rút từ dưới bàn ra một thanh ${bankerWeapon.name} lóe："Tìm chết！"`);
   setOptions([
-    { text: "近战作战", action: "combat_npc_melee" },
-    { text: "远程射击", action: "combat_npc_ranged" },
+    { text: "Chiến đấu cận chiến", action: "combat_npc_melee" },
+    { text: "Bắn tầm xa", action: "combat_npc_ranged" },
     { text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_npc_flee" },
   ]);
 }

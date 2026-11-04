@@ -24,12 +24,12 @@ export function handleWork() {
   const state = getState();
   cleanDualIdentity(state);
   if (hasCastleIdentity(state)) {
-    setStory("阵地主管皱了皱眉：\"你都是城堡的人了，还来抢我们穷人的活干？去去去！\" 你被赶走了。");
+    setStory("Quản lý trận địa nhíu mày：\"Bạn đều là người Lâu Đại Cítol rồi, còn đến tranh việc làm của người nghèo？Đi đi đi！\" Bạn bị đuổi đi。");
     showOutpostOptions();
     return;
   }
   if (state.phaseIndex < 1 || state.phaseIndex > 4) {
-    setStory("阵地的人已经下班了，明天再来打工吧");
+    setStory("Người ở trận địa đã hết giờ làm, hãy quay lại làm việc ngày mai。");
     showOutpostOptions();
     return;
   }

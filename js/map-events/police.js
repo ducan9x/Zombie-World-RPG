@@ -20,21 +20,21 @@ import {
 export function handlePoliceRaid() {
   const state = getState();
   if (state.lastPoliceRaidDay >= state.day) {
-    setStory("今天已经搜查过证物室了，明天再来吧。");
+    setStory("Hôm nay đã lục soát phòng chứng vật rồi, mai hãy quay lại.");
     showExploreOptionsState();
     return;
   }
   if (Math.random() < GAME_CONSTANTS.MAP_EVENTS.POLICE_TRAP_RATE) {
     state.health = Math.max(0, state.health - GAME_CONSTANTS.MAP_EVENTS.POLICE_TRAP_DAMAGE);
-    setStory(`你小心翼翼地翻找证物室，却不慎触发了警局遗留的陷阱！一阵爆炸将你掀翻在地，你被炸伤了，生命值 -${GAME_CONSTANTS.MAP_EVENTS.POLICE_TRAP_DAMAGE}。`);
+    setStory(`Bạn cẩn thận lục soát phòng chứng vật, nhưng chẳng may kích hoạt bẫy còn sót lại của đồn cảnh sát! Một vụ nổ hất bạn văng ra đất, bạn bị thương, HP -${GAME_CONSTANTS.MAP_EVENTS.POLICE_TRAP_DAMAGE}.`);
   } else {
     const ammo = AMMO[Math.floor(Math.random() * AMMO.length)];
     const count = Math.floor(Math.random() * (GAME_CONSTANTS.MAP_EVENTS.POLICE_AMMO_MAX - GAME_CONSTANTS.MAP_EVENTS.POLICE_AMMO_MIN + 1)) + GAME_CONSTANTS.MAP_EVENTS.POLICE_AMMO_MIN;
     const added = addItem({ id: ammo.id, name: ammo.name, type: "ammo", count });
     if (added) {
-      setStory(`你在一堆陈旧的档案后面发现了一些遗留弹药：${ammo.name}×${count}。这趟冒险总算没白来。`);
+      setStory(`Phía sau đống hồ sơ cũ bạn phát hiện một số đạn còn sót lại: ${ammo.name}×${count}. Chuyến mạo hiểm này không uổng phí.`);
     } else {
-      setStory(`你发现了一些弹药：${ammo.name}×${count}，但背包已满，无法携带。`);
+      setStory(`Bạn phát hiện một số đạn: ${ammo.name}×${count}, nhưng túi đã đầy, không thể mang.`);
     }
   }
   state.lastPoliceRaidDay = state.day;
@@ -49,7 +49,7 @@ export function handlePoliceRaid() {
 export function handlePoliceArchive() {
   const state = getState();
   if (state.lastPoliceArchiveDay >= state.day) {
-    setStory("今天已经翻找过档案柜了，明天再来吧。");
+    setStory("Hôm nay đã lục lọi tủ hồ sơ rồi, mai hãy quay lại.");
     showExploreOptionsState();
     return;
   }
@@ -60,16 +60,16 @@ export function handlePoliceArchive() {
     if (added) {
       state.crimeDataCount = (state.crimeDataCount || 0) + 1;
       const target = state.oldMaStep >= 1 ? 10 : "?";
-      setStory(`你在积满灰尘的档案柜深处翻出了一份泛黄的卷宗。\n\n这是一宗尘封已久的悬案——死者身份不明，案件编号已被涂黑，调查记录中反复出现一个名字：\"老马\"。\n\n📁 获得【犯罪资料】（${state.crimeDataCount}/${target}）`);
+      setStory(`Sâu trong tủ hồ sơ phủ đầy bụi bạn lục ra một tập hồ sơ ố vàng.\n\nĐây là một vụ án treo phủ bụi từ lâu — danh tính người chết không rõ, số vụ án đã bị bôi đen, trong hồ sơ điều tra nhiều lần xuất hiện một cái tên: "Lão Mã".\n\n📁 Nhận được [Tài liệu tội phạm] (${state.crimeDataCount}/${target})`);
     } else {
-      setStory("你翻到了一卷标着\"绝密\"字样的档案袋，但背包已满，无法携带。");
+      setStory("Bạn lục được một túi hồ sơ ghi \"Tuyệt mật\", nhưng túi đã đầy, không thể mang.");
     }
   } else {
     const failMessages = [
-      "你翻开一个又一个档案柜，里面除了发霉的拘留通知单之外什么都没有。",
-      "档案柜里的文件早已被老鼠啃得面目全非，散发着一股霉臭味。",
-      "你在档案柜里找到了一本破旧的执勤日记，但翻遍了也没发现任何有价值的线索。",
-      "档案柜的锁已经锈死，你费了半天劲才撬开，结果里面空空如也。",
+      "Bạn lật từng tủ hồ sơ, trong đó ngoài thông báo tạm giữ mốc meo thì chẳng có gì.",
+      "Tài liệu trong tủ hồ sơ đã bị chuột gặm đến méo mó, bốc mùi mốc.",
+      "Bạn tìm thấy một cuốn nhật ký trực ban cũ nát trong tủ hồ sơ, nhưng lật hết cũng không có manh mối có giá trị.",
+      "Khóa tủ hồ sơ đã gỉ chết, bạn mất nửa ngày mới cạy được, kết quả bên trong trống rỗng.",
     ];
     setStory(failMessages[Math.floor(Math.random() * failMessages.length)]);
   }

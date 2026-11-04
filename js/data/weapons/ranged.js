@@ -1,16 +1,16 @@
 export const RANGED_WEAPONS = [
   // ==================== 弓 ====================
   // common
-  { id: "木弓", name: "木弓", type: "ranged", damage: 18, integrity: 100, ammoType: "箭矢", critRate: 0.05, rarity: "common" },
-  { id: "反曲弓", name: "反曲弓", type: "ranged", damage: 24, integrity: 100, ammoType: "箭矢", critRate: 0.06, rarity: "common" },
+  { id: "木弓", name: "Cung gỗ", type: "ranged", damage: 18, integrity: 100, ammoType: "箭矢", critRate: 0.05, rarity: "common" },
+  { id: "反曲弓", name: "Cung cong ngược", type: "ranged", damage: 24, integrity: 100, ammoType: "箭矢", critRate: 0.06, rarity: "common" },
   // uncommon
-  { id: "复合弓", name: "复合弓", type: "ranged", damage: 32, integrity: 100, ammoType: "箭矢", critRate: 0.08, rarity: "uncommon" },
-  { id: "十字弩", name: "十字弩", type: "ranged", damage: 40, integrity: 100, ammoType: "箭矢", critRate: 0.09, rarity: "uncommon" },
+  { id: "复合弓", name: "Cung kết hợp", type: "ranged", damage: 32, integrity: 100, ammoType: "箭矢", critRate: 0.08, rarity: "uncommon" },
+  { id: "十字弩", name: "Cối nỏ", type: "ranged", damage: 40, integrity: 100, ammoType: "箭矢", critRate: 0.09, rarity: "uncommon" },
   // rare
-  { id: "折叠弩", name: "折叠弩", type: "ranged", damage: 48, integrity: 100, ammoType: "箭矢", critRate: 0.10, rarity: "rare" },
-  { id: "狙击弩", name: "狙击弩", type: "ranged", damage: 50, integrity: 100, ammoType: "箭矢", critRate: 0.11, rarity: "rare" },
+  { id: "折叠弩", name: "Cối nỏ gấp", type: "ranged", damage: 48, integrity: 100, ammoType: "箭矢", critRate: 0.10, rarity: "rare" },
+  { id: "狙击弩", name: "Cối nỏ săn bắn", type: "ranged", damage: 50, integrity: 100, ammoType: "箭矢", critRate: 0.11, rarity: "rare" },
   // legendary
-  { id: "原野之弓", name: "原野之弓", type: "ranged", damage: 52, integrity: 520, ammoType: "箭矢", critRate: 0.52, rarity: "myth" },
+  { id: "原野之弓", name: "Cung đồng quê", type: "ranged", damage: 52, integrity: 520, ammoType: "箭矢", critRate: 0.52, rarity: "myth" },
 
   // ==================== 手枪 ====================
   // common
@@ -21,9 +21,9 @@ export const RANGED_WEAPONS = [
   // uncommon
   { id: "GP100", name: "GP100", type: "ranged", damage: 49, integrity: 100, ammoType: ".357 Magnum", critRate: 0.20, rarity: "uncommon" },
   // rare
-  { id: "沙漠之鹰", name: "沙漠之鹰", type: "ranged", damage: 65, integrity: 100, ammoType: ".50 AE", critRate: 0.12, rarity: "rare" },
+  { id: "沙漠之鹰", name: "Deagle (Sa Mạc)", type: "ranged", damage: 65, integrity: 100, ammoType: ".50 AE", critRate: 0.12, rarity: "rare" },
   // legendary
-  { id: "皇家短枪", name: "皇家短枪", type: "ranged", damage: 99, integrity: 100, ammoType: ".357 Magnum", critRate: 0.29, rarity: "myth" },
+  { id: "皇家短枪", name: "Pistol ngắn hoàng gia", type: "ranged", damage: 99, integrity: 100, ammoType: ".357 Magnum", critRate: 0.29, rarity: "myth" },
 
   // ==================== 冲锋枪 ====================
   // uncommon
@@ -45,7 +45,7 @@ export const RANGED_WEAPONS = [
   { id: "AUG", name: "AUG", type: "ranged", damage: 55, integrity: 100, ammoType: "5.56×45mm NATO", critRate: 0.25, rarity: "rare" },
   { id: "AK47", name: "AK47", type: "ranged", damage: 55, integrity: 100, ammoType: "7.62×39mm", critRate: 0.20, rarity: "rare" },
   { id: "AKM", name: "AKM", type: "ranged", damage: 57, integrity: 100, ammoType: "7.62×39mm", critRate: 0.20, rarity: "rare" },
-  { id: "81式", name: "81式", type: "ranged", damage: 60, integrity: 100, ammoType: "7.62×39mm", critRate: 0.22, rarity: "rare" },
+  { id: "81式", name: "Súng 81", type: "ranged", damage: 60, integrity: 100, ammoType: "7.62×39mm", critRate: 0.22, rarity: "rare" },
   // epic
   { id: "AN94", name: "AN-94", type: "ranged", damage: 56, integrity: 100, ammoType: "5.56×45mm NATO", critRate: 0.27, rarity: "epic" },
 
@@ -84,7 +84,7 @@ export const RANGED_WEAPONS = [
 ];
 
 export const AMMO = [
-  { id: "箭矢", name: "箭矢", type: "ammo", compatibleWith: ["木弓", "反曲弓", "复合弓", "十字弩", "折叠弩", "狙击弩", "原野之弓"] },
+  { id: "箭矢", name: "Mũi tên", type: "ammo", compatibleWith: ["木弓", "反曲弓", "复合弓", "十字弩", "折叠弩", "狙击弩", "原野之弓"] },
   { id: ".357 Magnum", name: ".357 Magnum", type: "ammo", compatibleWith: ["GP100"] },
   { id: ".45 ACP", name: ".45 ACP", type: "ammo", compatibleWith: ["M1911", "UMP45"] },
   { id: ".50 AE", name: ".50 AE", type: "ammo", compatibleWith: ["沙漠之鹰"] },
@@ -96,5 +96,5 @@ export const AMMO = [
   { id: "7.62×54mmR", name: "7.62×54mmR", type: "ammo", compatibleWith: ["Mosin", "PKM"] },
   { id: "7.92×57mm", name: "7.92×57mm", type: "ammo", compatibleWith: ["MG42"] },
   { id: ".300 Winchester Magnum", name: ".300 Winchester Magnum", type: "ammo", compatibleWith: ["AWM"] },
-  { id: "12号霰弹", name: "12号霰弹", type: "ammo", compatibleWith: ["AA12", "M870", "SPAS12"] },
+  { id: "12号霰弹", name: "Súng dây bắn 12", type: "ammo", compatibleWith: ["AA12", "M870", "SPAS12"] },
 ];

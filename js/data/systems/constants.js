@@ -1,4 +1,4 @@
-export const TIME_PHASES = ["凌晨", "早上", "上午", "中午", "下午", "傍晚", "夜晚", "深夜"];
+export const TIME_PHASES = ["Rạng sáng", "Sáng sớm", "Buổi sáng", "Trưa", "Buổi chiều", "Hoàng hôn", "Ban đêm", "Khuya"];
 
 export const GAME_CONSTANTS = {
   MAX_HEALTH: 300,
@@ -22,7 +22,7 @@ export const GAME_CONSTANTS = {
   },
   COMBAT: {
     FLEE_RATE: 0.30,
-    FLEE_RATE_TEXT: "逃跑（30%）",
+    FLEE_RATE_TEXT: "Chạy trốn（30%）",
     RANGED_DODGE_RATE: 0.6,
     LIURUYAN_ASSIST_DAMAGE: 20,
     LIURUYAN_ASSIST_RATE: 0.3,
@@ -116,7 +116,7 @@ export const GAME_CONSTANTS = {
     GARDEN_COOLDOWN_DAYS: 3,
     TREATMENT_AMOUNTS: [10, 30, 50, 80],
     TREATMENT_RANKS: [3, 4, 5, 6],
-    TREATMENT_DOCTORS: { 10: "见习医生", 30: "正式医生", 50: "主治医生", 80: "宫廷医生" },
+    TREATMENT_DOCTORS: { 10: "Bác sĩ tập sự", 30: "Bác sĩ chính thức", 50: "Bác sĩ chủ trị", 80: "Bác sĩ cung đình" },
     MAX_LOAN_AMOUNT: 10,
     MEETING_RANK_REQUIRED: 5,
     GARDEN_RANK_REQUIRED: 6,
@@ -155,7 +155,7 @@ export const GAME_CONSTANTS = {
       { minCoins: 8001, maxCoins: Infinity, rate: 0.30 },
     ],
     ROB_RATE: 0.30,
-    EVENT_TEXT: "一群劫匪不知道从哪蹦出来，大声喊道最看不惯你们这些富商，要劫富济贫。他们人多势众，抢完就骑着马跑了，你损失了{amount}皇家币。",
+    EVENT_TEXT: "Mot nhom cuop khong biet tu dau nhay ra, lon tieng noi rang chung ghet nhat nhung phu thuong nhu cac nguoi, muon cuop cua nguoi giau de cuu nguoi ngheo. Chung dong nguoi the manh, cuop xong lien cuoi ngua chay mat, nguoi mat {amount} royal coin.",
   },
   BLACK_MARKET: {
     REFRESH_DAYS: 5,
@@ -344,12 +344,12 @@ export const GAME_CONSTANTS = {
   TURNS_PER_DAY: 8,
   MAP: {
     DANGER_MESSAGES: {
-      "★轻松": "这里看起来很安全，适合搜刮物资。",
-      "★★低危": "偶尔会有丧尸出没，保持警惕。",
-      "★★★中危": "丧尸活动频繁，需要小心行事。",
-      "★★★★高危": "大量丧尸聚集，极度危险！",
-      "★★★★★绝境": "这里简直是地狱，没有充分准备别来！",
-      "★★★★★★炼狱": "死亡禁区，只有最强者才能活着离开。",
+      "★轻松": "Nơi này trông rất an toàn, thích hợp lục soát vật tư.",
+      "★★低危": "Thỉnh thoảng có zombie xuất hiện, giữ cảnh giác.",
+      "★★★中危": "Zombie hoạt động thường xuyên, cần cẩn thận.",
+      "★★★★高危": "Rất nhiều zombie tụ tập, cực kỳ nguy hiểm!",
+      "★★★★★绝境": "Nơi này đúng là địa ngục, không có chuẩn bị đầy đủ thì đừng đến!",
+      "★★★★★★炼狱": "Vùng cấm tử vong, chỉ có kẻ mạnh nhất mới có thể sống sót rời đi.",
     },
   },
 };

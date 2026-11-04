@@ -106,7 +106,7 @@ export function pickRandomLoot(map) {
     case "fruit":
       return { ...randomItem(FRUITS) };
     case "cigarette":
-      return { id: "香烟", name: "香烟", type: "cigarette", count: 1 };
+      return { id: "香烟", name: "Thuốc lá", type: "cigarette", count: 1 };
     case "medicine": {
       const rarityWeights = GAME_CONSTANTS.LOOT.RARITY_WEIGHTS;
       const medicine = weightedRandom(MEDICINES.filter(m => m.rarity !== "myth"), m => rarityWeights[m.rarity] || 1);
@@ -132,7 +132,7 @@ export function pickRandomLoot(map) {
       const isMidDanger = map && map.danger.includes("★★★中危");
       const arrowChance = isLowDanger ? GAME_CONSTANTS.LOOT.ARROW_CHANCE_LOW : (isMidDanger ? GAME_CONSTANTS.LOOT.ARROW_CHANCE_MID : GAME_CONSTANTS.LOOT.ARROW_CHANCE_HIGH);
       if (Math.random() < arrowChance) {
-        return { id: "箭矢", name: "箭矢", type: "ammo", count: randInt(GAME_CONSTANTS.LOOT.ARROW_COUNT_MIN, GAME_CONSTANTS.LOOT.ARROW_COUNT_MAX) };
+        return { id: "箭矢", name: "Mũi tên", type: "ammo", count: randInt(GAME_CONSTANTS.LOOT.ARROW_COUNT_MIN, GAME_CONSTANTS.LOOT.ARROW_COUNT_MAX) };
       }
       const ammo = randomItem(AMMO.filter(a => a.id !== "箭矢"));
       return { ...ammo, count: randInt(GAME_CONSTANTS.LOOT.AMMO_COUNT_MIN, GAME_CONSTANTS.LOOT.AMMO_COUNT_MAX) };

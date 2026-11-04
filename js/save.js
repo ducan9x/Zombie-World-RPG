@@ -1,8 +1,8 @@
 /* ============================================================
-   存档系统模块
-   组织顺序：导入 → 常量 → localStorage 键名 → 存档槽位操作
-   → 最佳记录 → 时间格式化
-   使用 localStorage 持久化 11 个存档位和最佳生存记录
+   Mô-đun hệ thống lưu trữ
+   Thứ tự tổ chức: import → hằng số → tên khóa localStorage → thao tác vị trí lưu
+   → kỷ lục tốt nhất → định dạng thời gian
+   Sử dụng localStorage để lưu trữ 11 vị trí lưu và kỷ lục sinh tồn tốt nhất
    ============================================================ */
 
 import { normalizeState } from './state.js';
@@ -11,21 +11,21 @@ const SAVE_KEY_PREFIX = "zombie_save_";
 const BEST_RECORD_KEY = "zombie_best_record";
 const MAX_SLOTS = 11;
 
-// ---------- 存档槽位操作 ----------
+// ---------- Thao tác vị trí lưu ----------
 
 /**
- * 获取指定存档槽位的 localStorage 键名
- * @param {number} slotId - 槽位编号（0~10）
- * @returns {string} localStorage 键名
+ * Lấy tên khóa localStorage cho vị trí lưu chỉ định
+ * @param {number} slotId - số thứ tự vị trí (0~10)
+ * @returns {string} tên khóa localStorage
  */
 function getSlotKey(slotId) {
   return SAVE_KEY_PREFIX + slotId;
 }
 
 /**
- * 格式化时间戳为可读字符串
- * @param {Date} date - 日期对象
- * @returns {string} YYYY-MM-DD HH:MM:SS 格式的时间字符串
+ * Định dạng dấu thời gian thành chuỗi có thể đọc
+ * @param {Date} date - đối tượng ngày
+ * @returns {string} chuỗi thời gian định dạng YYYY-MM-DD HH:MM:SS
  */
 function formatTimestamp(date) {
   const y = date.getFullYear();
@@ -38,9 +38,9 @@ function formatTimestamp(date) {
 }
 
 /**
- * 获取全部 11 个存档位的数据
- * 空位返回 null，已占用位返回元数据（不含完整 gameState）
- * @returns {Array<Object|null>} 长度为 11 的数组
+ * Lấy dữ liệu của toàn bộ 11 vị trí lưu
+ * Vị trí trống trả về null, vị trí đã dùng trả về metadata (không chứa gameState đầy đủ)
+ * @returns {Array<Object|null>} mảng độ dài 11
  */
 export function getAllSlots() {
   const slots = [];
@@ -66,11 +66,11 @@ export function getAllSlots() {
 }
 
 /**
- * 将当前游戏状态保存到指定槽位
- * @param {number} slotId - 槽位编号（0~9）
- * @param {Object} gameState - 当前完整游戏状态
- * @param {string} nickname - 玩家昵称
- * @returns {boolean} 是否保存成功
+ * Lưu trạng thái game hiện tại vào vị trí chỉ định
+ * @param {number} slotId - số thứ tự vị trí (0~9)
+ * @param {Object} gameState - trạng thái game đầy đủ hiện tại
+ * @param {string} nickname - biệt danh người chơi
+ * @returns {boolean} có lưu thành công hay không
  */
 export function saveGame(slotId, gameState, nickname) {
   if (slotId < 0 || slotId >= MAX_SLOTS) return false;
@@ -100,9 +100,9 @@ export function saveGame(slotId, gameState, nickname) {
 }
 
 /**
- * 从指定槽位加载完整存档数据
- * @param {number} slotId - 槽位编号（0~9）
- * @returns {Object|null} 存档数据（含 gameState），或 null
+ * Tải dữ liệu lưu đầy đủ từ vị trí chỉ định
+ * @param {number} slotId - số thứ tự vị trí (0~9)
+ * @returns {Object|null} dữ liệu lưu (chứa gameState), hoặc null
  */
 export function loadGame(slotId) {
   if (slotId < 0 || slotId >= MAX_SLOTS) return null;
@@ -120,9 +120,9 @@ export function loadGame(slotId) {
 }
 
 /**
- * 删除指定槽位的存档
- * @param {number} slotId - 槽位编号（0~9）
- * @returns {boolean} 是否删除成功
+ * Xóa bản lưu của vị trí chỉ định
+ * @param {number} slotId - số thứ tự vị trí (0~9)
+ * @returns {boolean} có xóa thành công hay không
  */
 export function deleteSlot(slotId) {
   if (slotId < 0 || slotId >= MAX_SLOTS) return false;
@@ -134,11 +134,11 @@ export function autoSave(gameState, nickname) {
   return saveGame(0, gameState, nickname);
 }
 
-// ---------- 最佳记录 ----------
+// ---------- Kỷ lục tốt nhất ----------
 
 /**
- * 获取历史最佳生存记录
- * @returns {Object|null} 最佳记录数据，或 null（尚无记录）
+ * Lấy kỷ lục sinh tồn tốt nhất trong lịch sử
+ * @returns {Object|null} dữ liệu kỷ lục tốt nhất, hoặc null (chưa có kỷ lục)
  */
 export function getBestRecord() {
   const raw = localStorage.getItem(BEST_RECORD_KEY);
@@ -151,9 +151,9 @@ export function getBestRecord() {
 }
 
 /**
- * 更新最佳生存记录（仅在当前天数更大时更新）
- * @param {Object} gameState - 当前游戏状态
- * @returns {boolean} 是否刷新了记录
+ * Cập nhật kỷ lục sinh tồn tốt nhất (chỉ cập nhật khi số ngày hiện tại lớn hơn)
+ * @param {Object} gameState - trạng thái game hiện tại
+ * @returns {boolean} có làm mới kỷ lục hay không
  */
 export function updateBestRecord(gameState) {
   const best = getBestRecord();

@@ -23,18 +23,18 @@ import {
 export function handleExploreCave() {
   const state = getState();
   if (state.lastCaveDay >= state.day) {
-    setStory("今天已经探索过山洞了，明天再来吧。");
+    setStory("Hôm nay đã khám phá hang động rồi, mai quay lại nhé.");
     showExploreOptionsState();
     return;
   }
   state.lastCaveDay = state.day;
   if (Math.random() < GAME_CONSTANTS.MAP_EVENTS.CAVE_CIG_RATE) {
     addCigarettes(1);
-    setStory(`你在山洞深处发现了一包香烟！`);
+    setStory(`Bạn phát hiện một gói thuốc lá ở sâu trong hang động!`);
   } else {
     const ammo = AMMO[Math.floor(Math.random() * AMMO.length)];
     addItem({ id: ammo.id, name: ammo.name, type: "ammo", count: 1 });
-    setStory(`你在山洞角落里捡到了一颗${ammo.name}子弹。`);
+    setStory(`Bạn nhặt được một viên đạn ${ammo.name} ở góc hang động.`);
   }
   advanceTime(3);
   updateStatusEffects();
@@ -53,12 +53,12 @@ export function handleMoldySeeds() {
   const state = getState();
   const hasBadge = state.other.some(i => i.id === "farming_master_badge");
   if (!hasBadge) {
-    setStory("你看着这些发霉的种子，它们已经完全不能用了，你放弃了它们。（需要沐苗苗的农业大师徽章）");
+    setStory("Bạn nhìn những hạt giống mốc này, chúng đã hoàn toàn vô dụng, bạn bỏ chúng đi. (Cần huy hiệu bậc thầy nông nghiệp của Mục Miêu Miêu)");
     showExploreOptionsState();
     return;
   }
   if (state.lastMoldySeedsDay >= state.day) {
-    setStory("今天已经处理过这些发霉的种子了，明天再来吧。");
+    setStory("Hôm nay đã xử lý những hạt giống mốc này rồi, mai quay lại nhé.");
     showExploreOptionsState();
     return;
   }
@@ -72,11 +72,11 @@ export function handleMoldySeeds() {
       addedSeeds.push(seed.name);
     }
   }
-  let msg = "这些天在实验田的工作，跟着苗苗学习，已经让你掌握了重新利用坏种的能力。";
+  let msg = "Những ngày làm việc trên ruộng thí nghiệm, học theo Miêu Miêu, đã giúp bạn nắm được khả năng tái sử dụng hạt giống hỏng.";
   if (addedSeeds.length > 0) {
     msg += `\n\n你获得了：${addedSeeds.join("、")}`;
   } else {
-    msg += "\n\n但是你的背包已经满了，种子没能放进去。";
+    msg += "\n\nNhưng balo của bạn đã đầy, hạt giống không cho vào được.";
   }
   advanceTime(1);
   updateStatusEffects();
@@ -91,12 +91,12 @@ export function handleAbandonedField() {
   const state = getState();
   const hasBadge = state.other.some(i => i.id === "farming_master_badge");
   if (!hasBadge) {
-    setStory("你看着荒废的菜田，好像什么也做不了，你完全不懂行。（需要沐苗苗的农业大师徽章）");
+    setStory("Bạn nhìn mảnh ruộng rau bỏ hoang, dường như không làm gì được, bạn hoàn toàn không biết cách. (Cần huy hiệu bậc thầy nông nghiệp của Mục Miêu Miêu)");
     showExploreOptionsState();
     return;
   }
   if (state.lastAbandonedFieldDay >= state.day) {
-    setStory("今天已经打理过这片菜田了，明天再来吧。");
+    setStory("Hôm nay đã chăm sóc mảnh ruộng rau này rồi, mai quay lại nhé.");
     showExploreOptionsState();
     return;
   }
@@ -106,9 +106,9 @@ export function handleAbandonedField() {
   for (let i = 0; i < 2; i++) {
     if (addItem({ ...jiucai })) added++;
   }
-  let msg = "你清理了杂草并简单用河水浇灌了他们，按照沐苗苗教你的方法，你收获了2韭菜。";
+  let msg = "Bạn dọn cỏ dại và tưới nước sông đơn giản cho chúng, theo cách Mục Miêu Miêu dạy, bạn thu hoạch được 2 cây hẹ.";
   if (added < 2) {
-    msg += "\n\n⚠️ 部分韭菜因背包已满未能放入。";
+    msg += "\n\n⚠️ Một phần hẹ không cho vào được do balo đã đầy.";
   }
   advanceTime(1);
   updateStatusEffects();

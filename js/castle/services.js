@@ -8,20 +8,20 @@ export function handleCastleTreatment() {
   const state = getState();
   const rank = getCastleRank(state);
   if (state.lastTreatmentDay === state.day) {
-    setStory("您今天已经接受过治疗了，明天再来吧。");
+    setStory("Hôm nay bạn đã được chữa trị rồi, mai hãy đến nhé.");
     setPhase("castle_interior");
-    setOptions([{ text: "返回大厅", action: "castle_back" }]);
+    setOptions([{ text: "Quay về sảnh", action: "castle_back" }]);
     return;
   }
   setPhase("castle_treatment");
-  setStory("城堡医疗室内，几位穿着白大褂的医生正在忙碌。请选择为您治疗的医生：");
+  setStory("Trong phòng y tế lâu đài, vài bác sĩ mặc áo blouse trắng đang bận rộn. Vui lòng chọn bác sĩ để chữa trị cho bạn:");
   const opts = [];
-  const rankName = getCastleRankName(state) || "平民";
-  opts.push({ text: rank >= GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[0] ? "见习医生治疗（降低10%感染值）" : "见习医生（伯爵以上可用）", action: "treat_10", disabled: rank < GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[0] });
-  opts.push({ text: rank >= GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[1] ? "正式医生治疗（降低30%感染值）" : "正式医生（侯爵以上可用）", action: "treat_30", disabled: rank < GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[1] });
-  opts.push({ text: rank >= GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[2] ? "主治医生治疗（降低50%感染值）" : "主治医生（公爵以上可用）", action: "treat_50", disabled: rank < GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[2] });
-  opts.push({ text: rank >= GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[3] ? "宫廷医生治疗（降低80%感染值）" : "宫廷医生（储君以上可用）", action: "treat_80", disabled: rank < GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[3] });
-  opts.push({ text: "离开", action: "treat_back" });
+  const rankName = getCastleRankName(state) || "Bình dân";
+  opts.push({ text: rank >= GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[0] ? "Bác sĩ thực tập chữa trị（Giảm 10% giá trị nhiễm trùng）" : "Bác sĩ thực tập（Cần Bá tước trở lên）", action: "treat_10", disabled: rank < GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[0] });
+  opts.push({ text: rank >= GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[1] ? "Bác sĩ chính thức chữa trị（Giảm 30% giá trị nhiễm trùng）" : "Bác sĩ chính thức（Cần Hầu tước trở lên）", action: "treat_30", disabled: rank < GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[1] });
+  opts.push({ text: rank >= GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[2] ? "Bác sĩ trưởng khoa chữa trị（Giảm 50% giá trị nhiễm trùng）" : "Bác sĩ trưởng khoa（Cần Công tước trở lên）", action: "treat_50", disabled: rank < GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[2] });
+  opts.push({ text: rank >= GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[3] ? "Bác sĩ cung đình chữa trị（Giảm 80% giá trị nhiễm trùng）" : "Bác sĩ cung đình（Cần Trữ quân trở lên）", action: "treat_80", disabled: rank < GAME_CONSTANTS.CASTLE.TREATMENT_RANKS[3] });
+  opts.push({ text: "Rời đi", action: "treat_back" });
   setOptions(opts);
 }
 
@@ -30,7 +30,7 @@ export function handleTreatConfirm(amount) {
   state.infection = Math.max(0, state.infection - amount);
   state.lastTreatmentDay = state.day;
   const doctors = GAME_CONSTANTS.CASTLE.TREATMENT_DOCTORS;
-  setStory(`${doctors[amount]}为您进行了精心的治疗。感染值降低了${amount}%（当前感染值：${state.infection}%）。`);
+  setStory(`${doctors[amount]} đã tiến hành chữa trị tận tâm cho bạn. Giá trị nhiễm trùng giảm ${amount}%（Giá trị nhiễm trùng hiện tại：${state.infection}%）。`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -40,22 +40,22 @@ export function handleTreatConfirm(amount) {
 export function handleCastleMeeting() {
   const state = getState();
   const rank = getCastleRank(state);
-  const rankName = getCastleRankName(state) || "平民";
+  const rankName = getCastleRankName(state) || "Bình dân";
   if (rank < GAME_CONSTANTS.CASTLE.MEETING_RANK_REQUIRED) {
-    setStory(`会议管理处查看了你的爵位身份牌，礼貌地要求你离开会议厅。\n"这位${rankName}大人，很抱歉您还没有参加会议的资格。"`);
+    setStory(`Phòng quản lý hội nghị xem xét thẻtước vị của bạn, lịch sự yêu cầu bạn rời khỏi hội trường.\n"Vị ${rankName} đại nhân này, rất xin lỗi, ngài hiện chưa đủ tư cách tham dự hội nghị."`);
     setPhase("castle_interior");
-    setOptions([{ text: "返回大厅", action: "castle_back" }]);
+    setOptions([{ text: "Quay về sảnh", action: "castle_back" }]);
     return;
   }
   if (state.lastMeetingDay === state.day) {
-    setStory("您今天已经参加过会议了。");
+    setStory("Hôm nay bạn đã tham dự hội nghị rồi.");
     setPhase("castle_interior");
-    setOptions([{ text: "返回大厅", action: "castle_back" }]);
+    setOptions([{ text: "Quay về sảnh", action: "castle_back" }]);
     return;
   }
   state.lastMeetingDay = state.day;
   addCigarettes(2);
-  setStory(`你参加了城堡会议，各位大臣们讨论着物资分配和防御部署。会议结束后，侍从递给你两根香烟作为参会津贴。\n\n获得了2根香烟。`);
+  setStory(`Bạn đã tham dự hội nghị lâu đài, các đại thần thảo luận về phân phối vật tư và bố trí phòng thủ. Sau hội nghị, thị tùng đưa cho bạn hai điếu thuốc lá làm phụ cấp tham dự.\n\nNhận được 2 điếu thuốc lá。`);
   advanceTime(GAME_CONSTANTS.CASTLE.MEETING_TIME_COST);
   updateStatusEffects();
   checkDeath();
@@ -65,17 +65,17 @@ export function handleCastleMeeting() {
 export function handleCastleGarden() {
   const state = getState();
   const rank = getCastleRank(state);
-  const rankName = getCastleRankName(state) || "平民";
+  const rankName = getCastleRankName(state) || "Bình dân";
   if (rank < GAME_CONSTANTS.CASTLE.GARDEN_RANK_REQUIRED) {
-    setStory(`后花园禁卫看了看你的爵位身份牌，神情严肃。\n"这位${rankName}大人，留步，您目前还不被允许进入后花园。"`);
+    setStory(`Vệ binh hậu hoa viên xem xét thẻtước vị của bạn, vẻ mặt nghiêm túc.\n"Vị ${rankName} đại nhân này, dừng bước, ngài hiện chưa được phép vào hậu hoa viên."`);
     setPhase("castle_interior");
-    setOptions([{ text: "返回大厅", action: "castle_back" }]);
+    setOptions([{ text: "Quay về sảnh", action: "castle_back" }]);
     return;
   }
   if (state.day - state.lastGardenDay < GAME_CONSTANTS.CASTLE.GARDEN_COOLDOWN_DAYS) {
-    setStory("你最近已经逛过后花园了，过几天再来吧。");
+    setStory("Gần đây bạn đã đi dạo hậu hoa viên rồi, vài ngày nữa hãy đến nhé.");
     setPhase("castle_interior");
-    setOptions([{ text: "返回大厅", action: "castle_back" }]);
+    setOptions([{ text: "Quay về sảnh", action: "castle_back" }]);
     return;
   }
   state.lastGardenDay = state.day;
@@ -90,11 +90,11 @@ export function handleCastleGarden() {
         received.push(med.name);
       }
     }
-    setStory(`你在后花园漫步时遇到了皇后。她正在赏花，看到你后微笑着招了招手。\n\n"最近辛苦了，这些医疗用品你拿着，在外面探索时用得着。"\n\n获得了${received.join("、")}。`);
+    setStory(`Khi bạn dạo bước trong hậu hoa viên thì gặp hoàng hậu. Cô ấy đang ngắm hoa, thấy bạn liền mỉm cười vẫy tay.\n\n"Gần đây vất vả rồi, những vật tư y tế này bạn cầm lấy, khi đi thám hiểm bên ngoài sẽ dùng được."\n\nNhận được ${received.join("、")}。`);
   } else {
     const commonMelee = MELEE_WEAPONS.filter(w => w.type === "melee" && w.rarity === "common" && w.id !== "拳头");
     if (commonMelee.length === 0) {
-      setStory("你在后花园闲逛了一圈，什么也没找到。");
+      setStory("Bạn dạo một vòng hậu hoa viên, chẳng tìm thấy gì.");
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
@@ -104,7 +104,7 @@ export function handleCastleGarden() {
     const idx = Math.floor(Math.random() * commonMelee.length);
     const weapon = { ...commonMelee[idx], currentDurability: commonMelee[idx].durability };
     addItem(weapon);
-    setStory(`你在后花园闲逛时遇到了国王。国王正在练剑，看到你后点了点头。\n\n"来得正好，这把${weapon.name}是孤王收藏的，送给你防身用。"\n\n获得了${weapon.name}（普通品质近战武器）。`);
+    setStory(`Khi bạn dạo bước trong hậu hoa viên thì gặp nhà vua. Nhà vua đang luyện kiếm, thấy bạn liền gật đầu.\n\n"Đến đúng lúc, thanh ${weapon.name} này là bộ sưu tập của cô vương, tặng bạn đểphòng thân."\n\nNhận được ${weapon.name}（Vũ khí cận chiến phẩm chất thường）。`);
   }
   advanceTime(1);
   updateStatusEffects();
@@ -116,27 +116,27 @@ export function handleCastleTitleReissue() {
   const state = getState();
   const highest = getHighestObtainedRank(state);
   if (highest < 2) {
-    setStory("办事员在档案室翻找了半天，摇了摇头：\"没有可补办的身份牌记录。\"");
+    setStory("Nhân viên văn phòng lục tìm trong phòng lưu trữ nửa ngày, lắc đầu: \"Không có hồ sơ thẻ thân phận có thểbổ sung。\"");
     setPhase("castle_interior");
-    setOptions([{ text: "返回大厅", action: "castle_back" }]);
+    setOptions([{ text: "Quay về sảnh", action: "castle_back" }]);
     return;
   }
   const rankEntry = CASTLE_RANKS.find(r => r.rank === highest);
   if (!rankEntry) {
-    setStory("补办出现错误，请联系管理员。");
+    setStory("Xảy ra lỗi khibổ sung, vui lòng liên hệ quản trị viên。");
     setPhase("castle_interior");
-    setOptions([{ text: "返回大厅", action: "castle_back" }]);
+    setOptions([{ text: "Quay về sảnh", action: "castle_back" }]);
     return;
   }
   const hasId = state.other.some(i => i.id === SPECIAL_ITEMS[rankEntry.itemId].id);
   if (hasId) {
-    setStory(`您当前已经持有${rankEntry.name}身份牌，无需补办。`);
+    setStory(`Hiện tại bạn đã sở hữu thẻ thân phận ${rankEntry.name}, không cầnbổ sung。`);
     setPhase("castle_interior");
-    setOptions([{ text: "返回大厅", action: "castle_back" }]);
+    setOptions([{ text: "Quay về sảnh", action: "castle_back" }]);
     return;
   }
   state.other.push({ ...SPECIAL_ITEMS[rankEntry.itemId] });
-  setStory(`办事员仔细核对了档案，从保险柜中取出一块崭新的身份牌。\n\n"经查证，您确实曾被授予${rankEntry.name}身份。这是补办的身份牌，请收好。本次补办免费。"\n\n获得【${rankEntry.name}身份牌】！`);
+  setStory(`Nhân viên văn phòng cẩn thận đối chiếu hồ sơ, lấy từ tủ bảo hiểm ra một thẻ thân phận mới tinh.\n\n"Qua xác minh, ngàiquả thựctừng được phong tước ${rankEntry.name}. Đây là thẻ thân phậnbổ sung, xin hãy giữ kỹ. Lầnbổ sung này miễn phí。"\n\nNhận được【Thẻ thân phận ${rankEntry.name}】！`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -147,44 +147,44 @@ const CASTLE_WORK_BY_RANK = {
   0: {
     timeCost: 8,
     crashGain: 40,
-    story: "你在城堡的工地上干了一整天的苦力——搬砖、扛沙袋、清理马厩……累得腰都直不起来。\n\n你累了一天，又饿又渴！最苦最累的工作，但你获得了工资——一根香烟。",
-    storyFull: "你在城堡的工地上干了一整天的苦力——搬砖、扛沙袋、清理马厩……累得腰都直不起来。\n\n你累了一天，又饿又渴！最苦最累的工作，但背包已满，工资香烟未能放入！",
+    story: "Bạn làm việc chân tay cả ngày trên công trường lâu đài——khiêng gạch, vác bao cát, dọn chuồng ngựa……mệt đến mức không thẳng nổi lưng。\n\nBạn làm việc cả ngày, lại đói lại khát! Công việc khổ nhất mệt nhất, nhưng bạn nhận được tiền lương——một điếu thuốc lá。 ",
+    storyFull: "Bạn làm việc chân tay cả ngày trên công trường lâu đài——khiêng gạch, vác bao cát, dọn chuồng ngựa……mệt đến mức không thẳng nổi lưng。\n\nBạn làm việc cả ngày, lại đói lại khát! Công việc khổ nhất mệt nhất, nhưng balo đã đầy, tiền lương thuốc lá không thể cho vào！",
   },
   1: {
     timeCost: 7,
     crashGain: 30,
-    story: "你在城堡里干了一天的劳累活——搬运物资、整理仓库、协助工匠……累得够呛。\n\n劳累的工作让你又饿又渴，疲惫度上升了！但你获得了工资——一根香烟。",
-    storyFull: "你在城堡里干了一天的劳累活——搬运物资、整理仓库、协助工匠……累得够呛。\n\n劳累的工作让你又饿又渴，疲惫度上升了！但背包已满，工资香烟未能放入！",
+    story: "Bạn làm việc vất vả cả ngày trong lâu đài——vận chuyển vật tư, sắp xếp kho, hỗ trợ thợ thủ công……mệt không chịu nổi。\n\nCông việc lao động khiến bạn lại đói lại khát, điểm mệt mỏi tăng lên！Nhưng bạn nhận được tiền lương——một điếu thuốc lá。",
+    storyFull: "Bạn làm việc vất vả cả ngày trong lâu đài——vận chuyển vật tư, sắp xếp kho, hỗ trợ thợ thủ công……mệt không chịu nổi。\n\nCông việc lao động khiến bạn lại đói lại khát, điểm mệt mỏi tăng lên！Nhưng balo đã đầy, tiền lương thuốc lá không thể cho vào！",
   },
   2: {
     timeCost: 6,
     crashGain: 20,
-    story: "你在城堡里做了一天的正常工作——管理物资登记、协助守卫巡逻、检查仓库库存……虽然忙碌但还算体面。\n\n正常的工作让你有些疲惫，但你获得了工资——一根香烟。",
-    storyFull: "你在城堡里做了一天的正常工作——管理物资登记、协助守卫巡逻、检查仓库库存……虽然忙碌但还算体面。\n\n正常的工作让你有些疲惫，但背包已满，工资香烟未能放入！",
+    story: "Bạn làm việc bình thường cả ngày trong lâu đài——quản lý đăng ký vật tư, hỗ trợ vệ binh tuần tra, kiểm tra tồn kho……mặc dù bận rộn nhưng còncòn ra thể thống。\n\nCông việc bình thường khiến bạn có chút mệt mỏi, nhưng bạn nhận được tiền lương——một điếu thuốc lá。",
+    storyFull: "Bạn làm việc bình thường cả ngày trong lâu đài——quản lý đăng ký vật tư, hỗ trợ vệ binh tuần tra, kiểm tra tồn kho……mặc dù bận rộn nhưng còncòn ra thể thống。\n\nCông việc bình thường khiến bạn có chút mệt mỏi, nhưng balo đã đầy, tiền lương thuốc lá không thể cho vào！",
   },
   3: {
     timeCost: 5,
     crashGain: 10,
-    story: "你在城堡里轻松地工作了一天——监督下属干活、审核物资报表、偶尔巡视一下……伯爵的身份让工作轻松了不少。\n\n轻松的工作，你获得了工资——一根香烟。",
-    storyFull: "你在城堡里轻松地工作了一天——监督下属干活、审核物资报表、偶尔巡视一下……伯爵的身份让工作轻松了不少。\n\n轻松的工作，但背包已满，工资香烟未能放入！",
+    story: "Bạn làm việc nhẹ nhàng cả ngày trong lâu đài——giám sát thuộc hạ làm việc, xem xét báo cáo vật tư, thỉnh thoảng tuần tra một vòng……thân phận Bá tước khiến công việc nhẹ nhàng hơn nhiều。\n\nCông việc nhẹ nhàng, bạn nhận được tiền lương——một điếu thuốc lá。",
+    storyFull: "Bạn làm việc nhẹ nhàng cả ngày trong lâu đài——giám sát thuộc hạ làm việc, xem xét báo cáo vật tư, thỉnh thoảng tuần tra một vòng……thân phận Bá tước khiến công việc nhẹ nhàng hơn nhiều。\n\nCông việc nhẹ nhàng, nhưng balo đã đầy, tiền lương thuốc lá không thể cho vào！",
   },
   4: {
     timeCost: 4,
     crashGain: 0,
-    story: "你在城堡里巡视了一圈——检查了各处的防务、听取了守卫的汇报、视察了物资储备……侯爵的身份让你只需走走看看。\n\n巡视完毕，你获得了工资——一根香烟。",
-    storyFull: "你在城堡里巡视了一圈——检查了各处的防务、听取了守卫的汇报、视察了物资储备……侯爵的身份让你只需走走看看。\n\n巡视完毕，但背包已满，工资香烟未能放入！",
+    story: "Bạn tuần tra một vòng trong lâu đài——kiểm tra phòng thủ các nơi, nghe báo cáo của vệ binh,thị sát kho vật tư……thân phận Hầu tước khiến bạn chỉ cần đi xem một chút。\n\nTuần tra xong, bạn nhận được tiền lương——một điếu thuốc lá。",
+    storyFull: "Bạn tuần tra một vòng trong lâu đài——kiểm tra phòng thủ các nơi, nghe báo cáo của vệ binh,thị sát kho vật tư……thân phận Hầu tước khiến bạn chỉ cần đi xem một chút。\n\nTuần tra xong, nhưng balo đã đầy, tiền lương thuốc lá không thể cho vào！",
   },
   5: {
     timeCost: 3,
     crashGain: 0,
-    story: "你在城堡里走了个过场——在文件上签了几个字、出席了一个简短的会议、和几位官员寒暄了几句……公爵的身份让一切如此轻松。\n\n走完过场，你获得了工资——一根香烟。",
-    storyFull: "你在城堡里走了个过场——在文件上签了几个字、出席了一个简短的会议、和几位官员寒暄了几句……公爵的身份让一切如此轻松。\n\n走完过场，但背包已满，工资香烟未能放入！",
+    story: "Bạn đi qua sân trong lâu đài——ký vài chữ trên tài liệu, tham dự một hội nghị ngắn, và vài quan chứcchào hỏi vài câu……thân phận Công tước khiến mọi thứ dễ dàng như vậy。\n\nĐi qua sân xong, bạn nhận được tiền lương——một điếu thuốc lá。",
+    storyFull: "Bạn đi qua sân trong lâu đài——ký vài chữ trên tài liệu, tham dự một hội nghị ngắn, và vài quan chứcchào hỏi vài câu……thân phận Công tước khiến mọi thứ dễ dàng như vậy。\n\nĐi qua sân xong, nhưng balo đã đầy, tiền lương thuốc lá không thể cho vào！",
   },
   6: {
     timeCost: 2,
     crashGain: 0,
-    story: "你在城堡里坐了一会——品了品茶、翻了翻报告、随口吩咐了几件事……储君殿下的\"工作\"不过如此。\n\n坐了一会，你获得了工资——一根香烟。",
-    storyFull: "你在城堡里坐了一会——品了品茶、翻了翻报告、随口吩咐了几件事……储君殿下的\"工作\"不过如此。\n\n坐了一会，但背包已满，工资香烟未能放入！",
+    story: "Bạn ngồi trong lâu đài một lúc——nếm trà, lật báo cáo, tùy tiện phân phó vài việc……công việc của \"Trữ quân điện hạ\" chỉ có thế。\n\nNgồi một lúc, bạn nhận được tiền lương——một điếu thuốc lá。",
+    storyFull: "Bạn ngồi trong lâu đài một lúc——nếm trà, lật báo cáo, tùy tiện phân phó vài việc……công việc của \"Trữ quân điện hạ\" chỉ có thế。\n\nNgồi một lúc, nhưng balo đã đầy, tiền lương thuốc lá không thể cho vào！",
   },
 };
 
@@ -192,15 +192,15 @@ export function handleCastleWork() {
   const state = getState();
   cleanDualIdentity(state);
   if (hasAnyDawnIdentity(state)) {
-    setStory("城堡工头瞥了你一眼：\"曙光阵地的人还想来城堡干活？你怕不是奸细吧？滚！\" 两个卫兵把你架了出去。");
+    setStory("công đầu lâu đài liếc bạn một cái: \"Người của Dawn Base còn muốn đến lâu đài làm việc? Ngươi chẳng lẽ là gian tế? Cút!\" Hai vệ binhđẩy bạn ra ngoài。");
     setPhase("explore");
-    setOptions([{ text: "返回", action: "castle_work_back" }]);
+    setOptions([{ text: "Quay lại", action: "castle_work_back" }]);
     return;
   }
   if (state.lastCastleWorkDay === state.day) {
-    setStory("你今天已经在城堡工作过了，明天再来吧。");
+    setStory("Hôm nay bạn đã làm việc trong lâu đài rồi, mai hãy đến nhé.");
     setPhase("explore");
-    setOptions([{ text: "返回", action: "castle_work_back" }]);
+    setOptions([{ text: "Quay lại", action: "castle_work_back" }]);
     return;
   }
   const rank = getCastleRank(state);

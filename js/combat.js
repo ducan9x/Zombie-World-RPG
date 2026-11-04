@@ -1,6 +1,6 @@
 /* ============================================================
-   战斗系统模块
-   组织顺序：战斗工具 → 丧尸战斗 → NPC战斗 → 遭遇事件
+   Hệ thống chiến đấu
+   Thứ tự tổ chức: công cụ chiến đấu → chiến đấu zombie → chiến đấu NPC → sự kiện gặp gỡ
    ============================================================ */
 
 import {
@@ -49,20 +49,20 @@ import { checkLeaderAssassinationVictory } from './outpost/index.js';
 
 import { refreshIslandMenu } from './island/index.js';
 
-// ---------- 战斗工具 ----------
+// ---------- Công cụ chiến đấu ----------
 
 function getRangedAmmoInfo(state) {
-  if (!state.rangedWeapon) return "(未装备)";
+  if (!state.rangedWeapon) return "(chưa trang bị)";
   const ammoId = state.rangedWeapon.ammoType;
   const ammo = state.ammo.find(a => a.id === ammoId);
   const ammoCount = ammo ? ammo.count : 0;
-  return `(弹药:${ammoCount}发 完整:${state.rangedWeapon.integrity}%)`;
+  return `(đạn:${ammoCount} viên hoàn chỉnh:${state.rangedWeapon.integrity}%)`;
 }
 
 /**
- * 检查是否可以使用远程武器进行战斗
- * @param {Object} state - 游戏状态
- * @returns {boolean} 是否有弹药和武器
+ * Kiểm tra có thể dùng vũ khí tầm xa để chiến đấu không
+ * @param {Object} state - trạng thái game
+ * @returns {boolean} có đạn và vũ khí không
  */
 function canRangedCombat(state) {
   if (!state.rangedWeapon) return false;
@@ -72,8 +72,8 @@ function canRangedCombat(state) {
 }
 
 /**
- * 处理战斗前选择（近战/远程/逃跑）
- * @param {number} input - 玩家选择的选项编号
+ * Xử lý lựa chọn trước chiến đấu (cận chiến/tầm xa/chạy)
+ * @param {number} input - số thứ tự lựa chọn của người chơi
  */
 function handlePreCombatChoice(input) {
   const state = getState();
@@ -84,7 +84,7 @@ function handlePreCombatChoice(input) {
 
   if (action === "combat_flee") {
     if (Math.random() < GAME_CONSTANTS.COMBAT.FLEE_RATE) {
-      setStory(`你成功从${state._pendingZombie?.name || "丧尸"}的追击中逃脱了！`);
+      setStory(`Bạn đã thoát khỏi sự truy đuổi của ${state._pendingZombie?.name || "zombie"}!`);
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
@@ -92,9 +92,9 @@ function handlePreCombatChoice(input) {
         showExploreOptionsState();
       }
     } else {
-      setStory("逃跑失败！你被丧尸缠住了！被迫进入战斗！");
+      setStory("Chạy trốn thất bại! Bạn bị zombie quấn lấy! Bị buộc vào chiến đấu!");
       setPhase("combat");
-      setOptions([{ text: "战斗进行中...", action: "none" }]);
+      setOptions([{ text: "Chiến đấu đang diễn ra...", action: "none" }]);
       const zombieDef = state._pendingZombie;
       const died = handleCombat(zombieDef, "melee");
       if (died) return;
@@ -110,7 +110,7 @@ function handlePreCombatChoice(input) {
 
   if (action === "combat_melee") {
     setPhase("combat");
-    setOptions([{ text: "战斗进行中...", action: "none" }]);
+    setOptions([{ text: "Chiến đấu đang diễn ra...", action: "none" }]);
     const zombieDef = state._pendingZombie;
     const died = handleCombat(zombieDef, "melee");
     if (died) return;
@@ -125,9 +125,9 @@ function handlePreCombatChoice(input) {
 
   if (action === "combat_ranged") {
     if (!canRangedCombat(state)) {
-      setStory("你没有可用的远程武器或弹药！只能近战了！");
+      setStory("Bạn không có vũ khí tầm xa hoặc đạn khả dụng! Chỉ có thể cận chiến!");
       setPhase("combat");
-      setOptions([{ text: "战斗进行中...", action: "none" }]);
+      setOptions([{ text: "Chiến đấu đang diễn ra...", action: "none" }]);
       const zombieDef = state._pendingZombie;
       const died = handleCombat(zombieDef, "melee");
       if (died) return;
@@ -140,7 +140,7 @@ function handlePreCombatChoice(input) {
       return;
     }
     setPhase("combat");
-    setOptions([{ text: "战斗进行中...", action: "none" }]);
+    setOptions([{ text: "Chiến đấu đang diễn ra...", action: "none" }]);
     const zombieDef = state._pendingZombie;
     const died = handleCombat(zombieDef, "ranged");
     if (died) return;
@@ -154,12 +154,12 @@ function handlePreCombatChoice(input) {
   }
 }
 
-// ---------- 战斗（丧尸）----------
+// ---------- Chiến đấu (zombie) ----------
 
 /**
- * 处理与丧尸的战斗
- * @param {Object} zombieDef - 丧尸的定义数据
- * @param {string} combatMode - 战斗模式：'melee' 或 'ranged'
+ * Xử lý chiến đấu với zombie
+ * @param {Object} zombieDef - dữ liệu định nghĩa zombie
+ * @param {string} combatMode - chế độ chiến đấu: 'melee' hoặc 'ranged'
  */
 function handleCombat(zombieDef, combatMode = "melee") {
   const state = getState();
@@ -172,15 +172,15 @@ function handleCombat(zombieDef, combatMode = "melee") {
   state._frozen = 0;
   state._blindTurns = 0;
 
-  // 遭遇丧尸降低理智
+  // Gặp zombie giảm lý trí
   if (state.sanity > 0) {
     state.sanity = Math.max(0, state.sanity - GAME_CONSTANTS.SURVIVAL.SANITY_PER_ENCOUNTER);
-    combatLog.push({ round: 0, text: `遭遇丧尸让你的精神受到冲击，理智 -${GAME_CONSTANTS.SURVIVAL.SANITY_PER_ENCOUNTER}！` });
+    combatLog.push({ round: 0, text: `Gặp zombie khiến tinh thần bạn bị sốc, lý trí -${GAME_CONSTANTS.SURVIVAL.SANITY_PER_ENCOUNTER}!` });
   }
 
   const isCrippled = state.crash >= GAME_CONSTANTS.FATIGUE_MAX;
   if (isCrippled) {
-    combatLog.push({ round: 0, text: "你过于疲惫导致无法战斗，只能挨打！" });
+    combatLog.push({ round: 0, text: "Bạn quá mệt mỏi không thể chiến đấu, chỉ có thể bị đánh!" });
   }
 
   while (zombie.currentHp > 0 && state.health > 0) {
@@ -188,15 +188,15 @@ function handleCombat(zombieDef, combatMode = "melee") {
 
     if (Array.isArray(zombie.ability) && zombie.ability.includes("screech") && round % 2 === 0) {
       state.crash = Math.min(100, (state.crash || 0) + GAME_CONSTANTS.COMBAT.ABILITY_SCREECH_FATIGUE);
-      combatLog.push({ round, text: `${zombie.name}发出尖啸，你的精神受到冲击！疲惫+${GAME_CONSTANTS.COMBAT.ABILITY_SCREECH_FATIGUE}` });
+      combatLog.push({ round, text: `${zombie.name} phát ra tiếng thét, tinh thần bạn bị sốc! mệt mỏi+${GAME_CONSTANTS.COMBAT.ABILITY_SCREECH_FATIGUE}` });
     }
 
     if (currentMode === "ranged") {
       if (!canRangedCombat(state)) {
-        combatLog.push({ round, text: "你已没有子弹，只能近战了。" });
+        combatLog.push({ round, text: "Bạn đã hết đạn, chỉ có thể cận chiến." });
         currentMode = "melee";
       } else if (state.rangedWeapon && state.rangedWeapon.integrity <= 0) {
-        combatLog.push({ round, text: "你的枪已经坏了，只能近战了。" });
+        combatLog.push({ round, text: "Súng của bạn đã hỏng, chỉ có thể cận chiến." });
         state.rangedWeapon = null;
         currentMode = "melee";
       }
@@ -206,37 +206,37 @@ function handleCombat(zombieDef, combatMode = "melee") {
       let skipTurn = false;
 
       if (state._tripped > 0 && Math.random() < GAME_CONSTANTS.COMBAT.ABILITY_TRIP_SKIP_RATE) {
-        combatLog.push({ round, text: "你被爬行尸绊倒，灰头土脸地爬起来，无法攻击！" });
+        combatLog.push({ round, text: "Bạn bị zombie bò quấn ngã, chật vật đứng dậy, không thể tấn công!" });
         state._tripped = 0;
         skipTurn = true;
       }
 
       if (!skipTurn && state._blindTurns > 0 && Math.random() < GAME_CONSTANTS.COMBAT.ABILITY_BLIND_MISS_RATE) {
-        combatLog.push({ round, text: "你因为致盲效果打偏了！" });
+        combatLog.push({ round, text: "Bạn vì bị mù mà đánh lệch!" });
         state._blindTurns = 0;
         skipTurn = true;
       }
 
       if (!skipTurn && state._frozen > 0) {
-        combatLog.push({ round, text: "冰霜的寒气侵蚀着你的身体，攻击力下降！" });
+        combatLog.push({ round, text: "Hàn khí băng giá xói mòn cơ thể bạn, sát thương giảm!" });
       }
 
       if (!skipTurn) {
         if (Math.random() < zombie.dodge) {
-          combatLog.push({ round, text: "丧尸闪避了你的攻击！" });
+          combatLog.push({ round, text: "Zombie né đòn tấn công của bạn!" });
 
           if (Array.isArray(zombie.ability) && zombie.ability.includes("leap")) {
             const leapDmg = Math.floor(zombie.damage * GAME_CONSTANTS.COMBAT.ABILITY_LEAP_DAMAGE_MULT);
             state.health -= leapDmg;
             state.health = Math.max(0, state.health);
-            combatLog.push({ round, text: `跳跃尸借势反扑！对你造成${leapDmg}点伤害！` });
+            combatLog.push({ round, text: `Zombie nhảy vọt phản công! Gây ${leapDmg} điểm sát thương cho bạn!` });
           }
 
           if (Array.isArray(zombie.ability) && zombie.ability.includes("cloak")) {
             const cloakDmg = Math.floor(zombie.damage * GAME_CONSTANTS.COMBAT.ABILITY_CLOAK_COUNTER_MULT);
             state.health -= cloakDmg;
             state.health = Math.max(0, state.health);
-            combatLog.push({ round, text: `幽灵潜行尸遁入暗影，从背后偷袭！造成${cloakDmg}点伤害！` });
+            combatLog.push({ round, text: `Zombie幽 linh潜行 lẩn vào bóng tối, đánh lén từ sau! Gây ${cloakDmg} điểm sát thương!` });
           }
         } else if (currentMode === "ranged" && state.rangedWeapon) {
           const ammoId = state.rangedWeapon.ammoType;
@@ -258,19 +258,19 @@ function handleCombat(zombieDef, combatMode = "melee") {
             }
             if (isCrit) {
               damage *= GAME_CONSTANTS.COMBAT.CRIT_MULTIPLIER;
-              combatLog.push({ round, text: `💀爆头！命中${zombie.name}头部，伤害翻倍！造成${damage}点伤害！` });
+              combatLog.push({ round, text: `💀Bắn trúng đầu! Trúng đầu ${zombie.name}, sát thương gấp đôi! Gây ${damage} điểm sát thương!` });
             } else {
-              combatLog.push({ round, text: `你用${state.rangedWeapon.name}射击，造成${damage}点伤害。` });
+              combatLog.push({ round, text: `Bạn dùng ${state.rangedWeapon.name} bắn, gây ${damage} điểm sát thương.` });
             }
             zombie.currentHp -= damage;
             if (state.liuruyanRescued && Math.random() < GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_RATE && zombie.currentHp > 0) {
               zombie.currentHp -= GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE;
-              combatLog.push({ round, text: `柳如烟从暗处出手相助，造成${GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE}点伤害！` });
+              combatLog.push({ round, text: `Liu Ruyan ra tay từ trong bóng tối, gây ${GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE} điểm sát thương!` });
             }
             if (state.rangedWeapon.ammoType !== "箭矢") {
               state.rangedWeapon.integrity = Math.max(0, state.rangedWeapon.integrity - GAME_CONSTANTS.COMBAT.RANGED_SHOT_INTEGRITY_LOSS);
               if (state.rangedWeapon.integrity <= 0) {
-                combatLog.push({ round, text: `${state.rangedWeapon.name}耐久耗尽，彻底损坏了！` });
+                combatLog.push({ round, text: `${state.rangedWeapon.name} độ bền hao hết, hoàn toàn hỏng rồi!` });
                 state.rangedWeapon = null;
                 currentMode = "melee";
               }
@@ -279,9 +279,9 @@ function handleCombat(zombieDef, combatMode = "melee") {
         } else {
           let comboHits = 0;
           do {
-            // 理智归零时，50%概率攻击落空
+            // Lý trí về 0, 50% xác suất tấn công trượt
             if (state.sanity <= 0 && Math.random() < GAME_CONSTANTS.SURVIVAL.SANITY_ZERO_DAMAGE_ZERO_RATE) {
-              combatLog.push({ round, text: "幻觉扭曲了你的视野，你的攻击完全挥空了！" });
+              combatLog.push({ round, text: "Ảo giác làm méo mó tầm nhìn của bạn, đòn tấn công hoàn toàn trượt!" });
               break;
             }
             let playerDamage = state.meleeWeapon.damage;
@@ -295,16 +295,16 @@ function handleCombat(zombieDef, combatMode = "melee") {
             zombie.currentHp -= playerDamage;
             if (state.liuruyanRescued && Math.random() < GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_RATE && zombie.currentHp > 0) {
               zombie.currentHp -= GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE;
-              combatLog.push({ round, text: `柳如烟从暗处出手相助，造成${GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE}点伤害！` });
+              combatLog.push({ round, text: `Liu Ruyan ra tay từ trong bóng tối, gây ${GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE} điểm sát thương!` });
             }
             state.meleeWeapon.currentDurability = Math.max(0, state.meleeWeapon.currentDurability - 1);
             if (comboHits === 0) {
-              combatLog.push({ round, text: `你用${state.meleeWeapon.name}攻击，造成${playerDamage}点伤害。（HP:${Math.max(0, zombie.currentHp)}）` });
+              combatLog.push({ round, text: `Bạn dùng ${state.meleeWeapon.name} tấn công, gây ${playerDamage} điểm sát thương. (HP:${Math.max(0, zombie.currentHp)})` });
             } else {
-              combatLog.push({ round, text: `连击！追加攻击！造成${playerDamage}点伤害！（${comboHits}连击）（HP:${Math.max(0, zombie.currentHp)}）` });
+              combatLog.push({ round, text: `Liên kích! Đòn bổ sung! Gây ${playerDamage} điểm sát thương! (${comboHits} liên kích) (HP:${Math.max(0, zombie.currentHp)})` });
             }
             if (state.meleeWeapon.currentDurability <= 0 && state.meleeWeapon.id !== DEFAULT_ITEM_IDS.melee) {
-              combatLog.push({ round, text: `${state.meleeWeapon.name}耐久耗尽，彻底损坏了！` });
+              combatLog.push({ round, text: `${state.meleeWeapon.name} độ bền hao hết, hoàn toàn hỏng rồi!` });
               const fist = MELEE_WEAPONS.find(w => w.id === DEFAULT_ITEM_IDS.melee);
               state.meleeWeapon = { ...fist, currentDurability: fist.durability };
               break;
@@ -315,7 +315,7 @@ function handleCombat(zombieDef, combatMode = "melee") {
         state._blindTurns = 0;
       }
     } else {
-      combatLog.push({ round, text: "你疲惫不堪，无力还手……" });
+      combatLog.push({ round, text: "Bạn mệt đến không còn sức phản kháng……" });
     }
 
     if (zombie.currentHp <= 0) {
@@ -325,7 +325,7 @@ function handleCombat(zombieDef, combatMode = "melee") {
     let playerDodged = false;
     if (currentMode === "ranged" && Math.random() < GAME_CONSTANTS.COMBAT.RANGED_DODGE_RATE) {
       playerDodged = true;
-      combatLog.push({ round, text: "你拿着枪保持距离，闪避了丧尸的攻击！" });
+      combatLog.push({ round, text: "Bạn cầm súng giữ khoảng cách, né được đòn tấn công của zombie!" });
     }
 
     if (!playerDodged) {
@@ -334,21 +334,21 @@ function handleCombat(zombieDef, combatMode = "melee") {
 
       if (Array.isArray(zombie.ability) && zombie.ability.includes("infect")) {
         state.infection = Math.min(100, state.infection + GAME_CONSTANTS.COMBAT.INFECTION_ON_HIT);
-        combatLog.push({ round, text: `${zombie.name}的感染让你感到不适！感染值+${GAME_CONSTANTS.COMBAT.INFECTION_ON_HIT}` });
+        combatLog.push({ round, text: `${zombie.name} lây nhiễm khiến bạn khó chịu! giá trị nhiễm+${GAME_CONSTANTS.COMBAT.INFECTION_ON_HIT}` });
       }
 
       if (Array.isArray(zombie.ability) && zombie.ability.includes("blind")) {
         state._blindTurns = 1;
-        combatLog.push({ round, text: "你被致盲了，下一回合命中率降低！" });
+        combatLog.push({ round, text: "Bạn bị mù, lượt sau tỷ lệ trúng giảm!" });
       }
 
       if (Array.isArray(zombie.ability) && zombie.ability.includes("corrode")) {
         if (currentMode === "melee" && state.meleeWeapon.id !== DEFAULT_ITEM_IDS.melee) {
           state.meleeWeapon.currentDurability = Math.max(0, state.meleeWeapon.currentDurability - GAME_CONSTANTS.COMBAT.ABILITY_CORRODE_DURABILITY);
-          combatLog.push({ round, text: "你的武器被腐蚀了！" });
+          combatLog.push({ round, text: "Vũ khí của bạn bị ăn mòn!" });
         } else if (currentMode === "ranged" && state.rangedWeapon) {
           state.rangedWeapon.integrity = Math.max(0, state.rangedWeapon.integrity - GAME_CONSTANTS.COMBAT.ABILITY_CORRODE_INTEGRITY);
-          combatLog.push({ round, text: "你的武器被腐蚀了！" });
+          combatLog.push({ round, text: "Vũ khí của bạn bị ăn mòn!" });
         }
       }
 
@@ -356,68 +356,68 @@ function handleCombat(zombieDef, combatMode = "melee") {
         const acidDamage = Math.floor(Math.random() * (GAME_CONSTANTS.COMBAT.ABILITY_ACID_DAMAGE_MAX - GAME_CONSTANTS.COMBAT.ABILITY_ACID_DAMAGE_MIN + 1)) + GAME_CONSTANTS.COMBAT.ABILITY_ACID_DAMAGE_MIN;
         state.health -= acidDamage;
         state.health = Math.max(0, state.health);
-        combatLog.push({ round, text: `酸液喷射尸的酸液腐蚀了你！额外受到${acidDamage}点伤害！` });
+        combatLog.push({ round, text: `Zombie phun acid phun acid ăn mòn bạn! Nhận thêm ${acidDamage} điểm sát thương!` });
       }
 
       if (Array.isArray(zombie.ability) && zombie.ability.includes("summon") && !zombie.summoned) {
         zombie.summoned = true;
-        combatLog.push({ round, text: "群居尸母召唤了2只普通游荡丧尸！" });
+        combatLog.push({ round, text: "Zombie mẫu triệu hồi 2 zombie du đãng thường!" });
         const summonDmg = GAME_CONSTANTS.COMBAT.SUMMONED_ZOMBIE_DAMAGE;
         state.health -= summonDmg;
         state.health = Math.max(0, state.health);
-        combatLog.push({ round, text: `召唤丧尸对你造成了${summonDmg}点伤害。` });
+        combatLog.push({ round, text: `Zombie được triệu hồi gây ${summonDmg} điểm sát thương cho bạn.` });
         state.health -= summonDmg;
         state.health = Math.max(0, state.health);
-        combatLog.push({ round, text: `召唤丧尸对你造成了${summonDmg}点伤害。` });
+        combatLog.push({ round, text: `Zombie được triệu hồi gây ${summonDmg} điểm sát thương cho bạn.` });
       }
 
       if (Array.isArray(zombie.ability) && zombie.ability.includes("trip")) {
         state._tripped = 1;
-        combatLog.push({ round, text: "爬行尸缠绕住你的双腿，你被绊倒了！" });
+        combatLog.push({ round, text: "Zombie bò quấn lấy chân bạn, bạn bị vấp ngã!" });
       }
 
       if (Array.isArray(zombie.ability) && zombie.ability.includes("freeze")) {
         state._frozen = 1;
-        combatLog.push({ round, text: "冰霜尸的寒气侵入你的身体，你的动作变得迟缓了！" });
+        combatLog.push({ round, text: "Hàn khí của zombie băng giá xâm nhập cơ thể bạn, động tác bạn chậm lại!" });
       }
 
       if (Array.isArray(zombie.ability) && zombie.ability.includes("impale")) {
         const impaleDmg = Math.floor(zombie.damage * GAME_CONSTANTS.COMBAT.ABILITY_IMPALE_MULT);
         state.health -= impaleDmg;
         state.health = Math.max(0, state.health);
-        combatLog.push({ round, text: `穿刺尸的骨刺深深刺入你的身体！额外受到${impaleDmg}点穿甲伤害！` });
+        combatLog.push({ round, text: `Xương nhọn của zombie xuyên thấu đâm sâu vào cơ thể bạn! Nhận thêm ${impaleDmg} điểm sát thương xuyên giáp!` });
       }
 
       if (Array.isArray(zombie.ability) && zombie.ability.includes("cloak") && Math.random() < GAME_CONSTANTS.COMBAT.ABILITY_CLOAK_AMBUSH_RATE) {
         const cloakDmg = Math.floor(zombie.damage * GAME_CONSTANTS.COMBAT.ABILITY_CLOAK_AMBUSH_MULT);
         state.health -= cloakDmg;
         state.health = Math.max(0, state.health);
-        combatLog.push({ round, text: `幽灵潜行尸从暗影中发动偷袭！额外造成${cloakDmg}点伤害！` });
+        combatLog.push({ round, text: `Zombie幽 linh潜行 phát động đánh lén từ trong bóng tối! Gây thêm ${cloakDmg} điểm sát thương!` });
       }
 
-      combatLog.push({ round, text: `丧尸对你造成了${zombie.damage}点伤害。` });
+      combatLog.push({ round, text: `Zombie gây ${zombie.damage} điểm sát thương cho bạn.` });
     }
   }
 
   if (zombie.currentHp <= 0) {
-    combatLog.push({ round: "胜利", text: `你击败了${zombie.name}！` });
+    combatLog.push({ round: "Chiến thắng", text: `Bạn đã đánh bại ${zombie.name}!` });
 
     if (Array.isArray(zombie.ability) && zombie.ability.includes("selfDestruct")) {
       state.health -= zombie.damage;
       state.health = Math.max(0, state.health);
-      combatLog.push({ round: "胜利", text: `${zombie.name}爆炸了！造成${zombie.damage}点伤害！` });
+      combatLog.push({ round: "Chiến thắng", text: `${zombie.name} phát nổ! Gây ${zombie.damage} điểm sát thương!` });
     }
 
     if (Array.isArray(zombie.ability) && zombie.ability.includes("explosive")) {
       const explosiveDmg = Math.floor(zombie.damage * GAME_CONSTANTS.COMBAT.ABILITY_EXPLOSIVE_MULT);
       state.health -= explosiveDmg;
       state.health = Math.max(0, state.health);
-      combatLog.push({ round: "胜利", text: `爆裂尸的尸体猛然炸开！碎片四溅，造成${explosiveDmg}点伤害！` });
+      combatLog.push({ round: "Chiến thắng", text: `Thi thể zombie nổ tung! Mảnh vỡ văng tứ tung, gây ${explosiveDmg} điểm sát thương!` });
     }
 
     if (state.nurseZombieRescued) {
       state.health = Math.min(GAME_CONSTANTS.MAX_HEALTH, state.health + GAME_CONSTANTS.COMBAT.NURSE_HEAL_AFTER_COMBAT);
-      combatLog.push({ round: "胜利", text: `露露薇为你简单进行了伤口清理，健康恢复了${GAME_CONSTANTS.COMBAT.NURSE_HEAL_AFTER_COMBAT}。` });
+      combatLog.push({ round: "Chiến thắng", text: `Lulu Wei đã đơn giản xử lý vết thương cho bạn, sức khỏe hồi phục ${GAME_CONSTANTS.COMBAT.NURSE_HEAL_AFTER_COMBAT}.` });
     }
 
     if (Math.random() < GAME_CONSTANTS.COMBAT.ZOMBIE_LOOT_DROP_RATE) {
@@ -432,17 +432,17 @@ function handleCombat(zombieDef, combatMode = "melee") {
       }
       const added = addItem(lootItem);
       if (added) {
-        combatLog.push({ round: "胜利", text: `丧尸身上掉落了一些${isFood ? '食物' : '饮品'}：${lootItem.name}。` });
+        combatLog.push({ round: "Chiến thắng", text: `Trên người zombie rơi ra một ít ${isFood ? 'thực phẩm' : 'đồ uống'}: ${lootItem.name}.` });
       } else {
-        combatLog.push({ round: "胜利", text: `丧尸身上掉落了一些${isFood ? '食物' : '饮品'}，但背包已满。` });
+        combatLog.push({ round: "Chiến thắng", text: `Trên người zombie rơi ra một ít ${isFood ? 'thực phẩm' : 'đồ uống'}, nhưng balo đã đầy.` });
       }
     }
 
     if (Math.random() < GAME_CONSTANTS.YUMO.GEL_DROP_RATE) {
-      const gel = { id: "zombie_gel", name: "丧尸凝胶", type: "medicine", count: 1 };
+      const gel = { id: "zombie_gel", name: "Gel zombie", type: "medicine", count: 1 };
       const added = addItem(gel);
       if (added) {
-        combatLog.push({ round: "胜利", text: "丧尸身上析出了一团黏稠的凝胶。" });
+        combatLog.push({ round: "Chiến thắng", text: "Trên người zombie tiết ra một cục gel nhớt." });
       }
     }
 
@@ -459,40 +459,40 @@ function handleCombat(zombieDef, combatMode = "melee") {
   }
 
   if (state.health <= 0) {
-    combatLog.push({ round: "败北", text: "你被丧尸击倒了……" });
+    combatLog.push({ round: "Thất bại", text: "Bạn bị zombie đánh gục……" });
     checkDeath();
   }
 
   const logText = combatLog.map(entry => {
     if (typeof entry.round === "number") {
-      return `[第${entry.round}回合] ${entry.text}`;
+      return `[Lượt ${entry.round}] ${entry.text}`;
     }
     return entry.text;
   }).join("\n");
 
   const currentStory = state.story || "";
-  setStory(currentStory + "\n\n--- 战斗记录 ---\n" + logText);
+  setStory(currentStory + "\n\n--- Nhật ký chiến đấu ---\n" + logText);
 
   return state.health <= 0;
 }
 
-// ---------- NPC 战斗与交互 ----------
+// ---------- Chiến đấu và tương tác NPC ----------
 
 /**
- * 触发幸存者遭遇事件
+ * Kích hoạt sự kiện gặp người sống sót
  */
 function handleSurvivorEncounter() {
-  setStory("你在探索时遇到了一个幸存者。他警惕地看着你，但似乎没有立即动手的打算。");
+  setStory("Bạn gặp một người sống sót trong khi thám hiểm. Anh ấy cảnh giác nhìn bạn, nhưng dường như không định động thủ ngay.");
   setPhase("survivor_interact");
   setOptions([
-    { text: "交易（用食物换子弹）", action: "survivor_trade" },
-    { text: "背刺（偷袭幸存者）", action: "survivor_backstab" },
-    { text: "离开", action: "survivor_leave" }
+    { text: "Giao dịch (dùng thực phẩm đổi đạn)", action: "survivor_trade" },
+    { text: "Đâm lén (tấn công người sống sót)", action: "survivor_backstab" },
+    { text: "Rời đi", action: "survivor_leave" }
   ]);
 }
 
 /**
- * 触发悍匪遭遇事件
+ * Kích hoạt sự kiện gặp bandit
  */
 function handleBanditEncounter() {
   const state = getState();
@@ -500,17 +500,17 @@ function handleBanditEncounter() {
   state._pendingNpc = bandit;
   setPhase("pre_combat_npc");
   const meleeName = state.meleeWeapon.name;
-  const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "无";
+  const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "không";
   const ammoInfo = getRangedAmmoInfo(state);
-  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ 你的身体极度疲惫，无法正常战斗！建议先休息再探索。" : "";
-  setStory(`你遇到了${bandit.name}！他二话不说就朝你冲了过来！\n\n【近战】${meleeName}\n【远程】${rangedName} ${ammoInfo}${crashWarning}`);
+  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Cơ thể bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường! Nên nghỉ ngơi trước khi thám hiểm." : "";
+  setStory(`Bạn gặp ${bandit.name}! Anh ấy không nói hai lời liền xông về phía bạn!\n\n【Cận chiến】${meleeName}\n【Tầm xa】${rangedName} ${ammoInfo}${crashWarning}`);
   const options = [
-    { text: "近战作战", action: "combat_npc_melee" }
+    { text: "Chiến đấu cận chiến", action: "combat_npc_melee" }
   ];
   if (canRangedCombat(state)) {
-    options.push({ text: "远程作战", action: "combat_npc_ranged" });
+    options.push({ text: "Chiến đấu tầm xa", action: "combat_npc_ranged" });
   } else {
-    options.push({ text: "远程作战（不可用：无弹药）", action: "combat_npc_ranged", disabled: true });
+    options.push({ text: "Chiến đấu tầm xa (không khả dụng: không đạn)", action: "combat_npc_ranged", disabled: true });
   }
   options.push({ text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_npc_flee" });
   setOptions(options);
@@ -518,8 +518,8 @@ function handleBanditEncounter() {
 }
 
 /**
- * 处理悍匪战斗前选择
- * @param {number} input - 玩家选择的选项编号
+ * Xử lý lựa chọn trước chiến đấu NPC
+ * @param {number} input - số thứ tự lựa chọn của người chơi
  */
 function handlePreCombatNpcChoice(input) {
   const state = getState();
@@ -532,7 +532,7 @@ function handlePreCombatNpcChoice(input) {
     const wasDivingZombie = !!state._divingZombieCombat;
     if (Math.random() < GAME_CONSTANTS.COMBAT.FLEE_RATE) {
       if (wasDivingZombie) delete state._divingZombieCombat;
-      setStory(`你成功从${state._pendingNpc?.name || "敌人"}的追击中逃脱了！`);
+      setStory(`Bạn đã thoát khỏi sự truy đuổi của ${state._pendingNpc?.name || "kẻ địch"}!`);
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
@@ -544,9 +544,9 @@ function handlePreCombatNpcChoice(input) {
         }
       }
     } else {
-      setStory("逃跑失败！你被悍匪缠住了！被迫进入战斗！");
+      setStory("Chạy trốn thất bại! Bạn bị bandit quấn lấy! Bị buộc vào chiến đấu!");
       setPhase("combat");
-      setOptions([{ text: "战斗进行中...", action: "none" }]);
+      setOptions([{ text: "Chiến đấu đang diễn ra...", action: "none" }]);
       const npc = state._pendingNpc;
       handleNpcCombat(npc, "melee");
     }
@@ -555,7 +555,7 @@ function handlePreCombatNpcChoice(input) {
 
   if (action === "combat_npc_melee") {
     setPhase("combat");
-    setOptions([{ text: "战斗进行中...", action: "none" }]);
+    setOptions([{ text: "Chiến đấu đang diễn ra...", action: "none" }]);
     const npc = state._pendingNpc;
     handleNpcCombat(npc, "melee");
     return;
@@ -563,15 +563,15 @@ function handlePreCombatNpcChoice(input) {
 
   if (action === "combat_npc_ranged") {
     if (!canRangedCombat(state)) {
-      setStory("你没有可用的远程武器或弹药！只能近战了！");
+      setStory("Bạn không có vũ khí tầm xa hoặc đạn khả dụng! Chỉ có thể cận chiến!");
       setPhase("combat");
-      setOptions([{ text: "战斗进行中...", action: "none" }]);
+      setOptions([{ text: "Chiến đấu đang diễn ra...", action: "none" }]);
       const npc = state._pendingNpc;
       handleNpcCombat(npc, "melee");
       return;
     }
     setPhase("combat");
-    setOptions([{ text: "战斗进行中...", action: "none" }]);
+    setOptions([{ text: "Chiến đấu đang diễn ra...", action: "none" }]);
     const npc = state._pendingNpc;
     handleNpcCombat(npc, "ranged");
     return;
@@ -579,8 +579,8 @@ function handlePreCombatNpcChoice(input) {
 }
 
 /**
- * 处理幸存者交互界面的选择
- * @param {number} input - 玩家输入的选项编号
+ * Xử lý lựa chọn giao diện tương tác người sống sót
+ * @param {number} input - số thứ tự lựa chọn của người chơi
  */
 function handleSurvivorAction(input) {
   const state = getState();
@@ -590,7 +590,7 @@ function handleSurvivorAction(input) {
   const action = state.options[optionIndex].action;
 
   if (action === "survivor_leave") {
-    setStory("你选择不招惹幸存者，默默离开了。");
+    setStory("Bạn chọn không trêu chọc người sống sót, lặng lẽ rời đi.");
     advanceTime(1);
     updateStatusEffects();
     checkDeath();
@@ -602,11 +602,11 @@ function handleSurvivorAction(input) {
     const trade = getRandomTrade();
     state._trade = trade;
     setPhase("trade_choice");
-    setStory("幸存者愿意用子弹交换你的物资。");
+    setStory("Người sống sót sẵn sàng dùng đạn đổi vật tư của bạn.");
     setOptions([
-      { text: "用食物换子弹", action: "trade_food" },
-      { text: "用饮品换子弹", action: "trade_drink" },
-      { text: "返回", action: "trade_back" },
+      { text: "Dùng thực phẩm đổi đạn", action: "trade_food" },
+      { text: "Dùng đồ uống đổi đạn", action: "trade_drink" },
+      { text: "Quay lại", action: "trade_back" },
     ]);
     return;
   }
@@ -616,17 +616,17 @@ function handleSurvivorAction(input) {
     getState()._pendingNpc = survivor;
     setPhase("pre_combat_npc");
     const meleeName = getState().meleeWeapon.name;
-    const rangedName = getState().rangedWeapon ? getState().rangedWeapon.name : "无";
+    const rangedName = getState().rangedWeapon ? getState().rangedWeapon.name : "không";
     const ammoInfo = getRangedAmmoInfo(getState());
-    const crashWarning = getState().crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ 你的身体极度疲惫，无法正常战斗！建议先休息再探索。" : "";
-    setStory(`你决定铤而走险，偷袭这个幸存者！\n\n【近战】${meleeName}\n【远程】${rangedName} ${ammoInfo}${crashWarning}`);
+    const crashWarning = getState().crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Cơ thể bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường! Nên nghỉ ngơi trước khi thám hiểm." : "";
+    setStory(`Bạn quyết định mạo hiểm, đánh lén người sống sót này!\n\n【Cận chiến】${meleeName}\n【Tầm xa】${rangedName} ${ammoInfo}${crashWarning}`);
     const options = [
-      { text: "近战作战", action: "combat_npc_melee" }
+      { text: "Chiến đấu cận chiến", action: "combat_npc_melee" }
     ];
     if (canRangedCombat(getState())) {
-      options.push({ text: "远程作战", action: "combat_npc_ranged" });
+      options.push({ text: "Chiến đấu tầm xa", action: "combat_npc_ranged" });
     } else {
-      options.push({ text: "远程作战（不可用：无弹药）", action: "combat_npc_ranged", disabled: true });
+      options.push({ text: "Chiến đấu tầm xa (không khả dụng: không đạn)", action: "combat_npc_ranged", disabled: true });
     }
     options.push({ text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_npc_flee" });
     setOptions(options);
@@ -635,9 +635,9 @@ function handleSurvivorAction(input) {
 }
 
 /**
- * 处理与 NPC 的战斗
- * @param {Object} npc - NPC 实例数据
- * @param {string} combatMode - 战斗模式：'melee' 或 'ranged'
+ * Xử lý chiến đấu với NPC
+ * @param {Object} npc - dữ liệu thực thể NPC
+ * @param {string} combatMode - chế độ chiến đấu: 'melee' hoặc 'ranged'
  */
 function handleNpcCombat(npc, combatMode = "melee") {
   const state = getState();
@@ -648,22 +648,22 @@ function handleNpcCombat(npc, combatMode = "melee") {
   let round = 0;
   let currentMode = combatMode;
 
-  // 遭遇战斗降低理智
+  // Gặp chiến đấu giảm lý trí
   if (state.sanity > 0) {
     state.sanity = Math.max(0, state.sanity - GAME_CONSTANTS.SURVIVAL.SANITY_PER_ENCOUNTER);
-    combatLog.push({ round: 0, text: `遭遇敌人让你的精神受到冲击，理智 -${GAME_CONSTANTS.SURVIVAL.SANITY_PER_ENCOUNTER}！` });
+    combatLog.push({ round: 0, text: `Gặp kẻ địch khiến tinh thần bạn bị sốc, lý trí -${GAME_CONSTANTS.SURVIVAL.SANITY_PER_ENCOUNTER}!` });
   }
 
   const isCrippled = state.crash >= GAME_CONSTANTS.FATIGUE_MAX;
   if (isCrippled) {
-    combatLog.push({ round: 0, text: "你过于疲惫导致无法战斗，只能挨打！" });
+    combatLog.push({ round: 0, text: "Bạn quá mệt mỏi không thể chiến đấu, chỉ có thể bị đánh!" });
   }
 
   if (npc.hasRanged && Math.random() < GAME_CONSTANTS.COMBAT.NPC_RANGED_TRIGGER_RATE) {
     const npcRangedDamage = Math.floor(Math.random() * (GAME_CONSTANTS.COMBAT.NPC_RANGED_OPENING_DAMAGE_MAX - GAME_CONSTANTS.COMBAT.NPC_RANGED_OPENING_DAMAGE_MIN + 1)) + GAME_CONSTANTS.COMBAT.NPC_RANGED_OPENING_DAMAGE_MIN;
     state.health -= npcRangedDamage;
     state.health = Math.max(0, state.health);
-    combatLog.push({ round: 0, text: `${npc.name}拔出了远程武器朝你射击，造成${npcRangedDamage}点伤害！` });
+    combatLog.push({ round: 0, text: `${npc.name} rút vũ khí tầm xa bắn về phía bạn, gây ${npcRangedDamage} điểm sát thương!` });
   }
 
   if (!isCrippled && currentMode === "ranged" && state.rangedWeapon) {
@@ -679,24 +679,24 @@ function handleNpcCombat(npc, combatMode = "melee") {
       let damage = state.rangedWeapon.damage;
       if (isCrit) {
         damage *= GAME_CONSTANTS.COMBAT.CRIT_MULTIPLIER;
-        combatLog.push({ round: 0, text: `💀爆头！你用${state.rangedWeapon.name}命中${npc.name}头部，造成${damage}点伤害！` });
+        combatLog.push({ round: 0, text: `💀Bắn trúng đầu! Bạn dùng ${state.rangedWeapon.name} trúng đầu ${npc.name}, gây ${damage} điểm sát thương!` });
       } else {
-        combatLog.push({ round: 0, text: `你用${state.rangedWeapon.name}射击，造成${damage}点伤害。` });
+        combatLog.push({ round: 0, text: `Bạn dùng ${state.rangedWeapon.name} bắn, gây ${damage} điểm sát thương.` });
       }
       npc.hp -= damage;
       if (state.liuruyanRescued && Math.random() < GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_RATE && npc.hp > 0) {
         npc.hp -= GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE;
-        combatLog.push({ round: 0, text: `柳如烟从暗处出手相助，造成${GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE}点伤害！` });
+        combatLog.push({ round: 0, text: `Liu Ruyan ra tay từ trong bóng tối, gây ${GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE} điểm sát thương!` });
       }
       if (state.rangedWeapon.ammoType !== "箭矢") {
         state.rangedWeapon.integrity = Math.max(0, state.rangedWeapon.integrity - GAME_CONSTANTS.COMBAT.RANGED_SHOT_INTEGRITY_LOSS);
         if (state.rangedWeapon.integrity <= 0) {
-          combatLog.push({ round: 0, text: `${state.rangedWeapon.name}耐久耗尽，彻底损坏了！` });
+          combatLog.push({ round: 0, text: `${state.rangedWeapon.name} độ bền hao hết, hoàn toàn hỏng rồi!` });
           state.rangedWeapon = null;
         }
       }
     } else {
-      combatLog.push({ round: 0, text: "你已没有子弹，只能近战了。" });
+      combatLog.push({ round: 0, text: "Bạn đã hết đạn, chỉ có thể cận chiến." });
       currentMode = "melee";
     }
   }
@@ -706,24 +706,24 @@ function handleNpcCombat(npc, combatMode = "melee") {
 
     if (currentMode === "ranged") {
       if (!canRangedCombat(state)) {
-        combatLog.push({ round, text: "你已没有子弹，只能近战了。" });
+        combatLog.push({ round, text: "Bạn đã hết đạn, chỉ có thể cận chiến." });
         currentMode = "melee";
       } else if (state.rangedWeapon && state.rangedWeapon.integrity <= 0) {
-        combatLog.push({ round, text: "你的枪已经坏了，只能近战了。" });
+        combatLog.push({ round, text: "Súng của bạn đã hỏng, chỉ có thể cận chiến." });
         state.rangedWeapon = null;
         currentMode = "melee";
       }
     }
 
     if (!isCrippled) {
-      // 理智归零时，50%概率攻击落空
+      // Lý trí về 0, 50% xác suất tấn công trượt
       if (state.sanity <= 0 && Math.random() < GAME_CONSTANTS.SURVIVAL.SANITY_ZERO_DAMAGE_ZERO_RATE) {
-        combatLog.push({ round, text: "幻觉扭曲了你的视野，你的攻击完全挥空了！" });
+        combatLog.push({ round, text: "Ảo giác làm méo mó tầm nhìn của bạn, đòn tấn công hoàn toàn trượt!" });
       } else {
       const playerDamage = state.meleeWeapon.damage;
 
       if (Math.random() < (npc.dodgeRate || GAME_CONSTANTS.COMBAT.DEFAULT_NPC_DODGE_RATE)) {
-        combatLog.push({ round, text: `${npc.name}闪避了你的攻击！` });
+        combatLog.push({ round, text: `${npc.name} né được đòn tấn công của bạn!` });
       } else if (currentMode === "ranged" && state.rangedWeapon) {
         const ammoId = state.rangedWeapon.ammoType;
         const ammo = state.ammo.find(a => a.id === ammoId);
@@ -737,19 +737,19 @@ function handleNpcCombat(npc, combatMode = "melee") {
           let damage = state.rangedWeapon.damage;
           if (isCrit) {
             damage *= GAME_CONSTANTS.COMBAT.CRIT_MULTIPLIER;
-            combatLog.push({ round, text: `💀爆头！命中${npc.name}头部，伤害翻倍！造成${damage}点伤害！` });
+            combatLog.push({ round, text: `💀Bắn trúng đầu! Trúng đầu ${npc.name}, sát thương gấp đôi! Gây ${damage} điểm sát thương!` });
           } else {
-            combatLog.push({ round, text: `你用${state.rangedWeapon.name}射击，造成${damage}点伤害。` });
+            combatLog.push({ round, text: `Bạn dùng ${state.rangedWeapon.name} bắn, gây ${damage} điểm sát thương.` });
           }
           npc.hp -= damage;
           if (state.liuruyanRescued && Math.random() < GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_RATE && npc.hp > 0) {
             npc.hp -= GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE;
-            combatLog.push({ round, text: `柳如烟从暗处出手相助，造成${GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE}点伤害！` });
+            combatLog.push({ round, text: `Liu Ruyan ra tay từ trong bóng tối, gây ${GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE} điểm sát thương!` });
           }
           if (state.rangedWeapon.ammoType !== "箭矢") {
             state.rangedWeapon.integrity = Math.max(0, state.rangedWeapon.integrity - GAME_CONSTANTS.COMBAT.RANGED_SHOT_INTEGRITY_LOSS);
             if (state.rangedWeapon.integrity <= 0) {
-              combatLog.push({ round, text: `${state.rangedWeapon.name}耐久耗尽，彻底损坏了！` });
+              combatLog.push({ round, text: `${state.rangedWeapon.name} độ bền hao hết, hoàn toàn hỏng rồi!` });
               state.rangedWeapon = null;
             }
           }
@@ -760,16 +760,16 @@ function handleNpcCombat(npc, combatMode = "melee") {
           npc.hp -= playerDamage;
           if (state.liuruyanRescued && Math.random() < GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_RATE && npc.hp > 0) {
             npc.hp -= GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE;
-            combatLog.push({ round, text: `柳如烟从暗处出手相助，造成${GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE}点伤害！` });
+            combatLog.push({ round, text: `Liu Ruyan ra tay từ trong bóng tối, gây ${GAME_CONSTANTS.COMBAT.LIURUYAN_ASSIST_DAMAGE} điểm sát thương!` });
           }
           state.meleeWeapon.currentDurability = Math.max(0, state.meleeWeapon.currentDurability - 1);
           if (comboHits === 0) {
-            combatLog.push({ round, text: `你用${state.meleeWeapon.name}攻击，造成${playerDamage}点伤害。（${npc.name} HP:${Math.max(0, npc.hp)}）` });
+            combatLog.push({ round, text: `Bạn dùng ${state.meleeWeapon.name} tấn công, gây ${playerDamage} điểm sát thương. (${npc.name} HP:${Math.max(0, npc.hp)})` });
           } else {
-            combatLog.push({ round, text: `连击！追加攻击！造成${playerDamage}点伤害！（${comboHits}连击）（${npc.name} HP:${Math.max(0, npc.hp)}）` });
+            combatLog.push({ round, text: `Liên kích! Đòn bổ sung! Gây ${playerDamage} điểm sát thương! (${comboHits} liên kích) (${npc.name} HP:${Math.max(0, npc.hp)})` });
           }
           if (state.meleeWeapon.currentDurability <= 0 && state.meleeWeapon.id !== DEFAULT_ITEM_IDS.melee) {
-            combatLog.push({ round, text: `${state.meleeWeapon.name}耐久耗尽，彻底损坏了！` });
+            combatLog.push({ round, text: `${state.meleeWeapon.name} độ bền hao hết, hoàn toàn hỏng rồi!` });
             const fist = MELEE_WEAPONS.find(w => w.id === DEFAULT_ITEM_IDS.melee);
             state.meleeWeapon = { ...fist, currentDurability: fist.durability };
             break;
@@ -779,7 +779,7 @@ function handleNpcCombat(npc, combatMode = "melee") {
       }
       }
     } else {
-      combatLog.push({ round, text: "你疲惫不堪，无力还手……" });
+      combatLog.push({ round, text: "Bạn mệt đến không còn sức phản kháng……" });
     }
 
     if (npc.hp <= 0) break;
@@ -787,19 +787,19 @@ function handleNpcCombat(npc, combatMode = "melee") {
     let playerDodged = false;
     if (currentMode === "ranged" && Math.random() < GAME_CONSTANTS.COMBAT.RANGED_DODGE_RATE) {
       playerDodged = true;
-      combatLog.push({ round, text: "你拿着枪保持距离，闪避了攻击！" });
+      combatLog.push({ round, text: "Bạn cầm súng giữ khoảng cách, né được đòn tấn công!" });
     }
 
     if (!playerDodged) {
       const npcDamage = npc.damage;
       state.health -= npcDamage;
       state.health = Math.max(0, state.health);
-      combatLog.push({ round, text: `${npc.name}对你造成了${npcDamage}点伤害。` });
+      combatLog.push({ round, text: `${npc.name} gây ${npcDamage} điểm sát thương cho bạn.` });
     }
   }
 
   if (npc.hp <= 0) {
-    combatLog.push({ round: "胜利", text: `你击败了${npc.name}！` });
+    combatLog.push({ round: "Chiến thắng", text: `Bạn đã đánh bại ${npc.name}!` });
     state._combatNpcDefeated = true;
 
     const isBoss = BOSS_NAMES.includes(npc.name);
@@ -814,21 +814,21 @@ function handleNpcCombat(npc, combatMode = "melee") {
       state.maSanQuest4Done = true;
       triggerEnding("ending_food");
       return;
-    } else if (npc.name === "马三") {
+    } else if (npc.name === "Mã Tam") {
       state.outlawKilled = true;
-      state.stats.bossesDefeated.push("马三");
+      state.stats.bossesDefeated.push("Mã Tam");
       const outlawDrop = FIXED_LOOT_DROPS.outlaw_kill;
       const outlawWeapon = RANGED_WEAPONS.find(w => w.id === outlawDrop.weaponId);
       const addedAk = addItem({ ...outlawWeapon });
       const outlawAmmo = AMMO.find(a => a.id === outlawDrop.ammoId);
       const addedAmmo = addItem({ id: outlawAmmo.id, name: outlawAmmo.name, type: "ammo", count: outlawDrop.ammoCount });
       if (addedAk && addedAmmo) {
-        combatLog.push({ round: "胜利", text: `马三身上掉落：${outlawWeapon.name}×1、${outlawAmmo.name}×${outlawDrop.ammoCount}` });
+        combatLog.push({ round: "Chiến thắng", text: `Trên người Mã Tam rơi ra: ${outlawWeapon.name}×1、${outlawAmmo.name}×${outlawDrop.ammoCount}` });
       } else {
-        combatLog.push({ round: "胜利", text: "马三身上掉落了一些装备，但你的背包空间不足，部分物品无法携带。" });
+        combatLog.push({ round: "Chiến thắng", text: "Trên người Mã Tam rơi ra một số trang bị, nhưng không gian balo không đủ, một phần vật phẩm không thể mang theo." });
       }
-    } else if (npc.name === "黑影") {
-      state.stats.bossesDefeated.push("黑影");
+    } else if (npc.name === "Hắc Ảnh") {
+      state.stats.bossesDefeated.push("Hắc Ảnh");
       state.shadowDefeated = true;
       const shadowDrop = FIXED_LOOT_DROPS.shadow_kill;
       const shadowWeapon = RANGED_WEAPONS.find(w => w.id === shadowDrop.weaponId);
@@ -836,17 +836,17 @@ function handleNpcCombat(npc, combatMode = "melee") {
       const shadowAmmo = AMMO.find(a => a.id === shadowDrop.ammoId);
       const addedAmmo2 = addItem({ id: shadowAmmo.id, name: shadowAmmo.name, type: "ammo", count: shadowDrop.ammoCount });
       if (addedGun && addedAmmo2) {
-        combatLog.push({ round: "胜利", text: `黑影身上掉落：${shadowWeapon.name}×1、${shadowAmmo.name}×${shadowDrop.ammoCount}` });
+        combatLog.push({ round: "Chiến thắng", text: `Trên người Hắc Ảnh rơi ra: ${shadowWeapon.name}×1、${shadowAmmo.name}×${shadowDrop.ammoCount}` });
       } else {
-        combatLog.push({ round: "胜利", text: "黑影身上掉落了一些装备，但你的背包空间不足，部分物品无法携带。" });
+        combatLog.push({ round: "Chiến thắng", text: "Trên người Hắc Ảnh rơi ra một số trang bị, nhưng không gian balo không đủ, một phần vật phẩm không thể mang theo." });
       }
-    } else if (npc.name === "沉默的丧尸之王") {
+    } else if (npc.name === "Vua Zombie Im Lặng") {
       state.zombieKingDefeated = true;
-      state.stats.bossesDefeated.push("沉默的丧尸之王");
+      state.stats.bossesDefeated.push("Vua Zombie Im Lặng");
       state.other.push({ ...SPECIAL_ITEMS.silence_badge });
-      combatLog.push({ round: "胜利", text: "你击败了丧尸巢穴的真正主人！它的身躯轰然倒地，整个巢穴都为之震动。你在这场史无前例的战斗中活了下来，这将是末日后值得铭记的一刻。" });
-      combatLog.push({ round: "胜利", text: "你击败了尸王·寂灭！在它的残骸中，你发现了一枚刻着古老符文的徽章——【寂灭徽章】。这是一份荣誉的象征。" });
-    } else if (npc.name === "银行行长") {
+      combatLog.push({ round: "Chiến thắng", text: "Bạn đã đánh bại kẻ thống trị thực sự của tổ zombie! Thân thể nó đổ sập, cả tổ zombie đều rung chuyển. Bạn sống sót qua trận chiến chưa từng có này, đây sẽ là khoảnh khắc đáng nhớ sau mạt thế." });
+      combatLog.push({ round: "Chiến thắng", text: "Bạn đã đánh bại zombie chi vương·寂灭! Trong tàn tích của nó, bạn phát hiện một huy chương khắc cổ văn——【Huy chương寂灭】. Đây là biểu tượng của vinh dự." });
+    } else if (npc.name === "Ngân Hàng Hàng Trưởng") {
       state.castleDebt = null;
       state.castleDebtTriggered = false;
       state.bankerKilled = true;
@@ -860,47 +860,47 @@ function handleNpcCombat(npc, combatMode = "melee") {
           : { ...dropWeapon };
         const added = addItem(dropItem);
         if (added) {
-          combatLog.push({ round: "胜利", text: `行长倒地不起，债务一笔勾销！你从他桌上拿走了一把${dropWeapon.name}。` });
+          combatLog.push({ round: "Chiến thắng", text: `Hành trưởng ngã xuống, nợ nần xóa sạch! Bạn lấy từ bàn ông ấy một thanh ${dropWeapon.name}.` });
         } else {
-          combatLog.push({ round: "胜利", text: `行长倒地不起，债务一笔勾销！但背包已满，无法拿走${dropWeapon.name}。` });
+          combatLog.push({ round: "Chiến thắng", text: `Hành trưởng ngã xuống, nợ nần xóa sạch! Nhưng balo đã đầy, không thể lấy ${dropWeapon.name}.` });
         }
       }
-    } else if (npc.name === "城堡国王") {
+    } else if (npc.name === "Vua Lâu Đài") {
       state.kingKilled = true;
-      state.stats.bossesDefeated.push("城堡国王");
-      combatLog.push({ round: "胜利", text: "国王倒在王座脚下，华丽的长袍被鲜血浸透。大厅里一片死寂，贵族们惊恐地四散奔逃——但没有人敢上前。国王的时代，结束了。" });
+      state.stats.bossesDefeated.push("Vua Lâu Đài");
+      combatLog.push({ round: "Chiến thắng", text: "Quốc vương đổ gục dưới chân ngai vàng, áo choàng hoa lệ bị máu thấm ướt. Đại sảnh im phăng phắc, quý tộc kinh hãi tứ tán——nhưng không ai dám bước lên." });
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
       if (!state.gameOver) {
-        const logText = combatLog.map(entry => typeof entry.round === "number" ? `[第${entry.round}回合] ${entry.text}` : entry.text).join("\n");
+        const logText = combatLog.map(entry => typeof entry.round === "number" ? `[Lượt ${entry.round}] ${entry.text}` : entry.text).join("\n");
         setStory(logText);
-        setStory(state.story + "\n\n你趁乱逃离了城堡。从现在起，城堡的大门将永远对你关闭。");
+        setStory(state.story + "\n\nBạn nhân lúc hỗn loạn trốn khỏi thành bảo. Từ giờ trở đi, cửa thành bảo sẽ vĩnh viễn đóng với bạn.");
         showExploreOptionsState();
       }
       return;
-    } else if (npc.name === "老兵老赵") {
+    } else if (npc.name === "Lão Bin Lão Triệu") {
       state.zhaoKilled = true;
-      state.stats.bossesDefeated.push("老兵老赵");
-      combatLog.push({ round: "胜利", text: "老赵终于倒下了。他手里的步枪滚到一边，眼睛还睁着，望向灰蒙蒙的天空。也许他终于解脱了。" });
+      state.stats.bossesDefeated.push("Lão Bin Lão Triệu");
+      combatLog.push({ round: "Chiến thắng", text: "Lão Zhao cuối cùng cũng ngã xuống. Khẩu súng trong tay ông ấy lăn sang một bên, mắt vẫn mở, nhìn về bầu trời xám xịt. Có lẽ ông ấy cuối cùng cũng được giải thoát." });
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
       if (!state.gameOver) {
-        const logText = combatLog.map(entry => typeof entry.round === "number" ? `[第${entry.round}回合] ${entry.text}` : entry.text).join("\n");
+        const logText = combatLog.map(entry => typeof entry.round === "number" ? `[Lượt ${entry.round}] ${entry.text}` : entry.text).join("\n");
         setStory(logText);
         showExploreOptionsState();
       }
       return;
-    } else if (npc.name === "陈博士") {
+    } else if (npc.name === "Tiến Sĩ Trần") {
       state.doctorKilled = true;
-      state.stats.bossesDefeated.push("陈博士");
-      combatLog.push({ round: "胜利", text: "陈博士倒在实验台旁，打翻的试剂在地面上冒着白烟。他临死前还在喃喃自语着什么——也许是未完成的公式，也许是对自己一生的悔恨。" });
+      state.stats.bossesDefeated.push("Tiến Sĩ Trần");
+      combatLog.push({ round: "Chiến thắng", text: "Trần tiến sĩ ngã xuống bên cạnh bàn thí nghiệm, hóa chất bị đánh đổ bốc khói trắng trên sàn. Trước khi chết ông ấy vẫn lẩm bẩm điều gì đó——có lẽ là công thức chưa hoàn thành, có lẽ là hối hận về cả đời mình." });
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
       if (!state.gameOver) {
-        const logText = combatLog.map(entry => typeof entry.round === "number" ? `[第${entry.round}回合] ${entry.text}` : entry.text).join("\n");
+        const logText = combatLog.map(entry => typeof entry.round === "number" ? `[Lượt ${entry.round}] ${entry.text}` : entry.text).join("\n");
         setStory(logText);
         showExploreOptionsState();
       }
@@ -908,7 +908,7 @@ function handleNpcCombat(npc, combatMode = "melee") {
     } else if (state._liuruyanQuest2Combat) {
       delete state._liuruyanQuest2Combat;
       state.liuruyanQuest2Done = true;
-      const logText = combatLog.map(entry => typeof entry.round === "number" ? `[第${entry.round}回合] ${entry.text}` : entry.text).join("\n");
+      const logText = combatLog.map(entry => typeof entry.round === "number" ? `[Lượt ${entry.round}] ${entry.text}` : entry.text).join("\n");
       setStory(logText + "\n\n---\n\n" + MAP_NPC_INTROS.liuruyan_quest2_victory);
       advanceTime(1);
       updateStatusEffects();
@@ -918,15 +918,15 @@ function handleNpcCombat(npc, combatMode = "melee") {
     } else if (state._divingZombieCombat) {
       delete state._divingZombieCombat;
       state.yumoDivingKills++;
-      const progress = `已击杀${state.yumoDivingKills}/${GAME_CONSTANTS.YUMO.QUEST3_DIVING_KILLS}只潜水丧尸。`;
-      const questDone = state.yumoDivingKills >= GAME_CONSTANTS.YUMO.QUEST3_DIVING_KILLS ? "\n你已经完成了清理登陆丧尸的任务！" : "";
-      combatLog.push({ round: "胜利", text: progress });
+      const progress = `Đã giết ${state.yumoDivingKills}/${GAME_CONSTANTS.YUMO.QUEST3_DIVING_KILLS} zombie lặn.`;
+      const questDone = state.yumoDivingKills >= GAME_CONSTANTS.YUMO.QUEST3_DIVING_KILLS ? "\nBạn đã hoàn thành nhiệm vụ dọn zombie đổ bộ!" : "";
+      combatLog.push({ round: "Chiến thắng", text: progress });
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
       if (!state.gameOver) {
-        const logText = combatLog.map(entry => typeof entry.round === "number" ? `[第${entry.round}回合] ${entry.text}` : entry.text).join("\n");
-        setStory(logText + "\n\n---\n\n" + `你击败了潜水丧尸！\n${progress}${questDone}`);
+        const logText = combatLog.map(entry => typeof entry.round === "number" ? `[Lượt ${entry.round}] ${entry.text}` : entry.text).join("\n");
+        setStory(logText + "\n\n---\n\n" + `Bạn đã đánh bại zombie lặn!\n${progress}${questDone}`);
         refreshIslandMenu();
       }
       return;
@@ -937,8 +937,8 @@ function handleNpcCombat(npc, combatMode = "melee") {
       updateStatusEffects();
       checkDeath();
       if (!state.gameOver) {
-        const logText = combatLog.map(entry => typeof entry.round === "number" ? `[第${entry.round}回合] ${entry.text}` : entry.text).join("\n");
-        setStory(logText + "\n\n---\n\n" + "巨型丧尸傀儡轰然倒塌，金属框架扭曲变形，暗红色的管线断裂后喷出最后一股蒸汽。它终于安静了。发射中心的大门向你敞开。");
+        const logText = combatLog.map(entry => typeof entry.round === "number" ? `[Lượt ${entry.round}] ${entry.text}` : entry.text).join("\n");
+        setStory(logText + "\n\n---\n\n" + "Zombie傀儡 khổng lồ sụp đổ, khung kim loại vặn vẹo biến dạng, đường ống đỏ sẫm đứt đoạn phun ra hơi nước cuối cùng. Nó cuối cùng cũng yên tĩnh rồi. Cửa trung tâm phóng mở ra cho bạn.");
         showExploreOptionsState();
       }
       return;
@@ -946,8 +946,8 @@ function handleNpcCombat(npc, combatMode = "melee") {
       delete state._wolfQuest4Combat;
       state.wolfQuest4Done = true;
       state.stats.bossesDefeated.push("巨型海尸");
-      const logText = combatLog.map(entry => typeof entry.round === "number" ? `[第${entry.round}回合] ${entry.text}` : entry.text).join("\n");
-      setStory(logText + "\n\n---\n\n" + "巨型海尸发出一声震耳欲聋的哀嚎，庞大的身躯缓缓倾倒。海浪翻涌，仿佛整片海洋都在为这个远古生物的陨落而哀悼。\n\n人鱼浮出水面，月光照在她新生的鳞片上……");
+      const logText = combatLog.map(entry => typeof entry.round === "number" ? `[Lượt ${entry.round}] ${entry.text}` : entry.text).join("\n");
+      setStory(logText + "\n\n---\n\n" + "Hải thi khổng lồ phát ra tiếng rên rỉ chấn động, thân thể khổng lồ từ từ đổ xuống. Sóng biển cuộn trào, như cả đại dương đang thương tiếc cho sự vẫn lạc của sinh vật cổ đại này.\n\nNgười cá nổi lên mặt nước, ánh trăng rải trên chiếc vảy mới sinh của cô ấy……");
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
@@ -963,27 +963,27 @@ function handleNpcCombat(npc, combatMode = "melee") {
         if (added) droppedItems.push(getItemDisplayName(item));
       }
       if (droppedItems.length > 0) {
-        combatLog.push({ round: "胜利", text: `${npc.name}身上掉落：${droppedItems.join("、")}` });
+        combatLog.push({ round: "Chiến thắng", text: `${npc.name} trên người rơi ra: ${droppedItems.join("、")}` });
       }
       if (droppedItems.length < loot.length) {
-        combatLog.push({ round: "胜利", text: "背包已满，部分物品无法携带。" });
+        combatLog.push({ round: "Chiến thắng", text: "Balo đã đầy, một phần vật phẩm không thể mang theo." });
       }
     }
 
     if (state.nurseZombieRescued) {
       state.health = Math.min(GAME_CONSTANTS.MAX_HEALTH, state.health + GAME_CONSTANTS.COMBAT.NURSE_HEAL_AFTER_COMBAT);
-      combatLog.push({ round: "胜利", text: `露露薇为你简单进行了伤口清理，健康恢复了${GAME_CONSTANTS.COMBAT.NURSE_HEAL_AFTER_COMBAT}。` });
+      combatLog.push({ round: "Chiến thắng", text: `Lulu Wei đã đơn giản xử lý vết thương cho bạn, sức khỏe hồi phục ${GAME_CONSTANTS.COMBAT.NURSE_HEAL_AFTER_COMBAT}.` });
     }
 
     if (npc.type === "wanderingTrader") {
       const cigCount = Math.floor(Math.random() * (GAME_CONSTANTS.COMBAT.TRADER_CIG_DROP_MAX - GAME_CONSTANTS.COMBAT.TRADER_CIG_DROP_MIN + 1)) + GAME_CONSTANTS.COMBAT.TRADER_CIG_DROP_MIN;
       addCigarettes(cigCount);
-      combatLog.push({ round: "胜利", text: `${npc.name}身上掉落了${cigCount}根香烟` });
+      combatLog.push({ round: "Chiến thắng", text: `${npc.name} trên người rơi ra ${cigCount} điếu thuốc` });
     }
   }
 
   if (state.health <= 0) {
-    combatLog.push({ round: "败北", text: `你被${npc.name}杀死了……` });
+    combatLog.push({ round: "Thất bại", text: `Bạn bị ${npc.name} giết chết……` });
     if (state._maSanQuest4Combat) {
       delete state._maSanQuest4Combat;
     }
@@ -994,12 +994,12 @@ function handleNpcCombat(npc, combatMode = "melee") {
 
   const logText = combatLog.map(entry => {
     if (typeof entry.round === "number") {
-      return `[第${entry.round}回合] ${entry.text}`;
+      return `[Lượt ${entry.round}] ${entry.text}`;
     }
     return entry.text;
   }).join("\n");
 
-  setStory((state.story || "") + "\n\n--- 战斗记录 ---\n" + logText);
+  setStory((state.story || "") + "\n\n--- Nhật ký chiến đấu ---\n" + logText);
 
   advanceTime(1);
   updateStatusEffects();
@@ -1018,23 +1018,23 @@ function handleNpcCombat(npc, combatMode = "melee") {
 }
 
 /**
- * 触发黑市商人遭遇事件
+ * Kích hoạt sự kiện gặp thương nhân chợ đen
  */
 function handleWanderingTraderEncounter() {
-  setStory("一个背着大包小包的黑市商人出现在你面前。他咧嘴一笑：\"嘿，想不想做点买卖？我这儿什么都有！\"");
+  setStory("Một thương nhân chợ đen mang theo bao lớn bao nhỏ xuất hiện trước mặt bạn. Anh ấy nhe răng cười: \"Này, muốn làm chút giao dịch không? Tôi ở đây cái gì cũng có!\"");
   setPhase("trader_interact");
   setOptions([
-    { text: "香烟换子弹", action: "trader_ammo" },
-    { text: "购买武器", action: "trader_weapon" },
-    { text: "换随机消耗品（1根香烟）", action: "trader_consumable" },
-    { text: "背刺（偷袭黑市商人）", action: "trader_backstab" },
-    { text: "离开", action: "trader_leave" }
+    { text: "Điếu thuốc đổi đạn", action: "trader_ammo" },
+    { text: "Mua vũ khí", action: "trader_weapon" },
+    { text: "Đổi đồ tiêu hao ngẫu nhiên (1 điếu thuốc)", action: "trader_consumable" },
+    { text: "Đâm lén (tấn công thương nhân chợ đen)", action: "trader_backstab" },
+    { text: "Rời đi", action: "trader_leave" }
   ]);
 }
 
 /**
- * 处理黑市商人交互界面的选择
- * @param {number} input - 玩家输入的选项编号
+ * Xử lý lựa chọn giao diện tương tác thương nhân chợ đen
+ * @param {number} input - số thứ tự lựa chọn của người chơi
  */
 function handleWanderingTraderAction(input) {
   const state = getState();
@@ -1044,7 +1044,7 @@ function handleWanderingTraderAction(input) {
   const action = state.options[optionIndex].action;
 
   if (action === "trader_leave") {
-    setStory("你告别了黑市商人，继续你的旅途。");
+    setStory("Bạn từ biệt thương nhân chợ đen, tiếp tục hành trình.");
     advanceTime(1);
     showExploreOptionsState();
     return;
@@ -1055,17 +1055,17 @@ function handleWanderingTraderAction(input) {
     state._pendingNpc = trader;
     setPhase("pre_combat_npc");
     const meleeName = state.meleeWeapon.name;
-    const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "无";
+    const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "không";
     const ammoInfo = getRangedAmmoInfo(state);
-    const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ 你的身体极度疲惫，无法正常战斗！建议先休息再探索。" : "";
-    setStory(`你决定铤而走险，偷袭这个黑市商人！但他显然早有防备……\n\n【近战】${meleeName}\n【远程】${rangedName} ${ammoInfo}${crashWarning}`);
+    const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Cơ thể bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường! Nên nghỉ ngơi trước khi thám hiểm." : "";
+    setStory(`Bạn quyết định mạo hiểm, đánh lén thương nhân chợ đen này! Nhưng anh ấy rõ ràng đã có phòng bị……\n\n【Cận chiến】${meleeName}\n【Tầm xa】${rangedName} ${ammoInfo}${crashWarning}`);
     const options = [
-      { text: "近战作战", action: "combat_npc_melee" }
+      { text: "Chiến đấu cận chiến", action: "combat_npc_melee" }
     ];
     if (canRangedCombat(state)) {
-      options.push({ text: "远程作战", action: "combat_npc_ranged" });
+      options.push({ text: "Chiến đấu tầm xa", action: "combat_npc_ranged" });
     } else {
-      options.push({ text: "远程作战（不可用：无弹药）", action: "combat_npc_ranged", disabled: true });
+      options.push({ text: "Chiến đấu tầm xa (không khả dụng: không đạn)", action: "combat_npc_ranged", disabled: true });
     }
     options.push({ text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_npc_flee" });
     setOptions(options);
@@ -1074,46 +1074,46 @@ function handleWanderingTraderAction(input) {
 
   if (action === "trader_ammo") {
     if (state.cigarettes === 0) {
-      setStory("黑市商人瞥了你一眼：\"你没香烟还想换子弹？去去去！\"");
+      setStory("Thương nhân chợ đen liếc bạn một cái: \"Không có điếu thuốc còn muốn đổi đạn? Đi đi đi!\"");
       showExploreOptionsState();
       return;
     }
     setPhase("trader_buy_ammo");
-    setStory(`黑市商人掏出一个弹药箱：\"说吧，要什么子弹？每根香烟换${GAME_CONSTANTS.TRADING.AMMO_PER_CIG_MIN}~${GAME_CONSTANTS.TRADING.AMMO_PER_CIG_MAX}发。\"\n你有${state.cigarettes}根香烟。`);
+    setStory(`Thương nhân chợ đen lấy ra một hộp đạn: "Nói đi, muốn loại đạn nào? Mỗi điếu thuốc đổi ${GAME_CONSTANTS.TRADING.AMMO_PER_CIG_MIN}~${GAME_CONSTANTS.TRADING.AMMO_PER_CIG_MAX} viên."\nBạn có ${state.cigarettes} điếu thuốc.`);
     const ammoOptions = AMMO.map((a, i) => ({
-      text: `${a.name}（每根香烟换${GAME_CONSTANTS.TRADING.AMMO_PER_CIG_MIN}~${GAME_CONSTANTS.TRADING.AMMO_PER_CIG_MAX}发）`,
+      text: `${a.name}（mỗi điếu thuốc đổi ${GAME_CONSTANTS.TRADING.AMMO_PER_CIG_MIN}~${GAME_CONSTANTS.TRADING.AMMO_PER_CIG_MAX} viên）`,
       action: "buy_ammo",
       index: i
     }));
-    ammoOptions.push({ text: "返回", action: "trader_back", index: -1 });
+    ammoOptions.push({ text: "Quay lại", action: "trader_back", index: -1 });
     setOptions(ammoOptions);
     return;
   }
 
   if (action === "trader_weapon") {
     if (state.cigarettes === 0) {
-      setStory("黑市商人摇摇头：\"一根香烟都没有，我可不会白送武器。\"");
+      setStory("Thương nhân chợ đen lắc đầu: \"Một điếu thuốc cũng không có, tôi sẽ không tặng vũ khí đâu.\"");
       showExploreOptionsState();
       return;
     }
     setPhase("trader_buy_weapon");
-    setStory(`黑市商人拍了拍他的货箱：\"武器可不便宜，远程更贵！\"\n你有${state.cigarettes}根香烟。`);
+    setStory(`Thương nhân chợ đen vỗ vỗ hộp hàng: "Vũ khí không rẻ đâu, tầm xa càng đắt!"\nBạn có ${state.cigarettes} điếu thuốc.`);
     const weaponOptions = TRADER_WEAPON_SHOP.map((item, i) => {
-      const typeLabel = item.type === "ranged" ? "远程" : "近战";
+      const typeLabel = item.type === "ranged" ? "Tầm xa" : "Cận chiến";
       const weapon = item.type === "ranged"
         ? RANGED_WEAPONS.find(w => w.id === item.weaponId)
         : MELEE_WEAPONS.find(w => w.id === item.weaponId);
       const weaponName = weapon ? weapon.name : item.weaponId;
-      return { text: `${weaponName}（${typeLabel} ${item.costMin}~${item.costMax}根香烟）`, action: `buy_weapon_${i}`, index: i };
+      return { text: `${weaponName}（${typeLabel} ${item.costMin}~${item.costMax} điếu thuốc）`, action: `buy_weapon_${i}`, index: i };
     });
-    weaponOptions.push({ text: "返回", action: "trader_back", index: -1 });
+    weaponOptions.push({ text: "Quay lại", action: "trader_back", index: -1 });
     setOptions(weaponOptions);
     return;
   }
 
   if (action === "trader_consumable") {
     if (state.cigarettes === 0) {
-      setStory("黑市商人摆摆手：\"没香烟？那就别浪费我时间。\"");
+      setStory("Thương nhân chợ đen xua tay: \"Không có điếu thuốc? Vậy đừng lãng phí thời gian của tôi.\"");
       showExploreOptionsState();
       return;
     }
@@ -1131,10 +1131,10 @@ function handleWanderingTraderAction(input) {
     removeCigarettes(1);
     const added = addItem(consumableItem);
     if (added) {
-      setStory(`黑市商人用${consumableItem.name}换走了你一根香烟。`);
+      setStory(`Thương nhân chợ đen dùng ${consumableItem.name} đổi một điếu thuốc của bạn.`);
     } else {
       addCigarettes(1);
-      setStory(`背包已满，交易失败。黑市商人把香烟还给了你。`);
+      setStory(`Balo đã đầy, giao dịch thất bại. Thương nhân chợ đen trả lại điếu thuốc cho bạn.`);
     }
     advanceTime(1);
     updateStatusEffects();
@@ -1145,8 +1145,8 @@ function handleWanderingTraderAction(input) {
 }
 
 /**
- * 处理黑市商人购买弹药的选择
- * @param {number} input - 玩家输入的选项编号
+ * Xử lý lựa chọn mua đạn của thương nhân chợ đen
+ * @param {number} input - số thứ tự lựa chọn của người chơi
  */
 function handleTraderBuyAmmo(input) {
   const state = getState();
@@ -1163,23 +1163,23 @@ function handleTraderBuyAmmo(input) {
   if (option.action === "buy_ammo") {
     const ammo = AMMO[option.index];
     if (!ammo || state.cigarettes === 0) {
-      setStory("你没有任何香烟，无法兑换弹药。");
+      setStory("Bạn không có điếu thuốc nào, không thể đổi đạn.");
       showExploreOptionsState();
       return;
     }
     setPhase("trader_ammo_qty");
-    setStory(`选择用多少香烟兑换${ammo.name}？（1根香烟=随机${GAME_CONSTANTS.TRADING.AMMO_PER_CIG_MIN}~${GAME_CONSTANTS.TRADING.AMMO_PER_CIG_MAX}发）\n当前香烟：${state.cigarettes}根`);
+    setStory(`Chọn dùng bao nhiêu điếu thuốc đổi ${ammo.name}? (1 điếu thuốc = ngẫu nhiên ${GAME_CONSTANTS.TRADING.AMMO_PER_CIG_MIN}~${GAME_CONSTANTS.TRADING.AMMO_PER_CIG_MAX} viên)\nĐiếu thuốc hiện tại: ${state.cigarettes} điếu`);
     const qtyOptions = [];
     const amounts = [1, 5, 10];
     for (const amt of amounts) {
       if (amt <= state.cigarettes) {
-        qtyOptions.push({ text: `用${amt}根香烟兑换`, action: "confirm_ammo_qty", ammoIndex: option.index, qty: amt });
+        qtyOptions.push({ text: `Dùng ${amt} điếu thuốc đổi`, action: "confirm_ammo_qty", ammoIndex: option.index, qty: amt });
       }
     }
     if (state.cigarettes > 10) {
-      qtyOptions.push({ text: `用全部${state.cigarettes}根香烟兑换`, action: "confirm_ammo_qty", ammoIndex: option.index, qty: state.cigarettes });
+      qtyOptions.push({ text: `Dùng tất cả ${state.cigarettes} điếu thuốc đổi`, action: "confirm_ammo_qty", ammoIndex: option.index, qty: state.cigarettes });
     }
-    qtyOptions.push({ text: "返回", action: "trader_back" });
+    qtyOptions.push({ text: "Quay lại", action: "trader_back" });
     setOptions(qtyOptions);
     return;
   }
@@ -1188,7 +1188,7 @@ function handleTraderBuyAmmo(input) {
     const ammo = AMMO[option.ammoIndex];
     const qty = option.qty;
     if (!ammo || qty <= 0 || state.cigarettes < qty) {
-      setStory("香烟不足，无法兑换。");
+      setStory("Điếu thuốc không đủ, không thể đổi.");
       showExploreOptionsState();
       return;
     }
@@ -1198,11 +1198,11 @@ function handleTraderBuyAmmo(input) {
     const added = addItem({ id: ammo.id, name: ammo.name, type: "ammo", count: totalAmmo });
     if (!added) {
       addCigarettes(qty);
-      setStory("你的背包已满，无法装下更多弹药。");
+      setStory("Balo của bạn đã đầy, không thể chứa thêm đạn.");
       showExploreOptionsState();
       return;
     }
-    setStory(`交易成功！你用${qty}根香烟换来了${totalAmmo}发${ammo.name}（每根${perCig}发）。`);
+    setStory(`Giao dịch thành công! Bạn dùng ${qty} điếu thuốc đổi được ${totalAmmo} viên ${ammo.name} (mỗi điếu ${perCig} viên).`);
     advanceTime(1);
     updateStatusEffects();
     checkDeath();
@@ -1211,8 +1211,8 @@ function handleTraderBuyAmmo(input) {
 }
 
 /**
- * 处理黑市商人购买武器的选择
- * @param {number} input - 玩家输入的选项编号
+ * Xử lý lựa chọn mua vũ khí của thương nhân chợ đen
+ * @param {number} input - số thứ tự lựa chọn của người chơi
  */
 function handleTraderBuyWeapon(input) {
   const state = getState();
@@ -1227,7 +1227,7 @@ function handleTraderBuyWeapon(input) {
   }
 
   if (state.cigarettes === 0) {
-    setStory("黑市商人瞪了你一眼：\"没香烟凑什么热闹？\"");
+    setStory("Thương nhân chợ đen trừng bạn một cái: \"Không có điếu thuốc mà làm gì có chuyện vui?\"");
     showExploreOptionsState();
     return;
   }
@@ -1243,14 +1243,14 @@ function handleTraderBuyWeapon(input) {
     : MELEE_WEAPONS.find(w => w.id === shopItem.weaponId);
   const costMin = shopItem.costMin;
   const costMax = shopItem.costMax;
-  const costLabel = shopItem.type === "ranged" ? "远程" : "近战";
+  const costLabel = shopItem.type === "ranged" ? "Tầm xa" : "Cận chiến";
 
   if (!weaponDef) return;
 
   const cost = Math.floor(Math.random() * (costMax - costMin + 1)) + costMin;
 
   if (state.cigarettes < cost) {
-    setStory(`黑市商人摇摇头：\"这${costLabel}武器要${cost}根香烟，你只有${state.cigarettes}根，不够啊。\"`);
+    setStory(`Thương nhân chợ đen lắc đầu: "Vũ khí ${costLabel} này cần ${cost} điếu thuốc, bạn chỉ có ${state.cigarettes} điếu, không đủ."`);
     showExploreOptionsState();
     return;
   }
@@ -1263,9 +1263,9 @@ function handleTraderBuyWeapon(input) {
   const added = addItem(weaponItem);
   if (!added) {
     addCigarettes(cost);
-    setStory("背包已满，交易失败。黑市商人把香烟还给了你。");
+    setStory("Balo đã đầy, giao dịch thất bại. Thương nhân chợ đen trả lại điếu thuốc cho bạn.");
   } else {
-    setStory(`交易成功！你用${cost}根香烟买下了一把${weaponDef.name}。黑市商人吹了个口哨。`);
+    setStory(`Giao dịch thành công! Bạn dùng ${cost} điếu thuốc mua được một thanh ${weaponDef.name}. Thương nhân chợ đen thổi một tiếng huýt sáo.`);
   }
 
   advanceTime(1);
@@ -1275,24 +1275,24 @@ function handleTraderBuyWeapon(input) {
 }
 
 /**
- * 触发末日医生遭遇事件
+ * Kích hoạt sự kiện gặp bác sĩ mạt thế
  */
 function handleDoctorEncounter() {
-  setStory(`一个穿着白大褂、戴着口罩的中年人正在角落里整理医药箱。看到你走近，他平静地说："我是末日医生。给我${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST}份物资，我可以治疗你。"`);
+  setStory(`Một người đàn ông trung niên mặc áo choàng trắng, đeo khẩu trang đang ở góc phòng sắp xếp hộp thuốc. Thấy bạn đến gần, anh ấy bình tĩnh nói: "Tôi là bác sĩ mạt thế. Cho tôi ${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST} phần vật tư, tôi có thể chữa cho bạn."`);
   setPhase("doctor_interact");
   setOptions([
-    { text: `用${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST}份食物治疗`, action: "doctor_food" },
-    { text: `用${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST}份饮品治疗`, action: "doctor_drink" },
-    { text: `用${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST}份水果治疗`, action: "doctor_fruit" },
-    { text: `心理治疗（${GAME_CONSTANTS.DOCTOR.PSYCHOLOGY_FOOD_COST}食物，疲惫-${GAME_CONSTANTS.DOCTOR.PSYCHOLOGY_FATIGUE_REDUCTION}）`, action: "doctor_psychology" },
-    { text: "背刺（偷袭医生）", action: "doctor_backstab" },
-    { text: "离开", action: "doctor_leave" }
+    { text: `Dùng ${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST} phần thực phẩm để chữa`, action: "doctor_food" },
+    { text: `Dùng ${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST} phần đồ uống để chữa`, action: "doctor_drink" },
+    { text: `Dùng ${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST} phần trái cây để chữa`, action: "doctor_fruit" },
+    { text: `Trị liệu tâm lý (${GAME_CONSTANTS.DOCTOR.PSYCHOLOGY_FOOD_COST} thực phẩm, mệt mỏi-${GAME_CONSTANTS.DOCTOR.PSYCHOLOGY_FATIGUE_REDUCTION})`, action: "doctor_psychology" },
+    { text: "Đâm lén (tấn công bác sĩ)", action: "doctor_backstab" },
+    { text: "Rời đi", action: "doctor_leave" }
   ]);
 }
 
 /**
- * 处理末日医生交互界面的选择
- * @param {number} input - 玩家输入的选项编号
+ * Xử lý lựa chọn giao diện tương tác bác sĩ mạt thế
+ * @param {number} input - số thứ tự lựa chọn của người chơi
  */
 function handleDoctorAction(input) {
   const state = getState();
@@ -1302,7 +1302,7 @@ function handleDoctorAction(input) {
   const action = state.options[optionIndex].action;
 
   if (action === "doctor_leave") {
-    setStory("你谢过医生，继续上路了。");
+    setStory("Bạn cảm ơn bác sĩ, tiếp tục lên đường.");
     advanceTime(1);
     updateStatusEffects();
     checkDeath();
@@ -1314,7 +1314,7 @@ function handleDoctorAction(input) {
     const foodItems1 = state.food;
     const foodCount = foodItems1.reduce((sum, f) => sum + (f.count || 1), 0);
     if (foodCount < GAME_CONSTANTS.DOCTOR.PSYCHOLOGY_FOOD_COST) {
-      setStory(`你的食物不够，心理治疗需要${GAME_CONSTANTS.DOCTOR.PSYCHOLOGY_FOOD_COST}份食物。`);
+      setStory(`Thực phẩm của bạn không đủ, trị liệu tâm lý cần ${GAME_CONSTANTS.DOCTOR.PSYCHOLOGY_FOOD_COST} phần thực phẩm.`);
       handleDoctorEncounter();
       return;
     }
@@ -1330,7 +1330,7 @@ function handleDoctorAction(input) {
       }
     }
     state.crash = Math.max(0, (state.crash || 0) - GAME_CONSTANTS.DOCTOR.PSYCHOLOGY_FATIGUE_REDUCTION);
-    setStory(`末世游医给你进行了一段简短的心理疏导……你感觉心里好受了一些。疲惫-${GAME_CONSTANTS.DOCTOR.PSYCHOLOGY_FATIGUE_REDUCTION}。`);
+    setStory(`Bác sĩ mạt thế tiến hành một buổi tư vấn tâm lý ngắn……bạn cảm thấy dễ chịu hơn một chút. Mệt mỏi-${GAME_CONSTANTS.DOCTOR.PSYCHOLOGY_FATIGUE_REDUCTION}.`);
     advanceTime(1);
     updateStatusEffects();
     checkDeath();
@@ -1339,21 +1339,21 @@ function handleDoctorAction(input) {
   }
 
   if (action === "doctor_backstab") {
-    setStory("你握紧了武器，但转念一想——在这个末世，医生太宝贵了。医生对你有用，所以你收起了心思。");
+    setStory("Bạn nắm chặt vũ khí, nhưng nghĩ lại——giữa mạt thế, bác sĩ quá quý giá. Bác sĩ có ích cho bạn, nên bạn gác ý nghĩ đó sang một bên.");
     setPhase("doctor_interact");
     setOptions([
-      { text: `用${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST}份食物治疗`, action: "doctor_food" },
-      { text: `用${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST}份饮品治疗`, action: "doctor_drink" },
-      { text: `用${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST}份水果治疗`, action: "doctor_fruit" },
-      { text: "离开", action: "doctor_leave" }
+      { text: `Dùng ${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST} phần thực phẩm để chữa`, action: "doctor_food" },
+      { text: `Dùng ${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST} phần đồ uống để chữa`, action: "doctor_drink" },
+      { text: `Dùng ${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST} phần trái cây để chữa`, action: "doctor_fruit" },
+      { text: "Rời đi", action: "doctor_leave" }
     ]);
     return;
   }
 
   const typeMap = {
-    doctor_food: { type: "food", label: "食物", arr: state.food },
-    doctor_drink: { type: "drinks", label: "饮品", arr: state.drinks },
-    doctor_fruit: { type: "food", label: "水果", arr: state.food.filter(i => i.type === "fruit") },
+    doctor_food: { type: "food", label: "Thực phẩm", arr: state.food },
+    doctor_drink: { type: "drinks", label: "Đồ uống", arr: state.drinks },
+    doctor_fruit: { type: "food", label: "Trái cây", arr: state.food.filter(i => i.type === "fruit") },
   };
 
   const info = typeMap[action];
@@ -1362,7 +1362,7 @@ function handleDoctorAction(input) {
   if (action === "doctor_fruit") {
     const fruitCount = state.food.filter(i => i.type === "fruit").reduce((sum, i) => sum + (i.count || 1), 0);
     if (fruitCount < GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST) {
-      setStory(`医生摇摇头：\"你只有${fruitCount}份水果，我需要${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST}份。去多找些水果再来。\"`);
+      setStory(`Bác sĩ lắc đầu: "Bạn chỉ có ${fruitCount} phần trái cây, tôi cần ${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST} phần. Đi tìm thêm trái cây rồi quay lại."`);
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
@@ -1385,7 +1385,7 @@ function handleDoctorAction(input) {
   } else {
     const itemCount = info.arr.reduce((sum, i) => sum + (i.count || 1), 0);
     if (itemCount < GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST) {
-      setStory(`医生摇摇头：\"你只有${itemCount}份${info.label}，我需要${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST}份。\"`);
+      setStory(`Bác sĩ lắc đầu: "Bạn chỉ có ${itemCount} phần ${info.label}, tôi cần ${GAME_CONSTANTS.DOCTOR.TREATMENT_ITEM_COST} phần."`);
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
@@ -1406,7 +1406,7 @@ function handleDoctorAction(input) {
   }
 
   state.health = Math.min(GAME_CONSTANTS.MAX_HEALTH, state.health + GAME_CONSTANTS.DOCTOR.HEAL_AMOUNT);
-  setStory(`医生仔细地处理了你的伤口。你感觉好多了！（恢复了${GAME_CONSTANTS.DOCTOR.HEAL_AMOUNT}点生命值）`);
+  setStory(`Bác sĩ cẩn thận xử lý vết thương của bạn. Bạn cảm thấy khá hơn nhiều! (Hồi phục ${GAME_CONSTANTS.DOCTOR.HEAL_AMOUNT} điểm sinh mệnh)`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();

@@ -1,6 +1,6 @@
 /* ============================================================
-   基地建设模块
-   组织顺序：基地升级 → 种植系统 → 仓库系统
+   Mô-đun xây dựng căn cứ
+   Thứ tự tổ chức: nâng cấp căn cứ → hệ thống trồng trọt → hệ thống kho
    ============================================================ */
 
 import {
@@ -43,7 +43,7 @@ import {
   handleSeedSelect,
 } from './farming.js';
 
-// ---------- 基地升级 ----------
+// ---------- Nâng cấp căn cứ ----------
 
 export function getBaseName(level) {
   return BASE_LEVELS[level]?.name || BASE_LEVELS[0].name;
@@ -60,7 +60,7 @@ export function getBaseUpgradeCost(level) {
 export function handleUpgradeBase() {
   const state = getState();
   if (state.baseLevel >= GAME_CONSTANTS.BASE.MAX_BASE_LEVEL) {
-    setStory("【幸存者别墅】已经是最高等级的基地了，金碧辉煌，固若金汤。你站在落地窗前俯瞰这片末日废墟，心中感慨万千。");
+    setStory("【Biệt thự người sống sót】 đã là căn cứ cấp cao nhất, vàng son lộng lẫy, vững như thành đồng. Bạn đứng trước cửa sổ sát đất nhìn xuống vùng phế tích tận thế, trong lòng bồi hồi khôn xiết.");
     showHomeOptions();
     return;
   }
@@ -72,10 +72,10 @@ export function handleUpgradeBase() {
   const nextLevel = state.baseLevel + 1;
   const bonus = getBaseBonus(nextLevel) - getBaseBonus(state.baseLevel);
   const lines = [`🏠 ${getBaseName(state.baseLevel)} → ${getBaseName(nextLevel)}`];
-  lines.push(`睡眠恢复加成: ${getBaseBonus(state.baseLevel)} → ${getBaseBonus(nextLevel)}（+${bonus}HP）`);
-  lines.push(`⏱ 耗时: ${GAME_CONSTANTS.BASE.UPGRADE_TIME_COST}回合（1天）`);
+  lines.push(`Bổ sung hồi phục khi ngủ: ${getBaseBonus(state.baseLevel)} → ${getBaseBonus(nextLevel)}（+${bonus}HP）`);
+  lines.push(`⏱ Thời gian: ${GAME_CONSTANTS.BASE.UPGRADE_TIME_COST} lượt（1 ngày）`);
   lines.push(`━━━━━━━━━━━━━━━━━`);
-  lines.push(`📦 所需材料：`);
+  lines.push(`📦 Vật liệu cần：`);
   const costNames = BUILDING_MATERIAL_NAMES;
   let canAfford = true;
   for (const [id, count] of Object.entries(cost)) {
@@ -84,14 +84,14 @@ export function handleUpgradeBase() {
     if (have < count) canAfford = false;
   }
   if (canAfford) {
-    setStory(lines.join("\n") + "\n\n确定要消耗这些材料进行升级吗？升级将持续整整一天。");
+    setStory(lines.join("\n") + "\n\nXác nhận tiêu hao những vật liệu này để nâng cấp? Việc nâng cấp sẽ kéo dài cả một ngày.");
     setPhase("base_upgrade_confirm");
     setOptions([
-      { text: "✅ 确认升级", action: "confirm_upgrade" },
-      { text: "❌ 再想想", action: "back_to_base" },
+      { text: "✅ Xác nhận nâng cấp", action: "confirm_upgrade" },
+      { text: "❌ Suy nghĩ lại", action: "back_to_base" },
     ]);
   } else {
-    setStory(lines.join("\n") + "\n\n⚠️ 建筑材料不足，无法开工。去搜刮更多的材料吧！");
+    setStory(lines.join("\n") + "\n\n⚠️ Vật liệu xây dựng không đủ, không thể khởi công. Hãy đi lục soát thêm vật liệu nhé!");
     showBaseBuildOptions();
   }
 }
@@ -111,7 +111,7 @@ export function handleConfirmUpgrade() {
   checkDeath();
   if (!state.gameOver) {
     const flavor = BASE_LEVELS[state.baseLevel]?.upgradeFlavor || "";
-    setStory(`【${oldName} → ${newName}】\n\n${flavor}\n\n睡觉恢复效果提升了（+${getBaseBonus(state.baseLevel)}HP）！`);
+    setStory(`【${oldName} → ${newName}】\n\n${flavor}\n\nHiệu quả hồi phục khi ngủ đã tăng（+${getBaseBonus(state.baseLevel)}HP）！`);
     if (state.baseLevel >= GAME_CONSTANTS.BASE.MAX_BASE_LEVEL) {
       if (!state.unlockedAchievements) state.unlockedAchievements = [];
       if (!state.unlockedAchievements.includes("base_upgrade")) state.unlockedAchievements.push("base_upgrade");
@@ -120,7 +120,7 @@ export function handleConfirmUpgrade() {
   }
 }
 
-// ---------- 种植系统 ----------
+// ---------- Hệ thống trồng trọt ----------
 
 export function handlePlantCrop() {
   farmingPlantCrop();
@@ -134,7 +134,7 @@ export function handleHarvestCrops() {
   farmingHarvestCrops();
 }
 
-// ---------- 仓库系统 ----------
+// ---------- Hệ thống kho ----------
 
 export function getWarehouseCapacity(level) {
   return GAME_CONSTANTS.BASE.WAREHOUSE_BASE_CAP + level * GAME_CONSTANTS.BASE.WAREHOUSE_CAP_PER_LEVEL;
@@ -169,7 +169,7 @@ export function handleBuildWarehouse() {
   const state = getState();
   if (state.warehouseLevel >= GAME_CONSTANTS.BASE.MAX_WAREHOUSE_LEVEL) {
     const maxCap = getWarehouseCapacity(GAME_CONSTANTS.BASE.MAX_WAREHOUSE_LEVEL);
-    setStory(`仓库已经最大容量（${maxCap}格），无需继续扩建。`);
+    setStory(`Kho đã đạt sức chứa tối đa（${maxCap} ô），không cần mở rộng thêm.`);
     showBaseBuildOptions();
     return;
   }
@@ -182,10 +182,10 @@ export function handleBuildWarehouse() {
   const costNames = BUILDING_MATERIAL_NAMES;
   const currentCap = getWarehouseCapacity(state.warehouseLevel);
   const nextCap = getWarehouseCapacity(nextLevel);
-  let lines = [`📦 【仓库扩建 Lv${state.warehouseLevel} → Lv${nextLevel}】`];
-  lines.push(`容量: ${currentCap}格 → ${nextCap}格（+${nextCap - currentCap}格）`);
+  let lines = [`📦 【Mở rộng kho Lv${state.warehouseLevel} → Lv${nextLevel}】`];
+  lines.push(`Sức chứa: ${currentCap} ô → ${nextCap} ô（+${nextCap - currentCap} ô）`);
   lines.push(`━━━━━━━━━━━━━━━━━`);
-  lines.push(`📋 所需材料：`);
+  lines.push(`📋 Vật liệu cần：`);
   let canAfford = true;
   for (const [id, count] of Object.entries(cost)) {
     const have = countBuildingMaterial(state, id);
@@ -193,14 +193,14 @@ export function handleBuildWarehouse() {
     if (have < count) canAfford = false;
   }
   if (canAfford) {
-    setStory(lines.join("\n") + "\n\n扩建后可以存放更多物资，确定建造吗？");
+    setStory(lines.join("\n") + "\n\nSau khi mở rộng có thể chứa thêm nhiều vật tư, xác nhận xây dựng không?");
     setPhase("warehouse_upgrade_confirm");
     setOptions([
-      { text: "✅ 确认建造", action: "confirm_warehouse" },
-      { text: "❌ 再想想", action: "back_to_base" },
+      { text: "✅ Xác nhận xây dựng", action: "confirm_warehouse" },
+      { text: "❌ Suy nghĩ lại", action: "back_to_base" },
     ]);
   } else {
-    setStory(lines.join("\n") + "\n\n⚠️ 材料不够，没法开工。多去搜刮一些建材吧。");
+    setStory(lines.join("\n") + "\n\n⚠️ Vật liệu không đủ, không thể khởi công. Hãy đi lục soát thêm vật liệu nhé.");
     showBaseBuildOptions();
   }
 }
@@ -216,7 +216,7 @@ export function handleConfirmWarehouse() {
   }
   state.warehouseLevel++;
   const newCap = getWarehouseCapacity(state.warehouseLevel);
-  setStory(`📦 你花了一些时间，叮叮当当地在仓库里加装了一排新货架。\n\n仓库扩容完成！${oldCap}格 → ${newCap}格  |  当前使用：${state.warehouse.length}/${newCap}格`);
+  setStory(`📦 Bạn dành một ít thời gian, lách cách lắp thêm một dãy kệ mới trong kho.\n\nKho mở rộng hoàn tất! ${oldCap} ô → ${newCap} ô  |  Đang dùng: ${state.warehouse.length}/${newCap} ô`);
   advanceTime(GAME_CONSTANTS.BASE.WAREHOUSE_UPGRADE_TIME);
   updateStatusEffects();
   checkDeath();
@@ -230,12 +230,12 @@ export function handleOpenWarehouse() {
   const cap = getWarehouseCapacity(state.warehouseLevel);
   const usage = state.warehouse.length;
   const pct = Math.round((usage / cap) * 100);
-  setStory(`📦 【仓库】使用情况：${usage}/${cap}格（${pct}%）\n\n存入物品：将背包中的物品转移到仓库\n取出物品：将仓库中的物品拿回背包`);
+  setStory(`📦 【Kho】Tình trạng sử dụng: ${usage}/${cap} ô（${pct}%）\n\nCất vật phẩm: chuyển vật phẩm trong ba lô vào kho\nLấy vật phẩm: lấy vật phẩm trong kho về ba lô`);
   setPhase("warehouse_menu");
   setOptions([
-    { text: "存入物品", action: "warehouse_deposit" },
-    { text: "取出物品", action: "warehouse_withdraw" },
-    { text: "返回", action: "back_to_base" },
+    { text: "Cất vật phẩm", action: "warehouse_deposit" },
+    { text: "Lấy vật phẩm", action: "warehouse_withdraw" },
+    { text: "Quay lại", action: "back_to_base" },
   ]);
 }
 
@@ -243,40 +243,40 @@ export function handleWarehouseDeposit() {
   const state = getState();
   const cap = getWarehouseCapacity(state.warehouseLevel);
   if (state.warehouse.length >= cap) {
-    setStory("📦 仓库已经塞满了！先取出一些物品腾出空间吧。");
+    setStory("📦 Kho đã đầy rồi! Hãy lấy bớt vật phẩm ra để tạo chỗ trống nhé.");
     handleOpenWarehouse();
     return;
   }
   let items = [];
-  state.food.forEach((item, i) => items.push({ ...item, cat: "food", idx: i, label: `[食物] ${getItemDisplayName(item)}` }));
-  state.drinks.forEach((item, i) => items.push({ ...item, cat: "drinks", idx: i, label: `[饮品] ${getItemDisplayName(item)}` }));
-  state.medicine.forEach((item, i) => items.push({ ...item, cat: "medicine", idx: i, label: `[医疗] ${getItemDisplayName(item)}` }));
-  state.other.forEach((item, i) => items.push({ ...item, cat: "other", idx: i, label: `[其他] ${getItemDisplayName(item)}` }));
-  if (state.seeds) state.seeds.forEach((item, i) => items.push({ ...item, cat: "seed", idx: i, label: `[种子] ${getItemDisplayName(item)}` }));
-  if (state.cigarettes > 0) items.push({ cat: "cigarettes", idx: 0, name: "香烟", label: `[货物] (${state.cigarettes})香烟` });
-  if (state.gasoline > 0) items.push({ cat: "gasoline", idx: 0, name: "汽油", label: `[货物] (${state.gasoline})汽油` });
-  if (state.pureEnergy > 0) items.push({ cat: "pureEnergy", idx: 0, name: "纯净能源", label: `[货物] (${state.pureEnergy})纯净能源` });
+  state.food.forEach((item, i) => items.push({ ...item, cat: "food", idx: i, label: `[Thực phẩm] ${getItemDisplayName(item)}` }));
+  state.drinks.forEach((item, i) => items.push({ ...item, cat: "drinks", idx: i, label: `[Đồ uống] ${getItemDisplayName(item)}` }));
+  state.medicine.forEach((item, i) => items.push({ ...item, cat: "medicine", idx: i, label: `[Y tế] ${getItemDisplayName(item)}` }));
+  state.other.forEach((item, i) => items.push({ ...item, cat: "other", idx: i, label: `[Khác] ${getItemDisplayName(item)}` }));
+  if (state.seeds) state.seeds.forEach((item, i) => items.push({ ...item, cat: "seed", idx: i, label: `[Hạt giống] ${getItemDisplayName(item)}` }));
+  if (state.cigarettes > 0) items.push({ cat: "cigarettes", idx: 0, name: "Thuốc lá", label: `[Hàng hóa] (${state.cigarettes}) thuốc lá` });
+  if (state.gasoline > 0) items.push({ cat: "gasoline", idx: 0, name: "Xăng", label: `[Hàng hóa] (${state.gasoline}) xăng` });
+  if (state.pureEnergy > 0) items.push({ cat: "pureEnergy", idx: 0, name: "Năng lượng tinh khiết", label: `[Hàng hóa] (${state.pureEnergy}) năng lượng tinh khiết` });
   if (items.length === 0) {
-    setStory("📦 背包里空空如也，没有东西可以存。");
+    setStory("📦 Ba lô trống trơn, không có gì để cất.");
     handleOpenWarehouse();
     return;
   }
   setPhase("warehouse_deposit_select");
   const opts = items.map((item, i) => ({ text: item.label, action: "do_deposit", index: i, depositItem: item }));
-  opts.push({ text: "返回", action: "back_to_warehouse", index: -1 });
+  opts.push({ text: "Quay lại", action: "back_to_warehouse", index: -1 });
   setOptions(opts);
 }
 
 export function handleWarehouseWithdraw() {
   const state = getState();
   if (state.warehouse.length === 0) {
-    setStory("📦 仓库里空空如也，什么也没有。");
+    setStory("📦 Kho trống trơn, chẳng có gì.");
     handleOpenWarehouse();
     return;
   }
   setPhase("warehouse_withdraw_select");
   const opts = state.warehouse.map((item, i) => ({ text: `${getItemDisplayName(item)}`, action: "do_withdraw", index: i }));
-  opts.push({ text: "返回", action: "back_to_warehouse", index: -1 });
+  opts.push({ text: "Quay lại", action: "back_to_warehouse", index: -1 });
   setOptions(opts);
 }
 
@@ -291,11 +291,11 @@ export function handleDoDeposit(input) {
   if (item.cat === "cigarettes") {
     const depositCount = Math.min(item.count || state.cigarettes, state.cigarettes);
     removeCigarettes(depositCount);
-    state.warehouse.push({ id: "香烟", name: "香烟", type: "cigarette", count: depositCount });
+    state.warehouse.push({ id: "香烟", name: "Thuốc lá", type: "cigarette", count: depositCount });
   } else if (item.cat === "pureEnergy") {
     const depositCount = Math.min(item.count || state.pureEnergy, state.pureEnergy);
     removePureEnergy(depositCount);
-    state.warehouse.push({ id: "纯净能源", name: "纯净能源", type: "other", count: depositCount });
+    state.warehouse.push({ id: "纯净能源", name: "Năng lượng tinh khiết", type: "other", count: depositCount });
   } else {
     state.warehouse.push(item);
     const catMap = { food: state.food, drinks: state.drinks, medicine: state.medicine, other: state.other, seed: state.seeds };
@@ -303,7 +303,7 @@ export function handleDoDeposit(input) {
   }
   const cap = getWarehouseCapacity(state.warehouseLevel);
   const usage = state.warehouse.length;
-  setStory(`📦 你把${getItemDisplayName(item)}存入了仓库。（${usage}/${cap}格）`);
+  setStory(`📦 Bạn cất ${getItemDisplayName(item)} vào kho.（${usage}/${cap} ô）`);
   if (!state.gameOver) {
     const updatedState = getState();
     let hasMoreItems = false;
@@ -331,13 +331,13 @@ export function handleDoWithdraw(input) {
   const item = state.warehouse[option.index];
   const added = addItem({ ...item });
   if (!added) {
-    setStory("🎒 你的背包已满，拿不了更多东西了。先清理一下背包空间吧。");
+    setStory("🎒 Ba lô của bạn đã đầy, không mang thêm được nữa. Hãy dọn dẹp chỗ trống trong ba lô trước nhé.");
     handleOpenWarehouse();
     return;
   }
   state.warehouse.splice(option.index, 1);
   const cap2 = getWarehouseCapacity(state.warehouseLevel);
-  setStory(`📦 你从仓库中取出了${getItemDisplayName(item)}。（${state.warehouse.length}/${cap2}格）`);
+  setStory(`📦 Bạn lấy ${getItemDisplayName(item)} từ trong kho ra.（${state.warehouse.length}/${cap2} ô）`);
   if (!state.gameOver) {
     const updatedState = getState();
     if (updatedState.warehouse.length > 0) {

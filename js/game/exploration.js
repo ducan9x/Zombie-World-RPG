@@ -220,7 +220,7 @@ export function handleExplore() {
   const state = getState();
   const map = state.currentMap;
   if (!map) {
-    setStory("你不在任何地图中，无法探索。");
+    setStory("Bạn không ở trong bất kỳ bản đồ nào, không thể khám phá.");
     showHomeOptions();
     return;
   }
@@ -277,17 +277,17 @@ export function handleExplore() {
     setPhase("pre_combat");
     state._pendingZombie = zombieDef;
     const meleeName = state.meleeWeapon.name;
-    const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "无";
+    const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "không";
     const ammoInfo = getRangedAmmoInfo(state);
-    const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ 你的身体极度疲惫，无法正常战斗！建议先休息再探索。" : "";
-    setStory(`你遭遇了${zombieDef.name}（HP:${zombieDef.hp} 伤害:${zombieDef.damage}）！\n\n【近战】${meleeName}\n【远程】${rangedName} ${ammoInfo}${crashWarning}`);
+    const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Thể chất bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường! Khuyên nghỉ ngơi trước khi khám phá。" : "";
+    setStory(`Bạn gặp phải ${zombieDef.name}（HP:${zombieDef.hp} Sát thương:${zombieDef.damage}）！\n\n【Cận chiến】${meleeName}\n【Tầm xa】${rangedName} ${ammoInfo}${crashWarning}`);
     const options = [
-      { text: "近战作战", action: "combat_melee" }
+      { text: "Trận chiến cận chiến", action: "combat_melee" }
     ];
     if (canRangedCombat(state)) {
-      options.push({ text: "远程作战", action: "combat_ranged" });
+      options.push({ text: "Trận chiến tầm xa", action: "combat_ranged" });
     } else {
-      options.push({ text: "远程作战（不可用：无弹药）", action: "combat_ranged", disabled: true });
+      options.push({ text: "Trận chiến tầm xa（không thể dùng：không có đạn）", action: "combat_ranged", disabled: true });
     }
     options.push({ text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_flee" });
     setOptions(options);
@@ -298,7 +298,7 @@ export function handleExplore() {
     state._spaceCrateLooted = true;
     const spaceDrop = FIXED_LOOT_DROPS.space_crate;
     if (!spaceDrop) {
-      setStory("你在航天基地深处探索时，发现了一艘坠毁的太空舱，但里面已经空无一物。");
+      setStory("Bạn khám phá sâu trong cơ sở hàng không vũ trụ, tìm thấy một tàu không gian rơi xuống, nhưng bên trong đã trống rỗng。");
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
@@ -309,17 +309,17 @@ export function handleExplore() {
     const spaceAmmo = AMMO.find(a => a.id === spaceDrop.ammoId);
     const addedWeapon = spaceWeapon ? addItem({ ...spaceWeapon }) : false;
     const addedAmmo = spaceAmmo ? addItem({ id: spaceAmmo.id, name: spaceAmmo.name, type: "ammo", count: spaceDrop.ammoCount }) : false;
-    let msg = `你在航天基地深处探索时，发现了一艘坠毁的太空舱！舱体已经严重变形，但你从残骸中`;
+    let msg = `Bạn khám phá sâu trong cơ sở hàng không vũ trụ, tìm thấy một tàu không gian rơi xuống！Thân tàu đã bị biến dạng nghiêm trọng, nhưng bạn từ mảnh vụn`;
     if (spaceWeapon && spaceAmmo) {
-      msg += `找到了惊人的发现——一把${spaceWeapon.name}和${spaceDrop.ammoCount}发${spaceAmmo.name}弹药！`;
+      msg += `Tìm thấy một phát hiện kinh ngạc——một cây${spaceWeapon.name} và${spaceDrop.ammoCount} viên${spaceAmmo.name} dân dược！`;
     } else if (spaceWeapon) {
-      msg += `找到了一把${spaceWeapon.name}！`;
+      msg += `Tìm thấy một cây${spaceWeapon.name}！`;
     } else if (spaceAmmo) {
-      msg += `找到了${spaceDrop.ammoCount}发${spaceAmmo.name}弹药！`;
+      msg += `Tìm thấy${spaceDrop.ammoCount} viên${spaceAmmo.name} dân dược！`;
     } else {
-      msg += "什么都没有找到。";
+      msg += "Không tìm thấy gì cả。";
     }
-    if ((addedWeapon && addedAmmo === false) || (addedWeapon === false && addedAmmo)) msg += "\n但背包已满，部分物品无法携带。";
+    if ((addedWeapon && addedAmmo === false) || (addedWeapon === false && addedAmmo)) msg += "\nNhưng túi đồ đã đầy, một số vật phẩm không thể mang theo。";
     setStory(msg);
     const wasFoggy2 = getState().weather === "大雾";
     advanceTime(1);
@@ -333,13 +333,13 @@ export function handleExplore() {
   {
     const loot = pickRandomLoot(map);
     if (!loot) {
-      setStory("你仔细搜索了一番，什么也没找到。");
+      setStory("Bạn đã tìm kỹ, không tìm thấy gì。");
     } else {
       const added = addItem(loot);
       if (!added) {
-        setStory(`你发现了${loot.name}，但背包已满，无法携带。`);
+        setStory(`Bạn đã tìm thấy${loot.name}，nhưng túi đồ đã đầy, không thể mang theo。`);
       } else {
-        setStory(`你发现了${loot.name}！`);
+        setStory(`Bạn đã tìm thấy${loot.name}！`);
       }
     }
   }

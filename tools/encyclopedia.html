@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>图鉴百科 — 丧尸世界</title>
+  <title>Bách khoa toàn thư — Thế Giới Zombie</title>
   <link rel="icon" href="../public/icon/icon.png">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -146,14 +146,14 @@
 <body>
 <div class="app">
   <nav class="sidebar" id="sidebar">
-    <div class="sidebar-title"><span>☠</span> 图鉴百科</div>
+    <div class="sidebar-title"><span>☠</span> Bách khoa toàn thư</div>
   </nav>
   <div class="main" id="main-content">
     <div class="page-header">
-      <h1>📖 图鉴百科</h1>
-      <p>丧尸世界 · 全物品/角色/怪物图鉴 · 数据版本 V0.2.3 · 数据来源 <strong>tools_data/encyclopedia_data.csv</strong></p>
+      <h1>📖 Bách khoa toàn thư</h1>
+      <p>Thế Giới Zombie · ẢM THUẬN vật phẩm/nhân vật/quái vật · Phiên bản dữ liệu V0.2.3 · Nguồn dữ liệu <strong>tools_data/encyclopedia_data.csv</strong></p>
     </div>
-    <div class="search-bar"><input type="text" id="searchInput" placeholder="搜索名称、描述、属性..."></div>
+    <div class="search-bar"><input type="text" id="searchInput" placeholder="Tìm kiếm tên, mô tả, thuộc tính..."></div>
     <div id="tab-container"></div>
   </div>
 </div>
@@ -163,22 +163,22 @@ const RARITY_CLASS = {
   'epic': 'r-epic', 'legendary': 'r-legendary'
 };
 const RARITY_LABEL = {
-  'common': '普通', 'uncommon': '优秀', 'rare': '稀有',
-  'epic': '史诗', 'legendary': '传奇'
+  'common': 'Thường', 'uncommon': 'Ưu tú', 'rare': 'Hiếm',
+  'epic': 'Sử thi', 'legendary': 'Huyền thoại'
 };
 
 const CATEGORY_ICON = {
-  '近战武器': '⚔', '远程武器': '🏹', '弹药': '🔫',
-  '食物': '🥘', '水果': '🍎', '饮品': '💧', '药品': '💊',
-  '背包': '🎒', '作物': '🌾', '鱼类': '🐟', '建材': '🧱',
-  '特殊物品': '📦', '酒吧饮品': '🍹',
-  '丧尸': '🧟', 'BOSS': '👑', 'NPC': '👤'
+  'Vũ khí cận chiến': '⚔', 'Vũ khí tầm xa': '🏹', 'Đạn': '🔫',
+  'Thực phẩm': '🥘', 'Trái cây': '🍎', 'Đồ uống': '💧', 'Thuốc': '💊',
+  'Balo': '🎒', 'Cây trồng': '🌾', 'Cá': '🐟', 'Vật liệu xây dựng': '🧱',
+  'Vật phẩm đặc biệt': '📦', 'Đồ uống quán bar': '🍹',
+  'Zombie': '🧟', 'BOSS': '👑', 'NPC': '👤'
 };
 
 const CATEGORY_ORDER = [
-  '近战武器', '远程武器', '弹药', '食物', '水果', '饮品', '药品',
-  '背包', '作物', '鱼类', '建材', '特殊物品', '酒吧饮品',
-  '丧尸', 'BOSS', 'NPC'
+  'Vũ khí cận chiến', 'Vũ khí tầm xa', 'Đạn', 'Thực phẩm', 'Trái cây', 'Đồ uống', 'Thuốc',
+  'Balo', 'Cây trồng', 'Cá', 'Vật liệu xây dựng', 'Vật phẩm đặc biệt', 'Đồ uống quán bar',
+  'Zombie', 'BOSS', 'NPC'
 ];
 
 function parseCSV(text) {
@@ -235,7 +235,7 @@ function renderCategory(data, category, container) {
   const items = data[category] || [];
   const subGroups = groupBy(items, 1);
   const icon = CATEGORY_ICON[category] || '📋';
-  let html = `<div class="category-title">${icon} ${category}</div><p class="row-count">共 ${items.length} 项</p>`;
+  let html = `<div class="category-title">${icon} ${category}</div><p class="row-count">Tổng ${items.length} mục</p>`;
 
   for (const [sub, subItems] of Object.entries(subGroups)) {
     if (sub && sub !== category) {
@@ -252,7 +252,7 @@ function renderCategory(data, category, container) {
 
 async function loadData() {
   const res = await fetch('tools_data/encyclopedia_data.csv');
-  if (!res.ok) throw new Error('加载失败: ' + res.status);
+  if (!res.ok) throw new Error('Tải thất bại: ' + res.status);
   const text = await res.text();
   const all = parseCSV(text);
   const header = all[0];
@@ -265,7 +265,7 @@ function renderAll(data, container) {
   for (const cat of CATEGORY_ORDER) {
     if (!data[cat]) continue;
     const tab = document.createElement('div');
-    tab.className = 'tab-content' + (cat === '近战武器' ? ' active' : '');
+    tab.className = 'tab-content' + (cat === 'Vũ khí cận chiến' ? ' active' : '');
     tab.id = 'tab-' + cat;
     tab.innerHTML = renderCategory(data, cat, container);
     container.appendChild(tab);
@@ -310,7 +310,7 @@ function renderAll(data, container) {
 async function init() {
   try {
     const container = document.getElementById('tab-container');
-    container.innerHTML = '<div class="loading"><div class="spinner"></div><p>正在加载百科数据...</p></div>';
+    container.innerHTML = '<div class="loading"><div class="spinner"></div><p>Đang tải dữ liệu bách khoa toàn thư...</p></div>';
 
     const sidebar = document.getElementById('sidebar');
 
@@ -321,14 +321,14 @@ async function init() {
     for (const cat of CATEGORY_ORDER) {
       if (!data[cat]) continue;
       const count = data[cat].length;
-      sidebarHtml += `<div class="nav-item${cat === '近战武器' ? ' active' : ''}" data-tab="${cat}">${CATEGORY_ICON[cat] || '📋'} ${cat} <span class="badge">${count}</span></div>`;
+      sidebarHtml += `<div class="nav-item${cat === 'Vũ khí cận chiến' ? ' active' : ''}" data-tab="${cat}">${CATEGORY_ICON[cat] || '📋'} ${cat} <span class="badge">${count}</span></div>`;
     }
     sidebar.insertAdjacentHTML('beforeend', sidebarHtml);
 
     renderAll(data, container);
   } catch (err) {
     document.getElementById('tab-container').innerHTML =
-      '<div class="error"><div class="icon">⚠</div><p>加载百科数据失败</p><p style="color:#6a6a8e;font-size:13px;margin-top:8px">' + err.message + '</p></div>';
+      '<div class="error"><div class="icon">⚠</div><p>Tải dữ liệu bách khoa toàn thư thất bại</p><p style="color:#6a6a8e;font-size:13px;margin-top:8px">' + err.message + '</p></div>';
   }
 }
 

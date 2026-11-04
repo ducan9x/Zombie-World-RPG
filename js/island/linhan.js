@@ -13,7 +13,7 @@ import { SEAFOOD_MEALS, SEAFOOD_MEAL_RECIPES } from '../data/items/seafood-meals
 
 import { refreshIslandMenu } from './index.js';
 
-const RARITY_LABELS = { common: "普通", uncommon: "优秀", rare: "稀有", epic: "史诗", legendary: "传说" };
+const RARITY_LABELS = { common: "Thường", uncommon: "Ưu tú", rare: "Hiếm", epic: "Sử thi", legendary: "Huyền thoại" };
 
 function randomDialogue(pool) {
   return pool[Math.floor(Math.random() * pool.length)];

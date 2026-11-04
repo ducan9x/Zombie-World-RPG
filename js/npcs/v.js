@@ -23,7 +23,7 @@ import { getRandomTrade, BACKPACK_TYPES, LOOT_BACKPACKS, V_TRADE_AMMO_TYPES, GAM
 export function handleVTrade(input) {
   const state = getState();
   if (state.lastVTradeDay >= state.day) {
-    setStory("V小姐吐了口烟圈：\"今天已经交易过了，明天再来吧。\"");
+    setStory("Cô V phun một vòng khói thuốc：\"Hôm nay đã giao dịch rồi，ngày mai hãy quay lại。\"");
     handleNpcAction("chat");
     return;
   }
@@ -40,7 +40,7 @@ export function handleVTrade(input) {
   const trade = getRandomTrade();
   const added = addItem({ id: trade.ammoType, name: trade.ammoType, type: "ammo", count: trade.ammoPerItem });
   if (!added) {
-    setStory(`背包已满！V小姐皱了皱眉："下次带够空间再来吧。"`);
+    setStory(`Túi đồ đã đầy！Cô V nhíu mày："Lần sau mang đủ chỗ trống mới来吧。"`);
     advanceTime(1);
     updateStatusEffects();
     checkDeath();
@@ -62,7 +62,7 @@ export function handleVTrade(input) {
     }
   }
 
-  setStory(`V小姐收下了你的${getItemDisplayName(offerItem)}，丢给你${trade.ammoPerItem}发${trade.ammoType}。"公平交易。"`);
+  setStory(`Cô V nhận lấy${getItemDisplayName(offerItem)}，được cho${trade.ammoPerItem} viên${trade.ammoType}。"Giao dịch công bằng。"`);
   state.lastVTradeDay = state.day;
   advanceTime(1);
   updateStatusEffects();
@@ -75,7 +75,7 @@ export function handleVTrade(input) {
 export function handleVTradeConfirm(input) {
   const state = getState();
   if (state.lastVTradeDay >= state.day) {
-    setStory("今天已经和V小姐交易过了，明天再来吧。");
+    setStory("Hôm nay đã giao dịch với Cô V rồi，ngày mai hãy quay lại。");
     showExploreOptionsState();
     return;
   }
@@ -116,7 +116,7 @@ export function handleVTradeConfirm(input) {
         state.other.splice(bpIdx, 1);
       }
     }
-    setStory(`背包已满！V小姐看了看你的背包，摇了摇头："先把你的东西清理一下吧。"`);
+    setStory(`Túi đồ đã đầy！Cô V nhìn túi đồ của bạn，lắc đầu："Dọn dẹp đồ dùng của bạn trước đi。"`);
     advanceTime(1);
     updateStatusEffects();
     checkDeath();
@@ -138,7 +138,7 @@ export function handleVTradeConfirm(input) {
     }
   }
 
-  setStory(`V小姐收下了你的${getItemDisplayName(item)}，十分满意。她给了你${ammoCount}发${randomAmmo}和一个${randomBp}（容量${cap}）。`);
+  setStory(`Cô V nhận lấy${getItemDisplayName(item)}，đã hài lòng。Cô ấy đưa cho bạn${ammoCount} viên${randomAmmo} và một${randomBp}（dung lượng${cap}）。`);
   state.lastVTradeDay = state.day;
   advanceTime(1);
   updateStatusEffects();

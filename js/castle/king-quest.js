@@ -7,15 +7,15 @@ export function handleCastleKingQuest() {
   const state = getState();
   const rank = getCastleRank(state);
   if (rank < 1) {
-    setStory("国王不耐烦地挥了挥手：\"你连贵族都不是，还想要任务？先去办个身份牌再来！\"");
+    setStory("Vua không nhẫn nén vẫy tay：\"Bạn thậm chí không phải quý tộc, còn muốn nhiệm vụ？Hãy đi làm thẻ thân phận trước rồi đến！\"");
     setPhase("castle_interior");
-    setOptions([{ text: "返回大厅", action: "castle_back" }]);
+    setOptions([{ text: "Quay lại đại điện", action: "castle_back" }]);
     return;
   }
   if (rank < 2 && !hasNobleId(state)) {
-    setStory("国王不耐烦地挥了挥手：\"你连贵族都不是，还想要任务？先去办个身份牌再来！\"");
+    setStory("Vua không nhẫn nén vẫy tay：\"Bạn thậm chí không phải quý tộc, còn muốn nhiệm vụ？Hãy đi làm thẻ thân phận trước rồi đến！\"");
     setPhase("castle_interior");
-    setOptions([{ text: "返回大厅", action: "castle_back" }]);
+    setOptions([{ text: "Quay lại đại điện", action: "castle_back" }]);
     return;
   }
   setPhase("castle_king_quest");
@@ -28,9 +28,9 @@ export function handleCastleKingQuest() {
     break;
   }
   if (!availableQuest) {
-    setStory("国王满意地点了点头：\"你已经完成了孤王所有的任务，不愧是孤王的得力干将！暂时没有新的任务了。\"");
+    setStory("Vua gật đầu hài lòng：\"Bạn đã hoàn thành mọi nhiệm vụ của vua！Không phải là một tay đắc lực của vua sao！Hiện không còn nhiệm vụ mới。\"");
     setPhase("castle_interior");
-    setOptions([{ text: "返回大厅", action: "castle_back" }]);
+    setOptions([{ text: "Quay lại đại điện", action: "castle_back" }]);
     return;
   }
   const q = availableQuest;
@@ -40,7 +40,7 @@ export function handleCastleKingQuest() {
   setStory(desc);
   const opts = [];
   if (check.met) {
-    opts.push({ text: "✅ 提交任务", action: "king_quest_submit" });
+    opts.push({ text: "✅ Nộp nhiệm vụ", action: "king_quest_submit" });
   }
   opts.push({ text: "返回大厅", action: "king_quest_back" });
   setOptions(opts);
@@ -96,7 +96,7 @@ export function handleKingQuestSubmit() {
   const state = getState();
   const rank = getCastleRank(state);
   if (rank < 1) {
-    setStory("国王不耐烦了：\"你没有身份牌还敢来交任务？\"");
+    setStory("Vua không nhẫn nén：\"Bạn không có thẻ thân phận còn dám đến nộp nhiệm vụ？\"");
     setPhase("castle_interior");
     setOptions([{ text: "返回大厅", action: "king_quest_back" }]);
     return;
@@ -110,7 +110,7 @@ export function handleKingQuestSubmit() {
     break;
   }
   if (!quest || !checkKingQuestRequire(state, quest).met) {
-    setStory("任务条件未达成。");
+    setStory("Điều kiện nhiệm vụ chưa đạt được。");
     setPhase("castle_interior");
     setOptions([{ text: "返回大厅", action: "king_quest_back" }]);
     return;

@@ -1,24 +1,24 @@
 export const NPCS = {
   survivor: {
-    name: "流浪者",
+    name: "Lưu dân",
     hpMin: 100, hpMax: 160,
     damageMin: 20, damageMax: 30,
     hasRanged: 0.3
   },
   bandit: {
-    name: "刀疤",
+    name: "Đao Ba",
     hpMin: 150, hpMax: 240,
     damageMin: 30, damageMax: 40,
     hasRanged: 0.4
   },
   wanderingTrader: {
-    name: "黑市商人",
+    name: "Thương nhân chợ đen",
     hpMin: 200, hpMax: 300,
     damageMin: 30, damageMax: 50,
     hasRanged: 0.6
   },
   doctor: {
-    name: "末世游医",
+    name: "Du y mạt thế",
     hpMin: 60, hpMax: 100,
     damageMin: 15, damageMax: 25,
     hasRanged: 0.2
@@ -28,242 +28,242 @@ export const NPCS = {
 export const SURVIVOR_NPC = [
   {
     id: "v",
-    name: "V小姐",
-    desc: "一个眼神凌厉的女杀手，总是独来独往。她从不主动说话，但偶尔会给你一个冷峻的眼神。",
+    name: "Cô V",
+    desc: "Một nữ sát thủ ánh mắt lạnh lùng, luôn đơn độc. Cô ấy không bao giờ chủ động nói chuyện, nhưng thỉnh thoảng sẽ cho bạn một ánh mắt lạnh lẽo.",
     dialogues: {
       stranger: [
-        "\"别靠太近。\" 她冷冷地说。",
-        "她警惕地盯着你，一言不发。",
-        "\"这里不欢迎陌生人。\"",
-        "她擦拭着匕首，完全无视你的存在。",
-        "\"有事？\" 她头也不抬地问。"
+        "\"Đừng lại gần.\" cô ấy lạnh lùng nói.",
+        "Cô ấy cảnh giác nhìn bạn, không nói lời nào.",
+        "\"Nơi này không chào đón người lạ.\"",
+        "Cô ấy lau dao găm, hoàn toàn phớt lờ sự tồn tại của bạn.",
+        "\"Có việc gì?\" cô ấy hỏi mà không ngẩng đầu."
       ],
       acquaintance: [
-        "\"是你……有事吗？\"",
-        "她停下手中的动作，看了你一眼。",
-        "\"你还活着，不错。\"",
-        "\"别在这晃悠，小心丧尸。\"",
-        "\"我没什么好说的。\""
+        "\"Là bạn……có việc gì?\"",
+        "Cô ấy dừng động tác, liếc bạn một cái.",
+        "\"Bạn vẫn còn sống, không tệ.\"",
+        "\"Đừng lảng vảng ở đây, cẩn thận zombie.\"",
+        "\"Tôi không có gì để nói.\""
       ],
       friend: [
-        "\"来了。\" 她的语气稍微缓和了一些。",
-        "她扔给你一把匕首：\"拿着，防身用。\"",
-        "\"最近东边的丧尸变多了，小心点。\"",
-        "\"你进步了不少。\" 她难得地夸了你一句。",
-        "\"需要帮忙？\""
+        "\"Đến rồi.\" giọng cô ấy hơi dịu đi chút.",
+        "Cô ấy ném cho bạn một con dao găm: \"Cầm lấy, để phòng thân.\"",
+        "\"Gần đây phía đông zombie nhiều hơn, cẩn thận.\"",
+        "\"Bạn tiến bộ không ít.\" cô ấy hiếm khi khen bạn một câu.",
+        "\"Cần giúp đỡ?\""
       ],
       close: [
-        "\"坐。\" 她指了指旁边的石头。",
-        "她递给你一瓶水：\"渴了吧。\"",
-        "\"我以前是特种兵……算了，不说这个。\"",
-        "\"你是我在这末世唯一信任的人。\"",
-        "\"如果我死了，帮我照顾好自己。\""
+        "\"Ngồi đi.\" cô ấy chỉ vào hòn đá bên cạnh.",
+        "Cô ấy đưa bạn một chai nước: \"Khát rồi chứ.\"",
+        "\"Tôi từng là đặc công……thôi, không nói cái này.\"",
+        "\"Bạn là người duy nhất tôi tin trong mạt thế này.\"",
+        "\"Nếu tôi chết, hãy chăm sóc bản thân.\""
       ],
       soulmate: [
-        "\"终于……找到你了。\" 她眼中第一次出现了温暖。",
-        "她紧紧握住你的手：\"我们一起活下去。\"",
-        "\"我把我的一切都交给你了。\"",
-        "\"不管发生什么，我都会在你身边。\"",
-        "\"有你在，这个末世也没那么可怕了。\""
+        "\"Cuối cùng……tìm thấy bạn rồi.\" trong mắt cô ấy lần đầu xuất hiện sự ấm áp.",
+        "Cô ấy siết chặt tay bạn: \"Chúng ta cùng sống sót.\"",
+        "\"Tôi giao phó tất cả những gì tôi có cho bạn.\"",
+        "\"Dù xảy ra gì, tôi cũng ở bên bạn.\"",
+        "\"Có bạn ở đây, mạt thế này cũng không còn đáng sợ nữa.\""
       ]
     },
     tips: [
-      "【提示】医院里有很多医疗物资，但丧尸也很多。",
-      "【提示】警察局附近有武器刷新，但要小心军警丧尸。",
-      "【提示】军用背包在军事检查站刷新概率最高。",
-      "【提示】近战武器的耐久低于10时要小心使用。",
-      "【提示】感染值超过50会持续掉血，尽快找抗感染血清。"
+      "【Gợi ý】Bệnh viện có rất nhiều vật tư y tế, nhưng zombie cũng rất nhiều.",
+      "【Gợi ý】Gần sở cảnh sát có vũ khí xuất hiện, nhưng phải cẩn thận zombie quân cảnh.",
+      "【Gợi ý】Balo quân dụng xuất hiện với xác suất cao nhất tại trạm kiểm soát quân sự.",
+      "【Gợi ý】Khi độ bền vũ khí cận chiến dưới 10 phải cẩn thận khi dùng.",
+      "【Gợi ý】Giá trị nhiễm trên 50 sẽ liên tục mất máu, nhanh chóng tìm huyết thanh kháng nhiễm."
     ],
     quests: {
-      v1: { name: "初见任务", desc: "上交1份食物+1份饮品", reqAffection: 0, require: { food: 1, drinks: 1 }, reward: { item: "小匕首", desc: "小匕首×1" }, story: "\"饿着肚子没法战斗。给我吃的，我给你武器。\" 她用匕首指了指你。" },
-      v2: { name: "止血训练", desc: "上交5个止血带", reqAffection: 30, require: { medicine: 5, medicineId: "止血带" }, reward: { item: "指虎刀", desc: "指虎刀×1" }, story: "\"你还不算太弱。\" 她丢过来一把指虎刀。\"这把刀跟着我杀过不少丧尸，别让它蒙羞。\"" },
-      v3: { name: "血清任务", desc: "上交8个抗感染血清", reqAffection: 60, require: { medicine: 8, medicineId: "抗感染血清" }, reward: { item: "龙抄剑", desc: "龙抄剑×1" }, story: "\"血清是末世最珍贵的资源之一。\" 她递给你一把龙抄剑。\"你值得用这个了。\"" },
-      v4: { name: "困难试炼", desc: "上交8个战地医疗箱", reqAffection: 90, require: { medicine: 8, medicineId: "战地医疗箱" }, reward: { item: "P226", ammo: { type: "9×19mm", count: 50 }, desc: "P226×1 + 9×19mm×50" }, story: "\"你是我见过最顽强的幸存者。\" 她终于露出了真诚的笑容。\"这把P226，是我最后的压箱底了。别让我失望。\"" },
-      v5: { name: "急救物资", desc: "提交6个医用急救包+6个抗感染血清", reqAffection: 120, require: { items: [{ type: "medicine", id: "医用急救包", count: 6 }, { type: "medicine", id: "抗感染血清", count: 6 }] }, reward: { item: "UZI", ammo: { type: "9×19mm", count: 50 }, desc: "UZI×1 + 9×19mm×50" }, story: "\"你成长得很快。\" 她递给你一把UZI冲锋枪和几盒子弹。\"这把枪火力猛，适合对付成群的丧尸。别浪费子弹。\"" },
-      v6: { name: "终极试炼", desc: "提交所有药品各2个", reqAffection: 150, require: { allMedicine: 2 }, reward: { item: "M4A1", ammo: { type: "5.56×45mm NATO", count: 50 }, desc: "M4A1×1 + 5.56×45mm NATO×50" }, story: "\"你已经超越了我。\" 她郑重地递给你一把M4A1。\"这是我珍藏多年的步枪，现在它属于你了。去创造一个没有丧尸的世界吧。\"" }
+      v1: { name: "Nhiệm vụ gặp đầu", desc: "Nộp 1 thực phẩm + 1 đồ uống", reqAffection: 0, require: { food: 1, drinks: 1 }, reward: { item: "小匕首", desc: "Tiểu đao×1" }, story: "\"Đói bụng không thể chiến đấu. Cho tôi đồ ăn, tôi cho bạn vũ khí.\" cô ấy dùng dao găm chỉ vào bạn." },
+      v2: { name: "Huấn luyện cầm máu", desc: "Nộp 5 băng gạc", reqAffection: 30, require: { medicine: 5, medicineId: "止血带" }, reward: { item: "指虎刀", desc: "Chỉ hổ đao×1" }, story: "\"Bạn chưa tính là quá yếu.\" cô ấy ném cho bạn một con chỉ hổ đao. \"Con dao này đi theo tôi giết không ít zombie, đừng làm nó mất mặt.\"" },
+      v3: { name: "Nhiệm vụ huyết thanh", desc: "Nộp 8 huyết thanh kháng nhiễm", reqAffection: 60, require: { medicine: 8, medicineId: "抗感染血清" }, reward: { item: "龙抄剑", desc: "Long抄 kiếm×1" }, story: "\"Huyết thanh là một trong những tài nguyên quý giá nhất mạt thế.\" cô ấy đưa bạn một thanh long抄 kiếm. \"Bạn xứng đáng dùng cái này rồi.\"" },
+      v4: { name: "Thử thách khó", desc: "Nộp 8 hộp y tế chiến địa", reqAffection: 90, require: { medicine: 8, medicineId: "战地医疗箱" }, reward: { item: "P226", ammo: { type: "9×19mm", count: 50 }, desc: "P226×1 + 9×19mm×50" }, story: "\"Bạn là người sống sót ngoan cường nhất tôi từng thấy.\" cô ấy cuối cùng nở nụ cười chân thành. \"Con P226 này, là bảo bối cuối cùng của tôi. Đừng làm tôi thất vọng.\"" },
+      v5: { name: "Vật tư cấp cứu", desc: "Nộp 6 gói cấp cứu y tế + 6 huyết thanh kháng nhiễm", reqAffection: 120, require: { items: [{ type: "medicine", id: "gói cấp cứu y tế", count: 6 }, { type: "medicine", id: "huyết thanh kháng nhiễm", count: 6 }] }, reward: { item: "UZI", ammo: { type: "9×19mm", count: 50 }, desc: "UZI×1 + 9×19mm×50" }, story: "\"Bạn lớn nhanh thật.\" cô ấy đưa bạn một khẩu UZI và vài hộp đạn. \"Con súng này hỏa lực mạnh, phù hợp đối phó zombie thành đàn. Đừng lãng phí đạn.\"" },
+      v6: { name: "Thử thách cuối cùng", desc: "Nộp tất cả thuốc mỗi loại 2 cái", reqAffection: 150, require: { allMedicine: 2 }, reward: { item: "M4A1", ammo: { type: "5.56×45mm NATO", count: 50 }, desc: "M4A1×1 + 5.56×45mm NATO×50" }, story: "\"Bạn đã vượt qua tôi rồi.\" cô ấy trang trọng đưa bạn một khẩu M4A1. \"Đây là khẩu súng tôi cất giữ nhiều năm, giờ thuộc về bạn. Hãy đi tạo ra một thế giới không còn zombie.\"" }
     }
   },
   {
     id: "xiaohan",
-    name: "苏小涵",
-    desc: "一个笑容温暖的女孩，总是热心地帮助阵地里的每一个人。她的背包里似乎永远有喝不完的牛奶。",
+    name: "Tiểu Hàn",
+    desc: "Một cô gái nụ cười ấm áp, luôn nhiệt tình giúp đỡ mọi người trong trận địa. Túi cô ấy dường như luôn có uống mãi không hết sữa.",
     dialogues: {
       stranger: [
-        "\"嗨！你是新来的吗？欢迎欢迎！\" 她热情地向你打招呼。",
-        "\"你好呀！我叫小涵，以后有什么需要帮忙的尽管说！\"",
-        "\"要不要喝杯牛奶？补充营养很重要哦~\"",
-        "\"这是我的一点心意，希望你喜欢！\" 她递给你一串自制的护身符。",
-        "\"认识你真开心！在这末世能遇到新朋友真好！\""
+        "\"Này! Bạn mới đến à? Chào mừng chào mừng!\" cô ấy nhiệt tình chào bạn.",
+        "\"Xin chào! Tôi tên Tiểu Hàm, sau này có gì cần giúp cứ nói!\"",
+        "\"Uống ly sữa chứ? Bổ sung dinh dưỡng rất quan trọng đó~\"",
+        "\"Đây là chúttâm ý của tôi, hy vọng bạn thích!\" cô ấy đưa bạn một chuỗi bùa hộ mệnh tự làm.",
+        "\"Quen bạn thật vui! Giữa mạt thế gặp được bạn mới thật tốt!\""
       ],
       acquaintance: [
-        "\"又见面啦！今天感觉怎么样？\"",
-        "\"我刚整理完物资，好累呀……\"",
-        "\"莉莉又调皮了，真是拿她没办法~\"",
-        "\"V姐姐今天心情好像不错呢！\"",
-        "\"你今天有什么打算吗？\""
+        "\"Lại gặp nhau rồi! Hôm nay cảm giác thế nào?\"",
+        "\"Tôi vừa sắp xếp xong vật tư, mệt quá……\"",
+        "\"Lili lại nghịch ngợm rồi, thật không biết làm sao với cô ấy~\"",
+        "\"Hôm nay chị V hình như tâm trạng không tệ!\"",
+        "\"Hôm nay bạn có kế hoạch gì?\""
       ],
       friend: [
-        "\"来啦！我给你留了一点吃的！\"",
-        "\"谢谢你一直照顾我，真的很感谢！\"",
-        "\"今天天气真好，要是没有丧尸就好了……\"",
-        "\"我做了些饼干，你要不要尝尝？\"",
-        "\"有你在，我感觉安全多了。\""
+        "\"Đến rồi! Tôi để dành cho bạn chút đồ ăn!\"",
+        "\"Cảm ơn bạn luôn chăm sóc tôi, thật sự rất cảm ơn!\"",
+        "\"Hôm nay thời tiết đẹp, nếu không có zombie thì tốt……\"",
+        "\"Tôi làm ít bánh quy, bạn muốn nếm thử không?\"",
+        "\"Có bạn ở đây, tôi cảm thấy an toàn hơn nhiều.\""
       ],
       close: [
-        "\"我们是最好的朋友，对吧？\" 她开心地笑着。",
-        "\"告诉你一个秘密……其实我很害怕丧尸……\"",
-        "\"你知道吗，我以前是幼儿园老师，那些孩子们都很可爱……\"",
-        "\"要是能回到以前就好了……\" 她的眼神有些黯淡。",
-        "\"无论发生什么，我们都要一起活下去！\""
+        "\"Chúng ta là bạn tốt nhất, đúng không?\" cô ấy vui vẻ cười.",
+        "\"Nói bạn một bí mật……thật ra tôi rất sợ zombie……\"",
+        "\"Biết không, trước đây tôi là giáo viên mẫu giáo, những đứa trẻ đó rất đáng yêu……\"",
+        "\"Nếu có thể quay về trước đây thì tốt……\" ánh mắt cô ấy hơi tối đi.",
+        "\"Dù xảy ra gì, chúng ta cũng phải cùng nhau sống sót!\""
       ],
       soulmate: [
-        "\"我……我喜欢你！\" 她红着脸小声说。",
-        "\"有你在身边，我什么都不怕。\"",
-        "\"我们一起建立一个新的家园，好吗？\"",
-        "\"你是我在这个世界上最重要的人。\"",
-        "\"永远不要离开我，好吗？\""
+        "\"Tôi……tôi thích bạn!\" cô ấy đỏ mặt nhỏ giọng nói.",
+        "\"Có bạn ở bên, tôi không sợ gì cả.\"",
+        "\"Chúng ta cùng nhau xây dựng một ngôi nhà mới, được không?\"",
+        "\"Bạn là người quan trọng nhất của tôi trong thế giới này.\"",
+        "\"Đừng bao giờ rời xa tôi, được không?\""
       ]
     },
     tips: [
-      "【提示】水果可以同时补充饱腹和水分，是很好的应急食物。",
-      "【提示】饮用水分后会减少口渴值，但注意别喝太多！",
-      "【提示】牛奶和优酸乳是我最喜欢的饮品！",
-      "【提示】压缩饼干虽然不好吃，但饱腹值很高。",
-      "【提示】注意保持饥饿和水分在0%以上，否则会掉血哦！"
+      "【Gợi ý】Trái cây vừa bổ sung no vừa bổ sung nước, là thực phẩm khẩn cấp rất tốt.",
+      "【Gợi ý】Uống nước sẽ giảm giá trị khát, nhưng chú ý đừng uống quá nhiều!",
+      "【Gợi ý】Sữa tươi và sữa chua là đồ uống tôi thích nhất!",
+      "【Gợi ý】Bánh quy nén tuy không ngon, nhưng giá trị no rất cao.",
+      "【Gợi ý】Chú ý giữ đói và nước trên 0%, nếu không sẽ mất máu đó!"
     ],
     quests: {
-      xh0: { name: "初来乍到", desc: "提交任意1个饮品", reqAffection: 0, require: { drinks: 1 }, reward: { itemStack: [{ id: "创可贴", count: 3 }], desc: "创可贴×3" }, story: "\"你是新来的吧？给，这是见面礼！\" 她从包里掏出几个创可贴递给你。\"以后有需要就来阵地的厨房找我！\"" },
-      xh1: { name: "牛奶储备", desc: "提交10盒纯牛奶", reqAffection: 30, require: { drinks: 10, drinkId: "纯牛奶" }, reward: { itemStack: [{ id: "手术包", count: 3 }], desc: "手术包×3" }, story: "\"太好了，有了这些牛奶，阵地的孩子们就不用挨饿了。\" 她从医疗箱里拿出几个手术包。\"这是之前医生给我的，我用不上，给你吧！\"" },
-      xh2: { name: "饮品大采购", desc: "提交15盒优酸乳", reqAffection: 60, require: { drinks: 15, drinkId: "优酸乳" }, reward: { itemStack: [{ id: "抗生素", count: 5 }], desc: "抗生素×5" }, story: "\"天哪，这么多优酸乳！\" 她激动地抱了你一下。\"我找了很久的抗生素也给你，就当是谢礼啦！\"" },
-      xh3: { name: "罐头收集", desc: "提交所有罐头各1个", reqAffection: 90, require: { allCanned: 1 }, reward: { itemStack: [{ id: "抗感染血清", count: 3 }], desc: "抗感染血清×3" }, story: "\"哇，这么多罐头！\" 苏小涵开心地把罐头分类放好。\"这些够阵地的大家吃好几天了！这些血清是我之前存下来的，给你！\"" },
-      xh4: { name: "水果派对", desc: "提交所有水果各1个", reqAffection: 120, require: { allFruits: 1 }, reward: { itemStack: [{ id: "医用急救包", count: 3 }], desc: "医用急救包×3" }, story: "\"天哪！水果！\" 苏小涵的眼睛亮了起来。\"好久没吃过新鲜水果了！我要给大家做水果拼盘！这几个急救包你收好！\"" },
-      xh5: { name: "大采购", desc: "提交所有饮品各1个+所有食物各1个", reqAffection: 150, require: { allDrinks: 1, allFoods: 1 }, reward: { itemStack: [{ id: "战地医疗箱", count: 3 }], desc: "战地医疗箱×3" }, story: "\"这、这太多了吧！\" 苏小涵感动得眼眶泛红。\"你把整个超市都搬来了吗？我……我都不知道该怎么谢你！这几个战地医疗箱你一定要收下！\"" }
+      xh0: { name: "Mới đến", desc: "Nộp bất kỳ 1 đồ uống", reqAffection: 0, require: { drinks: 1 }, reward: { itemStack: [{ id: "创可贴", count: 3 }], desc: "Băng gạc cầm máu×3" }, story: "\"Bạn mới đến đúng không? Này, đây là quà gặp mặt!\" cô ấy lấy từ túi ra mấy miếng băng gạc đưa bạn. \"Sau này có cần thì đến nhà bếp trận địa tìm tôi!\"" },
+      xh1: { name: "Dự trữ sữa", desc: "Nộp 10 hộp sữa tươi", reqAffection: 30, require: { drinks: 10, drinkId: "纯牛奶" }, reward: { itemStack: [{ id: "手术包", count: 3 }], desc: "Gói phẫu thuật×3" }, story: "\"Tuyệt quá, có những sữa này, bọn trẻ trong trận địa sẽ không phải đói.\" cô ấy lấy từ hộp y tế ra mấy gói phẫu thuật. \"Đây là bác sĩ cho tôi trước đây, tôi dùng không hết, đưa bạn!\"" },
+      xh2: { name: "Mua sắm đồ uống", desc: "Nộp 15 hộp sữa chua", reqAffection: 60, require: { drinks: 15, drinkId: "优酸乳" }, reward: { itemStack: [{ id: "抗生素", count: 5 }], desc: "Kháng sinh×5" }, story: "\"Trời ơi, nhiều sữa chua vậy!\" cô ấy xúc động ôm bạn một cái. \"Kháng sinh tôi tìm lâu rồi cũng đưa bạn, xem như quà cảm ơn!\"" },
+      xh3: { name: "Thu thập đồ hộp", desc: "Nộp tất cả đồ hộp mỗi loại 1 cái", reqAffection: 90, require: { allCanned: 1 }, reward: { itemStack: [{ id: "huyết thanh kháng nhiễm", count: 3 }], desc: "Huyết thanh kháng nhiễm×3" }, story: "\"Oa, nhiều đồ hộp vậy!\" 苏小涵 vui vẻ phân loại đồ hộp. \"Đủ để mọi người trong trận địa ăn mấy ngày rồi! Những huyết thanh này tôi tích trước đây, đưa bạn!\"" },
+      xh4: { name: "Tiệc trái cây", desc: "Nộp tất cả trái cây mỗi loại 1 cái", reqAffection: 120, require: { allFruits: 1 }, reward: { itemStack: [{ id: "医用急救包", count: 3 }], desc: "Gói cấp cứu y tế×3" }, story: "\"Trời ơi! Trái cây!\" mắt 苏小涵 sáng lên. \"Lâu rồi không ăn trái cây tươi! Tôi phải làm đĩa trái cây cho mọi người! Mấy gói cấp cứu này bạn giữ đi!\"" },
+      xh5: { name: "Mua sắm lớn", desc: "Nộp tất cả đồ uống mỗi loại 1 cái + tất cả thực phẩm mỗi loại 1 cái", reqAffection: 150, require: { allDrinks: 1, allFoods: 1 }, reward: { itemStack: [{ id: "战地医疗箱", count: 3 }], desc: "Hộp y tế chiến địa×3" }, story: "\"Cái này, nhiều quá rồi!\" 苏小涵 xúc động đến đỏ vành mắt. \"Bạn dọn cả siêu thị về đây à? Tôi……tôi không biết cảm ơn thế nào! Mấy hộp y tế chiến địa này bạn nhất định phải nhận!\"" }
     }
   },
   {
     id: "lili",
-    name: "莉莉丝",
-    desc: "一个古灵精怪的少女，总喜欢摆弄各种废弃武器和机械零件。她精通武器回收与修理，还能调配药剂治疗感染。她说她有个仓库，里面堆满了各种宝贝。",
+    name: "Lili",
+    desc: "Một cô gái tinh nghịch, luôn thíchbày弄各种废弃武器和机械零件. Cô ấy tinh thông thu hồi và sửa chữa vũ khí, còn có thể pha chế thuốc chữa nhiễm. Cô ấy nói cô có một kho, bên trong chất đầy các loại bảo bối.",
     canRecycle: true,
     canCureInfection: true,
     dialogues: {
       stranger: [
-        "\"哇，你是谁呀？新来的吗？\" 她好奇地打量着你。",
-        "\"嗨！我是莉莉！你有没有香烟呀？\"",
-        "\"看！这是我今天捡到的宝贝！\" 她举起一把生锈的扳手。",
-        "\"你要不要和我一起去捡东西？可好玩了！\"",
-        "\"V姐姐说我太调皮了……可是捡东西真的很有趣嘛！\""
+        "\"Oa, bạn là ai? Mới đến à?\" cô ấy tò mò đánh giá bạn.",
+        "\"Này! Tôi là Lili! Bạn có điếu thuốc không?\"",
+        "\"Xem! Đây là bảo bối tôi nhặt được hôm nay!\" cô ấy giơ lên một con cờ lê rỉ sét.",
+        "\"Bạn có muốn cùng tôi đi nhặt đồ không? Vui lắm!\"",
+        "\"Chị V nói tôi quá nghịch ngợm……nhưng nhặt đồ thật sự rất thú vị mà!\""
       ],
       acquaintance: [
-        "\"又是你！今天带香烟来了吗？\"",
-        "\"我昨天在工厂发现了好多好东西！\"",
-        "\"小涵姐姐做的布丁真好吃！\"",
-        "\"V姐姐好凶……不过她其实很关心我们的！\"",
-        "\"你去过那个超市吗？里面有好多零食！\""
+        "\"Lại là bạn! Hôm nay mang điếu thuốc đến chưa?\"",
+        "\"Hôm qua tôi phát hiện rất nhiều đồ tốt trong nhà máy!\"",
+        "\"Bánh pudding chị Tiểu Hàm làm ngon thật!\"",
+        "\"Chị V dữ thật……nhưng thật ra cô ấy rất quan tâm chúng ta!\"",
+        "\"Bạn từng đi siêu thị đó chưa? Bên trong có rất nhiều đồ ăn vặt!\""
       ],
       friend: [
-        "\"来啦来啦！我给你看我新收藏的武器！\"",
-        "\"偷偷告诉你，我知道一个秘密基地！\"",
-        "\"你帮我保密哦……我半夜会溜出去捡东西。\"",
-        "\"香烟香烟！你有多余的香烟吗？\"",
-        "\"等我攒够香烟，我要建一个花园！\""
+        "\"Đến rồi đến rồi! Tôi cho bạn xem vũ khí sưu tầm mới của tôi!\"",
+        "\"Nói nhỏ cho bạn biết, tôi biết một căn cứ bí mật!\"",
+        "\"Bạn phải giữ bí mật giúp tôi……ban đêm tôi sẽ lén ra nhặt đồ.\"",
+        "\"Điếu thuốc điếu thuốc! Bạn có điếu thuốc dư không?\"",
+        "\"Đợi tôi tích đủ điếu thuốc, tôi muốn xây một khu vườn!\""
       ],
       close: [
-        "\"我们是好朋友对吧？那你要帮我保守秘密哦！\"",
-        "\"其实……我有点害怕黑暗……\"",
-        "\"你知道吗，我以前想当工程师的……\"",
-        "\"要是世界没有丧尸就好了，我好想上学……\"",
-        "\"谢谢你一直陪我聊天，你是我最好的朋友！\""
+        "\"Chúng ta là bạn tốt đúng không? Vậy bạn phải giúp tôi giữ bí mật nhé!\"",
+        "\"Thật ra……tôi hơi sợ bóng tối……\"",
+        "\"Biết không, trước đây tôi muốn làm kỹ sư……\"",
+        "\"Nếu thế giới không có zombie thì tốt, tôi rất muốn đi học……\"",
+        "\"Cảm ơn bạn luôn cùng tôi tán gẫu, bạn là bạn tốt nhất của tôi!\""
       ],
       soulmate: [
-        "\"我……我喜欢你！你愿意和我在一起吗？\"",
-        "\"有你在，黑夜也不可怕了！\"",
-        "\"我们一起收集好多好多东西，建立一个新世界！\"",
-        "\"你是我生命中最重要的人！\"",
-        "\"永远永远都不要离开我哦！\""
+        "\"Tôi……tôi thích bạn! Bạn có muốn ở bên tôi không?\"",
+        "\"Có bạn ở đây, đêm tối cũng không đáng sợ nữa!\"",
+        "\"Chúng ta cùng nhau thu thập thật nhiều đồ, xây dựng một thế giới mới!\"",
+        "\"Bạn là người quan trọng nhất trong cuộc đời tôi!\"",
+        "\"Mãi mãi mãi mãi đừng rời xa tôi nhé!\""
       ]
     },
     tips: [
-      "【提示】近战武器可以在工厂和警察局找到很多！",
-      "【提示】香烟是很好的交易货币，记得多收集！",
-      "【提示】黑市商人那里可以用香烟换武器哦！",
-      "【提示】回收近战武器可以获得香烟，找我就对啦！",
-      "【提示】棒球棍和消防斧是很好用的近战武器！"
+      "【Gợi ý】Vũ khí cận chiến có thể tìm thấy rất nhiều trong nhà máy và sở cảnh sát!",
+      "【Gợi ý】Điếu thuốc là tiền tệ giao dịch rất tốt, nhớ thu thập nhiều!",
+      "【Gợi ý】Tại thương nhân chợ đen có thể dùng điếu thuốc đổi vũ khí đó!",
+      "【Gợi ý】Thu hồi vũ khí cận chiến có thể nhận điếu thuốc, tìm tôi là đúng rồi!",
+      "【Gợi ý】Gậy bóng chày và rìu cứu hỏa là vũ khí cận chiến rất dễ dùng!"
     ],
-    recycleQuest: { name: "回收近战武器（永久）", desc: "回收任意近战武器，获得1根随机香烟", reward: { cigarette: true }, story: "\"好东西！\" 她仔细端详着你递来的武器，然后从兜里掏出一根香烟。\"这根给你，够意思吧？\"" },
-    recycleRangedQuest: { name: "回收远程武器（永久）", desc: "回收任意远程武器，获得2根随机香烟", reward: 2, story: "\"哟，这玩意儿不错嘛！\" 她眼睛一亮，熟练地把玩着你的远程武器。\"我正好缺零件，这两根烟归你了！\"" },
-    recycleBackpackQuest: { name: "回收多余背包（永久）", desc: "回收多余背包，按1+（容量÷20四舍五入）根香烟计算", reward: "dynamic", story: "\"背包也能换烟哦！\" 她拍了拍你的背包。\"容量越大的包越值钱呢~\"" },
-    repairQuest: { name: "维修枪支（永久）", desc: "上交10根香烟修复一把远程武器的50%完整度", cost: 10, repair: 50, story: "\"把枪给我！\" 莉莉兴奋地接过武器，熟练地拆卸、清理、上油……\"修好啦！{weapon}现在和新的一样好用！\"" },
-    repairBowQuest: { name: "修复弓弩（永久）", desc: "消耗5根香烟修复一把弓/弩的50%完整度", cost: 5, repair: 50, story: "\"弓弩我最拿手了！\" 她接过你的弓弩，熟练地调试着。\"以前我可是射箭俱乐部的！{weapon}现在好使多了！\"" },
-    cureInfectionQuest: { name: "清除感染（永久）", desc: "消耗10根香烟清除50%感染", cost: 10, cureAmount: 50, story: "\"你看起来不太对劲……\" 她皱起眉头打量着你。\"感染可不是闹着玩的！来，这个能帮你。\" 她给你注射了一针淡黄色的药剂。" },
-    giftQuest: { name: "神秘礼物", desc: "领取神秘礼物", reqAffection: 150, reward: { cigarettes: 20, ammo: { type: "9×19mm", count: 50 }, desc: "香烟×20 + 9×19mm×50" }, story: "\"嘿嘿，其实我早就给你准备了这个！\" 莉莉从仓库角落拖出一个大箱子。\"20根香烟加上50发子弹，我的全部压箱底了，因为我信任你！\"" }
+    recycleQuest: { name: "Thu hồi vũ khí cận chiến (vĩnh viễn)", desc: "Thu hồi bất kỳ vũ khí cận chiến, nhận 1 điếu thuốc ngẫu nhiên", reward: { cigarette: true }, story: "\"Đồ tốt!\" cô ấy cẩn thận xem xét vũ khí bạn đưa, rồi lấy từ túi ra một điếu thuốc. \"Điếu này cho bạn, hào phóng chứ?\"" },
+    recycleRangedQuest: { name: "Thu hồi vũ khí tầm xa (vĩnh viễn)", desc: "Thu hồi bất kỳ vũ khí tầm xa, nhận 2 điếu thuốc", reward: 2, story: "\"Oa, thứ này không tệ!\" mắt cô ấy sáng lên, thành thạo nghịch vũ khí tầm xa của bạn. \"Tôi đang thiếu linh kiện, hai điếu thuốc này thuộc về bạn!\"" },
+    recycleBackpackQuest: { name: "Thu hồi balo dư (vĩnh viễn)", desc: "Thu hồi balo dư, tính theo 1+(dung lượng÷20 làm tròn) điếu thuốc", reward: "dynamic", story: "\"Balo cũng có thể đổi thuốc đó!\" cô ấy vỗ vỗ balo của bạn. \"Dung lượng càng lớn càng đáng tiền nhé~\"" },
+    repairQuest: { name: "Sửa súng (vĩnh viễn)", desc: "Nộp 10 điếu thuốc sửa một vũ khí tầm xa hoàn chỉnh +50%", cost: 10, repair: 50, story: "\"Đưa súng đây!\" Lili hào hứng nhận vũ khí, thành thạo tháo rời, làm sạch, tra dầu……\"Sửa xong rồi! {weapon} giờ dùng như mới rồi!\"" },
+    repairBowQuest: { name: "Sửa cung nỏ (vĩnh viễn)", desc: "Tiêu 5 điếu thuốc sửa một cung/nỏ hoàn chỉnh +50%", cost: 5, repair: 50, story: "\"Cung nỏ tôi giỏi nhất!\" cô ấy nhận cung nỏ của bạn, thành thạo điều chỉnh. \"Trước đây tôi từng ở câu lạc bộ bắn cung! {weapon} giờ dùng tốt hơn nhiều!\"" },
+    cureInfectionQuest: { name: "Xóa nhiễm (vĩnh viễn)", desc: "Tiêu 10 điếu thuốc xóa 50% nhiễm", cost: 10, cureAmount: 50, story: "\"Bạn trông không ổn……\" cô ấy nhíu mày đánh giá bạn. \"Nhiễm không phải chuyện đùa! Này, cái này có thể giúp bạn.\" cô ấy tiêm cho bạn một mũi thuốc màu vàng nhạt." },
+    giftQuest: { name: "Quà bí ẩn", desc: "Nhận quà bí ẩn", reqAffection: 150, reward: { cigarettes: 20, ammo: { type: "9×19mm", count: 50 }, desc: "Điếu thuốc×20 + 9×19mm×50" }, story: "\"Hì hì, thật ra tôi đã chuẩn bị cái này cho bạn từ lâu!\" Lili kéo từ góc kho ra một chiếc hộp lớn. \"20 điếu thuốc cùng 50 viên đạn, toàn bộ bảo bối của tôi, vì tôi tin tưởng bạn!\"" }
   },
   {
     id: "mumiao",
-    name: "沐苗苗",
-    desc: "一位戴着草帽的年轻女子，手指间总沾着泥土。她是阵地里唯一的农业专家，据说只有她才能培育出末世中可种植的种子。",
+    name: "Mù Miào Miêu",
+    desc: "Một phụ nữ trẻ đội mũ rơm, ngón tay luôn dính đất. Cô ấy là chuyên gia nông nghiệp duy nhất trong trận địa, nghe nói chỉ có cô ấy mới có thể nuôi được hạt giống trồng được giữa mạt thế.",
     canTrade: false,
     canGift: true,
     dialogues: {
       stranger: [
-        "\"你是谁？别碰我的苗圃。\" 她警惕地挡在菜地前面。",
-        "\"末世里能种出东西的人，比能打枪的人更稀罕。\" 她冷冷地看了你一眼。",
-        "\"想买种子就排队，不想买就别碍事。\"",
-        "她蹲在地上仔细检查菜苗，完全无视你的存在。",
-        "\"别踩我的地！\" 她突然厉声呵斥。"
+        "\"Bạn là ai? Đừng động vào ruộng của tôi.\" cô ấy cảnh giác chặn trước ruộng rau.",
+        "\"Giữa mạt thế, người trồng được đồ còn hiếm hơn người bắn súng.\" cô ấy lạnh lùng liếc bạn.",
+        "\"Muốn mua hạt giống thì xếp hàng, không mua thì đừng vướng chân.\"",
+        "Cô ấy cúi người kiểm tra cây rau, hoàn toàn phớt lờ bạn.",
+        "\"Đừng giẫm lên đất của tôi!\" cô ấy đột nhiên quát lớn."
       ],
       acquaintance: [
-        "\"又来了？看来你对我的种子很感兴趣。\"",
-        "\"今天天气不错，苗子长得好。\" 她难得露出一点笑意。",
-        "\"你知道吗，末世之前我是个植物学博士……算了，说这些有什么用。\"",
-        "\"种子是很珍贵的，每一颗都不能浪费。\"",
-        "\"你看起来比上次精神多了，是不是吃了我的菜？\" 她嘴角微微上扬。"
+        "\"Lại đến nữa? Có vẻ bạn rất hứng thú với hạt giống của tôi.\"",
+        "\"Hôm nay thời tiết tốt, cây con lớn tốt.\" cô ấy hiếm khi nở nụ cười.",
+        "\"Biết không, trước mạt thế tôi là tiến sĩ thực vật học……thôi, nói những cái này có ích gì.\"",
+        "\"Hạt giống rất quý giá, mỗi hạt đều không được lãng phí.\"",
+        "\"Bạn trông tinh thần hơnlần trước rồi, có phải ăn rau của tôi không?\" khóe miệng cô ấy hơi cong lên."
       ],
       friend: [
-        "\"来，帮我看看这株苗，是不是该浇水了？\"",
-        "\"我一直在研究怎么让种子在辐射土壤里也能发芽……有进展了。\"",
-        "\"谢谢你经常来帮忙，实验田一个人真的忙不过来。\"",
-        "\"你有没有注意到，有些变异植物居然能净化土壤？这太神奇了。\"",
-        "\"我给你留了一些好种子，下次来的时候记得拿。\""
+        "\"Đến đây, giúp tôi xem cây này, có nên tưới nước không?\"",
+        "\"Tôi vẫn đang nghiên cứu làm sao để hạt giống nảy mầm trong đất bị nhiễm……có tiến triển rồi.\"",
+        "\"Cảm ơn bạn thường xuyên đến giúp, ruộng thí nghiệm một mình tôi thật sự bận không xuể.\"",
+        "\"Bạn có chú ý không, một số cây biến dị lại có thể làm sạch đất? Thật kỳ diệu.\"",
+        "\"Tôi để dành cho bạn ít hạt giống tốt, lần sau đến nhớ lấy.\""
       ],
       close: [
-        "\"你是我见过最细心的人……种地和打仗一样，都需要耐心。\"",
-        "\"有时候我会想，如果世界没有变成这样，我们会不会在某个花园里相遇？\" 她的目光变得柔和。",
-        "\"你知道吗，我有一片秘密花田……算了，还不是时候告诉你。\"",
-        "\"你每次来帮忙，我都觉得……心里很安宁。\"",
-        "\"我以前觉得只有植物不会背叛我……现在我不太确定了。\" 她看着你的眼睛说。"
+        "\"Bạn là người cẩn thận nhất tôi từng thấy……trồng trọt và đánh nhau như nhau, đều cần kiên nhẫn.\"",
+        "\"Đôi khi tôi nghĩ, nếu thế giới không biến thành thế này, chúng ta có thể gặp nhau trong một khu vườn nào đó?\" ánh mắt cô ấy dịu đi.",
+        "\"Biết không, tôi có một mảnh hoa viên bí mật……thôi, chưa phải lúc nói cho bạn.\"",
+        "\"Mỗi lần bạn đến giúp, tôi cảm thấy……trong lòng rất yên bình.\"",
+        "\"Trước đây tôi nghĩ chỉ có cây cối sẽ không phản bội tôi……giờ tôi không chắc nữa.\" cô ấy nhìn vào mắt bạn nói."
       ],
       soulmate: [
-        "\"你是我在这片废土上种下的最珍贵的种子。\" 她轻声说，眼里有光。",
-        "\"我愿意把我的花田给你看……那里是我全部的秘密。\"",
-        "\"你知道吗，有些花只在信任的人面前才会开。\" 她握住你的手。",
-        "\"不管世界变成什么样，只要和你在一起，哪里都是花园。\"",
-        "\"谢谢你，让我相信这个世界上还有值得守护的东西。\" 她靠在你肩上。"
+        "\"Bạn là hạt giống quý giá nhất tôi trồng trên mảnh phế thổ này.\" cô ấy khẽ nói, trong mắt có ánh sáng.",
+        "\"Tôi sẵn sàng cho bạn xem hoa viên của tôi……đó là toàn bộ bí mật của tôi.\"",
+        "\"Biết không, một số loài hoa chỉ nở trước người đáng tin.\" cô ấy nắm tay bạn.",
+        "\"Dù thế giới biến thành thế nào, chỉ cần ở bên bạn, đâu cũng là vườn hoa.\"",
+        "\"Cảm ơn bạn, để tôi tin rằng thế giới này vẫn còn thứ đáng để bảo vệ.\" cô ấy tựa vào vai bạn."
       ]
     },
     tips: [
-      "【提示】种子可以在沐苗苗这里购买，也可以照看实验田获得。",
-      "【提示】不同作物的成熟时间和产量不同，合理规划种植很重要。",
-      "【提示】黑市商人偶尔也会出售种子，但价格更贵。",
-      "【提示】种什么得什么，选择高产量作物可以更有效地利用耕地。",
-      "【提示】经常来照看实验田，可以积累好感度还能免费获得种子。"
+      "【Gợi ý】Hạt giống có thể mua tại Miao Miao, cũng có thể nhận được qua chăm sóc ruộng thí nghiệm.",
+      "【Gợi ý】Các loại cây khác nhau thời gian chín và sản lượng khác nhau, lập kế hoạch trồng hợp lý rất quan trọng.",
+      "【Gợi ý】Thương nhân chợ đen thỉnh thoảng cũng bán hạt giống, nhưng giá đắt hơn.",
+      "【Gợi ý】Trồng gì được nấy, chọn cây trồng sản lượng cao có thể sử dụng ruộng hiệu quả hơn.",
+      "【Gợi ý】Thường xuyên đến chăm sóc ruộng thí nghiệm, có thể tích lũy độ thiện cảm còn nhận hạt giống miễn phí."
     ]
   }
 ];
 
 export const NAMED_NPCS = {
-  ma_san: { name: "马三", hp: 300, damageMin: 40, damageMax: 60, hasRanged: true, dodgeRate: 0.4 },
-  shadow: { name: "黑影", hp: 400, damageMin: 50, damageMax: 80, hasRanged: true, dodgeRate: 0.5 },
-  zombie_king: { name: "沉默的丧尸之王", hp: 420, damage: 115, hasRanged: false, dodgeRate: 0.25 },
-  banker: { name: "银行行长", hp: 350, damageMin: 50, damageMax: 80, hasRanged: false, dodgeRate: 0.3 },
-  leader: { name: "阵地首领", hp: 400, damage: 110, hasRanged: false, dodgeRate: 0.25 },
-  giant_puppet: { name: "巨型丧尸傀儡", hp: 380, damage: 105, hasRanged: false, dodgeRate: 0.20 },
-  football_zombie: { name: "橄榄球丧尸", hp: 250, damageMin: 30, damageMax: 55, hasRanged: false, dodgeRate: 0.15 },
-  diving_zombie: { name: "潜水丧尸", hp: 200, damageMin: 35, damageMax: 55, hasRanged: true, dodgeRate: 0.15 },
-  sea_monster: { name: "巨型海尸", hp: 600, damage: 80, hasRanged: false, dodgeRate: 0.08 },
-  king_boss: { name: "城堡国王", hp: 450, damage: 100, hasRanged: false, dodgeRate: 0.2 },
-  zhao_boss: { name: "老兵老赵", hp: 350, damageMin: 70, damageMax: 90, hasRanged: true, dodgeRate: 0.3 },
-  doctor_boss: { name: "陈博士", hp: 300, damageMin: 50, damageMax: 70, hasRanged: true, dodgeRate: 0.35 },
+  ma_san: { name: "Mã Tam", hp: 300, damageMin: 40, damageMax: 60, hasRanged: true, dodgeRate: 0.4 },
+  shadow: { name: "Hắc Ảnh", hp: 400, damageMin: 50, damageMax: 80, hasRanged: true, dodgeRate: 0.5 },
+  zombie_king: { name: "Vua Zombie Im Lặng", hp: 420, damage: 115, hasRanged: false, dodgeRate: 0.25 },
+  banker: { name: "Ngân Hàng Hàng Trưởng", hp: 350, damageMin: 50, damageMax: 80, hasRanged: false, dodgeRate: 0.3 },
+  leader: { name: "Trưởng Trận Địa", hp: 400, damage: 110, hasRanged: false, dodgeRate: 0.25 },
+  giant_puppet: { name: "Cỗ Rối Khổng Lồ", hp: 380, damage: 105, hasRanged: false, dodgeRate: 0.20 },
+  football_zombie: { name: "Zombie Bóng Bầu Đục", hp: 250, damageMin: 30, damageMax: 55, hasRanged: false, dodgeRate: 0.15 },
+  diving_zombie: { name: "Zombie Lặn", hp: 200, damageMin: 35, damageMax: 55, hasRanged: true, dodgeRate: 0.15 },
+  sea_monster: { name: "Hải Thần Khổng Lồ", hp: 600, damage: 80, hasRanged: false, dodgeRate: 0.08 },
+  king_boss: { name: "Vua Lâu Đài", hp: 450, damage: 100, hasRanged: false, dodgeRate: 0.2 },
+  zhao_boss: { name: "Lão Bin Lão Triệu", hp: 350, damageMin: 70, damageMax: 90, hasRanged: true, dodgeRate: 0.3 },
+  doctor_boss: { name: "Tiến Sĩ Trần", hp: 300, damageMin: 50, damageMax: 70, hasRanged: true, dodgeRate: 0.35 },
 };
 
 export const BOSS_NAMES = Object.values(NAMED_NPCS).map(npc => npc.name);

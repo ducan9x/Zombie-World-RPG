@@ -1,23 +1,23 @@
 /* ============================================================
-   作弊系统模块（开发者测试用）
-   支持格式：/get_{物品名}_{数量}
-   物品名支持：
-   - 食物：food_xxx 或直接食物名
-   - 饮品：drink_xxx
-   - 药品：medicine_xxx
-   - 水果：fruit_xxx
-   - 香烟：cigarette_xxx
-   - 皇家币：royalcoin_xxx (如 royalcoin_10)
-   - 汽油：gasoline_xxx (如 gasoline_5)
-   - 弹药：ammo_xxx (如 ammo_9mm, ammo_magnum)
-   - 近战武器：melee_xxx (如 melee_平底锅, melee_武士刀)
-   - 远程武器：ranged_xxx (如 ranged_G17, ranged_AWM)
-   - 背包：backpack_xxx (如 backpack_战术背包, backpack_超大旅行背包)
-   - 种子：seed_xxx (如 seed_seed_luobo, seed_seed_gouqi)
-   - 作物：crop_xxx (如 crop_牛皮菜, crop_胡萝卜)
-   - 鱼类：fish_xxx (如 fish_grey_mullet, fish_abyss_core_fish)
-   - 海鲜套餐：seafood_xxx (如 seafood_bad_seafood_meal, seafood_top_seafood_meal)
-   - 酒吧饮品：bar_xxx (如 bar_rainbow_beer, bar_king_special)
+   Hệ thống mã gian lận (dùng thử cho nhà phát triển)
+   Hỗ trợ định dạng: /get_{tên vật phẩm}_{số lượng}
+   Tên vật phẩm hỗ trợ:
+   - Thực phẩm: food_xxx hoặc tên thực phẩm trực tiếp
+   - Đồ uống: drink_xxx
+   - Thuốc: medicine_xxx
+   - Trái cây: fruit_xxx
+   - Thuốc lá: cigarette_xxx
+   - Xu Hoàng Gia: royalcoin_xxx (ví dụ royalcoin_10)
+   - Xăng: gasoline_xxx (ví dụ gasoline_5)
+   - Dân dược: ammo_xxx (ví dụ ammo_9mm, ammo_magnum)
+   - Vũ khí cận chiến: melee_xxx (ví dụ melee_平底锅, melee_武士刀)
+   - Vũ khí tầm xa: ranged_xxx (ví dụ ranged_G17, ranged_AWM)
+   - Balo: backpack_xxx (ví dụ backpack_战术背包, backpack_超大旅行背包)
+   - Hạt giống: seed_xxx (ví dụ seed_seed_luobo, seed_seed_gouqi)
+   - Trồng trọt: crop_xxx (ví dụ crop_牛皮菜, crop_胡萝卜)
+   - Cá: fish_xxx (ví dụ fish_grey_mullet, fish_abyss_core_fish)
+   - Bữa ăn hải sản: seafood_xxx (ví dụ seafood_bad_seafood_meal, seafood_top_seafood_meal)
+   - Đồ uống quán bar: bar_xxx (ví dụ bar_rainbow_beer, bar_king_special)
    ============================================================ */
 
 import { getState, addItem, addCigarettes, addRoyalCoins, addGasoline } from './state.js';
@@ -67,7 +67,7 @@ function getFruitByName(name) {
 }
 
 function getCigaretteByName(name) {
-  return name.includes("香烟") ? { id: "香烟", name: "香烟", type: "cigarette" } : undefined;
+  return name.includes("香烟") ? { id: "香烟", name: "Thuốc lá", type: "cigarette" } : undefined;
 }
 
 function getAmmoByName(name) {
@@ -170,20 +170,20 @@ export function processCheatCommand(input) {
       if (item) {
         addCigarettes(count);
         added = count;
-        item = { name: "香烟" };
+        item = { name: "Thuốc lá" };
       }
       break;
 
     case 'royalcoin':
       addRoyalCoins(count);
       added = count;
-      item = { name: "皇家币" };
+      item = { name: "Xu Hoàng Gia" };
       break;
 
     case 'gasoline':
       addGasoline(count);
       added = count;
-      item = { name: "汽油" };
+      item = { name: "Xăng" };
       break;
 
     case 'ammo':
@@ -291,7 +291,7 @@ export function processCheatCommand(input) {
 
     case 'health':
       state.health = Math.min(GAME_CONSTANTS.MAX_HEALTH, state.health + count);
-      return { success: true, message: `生命值 +${count}` };
+      return { success: true, message: `Sinh mệnh +${count}` };
 
     case 'full':
       state.health = GAME_CONSTANTS.MAX_HEALTH;
@@ -300,15 +300,15 @@ export function processCheatCommand(input) {
       state.infection = 0;
       state.crash = 0;
       state.sanity = GAME_CONSTANTS.SANITY_MAX;
-      return { success: true, message: '已恢复全部属性' };
+      return { success: true, message: 'Đã khôi phục tất cả thuộc tính' };
 
     case 'day':
       state.day += count;
-      return { success: true, message: `天数 +${count}` };
+      return { success: true, message: `Ngày +${count}` };
   }
 
   if (item && added > 0) {
-    return { success: true, message: `已添加 ${added} 个 ${item.name}` };
+    return { success: true, message: `Đã thêm ${added} ${item.name}` };
   }
 
   return { success: false, message: null };

@@ -59,13 +59,13 @@ export function handleEnterIsland() {
   if (state.islandDebt) {
     const daysLeft = state.islandDebt.dueDay - state.day;
     if (daysLeft < 0) {
-      setStory(`你踏上了小型岛屿。余墨公爵的管家匆匆赶来：\"阁下的岛屿银行债务已逾期 ${-daysLeft} 天，请尽快前往银行还款！\"`);
+      setStory(`Bạn đặt chân lên đảo nhỏ. Quản gia của Công tước Dư Mặc vội vàng chạy tới: \"Thưa ngài, nợ ngân hàng đảo của ngài đã quá hạn ${-daysLeft} ngày, xin mau chóng đến ngân hàng trả nợ!\"`);
       refreshIslandMenu();
       return;
     }
   }
 
-  setStory("你驾驶游艇来到了小型岛屿。这座岛屿风景秀丽，是国王赐予余墨公爵的封地。岛上的居民安居乐业，城堡的旗帜在岛中央飘扬。");
+  setStory("Bạn lái du thuyền đến đảo nhỏ. Hòn đảo phong cảnh hữu tình, là đất phong vua ban cho Công tước Dư Mặc. Cư dân trên đảo an cư lạc nghiệp, cờ thành phấp phới giữa đảo.");
   refreshIslandMenu();
 }
 
@@ -73,30 +73,30 @@ export function refreshIslandMenu() {
   const state = getState();
   setPhase("island");
   const options = [
-    { text: "探索", action: "island_explore" },
-    { text: "进食", action: "eat" },
-    { text: "饮水", action: "drink" },
-    { text: "医疗", action: "medicine" },
-    { text: "装备", action: "equip" },
-    { text: "离开", action: "island_leave" },
-    { text: "丢弃", action: "discard" },
-    { text: "岛民顾月", action: "island_guyue" },
-    { text: "岛民林寒", action: "island_linhan" },
-    { text: "余墨公爵", action: "island_yumo" },
+    { text: "Khám phá", action: "island_explore" },
+    { text: "Ăn uống", action: "eat" },
+    { text: "Uống nước", action: "drink" },
+    { text: "Y tế", action: "medicine" },
+    { text: "Trang bị", action: "equip" },
+    { text: "Rời đi", action: "island_leave" },
+    { text: "Vứt bỏ", action: "discard" },
+    { text: "Cư dân Cố Nguyệt", action: "island_guyue" },
+    { text: "Cư dân Lâm Hàn", action: "island_linhan" },
+    { text: "Công tước Dư Mặc", action: "island_yumo" },
   ];
   if (isQuestDone("yumoQuest2") && !isQuestDone("yumoQuest3")) {
-    options.push({ text: "清理登陆丧尸", action: "island_clean_diving" });
+    options.push({ text: "Dọn dẹp xác sống đổ bộ", action: "island_clean_diving" });
   }
-  options.push({ text: "钓鱼区域", action: "island_fishing" });
-  options.push({ text: "岛内休息", action: "island_rest" });
-  options.push({ text: "凯伦国王酒吧", action: "island_bar" });
-  options.push({ text: "艾莉娜皇后街", action: "island_street" });
-  options.push({ text: "卢修斯投资行", action: "island_invest" });
-  options.push({ text: "皇家黑市", action: "island_black_market" });
-  options.push({ text: "情报中枢", action: "island_intel" });
-  options.push({ text: "岛屿银行", action: "island_bank" });
-  options.push({ text: "补助福利", action: "island_welfare" });
-  options.push({ text: "王国储油船", action: "island_oil_tanker" });
+  options.push({ text: "Khu vực câu cá", action: "island_fishing" });
+  options.push({ text: "Nghỉ trên đảo", action: "island_rest" });
+  options.push({ text: "Quán bar Vua Karen", action: "island_bar" });
+  options.push({ text: "Phố Hoàng hậu Elena", action: "island_street" });
+  options.push({ text: "Hành đầu tư Lucius", action: "island_invest" });
+  options.push({ text: "Chợ đen hoàng gia", action: "island_black_market" });
+  options.push({ text: "Trung tâm tình báo", action: "island_intel" });
+  options.push({ text: "Ngân hàng đảo", action: "island_bank" });
+  options.push({ text: "Phúc lợi trợ cấp", action: "island_welfare" });
+  options.push({ text: "Tàu chở dầu vương quốc", action: "island_oil_tanker" });
   setOptions(options);
 }
 
@@ -195,13 +195,13 @@ export function handleIslandExplore() {
 
   const loot = pickRandomLoot(map);
   if (!loot) {
-    setStory("你在岛上四处寻找，什么也没找到。");
+    setStory("Bạn tìm kiếm khắp đảo, không tìm thấy gì.");
   } else {
     const added = addItem(loot);
     if (!added) {
-      setStory(`你发现了${loot.name}，但背包已满，无法携带。`);
+      setStory(`Bạn phát hiện ${loot.name}, nhưng balo đã đầy, không thể mang theo.`);
     } else {
-      setStory(`你在岛上发现了${loot.name}！`);
+      setStory(`Bạn phát hiện ${loot.name} trên đảo!`);
     }
   }
 
@@ -218,7 +218,7 @@ export function handleIslandLeave() {
   const portMap = MAPS.find(m => m.id === "江边港口码头");
   state.currentMap = portMap;
   setLocation("江边港口码头");
-  setStory("你驾驶游艇返回了江边港口码头。");
+  setStory("Bạn lái du thuyền quay về bến cảng sông.");
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -233,7 +233,7 @@ export function handleIslandRest() {
   state.crash = Math.max(state.crash - GAME_CONSTANTS.ISLAND.REST_FATIGUE, 0);
   state.sanity = Math.min(GAME_CONSTANTS.SANITY_MAX, state.sanity + GAME_CONSTANTS.ISLAND.REST_SANITY_RECOVERY);
 
-  setStory(`你在岛上的小屋中休憩了一段时间，海风轻拂，你感到身心都得到了充分的放松。\n恢复了${healAmount}点生命，降低了${crashReduction}点疲惫，理智恢复了${GAME_CONSTANTS.ISLAND.REST_SANITY_RECOVERY}点。`);
+  setStory(`Bạn nghỉ ngơi trong căn nhà nhỏ trên đảo, gió biển khẽ thổi, bạn cảm thấy thân tâm được thư giãn đầy đủ.\nHồi ${healAmount} điểm sinh lực, giảm ${crashReduction} điểm mệt mỏi, lý trí hồi ${GAME_CONSTANTS.ISLAND.REST_SANITY_RECOVERY} điểm.`);
 
   advanceTime(GAME_CONSTANTS.ISLAND.REST_TIME);
   updateStatusEffects();
@@ -253,11 +253,11 @@ export function handleCleanDivingZombie() {
   };
   state._divingZombieCombat = true;
   setPhase("pre_combat_npc");
-  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ 你的身体极度疲惫，无法正常战斗！建议先休息再探索。" : "";
-  setStory(`一只潜水丧尸从海中爬上了岸，浑身滴着腥臭的海水，朝你扑来！${crashWarning}`);
+  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Cơ thể bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường! Nên nghỉ ngơi trước khi khám phá." : "";
+  setStory(`Một xác sống lặn từ biển trèo lên bờ, toàn thân nhỏ giọt nước biển tanh hôi, lao về phía bạn!${crashWarning}`);
   setOptions([
-    { text: "近战作战", action: "combat_npc_melee" },
-    { text: "远程射击", action: "combat_npc_ranged" },
+    { text: "Chiến đấu cận chiến", action: "combat_npc_melee" },
+    { text: "Bắn từ xa", action: "combat_npc_ranged" },
     { text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_npc_flee" },
   ]);
 }
@@ -276,25 +276,25 @@ export function handleIslandBank() {
       const rate = Math.min(IC.INTEREST_RATE_BASE + steps * IC.INTEREST_RATE_PER_STEP, IC.INTEREST_RATE_CAP);
       state.islandDebt.amount += interest;
       state.islandDebt.dueDay = state.day + GAME_CONSTANTS.ISLAND.LOAN_TERM_DAYS;
-      setStory(`🏦 债务逾期处理\n\n阁下的岛屿银行债务已逾期 ${overdueDays} 天，加上${Math.round(rate * 100)}%利息（${interest}皇家币），现在共欠${state.islandDebt.amount}皇家币，还款期限已延至第${state.islandDebt.dueDay}天。`);
-      setOptions([{ text: "继续", action: "island_bank_continue" }]);
+      setStory(`🏦 Xử lý nợ quá hạn\n\nNợ ngân hàng đảo của ngài đã quá hạn ${overdueDays} ngày, cộng ${Math.round(rate * 100)}% lãi (${interest} royalcoin?), hiệnnợ ${state.islandDebt.amount} royalcoin, thời hạn trả nợ đã dời đến ngày ${state.islandDebt.dueDay}.`);
+      setOptions([{ text: "Tiếp tục", action: "island_bank_continue" }]);
       return;
     }
   }
 
-  let info = "🏦 【岛屿银行】\n由皇后开设的皇家银行\n\n";
+  let info = "🏦 【Ngân hàng đảo】\nNgân hàng hoàng gia do hoàng hậu mở\n\n";
   if (state.islandDebt) {
     const daysLeft = state.islandDebt.dueDay - state.day;
-    info += `当前债务：${state.islandDebt.amount}皇家币（还剩 ${daysLeft} 天还款）\n\n`;
+    info += `Nợ hiện tại: ${state.islandDebt.amount} royalcoin (còn ${daysLeft} ngày để trả)\n\n`;
   } else {
-    info += "你目前没有债务。\n\n";
+    info += "Bạn hiện không có nợ.\n\n";
   }
-  info += "借贷：借支皇家币（10/20/30/40/50/60/70/80/90/100十档）\n还款：偿还债务";
+  info += "Vay mượn: Vay royalcoin (10 mức 10/20/30/40/50/60/70/80/90/100)\nTrả nợ: Hoàn trả nợ";
   setStory(info);
   setOptions([
-    { text: "借贷", action: "island_loan" },
-    { text: state.islandDebt ? "还款" : "还款（无债务）", action: "island_repay", disabled: !state.islandDebt },
-    { text: "离开", action: "island_bank_leave" },
+    { text: "Vay mượn", action: "island_loan" },
+    { text: state.islandDebt ? "Trả nợ" : "Trả nợ (Không có nợ)", action: "island_repay", disabled: !state.islandDebt },
+    { text: "Rời đi", action: "island_bank_leave" },
   ]);
 }
 
@@ -339,12 +339,12 @@ function hasAnyCastleRelatedIdentity(state) {
 export function handleIslandLoan() {
   const state = getState();
   if (state.islandDebt) {
-    setStory("你还有未还清的债务，先还清再来借吧。");
+    setStory("Bạn còn nợ chưa trả, hãy trả xong rồi vay tiếp.");
     handleIslandBank();
     return;
   }
   if (!hasAnyCastleRelatedIdentity(state)) {
-    setStory("银行柜员礼貌地说：\"只有城堡相关势力成员才能使用岛屿银行。请出示城堡通行证或城堡身份牌。\"");
+    setStory("Nhân viên ngân hàng lễ phép nói: \"Chỉ thành viên liên quan đến thành mới được dùng ngân hàng đảo. Xin xuất trình thẻ thông hành thành hoặc thẻ thân phận thành.\"");
     handleIslandBank();
     return;
   }
@@ -352,10 +352,10 @@ export function handleIslandLoan() {
   setPhase("island_bank");
   const opts = [];
   for (const amount of GAME_CONSTANTS.ISLAND.LOAN_AMOUNTS) {
-    opts.push({ text: `${amount}皇家币`, action: "island_loan_submit", amount });
+    opts.push({ text: `${amount} royalcoin`, action: "island_loan_submit", amount });
   }
-  opts.push({ text: "返回", action: "island_loan_back" });
-  setStory(`🏦 请选择借贷金额（皇后开设的银行，利息仅${GAME_CONSTANTS.ISLAND.INTEREST_RATE_BASE * 100}%，期限${GAME_CONSTANTS.ISLAND.LOAN_TERM_DAYS}天）：`);
+  opts.push({ text: "Quay lại", action: "island_loan_back" });
+  setStory(`🏦 Hãy chọn số tiền vay (Ngân hàng do hoàng hậu mở, lãi chỉ ${GAME_CONSTANTS.ISLAND.INTEREST_RATE_BASE * 100}%, thời hạn ${GAME_CONSTANTS.ISLAND.LOAN_TERM_DAYS} ngày):`);
   setOptions(opts);
 }
 
@@ -368,13 +368,13 @@ export function handleIslandLoanSubmit(input) {
   const amount = option.amount;
   state.islandDebt = { amount, dueDay: state.day + GAME_CONSTANTS.ISLAND.LOAN_TERM_DAYS };
   addRoyalCoins(amount);
-  setStory(`✅ 你从岛屿银行借贷了 ${amount} 皇家币。柜员微笑着说：\"皇后殿下吩咐过，利息只需10%，请务必在 ${GAME_CONSTANTS.ISLAND.LOAN_TERM_DAYS} 天内还清。\"\n\n当前皇家币：${state.royalCoins}`);
+  setStory(`✅ Bạn vay ${amount} royalcoin từ ngân hàng đảo. Nhân viên mỉm cười: \"Hoàng hậu điện hạ đã dặn, lãi chỉ 10%, xinhãy trả trong ${GAME_CONSTANTS.ISLAND.LOAN_TERM_DAYS} ngày.\"\n\nRoyalcoin hiện tại: ${state.royalCoins}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
   if (!state.gameOver) {
     setPhase("island_bank");
-    setOptions([{ text: "继续", action: "island_bank_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "island_bank_continue" }]);
   }
 }
 
@@ -401,26 +401,26 @@ export function handleIslandInvestAction(input) {
 export function handleIslandRepay() {
   const state = getState();
   if (!state.islandDebt) {
-    setStory("你没有债务需要偿还。");
+    setStory("Bạn không có nợ cần trả.");
     handleIslandBank();
     return;
   }
   const needed = state.islandDebt.amount;
   if (state.royalCoins < needed) {
-    setStory(`❌ 你需要 ${needed} 皇家币来还清债务，但你只有 ${state.royalCoins} 皇家币。去城堡皇后那里兑换一些皇家币再来吧。`);
+    setStory(`❌ Bạn cần ${needed} royalcoin để trả nợ, nhưng bạn chỉ có ${state.royalCoins} royalcoin. Hãy đến chỗ hoàng hậu thành đổi royalcoin rồi quay lại.`);
     handleIslandBank();
     return;
   }
   removeRoyalCoins(needed);
   state.islandDebt = null;
   state.islandDebtTriggered = false;
-  setStory(`✅ 你偿还了全部债务（${needed}皇家币）。柜员点点头：\"谢谢您的诚信，皇后殿下会很高兴的。\"\n\n当前皇家币：${state.royalCoins}`);
+  setStory(`✅ Bạn đã trả toàn bộ nợ (${needed} royalcoin). Nhân viên gật đầu: \"Cảm ơn sự chân thành của ngài, hoàng hậu điện hạ sẽ rất vui.\"\n\nRoyalcoin hiện tại: ${state.royalCoins}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
   if (!state.gameOver) {
     setPhase("island_bank");
-    setOptions([{ text: "继续", action: "island_bank_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "island_bank_continue" }]);
   }
 }
 
@@ -428,7 +428,7 @@ export function handleIslandWelfare() {
   const state = getState();
   const rank = getCastleRank(state);
   if (rank === 0) {
-    setStory("❌ 福利窗口的工作人员瞟了你一眼：\"只有城堡贵族才能领取补助福利，你还没有获得贵族身份。\"");
+    setStory("❌ Nhân viên cửa sổ phúc lợi liếc bạn một cái: \"Chỉ quý tộc thành mới được nhận phúc lợi trợ cấp, bạn chưa có thân phận quý tộc.\"");
     refreshIslandMenu();
     return;
   }
@@ -436,7 +436,7 @@ export function handleIslandWelfare() {
   const daysSinceLast = state.day - state.lastIslandWelfareDay;
   if (state.lastIslandWelfareDay > 0 && daysSinceLast < IC.WELFARE_COOLDOWN_DAYS) {
     const daysLeft = IC.WELFARE_COOLDOWN_DAYS - daysSinceLast;
-    setStory(`⏳ 你还没到下次领取福利的时间。\n\n距离下次可领取还有 ${daysLeft} 天。`);
+    setStory(`⏳ Bạn chưa đến thời gian nhận phúc lợi lần sau.\n\nCòn ${daysLeft} ngày nữa mới có thể nhận.`);
     refreshIslandMenu();
     return;
   }
@@ -444,7 +444,7 @@ export function handleIslandWelfare() {
   state.lastIslandWelfareDay = state.day;
   addRoyalCoins(reward);
   const rankName = getCastleRankName(state);
-  setStory(`✅ 【补助福利】\n\n工作人员核对了你的身份牌：\"${rankName}阁下，这是您的贵族补助。\"\n你领取了 ${reward} 皇家币。\n\n当前皇家币：${state.royalCoins}\n下次可领取：第${state.day + IC.WELFARE_COOLDOWN_DAYS}天`);
+  setStory(`✅ 【Phúc lợi trợ cấp】\n\nNhân viên kiểm tra thẻ thân phận của bạn: \"${rankName} các hạ, đây là trợ cấp quý tộc của ngài.\"\nBạn nhận được ${reward} royalcoin.\n\nRoyalcoin hiện tại: ${state.royalCoins}\nLần nhận tiếp theo: Ngày ${state.day + IC.WELFARE_COOLDOWN_DAYS}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -455,11 +455,11 @@ export function handleIslandOilTanker() {
   const state = getState();
   const IC = GAME_CONSTANTS.ISLAND;
   setPhase("island");
-  setStory(`⛽ 【王国储油船】\n\n一艘巨大的皇家油轮停靠在岛屿码头，上面印着皇家徽记。\n船长热情地迎上来：\"欢迎！这是王国官方的汽油交易站。\"\n\n💰 购买汽油：${IC.OIL_TANKER_BUY_PRICE}皇家币 → 1汽油\n♻️ 回收汽油：1汽油 → ${IC.OIL_TANKER_SELL_PRICE}皇家币\n\n当前持有：${state.royalCoins}皇家币 | ${state.gasoline}汽油`);
+  setStory(`⛽ 【Tàu chở dầu vương quốc】\n\nMột tàu dầu hoàng gia khổng lồ neo tại bến đảo, trên thân in huy hiệu hoàng gia.\nThuyền trưởng nhiệt tình đón: \"Chào mừng! Đây là trạm giao dịch xăng dầu chính thức của vương quốc.\"\n\n💰 Mua xăng: ${IC.OIL_TANKER_BUY_PRICE} royalcoin → 1 xăng\n♻️ Thu hồi xăng: 1 xăng → ${IC.OIL_TANKER_SELL_PRICE} royalcoin\n\nHiện có: ${state.royalCoins} royalcoin | ${state.gasoline} xăng`);
   setOptions([
-    { text: `购买汽油（${IC.OIL_TANKER_BUY_PRICE}币→1汽油）`, action: "oil_tanker_buy" },
-    { text: `回收汽油（1汽油→${IC.OIL_TANKER_SELL_PRICE}币）`, action: "oil_tanker_sell" },
-    { text: "离开", action: "oil_tanker_back" },
+    { text: `Mua xăng (${IC.OIL_TANKER_BUY_PRICE}coin→1 xăng)`, action: "oil_tanker_buy" },
+    { text: `Thu hồi xăng (1 xăng→${IC.OIL_TANKER_SELL_PRICE}coin)`, action: "oil_tanker_sell" },
+    { text: "Rời đi", action: "oil_tanker_back" },
   ]);
 }
 
@@ -467,13 +467,13 @@ export function handleOilTankerBuy() {
   const state = getState();
   const IC = GAME_CONSTANTS.ISLAND;
   if (state.royalCoins < IC.OIL_TANKER_BUY_PRICE) {
-    setStory(`❌ 你的皇家币不足。需要${IC.OIL_TANKER_BUY_PRICE}皇家币，当前只有${state.royalCoins}皇家币。`);
+    setStory(`❌ Royalcoin của bạn không đủ. Cần ${IC.OIL_TANKER_BUY_PRICE} royalcoin, hiện chỉ có ${state.royalCoins} royalcoin.`);
     handleIslandOilTanker();
     return;
   }
   removeRoyalCoins(IC.OIL_TANKER_BUY_PRICE);
   addGasoline(1);
-  setStory(`✅ 你花费${IC.OIL_TANKER_BUY_PRICE}皇家币购买了1汽油。\n\n当前皇家币：${state.royalCoins} | 当前汽油：${state.gasoline}`);
+  setStory(`✅ Bạn dùng ${IC.OIL_TANKER_BUY_PRICE} royalcoin mua 1 xăng.\n\nRoyalcoin hiện tại: ${state.royalCoins} | Xăng hiện tại: ${state.gasoline}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -484,13 +484,13 @@ export function handleOilTankerSell() {
   const state = getState();
   const IC = GAME_CONSTANTS.ISLAND;
   if (state.gasoline < 1) {
-    setStory("❌ 你没有汽油可以回收。");
+    setStory("❌ Bạn không có xăng để thu hồi.");
     handleIslandOilTanker();
     return;
   }
   removeGasoline(1);
   addRoyalCoins(IC.OIL_TANKER_SELL_PRICE);
-  setStory(`✅ 你回收了1汽油，获得${IC.OIL_TANKER_SELL_PRICE}皇家币。\n\n当前皇家币：${state.royalCoins} | 当前汽油：${state.gasoline}`);
+  setStory(`✅ Bạn thu hồi 1 xăng, nhận được ${IC.OIL_TANKER_SELL_PRICE} royalcoin.\n\nRoyalcoin hiện tại: ${state.royalCoins} | Xăng hiện tại: ${state.gasoline}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();

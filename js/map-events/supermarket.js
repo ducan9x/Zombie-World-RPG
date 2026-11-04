@@ -22,15 +22,15 @@ import {
 export function handleMaskedManInteract() {
   const state = getState();
   if (state.shadowDefeated) {
-    setStory("那个黑影已经不在了，超市角落空荡荡的。");
+    setStory("Bóng đen đó đã không còn nữa, góc siêu thị trống trơn.");
     showExploreOptionsState();
     return;
   }
   setPhase("explore");
   setStory(MAP_NPC_INTROS.shadow_intro);
   setOptions([
-    { text: "对抗", action: "masked_man_fight" },
-    { text: "离开", action: "masked_man_leave" },
+    { text: "Đối kháng", action: "masked_man_fight" },
+    { text: "Rời khỏi", action: "masked_man_leave" },
   ]);
 }
 
@@ -47,8 +47,8 @@ export function handleMaskedManFight() {
   setPhase("pre_combat_npc");
   setStory(MAP_NPC_INTROS.shadow_fight);
   setOptions([
-    { text: "近战作战", action: "combat_npc_melee" },
-    { text: "远程射击", action: "combat_npc_ranged" },
+    { text: "Tấn công cận chiến", action: "combat_npc_melee" },
+    { text: "Bắn tầm xa", action: "combat_npc_ranged" },
     { text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_npc_flee" },
   ]);
 }
@@ -61,11 +61,11 @@ export function handleMaskedManLeave() {
 export function handleSupermarketContraband() {
   const state = getState();
   if (state.oldMaContrabandUsed) {
-    setStory("你再次打开那个隐蔽的暗格，里面空空如也。那股诡异的能量已经消散了，什么也没有留下。");
+    setStory("Bạn lại mở ngăn tối đó, bên trong trống rỗng. Năng lượng quỷ dị đó đã tiêu tan, không còn gì để lại.");
     showExploreOptionsState();
     return;
   }
-  setStory("你在超市最深处的一排货架后面，发现了一个极其隐蔽的暗格。里面有某种散发着幽绿色光芒的管状物——不像是这个世界的东西。\n\n你犹豫了片刻，最终还是按下了启动钮。一股冰冷的能量瞬间涌入体内，你的视野边缘开始扭曲，脑海中闪过无数支离破碎的画面——血月、倒悬的城市、无数无声尖叫的面孔……\n\n不知过了多久，你才从地上爬起来。身体从未如此有力，但心里却像被剜去了一块什么东西。");
+  setStory("Ở sâu nhất siêu thị, sau một dãy kệ hàng, bạn phát hiện một ngăn tối cực kỳ kín đáo. Bên trong có thứ gì đó phát ra ánh sáng xanh lục——không giống thứ của thế giới này.\n\nBạn do dự một lát, cuối cùng vẫn nhấn nút khởi động. Một luồng năng lượng lạnh lẽo tức thì tràn vào cơ thể, rìa tầm nhìn bắt đầu méo mó, trong đầu lóe lên vô số hình ảnh vỡ vụn——trăng máu, thành phố đảo ngược, vô số khuôn mặt la hét không tiếng động……\n\nKhông biết bao lâu sau, bạn mới đứng dậy từ mặt đất. Cơ thể chưa bao giờ mạnh mẽ như vậy, nhưng trong lòng như bị khoét mất một mảnh thứ gì đó.");
   state.sanity = Math.max(0, state.sanity - 50);
   state.crash = 0;
   resetCrashTurns();

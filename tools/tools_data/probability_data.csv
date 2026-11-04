@@ -11,7 +11,7 @@ quality,fishing_quality,uncommon_fish,240,24.00%,84.00%,pct-mid
 quality,fishing_quality,rare_fish,120,12.00%,96.00%,pct
 quality,fishing_quality,epic_fish,35,3.50%,99.50%,pct-high
 quality,fishing_quality,legendary_fish,5,0.50%,100.00%,pct-high
-maps,map_info,danger_level,zombie_rate,食物,饮品,水果,药品,子弹,背包,近战,远程,香烟,建筑,空白
+maps,map_info,danger_level,zombie_rate,Thức ăn,Đồ uống,Trái cây,Thuốc,Đạn,Túi,Cận chiến,Tầm xa,Thuốc lá,Vật liệu,Tay trắng
 maps,doom_castle,safe,0%,—,—,—,—,—,—,—,—,—,—,100%
 maps,dawn_outpost,safe,0%,—,—,—,—,—,—,—,—,—,—,100%
 maps,mountain_lookout,easy,1%,20,20,20,5,5,10,10,—,10,—,—
@@ -36,34 +36,34 @@ maps,zombie_nest,hell_risk,60%,—,—,—,10,10,—,40,20,20,—,—
 maps,space_base,hell_risk,65%,10,5,5,—,20,—,20,20,20,—,—
 maps,hidden_island,easy,0%,30,30,30,2,2,2,2,2,—,—,—
 combat_dodge,zombies,boss,dodge_rate,notes
-combat_dodge,rotten_corpse,,0%,移动缓慢
-combat_dodge,obese_zombie,,0%,无法移动
-combat_dodge,explosive_zombie,,0%,移动缓慢
-combat_dodge,hive_mother,,0%,专注召唤
-combat_dodge,iron_zombie,,0%,坦克型
-combat_dodge,giant_tank_zombie,,0%,高防御
-combat_dodge,normal_walker,,5%,基础丧尸
-combat_dodge,ripper_zombie,,5%,近战狂战士
-combat_dodge,acid_spitter,,5%,远程攻击者
-combat_dodge,police_zombie,,10%,前军人
-combat_dodge,frost_zombie,,10%,减速控制
-combat_dodge,impaler_zombie,,12%,远程穿刺
+combat_dodge,rotten_corpse,,0%,Di chuyển chậm
+combat_dodge,obese_zombie,,0%,Không thể di chuyển
+combat_dodge,explosive_zombie,,0%,Di chuyển chậm
+combat_dodge,hive_mother,,0%,Tập trung triệu hồi
+combat_dodge,iron_zombie,,0%,Dạng tank
+combat_dodge,giant_tank_zombie,,0%,Phòng thủ cao
+combat_dodge,normal_walker,,5%,Zombie cơ bản
+combat_dodge,ripper_zombie,,5%,Chiến binh cận chiến cuồng
+combat_dodge,acid_spitter,,5%,Kẻ tấn công tầm xa
+combat_dodge,police_zombie,,10%,Cựu quân nhân
+combat_dodge,frost_zombie,,10%,Kiểm soát làm chậm
+combat_dodge,impaler_zombie,,12%,Xuyên thủng tầm xa
 combat_dodge,football_zombie,,15%,BOSS
 combat_dodge,diving_zombie,,15%,BOSS
-combat_dodge,giant_sea_zombie,,8%,深海远古BOSS
-combat_dodge,crawler_zombie,,20%,地面移动
+combat_dodge,giant_sea_zombie,,8%,BOSS cổ đại biển sâu
+combat_dodge,crawler_zombie,,20%,Di chuyển trên đất
 combat_dodge,giant_puppet,,20%,BOSS
 combat_dodge,zombie_king,,25%,BOSS
 combat_dodge,outpost_leader,,25%,BOSS
 combat_dodge,banker,,30%,BOSS
-combat_dodge,fast_zombie,,35%,快速移动
-combat_dodge,jumping_zombie,,35%,跳跃闪避
+combat_dodge,fast_zombie,,35%,Di chuyển nhanh
+combat_dodge,jumping_zombie,,35%,Nhảy né tránh
 combat_dodge,ma_san,,40%,BOSS
-combat_dodge,shadow,,50%,隐身BOSS
+combat_dodge,shadow,,50%,BOSS tàng hình
 combat_dodge,castle_king,,20%,BOSS
-combat_dodge,veteran_zhao,,30%,远程BOSS
-combat_dodge,dr_chen,,35%,远程BOSS
-combat_dodge,ghost_stalker,,50%,隐身能力
+combat_dodge,veteran_zhao,,30%,BOSS tầm xa
+combat_dodge,dr_chen,,35%,BOSS tầm xa
+combat_dodge,ghost_stalker,,50%,Khả năng tàng hình
 combat_params,params,value
 combat_params,flee_success_rate,25%
 combat_params,ranged_dodge_rate,60%
@@ -73,11 +73,11 @@ combat_params,liuruyan_assist_rate,30% (damage 20)
 combat_params,npc_ranged_first_shot,40%
 combat_params,npc_dodge_rate,20%
 combat_special,ability,trigger_rate,effect
-combat_special,crawler_trip,30%,跳过玩家回合
-combat_special,blind_miss,50%,玩家攻击落空
-combat_special,stalker_ambush,40%,×0.8额外伤害
-combat_special,explosion_multiplier,×2,双倍伤害
-combat_special,illusion_zero_damage,50%,理智为零时触发
+combat_special,crawler_trip,30%,Bỏ qua lượt người chơi
+combat_special,blind_miss,50%,Đòn tấn công trượt
+combat_special,stalker_ambush,40%,×0.8 sát thương thêm
+combat_special,explosion_multiplier,×2,Sát thương gấp đôi
+combat_special,illusion_zero_damage,50%,Kích hoạt khi lý trí bằng 0
 crit_ranged,weapon,crit_rate,rarity
 crit_ranged,wooden_bow,5%,common
 crit_ranged,recurve_bow,6%,common
@@ -191,27 +191,27 @@ invest,food_stable,profit,50%,+10%
 invest,food_stable,break_even,30%,0%
 invest,food_stable,loss,20%,-10%
 invest,entertainment_high_risk,hit,1%,+90%
-invest,娱乐投资（超高波动）,不错,4%,+50%
-invest,娱乐投资（超高波动）,回本,5%,+10%
-invest,娱乐投资（超高波动）,亏损,20%,-40%
-invest,娱乐投资（超高波动）,严重亏损,30%,-60%
-invest,娱乐投资（超高波动）,血本无归,40%,-80%
-invest,科技投资（中等风险）,收益,30%,+20%
-invest,科技投资（中等风险）,持平,20%,0%
-invest,科技投资（中等风险）,亏损,50%,-10%
-invest,农业投资（低风险低回报）,丰收,10%,+30%
-invest,农业投资（低风险低回报）,收益,5%,+10%
-invest,农业投资（低风险低回报）,持平,80%,0%
-invest,农业投资（低风险低回报）,虫害,5%,-20%
-other,项目,范围,说明
-other,睡眠疲惫恢复,10~25,随机范围
-other,睡眠生命恢复,20~40,随机范围
-other,睡觉恢复理智,20,固定值
-other,贵族客房休息恢复理智,30,固定值
-other,岛内休息恢复理智,25,固定值
-other,露露薇喂罐头好感,+2~3,随机范围
-other,沐苗苗照料好感,+1~3,随机范围
-other,V小姐交易弹药数,3~12发,随机范围
-other,莉莉交易药品数,1~3个,随机范围
-other,重伤倒地后生命,回复至30%,固定比例
-other,贷款日利率,10%,固定比例
+invest,Đầu tư giải trí (biến động cực cao),Tốt,4%,+50%
+invest,Đầu tư giải trí (biến động cực cao),Hòa vốn,5%,+10%
+invest,Đầu tư giải trí (biến động cực cao),Lỗ,20%,-40%
+invest,Đầu tư giải trí (biến động cực cao),Lỗ nặng,30%,-60%
+invest,Đầu tư giải trí (biến động cực cao),Mất trắng,40%,-80%
+invest,Đầu tư công nghệ (rủi ro trung bình),Lãi,30%,+20%
+invest,Đầu tư công nghệ (rủi ro trung bình),Hòa vốn,20%,0%
+invest,Đầu tư công nghệ (rủi ro trung bình),Lỗ,50%,-10%
+invest,Đầu tư nông nghiệp (rủi ro thấp lợi nhuận thấp),Mùa màng,10%,+30%
+invest,Đầu tư nông nghiệp (rủi ro thấp lợi nhuận thấp),Lãi,5%,+10%
+invest,Đầu tư nông nghiệp (rủi ro thấp lợi nhuận thấp),Hòa vốn,80%,0%
+invest,Đầu tư nông nghiệp (rủi ro thấp lợi nhuận thấp),Sâu bệnh,5%,-20%
+other,Mục,Phạm vi,Giải thích
+other,Hồi phục mệt mỏi khi ngủ,10~25,Phạm vi ngẫu nhiên
+other,Hồi phục sinh mệnh khi ngủ,20~40,Phạm vi ngẫu nhiên
+other,Hồi phục lý trí khi ngủ,20,Giá trị cố định
+other,Hồi phục lý trí nghỉ phòng quý tộc,30,Giá trị cố định
+other,Hồi phục lý trí nghỉ trên đảo,25,Giá trị cố định
+other,Cho Lulu Wei ăn đồ hộp (độ hảo cảm),+2~3,Phạm vi ngẫu nhiên
+other,Chăm sóc ruộng của Mục Miêu Miêu (độ hảo cảm),+1~3,Phạm vi ngẫu nhiên
+other,V tiểu thư giao dịch đạn,3~12 viên,Phạm vi ngẫu nhiên
+other,Lily giao dịch thuốc,1~3 cái,Phạm vi ngẫu nhiên
+other,Sau khi ngã xuống hồi HP,30%,Tỷ lệ cố định
+other,Lãi suất vay mỗi ngày,10%,Tỷ lệ cố định

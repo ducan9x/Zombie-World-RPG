@@ -20,23 +20,23 @@ function hasAnyCastleRelatedIdentity(state) {
 export function handleStreet() {
   const state = getState();
   if (!hasAnyCastleRelatedIdentity(state)) {
-    setStory("商业街的守卫拦住了你：\"这里只对城堡相关势力开放，请出示城堡通行证或城堡身份牌。\"");
+    setStory("Vệ binh phố thương mại chặn bạn lại: \"Nơi này chỉ dành cho các thế lực liên quan đến lâu đài, vui lòng xuất trình giấy thông hành lâu đài hoặc thẻ thân phận lâu đài.\"");
     refreshIslandMenu();
     return;
   }
   if (!STREET_OPEN_PHASES.includes(state.phaseIndex)) {
-    setStory("商业街的店铺都关门了，铁门紧锁，只有明天再来。");
+    setStory("Các cửa hàng ở khu phố thương mại đều đã đóng cửa, cửa sắt khóa chặt, chỉ có thể mai quay lại.");
     refreshIslandMenu();
     return;
   }
   setPhase("island_street");
-  setStory("艾莉娜皇后在岛屿上开辟的商业街，鳞次栉比的店铺沿着石板路排开。商人们热情地招呼着来往的贵族，货架上摆满了大陆上难得一见的商品。这里是岛上最繁华的地段，也是皇家币流通最活跃的地方。");
+  setStory("Phố thương mại do Nữ hoàng Elena khai mở trên đảo, các cửa hàng san sát dọc theo con đường lát đá. Thương nhân nhiệt tình mời gọi các quý tộc qua lại, kệ hàng chất đầy những món hàng hiếm thấy trên lục địa. Đây là khu vực phồn thịnh nhất của đảo, cũng là nơi đồng tiền hoàng gia lưu thông sôi động nhất.");
   setOptions([
-    { text: "近战武具店", action: "street_melee" },
-    { text: "弹药店", action: "street_ammo" },
-    { text: "食品店", action: "street_food" },
-    { text: "医药店", action: "street_medical" },
-    { text: "离开", action: "street_leave" },
+    { text: "Cửa hàng vũ khí cận chiến", action: "street_melee" },
+    { text: "Cửa hàng đạn dược", action: "street_ammo" },
+    { text: "Cửa hàng thực phẩm", action: "street_food" },
+    { text: "Cửa hàng y dược", action: "street_medical" },
+    { text: "Rời đi", action: "street_leave" },
   ]);
 }
 
@@ -104,20 +104,20 @@ export function handleStreetAction(input) {
 function handleStreetMelee() {
   const state = getState();
   setPhase("island_street_melee");
-  let desc = "武具店的老板是个沉默寡言的铁匠，墙上挂满了各式近战武器。他看了你一眼，\"看上哪把？\"\n\n";
-  desc += `当前皇家币：${state.royalCoins}\n\n`;
+  let desc = "Chủ cửa hàng vũ khí là một thợ rèn ít nói, trên tường treo đầy đủ loại vũ khí cận chiến. Ông liếc nhìn bạn: \"Nhìn trúng thanh nào?\"\n\n";
+  desc += `Tiền hoàng gia hiện tại: ${state.royalCoins}\n\n`;
   MELEE_SHOP_ITEMS.forEach((item, i) => {
     const weapon = MELEE_WEAPONS.find(w => w.id === item.weaponId);
     if (weapon) {
-      desc += `${weapon.name} - 伤害:${weapon.damage} 耐久:${weapon.durability} - ${item.price}币\n`;
+      desc += `${weapon.name} - Sát thương:${weapon.damage} Độ bền:${weapon.durability} - ${item.price} xu\n`;
     }
   });
   setStory(desc);
   const opts = MELEE_SHOP_ITEMS.map((item, i) => {
     const weapon = MELEE_WEAPONS.find(w => w.id === item.weaponId);
-    return { text: `${weapon.name}（${item.price}币）`, action: "street_melee_buy", shopIndex: i };
+    return { text: `${weapon.name} (${item.price} xu)`, action: "street_melee_buy", shopIndex: i };
   });
-  opts.push({ text: "返回", action: "street_back" });
+  opts.push({ text: "Quay lại", action: "street_back" });
   setOptions(opts);
 }
 
@@ -133,37 +133,37 @@ function handleStreetMeleeBuy(input) {
   const weapon = MELEE_WEAPONS.find(w => w.id === shopItem.weaponId);
   if (!weapon) { handleStreetMelee(); return; }
   if (state.royalCoins < shopItem.price) {
-    setStory(`你的皇家币不够。这把${weapon.name}需要${shopItem.price}币，你只有${state.royalCoins}币。`);
+    setStory(`Tiền hoàng gia của bạn không đủ. Thanh ${weapon.name} này cần ${shopItem.price} xu, bạn chỉ có ${state.royalCoins} xu.`);
     handleStreetMelee();
     return;
   }
   removeRoyalCoins(shopItem.price);
   const weaponCopy = { ...weapon, currentDurability: weapon.durability };
   addItem(weaponCopy);
-  setStory(`铁匠从墙上取下${weapon.name}递给你：\"好眼光，这把不会让你失望的。\"\n\n花费 ${shopItem.price} 皇家币，获得 ${weapon.name}\n当前皇家币：${state.royalCoins}`);
+  setStory(`Thợ rèn lấy ${weapon.name} xuống từ tường đưa cho bạn: "Mắt nhìn tốt, thanh này sẽ không làm bạn thất vọng."\n\nChi ${shopItem.price} xu tiền hoàng gia, nhận ${weapon.name}\nTiền hoàng gia hiện tại: ${state.royalCoins}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
   if (!state.gameOver) {
     setPhase("island_street_melee");
-    setOptions([{ text: "继续", action: "street_melee_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "street_melee_continue" }]);
   }
 }
 
 function handleStreetAmmo() {
   const state = getState();
   setPhase("island_street_ammo");
-  let desc = "弹药店老板是个退伍老兵，货架上整整齐齐地码放着各种口径的弹药。\"要什么？都是好货。\"\n\n";
-  desc += `当前皇家币：${state.royalCoins}\n\n`;
+  let desc = "Chủ cửa hàng đạn dược là một cựu chiến binh xuất ngũ, trên kệ bày ngay ngắn đủ loại đạn các cỡ nòng. \"Cần gì? Toàn đồ tốt.\"\n\n";
+  desc += `Tiền hoàng gia hiện tại: ${state.royalCoins}\n\n`;
   AMMO_SHOP_ITEMS.forEach((item, i) => {
-    desc += `${item.ammoId} - ${item.count}发 - ${item.price}币\n`;
+    desc += `${item.ammoId} - ${item.count} viên - ${item.price} xu\n`;
   });
   setStory(desc);
   const opts = AMMO_SHOP_ITEMS.map((item, i) => {
-    return { text: `${item.ammoId}（${item.price}币/${item.count}发）`, action: "street_ammo_buy", shopIndex: i };
+    return { text: `${item.ammoId} (${item.price} xu/${item.count} viên)`, action: "street_ammo_buy", shopIndex: i };
   });
-  opts.push({ text: "回收子弹", action: "street_ammo_recycle" });
-  opts.push({ text: "返回", action: "street_back" });
+  opts.push({ text: "Thu hồi đạn", action: "street_ammo_recycle" });
+  opts.push({ text: "Quay lại", action: "street_back" });
   setOptions(opts);
 }
 
@@ -179,7 +179,7 @@ function handleStreetAmmoBuy(input) {
   const ammoData = AMMO.find(a => a.name === shopItem.ammoId);
   if (!ammoData) { handleStreetAmmo(); return; }
   if (state.royalCoins < shopItem.price) {
-    setStory(`你的皇家币不够。这批弹药需要${shopItem.price}币，你只有${state.royalCoins}币。`);
+    setStory(`Tiền hoàng gia không đủ. Lô đạn này cần ${shopItem.price} xu, bạn chỉ có ${state.royalCoins} xu.`);
     handleStreetAmmo();
     return;
   }
@@ -190,42 +190,42 @@ function handleStreetAmmoBuy(input) {
   } else {
     state.ammo.push({ id: ammoData.id, name: ammoData.name, count: shopItem.count });
   }
-  setStory(`老兵从货架上取下一盒${shopItem.ammoId}推到你面前：\"够你打一阵子了。\"\n\n花费 ${shopItem.price} 皇家币，获得 ${shopItem.ammoId} ×${shopItem.count}\n当前皇家币：${state.royalCoins}`);
+  setStory(`Cựu chiến binh lấy một hộp ${shopItem.ammoId} từ kệ đẩy đến trước mặt bạn: "Đủ cho bạn bắn một thời gian." \n\nChi ${shopItem.price} xu tiền hoàng gia, nhận ${shopItem.ammoId} ×${shopItem.count}\nTiền hoàng gia hiện tại: ${state.royalCoins}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
   if (!state.gameOver) {
     setPhase("island_street_ammo");
-    setOptions([{ text: "继续", action: "street_ammo_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "street_ammo_continue" }]);
   }
 }
 
 function handleStreetAmmoRecycle() {
   const state = getState();
   setPhase("island_street_ammo_recycle");
-  let desc = "老兵瞥了一眼你的弹药袋：\"不用的子弹可以回收换币，10发换1币。\"\n\n";
+  let desc = "Cựu chiến binh liếc nhìn túi đạn của bạn: \"Đạn không dùng có thể thu hồi đổi xu, 10 viên đổi 1 xu.\"\n\n";
   const recyclable = state.ammo.filter(a => a.count >= AMMO_RECYCLE_RATE);
   if (recyclable.length === 0) {
-    desc += "你没有足够数量的弹药可以回收。";
+    desc += "Bạn không có đủ số lượng đạn để thu hồi.";
     setStory(desc);
-    setOptions([{ text: "返回", action: "street_ammo" }]);
+    setOptions([{ text: "Quay lại", action: "street_ammo" }]);
     return;
   }
   recyclable.forEach(a => {
-    desc += `${a.name}：${a.count}发 → ${Math.floor(a.count / AMMO_RECYCLE_RATE)}币\n`;
+    desc += `${a.name}: ${a.count} viên → ${Math.floor(a.count / AMMO_RECYCLE_RATE)} xu\n`;
   });
   setStory(desc);
   const opts = [];
   state.ammo.forEach((a, i) => {
     if (a.count >= AMMO_RECYCLE_RATE) {
       opts.push({
-        text: `回收${a.name}（${a.count}发→${Math.floor(a.count / AMMO_RECYCLE_RATE)}币）`,
+        text: `Thu hồi ${a.name} (${a.count} viên→${Math.floor(a.count / AMMO_RECYCLE_RATE)} xu)`,
         action: "street_ammo_recycle_type",
         ammoIndex: i,
       });
     }
   });
-  opts.push({ text: "返回", action: "street_ammo" });
+  opts.push({ text: "Quay lại", action: "street_ammo" });
   setOptions(opts);
 }
 
@@ -246,35 +246,35 @@ function handleStreetAmmoRecycleType(input) {
   if (ammoItem.count <= 0) {
     state.ammo = state.ammo.filter((_, i) => i !== ammoIndex);
   }
-  setStory(`老兵收走了${usedCount}发${ammoItem.name}，数了数，递给你${coins}皇家币：\"下次再来。\"\n\n回收 ${ammoItem.name} ×${usedCount}，获得 ${coins} 皇家币\n当前皇家币：${state.royalCoins}`);
+  setStory(`Cựu chiến binh thu ${usedCount} viên ${ammoItem.name}, đếm xong đưa cho bạn ${coins} xu tiền hoàng gia: "Lần sau lại đến."\n\nThu hồi ${ammoItem.name} ×${usedCount}, nhận ${coins} xu tiền hoàng gia\nTiền hoàng gia hiện tại: ${state.royalCoins}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
   if (!state.gameOver) {
     setPhase("island_street_ammo");
-    setOptions([{ text: "继续", action: "street_ammo_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "street_ammo_continue" }]);
   }
 }
 
 function handleStreetFood() {
   const state = getState();
   setPhase("island_street_food");
-  let desc = "食品店的货架上摆满了各种罐头和饮品，店员微笑着说：\"都是新鲜货，保证品质。\"\n\n";
-  desc += `当前皇家币：${state.royalCoins}\n\n`;
+  let desc = "Kệ hàng cửa hàng thực phẩm bày đầy đủ loại đồ hộp và đồ uống, nhân viên bán hàng mỉm cười: \"Toàn hàng tươi, đảm bảo chất lượng.\"\n\n";
+  desc += `Tiền hoàng gia hiện tại: ${state.royalCoins}\n\n`;
   FOOD_SHOP_ITEMS.forEach((shopItem, i) => {
     const source = shopItem.type === "food" ? FOODS : DRINKS;
     const item = source.find(it => it.id === shopItem.itemId);
     if (item) {
-      desc += `${item.name} - ${shopItem.price}币\n`;
+      desc += `${item.name} - ${shopItem.price} xu\n`;
     }
   });
   setStory(desc);
   const opts = FOOD_SHOP_ITEMS.map((shopItem, i) => {
     const source = shopItem.type === "food" ? FOODS : DRINKS;
     const item = source.find(it => it.id === shopItem.itemId);
-    return { text: `${item.name}（${shopItem.price}币）`, action: "street_food_buy", shopIndex: i };
+    return { text: `${item.name} (${shopItem.price} xu)`, action: "street_food_buy", shopIndex: i };
   });
-  opts.push({ text: "返回", action: "street_back" });
+  opts.push({ text: "Quay lại", action: "street_back" });
   setOptions(opts);
 }
 
@@ -291,40 +291,40 @@ function handleStreetFoodBuy(input) {
   const item = source.find(it => it.id === shopItem.itemId);
   if (!item) { handleStreetFood(); return; }
   if (state.royalCoins < shopItem.price) {
-    setStory(`你的皇家币不够。${item.name}需要${shopItem.price}币，你只有${state.royalCoins}币。`);
+    setStory(`Tiền hoàng gia không đủ. ${item.name} cần ${shopItem.price} xu, bạn chỉ có ${state.royalCoins} xu.`);
     handleStreetFood();
     return;
   }
   removeRoyalCoins(shopItem.price);
   const itemCopy = { ...item };
   addItem(itemCopy);
-  setStory(`店员从货架上取下${item.name}递给你：\"欢迎下次光临！\"\n\n花费 ${shopItem.price} 皇家币，获得 ${item.name}\n当前皇家币：${state.royalCoins}`);
+  setStory(`Nhân viên bán hàng lấy ${item.name} từ kệ đưa cho bạn: "Hoan nghênh quý khách lần sau ghé lại!"\n\nChi ${shopItem.price} xu tiền hoàng gia, nhận ${item.name}\nTiền hoàng gia hiện tại: ${state.royalCoins}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
   if (!state.gameOver) {
     setPhase("island_street_food");
-    setOptions([{ text: "继续", action: "street_food_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "street_food_continue" }]);
   }
 }
 
 function handleStreetMedical() {
   const state = getState();
   setPhase("island_street_medical");
-  let desc = "医药店里弥漫着淡淡的药水味，货架上整齐地摆放着各种药品。药剂师推了推眼镜：\"需要什么药？都是好东西。\"\n\n";
-  desc += `当前皇家币：${state.royalCoins}\n\n`;
+  let desc = "Trong cửa hàng y dược thoang thoảng mùi thuốc, trên kệ bày ngay ngắn đủ loại thuốc. Dược sĩ đẩy gọng kính: \"Cần loại thuốc nào? Toàn đồ tốt.\"\n\n";
+  desc += `Tiền hoàng gia hiện tại: ${state.royalCoins}\n\n`;
   MEDICAL_SHOP_ITEMS.forEach((shopItem, i) => {
     const item = MEDICINES.find(m => m.id === shopItem.itemId);
     if (item) {
-      desc += `${item.name} - ${shopItem.price}币\n`;
+      desc += `${item.name} - ${shopItem.price} xu\n`;
     }
   });
   setStory(desc);
   const opts = MEDICAL_SHOP_ITEMS.map((shopItem, i) => {
     const item = MEDICINES.find(m => m.id === shopItem.itemId);
-    return { text: `${item.name}（${shopItem.price}币）`, action: "street_medical_buy", shopIndex: i };
+    return { text: `${item.name} (${shopItem.price} xu)`, action: "street_medical_buy", shopIndex: i };
   });
-  opts.push({ text: "返回", action: "street_back" });
+  opts.push({ text: "Quay lại", action: "street_back" });
   setOptions(opts);
 }
 
@@ -340,19 +340,19 @@ function handleStreetMedicalBuy(input) {
   const item = MEDICINES.find(m => m.id === shopItem.itemId);
   if (!item) { handleStreetMedical(); return; }
   if (state.royalCoins < shopItem.price) {
-    setStory(`你的皇家币不够。${item.name}需要${shopItem.price}币，你只有${state.royalCoins}币。`);
+    setStory(`Tiền hoàng gia không đủ. ${item.name} cần ${shopItem.price} xu, bạn chỉ có ${state.royalCoins} xu.`);
     handleStreetMedical();
     return;
   }
   removeRoyalCoins(shopItem.price);
   const itemCopy = { ...item };
   addItem(itemCopy);
-  setStory(`药剂师从药柜里取出一份${item.name}递给你：\"按时服用，保重身体。\"\n\n花费 ${shopItem.price} 皇家币，获得 ${item.name}\n当前皇家币：${state.royalCoins}`);
+  setStory(`Dược sĩ lấy từ tủ thuốc một phần ${item.name} đưa cho bạn: "Uống đúng giờ, giữ gìn sức khỏe."\n\nChi ${shopItem.price} xu tiền hoàng gia, nhận ${item.name}\nTiền hoàng gia hiện tại: ${state.royalCoins}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
   if (!state.gameOver) {
     setPhase("island_street_medical");
-    setOptions([{ text: "继续", action: "street_medical_continue" }]);
+    setOptions([{ text: "Tiếp tục", action: "street_medical_continue" }]);
   }
 }

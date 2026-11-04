@@ -1,7 +1,7 @@
 /* ============================================================
-   游戏 UI 渲染模块
-   组织顺序：导入 → 辅助函数 → 面板渲染（状态/武器/背包/货物/故事/选项）
-   → 综合渲染 → UI 初始化
+   Mô-đun render UI game
+   Thứ tự tổ chức: import → hàm phụ trợ → render bảng điều khiển (trạng thái/vũ khí/ba lô/hàng hóa/câu chuyện/lựa chọn)
+   → render tổng hợp → khởi tạo UI
    ============================================================ */
 
 import { getState, setName, setPhase, resetState, getItemDisplayName, getGameSettings, toggleClickMode, toggleInputMode, toggleMusic } from './state.js';
@@ -38,18 +38,18 @@ export function updateMusicState() {
   }
 }
 
-// ---------- 辅助函数 ----------
+// ---------- Hàm phụ trợ ----------
 
-// 计算背包中所有物品的总数量
+// Tính tổng số lượng vật phẩm trong ba lô
 function getBackpackCount(state) {
   const countArr = (arr) => arr.reduce((sum, item) => sum + (item.count || 1), 0);
   return countArr(state.food) + countArr(state.drinks) + countArr(state.medicine) + countArr(state.other) + (state.seeds ? countArr(state.seeds) : 0);
 }
 
-// 格式化弹药显示文本，无弹药时返回"无"
+// Định dạng văn bản hiển thị đạn dược, trả về "Không" khi không có đạn
 function formatAmmo(state) {
   if (state.ammo.length === 0) {
-    return '无';
+    return 'Không';
   }
   return state.ammo.map(a => `${a.name}×${a.count}`).join('、');
 }
@@ -58,7 +58,7 @@ function getBaseDisplayName(state) {
   return BASE_LEVELS[state.baseLevel || 0]?.name || BASE_LEVELS[0].name;
 }
 
-// ---------- 面板渲染 ----------
+// ---------- Render bảng điều khiển ----------
 
 export function renderIdentity(state) {
   const panel = document.getElementById('identity-panel');
@@ -66,90 +66,90 @@ export function renderIdentity(state) {
   state._identityDisplay = display;
   panel.innerHTML = `
 <div class="identity-panel">
-  <div class="panel-title">🎭 身份</div>
-  <div class="stat-row"><span class="stat-label">🆔 身份</span><span class="stat-value identity-value">${display}</span></div>
+  <div class="panel-title">🎭 Thân phận</div>
+  <div class="stat-row"><span class="stat-label">🆔 Thân phận</span><span class="stat-value identity-value">${display}</span></div>
 </div>`;
 }
 
 /**
- * 渲染角色状态面板
- * @param {Object} state - 游戏状态对象
+ * Render bảng điều khiển trạng thái nhân vật
+ * @param {Object} state - Đối tượng trạng thái game
  */
 export function renderStats(state) {
   const panel = document.getElementById('stats-panel');
   const hpPct = Math.round(state.health / GAME_CONSTANTS.MAX_HEALTH * 100);
   panel.innerHTML = `
-<div class="stats-title">📊 角色状态</div>
-<div class="stat-row"><span class="stat-label">角色</span><span class="stat-value">${state.name}</span></div>
-<div class="stat-row"><span class="stat-label">时间</span><span class="stat-value">第${state.day}天 ${TIME_PHASES[state.phaseIndex]} · ${state.weather}</span></div>
-<div class="stat-row"><span class="stat-label">地点</span><span class="stat-value">${state.location}</span></div>
+<div class="stats-title">📊 Trạng thái nhân vật</div>
+<div class="stat-row"><span class="stat-label">Nhân vật</span><span class="stat-value">${state.name}</span></div>
+<div class="stat-row"><span class="stat-label">Thời gian</span><span class="stat-value">Ngày ${state.day} ${TIME_PHASES[state.phaseIndex]} · ${state.weather}</span></div>
+<div class="stat-row"><span class="stat-label">Địa điểm</span><span class="stat-value">${state.location}</span></div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label">❤️ 健康</span>
+  <span class="stat-bar-label">❤️ Sức khỏe</span>
   <div class="stat-bar-track"><div class="stat-bar-fill hp" style="width:${hpPct}%"></div></div>
   <span class="stat-bar-value hp">${state.health}</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label">🍖 饱腹</span>
+  <span class="stat-bar-label">🍖 Bụng no</span>
   <div class="stat-bar-track"><div class="stat-bar-fill hunger" style="width:${state.hunger}%"></div></div>
   <span class="stat-bar-value hunger">${state.hunger}%</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label">💧 水分</span>
+  <span class="stat-bar-label">💧 Nước</span>
   <div class="stat-bar-track"><div class="stat-bar-fill thirst" style="width:${state.hydration}%"></div></div>
   <span class="stat-bar-value thirst">${state.hydration}%</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label">🧠 理智</span>
+  <span class="stat-bar-label">🧠 Lý trí</span>
   <div class="stat-bar-track"><div class="stat-bar-fill sanity" style="width:${state.sanity}%"></div></div>
   <span class="stat-bar-value sanity">${state.sanity}%</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label">💪 疲惫</span>
+  <span class="stat-bar-label">💪 Mệt mỏi</span>
   <div class="stat-bar-track"><div class="stat-bar-fill fatigue" style="width:${state.crash}%"></div></div>
   <span class="stat-bar-value fatigue">${state.crash}%</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label">🦠 感染</span>
+  <span class="stat-bar-label">🦠 Nhiễm bệnh</span>
   <div class="stat-bar-track"><div class="stat-bar-fill infection" style="width:${state.infection}%"></div></div>
   <span class="stat-bar-value infection">${state.infection}%</span>
 </div>
-<div class="stat-row"><span class="stat-label">状态</span><span class="stat-value">${state.status}</span></div>
-<div class="stat-row"><span class="stat-label">🏠 基地</span><span class="stat-value">${getBaseDisplayName(state)}</span></div>`;
+<div class="stat-row"><span class="stat-label">Trạng thái</span><span class="stat-value">${state.status}</span></div>
+<div class="stat-row"><span class="stat-label">🏠 Căn cứ</span><span class="stat-value">${getBaseDisplayName(state)}</span></div>`;
 }
 
 /**
- * 渲染武器面板
- * @param {Object} state - 游戏状态对象
+ * Render bảng điều khiển vũ khí
+ * @param {Object} state - Đối tượng trạng thái game
  */
 export function renderWeapons(state) {
   const panel = document.getElementById('weapon-panel');
   const meleeDurability = state.meleeWeapon.durability === Infinity 
-    ? '无限' 
+    ? '∞' 
     : `${state.meleeWeapon.currentDurability}/${state.meleeWeapon.durability}`;
   panel.innerHTML = `
 <div class="weapon-panel">
-  <div class="panel-title">⚔️ 武器</div>
-  <div class="stat-row"><span class="stat-label">🔪 近战</span><span class="stat-value">${state.meleeWeapon.name}（伤害${state.meleeWeapon.damage} 连击${Math.round((state.meleeWeapon.comboRate || 0) * 100)}%）</span></div>
-  <div class="stat-row"><span class="stat-label">🛡️ 耐久</span><span class="stat-value">${meleeDurability}</span></div>
-  <div class="stat-row"><span class="stat-label">🏹 远程</span><span class="stat-value">${state.rangedWeapon ? state.rangedWeapon.name : '无'}</span></div>
-  <div class="stat-row"><span class="stat-label">⚙️ 完整</span><span class="stat-value">${state.rangedWeapon ? state.rangedWeapon.integrity : '无'}</span></div>
-  <div class="stat-row"><span class="stat-label">💥 弹药</span><span class="stat-value">${formatAmmo(state)}</span></div>
+  <div class="panel-title">⚔️ Vũ khí</div>
+  <div class="stat-row"><span class="stat-label">🔪 Cận chiến</span><span class="stat-value">${state.meleeWeapon.name}（sát thương${state.meleeWeapon.damage} liên kích${Math.round((state.meleeWeapon.comboRate || 0) * 100)}%）</span></div>
+  <div class="stat-row"><span class="stat-label">🛡️ Độ bền</span><span class="stat-value">${meleeDurability}</span></div>
+  <div class="stat-row"><span class="stat-label">🏹 Tầm xa</span><span class="stat-value">${state.rangedWeapon ? state.rangedWeapon.name : 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">⚙️ Độ nguyên vẹn</span><span class="stat-value">${state.rangedWeapon ? state.rangedWeapon.integrity : 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">💥 Đạn dược</span><span class="stat-value">${formatAmmo(state)}</span></div>
 </div>`;
 }
 
 /**
- * 渲染背包面板
- * @param {Object} state - 游戏状态对象
+ * Render bảng điều khiển ba lô
+ * @param {Object} state - Đối tượng trạng thái game
  */
 export function renderInventory(state) {
   const panel = document.getElementById('inventory-panel');
   const count = getBackpackCount(state);
   
-  // 食物、鱼类、水果分别过滤
+  // Lọc riêng thực phẩm, cá, trái cây
   const foods = state.food.filter(f => f.type === "food" || f.type === "fruit");
   const fish = state.food.filter(f => f.type === "fish");
   
-  // 其他拆分为武器、枪械、建材、其他
+  // Phân loại "khác" thành vũ khí, súng, vật liệu xây dựng, khác
   const meleeItems = state.other.filter(o => o.type === "melee");
   const rangedItems = state.other.filter(o => o.type === "ranged");
   const buildingItems = state.other.filter(o => o.type === "building");
@@ -157,46 +157,46 @@ export function renderInventory(state) {
   
   panel.innerHTML = `
 <div class="inventory-panel">
-  <div class="panel-title">🎒 背包</div>
-  <div class="stat-row"><span class="stat-label">背包</span><span class="stat-value">${state.backpack.name}（容量${count}/${state.backpack.capacity}）</span></div>
-  <div class="stat-row"><span class="stat-label">🍞 食物</span><span class="stat-value">${foods.map(f => getItemDisplayName(f)).join('、') || '无'}</span></div>
-  <div class="stat-row"><span class="stat-label">🥤 饮品</span><span class="stat-value">${state.drinks.map(d => getItemDisplayName(d)).join('、') || '无'}</span></div>
-  <div class="stat-row"><span class="stat-label">💊 医疗</span><span class="stat-value">${state.medicine.map(m => getItemDisplayName(m)).join('、') || '无'}</span></div>
-  <div class="stat-row"><span class="stat-label">🐟 鱼类</span><span class="stat-value">${fish.map(f => getItemDisplayName(f)).join('、') || '无'}</span></div>
-  <div class="stat-row"><span class="stat-label">⚔️ 武器</span><span class="stat-value">${meleeItems.map(o => getItemDisplayName(o)).join('、') || '无'}</span></div>
-  <div class="stat-row"><span class="stat-label">🔫 枪械</span><span class="stat-value">${rangedItems.map(o => getItemDisplayName(o)).join('、') || '无'}</span></div>
-  <div class="stat-row"><span class="stat-label">🧱 建材</span><span class="stat-value">${buildingItems.map(o => getItemDisplayName(o)).join('、') || '无'}</span></div>
-  <div class="stat-row"><span class="stat-label">🌱 种子</span><span class="stat-value">${state.seeds ? state.seeds.map(s => getItemDisplayName(s)).join('、') || '无' : '无'}</span></div>
-  <div class="stat-row"><span class="stat-label">🧰 其他</span><span class="stat-value">${otherItems.map(o => getItemDisplayName(o)).join('、') || '无'}</span></div>
+  <div class="panel-title">🎒 Ba lô</div>
+  <div class="stat-row"><span class="stat-label">Ba lô</span><span class="stat-value">${state.backpack.name}（sức chứa${count}/${state.backpack.capacity}）</span></div>
+  <div class="stat-row"><span class="stat-label">🍞 Thực phẩm</span><span class="stat-value">${foods.map(f => getItemDisplayName(f)).join('、') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">🥤 Đồ uống</span><span class="stat-value">${state.drinks.map(d => getItemDisplayName(d)).join('、') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">💊 Y tế</span><span class="stat-value">${state.medicine.map(m => getItemDisplayName(m)).join('、') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">🐟 Cá</span><span class="stat-value">${fish.map(f => getItemDisplayName(f)).join('、') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">⚔️ Vũ khí</span><span class="stat-value">${meleeItems.map(o => getItemDisplayName(o)).join('、') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">🔫 Súng</span><span class="stat-value">${rangedItems.map(o => getItemDisplayName(o)).join('、') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">🧱 Vật liệu xây dựng</span><span class="stat-value">${buildingItems.map(o => getItemDisplayName(o)).join('、') || 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">🌱 Hạt giống</span><span class="stat-value">${state.seeds ? state.seeds.map(s => getItemDisplayName(s)).join('、') || 'Không' : 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label">🧰 Khác</span><span class="stat-value">${otherItems.map(o => getItemDisplayName(o)).join('、') || 'Không'}</span></div>
 </div>`;
 }
 
 /**
- * 渲染货物面板
- * @param {Object} state - 游戏状态对象
+ * Render bảng điều khiển hàng hóa
+ * @param {Object} state - Đối tượng trạng thái game
  */
 export function renderCargo(state) {
   const panel = document.getElementById('cargo-panel');
-  const cigDisplay = state.cigarettes > 0 ? `(${state.cigarettes})香烟` : '无';
-  const gasDisplay = state.gasoline > 0 ? `(${state.gasoline})汽油` : '无';
-  const royalDisplay = state.royalCoins > 0 ? `(${state.royalCoins})皇家币` : '无';
-  const pureDisplay = state.pureEnergy > 0 ? `(${state.pureEnergy})纯净能源` : '无';
+  const cigDisplay = state.cigarettes > 0 ? `(${state.cigarettes}) thuốc lá` : 'Không';
+  const gasDisplay = state.gasoline > 0 ? `(${state.gasoline}) xăng` : 'Không';
+  const royalDisplay = state.royalCoins > 0 ? `(${state.royalCoins}) tiền hoàng gia` : 'Không';
+  const pureDisplay = state.pureEnergy > 0 ? `(${state.pureEnergy}) năng lượng tinh khiết` : 'Không';
   panel.innerHTML = `
 <div class="cargo-panel">
-  <div class="panel-title">📦 货物</div>
-  <div class="stat-row"><span class="stat-label">🚬 香烟</span><span class="stat-value">${cigDisplay}</span></div>
-  <div class="stat-row"><span class="stat-label">⛽ 汽油</span><span class="stat-value">${gasDisplay}</span></div>
-  <div class="stat-row"><span class="stat-label">👑 皇家币</span><span class="stat-value">${royalDisplay}</span></div>
-  <div class="stat-row"><span class="stat-label">🔋 纯净能源</span><span class="stat-value">${pureDisplay}</span></div>
-  <div class="stat-row"><span class="stat-label">🏰 城堡债务</span><span class="stat-value">${state.castleDebt ? (() => { const d = state.castleDebt.dueDay - state.day; return d > 0 ? `${state.castleDebt.amount}根香烟，剩余${d}天` : `${state.castleDebt.amount}根香烟，逾期${-d}天！`; })() : "无"}</span></div>
-  <div class="stat-row"><span class="stat-label">🏝️ 岛屿债务</span><span class="stat-value">${state.islandDebt ? (() => { const d = state.islandDebt.dueDay - state.day; return d > 0 ? `${state.islandDebt.amount}皇家币，剩余${d}天` : `${state.islandDebt.amount}皇家币，逾期${-d}天！`; })() : "无"}</span></div>
-  <div class="stat-row"><span class="stat-label">📈 投资</span><span class="stat-value">${state.investment ? (() => { const dir = INVEST_DIRECTIONS.find(d => d.id === state.investment.directionId); const daysLeft = state.investment.dueDay - state.day; return daysLeft > 0 ? `${dir ? dir.name : state.investment.directionId}，${state.investment.amount}币，剩余${daysLeft}天` : `${dir ? dir.name : state.investment.directionId}，${state.investment.amount}币，已到期！`; })() : "无"}</span></div>
+  <div class="panel-title">📦 Hàng hóa</div>
+  <div class="stat-row"><span class="stat-label">🚬 Thuốc lá</span><span class="stat-value">${cigDisplay}</span></div>
+  <div class="stat-row"><span class="stat-label">⛽ Xăng</span><span class="stat-value">${gasDisplay}</span></div>
+  <div class="stat-row"><span class="stat-label">👑 Tiền hoàng gia</span><span class="stat-value">${royalDisplay}</span></div>
+  <div class="stat-row"><span class="stat-label">🔋 Năng lượng tinh khiết</span><span class="stat-value">${pureDisplay}</span></div>
+  <div class="stat-row"><span class="stat-label">🏰 Nợ lâu đài</span><span class="stat-value">${state.castleDebt ? (() => { const d = state.castleDebt.dueDay - state.day; return d > 0 ? `${state.castleDebt.amount} điếu thuốc lá, còn ${d} ngày` : `${state.castleDebt.amount} điếu thuốc lá, quá hạn ${-d} ngày!`; })() : "Không"}</span></div>
+  <div class="stat-row"><span class="stat-label">🏝️ Nợ đảo</span><span class="stat-value">${state.islandDebt ? (() => { const d = state.islandDebt.dueDay - state.day; return d > 0 ? `${state.islandDebt.amount} tiền hoàng gia, còn ${d} ngày` : `${state.islandDebt.amount} tiền hoàng gia, quá hạn ${-d} ngày!`; })() : "Không"}</span></div>
+  <div class="stat-row"><span class="stat-label">📈 Đầu tư</span><span class="stat-value">${state.investment ? (() => { const dir = INVEST_DIRECTIONS.find(d => d.id === state.investment.directionId); const daysLeft = state.investment.dueDay - state.day; return daysLeft > 0 ? `${dir ? dir.name : state.investment.directionId}，${state.investment.amount} xu, còn ${daysLeft} ngày` : `${dir ? dir.name : state.investment.directionId}，${state.investment.amount} xu, đã đáo hạn!`; })() : "Không"}</span></div>
 </div>`;
 }
 
 /**
- * 渲染故事文本区域
- * @param {Object} state - 游戏状态对象
+ * Render khu vực văn bản câu chuyện
+ * @param {Object} state - Đối tượng trạng thái game
  */
 export function renderStory(state) {
   const area = document.getElementById('story-area');
@@ -204,8 +204,8 @@ export function renderStory(state) {
 }
 
 /**
- * 渲染选项列表
- * @param {Object} state - 游戏状态对象
+ * Render danh sách lựa chọn
+ * @param {Object} state - Đối tượng trạng thái game
  */
 export function renderOptions(state) {
   const area = document.getElementById('options-area');
@@ -274,10 +274,10 @@ export function renderOptions(state) {
   }
 }
 
-// ---------- 存档/最佳记录页面 ----------
+// ---------- Trang lưu trữ / kỷ lục tốt nhất ----------
 
 /**
- * 渲染存档槽位页面
+ * Render trang ô lưu trữ
  */
 export function renderSavePage() {
   const area = document.getElementById('save-slots-area');
@@ -285,19 +285,19 @@ export function renderSavePage() {
   let html = '';
   const autoSlot = slots[0];
   if (autoSlot) {
-    html += `<div class="option-item auto-save-slot" data-index="1">🔄 自动存档：${autoSlot.nickname} · 第${autoSlot.day}天 · ${autoSlot.timestamp}</div>`;
+    html += `<div class="option-item auto-save-slot" data-index="1">🔄 Tự động lưu: ${autoSlot.nickname} · Ngày ${autoSlot.day} · ${autoSlot.timestamp}</div>`;
   } else {
-    html += `<div class="option-item auto-save-slot" data-index="1">🔄 自动存档 —— 空 ——</div>`;
+    html += `<div class="option-item auto-save-slot" data-index="1">🔄 Tự động lưu —— Trống ——</div>`;
   }
   for (let i = 1; i < slots.length; i++) {
     const slot = slots[i];
     if (slot === null) {
-      html += `<div class="option-item" data-index="${i + 1}">槽位 ${i} —— 空 ——</div>`;
+      html += `<div class="option-item" data-index="${i + 1}">Ô ${i} —— Trống ——</div>`;
     } else {
-      html += `<div class="option-item" data-index="${i + 1}">槽位 ${i}：${slot.nickname} · 第${slot.day}天 · ${slot.timestamp}</div>`;
+      html += `<div class="option-item" data-index="${i + 1}">Ô ${i}: ${slot.nickname} · Ngày ${slot.day} · ${slot.timestamp}</div>`;
     }
   }
-  html += `<div class="option-item" data-index="${slots.length + 1}">返回</div>`;
+  html += `<div class="option-item" data-index="${slots.length + 1}">Quay lại</div>`;
   area.innerHTML = html;
 
   const settings = getGameSettings();
@@ -314,56 +314,56 @@ export function renderSavePage() {
 }
 
 /**
- * 渲染最佳记录页面
+ * Render trang kỷ lục tốt nhất
  */
 export function renderBestRecordPage() {
   const area = document.getElementById('best-record-content');
   const record = getBestRecord();
   if (!record) {
-    area.innerHTML = `<div>暂无历史记录。</div>`;
+    area.innerHTML = `<div>Chưa có lịch sử ghi nhận.</div>`;
     return;
   }
   const s = record.snapshot;
-  const backpackName = s.backpack ? s.backpack.name : '无';
+  const backpackName = s.backpack ? s.backpack.name : 'Không';
   const backpackCapacity = s.backpack ? s.backpack.capacity : 0;
-  const meleeName = s.meleeWeapon ? s.meleeWeapon.name : '无';
-  const rangedName = s.rangedWeapon ? s.rangedWeapon.name : '无';
-  const foodNames = (s.food && s.food.length > 0) ? s.food.map(f => getItemDisplayName(f)).join('、') : '无';
-  const drinkNames = (s.drinks && s.drinks.length > 0) ? s.drinks.map(d => getItemDisplayName(d)).join('、') : '无';
-  const medicineNames = (s.medicine && s.medicine.length > 0) ? s.medicine.map(m => getItemDisplayName(m)).join('、') : '无';
-  const otherNames = (s.other && s.other.length > 0) ? s.other.map(o => getItemDisplayName(o)).join('、') : '无';
-  const cigDisplay = (s.cigarettes && s.cigarettes > 0) ? '(' + s.cigarettes + ')香烟' : '无';
-  const gasDisplay = (s.gasoline && s.gasoline > 0) ? '(' + s.gasoline + ')汽油' : '无';
-  const royalDisplay = (s.royalCoins && s.royalCoins > 0) ? '(' + s.royalCoins + ')皇家币' : '无';
-  const pureDisplay = (s.pureEnergy && s.pureEnergy > 0) ? '(' + s.pureEnergy + ')纯净能源' : '无';
-  const ammoNames = (s.ammo && s.ammo.length > 0) ? s.ammo.map(a => `${a.name}×${a.count}`).join('、') : '无';
+  const meleeName = s.meleeWeapon ? s.meleeWeapon.name : 'Không';
+  const rangedName = s.rangedWeapon ? s.rangedWeapon.name : 'Không';
+  const foodNames = (s.food && s.food.length > 0) ? s.food.map(f => getItemDisplayName(f)).join('、') : 'Không';
+  const drinkNames = (s.drinks && s.drinks.length > 0) ? s.drinks.map(d => getItemDisplayName(d)).join('、') : 'Không';
+  const medicineNames = (s.medicine && s.medicine.length > 0) ? s.medicine.map(m => getItemDisplayName(m)).join('、') : 'Không';
+  const otherNames = (s.other && s.other.length > 0) ? s.other.map(o => getItemDisplayName(o)).join('、') : 'Không';
+  const cigDisplay = (s.cigarettes && s.cigarettes > 0) ? '(' + s.cigarettes + ') thuốc lá' : 'Không';
+  const gasDisplay = (s.gasoline && s.gasoline > 0) ? '(' + s.gasoline + ') xăng' : 'Không';
+  const royalDisplay = (s.royalCoins && s.royalCoins > 0) ? '(' + s.royalCoins + ') tiền hoàng gia' : 'Không';
+  const pureDisplay = (s.pureEnergy && s.pureEnergy > 0) ? '(' + s.pureEnergy + ') năng lượng tinh khiết' : 'Không';
+  const ammoNames = (s.ammo && s.ammo.length > 0) ? s.ammo.map(a => `${a.name}×${a.count}`).join('、') : 'Không';
 
   area.innerHTML = `
-<div>最长生存：第 ${record.day} 天</div>
-<div>角色：${record.nickname}</div>
-<div>生命：${s.health}</div>
-<div>疲惫：${s.crash}%</div>
-<div>理智：${s.sanity !== undefined ? s.sanity + '%' : '100%'}</div>
-<div>感染：${s.infection}%</div>
-<div>位置：${s.location}</div>
-<div>近战武器：${meleeName}</div>
-<div>远程武器：${rangedName}</div>
-<div>背包：${backpackName}（${backpackCapacity}格）</div>
-<div>食物：${foodNames}</div>
-<div>饮品：${drinkNames}</div>
-<div>药品：${medicineNames}</div>
-<div>其他：${otherNames}</div>
-<div>香烟：${cigDisplay}</div>
-<div>汽油：${gasDisplay}</div>
-<div>皇家币：${royalDisplay}</div>
-<div>纯净能源：${pureDisplay}</div>
-<div>弹药：${ammoNames}</div>`;
+<div>Sống sót lâu nhất: Ngày ${record.day}</div>
+<div>Nhân vật: ${record.nickname}</div>
+<div>Sinh mệnh: ${s.health}</div>
+<div>Mệt mỏi: ${s.crash}%</div>
+<div>Lý trí: ${s.sanity !== undefined ? s.sanity + '%' : '100%'}</div>
+<div>Nhiễm bệnh: ${s.infection}%</div>
+<div>Vị trí: ${s.location}</div>
+<div>Vũ khí cận chiến: ${meleeName}</div>
+<div>Vũ khí tầm xa: ${rangedName}</div>
+<div>Ba lô: ${backpackName}（${backpackCapacity} ô）</div>
+<div>Thực phẩm: ${foodNames}</div>
+<div>Đồ uống: ${drinkNames}</div>
+<div>Thuốc: ${medicineNames}</div>
+<div>Khác: ${otherNames}</div>
+<div>Thuốc lá: ${cigDisplay}</div>
+<div>Xăng: ${gasDisplay}</div>
+<div>Tiền hoàng gia: ${royalDisplay}</div>
+<div>Năng lượng tinh khiết: ${pureDisplay}</div>
+<div>Đạn dược: ${ammoNames}</div>`;
 }
 
-// ---------- 成就页面 ----------
+// ---------- Trang thành tựu ----------
 
 /**
- * 渲染成就页面
+ * Render trang thành tựu
  */
 export function renderAchievementPage() {
   const area = document.getElementById('achievement-content');
@@ -385,7 +385,7 @@ export function renderAchievementPage() {
         <div class="achievement-icon">❓</div>
         <div class="achievement-info">
           <div class="achievement-name">???</div>
-          <div class="achievement-desc">尚未解锁</div>
+          <div class="achievement-desc">Chưa mở khóa</div>
         </div>
       </div>`;
     }
@@ -400,23 +400,23 @@ export function renderSettingsPage() {
   const inputBtn = document.getElementById('input-mode-btn');
   const musicBtn = document.getElementById('music-btn');
   if (clickBtn) {
-    clickBtn.textContent = '点击模式：' + (settings.clickMode ? '开' : '关');
+    clickBtn.textContent = 'Chế độ nhấp: ' + (settings.clickMode ? 'Bật' : 'Tắt');
     clickBtn.className = 'settings-toggle-btn ' + (settings.clickMode ? 'on' : 'off');
   }
   if (inputBtn) {
-    inputBtn.textContent = '输入模式：' + (settings.inputMode ? '开' : '关');
+    inputBtn.textContent = 'Chế độ nhập: ' + (settings.inputMode ? 'Bật' : 'Tắt');
     inputBtn.className = 'settings-toggle-btn ' + (settings.inputMode ? 'on' : 'off');
   }
   if (musicBtn) {
-    musicBtn.textContent = '游戏音乐：' + (settings.musicEnabled ? '开' : '关');
+    musicBtn.textContent = 'Nhạc game: ' + (settings.musicEnabled ? 'Bật' : 'Tắt');
     musicBtn.className = 'settings-toggle-btn ' + (settings.musicEnabled ? 'on' : 'off');
   }
 }
 
-// ---------- 综合渲染 ----------
+// ---------- Render tổng hợp ----------
 
 /**
- * 综合渲染所有 UI 面板，根据游戏阶段控制界面显示
+ * Render tổng hợp tất cả bảng điều khiển UI, điều khiển hiển thị giao diện theo giai đoạn game
  */
 export function renderAll() {
   const state = getState();
@@ -539,10 +539,10 @@ export function renderAll() {
   storyArea.scrollTop = storyArea.scrollHeight;
 }
 
-// ---------- UI 初始化 ----------
+// ---------- Khởi tạo UI ----------
 
 /**
- * 初始化 UI 事件绑定与初始显示状态
+ * Khởi tạo ràng buộc sự kiện UI và trạng thái hiển thị ban đầu
  */
 export function setupPagination() {
   const prevBtn = document.getElementById('prev-page-btn');
@@ -580,7 +580,7 @@ export function initUI() {
     newGameBtn.addEventListener('click', () => {
       const value = nameInput.value.trim();
       if (!value) {
-        alert('请输入角色昵称');
+        alert('Vui lòng nhập biệt danh nhân vật');
         return;
       }
       resetState();
@@ -675,7 +675,7 @@ export function initUI() {
     clickModeBtn.addEventListener('click', () => {
       const result = toggleClickMode();
       if (!result) {
-        alert('至少保留一种操作模式');
+        alert('Phải giữ ít nhất một chế độ thao tác');
       }
       renderSettingsPage();
     });
@@ -685,7 +685,7 @@ export function initUI() {
     inputModeBtn.addEventListener('click', () => {
       const result = toggleInputMode();
       if (!result) {
-        alert('至少保留一种操作模式');
+        alert('Phải giữ ít nhất một chế độ thao tác');
       }
       renderSettingsPage();
     });

@@ -1,328 +1,328 @@
 export const ACHIEVEMENTS = [
-  { id: "survive_10", name: "初出茅庐", desc: "生存10天", icon: "🏆" },
-  { id: "survive_30", name: "顽强生存", desc: "生存30天", icon: "🏆" },
-  { id: "survive_100", name: "末日传奇", desc: "生存100天", icon: "👑" },
-  { id: "zombie_hunter", name: "丧尸猎人", desc: "击杀50只丧尸", icon: "⚔️" },
-  { id: "zombie_slayer", name: "屠尸者", desc: "击杀200只丧尸", icon: "💀" },
-  { id: "explorer", name: "探索者", desc: "探索10张不同的地图", icon: "🗺️" },
-  { id: "collector", name: "全图探索", desc: "探索所有地图", icon: "🌍" },
-  { id: "base_upgrade", name: "安居乐业", desc: "基地升至满级", icon: "🏠" },
-  { id: "companion_recruit", name: "不再孤单", desc: "招募第一个伙伴", icon: "🤝" },
-  { id: "boss_killer", name: "赏金猎人", desc: "击败第一个BOSS", icon: "🎯" },
-  { id: "noble_status", name: "贵族身份", desc: "获得贵族身份牌", icon: "👑" },
-  { id: "dawn_member", name: "曙光成员", desc: "加入曙光阵地", icon: "🌅" },
-  { id: "ending_death", name: "终结", desc: "达成结局：死亡", icon: "💀" },
-  { id: "ending_999", name: "未知的将来", desc: "达成结局：未知的将来", icon: "🌅" },
-  { id: "ending_prince", name: "权力的沉溺", desc: "达成结局：权力的沉溺", icon: "👑" },
-  { id: "ending_captain", name: "发光发热吧", desc: "达成结局：发光发热吧", icon: "🌅" },
-  { id: "ending_newforce", name: "成为新势力", desc: "达成结局：成为新势力", icon: "⚔️" },
-  { id: "ending_space", name: "飞向太空", desc: "达成结局：飞向太空", icon: "🚀" },
-  { id: "ending_hope", name: "希望的火种", desc: "达成结局：希望的火种", icon: "🌟" },
-  { id: "ending_stay", name: "留下来吧", desc: "达成结局：留下来吧", icon: "🛡️" },
-  { id: "ending_farming", name: "我不是农神", desc: "达成结局：我不是农神", icon: "🌾" },
-  { id: "ending_love_hate", name: "爱恨情仇", desc: "达成结局：爱恨情仇", icon: "💪" },
-  { id: "ending_food", name: "沦为盘中餐", desc: "达成结局：沦为盘中餐", icon: "🍖" },
-  { id: "ending_elopement", name: "私奔", desc: "达成结局：私奔", icon: "🚗" },
-  { id: "ending_mermaid", name: "人鱼传说", desc: "达成结局：人鱼传说", icon: "🧜" },
-  { id: "ending_used", name: "被人当枪使", desc: "达成结局：被人当枪使", icon: "🔫" },
+  { id: "survive_10", name: "Chân ướt chân ráo", desc: "Sinh tồn 10 ngày", icon: "🏆" },
+  { id: "survive_30", name: "Sinh tồn bền bỉ", desc: "Sinh tồn 30 ngày", icon: "🏆" },
+  { id: "survive_100", name: "Huyền thoại mạt thế", desc: "Sinh tồn 100 ngày", icon: "👑" },
+  { id: "zombie_hunter", name: "Thợ săn zombie", desc: "Giết 50 zombie", icon: "⚔️" },
+  { id: "zombie_slayer", name: "Kẻ đồ tể zombie", desc: "Giết 200 zombie", icon: "💀" },
+  { id: "explorer", name: "Nhà thám hiểm", desc: "Thám hiểm 10 bản đồ khác nhau", icon: "🗺️" },
+  { id: "collector", name: "Khám phá toàn bản đồ", desc: "Thám hiểm tất cả bản đồ", icon: "🌍" },
+  { id: "base_upgrade", name: "An cư lạc nghiệp", desc: "Cơ sở lên tối đa cấp", icon: "🏠" },
+  { id: "companion_recruit", name: "Không còn cô đơn", desc: "Chiêu mộ người đồng hành đầu tiên", icon: "🤝" },
+  { id: "boss_killer", name: "Thợ săn tiền thưởng", desc: "Đánh bại BOSS đầu tiên", icon: "🎯" },
+  { id: "noble_status", name: "Thân phận quý tộc", desc: "Nhận được tước vị quý tộc", icon: "👑" },
+  { id: "dawn_member", name: "Thành viên bình minh", desc: "Gia nhập trận địa bình minh", icon: "🌅" },
+  { id: "ending_death", name: "Kết thúc", desc: "Đạt kết cục: Tử vong", icon: "💀" },
+  { id: "ending_999", name: "Tương lai chưa biết", desc: "Đạt kết cục: Tương lai chưa biết", icon: "🌅" },
+  { id: "ending_prince", name: "Đắm chìm quyền lực", desc: "Đạt kết cục: Đắm chìm quyền lực", icon: "👑" },
+  { id: "ending_captain", name: "Phát sáng đi", desc: "Đạt kết cục: Phát sáng đi", icon: "🌅" },
+  { id: "ending_newforce", name: "Trở thành thế lực mới", desc: "Đạt kết cục: Trở thành thế lực mới", icon: "⚔️" },
+  { id: "ending_space", name: "Bay vào vũ trụ", desc: "Đạt kết cục: Bay vào vũ trụ", icon: "🚀" },
+  { id: "ending_hope", name: "Hạt giống hy vọng", desc: "Đạt kết cục: Hạt giống hy vọng", icon: "🌟" },
+  { id: "ending_stay", name: "Ở lại đi", desc: "Đạt kết cục: Ở lại đi", icon: "🛡️" },
+  { id: "ending_farming", name: "Tôi không phải thần nông", desc: "Đạt kết cục: Tôi không phải thần nông", icon: "🌾" },
+  { id: "ending_love_hate", name: "Yêu hận tình thù", desc: "Đạt kết cục: Yêu hận tình thù", icon: "💪" },
+  { id: "ending_food", name: "Trở thành món ăn", desc: "Đạt kết cục: Trở thành món ăn", icon: "🍖" },
+  { id: "ending_elopement", name: "Tư bôn", desc: "Đạt kết cục: Tư bôn", icon: "🚗" },
+  { id: "ending_mermaid", name: "Truyền thuyết người cá", desc: "Đạt kết cục: Truyền thuyết người cá", icon: "🧜" },
+  { id: "ending_used", name: "Bị người khác dùng làm súng", desc: "Đạt kết cục: Bị người khác dùng làm súng", icon: "🔫" },
 ];
 
 export const ENDING_STORIES = {
-  ending_death: `【结局一：死亡】
+  ending_death: `【Kết cục 1: Tử vong】
 
-在这片被丧尸蹂躏的大地上，又一个生命消逝了。
+Trên mảnh đất bị zombie tàn phá, lại một sinh mệnh vụt tắt.
 
-你的旅程到此结束。那些未完成的梦想、未兑现的承诺、未说出口的话语……都随着你的死亡化作了尘埃。
+Hành trình của bạn kết thúc tại đây. Những giấc mơ chưa hoàn thành, những lời hứa chưa thực hiện, những lời chưa nói ra……tất cả đều hóa thành bụi theo cái chết của bạn.
 
-也许有人会记得你，也许不会。末日的车轮不会因为任何人停下。
+Có lẽ có người sẽ nhớ bạn, có lẽ không. Bánh xe mạt thế sẽ không vì bất kỳ ai mà dừng lại.
 
-愿你在另一个世界，不再有饥饿、恐惧和孤独。
+Nguyện bạn ở một thế giới khác, không còn đói khát, sợ hãi và cô đơn.
 
-—— 你的故事，就此终结。`,
+—— Câu chuyện của bạn, đến đây là hết.`,
 
-  ending_999: `【结局二：未知的将来】
+  ending_999: `【Kết cục 2: Tương lai chưa biết】
 
-第999天。
+Ngày thứ 999.
 
-你站在基地的屋顶上，望着远方破晓的天空。风中的腐臭味已经淡了许多，取而代之的是一种说不清的清新感。
+Bạn đứng trên mái cơ sở, nhìn về phía chân trời rạng đông phương xa. Mùi thối trong gió đã nhạt đi nhiều, thay vào đó là một cảm giác tươi mới khó tả.
 
-九百九十九个日夜。你从那个蜷缩在帐篷里瑟瑟发抖的幸存者，变成了这片废土上最坚韧的存在。你见证过太多死亡，也创造过太多奇迹。
+Chín trăm chín mươi chín ngày đêm. Bạn từ người sống sót co ro trong lều run rẩy, trở thành tồn tại kiên cường nhất trên mảnh phế thổ này. Bạn đã chứng kiến quá nhiều cái chết, cũng đã tạo ra quá nhiều kỳ tích.
 
-就在这时，你在基地角落发现了一个尘封已久的箱子。打开后，里面是一个闪烁着奇异光芒的背包——次元收纳背包。它似乎不属于这个世界，却能容纳远超常理的物品。
+Ngay lúc này, bạn phát hiện một chiếc hộp bụi bám ở góc cơ sở. Mở ra, bên trong là một chiếc balo lấp lánh ánh sáng kỳ lạ——balo chứa đồ đa chiều. Nó dường như không thuộc về thế giới này, nhưng có thể chứa lượng vật phẩm vượt xa lẽ thường.
 
-你背上了它。一股温暖的力量流过全身，仿佛在告诉你：无论将来面对什么，你都将继续前行。
+Bạn đeo nó lên. Một dòng sức mạnh ấm áp chảy qua toàn thân, như đang nói với bạn: dù tương lai đối mặt với gì, bạn sẽ tiếp tục tiến bước.
 
-远方，隐约传来了其他幸存者的声音。文明的火种，从未熄灭。
+Phương xa, mơ hồ truyền đến tiếng của những người sống sót khác. Ngọn lửa văn minh, chưa bao giờ tắt.
 
-—— 你的故事，仍在继续。\n\n获得【次元收纳背包】（68格）！`,
+—— Câu chuyện của bạn, vẫn đang tiếp tục.\n\nNhận được 【Balo chứa đồ đa chiều】 (68 ô)!`,
 
-  ending_prince: `【结局三：权力的沉溺】
+  ending_prince: `【Kết cục 3: Đắm chìm quyền lực】
 
-你回到了基地，脱下那身代表储君身份的华服，疲惫地坐在床边。
+Bạn trở về cơ sở, cởi bộ lễ phục đại diện cho thân phậnThái tử, mệt mỏi ngồi bên giường.
 
-城堡的生活奢华而糜烂。国王的赏识、大臣的奉承、下人的敬畏……一切都来得太快了。你发现自己开始沉溺于这种权力带来的快感。
+Cuộc sống thành bảo xa hoa mà mục ruỗng. Sự ưu ái của quốc vương, sự nịnh nọt của đại thần, sự kính sợ của người hầu……tất cả đến quá nhanh. Bạn phát hiện mình bắt đầu đắm chìm trong khoái cảm mà quyền lực mang lại.
 
-窗外，曙光阵地的方向隐约有火光闪烁。你记得那个满脸风霜的首领，记得V小姐冷峻的眼神，记得苏小涵温暖的笑容，记得莉莉丝调皮的话语。
+Ngoài cửa sổ, hướng trận địa bình minh thấp thoáng có ánh lửa. Bạn nhớ vịthủ lĩnh đầy gió sương, nhớ ánh mắt lạnh lùng của V小姐, nhớ nụ cười ấm áp của 苏小涵, nhớ lời nói tinh nghịch của 莉莉丝.
 
-但那些都已经与你无关了。
+Nhưng những điều đó đã không còn liên quan đến bạn.
 
-你是储君。城堡未来的继承人。无数人的生死，只在你一念之间。
+Bạn làThái tử. Người thừa kế tương lai của thành bảo. Sinh mạng vô số người, chỉ trong một ý niệm của bạn.
 
-不知为何，你感到一阵深深的不安。权力就像一剂毒药，慢慢地侵蚀着你的灵魂。
+Không biết vì sao, bạn cảm thấy một nỗi bất an sâu sắc. Quyền lực như một liều thuốc độc, chậm rãi xói mòn linh hồn bạn.
 
-国王终究会老去。而你……准备好成为下一个他了吗？
+Quốc vương cuối cùng sẽ già đi. Còn bạn……sẵn sàng trở thành người tiếp theo ông ấy chưa?
 
-—— 权力的沉溺，或许比丧尸更可怕。`,
+—— Đắm chìm quyền lực, có lẽ còn đáng sợ hơn zombie.`,
 
-  ending_captain: `【结局四：发光发热吧】
+  ending_captain: `【Kết cục 4: Phát sáng đi】
 
-你回到了基地，胸前那枚曙光队长徽章在昏暗的灯光下闪烁着微光。
+Bạn trở về cơ sở, huy chương đội trưởng bình minh trên ngực lấp lánh ánh sáng yếu ớt dưới ánh đèn mờ.
 
-阵地里的每一个人都信任你、依赖你。V小姐不再冷眼相待，苏小涵的笑容因你而更加灿烂，莉莉丝总是缠着你讲外面的故事。
+Mỗi người trong trận địa đều tin tưởng bạn, nương tựa vào bạn. V小姐 không còn lạnh nhạt, nụ cười của 苏小涵 vì bạn mà càng rạng rỡ, 莉莉丝 luôn quấn lấy bạn kể chuyện bên ngoài.
 
-曙光阵地，终于有了一位真正的领袖。
+Trận địa bình minh, cuối cùng có một nhà lãnh đạo thực sự.
 
-你站在基地的窗前，望着外面那片被丧尸蹂躏过的大地。虽然前路漫漫，但只要有你在，阵地的每一个人就有了希望。
+Bạn đứng bên cửa sổ cơ sở, nhìn mảnh đất bị zombie tàn phá ngoài kia. Tuy con đường phía trước còn dài, nhưng có bạn ở đó, mỗi người trong trận địa đều có hy vọng.
 
-明天，你还要继续带领大家搜刮物资、加固防线、救助幸存者。
+Ngày mai, bạn còn phải tiếp tục dẫn dắt mọi người lục soát vật tư, củng cố phòng tuyến, cứu người sống sót.
 
-末世之中，你是那道最温暖的光。
+Giữa mạt thế, bạn là tia sáng ấm áp nhất.
 
-—— 继续发光发热吧，曙光先锋队长！`,
+—— Tiếp tục phát sáng đi, đội trưởng tiền phong bình minh!`,
 
-  ending_newforce: `【结局五：成为新势力】
+  ending_newforce: `【Kết cục 5: Trở thành thế lực mới】
 
-当最后一块拼图归位，一个新的时代悄然降临。
+Khi mảnh ghép cuối cùng trở về chỗ, một thời đại mới lặng lẽgiáng lâm.
 
-露露薇站在你的身旁，她已经完全摆脱了丧尸的诅咒，成为了连接人类与变异体之间的桥梁。柳如烟依偎在你身边，她的眼中不再有恐惧，只有对未来的期许。
+Lulu Wei đứng bên cạnh bạn, cô đã hoàn toàn thoát khỏi lời nguyền zombie, trở thành cầu nối giữa con người và thể biến dị. Liu Ruyan tựa vào bạn, trong mắt cô không còn sợ hãi, chỉ có kỳ vọng vào tương lai.
 
-马三的覆灭、黑影的消亡、丧尸之王的陨落——这些曾经令人闻风丧胆的名字，如今只是你传奇故事中的注脚。博士的研究成果让你掌握了控制病毒的关键技术。
+Sự sụp đổ của Mã Tam, sự tiêu vong của Hắc Ảnh, sự vẫn lạc của zombie chi vương——những cái tên từng khiến người ta nghe tin đã sợ hãi, nay chỉ là những dòng chú thích trong câu chuyện huyền thoại của bạn. Thành quả nghiên cứu của tiến sĩ giúp bạn nắm giữ kỹ thuật then chốt để khống chế virus.
 
-你拥有了一支由露露薇改造的"清醒丧尸"部队，柳如烟训练的人类精锐战士，以及博士留下的尖端科技。
+Bạn sở hữu một đội "zombie tỉnh táo" được Lulu Wei cải tạo, tinh nhuệ chiến sĩ do Liu Ruyan huấn luyện, và công nghệ tiên tiến tiến sĩ để lại.
 
-城堡和阵地都在等着你的决定。是让他们继续各自为政，还是……建立一个全新的秩序？
+Thành bảo và trận địa đều đang chờ quyết định của bạn. Để họ tiếp tục cát cứ, hay là……xây dựng một trật tự hoàn toàn mới?
 
-你从怀中取出了那把传说中的无畏之刃。它在阳光下闪烁着耀眼的光芒，仿佛在宣告一个新时代的到来。
+Bạn lấy ra lưỡi dao vô úy trong truyền thuyết. Nó lấp lánh ánh sáng chói mắt dưới ánh mặt trời, như tuyên bố một thời đại mới đã đến.
 
-旧的势力终将消亡，新的传奇正在书写。
+Thế lực cũ cuối cùng sẽ tiêu vong, huyền thoại mới đang được viết nên.
 
-而你，就是这部传奇的主角。
+Còn bạn, chính là nhân vật chính của huyền thoại này.
 
-—— 从此，这片废土上多了一股无法被忽视的力量。`,
+—— Từ nay về sau, trên mảnh phế thổ này thêm một lực lượng không thể bị bỏ qua.`,
 
-  ending_space: `【结局六：飞向太空】
+  ending_space: `【Kết cục 6: Bay vào vũ trụ】
 
-倒计时归零的那一刻，整座发射塔剧烈震颤。你独自坐在狭小的驾驶舱内，安全带勒得胸口发疼。
+Khoảnh khắc đếm ngược về 0, cả tòa tháp phóng rung lên dữ dội. Bạn một mình ngồi trong buồng lái chật hẹp, dây an toàn siết chặt ngực.
 
-三、二、一——
+Ba, hai, một——
 
-火箭冲破大气层的那一刻，你看着脚下灰蒙蒙的大地渐渐缩小成一颗暗淡的星球。那些在废墟中挣扎的日夜、那些来不及说出口的告别、那些再也回不去的面孔……全都化作了舷窗外一闪而逝的流星。
+Khoảnh khắc tên lửa xé rách khí quyển, bạn nhìn mặt đất xám xịt dưới chân từ từ thu nhỏ thành một hành tinh tối mờ. Những ngày đêm vật lộn trong phế tích, những lời tạm biệt chưa kịp nói, những khuôn mặt không thể quay lại……tất cả đều hóa thành những vệt sao băng lướt qua ngoài cửa sổ.
 
-你不知道自己做对了还是做错了。但此刻，你已无法回头。
+Bạn không biết mình làm đúng hay sai. Nhưng giờ đây, bạn không thể quay đầu.
 
-舱外是无尽的黑暗与星辰。你漂浮在失重的空间里，像一粒被抛入大海的沙。
+Ngoài buồng là bóng tối vô tận và các vì sao. Bạn trôi nổi trong trạng thái không trọng lực, như một hạt cát bị ném vào biển.
 
-也许某一天，你会找到新的家园。也许不会。
+Có lẽ một ngày nào đó, bạn sẽ tìm được một ngôi nhà mới. Có lẽ không.
 
-但至少——你选择了飞翔。
+Nhưng ít nhất——bạn đã chọn bay.
 
-—— 你的故事，飞向了未知的星空。`,
+—— Câu chuyện của bạn, bay về phía những vì sao chưa biết.`,
 
-  ending_hope: `【结局七：希望的火种】
+  ending_hope: `【Kết cục 7: Hạt giống hy vọng】
 
-倒计时归零的那一刻，整座发射塔剧烈震颤。
+Khoảnh khắc đếm ngược về 0, cả tòa tháp phóng rung lên dữ dội.
 
-"大家抓紧！"你大喊。V小姐沉默地握紧了扶手，苏小涵紧紧抱着你的手臂，莉莉丝则缩在角落里，眼眶泛红却倔强地咬着嘴唇。
+" mọi người nắm chặt!" bạn hét lớn. V小姐 im lặng siết chặt tay vịn, 苏小涵 ôm chặt cánh tay bạn, 莉莉丝 co rúm trong góc, hốc mắt đỏ hoe nhưng vẫn bướng bỉnh cắn môi.
 
-三、二、一——
+Ba, hai, một——
 
-你和伙伴们挤在狭小的舱体内，火箭震颤着升空。窗外是末日，前方是未知。但至少，你们在一起。
+Bạn và các đồng hành chen chúc trong buồng lái chật hẹp, tên lửa rung chuyển bay lên. Ngoài cửa sổ là mạt thế, phía trước là chưa biết. Nhưng ít nhất, các bạn ở bên nhau.
 
-透过舷窗，你看到那片被丧尸蹂躏的大地越来越小。V小姐终于松开了紧握的扶手，轻轻说了一句："走吧。" 苏小涵靠在你肩上，泪水无声地滑落。莉莉丝擦了擦眼睛，忽然笑了："嘿，我们真的要上天了！"
+Qua cửa sổ, bạn thấy mảnh đất bị zombie tàn phá ngày càng nhỏ. V小姐 cuối cùng buông tay vịn đang siết chặt, khẽ nói một câu: "Đi thôi." 苏小涵 tựa vào vai bạn, nước mắt lặng lẽ lăn xuống. 莉莉丝 lau mắt, bỗng cười: "Này, chúng ta thật sự sắp lên trời rồi!"
 
-舱外是无尽的黑暗与星辰。但舱内，有温度，有呼吸，有彼此。
+Ngoài buồng là bóng tối vô tận và các vì sao. Nhưng trong buồng, có nhiệt độ, có hơi thở, có nhau.
 
-也许某一天，你们会找到新的家园。也许不会。
+Có lẽ một ngày nào đó, các bạn sẽ tìm được ngôi nhà mới. Có lẽ không.
 
-但只要在一起，希望就不会熄灭。
+Nhưng chỉ cần ở bên nhau, hy vọng sẽ không tắt.
 
-—— 你们是末日最后的火种，也是最亮的星光。`,
+—— Các bạn là hạt giống cuối cùng của mạt thế, cũng là ánh sao sáng nhất.`,
 
-  ending_stay: `【结局八：留下来吧】
+  ending_stay: `【Kết cục 8: Ở lại đi】
 
-你看着陈博士一步步走上舷梯，他的背影在火箭的阴影中显得格外瘦小。他回过头，推了推那副厚重的眼镜，嘴角露出一丝微笑："谢谢你。替我……好好活下去。"
+Bạn nhìn Trần tiến sĩ từng bước đi lên thang máy, bóng lưng ông ấy trong bóng tên lửa đặc biệt nhỏ bé. Ông ấy quay đầu, đẩy gọng kính dày, khóe miệng nở nụ cười: "Cảm ơn bạn. Thay tôi……sống cho tốt."
 
-舱门关闭。倒计时开始。
+Cửa buồng đóng lại. Đếm ngược bắt đầu.
 
-你转身走出发射中心，火箭的轰鸣在身后越来越响。你抬头望去，一道刺目的白光撕裂了灰蒙蒙的天空，像一颗逆行的流星，朝着无尽的宇宙飞去。
+Bạn quay người đi ra khỏi trung tâm phóng, tiếng gầm tên lửa phía sau ngày càng lớn. Bạn ngẩng đầu nhìn, một vệt sáng trắng chói lóa xé toạc bầu trời xám xịt, như một vệt sao băng đi ngược, bay về phía vũ trụ vô tận.
 
-陈博士带着希望飞向了太空。而你，选择留下来。
+Trần tiến sĩ mang theo hy vọng bay vào vũ trụ. Còn bạn, chọn ở lại.
 
-你握紧了手中的武器。这世界还没完，你还要继续战斗。
+Bạn siết chặt vũ khí trong tay. Thế giới này chưa kết thúc, bạn còn phải tiếp tục chiến đấu.
 
-脚下的土地满目疮痍，但你的眼中还有光。
+Mảnh đất dưới chân đầy thương tích, nhưng trong mắt bạn vẫn còn ánh sáng.
 
-—— 只要还有一口气在，故事就不会结束。`,
+—— Chỉ cần còn một hơi thở, câu chuyện sẽ không kết thúc.`,
 
-  ending_farming: `【结局九：我不是农神】
+  ending_farming: `【Kết cục 9: Tôi không phải thần nông】
 
-你站在试验田边，看着那片曾经荒芜的土地上，如今长满了各式各样的作物。风吹过麦浪，发出沙沙的声响，像是大地在低语。
+Bạn đứng bên ruộng thí nghiệm, nhìn mảnh đất từng hoang vu nay mọc đầy các loại cây trồng. Gió thổi qua sóng lúa, phát ra tiếng xào xạc, như đại địa đang thì thầm.
 
-沐苗苗站在你身旁，草帽下的脸庞沾着泥土，却笑得比阳光还灿烂。她弯腰拔起一颗胡萝卜，在衣角上擦了擦，咬了一口，眼眶忽然红了。
+Miao Miao đứng bên bạn, khuôn mặt dưới mũ rơm dính đất, nhưng nụ cười rạng rỡ hơn cả ánh mặt trời. Cô ấy cúi người nhổ một củ cà rốt, lau trên vạt áo, cắn một miếng, hốc mắt bỗng đỏ hoe.
 
-"你知道吗……"她的声音有些哽咽，"我爸妈走的时候，我什么都不会。我连一颗种子都种不活。"
+"Biết không……" giọng cô ấy nghẹn ngào, "Khi bố mẹ em đi, em chẳng biết gì. Em thậm chí không trồng nổi một hạt giống."
 
-她蹲下身，双手捧起一把泥土，让它从指缝间缓缓流下。
+Cô ấy khom người, hai tay nâng một nắm đất, để nó từ kẽ ngón tay chậm rãi chảy xuống.
 
-"后来我学会了。每一颗种子，每一次浇水，每一株苗……都是他们在天上看着我。"
+"Sau đó em đã học được. Mỗi hạt giống, mỗi lần tưới nước, mỗi cây mầm……đều là họ đang nhìn em từ trên trời."
 
-远处，花圈墓碑前的花环在风中轻轻摇曳。日记本上的字迹已经模糊，但苗苗手绘的那幅一家人，依然清晰如昨。
+Phương xa, vòng hoa trước bia mộ khẽ lay trong gió. Chữ trên nhật ký đã mờ, nhưng bức tranh gia đình do Miao Miao vẽ tay, vẫn rõ như hôm qua.
 
-你看着这片试验田——它不再是求生的工具，而是一座纪念碑。每一株作物都在说：我们还在，我们还记得。
+Bạn nhìn mảnh ruộng thí nghiệm này——nó không còn là công cụ cầu sinh, mà là một đài kỷ niệm. Mỗi cây trồng đều đang nói: chúng tôi vẫn còn, chúng tôi vẫn nhớ.
 
-沐苗苗站起身，拍了拍膝盖上的土，忽然笑了：
+Miao Miao đứng dậy, vỗ đất trên đầu gối, bỗng cười:
 
-"我不是什么农神啦……我只是个不想再让人挨饿的普通人。"
+"Em không phải thần nông gì cả……em chỉ là một người bình thường không muốn để ai phải đói nữa."
 
-你也是。你们都是。
+Bạn cũng vậy. Các bạn đều vậy.
 
-—— 在这片废土上，最伟大的奇迹不是武器，不是权力，而是一颗种子破土而出的声音。`,
+—— Trên mảnh phế thổ này, kỳ tích vĩ đại nhất không phải vũ khí, không phải quyền lực, mà là âm thanh của một hạt giống phá đất vươn lên.`,
 
-  ending_love_hate: `【结局十：爱恨情仇】
+  ending_love_hate: `【Kết cục 10: Yêu hận tình thù】
 
-你站在城堡的阳台上，看着远处阵地和城堡的灯火。两个世界，两种秩序，在你眼前交织成一片。
+Bạn đứng trên ban công thành bảo, nhìn ánh đèn của trận địa và thành bảo phương xa. Hai thế giới, hai trật tự, đan xen trước mắt bạn thành một mảnh.
 
-皇后站在你身旁，手中握着那枚定情信物——向日葵吊坠。她的目光穿过夜色，似乎在看着很远很远的地方。
+Hoàng hậu đứng bên bạn, tay nắm chặt vật đính ước——dây chuyền hoa hướng dương. Ánh mắt cô ấy xuyên qua màn đêm, như đang nhìn về một nơi rất xa rất xa.
 
-"你知道吗，"她轻声说，"他不是坏人。他只是……太固执了。"
+"Biết không," cô ấy khẽ nói, "ông ấy không phải người xấu. Ông ấy chỉ là……quá cố chấp thôi."
 
-你想起录音笔里的声音，想起首领的沉默，想起那些在权力和情感之间被碾碎的人。
+Bạn nhớ giọng trong bút ghi âm, nhớ sự im lặng củathủ lĩnh, nhớ những người bị nghiền nát giữa quyền lực và tình cảm.
 
-"他只爱我一个人。"皇后忽然笑了，笑容里有苦涩，也有温柔，"在这个末世里，一个国王只爱他的皇后，这算不算一种浪漫？"
+"Ông ấy chỉ yêu mình em thôi." Hoàng hậu bỗng cười, trong nụ cười có cay đắng, cũng có dịu dàng, "Giữa mạt thế này, một quốc vương chỉ yêu hoàng hậu của mình, có coi là một dạng lãng mạn không?"
 
-你沉默了。
+Bạn im lặng.
 
-国王用权力筑起高墙，首领用信念守住阵地，而皇后站在两堵墙之间，被撕裂，也被成全。
+Quốc vương dùng quyền lực xây nên bức tường cao,thủ lĩnh dùng niềm tin giữ vững trận địa, còn hoàng hậu đứng giữa hai bức tường, bị xé rách, cũng được thành toàn.
 
-"谢谢你。"她把吊坠放回胸口，"谢谢你让我知道，他还在想我。也谢谢你让我知道，我哥哥……还在等我。"
+"Cảm ơn bạn." cô ấy đặt dây chuyền trở về ngực, "Cảm ơn bạn cho em biết, ông ấy vẫn còn đang nghĩ đến em. Cũng cảm ơn bạn cho em biết, anh trai em……vẫn đang đợi em."
 
-远处，阵地灯火通明。城堡里，国王还在等他的皇后回家。
+Phương xa, trận địa ánh đèn sáng trưng. Trong thành bảo, quốc vương vẫn đang đợi hoàng hậu trở về.
 
-而你，站在爱恨之间，终于明白：末世里最奢侈的，不是权力，不是物资，而是还有人值得你恨，还有人值得你爱。
+Còn bạn, đứng giữa yêu và hận, cuối cùng hiểu ra: điều xa xỉ nhất giữa mạt thế, không phải quyền lực, không phải vật tư, mà là vẫn còn có người đáng để bạn hận, vẫn còn có người đáng để bạn yêu.
 
-—— 爱恨情仇，不过是因为，我们都还活着。`,
+—— Yêu hận tình thù, đơn giản là vì, chúng ta vẫn còn sống.`,
 
-  ending_food: `【结局十一：沦为盘中餐】
+  ending_food: `【Kết cục 11: Trở thành món ăn】
 
-你的意识在黑暗中沉浮。
+Ý thức bạn chìm nổi trong bóng tối.
 
-恍惚间，你听到了铁锅咕嘟冒泡的声音，闻到了一股浓烈的肉香——那味道如此熟悉，因为你曾经在服务区的餐厅里品尝过。
+Mơ hồ, bạn nghe thấy tiếng nồi sắt sôi ùng ục, ngửi thấy một mùi thịt đậm——mùi đó quen thuộc đến lạ, vì bạn từng nếm thử trong nhà hàng khu dịch vụ.
 
-钝痛从四肢传来。
+Đau buốt từ các chi truyền đến.
 
-你无法动弹，无法呼救。
+Bạn không thể động đậy, không thể cầu cứu.
 
-马三的身影在火光中晃动，他哼着不知名的小曲，刀锋在昏黄的灯光下闪烁着冷冽的光芒。他的动作熟练得令人胆寒——那是一种经过无数次练习的从容。
+Bóng Mã Tam lung lay trong ánh lửa, ông ấy ngân nga một điệu nhỏ không rõ tên, lưỡi dao lóe lên ánh lạnh dưới ánh đèn vàng. Động tác ông ấy thành thạo đến rợn người——đó là sự ung dung của người đã luyện tập vô số lần.
 
-"别怕，兄弟。"他的声音从远处飘来，带着一种诡异的温柔，"你说过要和我一起统治这片区域的……"
+"Đừng sợ, huynh đệ." giọng ông ấy từ xa vọng lại, mang theo một thứ dịu dàng quỷ dị, "Bạn từng nói muốn cùng tôi thống trị khu vực này……"
 
-铁锅里的汤汁翻滚着，蒸汽升腾，在空气中弥漫开。
+Nước trong nồi sôi cuồn cuộn, hơi nước bốc lên, lan tỏa trong không khí.
 
-"现在，你已经成为我的一部分了。"
+"Giờ đây, bạn đã trở thành một phần của tôi rồi."
 
-黑暗中，你终于明白了一切——那些"杂肉"、那个"武器库"的承诺、那越来越疯狂的眼神……
+Trong bóng tối, bạn cuối cùng cũng hiểu ra tất cả——những "thịt tạp" đó, lời hứa về "kho vũ khí", ánh mắt ngày càng điên cuồng……
 
-可惜，明白得太晚了。
+Đáng tiếc, hiểu ra quá muộn.
 
-你的故事，在国道高速服务区的某间昏暗餐厅里，画上了一个被端上餐桌的句号。
+Câu chuyện của bạn, trong một gian nhà hàng tối tăm tại khu dịch vụ cao tốc, khép lại bằng một dấu chấm được đặt lên bàn ăn.
 
-—— 沦为盘中餐，成为马三的又一道"新菜"。`,
+—— Trở thành món ăn, trở thành một "món mới" nữa của Mã Tam.`,
 
-  ending_elopement: `【结局十二：私奔】
+  ending_elopement: `【Kết cục 12: Tư bôn】
 
-越野车引擎的轰鸣声撕破了末日的寂静。
+Tiếng gầm động cơ xe việt dã xé toạc sự tĩnh lặng của mạt thế.
 
-柳如烟坐在副驾驶位上，风从破碎的车窗灌进来，吹乱了她额前的碎发。她回头看了一眼——那座困住你们许久的城市，正在后视镜里越来越远。
+Liu Ruyan ngồi ghế phụ, gió từ cửa sổ vỡ ùa vào, thổi rối tóc mai cô ấy. Cô ấy quay đầu nhìn——thành phố giam cầm các bạn bấy lâu, đang lùi dần trong gương chiếu hậu.
 
-你握着方向盘，指节泛白，但嘴角却忍不住上扬。
+Bạn nắm vô lăng, đốt ngón tay trắng bệch, nhưng khóe miệng không nhịn được cong lên.
 
-"想什么呢？"她问。
+"Nghĩ gì vậy?" cô ấy hỏi.
 
-"在想……我们真的出来了。"
+"Nghĩ rằng……chúng ta thật sự ra rồi."
 
-她笑了，那是一种你从没见过的轻松笑容——没有末日的阴霾，没有生存的焦虑，只有纯粹的、属于年轻人的恣意和张扬。
+Cô ấy cười, đó là nụ cười nhẹ nhõm bạn chưa từng thấy——không còn âm trầm mạt thế, không còn lo âu sinh tồn, chỉ có sự tự do và phóng khoáng thuần túy của tuổi trẻ.
 
-后备箱里塞满了你们仅有的物资——几瓶水，一些压缩饼干，还有那把撬棍。
+Thùng xe chất đầy vật tư ít ỏi của các bạn——vài chai nước, ít bánh quy nén, và cây nạy đó.
 
-你们不知道前方是什么。
+Các bạn không biết phía trước là gì.
 
-也许是另一座丧尸横行的死城，也许是某个还保留着文明火种的聚居地，也许是一片荒芜的废土。
+Có lẽ là một thành phố chết khác đầy zombie, có lẽ là một khu định cư còn giữ ngọn lửa văn minh, có lẽ là một mảnh phế thổ hoang vu.
 
-但你们在一起。
+Nhưng các bạn ở bên nhau.
 
-车窗外，夕阳将天际染成一片温暖的橘红色。柳如烟把头靠在车窗上，轻声说：
+Ngoài cửa sổ, hoàng hôn nhuộm chân trời thành một mảng cam ấm. Liu Ruyan tựa đầu vào cửa sổ, khẽ nói:
 
-"你知道吗……末世之前，我最大的愿望就是毕业旅行。"
+"Biết không……trước mạt thế, ước mơ lớn nhất của em là đi du lịch tốt nghiệp."
 
-你踩下油门，越野车在废弃的公路上扬起一路尘土。
+Bạn đạp ga, xe việt dã cuốn theo một vệt bụi trên đường bỏ hoang.
 
-"那现在就是我们的毕业旅行了。"
+"Vậy giờ đây chính là chuyến du lịch tốt nghiệp của chúng ta."
 
-她笑得弯起了眼睛。
+Cô ấy cười cong mắt.
 
-路在向前延伸，通往未知的远方。而你们终于明白——在这个崩塌的世界里，最奢侈的不是物资，不是武器，而是还有一个人，愿意陪你一起逃亡。
+Con đường vươn về phía trước, thông đến phương xa chưa biết. Và các bạn cuối cùng hiểu ra——giữa thế giới sụp đổ này, điều xa xỉ nhất không phải vật tư, không phải vũ khí, mà là vẫn còn có một người, sẵn sàng cùng bạn bỏ trốn.
 
-—— 私奔到世界尽头，哪怕末日也不回头。`,
+—— Tư bôn đến tận cùng thế giới, dù mạt thế cũng không quay đầu.`,
 
-  ending_used: `【结局十四：被人当枪使】
+  ending_used: `【Kết cục 14: Bị người khác dùng làm súng】
 
-地下地铁隧道的空气阴冷潮湿，墙壁上的水珠一滴一滴落在锈蚀的铁轨上。
+Không khí trong đường hầm tàu điện ngầm dưới đất lạnh lẽo ẩm ướt, giọt nước trên tường tí tách rơi xuống đường ray rỉ sét.
 
-你站在隧道深处，握紧了手中的武器。远处传来了脚步声——是老马。他踩着积水走来，手里提着一个鼓鼓囊囊的布袋。
+Bạn đứng sâu trong đường hầm, siết chặt vũ khí. Từ xa vọng đến tiếng bước chân——là Lão Mã. Ông ấy dẫm nước đi tới, tay xách một túi vải phồng.
 
-"来啦。"他咧嘴一笑，露出几颗黄牙。"30根烟，都在这里。你应得的。"
+"Đến rồi." ông ấy nhe răng cười, để lộ mấy chiếc răng vàng. "30 điếu thuốc, đều ở đây. Bạn xứng đáng nhận."
 
-他把布袋放在地上，缓缓直起腰。然后——
+Ông ấy đặt túi vải xuống đất, từ từ đứng thẳng lên. Sau đó——
 
-你甚至没看清他拔枪的动作。
+Bạn thậm chí còn chưa kịpnhìn rõ động tác ông ấy rút súng.
 
-一声枪响在隧道里久久回荡。你低头，看见胸口涌出的血。
+Một tiếng súng vang vọng lâu trong đường hầm. Bạn cúi đầu, thấy máu trào từ ngực.
 
-老马蹲下身，对着你渐渐模糊的眼睛，轻声说道："黑影、马三、国王、老赵、陈博士……你背负了太多人命。他们每一个人的死，都在我的账本上记着呢。我只是……替天行道。"
+Lão Mã khom người, trước mắt bạn đang dần mờ, khẽ nói: "Hắc Ảnh, Mã Tam, quốc vương, Lão Zhao, Trần tiến sĩ……bạn đã gánh quá nhiều mạng người. Mỗi cái chết của họ, tôi đều ghi trong sổ của mình. Tôi chỉ là……thay trời hành đạo."
 
-他从你口袋里摸出了剩余的香烟，叼起一根，点燃。烟雾在昏暗的隧道中缓缓升腾。
+Ông ấy móc những điếu thuốc còn lại từ túi bạn, ngậm một điếu, châm lửa. Khói thuốc từ từ bốc lên trong đường hầm tối tăm.
 
-"别怪我。这末世，总得有人来收这笔账。"
+"Đừng trách tôi. Mạt thế này, luôn phải có người đến thu món nợ đó."
 
-脚步声渐渐远去。隧道深处，只剩下滴水声，和你的身体慢慢变冷。
+Tiếng bước chân dần xa. Sâu trong đường hầm, chỉ còn tiếng nước tí tách, và cơ thể bạn chậm rãi lạnh đi.
 
-—— 你不过是别人手中的一把枪。`,
+—— Bạn chẳng qua chỉ là một khẩu súng trong tay người khác.`,
 
-  ending_mermaid: `【结局十三：人鱼传说】
+  ending_mermaid: `【Kết cục 13: Truyền thuyết người cá】
 
-巨型海尸的庞大身躯缓缓沉入深海。海面上最后一道波纹也消散了，世界突然变得异常安静。
+Thân thể khổng lồ của hải thi chìm dần xuống đáy biển sâu. Gợn sóng cuối cùng trên mặt biển cũng tan đi, thế giới đột nhiên trở nên khác thường yên tĩnh.
 
-人鱼浮在水面上，月光洒在她新生的鳞片上，折射出粼粼的银光。她的鱼尾已经完全愈合，比之前更加美丽——每一片鳞都像精心打磨的珍珠。
+Người cá nổi trên mặt nước, ánh trăng rải trên những chiếc vảy mới sinh của cô ấy, phản chiếu ánh bạc lấp lánh. Đuôi cá của cô ấy đã hoàn toàn lành lại, đẹp hơn trước——mỗi chiếc vảy như viên ngọc trai được mài giũa kỹ lưỡng.
 
-"结束了……" 她轻声说，声音像海浪般轻柔却充满了力量。
+"Kết thúc rồi……" cô ấy khẽ nói, giọng như sóng biển nhẹ nhàng mà đầy sức mạnh.
 
-老狼站在船头，放下了猎枪。他沉默了很久，才沙哑地开口："这么多年了……我一直守着那个仓库，守着这个秘密。现在，终于可以放下了。"
+Lão sói đứng ở mũi thuyền, đặt súng săn xuống. Ông ấy im lặng rất lâu, mới khàn khàn cất lời: "Nhiều năm rồi……tôi vẫn luôn giữ kho vật nghiệp đó, giữ bí mật này. Giờ đây, cuối cùng có thể đặt xuống."
 
-人鱼缓缓游到船舷边，抬头望着你们："我要回深海了。那里才是我的家。但我会记得你们——在这个被诅咒的世界里，愿意帮助一个人鱼的两个人。"
+Người cá chậm rãi bơi đến mạn thuyền, ngẩng đầu nhìn các bạn: "Tôi phải về biển sâu rồi. Đó mới là nhà của tôi. Nhưng tôi sẽ nhớ các bạn——giữa thế giới bị nguyền rủa này, hai người sẵn sàng giúp đỡ một người cá."
 
-她从颈间取下两枚鳞片——一枚泛着蓝白电弧，一枚流转着金色雷光，轻轻放在船舷上。
+Cô ấy tháo từ cổ hai chiếc vảy——một chiếc lấp lánh hồ quang điện xanh trắng, một chiếc lưu chuyển ánh sáng vàng của sấm sét, nhẹ nhàng đặt trên mạn thuyền.
 
-"带着它们。无论你们走到哪里，大海都会庇护你们。"
+"Mang chúng theo. Dù các bạn đi đến đâu, biển cả sẽ che chở các bạn."
 
-她潜入水中，身影越来越深，越来越远。但在消失之前，她回过头，露出了一抹笑容——那是这片末日的海洋上空，最纯净、最美丽的一道光。
+Cô ấy lặn xuống nước, thân ảnh ngày càng sâu, ngày càng xa. Nhưng trước khi biến mất, cô ấy quay đầu, nở một nụ cười——đó là tia sáng thuần khiết và đẹp nhất trên bầu trời biển cả mạt thế này.
 
-老狼点了一根烟，吐出一口长气："走吧，小子。我们还有很长的路要走。"
+Lão sói châm một điếu thuốc, thở ra một hơi dài: "Đi thôi, cậu trai. Chúng ta còn con đường rất dài phải đi."
 
-你握紧了手中的鳞片。它们冰凉而温暖，像是一个承诺。
+Bạn siết chặt những chiếc vảy trong tay. Chúng lạnh lẽo mà cũng ấm áp, như một lời hứa.
 
-也许有一天，这场末日会结束。也许不会。
+Có lẽ một ngày nào đó, mạt thế này sẽ kết thúc. Có lẽ không.
 
-但你永远不会忘记——在深海之下，有一个人鱼，正在唱着只有你能听懂的歌。
+Nhưng bạn sẽ không bao giờ quên——dưới đáy biển sâu, có một người cá, đang hát một bài ca chỉ bạn mới nghe hiểu.
 
-—— 人鱼传说，永不完结。`,
+—— Truyền thuyết người cá, không bao giờ kết thúc.`,
 };

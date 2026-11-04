@@ -1,6 +1,6 @@
 /* ============================================================
-   地图 NPC 模块
-   组织顺序：地图NPC入口 → 交易/赠送
+   Mô-đun NPC bản đồ
+   Thứ tự tổ chức: Lối vào NPC bản đồ → Giao dịch/Tặng
    ============================================================ */
 
 import {
@@ -37,7 +37,7 @@ export function handleMapNpcs(npcId) {
   const state = getState();
   const npcData = SURVIVOR_NPC.find(n => n.id === npcId);
   if (!npcData) {
-    setStory("这里空无一人。");
+    setStory("Ở đây không một bóng người.");
     showExploreOptionsState();
     return;
   }
@@ -45,12 +45,12 @@ export function handleMapNpcs(npcId) {
   const affinity = getNpcAffinity(npcId);
   const stage = getAffinityStage(affinity);
   const intro = npcData.desc;
-  setStory(intro + `\n\n好感度：${affinity}/${AFFINITY_MAX[npcId]}`);
+  setStory(intro + `\n\nHảo cảm：${affinity}/${AFFINITY_MAX[npcId]}`);
   setPhase("map_npc");
   setOptions([
-    { text: "交易", action: "map_npc_trade" },
-    { text: "赠送", action: "map_npc_gift" },
-    { text: "离开", action: "map_npc_leave" },
+    { text: "Giao dịch", action: "map_npc_trade" },
+    { text: "Tặng", action: "map_npc_gift" },
+    { text: "Rời đi", action: "map_npc_leave" },
   ]);
 }
 
@@ -62,7 +62,7 @@ export function handleMapNpcsAction(input) {
   const action = state.options[optionIndex].action;
 
   if (action === "map_npc_leave") {
-    setStory("你离开了这里。");
+    setStory("Bạn đã rời khỏi đây.");
     showExploreOptionsState();
     return;
   }
@@ -72,21 +72,21 @@ export function handleMapNpcsAction(input) {
     const npcData = SURVIVOR_NPC.find(n => n.id === npcId);
     if (!npcData) return;
     let items = [];
-    state.food.forEach((item, i) => items.push({ cat: "food", idx: i, name: getItemDisplayName(item), label: `[食物] ${getItemDisplayName(item)}` }));
-    state.drinks.forEach((item, i) => items.push({ cat: "drinks", idx: i, name: getItemDisplayName(item), label: `[饮品] ${getItemDisplayName(item)}` }));
-    state.medicine.forEach((item, i) => items.push({ cat: "medicine", idx: i, name: getItemDisplayName(item), label: `[医疗] ${getItemDisplayName(item)}` }));
-    if (state.cigarettes > 0) items.push({ cat: "cigarettes", idx: 0, name: "香烟", label: `[货物] (${state.cigarettes})香烟` });
-    if (state.gasoline > 0) items.push({ cat: "gasoline", idx: 0, name: "汽油", label: `[货物] (${state.gasoline})汽油` });
-    if (state.pureEnergy > 0) items.push({ cat: "pureEnergy", idx: 0, name: "纯净能源", label: `[货物] (${state.pureEnergy})纯净能源` });
+    state.food.forEach((item, i) => items.push({ cat: "food", idx: i, name: getItemDisplayName(item), label: `[Thức ăn] ${getItemDisplayName(item)}` }));
+    state.drinks.forEach((item, i) => items.push({ cat: "drinks", idx: i, name: getItemDisplayName(item), label: `[Đồ uống] ${getItemDisplayName(item)}` }));
+    state.medicine.forEach((item, i) => items.push({ cat: "medicine", idx: i, name: getItemDisplayName(item), label: `[Y tế] ${getItemDisplayName(item)}` }));
+    if (state.cigarettes > 0) items.push({ cat: "cigarettes", idx: 0, name: "Thuốc lá", label: `[Hàng hóa] (${state.cigarettes})Thuốc lá` });
+    if (state.gasoline > 0) items.push({ cat: "gasoline", idx: 0, name: "Xăng", label: `[Hàng hóa] (${state.gasoline})Xăng` });
+    if (state.pureEnergy > 0) items.push({ cat: "pureEnergy", idx: 0, name: "Năng lượng tinh khiết", label: `[Hàng hóa] (${state.pureEnergy})Năng lượng tinh khiết` });
     if (items.length === 0) {
-      setStory("你没有什么可以交易的。");
+      setStory("Bạn không có gì để giao dịch.");
       handleMapNpcs(npcId);
       return;
     }
     setPhase("map_npc_trade");
-    setStory("选择你要交易的物品：");
+    setStory("Chọn vật phẩm bạn muốn giao dịch:");
     const opts = items.map((item, i) => ({ text: item.label, action: "map_npc_trade_confirm", index: i, tradeItem: item }));
-    opts.push({ text: "返回", action: "map_npc_trade_back", index: -1 });
+    opts.push({ text: "Quay lại", action: "map_npc_trade_back", index: -1 });
     setOptions(opts);
     return;
   }
@@ -94,14 +94,14 @@ export function handleMapNpcsAction(input) {
   if (action === "map_npc_gift") {
     const npcId = state._currentNpc;
     if (state.cigarettes <= 0 && state.gasoline <= 0 && state.pureEnergy <= 0) {
-      setStory("你没有香烟、汽油或纯净能源可以赠送。");
+      setStory("Bạn không có thuốc lá, xăng hoặc năng lượng tinh khiết để tặng.");
       handleMapNpcs(npcId);
       return;
     }
     let giftItems = [];
-    if (state.cigarettes > 0) giftItems.push({ cat: "cigarettes", name: "香烟" });
-    if (state.gasoline > 0) giftItems.push({ cat: "gasoline", name: "汽油" });
-    if (state.pureEnergy > 0) giftItems.push({ cat: "pureEnergy", name: "纯净能源" });
+    if (state.cigarettes > 0) giftItems.push({ cat: "cigarettes", name: "Thuốc lá" });
+    if (state.gasoline > 0) giftItems.push({ cat: "gasoline", name: "Xăng" });
+    if (state.pureEnergy > 0) giftItems.push({ cat: "pureEnergy", name: "Năng lượng tinh khiết" });
     if (giftItems.length === 1) {
       const gift = giftItems[0];
       if (gift.cat === "cigarettes") removeCigarettes(1);
@@ -109,7 +109,7 @@ export function handleMapNpcsAction(input) {
       else if (gift.cat === "pureEnergy") removePureEnergy(1);
       addNpcAffinity(npcId, GAME_CONSTANTS.NPC.MAP_NPC_GIFT_AFFINITY);
       const affinity = getNpcAffinity(npcId);
-      setStory(`你递上了一份${gift.name}。${SURVIVOR_NPC.find(n => n.id === npcId)?.name || "对方"}露出感激的神色，好感度 +${GAME_CONSTANTS.NPC.MAP_NPC_GIFT_AFFINITY}（当前 ${affinity}/${AFFINITY_MAX[npcId]}）。`);
+      setStory(`Bạn đưa lên một ${gift.name}. ${SURVIVOR_NPC.find(n => n.id === npcId)?.name || "đối phương"} lộ vẻ biết ơn, hảo cảm +${GAME_CONSTANTS.NPC.MAP_NPC_GIFT_AFFINITY}（hiện tại ${affinity}/${AFFINITY_MAX[npcId]}）。`);
       advanceTime(1);
       updateStatusEffects();
       checkDeath();
@@ -119,9 +119,9 @@ export function handleMapNpcsAction(input) {
       return;
     }
     setPhase("map_npc_gift_select");
-    setStory("请选择要赠送的物品：");
-    const opts = giftItems.map((item, i) => ({ text: `[货物] ${item.name}`, action: "map_npc_gift_confirm", index: i, giftItem: item }));
-    opts.push({ text: "返回", action: "map_npc_gift_back", index: -1 });
+    setStory("Hãy chọn vật phẩm muốn tặng:");
+    const opts = giftItems.map((item, i) => ({ text: `[Hàng hóa] ${item.name}`, action: "map_npc_gift_confirm", index: i, giftItem: item }));
+    opts.push({ text: "Quay lại", action: "map_npc_gift_back", index: -1 });
     setOptions(opts);
     return;
   }
@@ -130,7 +130,7 @@ export function handleMapNpcsAction(input) {
 export function handleMapNpcTrade(input) {
   const state = getState();
   if (state.lastMapNpcTradeDay >= state.day) {
-    setStory("今天已经交易过了，明天再来吧。");
+    setStory("Hôm nay đã giao dịch rồi, ngày mai hãy quay lại.");
     showExploreOptionsState();
     return;
   }
@@ -160,7 +160,7 @@ export function handleMapNpcTrade(input) {
   }
   addCigarettes(1);
   state.lastMapNpcTradeDay = state.day;
-  setStory(`你交易了${getItemDisplayName(item)}，获得了一根香烟。`);
+  setStory(`Bạn đã giao dịch ${getItemDisplayName(item)}, nhận được một điếu thuốc lá.`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -189,7 +189,7 @@ export function handleMapNpcGiftConfirm(input) {
 
   addNpcAffinity(npcId, GAME_CONSTANTS.NPC.MAP_NPC_GIFT_AFFINITY);
   const affinity = getNpcAffinity(npcId);
-  setStory(`你递上了一份${gift.name}。${SURVIVOR_NPC.find(n => n.id === npcId)?.name || "对方"}露出感激的神色，好感度 +${GAME_CONSTANTS.NPC.MAP_NPC_GIFT_AFFINITY}（当前 ${affinity}/${AFFINITY_MAX[npcId]}）。`);
+  setStory(`Bạn đưa lên một ${gift.name}. ${SURVIVOR_NPC.find(n => n.id === npcId)?.name || "đối phương"} lộ vẻ biết ơn, hảo cảm +${GAME_CONSTANTS.NPC.MAP_NPC_GIFT_AFFINITY}（hiện tại ${affinity}/${AFFINITY_MAX[npcId]}）。`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -197,5 +197,3 @@ export function handleMapNpcGiftConfirm(input) {
     handleMapNpcs(npcId);
   }
 }
-
-

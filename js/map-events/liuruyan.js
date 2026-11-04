@@ -37,16 +37,16 @@ export function handleInfectedWoman() {
   if (state.day <= GAME_CONSTANTS.LIURUYAN.RESCUE_DEADLINE_DAYS) {
     const remaining = GAME_CONSTANTS.LIURUYAN.RESCUE_DEADLINE_DAYS - state.day;
     setPhase("explore");
-    setStory(`${MAP_NPC_INTROS.infected_woman_intro}\n\n生命倒计时：还剩 ${remaining} 天`);
+    setStory(`${MAP_NPC_INTROS.infected_woman_intro}\n\nĐếm ngược sinh mệnh: còn ${remaining} ngày`);
     setOptions([
-      { text: `给她注射抗感染药剂×${GAME_CONSTANTS.LIURUYAN.SERUM_COST}`, action: "inject_woman" },
-      { text: "先不管她吧。", action: "ignore_woman" },
+      { text: `Tiêm cho cô ấy thuốc kháng nhiễm×${GAME_CONSTANTS.LIURUYAN.SERUM_COST}`, action: "inject_woman" },
+      { text: "Mặc kệ cô ấy đi.", action: "ignore_woman" },
     ]);
   } else {
     setPhase("explore");
     setStory(MAP_NPC_INTROS.infected_woman_zombie);
     setOptions([
-      { text: "消灭她（她已变成丧尸）", action: "kill_zombie_woman" },
+      { text: "Tiêu diệt cô ấy（cô ấy đã biến thành zombie）", action: "kill_zombie_woman" },
     ]);
   }
 }
@@ -55,7 +55,7 @@ export function handleInjectWoman() {
   const state = getState();
   const serumCount = state.medicine.filter(m => m.id === DEFAULT_ITEM_IDS.serum).reduce((sum, m) => sum + (m.count || 1), 0);
   if (serumCount < GAME_CONSTANTS.LIURUYAN.SERUM_COST) {
-    setStory(`你的${MEDICINES.find(m => m.id === DEFAULT_ITEM_IDS.serum).name}不够，需要 ${GAME_CONSTANTS.LIURUYAN.SERUM_COST} 支。`);
+    setStory(`Thuốc ${MEDICINES.find(m => m.id === DEFAULT_ITEM_IDS.serum).name} của bạn không đủ, cần ${GAME_CONSTANTS.LIURUYAN.SERUM_COST} ống.`);
     handleInfectedWoman();
     return;
   }
@@ -77,7 +77,7 @@ export function handleInjectWoman() {
   if (!state.unlockedAchievements.includes("companion_recruit")) state.unlockedAchievements.push("companion_recruit");
   handleGoHome();
   const serumName = MEDICINES.find(m => m.id === DEFAULT_ITEM_IDS.serum).name;
-  setStory(`你颤抖着双手，将${GAME_CONSTANTS.LIURUYAN.SERUM_COST}支${serumName}依次注入她的体内。血清的效果几乎是立竿见影的——她剧烈地咳嗽了几声，皮肤上的溃烂开始肉眼可见地愈合。\n\n她缓缓睁开了眼睛，那是一双棕色的眼眸，清澈而迷茫。\n\n"我……我这是在哪儿？"她虚弱地问道。\n\n你向她说明了情况。她沉默了很久，泪水无声地滑落。\n\n"谢……谢谢。我叫柳如烟。"她的声音很轻，像是用尽了全身的力气。"如果你不嫌弃的话……我想跟着你。虽然我可能帮不上什么大忙，但我可以帮你搜集一些物资……"\n\n你点了点头。\n\n就这样，柳如烟成为了你的伙伴。从今以后，她每天都会出门为你搜集一些物资。\n\n你带着柳如烟安全回到了幸存者帐篷。`);
+  setStory(`Bạn run rẩy hai tay, lần lượt tiêm ${GAME_CONSTANTS.LIURUYAN.SERUM_COST} ống ${serumName} vào cơ thể cô ấy. Hiệu quả của huyết thanh gần như tức thì——cô ấy ho dữ dội vài tiếng, những chỗ lở loét trên da bắt đầu lành lại với tốc độ mắt thường có thể thấy.\n\nCô ấy chậm rãi mở mắt, đó là một đôi mắt nâu, trong trẻo mà mờ mịt.\n\n" Tôi……tôi đang ở đâu?" Cô ấy yếu ớt hỏi.\n\nBạn giải thích tình hình cho cô. Cô im lặng rất lâu, nước mắt lặng lẽ trượt xuống.\n\n" Cảm……cảm ơn. Tôi tên Liu Ru Yan." Giọng cô rất khẽ, như dùng hết sức lực toàn thân. "Nếu bạn không chê……tôi muốn đi theo bạn. Tuy tôi có thể không giúp được gì nhiều, nhưng tôi có thể giúp bạn thu thập một ít vật tư……"\n\nBạn gật đầu.\n\nCứ như vậy, Liu Ru Yan trở thành đồng bạn của bạn. Từ nay về sau, mỗi ngày cô ấy sẽ ra ngoài thu thập một ít vật tư cho bạn.\n\nBạn đưa Liu Ru Yan an toàn trở về lều của người sống sót.`);
 }
 
 export function handleIgnoreWoman() {
@@ -90,11 +90,11 @@ export function handleKillZombieWoman() {
   const zombieDef = getRandomZombie(state.currentMap);
   setPhase("pre_combat");
   state._pendingZombie = zombieDef;
-  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ 你的身体极度疲惫，无法正常战斗！建议先休息再探索。" : "";
-  setStory(`曾经的女人已经完全变成了丧尸，她嘶吼着朝你扑了过来！${crashWarning}`);
+  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Cơ thể bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường! Khuyến nghị nghỉ ngơi trước rồi hãy khám phá." : "";
+  setStory(`Người phụ nữ từng đó đã hoàn toàn biến thành zombie, cô ấy gầm lên lao về phía bạn!${crashWarning}`);
   setOptions([
-    { text: "近战作战", action: "combat_melee" },
-    { text: "远程射击", action: "combat_ranged" },
+    { text: "Chiến đấu cận chiến", action: "combat_melee" },
+    { text: "Bắn tầm xa", action: "combat_ranged" },
     { text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_flee" },
   ]);
 }
@@ -110,8 +110,8 @@ export function handleLiuruyanClassroom() {
     setStory(MAP_NPC_INTROS.liuruyan_quest4_enough);
     setPhase("explore");
     setOptions([
-      { text: "上车离开", action: "liuruyan_quest_accept" },
-      { text: "再准备一下", action: "liuruyan_reject" },
+      { text: "Lên xe rời đi", action: "liuruyan_quest_accept" },
+      { text: "Chuẩn bị thêm chút nữa", action: "liuruyan_reject" },
     ]);
     return;
   }
@@ -119,8 +119,8 @@ export function handleLiuruyanClassroom() {
     setStory(MAP_NPC_INTROS.liuruyan_classroom_intro);
     setPhase("explore");
     setOptions([
-      { text: "那个座位", action: "liuruyan_seat" },
-      { text: "离开", action: "liuruyan_reject" },
+      { text: "Ghế đó", action: "liuruyan_seat" },
+      { text: "Rời đi", action: "liuruyan_reject" },
     ]);
     return;
   }
@@ -128,8 +128,8 @@ export function handleLiuruyanClassroom() {
     setStory(MAP_NPC_INTROS.liuruyan_quest2_intro);
     setPhase("explore");
     setOptions([
-      { text: "去体育场", action: "liuruyan_quest_fight" },
-      { text: "还没准备好", action: "liuruyan_reject" },
+      { text: "Đến sân vận động", action: "liuruyan_quest_fight" },
+      { text: "Chưa chuẩn bị xong", action: "liuruyan_reject" },
     ]);
     return;
   }
@@ -137,8 +137,8 @@ export function handleLiuruyanClassroom() {
     setStory(MAP_NPC_INTROS.liuruyan_quest3_intro);
     setPhase("explore");
     setOptions([
-      { text: "用撬棍开门", action: "liuruyan_quest_accept" },
-      { text: "先算了", action: "liuruyan_reject" },
+      { text: "Dùng xà beng mở cửa", action: "liuruyan_quest_accept" },
+      { text: "Thôi vậy", action: "liuruyan_reject" },
     ]);
     return;
   }
@@ -153,7 +153,7 @@ export function handleLiuruyanClassroom() {
     setStory(MAP_NPC_INTROS.liuruyan_quest4_intro + "\n\n" + MAP_NPC_INTROS.liuruyan_quest4_need_gas.replace("{need}", need));
     setPhase("explore");
     setOptions([
-      { text: "去弄汽油", action: "liuruyan_reject" },
+      { text: "Đi kiếm xăng", action: "liuruyan_reject" },
     ]);
     return;
   }
@@ -163,8 +163,8 @@ export function handleLiuruyanSeat() {
   setStory(MAP_NPC_INTROS.liuruyan_classroom_seat);
   setPhase("explore");
   setOptions([
-    { text: "一起去医务室", action: "liuruyan_quest_accept" },
-    { text: "下次再说", action: "liuruyan_reject" },
+    { text: "Cùng đi phòng y tế", action: "liuruyan_quest_accept" },
+    { text: "Lần sau nói", action: "liuruyan_reject" },
   ]);
 }
 
@@ -176,7 +176,7 @@ export function handleLiuruyanQuestAccept() {
   setPhase("explore");
   const state = getState();
   if (!state.liuruyanQuest1Done) {
-    addItem({ id: "万能针剂", name: "万能针剂", type: "medicine" });
+    addItem({ id: "万能针剂", name: "Thuốc Tiêm Đa Năng", type: "medicine" });
     state.liuruyanQuest1Done = true;
     setStory(MAP_NPC_INTROS.liuruyan_quest1_accept);
     advanceTime(1);
@@ -184,7 +184,7 @@ export function handleLiuruyanQuestAccept() {
     checkDeath();
     if (!state.gameOver) {
       setOptions([
-        { text: "离开教室", action: "liuruyan_reject" },
+        { text: "Rời khỏi lớp học", action: "liuruyan_reject" },
       ]);
     }
     return;
@@ -195,11 +195,11 @@ export function handleLiuruyanQuestAccept() {
     if (!hasCrowbar) {
       setStory(MAP_NPC_INTROS.liuruyan_quest3_need_crowbar);
       setOptions([
-        { text: "离开", action: "liuruyan_reject" },
+        { text: "Rời đi", action: "liuruyan_reject" },
       ]);
       return;
     }
-    addItem({ id: "car_key", name: "车钥匙", type: "other" });
+    addItem({ id: "car_key", name: "Chìa khóa xe", type: "other" });
     state.liuruyanQuest3Done = true;
     setStory(MAP_NPC_INTROS.liuruyan_quest3_success);
     advanceTime(1);
@@ -207,7 +207,7 @@ export function handleLiuruyanQuestAccept() {
     checkDeath();
     if (!state.gameOver) {
       setOptions([
-        { text: "离开", action: "liuruyan_reject" },
+        { text: "Rời đi", action: "liuruyan_reject" },
       ]);
     }
     return;
@@ -229,10 +229,10 @@ export function handleLiuruyanQuestFight() {
   };
   state._liuruyanQuest2Combat = true;
   setPhase("pre_combat_npc");
-  setStory("一只体型庞大的橄榄球丧尸正在操场上游荡，它穿着破烂的队服，头盔下露出腐烂的脸。它似乎注意到了你们！");
+  setStory("Một con zombie bóng bầu dục to lớn đang lang thang trên sân vận động, nó mặc bộ đồng phục đã rách nát, dưới mũ bảo hiểm lộ ra khuôn mặt thối rữa. Nó dường như đã chú ý đến các bạn!");
   setOptions([
-    { text: "近战作战", action: "combat_npc_melee" },
-    { text: "远程射击", action: "combat_npc_ranged" },
+    { text: "Chiến đấu cận chiến", action: "combat_npc_melee" },
+    { text: "Bắn tầm xa", action: "combat_npc_ranged" },
     { text: GAME_CONSTANTS.COMBAT.FLEE_RATE_TEXT, action: "combat_npc_flee" },
   ]);
 }

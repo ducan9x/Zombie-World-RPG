@@ -33,28 +33,28 @@ export function showOutpostOptions() {
   setPhase("explore");
   const state = getState();
   const opts = [
-    { text: "探索", action: "outpost_explore" },
-    { text: "进食", action: "eat" },
-    { text: "饮水", action: "drink" },
-    { text: "医疗", action: "medicine" },
-    { text: "装备", action: "equip" },
-    { text: "回家", action: "goHome" },
-    { text: "丢弃", action: "discard" },
-    { text: "V小姐", action: "npc_v" },
-    { text: "苏小涵", action: "npc_xiaohan" },
-    { text: "莉莉丝", action: "npc_lili" },
-    { text: "沐苗苗", action: "npc_mumiao" },
-    { text: "阵地首领", action: "npc_leader" }
+    { text: "Khám phá", action: "outpost_explore" },
+    { text: "Ăn", action: "eat" },
+    { text: "Uống nước", action: "drink" },
+    { text: "Y tế", action: "medicine" },
+    { text: "Trang bị", action: "equip" },
+    { text: "Về nhà", action: "goHome" },
+    { text: "Vứt bỏ", action: "discard" },
+    { text: "Cô V", action: "npc_v" },
+    { text: "Su Xiao Han", action: "npc_xiaohan" },
+    { text: "Lilith", action: "npc_lili" },
+    { text: "Mieu Miao", action: "npc_mumiao" },
+    { text: "Thủ lĩnh trận địa", action: "npc_leader" }
   ];
-  opts.push({ text: "轻松打工", action: "work" });
-  opts.push({ text: "乞讨物资", action: "beg_supplies" });
-  opts.push({ text: "曙光交易站", action: "trading_post" });
-  opts.push({ text: "物资征集处", action: "collection_point" });
+  opts.push({ text: "Làm việc nhẹ nhàng", action: "work" });
+  opts.push({ text: "Khất thực vật tư", action: "beg_supplies" });
+  opts.push({ text: "Trạm giao dịch Dawn", action: "trading_post" });
+  opts.push({ text: "Điểm trưng thu vật tư", action: "collection_point" });
   setOptions(opts);
 }
 
 export function handleOutpostExplore() {
-  setStory("你四处张望了一下——这里是别人的地盘，偷东西不好吧。");
+  setStory("Bạn nhìn quanh một lượt——đây là địa bàn của người khác, trộm đồ không hay đâu.");
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -65,12 +65,12 @@ export function handleBegSupplies() {
   const state = getState();
   cleanDualIdentity(state);
   if (hasCastleIdentity(state)) {
-    setStory("阵地管理员瞥了你一眼：\"哼，城堡的人还来我们这讨饭？要不要脸！\" 周围的人投来鄙夷的目光，你只好灰溜溜地走开。");
+    setStory("Quản lý trận địa liếc nhìn bạn: \"Hừ, người của lâu đài còn đến chỗ chúng tôi xin cơm à? Có còn biết xấu hổ không!\" Người xung quanh nhìn bạn bằng ánh mắt khinh bỉ, bạn đành lủi thủi đi mất.");
     showOutpostOptions();
     return;
   }
   if (!canBegToday()) {
-    setStory("今天已经领取了救济，明天再来吧。");
+    setStory("Hôm nay đã nhận cứu trợ rồi, mai lại đến nhé.");
     showOutpostOptions();
     return;
   }
@@ -83,16 +83,16 @@ export function handleBegSupplies() {
     const added2 = addItem({ ...fruit2 });
     if (added1 || added2) {
       markBegDone();
-      setStory(`曙光先锋队长的身份让你多领了一份救济！阵地管理员递给你${fruit.name}和${fruit2.name}。"队长大人，请慢用！"`);
+      setStory(`Thân phận đội trưởng tiên phong Dawn khiến bạn được lĩnh thêm một phần cứu trợ! Quản lý trận địa đưa cho bạn ${fruit.name} và ${fruit2.name}. "Đội trưởng đại nhân, xin từ từ dùng!"`);
     } else {
-      setStory("你的背包已满，无法领取救济物资。");
+      setStory("Ba lô của bạn đã đầy, không thể nhận vật tư cứu trợ.");
     }
   } else {
     if (added1) {
       markBegDone();
-      setStory(`阵地管理员递给你一份${fruit.name}。"省着点吃，明天再来。"`);
+      setStory(`Quản lý trận địa đưa cho bạn một phần ${fruit.name}. "Tiết kiệm mà ăn, mai lại đến."`);
     } else {
-      setStory("你的背包已满，无法领取救济物资。");
+      setStory("Ba lô của bạn đã đầy, không thể nhận vật tư cứu trợ.");
     }
   }
   advanceTime(1);
@@ -105,24 +105,24 @@ export function handleTradingPost() {
   const state = getState();
   const OC = GAME_CONSTANTS.OUTPOST;
   setPhase("explore");
-  let info = "🏪 【曙光交易站】\n\n阵地后勤官管理着一个小型物资交易站：\"这些都是我们从各地搜刮来的，只收香烟。\"\n\n";
-  info += `当前香烟：${state.cigarettes}\n\n`;
-  info += "商品列表：\n";
+  let info = "🏪 【Trạm giao dịch Dawn】\n\nHậu cần trận địa quản lý một trạm giao dịch vật tư nhỏ: \"Đây đều là đồ chúng tôi lục lọi từ khắp nơi, chỉ thu thuốc lá.\"\n\n";
+  info += `Thuốc lá hiện tại: ${state.cigarettes}\n\n`;
+  info += "Danh sách hàng hóa:\n";
   const prices = OC.TRADING_POST;
   const ammoAmounts = OC.TRADING_POST_AMMO;
   for (const [name, price] of Object.entries(prices)) {
     const ammoAmount = ammoAmounts[name];
-    const extra = ammoAmount ? `（${ammoAmount}发）` : "";
-    info += `  ${name}${extra} - ${price}香烟\n`;
+    const extra = ammoAmount ? `（${ammoAmount} viên）` : "";
+    info += `  ${name}${extra} - ${price} thuốc lá\n`;
   }
   setStory(info);
   const opts = [];
   for (const [name, price] of Object.entries(prices)) {
     const ammoAmount = ammoAmounts[name];
-    const extra = ammoAmount ? `（${ammoAmount}发）` : "";
-    opts.push({ text: `购买${name}${extra}（${price}香烟）`, action: "trading_post_buy", item: name, price });
+    const extra = ammoAmount ? `（${ammoAmount} viên）` : "";
+    opts.push({ text: `Mua ${name}${extra}（${price} thuốc lá）`, action: "trading_post_buy", item: name, price });
   }
-  opts.push({ text: "离开", action: "trading_post_back" });
+  opts.push({ text: "Rời đi", action: "trading_post_back" });
   setOptions(opts);
 }
 
@@ -134,7 +134,7 @@ export function handleTradingPostBuy(input) {
   if (option.action !== "trading_post_buy") return;
   const { item, price } = option;
   if (state.cigarettes < price) {
-    setStory(`❌ 你的香烟不足，需要${price}支香烟，当前只有${state.cigarettes}支。`);
+    setStory(`❌ Thuốc lá của bạn không đủ, cần ${price} điếu thuốc lá, hiện chỉ có ${state.cigarettes} điếu.`);
     handleTradingPost();
     return;
   }
@@ -143,7 +143,7 @@ export function handleTradingPostBuy(input) {
   if (ammoAmount) {
     removeCigarettes(price);
     addAmmo(item, ammoAmount);
-    setStory(`✅ 你花费${price}支香烟购买了${ammoAmount}发${item}。\n\n当前香烟：${state.cigarettes}`);
+    setStory(`✅ Bạn tiêu ${price} điếu thuốc lá mua ${ammoAmount} viên ${item}.\n\nThuốc lá hiện tại: ${state.cigarettes}`);
   } else {
     let added = false;
     const drink = DRINKS.find(d => d.id === item);
@@ -157,12 +157,12 @@ export function handleTradingPostBuy(input) {
       }
     }
     if (!added) {
-      setStory("❌ 购买失败，背包可能已满。");
+      setStory("❌ Mua thất bại, ba lô có thể đã đầy.");
       handleTradingPost();
       return;
     }
     removeCigarettes(price);
-    setStory(`✅ 你花费${price}支香烟购买了${item}。\n\n当前香烟：${state.cigarettes}`);
+    setStory(`✅ Bạn tiêu ${price} điếu thuốc lá mua ${item}.\n\nThuốc lá hiện tại: ${state.cigarettes}`);
   }
   advanceTime(1);
   updateStatusEffects();
@@ -184,11 +184,11 @@ export function handleCollectionPoint() {
       cropCount += (item.count || 1);
     }
   }
-  setStory(`📦 【物资征集处】\n\n曙光阵地正在征集民间物资，可用农产品换取香烟。\n\n📌 兑换规则：\n  ${OC.COLLECTION_FRUIT_COST}个水果 → ${OC.COLLECTION_REWARD}香烟\n  ${OC.COLLECTION_CROP_COST}个作物 → ${OC.COLLECTION_REWARD}香烟\n\n📦 当前持有：\n  水果：${fruitCount}个\n  作物：${cropCount}个\n  香烟：${state.cigarettes}支`);
+  setStory(`📦 【Điểm trưng thu vật tư】\n\nTrận địa Dawn đang trưng thu vật tư dân gian, có thể dùng nông sản đổi thuốc lá.\n\n📌 Quy tắc đổi:\n  ${OC.COLLECTION_FRUIT_COST} trái cây → ${OC.COLLECTION_REWARD} thuốc lá\n  ${OC.COLLECTION_CROP_COST} nông sản → ${OC.COLLECTION_REWARD} thuốc lá\n\n📦 Đang giữ:\n  Trái cây: ${fruitCount} quả\n  Nông sản: ${cropCount} cái\n  Thuốc lá: ${state.cigarettes} điếu`);
   setOptions([
-    { text: `上交${OC.COLLECTION_FRUIT_COST}个水果 → ${OC.COLLECTION_REWARD}香烟`, action: "collection_fruit" },
-    { text: `上交${OC.COLLECTION_CROP_COST}个作物 → ${OC.COLLECTION_REWARD}香烟`, action: "collection_crop" },
-    { text: "离开", action: "collection_back" },
+    { text: `Nộp ${OC.COLLECTION_FRUIT_COST} trái cây → ${OC.COLLECTION_REWARD} thuốc lá`, action: "collection_fruit" },
+    { text: `Nộp ${OC.COLLECTION_CROP_COST} nông sản → ${OC.COLLECTION_REWARD} thuốc lá`, action: "collection_crop" },
+    { text: "Rời đi", action: "collection_back" },
   ]);
 }
 
@@ -200,7 +200,7 @@ export function handleCollectionFruit() {
     if (item.type === "fruit") fruitCount += (item.count || 1);
   }
   if (fruitCount < OC.COLLECTION_FRUIT_COST) {
-    setStory(`❌ 你的水果不足，需要${OC.COLLECTION_FRUIT_COST}个，当前只有${fruitCount}个。`);
+    setStory(`❌ Trái cây của bạn không đủ, cần ${OC.COLLECTION_FRUIT_COST} quả, hiện chỉ có ${fruitCount} quả.`);
     handleCollectionPoint();
     return;
   }
@@ -218,7 +218,7 @@ export function handleCollectionFruit() {
     }
   }
   addCigarettes(OC.COLLECTION_REWARD);
-  setStory(`✅ 你上交了${OC.COLLECTION_FRUIT_COST}个水果，获得${OC.COLLECTION_REWARD}支香烟。\n\n当前香烟：${state.cigarettes}`);
+  setStory(`✅ Bạn nộp ${OC.COLLECTION_FRUIT_COST} trái cây, nhận ${OC.COLLECTION_REWARD} điếu thuốc lá.\n\nThuốc lá hiện tại: ${state.cigarettes}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -235,7 +235,7 @@ export function handleCollectionCrop() {
     }
   }
   if (cropCount < OC.COLLECTION_CROP_COST) {
-    setStory(`❌ 你的作物不足，需要${OC.COLLECTION_CROP_COST}个，当前只有${cropCount}个。`);
+    setStory(`❌ Nông sản của bạn không đủ, cần ${OC.COLLECTION_CROP_COST} cái, hiện chỉ có ${cropCount} cái.`);
     handleCollectionPoint();
     return;
   }
@@ -253,7 +253,7 @@ export function handleCollectionCrop() {
     }
   }
   addCigarettes(OC.COLLECTION_REWARD);
-  setStory(`✅ 你上交了${OC.COLLECTION_CROP_COST}个作物，获得${OC.COLLECTION_REWARD}支香烟。\n\n当前香烟：${state.cigarettes}`);
+  setStory(`✅ Bạn nộp ${OC.COLLECTION_CROP_COST} nông sản, nhận ${OC.COLLECTION_REWARD} điếu thuốc lá.\n\nThuốc lá hiện tại: ${state.cigarettes}`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();

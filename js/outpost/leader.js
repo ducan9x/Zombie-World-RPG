@@ -41,21 +41,21 @@ import { showOutpostOptions } from './menu.js';
 export function handleNpcLeader() {
   const state = getState();
   if (!state.leaderAlive) {
-    setStory("阵地首领已经不在了……他的位置空着，阵地里的人都在议论纷纷。");
+    setStory("Thủ lĩnh căn cứ không còn nữa... vị trí của anh ấy trống rỗng, mọi người trong căn cứ đang bàn tán xôn xao.");
     setPhase("npc_leader");
-    setOptions([{ text: "返回", action: "leader_leave" }]);
+    setOptions([{ text: "Quay lại", action: "leader_leave" }]);
     return;
   }
   cleanDualIdentity(state);
   if (hasCastleIdentity(state)) {
-    setStory("阵地首领警惕地盯着你：\"你居然是城堡势力的人，快滚开！\" 几个卫兵围了上来，你只好灰溜溜地离开。");
+    setStory("Thủ lĩnh căn cứ cảnh giác nhìn bạn: \"Hóa ra bạn là người của thế lực lâu đài, cút ngay!\" Vài vệ binh vây lại, bạn đành lủi thủi rời đi.");
     setPhase("npc_leader");
-    setOptions([{ text: "返回", action: "leader_leave" }]);
+    setOptions([{ text: "Quay lại", action: "leader_leave" }]);
     return;
   }
   const hasBadge = hasDawnBadge(state);
   const affinity = state.npcAffinity.leader || 0;
-  setStory(`【阵地首领】\n\n阵地首领是个满脸风霜的中年男人，眼神坚毅。他打量着你，微微点头。\n\n好感度：${affinity}/${AFFINITY_MAX.leader}${hasBadge ? "\n\n你已加入曙光阵地，佩戴着曙光徽章。" : ""}`);
+  setStory(`【Thủ lĩnh căn cứ】\n\nThủ lĩnh căn cứ là một người đàn ông trung niên đầy gió sương, ánh mắt kiên nghị. Anh ấy đánh giá bạn, khẽ gật đầu.\n\nĐiểm thân mật: ${affinity}/${AFFINITY_MAX.leader}${hasBadge ? "\n\nBạn đã gia nhập Dawn Base, đang đeo huy chương Dawn." : ""}`);
   showLeaderOptions();
 }
 
@@ -64,26 +64,26 @@ export function showLeaderOptions() {
   setPhase("npc_leader");
   const hasBadge = hasDawnBadge(state);
   const opts = [
-    { text: "对话", action: "leader_chat" },
-    { text: "送礼", action: "leader_gift" },
-    { text: hasBadge ? "退出阵地" : "加入阵地", action: hasBadge ? "leader_quit" : "leader_join" },
-    { text: "领取礼物", action: "leader_claim" },
-    { text: "获取荣誉", action: "leader_honor" },
+    { text: "Đối thoại", action: "leader_chat" },
+    { text: "Tặng quà", action: "leader_gift" },
+    { text: hasBadge ? "Rời căn cứ" : "Gia nhập căn cứ", action: hasBadge ? "leader_quit" : "leader_join" },
+    { text: "Nhận quà", action: "leader_claim" },
+    { text: "Nhận vinh dự", action: "leader_honor" },
   ];
   const hasRecorder = state.other.some(i => i.id === "strange_recorder");
   const leaderQuestInProgress = state.npcQuestsDone && (state.npcQuestsDone.leaderQuest1 || state.npcQuestsDone.leaderQuest2);
   if (!isQuestDone("leaderQuest3") && (hasRecorder || leaderQuestInProgress)) {
-    opts.push({ text: "关于录音笔", action: "leader_recorder" });
+    opts.push({ text: "Về máy ghi âm", action: "leader_recorder" });
   }
-  opts.push({ text: "悄悄暗杀", action: "leader_assassinate" });
-  opts.push({ text: "离开", action: "leader_leave" });
+  opts.push({ text: "Ám sát lén lút", action: "leader_assassinate" });
+  opts.push({ text: "Rời đi", action: "leader_leave" });
   setOptions(opts);
 }
 
 export function handleLeaderChat() {
   const state = getState();
   if (state.lastLeaderChatDay === state.day) {
-    setStory("首领摆摆手：\"今天已经说得够多了，我很忙，你走吧。\"");
+    setStory("Thủ lĩnh xua tay: \"Hôm nay đã nói đủ rồi, tôi rất bận, bạn đi đi.\"");
     showLeaderOptions();
     return;
   }
@@ -91,7 +91,7 @@ export function handleLeaderChat() {
   addNpcAffinity("leader", GAME_CONSTANTS.OUTPOST.LEADER_CHAT_AFFINITY);
   const chatLines = LEADER_DIALOGUES;
   const line = chatLines[Math.floor(Math.random() * chatLines.length)];
-  setStory(`首领忙里偷闲和你聊了几句：${line}\n\n好感度 +1（当前 ${state.npcAffinity.leader}）`);
+  setStory(`Thủ lĩnh tranh thủ lúc bận rộn trò chuyện với bạn vài câu: ${line}\n\nĐiểm thân mật +1（Hiện tại ${state.npcAffinity.leader}）`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -108,7 +108,7 @@ export function handleLeaderRecorder() {
   }
 
   if (isQuestDone("leaderQuest3")) {
-    setStory("首领拍了拍你的肩膀：\"过去的事就让它过去吧。\"");
+    setStory("Thủ lĩnh vỗ vai bạn: \"Chuyện quá khứ cứ để nó qua đi.\"");
     showLeaderOptions();
     return;
   }
@@ -122,7 +122,26 @@ export function handleLeaderRecorder() {
     const letter = SPECIAL_ITEMS.letter_to_sister;
     addItem({ ...letter });
     addNpcAffinity("leader", 10);
-    setStory(`你把录音笔递给首领。他按下播放键，脸色一点一点地沉了下去。\n\n录音结束后，帐篷里一片死寂。\n\n首领的拳头攥得咯咯作响，声音沙哑：\n"这个畜生……他杀了我派去的人。那个女孩，她只是个情报员，她什么都没做错……"\n\n他闭上眼，深吸了一口气：\n"三年前，他看上了我妹妹。我承认，我反对他们在一起，是因为我不信任他。后来他果然露出了真面目——他想控制阵地的资源，被我拒绝后就怀恨在心。"\n\n"我赶走了他，也伤了妹妹的心。她走了，去了城堡，成了现在的皇后。"\n\n首领从抽屉里取出一封泛黄的信：\n"这封信我写了三年，一直没勇气寄出去。你……能帮我交给她吗？"\n\n📖 获得【给妹妹的信】\n\n首领好感度 +10（当前 ${state.npcAffinity.leader}/${AFFINITY_MAX.leader}）\n\n（提示：将信件交给城堡的皇后）`);
+    setStory(`Bạn đưa máy ghi âm cho thủ lĩnh. Anh ấy nhấn nút phát, sắc mặt dần dần trầm xuống.
+
+Sau khi bản ghi âm kết thúc, trong lều im phăng phắc.
+
+Nắm đấm thủ lĩnh siết chặt kêu răng rắc, giọng khàn khàn:
+"Con súc vật đó... hắn đã giết người tôi phái đi. Cô gái đó, cô ấy chỉ là một tình báo viên, cô ấy không làm gì sai cả..."
+
+Anh ấy nhắm mắt, hít sâu một hơi:
+"Ba năm trước, hắn nhìn trúng em gái tôi. Tôi thừa nhận, tôi phản đối họ ở bên nhau, vì tôi không tin hắn. Sau đó hắn quả nhiên lộ nguyên hình — hắn muốn kiểm soát tài nguyên của căn cứ, bị tôi từ chối thì ôm hận trong lòng."
+
+"Tôi đã đuổi hắn đi, cũng làm tổn thương em gái. Cô ấy đi rồi, đến lâu đài, trở thành hoàng hậu hiện tại."
+
+Thủ lĩnh lấy từ ngăn kéo ra một phong bì đã ngả vàng:
+"Tờ thư này tôi viết ba năm rồi, vẫn chưa đủ can đảm gửi đi. Bạn... có thể giúp tôi đưa cho cô ấy không?"
+
+📖 Nhận được【Thư gửi em gái】
+
+Thủ lĩnh điểm thân mật +10（Hiện tại ${state.npcAffinity.leader}/${AFFINITY_MAX.leader}）
+
+（Gợi ý：Giao thư cho hoàng hậu của lâu đài）`);
     showLeaderOptions();
     return;
   }
@@ -130,7 +149,7 @@ export function handleLeaderRecorder() {
   if (isQuestDone("leaderQuest1") && !isQuestDone("leaderQuest2")) {
     const hasReply = state.other.some(i => i.id === "queen_reply");
     if (!hasReply) {
-      setStory("首领看着你：\"信送到了吗？她的回信……我需要知道她的想法。\"");
+      setStory("Thủ lĩnh nhìn bạn: \"Thư đã đưa đến chưa?thưhồi âm của cô ấy... tôi cần biết suy nghĩ của cô ấy.\"");
       showLeaderOptions();
       return;
     }
@@ -153,11 +172,11 @@ export function handleLeaderQuest2() {
   const needBaijiu = 5;
 
   if (!hasReply || baijiuCount < needBaijiu) {
-    let msg = "首领叹了口气：\"我想喝点酒，你帮我弄点高度白酒来。5瓶就够了。还有……我妹妹的回信，你带了吗？\"\n\n所需物品：";
-    if (!hasReply) msg += "\n  皇后的回信 ✗";
-    else msg += "\n  皇后的回信 ✓";
-    if (baijiuCount < needBaijiu) msg += `\n  高度白酒 ${baijiuCount}/${needBaijiu}`;
-    else msg += `\n  高度白酒 ${baijiuCount}/${needBaijiu} ✓`;
+    let msg = "Thủ lĩnh thở dài: \"Tôi muốn uống chút rượu, bạn giúp tôi kiếm chút rượu trắng mạnh. 5 chai là đủ. Còn nữa...thưhồi âm của em gái tôi, bạn mang theo chưa?\"\n\nVật phẩm cần:";
+    if (!hasReply) msg += "\n thưhồi âm của hoàng hậu ✗";
+    else msg += "\n thưhồi âm của hoàng hậu ✓";
+    if (baijiuCount < needBaijiu) msg += `\n  Rượu trắng mạnh ${baijiuCount}/${needBaijiu}`;
+    else msg += `\n  Rượu trắng mạnh ${baijiuCount}/${needBaijiu} ✓`;
     setStory(msg);
     showLeaderOptions();
     return;
@@ -171,7 +190,27 @@ export function handleLeaderQuest2() {
   advanceTime(3);
   updateStatusEffects();
   checkDeath();
-  setStory(`你把皇后的回信和5瓶高度白酒放在首领面前。\n\n他先倒了满满一杯，一饮而尽。然后小心翼翼地拆开回信，一个字一个字地看。\n\n"她说……她不怪我。" 首领的声音有些颤抖，"她说她理解我为什么赶走那个人，但她已经习惯了城堡的生活，不想回来了。"\n\n他又灌了一杯酒：\n"三年前，我写了一封信给她。我说，哥哥错了，不该把她的心上人赶走。我说，回来吧，阵地永远是你的家。"\n\n"可她没回来。"\n\n首领把信折好，放进了胸口的口袋里。他举起酒杯：\n"来，陪我喝。今晚不谈阵地，不谈末日，就两个老朋友，喝到天亮。"\n\n你们喝了一整夜。他讲了很多以前的事——怎么建起阵地，怎么在尸潮中活下来，怎么看着身边的人一个一个离开。说到最后，他靠在椅背上，醉眼朦胧地念着回信的最后一句话：\n\n"哥，我不恨你。但有些伤口，时间也治不好。"\n\n首领好感度 +20（当前 ${state.npcAffinity.leader}/${AFFINITY_MAX.leader}）\n\n时间推进了3个回合。`);
+  setStory(`Bạn đặtthưhồi âm của hoàng hậu và 5 chai rượu trắng mạnh trước mặt thủ lĩnh.
+
+Anh ấy trước rót đầy một ly, uống cạn. Sau đó cẩn thận mởthưhồi âm, đọc từng chữ một.
+
+"Cô ấy nói... cô ấy không trách tôi." Giọng thủ lĩnh có chút run rẩy, "Cô ấy nói cô ấy hiểu tại sao tôi đuổi người đó đi, nhưng cô ấy đã quen với cuộc sống ở lâu đài, không muốn quay lại."
+
+Anh ấy lại rót một ly rượu:
+"Ba năm trước, tôi viết một bức thư cho cô ấy. Tôi nói, anh đã sai, không nên đuổi người trong lòng cô đi. Tôi nói, quay về đi, căn cứ mãi mãi là nhà của cô."
+
+"Nhưng cô ấy không quay về."
+
+Thủ lĩnh gấp thư lại, cho vào túi áo ngực. Anh ấy nâng ly rượu:
+"Đến, uống cùng tôi. Đêm nay không bàn về căn cứ, không bàn về ngày tận thế, chỉ hai người bạn cũ, uống đến sáng."
+
+Các bạn uống cả đêm. Anh ấy kể rất nhiều chuyện trước đây — cách xây dựng căn cứ, cách sống sót trong đợt zombie, cách nhìn người bên cạnh lần lượt rời đi. Nói đến cuối, anh ấy tựa vào ghế, mắt say lờ đờniệm thưhồi âm của hoàng hậu câu cuối cùng:
+
+"Anh, em không hận anh. Nhưng có những vết thương, thời gian cũng không chữa lành được."
+
+Thủ lĩnh điểm thân mật +20（Hiện tại ${state.npcAffinity.leader}/${AFFINITY_MAX.leader}）
+
+Thời gian tiến 3 lượt.`);
   if (!state.gameOver) showLeaderOptions();
 }
 
@@ -181,7 +220,7 @@ export function handleLeaderQuest3() {
   const needSerum = 3;
 
   if (serumCount < needSerum) {
-    setStory(`首领浑身长满了红疹，脸色铁青，显然是酒精中毒了。他勉强撑着说：\n"我没事……只是喝多了……"\n\n但他的情况明显很严重，需要万能针剂来解毒。\n\n所需物品：\n  万能针剂 ${serumCount}/${needSerum}`);
+    setStory(`Thủ lĩnh toàn thân mọc đầy phát ban đỏ, mặt xanh mét, rõ ràng là ngộ độc rượu. Anh ấy cố gắng chống đỡ nói:\n"Không sao... chỉ là uống nhiều thôi..."\n\nNhưng tình trạng của anh ấy rõ ràng rất nghiêm trọng, cần thuốc vạn năng để giải độc.\n\nVật phẩm cần:\n  Thuốc vạn năng ${serumCount}/${needSerum}`);
     showLeaderOptions();
     return;
   }
@@ -195,14 +234,32 @@ export function handleLeaderQuest3() {
   advanceTime(2);
   updateStatusEffects();
   checkDeath();
-  setStory(`你把三支万能针剂依次注入首领体内。他的呼吸渐渐平稳，身上的红疹也开始消退。\n\n过了好一会儿，首领缓缓睁开眼睛，看到你守在旁边，露出一丝苦笑：\n"让你见笑了。堂堂阵地首领，差点被酒给送走。"\n\n他从枕头底下摸出一个小盒子，递给你：\n"别误会，这不是给你的定情信物。" 他咳了两声，"这是以前那个人——国王，送给我妹妹的礼物。他落在了阵地，一直没收回去。"\n\n他顿了顿：\n"现在它对你更有用。拿着吧，算是谢谢你。不只是救了我一命，还有……帮我完成了三年没做到的事。"\n\n你打开盒子，里面是一枚精致的吊坠，上面刻着一朵小小的向日葵。\n\n🏹 获得【9×19mm】×100！\n📿 获得【定情信物】！\n\n首领好感度 +30（当前 ${state.npcAffinity.leader}/${AFFINITY_MAX.leader}）\n\n时间推进了2个回合。`);
+  setStory(`Bạn tiêm ba ống thuốc vạn năng vào cơ thể thủ lĩnh. Hơi thở anh ấy dần dần ổn định, phát ban trên người cũng bắt đầu tiêu đi.
+
+Một lúc sau, thủ lĩnh chậm rãi mở mắt, thấy bạn đang ở bên cạnh, lộ ra một nụ cười khổ:
+"Để bạn chê cười rồi. Thủ lĩnh căn cứ đường đường, suýt bị rượu đưa đi."
+
+Anh ấy mò từ dưới gối ra một chiếc hộp nhỏ, đưa cho bạn:
+"Đừng hiểu lầm, đây không phải vật đính ước cho bạn." Anh ấy ho hai tiếng, "Đây là món quà trước đây người đó — nhà vua, tặng cho em gái tôi. Anh ấy để lại căn cứ, vẫn chưa thu hồi."
+
+Anh ấy dừng lại:
+"Giờ nó có ích cho bạn hơn. Cầm đi, coi như cảm ơn bạn. Không chỉ cứu mạng tôi, còn... giúp tôi hoàn thành việc ba năm chưa làm được."
+
+Bạn mở hộp, bên trong là một chiếc mặt dây chuyền tinh xảo, trên đó khắc một bông hoa hướng dương nhỏ.
+
+🏹 Nhận được【9×19mm】×100!
+📿 Nhận được【Vật đính ước】!
+
+Thủ lĩnh điểm thân mật +30（Hiện tại ${state.npcAffinity.leader}/${AFFINITY_MAX.leader}）
+
+Thời gian tiến 2 lượt.`);
   if (!state.gameOver) showLeaderOptions();
 }
 
 export function handleLeaderHonor() {
   const state = getState();
   if (hasCastleIdentity(state)) {
-    setStory("首领皱起了眉头，目光变得锐利：\"你身上有城堡势力的身份牌。我们曙光阵地不欢迎城堡的人。在你和城堡彻底断绝关系之前，不要再来找我了。\"\n\n他转过身去，不再看你。");
+    setStory("Thủ lĩnh nhíu mày, ánh mắt sắc bén: \"Bạn mang thẻ thân phận thế lực lâu đài. Dawn Base của chúng tôi không hoan nghênh người của lâu đài. Trước khi bạn và lâu đài cắt đứt hoàn toàn, đừng đến tìm tôi nữa.\"\n\nAnh ấy quay lưng đi, không nhìn bạn nữa.");
     showLeaderOptions();
     return;
   }
@@ -213,18 +270,18 @@ export function handleLeaderHonor() {
 
   if (!allMaxed) {
     const missing = [];
-    if (vAffinity < AFFINITY_MAX.v) missing.push(`V小姐（${vAffinity}/${AFFINITY_MAX.v}）`);
-    if (xiaohanAffinity < AFFINITY_MAX.xiaohan) missing.push(`苏小涵（${xiaohanAffinity}/${AFFINITY_MAX.xiaohan}）`);
-    if (liliAffinity < AFFINITY_MAX.lili) missing.push(`莉莉丝（${liliAffinity}/${AFFINITY_MAX.lili}）`);
-    if ((state.npcAffinity.leader || 0) < AFFINITY_MAX.leader) missing.push(`首领本人（${state.npcAffinity.leader || 0}/${AFFINITY_MAX.leader}）`);
+    if (vAffinity < AFFINITY_MAX.v) missing.push(`Cô V（${vAffinity}/${AFFINITY_MAX.v}）`);
+    if (xiaohanAffinity < AFFINITY_MAX.xiaohan) missing.push(`Tô Tiểu Hàm（${xiaohanAffinity}/${AFFINITY_MAX.xiaohan}）`);
+    if (liliAffinity < AFFINITY_MAX.lili) missing.push(`Lilith（${liliAffinity}/${AFFINITY_MAX.lili}）`);
+    if ((state.npcAffinity.leader || 0) < AFFINITY_MAX.leader) missing.push(`Bản thân thủ lĩnh（${state.npcAffinity.leader || 0}/${AFFINITY_MAX.leader}）`);
 
-    setStory(`首领摇了摇头，语气中带着遗憾：\"阵地的人还是不够信任你。你看看，${missing.join("、")}——他们对你的信任都还不够。曙光先锋队长的位置，需要得到阵地所有人的认可才行。去和他们多聊聊吧，帮助每一个人，让他们真心接纳你。等所有人都信任你了，再来找我。\"`);
+    setStory(`Thủ lĩnh lắc đầu, giọng mang theo sự tiếc nuối: \"Người của căn cứ vẫn chưa đủ tin tưởng bạn. Bạn xem, ${missing.join("、")}——niềm tin của họ dành cho bạn vẫn chưa đủ. Vị trí Thuyền trưởng tiên phong Dawn, cần được mọi người trong căn cứ công nhận mới được. Hãy đi nói chuyện với họ đi, giúp đỡ từng người, để họ chân thành tiếp nhận bạn. Đợi đến khi tất cả đều tin tưởng bạn, hãy đến tìm tôi.\"`);
     showLeaderOptions();
     return;
   }
 
   if (hasDawnCaptainBadge(state)) {
-    setStory("首领拍了拍你的肩膀：\"你已经是曙光先锋队长了，无需再次授予。\"");
+    setStory("Thủ lĩnh vỗ vai bạn: \"Bạn đã là Thuyền trưởng tiên phong Dawn rồi, không cần trao thêm nữa.\"");
     showLeaderOptions();
     return;
   }
@@ -236,7 +293,24 @@ export function handleLeaderHonor() {
   if (vectorWeapon) addItem({ ...vectorWeapon });
   if (vectorAmmo) addItem({ id: vectorAmmo.id, name: vectorAmmo.name, type: "ammo", count: GAME_CONSTANTS.OUTPOST.HONOR_AMMO_COUNT });
 
-  setStory(`首领看着你，眼中闪烁着欣慰的光芒。他站起身，郑重地走到你面前。\n\n\"${state.name}，自从你来到曙光阵地，这里的每一个人都被你所感动。V小姐那冷漠的心被你温暖了，苏小涵的笑容因你而更加灿烂，莉莉丝那调皮的性格也对你言听计从……甚至连我这个老头子，也从你身上看到了末日的希望。\"\n\n他顿了顿，从怀中取出一枚泛着银光的徽章，又从身后的箱子里拿出一把崭新的冲锋枪和几盒子弹。\n\n\"这是曙光队长徽章，代表着曙光阵地最高的荣誉。从今天起，你就是曙光先锋队长——阵地的领军人物！这把Vector冲锋枪是阵地最好的装备之一，配上60发9mm子弹，足够你应对任何危险。\"\n\n\"但你要记住，一旦接受这份荣誉，你将永远无法再与末日城堡有任何瓜葛。他们不会接受一个曙光队长，就像我们不会接受一个城堡贵族一样。\"\n\n他将徽章郑重地别在你的胸前，把武器塞到你手中。\n\n\"去吧，带领我们走向真正的曙光。\"\n\n获得【曙光队长徽章】！\n获得【Vector】+【9×19mm×60】！\n\n（提示：持有曙光队长徽章后，打工和乞讨产出翻倍，莉莉丝所有服务永久半价，但无法获得任何城堡身份。）`);
+  setStory(`Thủ lĩnh nhìn bạn, trong mắt lóe lên ánh sáng vui mừng. Anh ấy đứng dậy, trang trọng đi đến trước mặt bạn.
+
+"${state.name}，từ khi bạn đến Dawn Base, mỗi người ở đây đều bị bạn cảm động. Trái tim lạnh giá của Cô V được bạn sưởi ấm, nụ cười của Tô Tiểu Hàm vì bạn mà càng rạng rỡ, tính cách tinh nghịch của Lilith cũng nghe lời bạn... ngay cả tôi, một ông già, cũng nhìn thấy hy vọng của ngày tận thế trên người bạn."
+
+Anh ấy dừng lại, lấy từ trong ngực ra một huy chương phát ánh bạc, lại từ chiếc hộp phía sau lấy ra một khẩu súng trường mới tinh và vài hộp đạn.
+
+"Đây là huy chương Thuyền trưởng Dawn, đại diện cho vinh dự cao nhất của Dawn Base. Từ hôm nay, bạn chính là Thuyền trưởng tiên phong Dawn — nhân vật dẫn dắt căn cứ! Khẩu Vector này là một trong những trang bị tốt nhất của căn cứ, cùng 60 viên đạn 9mm, đủ để bạn đối phó với bất kỳ nguy hiểm nào."
+
+"Nhưng bạn phải nhớ, một khi nhận vinh dự này, bạn sẽ không bao giờ có thể có bất kỳ liên hệ nào với lâu đài ngày tận thế nữa. Họ sẽ không chấp nhận một Thuyền trưởng Dawn, giống như chúng tôi sẽ không chấp nhận một quý tộc lâu đài."
+
+Anh ấy trang trọng gắn huy chương lên ngực bạn, nhét vũ khí vào tay bạn.
+
+"Đi đi, dẫn dắt chúng tôi tiến về bình minh thực sự."
+
+Nhận được【Huy chương Thuyền trưởng Dawn】!
+Nhận được【Vector】+【9×19mm×60】!
+
+（Gợi ý：Sau khi sở hữu huy chương Thuyền trưởng Dawn, sản lượng làm công và ăn xin tăng gấp đôi, tất cả dịch vụ của Lilith giảm nửa giá vĩnh viễn, nhưng không thể có bất kỳ thân phận lâu đài nào.）`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -246,34 +320,34 @@ export function handleLeaderHonor() {
 export function handleLeaderGift() {
   const state = getState();
   if (state.lastLeaderGiftDay === state.day) {
-    setStory("首领摆摆手：\"今天已经收过你的东西了，我很忙。\"");
+    setStory("Thủ lĩnh xua tay: \"Hôm nay đã nhận đồ của bạn rồi, tôi rất bận.\"");
     showLeaderOptions();
     return;
   }
   let items = [];
-  state.food.forEach((item, i) => items.push({ ...item, cat: "food", idx: i, label: `[食物] ${getItemDisplayName(item)}` }));
-  state.drinks.forEach((item, i) => items.push({ ...item, cat: "drinks", idx: i, label: `[饮品] ${getItemDisplayName(item)}` }));
-  state.medicine.forEach((item, i) => items.push({ ...item, cat: "medicine", idx: i, label: `[医疗] ${getItemDisplayName(item)}` }));
-  state.other.forEach((item, i) => items.push({ ...item, cat: "other", idx: i, label: `[其他] ${getItemDisplayName(item)}` }));
-  if (state.cigarettes > 0) items.push({ cat: "cigarettes", idx: 0, name: "香烟", label: `[货物] (${state.cigarettes})香烟` });
-  if (state.gasoline > 0) items.push({ cat: "gasoline", idx: 0, name: "汽油", label: `[货物] (${state.gasoline})汽油` });
-  if (state.pureEnergy > 0) items.push({ cat: "pureEnergy", idx: 0, name: "纯净能源", label: `[货物] (${state.pureEnergy})纯净能源` });
+  state.food.forEach((item, i) => items.push({ ...item, cat: "food", idx: i, label: `[Thức ăn] ${getItemDisplayName(item)}` }));
+  state.drinks.forEach((item, i) => items.push({ ...item, cat: "drinks", idx: i, label: `[Đồ uống] ${getItemDisplayName(item)}` }));
+  state.medicine.forEach((item, i) => items.push({ ...item, cat: "medicine", idx: i, label: `[Y tế] ${getItemDisplayName(item)}` }));
+  state.other.forEach((item, i) => items.push({ ...item, cat: "other", idx: i, label: `[Khác] ${getItemDisplayName(item)}` }));
+  if (state.cigarettes > 0) items.push({ cat: "cigarettes", idx: 0, name: "Thuốc lá", label: `[Hàng hóa] (${state.cigarettes})Thuốc lá` });
+  if (state.gasoline > 0) items.push({ cat: "gasoline", idx: 0, name: "Xăng", label: `[Hàng hóa] (${state.gasoline})Xăng` });
+  if (state.pureEnergy > 0) items.push({ cat: "pureEnergy", idx: 0, name: "Năng lượng tinh khiết", label: `[Hàng hóa] (${state.pureEnergy})Năng lượng tinh khiết` });
   if (items.length === 0) {
-    setStory("你翻了翻背包，没什么能拿得出手的东西。");
+    setStory("Bạn lục tung balo, không có thứ gì đem ra được.");
     showLeaderOptions();
     return;
   }
   setPhase("leader_gift_select");
-  setStory("请选择要送给首领的物品：");
+  setStory("Vui lòng chọn vật phẩm muốn tặng cho thủ lĩnh:");
   const opts = items.map((item, i) => ({ text: item.label, action: "leader_do_gift", index: i, giftItem: item }));
-  opts.push({ text: "返回", action: "back_to_leader", index: -1 });
+  opts.push({ text: "Quay lại", action: "back_to_leader", index: -1 });
   setOptions(opts);
 }
 
 export function handleLeaderJoin() {
   const state = getState();
   if (hasDawnBadge(state)) {
-    setStory("你已经加入了曙光阵地。");
+    setStory("Bạn đã gia nhập Dawn Base rồi.");
     showLeaderOptions();
     return;
   }
@@ -281,7 +355,7 @@ export function handleLeaderJoin() {
   cleanDualIdentity(state);
   if (!state.unlockedAchievements) state.unlockedAchievements = [];
   if (!state.unlockedAchievements.includes("dawn_member")) state.unlockedAchievements.push("dawn_member");
-  setStory("首领郑重地将一枚曙光徽章别在你的胸前：\"欢迎加入曙光阵地。从今往后，我们就是一家人了。\"\n\n获得【曙光徽章】！\n\n（注意：加入曙光阵地后，你将无法在城堡银行借贷、在城堡打工、或办理贵族身份。）");
+  setStory("Thủ lĩnh trang trọng gắn một huy chương Dawn lên ngực bạn: \"Chào mừng gia nhập Dawn Base. Từ nay về sau, chúng ta là một gia đình.\"\n\nNhận được【Huy chương Dawn】!\n\n（Lưu ý：Sau khi gia nhập Dawn Base, bạn sẽ không thể vay tiền ở ngân hàng lâu đài, làm công ở lâu đài, hoặc xử lý thân phận quý tộc.）");
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -298,7 +372,7 @@ export function handleLeaderQuit() {
   if (captainIdx !== -1) {
     state.other.splice(captainIdx, 1);
   }
-  setStory("你交回了曙光徽章。首领叹了口气：\"人各有志，走吧。\"\n\n你退出了曙光阵地。");
+  setStory("Bạn trả lại huy chương Dawn. Thủ lĩnh thở dài: \"Mỗi người một chí hướng, đi đi.\"\n\nBạn đã rời khỏi Dawn Base.");
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
@@ -308,12 +382,12 @@ export function handleLeaderQuit() {
 export function handleLeaderClaim() {
   const state = getState();
   if (state.leaderGiftClaimed) {
-    setStory("首领摇摇头：\"礼物你已经领过了，别贪心。\"");
+    setStory("Thủ lĩnh lắc đầu: \"Quà bạn đã nhận rồi, đừng tham lam.\"");
     showLeaderOptions();
     return;
   }
   if ((state.npcAffinity.leader || 0) < AFFINITY_MAX.leader) {
-    setStory(`首领笑了笑："你的好感度还不够（${state.npcAffinity.leader}/${AFFINITY_MAX.leader}），再帮我多做点事吧。"`);
+    setStory(`Thủ lĩnh cười: \"Điểm thân mật của bạn chưa đủ（${state.npcAffinity.leader}/${AFFINITY_MAX.leader}）, hãy giúp tôi làm thêm việc đi.\"`);
     showLeaderOptions();
     return;
   }
@@ -329,11 +403,11 @@ export function handleLeaderClaim() {
   const added = addItem(giftItem);
   if (added) {
     const stats = gift.type === "melee"
-      ? `${giftWeapon.damage}伤害/${giftWeapon.durability}耐久/${Math.round(giftWeapon.comboRate * 100)}%连击率`
-      : `${giftWeapon.damage}伤害/${giftWeapon.ammoType}`;
-    setStory(`首领从身后的箱子里取出一件武器："这是当年我在部队时用的${giftWeapon.name}，跟了我很多年。现在它是你的了。"\n\n获得【${giftWeapon.name}】(${stats})！`);
+      ? `${giftWeapon.damage} sát thương/${giftWeapon.durability} độ bền/${Math.round(giftWeapon.comboRate * 100)}% tỷ lệ liên kích`
+      : `${giftWeapon.damage} sát thương/${giftWeapon.ammoType}`;
+    setStory(`Thủ lĩnh lấy từ chiếc hộp phía sau một món vũ khí: \"Đây là ${giftWeapon.name} mà tôi dùng hồi còn trong quân ngũ, theo tôi nhiều năm rồi. Giờ nó là của bạn.\"\n\nNhận được【${giftWeapon.name}】(${stats})!`);
   } else {
-    setStory(`首领想送你一把${giftWeapon.name}，但你的背包已经满了。先腾点空间吧。`);
+    setStory(`Thủ lĩnh muốn tặng bạn một ${giftWeapon.name}, nhưng balo của bạn đã đầy. Hãydọn một ít chỗ đi.`);
   }
   advanceTime(1);
   updateStatusEffects();
@@ -365,7 +439,7 @@ export function handleLeaderDoGift(input) {
   }
   state.lastLeaderGiftDay = state.day;
   addNpcAffinity("leader", GAME_CONSTANTS.OUTPOST.LEADER_GIFT_AFFINITY);
-  setStory(`你送上了一份${getItemDisplayName(item)}。首领收下后点了点头："嗯，心意领了。"\n\n好感度 +1（当前 ${state.npcAffinity.leader}）`);
+  setStory(`Bạn tặng một ${getItemDisplayName(item)}. Thủ lĩnh nhận xong gật đầu: \"Ừm, tôi nhận tấm lòng.\"\n\nĐiểm thân mật +1（Hiện tại ${state.npcAffinity.leader}）`);
   advanceTime(1);
   updateStatusEffects();
   checkDeath();

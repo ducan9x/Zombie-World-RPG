@@ -1,9 +1,9 @@
 export const BUILDING_MATERIALS = [
-  { id: "wood", name: "木材", type: "building" },
-  { id: "building_mat", name: "建筑材料", type: "building" },
-  { id: "stone", name: "石头", type: "building" },
-  { id: "nails", name: "铁钉", type: "building" },
-  { id: "glass", name: "玻璃", type: "building" },
+  { id: "wood", name: "Gỗ", type: "building" },
+  { id: "building_mat", name: "Vật liệu xây dựng", type: "building" },
+  { id: "stone", name: "Đá", type: "building" },
+  { id: "nails", name: "M đóng", type: "building" },
+  { id: "glass", name: "Kính", type: "building" },
 ];
 
 export const BUILDING_MATERIAL_NAMES = {};

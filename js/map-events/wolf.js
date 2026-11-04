@@ -33,7 +33,7 @@ import {
 import { triggerEnding } from '../game/endings.js';
 
 /* ============================================================
-   老狼 - 对话 / 交易（保持原有逻辑）
+   Lão sói - đối thoại / giao dịch (giữ nguyên logic)
    ============================================================ */
 
 export function handleWolfInteract() {
@@ -50,25 +50,25 @@ export function handleWolfChat() {
 }
 
 export function handleWolfLeave() {
-  setStory("你和老狼告别，离开了居民区。");
+  setStory("Bạn từ biệt lão sói, rời khỏi khu dân cư.");
   showExploreOptionsState();
 }
 
 export function handleWolfTrade() {
   const state = getState();
   if (state.lastWolfTradeDay >= state.day) {
-    setStory("今天已经和老狼交易过了，明天再来吧。");
+    setStory("Hôm nay đã giao dịch với lão sói rồi, ngày mai hãy quay lại.");
     handleWolfInteract();
     return;
   }
   const foodCount = state.food.reduce((sum, f) => sum + (f.count || 1), 0);
   if (foodCount < GAME_CONSTANTS.MAP_EVENTS.WOLF_TRADE_FOOD_COST) {
-    setStory(`老狼瞥了你一眼："就这点吃的还想换东西？至少${GAME_CONSTANTS.MAP_EVENTS.WOLF_TRADE_FOOD_COST}份食物。"你只有${foodCount}份。`);
+    setStory(`Lão sói liếc bạn một cái: "Chỉ từng đó đồ ăn còn muốn đổi thứ? Ít nhất ${GAME_CONSTANTS.MAP_EVENTS.WOLF_TRADE_FOOD_COST} phần thực phẩm. Bạn chỉ có ${foodCount} phần."`);
     handleWolfInteract();
     return;
   }
   if (getBackpackCount() - GAME_CONSTANTS.MAP_EVENTS.WOLF_TRADE_FOOD_COST + 1 > state.backpack.capacity) {
-    setStory("背包空间不足，无法完成交易。");
+    setStory("Không gian balo không đủ, không thể hoàn thành giao dịch.");
     handleWolfInteract();
     return;
   }
@@ -92,9 +92,9 @@ export function handleWolfTrade() {
   const added = addItem({ ...med, type: "medicine" });
   const foodNames = removedItems.map(f => f.name).join("、");
   if (added) {
-    setStory(`你用${foodNames}与老狼交换了一盒${med.name}。老狼接过食物，迫不及待地啃了起来。`);
+    setStory(`Bạn dùng ${foodNames} đổi với lão sói một hộp ${med.name}. Lão sói nhận đồ ăn, vội vàng gặm lên.`);
   } else {
-    setStory(`你用${foodNames}与老狼交换了一盒${med.name}，但背包已满，药品掉在了地上！`);
+    setStory(`Bạn dùng ${foodNames} đổi với lão sói một hộp ${med.name}, nhưng balo đã đầy, thuốc rơi xuống đất!`);
   }
   state.lastWolfTradeDay = state.day;
   advanceTime(1);
@@ -106,43 +106,43 @@ export function handleWolfTrade() {
 }
 
 /* ============================================================
-   选项构建辅助
+   Hàm hỗ trợ xây dựng lựa chọn
    ============================================================ */
 
 function buildWolfOptions() {
   const state = getState();
   const opts = [
-    { text: "对话", action: "wolf_chat" },
-    { text: "以物易物", action: "wolf_trade" },
+    { text: "Đối thoại", action: "wolf_chat" },
+    { text: "Trao đổi vật phẩm", action: "wolf_trade" },
   ];
 
-  // 任务一：鳞片收集
+  // Nhiệm vụ 1: thu thập vảy
   if (!state.wolfQuest1Done) {
-    opts.push({ text: "任务：鳞片收集", action: "wolf_quest1" });
+    opts.push({ text: "Nhiệm vụ: thu thập vảy", action: "wolf_quest1" });
   }
 
-  // 任务二：收藏家
+  // Nhiệm vụ 2: nhà sưu tầm
   if (state.wolfQuest1Done && !state.wolfQuest2Done) {
-    opts.push({ text: "任务：收藏家", action: "wolf_quest2" });
+    opts.push({ text: "Nhiệm vụ: nhà sưu tầm", action: "wolf_quest2" });
   }
 
-  // 任务三：出海前的准备
+  // Nhiệm vụ 3: chuẩn bị ra khơi
   const mermaidAff = getNpcAffinity("mermaid");
   if (state.wolfQuest2Done && !state.wolfQuest3Done && mermaidAff >= GAME_CONSTANTS.WOLF.MERMAID_MAX_AFFINITY) {
-    opts.push({ text: "任务：出海前的准备", action: "wolf_quest3" });
+    opts.push({ text: "Nhiệm vụ: chuẩn bị ra khơi", action: "wolf_quest3" });
   }
 
-  // 任务四：巨型海尸
+  // Nhiệm vụ 4: hải thi khổng lồ
   if (state.wolfQuest3Done && !state.wolfQuest4Done) {
-    opts.push({ text: "任务：巨型海尸", action: "wolf_quest4" });
+    opts.push({ text: "Nhiệm vụ: hải thi khổng lồ", action: "wolf_quest4" });
   }
 
-  opts.push({ text: "离开", action: "wolf_leave" });
+  opts.push({ text: "Rời đi", action: "wolf_leave" });
   return opts;
 }
 
 /* ============================================================
-   任务一：鳞片收集 - 提交5个闪电鳞片
+   Nhiệm vụ 1: thu thập vảy - nộp 5 vảy sấm sét
    ============================================================ */
 
 export function handleWolfQuest1() {
@@ -151,10 +151,10 @@ export function handleWolfQuest1() {
 
   setPhase("explore");
   setStory(
-    `老狼眯起眼睛，若有所思地看着你："小伙子，听说过'闪电鳞片'这种东西吗？\n` +
-    `据说只有在带电的水域中，由某种特殊的鱼才能产出。我最近在研究这些东西，\n` +
-    `如果你能帮我弄到${cost}片闪电鳞片，我欠你一个人情。\n\n` +
-    `（提示：也许可以去商场的漏电玻璃缸那里试试）`
+    `Lão sói nheo mắt, trầm tư nhìn bạn: "Cậu trai, từng nghe về 'vảy sấm sét' chưa?\n` +
+    `Nghe nói chỉ có trong vùng nước mang điện, do một loại cá đặc biệt mới sản xuất. Tôi gần đây đang nghiên cứu mấy thứ này,\n` +
+    `nếu cậu có thể giúp tôi lấy ${cost} vảy sấm sét, tôi sẽ nợ cậu một món.\n\n` +
+    `（Gợi ý: có lẽ có thể thử ở bể kính rò điện trong trung tâm thương mại）`
   );
 
   const lightningItem = state.other.find(i => i.id === "lightning_scale");
@@ -162,11 +162,11 @@ export function handleWolfQuest1() {
 
   setOptions([
     {
-      text: `提交${cost}个闪电鳞片（当前拥有：${lightningCount}）`,
+      text: `Nộp ${cost} vảy sấm sét (hiện có: ${lightningCount})`,
       action: "wolf_quest1_submit",
       disabled: lightningCount < cost,
     },
-    { text: "返回", action: "wolf_interact" },
+    { text: "Quay lại", action: "wolf_interact" },
   ]);
 }
 
@@ -189,7 +189,7 @@ export function handleWolfQuest1Submit() {
   }
 
   if (remaining > 0) {
-    setStory("闪电鳞片数量不足，老狼摇了摇头。");
+    setStory("Số lượng vảy sấm sét không đủ, lão sói lắc đầu.");
     handleWolfInteract();
     return;
   }
@@ -198,15 +198,15 @@ export function handleWolfQuest1Submit() {
   addNpcAffinity("wolf", 10);
 
   setStory(
-    `你将${cost}片闪电鳞片交到老狼手中。\n\n` +
-    `老狼仔细端详着这些闪烁着电弧的鳞片，眼中闪过一丝惊讶：\n` +
-    `"好家伙……这玩意儿比我预想的还要厉害。这些鳞片里蕴含的能量，\n` +
-    `绝对不是这末世里该有的东西。"\n\n` +
-    `他小心地将鳞片收进怀里，压低声音说道：\n` +
-    `"其实……我一直在研究更深层的东西。传说深海中有一种生物，\n` +
-    `它们的鳞片蕴含着雷霆之力。而这些闪电鳞片，只是最初级的产物……\n` +
-    `如果你能弄到更高级的'通雷鳞片'，记得来找我。"\n\n` +
-    `✅ 任务"鳞片收集"完成！老狼好感度 +10。`
+    `Bạn đưa ${cost} vảy sấm sét vào tay lão sói.\n\n` +
+    `Lão sói cẩn thận xem xét những chiếc vảy lấp lánh hồ quang điện, trong mắt thoáng hiện vẻ ngạc nhiên:\n` +
+    `"Khá lắm……thứ này còn lợi hại hơn tôi dự đoán. Năng lượng chứa trong những chiếc vảy này,\n` +
+    `tuyệt đối không phải thứ nên có trong mạt thế này."\n\n` +
+    `Ông ấy cẩn thận cất vảy vào trong ngực, hạ giọng nói:\n` +
+    `"Thật ra……tôi vẫn đang nghiên cứu những thứ sâu hơn. Truyền thuyết nói trong biển sâu có một loại sinh vật,\n` +
+    `vảy của chúng chứa lực lượng sấm sét. Còn những vảy sấm sét này, chỉ là sản phẩm sơ cấp nhất……\n` +
+    `nếu cậu có thể lấy được 'vảy thông lôi' cao cấp hơn, nhớ tìm tôi."\n\n` +
+    `✅ Nhiệm vụ "thu thập vảy" hoàn thành! Độ thiện cảm lão sói +10.`
   );
 
   advanceTime(1);
@@ -218,7 +218,7 @@ export function handleWolfQuest1Submit() {
 }
 
 /* ============================================================
-   任务二：收藏家 - 提交3个通雷鳞片
+   Nhiệm vụ 2: nhà sưu tầm - nộp 3 vảy thông lôi
    ============================================================ */
 
 export function handleWolfQuest2() {
@@ -227,11 +227,11 @@ export function handleWolfQuest2() {
 
   setPhase("explore");
   setStory(
-    `老狼从怀里掏出一本破旧的笔记本，上面画满了各种奇怪的符号和图案。\n` +
-    `"通雷鳞片——我查了很多古籍才找到这个名字。" 他指着笔记本上的一张草图，\n` +
-    `"这种鳞片比闪电鳞片强大得多，据说产自传说中的深渊鱼类。\n` +
-    `如果你能帮我弄到${cost}片，我就告诉你一个秘密——\n` +
-    `关于这个小区物业仓库里藏着的东西。"`
+    `Lão sói lấy từ trong ngực ra một cuốn sổ cũ nát, trên đó vẽ đầy các loại ký hiệu và hình vẽ kỳ lạ.\n` +
+    `"Vảy thônglôi——tôi tra rất nhiều cổ thư mới tìm được cái tên này." ông ấy chỉ vào một bức phác thảo trên sổ,\n` +
+    `"Loại vảy này mạnh hơn vảy sấm sét nhiều, nghe nói sản xuất từ loài cá vực sâu trong truyền thuyết.\n` +
+    `Nếu cậu giúp tôi lấy ${cost} chiếc, tôi sẽ nói cho cậu một bí mật——\n` +
+    `về thứ cất giấu trong kho vật nghiệp của khu dân cư này."`
   );
 
   const thunderItem = state.other.find(i => i.id === "thunder_scale");
@@ -239,11 +239,11 @@ export function handleWolfQuest2() {
 
   setOptions([
     {
-      text: `提交${cost}个通雷鳞片（当前拥有：${thunderCount}）`,
+      text: `Nộp ${cost} vảy thông lôi (hiện có: ${thunderCount})`,
       action: "wolf_quest2_submit",
       disabled: thunderCount < cost,
     },
-    { text: "返回", action: "wolf_interact" },
+    { text: "Quay lại", action: "wolf_interact" },
   ]);
 }
 
@@ -266,7 +266,7 @@ export function handleWolfQuest2Submit() {
   }
 
   if (remaining > 0) {
-    setStory("通雷鳞片数量不足，老狼叹了口气。");
+    setStory("Số lượng vảy thông lôi không đủ, lão sói thở dài.");
     handleWolfInteract();
     return;
   }
@@ -275,16 +275,16 @@ export function handleWolfQuest2Submit() {
   addNpcAffinity("wolf", 15);
 
   setStory(
-    `你郑重地将${cost}片通雷鳞片放到老狼手中。\n\n` +
-    `鳞片在接触老狼手掌的瞬间，迸发出一道细微的雷光。老狼的手微微颤抖——\n` +
-    `不是被电的，而是激动。\n\n` +
-    `"果然……果然是真的！" 他深吸一口气，将鳞片用一块破布仔细包裹好。\n` +
-    `"听好了，小伙子。物业仓库那边……有个受伤的人鱼。\n` +
-    `她被困在那里很久了，我不敢让任何人靠近她。\n` +
-    `但现在，你证明了你的诚意——你可以去看看她了。\n` +
-    `带上你的鳞片，也许……你能帮到她。"\n\n` +
-    `✅ 任务"收藏家"完成！老狼好感度 +15。\n` +
-    `🔓 老旧居民小区的【物业仓库】现已开放！`
+    `Bạn trịnh trọng đặt ${cost} vảy thông lôi vào tay lão sói.\n\n` +
+    `Vảy vừa chạm vào lòng bàn tay lão sói, liền bắn ra một tia sét nhỏ. Tay lão sói khẽ run——\n` +
+    `không phải vì điện giật, mà vì kích động.\n\n` +
+    `"Quả nhiên……quả nhiên là thật!" ông ấy hít sâu một hơi, dùng một mảnh vải cũ cẩn thận gói vảy lại.\n` +
+    `"Nghe đây, cậu trai. Phía kho vật nghiệp……có một người cá bị thương.\n` +
+    `Cô ấy bị nhốt ở đó rất lâu rồi, tôi không dám để ai đến gần cô ấy.\n` +
+    `Nhưng giờ đây, cậu đã chứng minh thành ý của mình——cậu có thể đi xem cô ấy.\n` +
+    `Mang theo vảy của cậu, có lẽ……cậu có thể giúp được cô ấy."\n\n` +
+    `✅ Nhiệm vụ "nhà sưu tầm" hoàn thành! Độ thiện cảm lão sói +15.\n` +
+    `🔓 【Kho vật nghiệp】 tại khu dân cư cũ đã mở!`
   );
 
   advanceTime(1);
@@ -296,8 +296,8 @@ export function handleWolfQuest2Submit() {
 }
 
 /* ============================================================
-   任务三：出海前的准备 —— 提交5汽油+5任意食物+5任意饮品
-   奖励：沙漠之鹰 + 30发.50 AE
+   Nhiệm vụ 3: chuẩn bị ra khơi —— nộp 5 xăng + 5 thực phẩm bất kỳ + 5 đồ uống bất kỳ
+   Phần thưởng: Desert Eagle + 30 viên .50 AE
    ============================================================ */
 
 export function handleWolfQuest3() {
@@ -305,12 +305,12 @@ export function handleWolfQuest3() {
 
   setPhase("explore");
   setStory(
-    `老狼站在窗边，望着远方海的方向，神色凝重。\n\n` +
-    `"人鱼告诉了我一些事情……深海中有个大家伙，比我们见过的任何丧尸都要可怕。\n` +
-    `如果不管它，迟早会威胁到整个海岸线。"\n\n` +
-    `他转过身，目光坚定："我准备出海，去会会那个怪物。但我需要补给——\n` +
-    `${GAME_CONSTANTS.WOLF.QUEST3_GASOLINE_COST}桶汽油、${GAME_CONSTANTS.WOLF.QUEST3_FOOD_COST}份食物、${GAME_CONSTANTS.WOLF.QUEST3_DRINKS_COST}份饮品。\n` +
-    `不会让你白忙活的，事成之后，我珍藏多年的家伙归你。"`
+    `Lão sói đứng bên cửa sổ, nhìn về phía biển, thần sắc ngưng trọng.\n\n` +
+    `"Người cá nói cho tôi biết vài chuyện……trong biển sâu có một con quái vật, đáng sợ hơn bất kỳ zombie nào chúng ta từng thấy.\n` +
+    `Nếu không xử lý nó, sớm muộn gì cũng đe dọa toàn bộ bờ biển."\n\n` +
+    `Ông ấy xoay người, ánh mắt kiên định: "Tôi chuẩn bị ra khơi, đi gặp con quái vật đó. Nhưng tôi cần tiếp tế——\n` +
+    `${GAME_CONSTANTS.WOLF.QUEST3_GASOLINE_COST} thùng xăng、${GAME_CONSTANTS.WOLF.QUEST3_FOOD_COST} phần thực phẩm、${GAME_CONSTANTS.WOLF.QUEST3_DRINKS_COST} phần đồ uống.\n` +
+    `Sẽ không để cậu bận công toi, xong việc, thứ tôi cất giữ nhiều năm sẽ thuộc về cậu."`
   );
 
   const foodCount = state.food.reduce((sum, f) => sum + (f.count || 1), 0);
@@ -323,21 +323,21 @@ export function handleWolfQuest3() {
 
   setOptions([
     {
-      text: `提交物资（汽油:${state.gasoline}/${GAME_CONSTANTS.WOLF.QUEST3_GASOLINE_COST} 食物:${foodCount}/${GAME_CONSTANTS.WOLF.QUEST3_FOOD_COST} 饮品:${drinksCount}/${GAME_CONSTANTS.WOLF.QUEST3_DRINKS_COST}）`,
+      text: `Nộp vật tư (xăng:${state.gasoline}/${GAME_CONSTANTS.WOLF.QUEST3_GASOLINE_COST} thực phẩm:${foodCount}/${GAME_CONSTANTS.WOLF.QUEST3_FOOD_COST} đồ uống:${drinksCount}/${GAME_CONSTANTS.WOLF.QUEST3_DRINKS_COST})`,
       action: "wolf_quest3_submit",
       disabled: !canSubmit,
     },
-    { text: "返回", action: "wolf_interact" },
+    { text: "Quay lại", action: "wolf_interact" },
   ]);
 }
 
 export function handleWolfQuest3Submit() {
   const state = getState();
 
-  // 扣除汽油
+  // Khấu trừ xăng
   removeGasoline(GAME_CONSTANTS.WOLF.QUEST3_GASOLINE_COST);
 
-  // 扣除食物
+  // Khấu trừ thực phẩm
   let foodRemaining = GAME_CONSTANTS.WOLF.QUEST3_FOOD_COST;
   for (let i = state.food.length - 1; i >= 0 && foodRemaining > 0; i--) {
     const available = state.food[i].count || 1;
@@ -350,7 +350,7 @@ export function handleWolfQuest3Submit() {
     }
   }
 
-  // 扣除饮品
+  // Khấu trừ đồ uống
   let drinksRemaining = GAME_CONSTANTS.WOLF.QUEST3_DRINKS_COST;
   for (let i = state.drinks.length - 1; i >= 0 && drinksRemaining > 0; i--) {
     const available = state.drinks[i].count || 1;
@@ -363,7 +363,7 @@ export function handleWolfQuest3Submit() {
     }
   }
 
-  // 奖励
+  // Phần thưởng
   const deagle = RANGED_WEAPONS.find(w => w.id === GAME_CONSTANTS.WOLF.QUEST3_REWARD_DEAGLE);
   const deagleItem = deagle ? { ...deagle } : null;
   if (deagleItem) addItem(deagleItem);
@@ -380,16 +380,16 @@ export function handleWolfQuest3Submit() {
   addNpcAffinity("wolf", 20);
 
   setStory(
-    `你将从各处搜刮来的物资堆在老狼面前：\n` +
-    `${GAME_CONSTANTS.WOLF.QUEST3_GASOLINE_COST}桶汽油、${GAME_CONSTANTS.WOLF.QUEST3_FOOD_COST}份食物、${GAME_CONSTANTS.WOLF.QUEST3_DRINKS_COST}份饮品。\n\n` +
-    `老狼沉默了好一会儿，然后从床底拖出一个油布包裹的长条箱子。\n` +
-    `"拿着。" 他打开箱子——一把保养得锃亮的沙漠之鹰躺在里面，\n` +
-    `旁边整齐码放着${GAME_CONSTANTS.WOLF.QUEST3_REWARD_AMMO_COUNT}发.50 AE大口径子弹。\n\n` +
-    `"这是我年轻时在黑市花了血本弄来的。射程远、威力大，\n` +
-    `对付那个深海的怪物，应该能派上用场。"\n\n` +
-    `他拍拍你的肩膀："准备好了就来找我。真正的对手，在深海下面。"\n\n` +
-    `✅ 任务"出海前的准备"完成！老狼好感度 +20。\n` +
-    `🎁 获得：${deagleItem ? deagleItem.name : "沙漠之鹰"}×1 + ${GAME_CONSTANTS.WOLF.QUEST3_REWARD_AMMO}×${GAME_CONSTANTS.WOLF.QUEST3_REWARD_AMMO_COUNT}`
+    `Bạn chất đống vật tư lục soát từ khắp nơi trước mặt lão sói:\n` +
+    `${GAME_CONSTANTS.WOLF.QUEST3_GASOLINE_COST} thùng xăng、${GAME_CONSTANTS.WOLF.QUEST3_FOOD_COST} phần thực phẩm、${GAME_CONSTANTS.WOLF.QUEST3_DRINKS_COST} phần đồ uống.\n\n` +
+    `Lão sói im lặng một lúc, sau đó kéo từ dưới giường ra một chiếc hộp dài bọc vải dầu.\n` +
+    `"Cầm lấy." ông ấy mở hộp——một khẩu Desert Eagle được bảo dưỡng sáng bóng nằm trong đó,\n` +
+    `bên cạnh xếp ngay ngắn ${GAME_CONSTANTS.WOLF.QUEST3_REWARD_AMMO_COUNT} viên đạn .50 AE cỡ lớn.\n\n` +
+    `"Đây là thứ tôi mua ở chợ đen thời còn trẻ, tốn không ít công sức. Tầm bắn xa、sát thương lớn,\n` +
+    `đối phó con quái vật biển sâu đó, hẳn sẽ có tác dụng."\n\n` +
+    `Ông ấy vỗ vai bạn: "Chuẩn bị xong thì tìm tôi. Đối thủ thực sự, ở dưới biển sâu."\n\n` +
+    `✅ Nhiệm vụ "chuẩn bị ra khơi" hoàn thành! Độ thiện cảm lão sói +20.\n` +
+    `🎁 Nhận được: ${deagleItem ? deagleItem.name : "Desert Eagle"}×1 + ${GAME_CONSTANTS.WOLF.QUEST3_REWARD_AMMO}×${GAME_CONSTANTS.WOLF.QUEST3_REWARD_AMMO_COUNT}`
   );
 
   advanceTime(1);
@@ -401,9 +401,9 @@ export function handleWolfQuest3Submit() {
 }
 
 /* ============================================================
-   任务四：巨型海尸 —— 只能远程攻击的BOSS战
-   胜利 → 结局十三 "人鱼传说"
-   失败 → 死亡
+   Nhiệm vụ 4: hải thi khổng lồ —— chỉ có thể tấn công từ xa BOSSchiến
+   Chiến thắng → kết cục 13 "Truyền thuyết người cá"
+   Thất bại → tử vong
    ============================================================ */
 
 export function handleWolfQuest4() {
@@ -411,9 +411,9 @@ export function handleWolfQuest4() {
 
   if (!state.rangedWeapon) {
     setStory(
-      `老狼看着你空空的双手，皱起了眉头：\n` +
-      `"你没带远程武器？那可是深海里的怪物，近战根本碰不到它！\n` +
-      `去装备一把远程武器，带足弹药再来找我。"`
+      `Lão sói nhìn hai tay trống trơn của bạn, nhíu mày:\n` +
+      `"Bạn không mang vũ khí tầm xa? Đó là quái vật biển sâu, cận chiếnhoàn toàn không với tới!\n` +
+      `Đi trang bị một vũ khí tầm xa, mang đủ đạn rồi quay lại tìm tôi."`
     );
     handleWolfInteract();
     return;
@@ -423,8 +423,8 @@ export function handleWolfQuest4() {
   const ammo = state.ammo.find(a => a.id === ammoId);
   if (!ammo || ammo.count <= 0) {
     setStory(
-      `老狼看了看你的${state.rangedWeapon.name}：\n` +
-      `"枪是好枪，但你没带弹药！快去补充些${ammoId}再来。"`
+      `Lão sói nhìn ${state.rangedWeapon.name} của bạn:\n` +
+      `"Súng là súng tốt, nhưng bạn không mang đạn! Mau đi bổ sung ${ammoId} rồi quay lại."`
     );
     handleWolfInteract();
     return;
@@ -432,34 +432,34 @@ export function handleWolfQuest4() {
 
   setPhase("explore");
   setStory(
-    `老狼带你来港口边的一艘破旧渔船旁。海面阴沉，铅灰色的云层压得极低。\n\n` +
-    `"那个家伙……就在这片海域下面。" 老狼的声音低沉而凝重。\n` +
-    `"巨大得不像这个世界的生物。人鱼说，它沉睡了几百年，\n` +
-    `是末日的能量把它唤醒了。"\n\n` +
-    `远处，一只雪白的手臂从船舷边探出——是受伤的人鱼。\n` +
-    `她的鳞片在阴暗的海面上泛着微光，眼神中既有恐惧，也有决绝。\n\n` +
-    `"准备好了吗？" 老狼握紧了猎枪。\n` +
-    `"这一战，要么把怪物送回深渊……要么我们全都葬身鱼腹。"\n\n` +
-    `⚠ 巨型海尸只能通过远程武器攻击，近战无效！`
+    `Lão sói đưa bạn đến bên một chiếc thuyền cá cũ nát ở cảng. Mặt biển âm u, mây xám nặng trĩu ép xuống rất thấp.\n\n` +
+    `"Con đó……ngay dưới vùng biển này." giọng lão sói trầm và ngưng trọng.\n` +
+    `"Khổng lồ đến không giống sinh vật của thế giới này. Người cá nói, nó đã ngủ say mấy trăm năm,\n` +
+    `là năng lượng mạt thế đánh thức nó."\n\n` +
+    `Phía xa, một cánh tay trắng như tuyết thò ra từ mạn thuyền——là người cá bị thương.\n` +
+    `Vảy của cô ấy lấp lánh ánh sáng yếu trên mặt biển âm u, trong mắt vừa có sợ hãi, vừa có quyết tuyệt.\n\n` +
+    `"Chuẩn bị xong chưa? " lão sói siết chặt súng săn.\n` +
+    `"Trận này, hoặc là đưa quái vật trở về vực sâu……hoặc chúng ta đều chôn thây trong bụng cá."\n\n` +
+    `⚠ Hải thi khổng lồ chỉ có thể dùng vũ khí tầm xa để tấn công, cận chiến vô hiệu!`
   );
 
   setOptions([
-    { text: "出海迎战（远程作战·不可逆转！）", action: "wolf_quest4_fight" },
-    { text: "暂时撤退", action: "wolf_quest4_retreat" },
+    { text: "Ra khơi nghênh chiến (tầm xa·không thể quay lại!)", action: "wolf_quest4_fight" },
+    { text: "Tạm thời rút lui", action: "wolf_quest4_retreat" },
   ]);
 }
 
 export function handleWolfQuest4Retreat() {
-  setStory("你暂时放弃了出海的念头。老狼默默点了点头：\"准备充分再来，不急。\"");
+  setStory("Bạn tạm thời bỏ ý định ra khơi. Lão sói lặng lẽ gật đầu: \"Chuẩn bị kỹ rồi hãy đến, không vội.\"");
   handleWolfInteract();
 }
 
 export function handleWolfQuest4Fight() {
   const state = getState();
 
-  // 再次检查远程武器
+  // Kiểm tra lại vũ khí tầm xa
   if (!state.rangedWeapon) {
-    setStory("你没有装备远程武器，无法与深海怪物战斗！");
+    setStory("Bạn không trang bị vũ khí tầm xa, không thể chiến đấu với quái vật biển sâu!");
     handleWolfInteract();
     return;
   }
@@ -467,15 +467,15 @@ export function handleWolfQuest4Fight() {
   const ammoId = state.rangedWeapon.ammoType;
   const ammo = state.ammo.find(a => a.id === ammoId);
   if (!ammo || ammo.count <= 0) {
-    setStory("你没有弹药，无法战斗！");
+    setStory("Bạn không có đạn, không thể chiến đấu!");
     handleWolfInteract();
     return;
   }
 
-  // 创建BOSS
+  // Tạo BOSS
   const bossDef = NAMED_NPCS.sea_monster;
   if (!bossDef) {
-    setStory("【错误】BOSS数据未定义，请联系开发者。");
+    setStory("【Lỗi】Dữ liệu BOSS chưa định nghĩa, vui lòng liên hệ nhà phát triển.");
     handleWolfInteract();
     return;
   }
@@ -495,28 +495,28 @@ export function handleWolfQuest4Fight() {
 
   setPhase("pre_combat_npc");
   setStory(
-    `渔船驶入了深海区域。海面突然剧烈翻涌——\n\n` +
-    `一个巨大的黑影从深海中缓缓升起。那是一个难以名状的生物：\n` +
-    `腐烂的鲸鱼般的身躯上覆盖着漆黑的鳞甲，数十条触手从身体两侧伸出，\n` +
-    `每条触手末端都长着一只发着幽光的眼睛。\n\n` +
-    `"就是它！" 老狼大吼一声。受伤的人鱼发出了一声奇异而悲怆的吟唱，\n` +
-    `一道微弱的屏障笼罩了渔船——那是她能提供的最后一点庇护。\n\n` +
-    `【巨型海尸】HP:${npc.hp} 伤害:${npc.damage}\n` +
-    `⚠ 此怪物只能用远程武器攻击！\n\n` +
-    `【近战】${state.meleeWeapon.name}\n` +
-    `【远程】${state.rangedWeapon.name} (弹药:${ammo ? ammo.count : 0}发 完整:${state.rangedWeapon.integrity}%)`
+    `Thuyền cá đi vào vùng biển sâu. Mặt biển đột nhiên cuộn trào dữ dội——\n\n` +
+    `Một bóng đen khổng lồ từ biển sâu chậm rãi dâng lên. Đó là một sinh vật khó tả:\n` +
+    `thân thể giống cá voi thối rữa, phủ vảy đen tuyền, hàng chục xúc tu vươn ra từ hai bên thân,\n` +
+    `cuối mỗi xúc tu mọc một con mắt phát ánh sáng u ám.\n\n` +
+    `"Là nó! " lão sói hét lớn. Người cá bị thương cất lên một khúc hát kỳ lạ mà bi thương,\n` +
+    `một rào cản mỏng manh bao trùm thuyền cá——đó là chút che chở cuối cùng cô ấy có thể cung cấp.\n\n` +
+    `【Hải thi khổng lồ】HP:${npc.hp} Sát thương:${npc.damage}\n` +
+    `⚠ Quái vật này chỉ có thể dùng vũ khí tầm xa để tấn công!\n\n` +
+    `【Cận chiến】${state.meleeWeapon.name}\n` +
+    `【Tầm xa】${state.rangedWeapon.name} (đạn:${ammo ? ammo.count : 0} viên hoàn chỉnh:${state.rangedWeapon.integrity}%)`
   );
 
   const options = [
-    { text: "远程作战", action: "combat_npc_ranged" },
-    { text: "近战作战（无效！无法触及深海怪物）", action: "combat_npc_melee", disabled: true },
-    { text: "撤退（25%）", action: "combat_npc_flee" },
+    { text: "Chiến đấu tầm xa", action: "combat_npc_ranged" },
+    { text: "Chiến đấu cận chiến (vô hiệu! không với tới quái vật biển sâu)", action: "combat_npc_melee", disabled: true },
+    { text: "Rút lui (25%)", action: "combat_npc_flee" },
   ];
   setOptions(options);
 }
 
 /* ============================================================
-   物业仓库 - 老旧居民小区常驻选项
+   Kho vật nghiệp - tùy chọn thường trú tại khu dân cư cũ
    ============================================================ */
 
 export function handlePropertyWarehouse() {
@@ -524,12 +524,12 @@ export function handlePropertyWarehouse() {
 
   if (!state.wolfQuest2Done) {
     setStory(
-      "你走到物业仓库门前，发现铁门上挂着一把生锈的大锁。\n" +
-      "透过门缝往里看，隐约能看到一个蜷缩的身影……\n\n" +
-      "就在这时，老狼不知从哪冒了出来，挡在你面前：\n" +
-      "\"那个地方……你还是别去了。\" 他的眼神很复杂。\n" +
-      "\"等你帮我办妥了那些事，我自然会告诉你里面有什么。\"\n\n" +
-      "老狼不希望你去那个地方，还是算了。"
+      "Bạn đi đến cửa kho vật nghiệp, phát hiện trên cửa sắt treo một ổ khóa rỉ sét lớn.\n" +
+      "Qua khe cửa nhìn vào, mơ hồ thấy một thân hình co ro……\n\n" +
+      "Ngay lúc đó, lão sói không biết từ đâu xuất hiện, chặn trước mặt bạn:\n" +
+      "\"Chỗ đó……bạn đừng đi thì hơn.\" ánh mắt ông ấy rất phức tạp.\n" +
+      "\"Đợi bạn giúp tôi làm xong những việc đó, tôi tự nhiên sẽ nói cho bạn bên trong có gì."\n\n" +
+      "Lão sói không muốn bạn đi chỗ đó, thôi vậy."
     );
     showExploreOptionsState();
     return;
@@ -539,7 +539,7 @@ export function handlePropertyWarehouse() {
 }
 
 /* ============================================================
-   受伤人鱼 —— 亲和度系统
+   Người cá bị thương —— hệ thống thiện cảm
    ============================================================ */
 
 export function handleMermaidInteract() {
@@ -549,44 +549,44 @@ export function handleMermaidInteract() {
   setPhase("explore");
 
   let storyText;
-  const affInfo = `\n\n当前好感度：${mermaidAff}/${GAME_CONSTANTS.WOLF.MERMAID_MAX_AFFINITY}`;
+  const affInfo = `\n\nĐộ thiện cảm hiện tại: ${mermaidAff}/${GAME_CONSTANTS.WOLF.MERMAID_MAX_AFFINITY}`;
   if (mermaidAff < 30) {
     storyText =
-      "你推开物业仓库锈迹斑斑的铁门，一股潮湿的海腥味扑面而来。\n" +
-      "仓库深处，一个破旧的浴缸里蜷缩着一个奇异的生物——\n" +
-      "上半身是苍白的少女形态，下半身却是一条覆盖着黯淡鳞片的鱼尾。\n\n" +
-      "她的鱼尾上有一道深深的伤口，鳞片脱落了大半，露出下面发炎的皮肉。\n" +
-      "她抬起头，虚弱而警惕地看着你，嘴唇微微颤动却没有发出声音。" +
+      "Bạn đẩy cánh cửa sắt gỉ sét của kho vật nghiệp, một mùi tanh biển ẩm ướt xộc vào mặt.\n" +
+      "Sâu trong kho, trong một chiếc bồn tắm cũ kỹ co ro một sinh vật kỳ lạ——\n" +
+      "nửa trên là hình thiếu nữ trắng bệch, nửa dưới lại là một chiếc đuôi cá phủ vảy tối mờ.\n\n" +
+      "Trên đuôi cá của cô ấy có một vết thương sâu, vảy rụng mất quá nửa, lộ ra da thịt viêm nhiễm bên dưới.\n" +
+      "Cô ấy ngẩng đầu, yếu ớt mà cảnh giác nhìn bạn, môi khẽ run nhưng không phát ra âm thanh." +
       affInfo;
   } else if (mermaidAff < 80) {
     storyText =
-      "受伤的人鱼看到你，眼中闪过一丝微弱的光芒。\n" +
-      "她的鱼尾伤口似乎好了一些，但依旧触目惊心。\n" +
-      "她用沙哑的声音轻轻说道：\"你……又来了。谢谢你……那些鳞片……\"" +
+      "Người cá bị thương thấy bạn, trong mắt lóe lên một tia sáng yếu ớt.\n" +
+      "Vết thương trên đuôi cá của cô ấy dường như đã tốt hơn chút, nhưng vẫn kinh người.\n" +
+      "Cô ấy dùng giọng khàn khàn khẽ nói: \"Bạn……lại đến nữa. Cảm ơn……những chiếc vảy……\"" +
       affInfo;
   } else if (mermaidAff < GAME_CONSTANTS.WOLF.MERMAID_MAX_AFFINITY) {
     storyText =
-      `人鱼的精神好多了。她的鱼尾上的伤口已经开始愈合，\n` +
-      `一些新的、微小的鳞片正在重新生长。\n` +
-      `"我感觉到……力量在慢慢回来。" 她的声音不再沙哑，\n` +
-      `而是带着一种奇异的、像海浪般的韵律。\n` +
-      `"再帮帮我……再给我一些鳞片……我就快能回家了……"` +
+      `Tinh thần người cá tốt hơn nhiều. Vết thương trên đuôi cá đã bắt đầu lành,\n` +
+      `một số chiếc vảy mới, nhỏ xíu đang mọc lại.\n` +
+      `"Tôi cảm nhận được……sức mạnh đang từ từ quay lại." giọng cô ấy không còn khàn,\n` +
+      `mà mang theo một tiết tấu kỳ lạ, như sóng biển.\n` +
+      `"Giúp tôi nữa đi……đưa thêm vảy cho tôi……tôi sắp có thể về nhà rồi……"` +
       affInfo;
   } else {
     storyText =
-      `人鱼的鱼尾已经完全愈合！新的鳞片闪烁着珍珠般的光泽，\n` +
-      `在昏暗的仓库中像星辰一样明亮。\n\n` +
-      `她从浴缸中站起身——不，是飘了起来——水珠悬浮在她周围，\n` +
-      `空气中弥漫着海洋的清新气息。\n\n` +
-      `"谢谢你……陌生人。不，你已经不是陌生人了。"\n` +
-      `她伸出手，一柄造型奇特的渔叉从水雾中缓缓浮现——\n` +
-      `"这是海歌渔叉，我们一族的圣物。它曾经属于我的母亲，\n` +
-      `现在……它属于你。"\n\n` +
-      `她将渔叉递到你手中，眼中闪烁着泪光：\n` +
-      `"请帮帮老狼……帮我们消灭那个深海的怪物。\n` +
-      `只有它死了，我才能真正自由地回到大海。"\n\n` +
-      `🎁 获得：【海歌渔叉】！\n` +
-      `🔓 老狼任务三"出海前的准备"已解锁！` +
+      `Đuôi cá của người cá đã hoàn toàn lành! Chiếc vảy mới lấp lánh ánh ngọc trai,\n` +
+      `trong kho tối tăm sáng như những vì sao.\n\n` +
+      `Cô ấy đứng dậy từ trong bồn tắm——không, là bay lên——giọt nước lơ lửng quanh cô ấy,\n` +
+      `không khí tràn ngập hơi thở tươi mới của biển cả.\n\n` +
+      `"Cảm ơn bạn……người lạ. Không, bạn không còn là người lạ nữa."\n` +
+      `Cô ấy vươn tay, một cây đinh ba kỳ lạ chậm rãi hiện ra từ trong sương nước——\n` +
+      `"Đây là đinh ba hải ca, thánh vật của tộc chúng tôi. Nó từng thuộc về mẹ tôi,\n` +
+      `giờ đây……thuộc về bạn."\n\n` +
+      `Cô ấy trao đinh ba vào tay bạn, trong mắt lấp lánh nước mắt:\n` +
+      `"Xin hãy giúp lão sói……giúp chúng tôi tiêu diệt con quái vật biển sâu đó.\n` +
+      `Chỉ khi nó chết, tôi mới thực sự tự do quay về biển cả."\n\n` +
+      `🎁 Nhận được: 【Đinh ba hải ca】!\n` +
+      `🔓 Nhiệm vụ 3 của lão sói "chuẩn bị ra khơi" đã mở!` +
       affInfo;
   }
 
@@ -599,16 +599,16 @@ export function handleMermaidInteract() {
 
   const opts = [];
   opts.push({
-    text: `提交闪电鳞片（+${GAME_CONSTANTS.WOLF.MERMAID_LIGHTNING_AFFINITY}好感 拥有：${lightningCount}）`,
+    text: `Nộp vảy sấm sét (+${GAME_CONSTANTS.WOLF.MERMAID_LIGHTNING_AFFINITY} thiện cảm đang có: ${lightningCount})`,
     action: "mermaid_submit_lightning",
     disabled: lightningCount === 0 || mermaidAff >= GAME_CONSTANTS.WOLF.MERMAID_MAX_AFFINITY,
   });
   opts.push({
-    text: `提交通雷鳞片（+${GAME_CONSTANTS.WOLF.MERMAID_THUNDER_AFFINITY}好感 拥有：${thunderCount}）`,
+    text: `Nộp vảy thông lôi (+${GAME_CONSTANTS.WOLF.MERMAID_THUNDER_AFFINITY} thiện cảm đang có: ${thunderCount})`,
     action: "mermaid_submit_thunder",
     disabled: thunderCount === 0 || mermaidAff >= GAME_CONSTANTS.WOLF.MERMAID_MAX_AFFINITY,
   });
-  opts.push({ text: "离开", action: "mermaid_leave" });
+  opts.push({ text: "Rời đi", action: "mermaid_leave" });
 
   setOptions(opts);
 }
@@ -626,7 +626,7 @@ function handleMermaidSubmitScale(scaleId, affinityGain) {
 
   const idx = state.other.findIndex(i => i.id === scaleId);
   if (idx === -1) {
-    setStory("你没有这个鳞片，人鱼失望地垂下了眼帘。");
+    setStory("Bạn không có chiếc vảy này, người cá thất vọng cúi mắt xuống.");
     handleMermaidInteract();
     return;
   }
@@ -640,25 +640,25 @@ function handleMermaidSubmitScale(scaleId, affinityGain) {
 
   const newAff = addNpcAffinity("mermaid", affinityGain);
 
-  const scaleName = scaleId === "lightning_scale" ? "闪电鳞片" : "通雷鳞片";
+  const scaleName = scaleId === "lightning_scale" ? "vảy sấm sét" : "vảy thông lôi";
 
-  let storyMsg = `你将一片${scaleName}递给人鱼。\n\n`;
+  let storyMsg = `Bạn đưa một chiếc ${scaleName} cho người cá.\n\n`;
 
   if (scaleId === "lightning_scale") {
     storyMsg +=
-      `她接过鳞片，轻轻放在自己的伤口上。鳞片融化了——\n` +
-      `化作一道微弱的电弧，渗入了她的鱼尾。\n` +
-      `伤口的边缘似乎缩小了一点点……`;
+      `Cô ấy nhận lấy chiếc vảy, nhẹ nhàng đặt lên vết thương của mình. Chiếc vảy tan chảy——\n` +
+      `hóa thành một tia sét yếu ớt, thấm vào đuôi cá của cô ấy.\n` +
+      `Rìa vết thương dường như nhỏ đi một chút……`;
   } else {
     storyMsg +=
-      `她双手捧住通雷鳞片，闭上眼睛，低声吟唱了一段古老的曲调。\n` +
-      `鳞片在低沉的雷声中化作金色的光点，覆盖了她的全身。\n` +
-      `伤口以肉眼可见的速度愈合了一小片！`;
+      `Cô ấy hai tay nâng chiếc vảy thông lôi, nhắm mắt, khẽ ngâm một khúc ca cổ xưa.\n` +
+      `Chiếc vảy trong tiếng sét trầm thấp hóa thành những hạt sáng vàng, bao phủ toàn thân cô ấy.\n` +
+      `Vết thương lành lại một mảng nhỏ với tốc độ mắt thường có thể thấy!`;
   }
 
-  storyMsg += `\n\n人鱼好感度：${newAff}/${GAME_CONSTANTS.WOLF.MERMAID_MAX_AFFINITY}`;
+  storyMsg += `\n\nĐộ thiện cảm người cá: ${newAff}/${GAME_CONSTANTS.WOLF.MERMAID_MAX_AFFINITY}`;
 
-  // 检查是否达到最大好感度
+  // Kiểm tra đạt độ thiện cảm tối đa
   if (newAff >= GAME_CONSTANTS.WOLF.MERMAID_MAX_AFFINITY) {
     const harpoon = MELEE_WEAPONS.find(w => w.id === GAME_CONSTANTS.WOLF.MERMAID_REWARD_WEAPON);
     if (harpoon) {
@@ -666,25 +666,25 @@ function handleMermaidSubmitScale(scaleId, affinityGain) {
       const added = addItem(weapon);
       if (added) {
         storyMsg +=
-          `\n\n就在鳞片完全融入的瞬间，人鱼的身体突然绽放出耀眼的光芒。\n` +
-          `水雾在她周围旋转、升腾，最终凝聚成一柄造型古朴而优雅的渔叉——\n` +
-          `"海歌渔叉"——它的叉尖闪烁着珍珠般的光泽，叉柄上刻着古老的海洋符文。\n\n` +
-          `人鱼双手将渔叉捧起，郑重地交给你：\n` +
-          `"这是我们族中最珍贵的武器，我的母亲说，只有真正的朋友才配拥有它。\n` +
-          `现在，你就是我们真正的朋友了。"\n\n` +
-          `她的眼中映着鳞光：\n` +
-          `"去告诉老狼……关于那个深海怪物的事。它不该存在于这个世界。\n` +
-          `你们需要联手——我会在海中为你们引路。"`;
+          `\n\nNgay khoảnh khắc chiếc vảy hoàn toàn hòa vào, thân thể người cá đột nhiên bừng sáng rực rỡ.\n` +
+          `Sương nước xoáy tròn quanh cô ấy, bốc lên, cuối cùng ngưng tụ thành một cây đinh ba cổ kính mà thanh nhã——\n` +
+          `"Đinh ba hải ca"——đầu đinh ba lấp lánh ánh ngọc trai, cán khắc cổ văn biển cả.\n\n` +
+          `Người cá hai tay nâng đinh ba, trang trọng trao cho bạn:\n` +
+          `"Đây là vũ khí quý giá nhất tộc chúng tôi, mẹ tôi nói, chỉ có bạn thực sự mới xứng đáng sở hữu.\n` +
+          `Giờ đây, bạn chính là bạn thực sự của chúng tôi."\n\n` +
+          `Trong mắt cô ấy phản chiếu ánh vảy:\n` +
+          `"Đi nói với lão sói……về chuyện con quái vật biển sâu. Nó không nên tồn tại ở thế giới này.\n` +
+          `Các bạn cần liên thủ——tôi sẽ dẫn đường cho các bạn trong biển."`;
       } else {
-        storyMsg += `\n\n⚠ 背包已满，无法获得海歌渔叉！请清理背包后再来。`;
-        // 好感度保持，但回滚一点让玩家可以重新触发
+        storyMsg += `\n\n⚠ Balo đã đầy, không thể nhận đinh ba hải ca! Vui lòng dọn dẹp balo rồi quay lại.`;
+        // Độ thiện cảm giữ nguyên, nhưng lùi lại một chút để người chơi có thể kích hoạt lại
         state.npcAffinity.mermaid = GAME_CONSTANTS.WOLF.MERMAID_MAX_AFFINITY - 1;
         setStory(storyMsg);
         handleMermaidInteract();
         return;
       }
     }
-    storyMsg += `\n\n🎁 获得：【海歌渔叉】！\n🔓 老狼任务三"出海前的准备"已解锁！`;
+    storyMsg += `\n\n🎁 Nhận được: 【Đinh ba hải ca】!\n🔓 Nhiệm vụ 3 của lão sói "chuẩn bị ra khơi" đã mở!`;
   }
 
   setStory(storyMsg);
@@ -702,12 +702,12 @@ function handleMermaidSubmitScale(scaleId, affinityGain) {
 }
 
 export function handleMermaidLeave() {
-  setStory("你轻轻关上了物业仓库的门，人鱼的目光在黑暗中渐渐隐去。");
+  setStory("Bạn nhẹ nhàng đóng cửa kho vật nghiệp, ánh mắt người cá dần ẩn vào trong bóng tối.");
   showExploreOptionsState();
 }
 
 /* ============================================================
-   巨型海尸战斗后处理 —— 在 combat.js 中通过 _wolfQuest4Combat 标记触发
+   Xử lý sau chiến đấu hải thi khổng lồ —— kích hoạt trong combat.js qua cờ _wolfQuest4Combat
    ============================================================ */
 
 export function checkWolfQuest4Victory() {
@@ -723,6 +723,6 @@ export function checkWolfQuest4Victory() {
     return true;
   }
 
-  // 战斗失败由 combat.js 的 checkDeath 处理
+  // Thất bại chiến đấu do checkDeath trong combat.js xử lý
   return false;
 }

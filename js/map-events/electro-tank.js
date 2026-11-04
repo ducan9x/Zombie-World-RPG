@@ -21,60 +21,60 @@ import {
 } from '../routing.js';
 
 /**
- * 市中心综合商场 - 漏电玻璃缸主入口
+ * Trung tâm thương mại - bể cá điện chính
  */
 export function handleElectroTank() {
   setPhase("explore");
   setStory(
-    "商场角落有一个巨大的玻璃缸，缸壁上布满了青苔和裂纹。\n" +
-    "缸内的水浑浊不清，隐约能看到几根裸露的电线在水中摇曳，发出滋滋的电流声。\n" +
-    "水面上漂浮着几条早已翻白的小鱼——看来普通的鱼根本无法在这带电的水中存活。\n" +
-    "你注意到缸底有几片泛着微光的鳞片，似乎蕴藏着某种能量……"
+    "Góc thương trường có một chiếc bể kính khổng lồ, thành bể phủ đầy rêu xanh và vết nứt.\n" +
+    "Nước trong bể đục ngầu, ẩn hiện vài sợi dây điện trần đang lắc lư trong nước, phát ra tiếng xèo xèo.\n" +
+    "Mặt nước nổi lờ đờ vài con cá nhỏ đã lật trắng bụng từ lâu——xem ra cá thường không thể sống trong nước có điện này.\n" +
+    "Bạn chú ý thấy đáy bể có vài vảy lấp lánh ánh sáng vi mô, dường như chứa đựng một dạng năng lượng nào đó……"
   );
   showElectroOptions();
 }
 
 /**
- * 展示玻璃缸子选项（不覆盖当前 story）
+ * Hiển thị các lựa chọn phụ của bể cá điện (không ghi đè story hiện tại)
  */
 function showElectroOptions() {
   setOptions([
-    { text: "投放鱼类", action: "electro_throw_fish" },
-    { text: "用手触摸", action: "electro_touch" },
-    { text: "离开", action: "electro_leave" },
+    { text: "Thả cá", action: "electro_throw_fish" },
+    { text: "Chạm tay", action: "electro_touch" },
+    { text: "Rời đi", action: "electro_leave" },
   ]);
 }
 
 /**
- * 投放鱼类 - 选择要投放的鱼
+ * Thả cá - chọn loại cá muốn thả
  */
 export function handleElectroThrowFish() {
   const state = getState();
   const fishInBag = state.food.filter(f => f.type === "fish");
 
   if (fishInBag.length === 0) {
-    setStory("你翻遍了背包，一条鱼都没有。也许该去岛屿钓些鱼再来。");
+    setStory("Bạn lục khắp balo, không có lấy một con cá. Có lẽ nên ra đảo câu vài con rồi quay lại.");
     setOptions([
-      { text: "用手触摸", action: "electro_touch" },
-      { text: "离开", action: "electro_leave" },
+      { text: "Chạm tay", action: "electro_touch" },
+      { text: "Rời đi", action: "electro_leave" },
     ]);
     return;
   }
 
   setPhase("explore");
-  setStory("请选择你要投放的鱼类：");
+  setStory("Hãy chọn loại cá bạn muốn thả:");
   const opts = fishInBag.map((f, i) => ({
     text: `${f.name} ×${f.count || 1}`,
     action: "electro_fish_confirm",
     fishIndex: i,
     fishId: f.id,
   }));
-  opts.push({ text: "返回", action: "electro_tank" });
+  opts.push({ text: "Quay lại", action: "electro_tank" });
   setOptions(opts);
 }
 
 /**
- * 确认投放某条鱼
+ * Xác nhận thả một con cá
  */
 export function handleElectroFishConfirm(input) {
   const state = getState();
@@ -94,10 +94,10 @@ export function handleElectroFishConfirm(input) {
     return;
   }
 
-  // 消耗1条鱼
+  // Tiêu thụ 1 con cá
   const fishInBag = state.food.filter(f => f.type === "fish" && f.id === option.fishId);
   if (fishInBag.length === 0) {
-    setStory("背包中找不到该鱼，也许已经被消耗了。");
+    setStory("Không tìm thấy cá đó trong balo, có lẽ đã bị tiêu thụ rồi.");
     handleElectroTank();
     return;
   }
@@ -116,26 +116,26 @@ export function handleElectroFishConfirm(input) {
     const scale = { ...SPECIAL_ITEMS.lightning_scale };
     addItem(scale);
     storyMsg =
-      `你将【${formatQualityText(fishDef.name, rarity)}】轻轻放入玻璃缸中……\n\n` +
-      `鱼入水的瞬间，电光四溅！滋滋作响的电流缠绕在鱼身上，却没有将它电死。\n` +
-      `${formatQualityText(fishDef.name, rarity)}在电流中剧烈颤动，鳞片开始折射出耀眼的蓝白色光芒。\n` +
-      `片刻之后，鱼沉入缸底，一片闪烁着电弧的鳞片缓缓浮了上来——\n\n` +
-      `✨ 获得特殊物品：${formatQualityText(SPECIAL_ITEMS.lightning_scale.name, "epic")}！`;
+      `Bạn thả 【${formatQualityText(fishDef.name, rarity)}】 nhẹ nhàng vào bể kính……\n\n` +
+      `Ngay khi cá chạm nước, điện quang bắn tung tóe! Dòng điện xèo xèo quấn lấy thân cá, nhưng không điện chết nó.\n` +
+      `${formatQualityText(fishDef.name, rarity)} rung lên dữ dội trong dòng điện, vảy bắt đầu khúc xạ ánh sáng xanh trắng chói lòa.\n` +
+      `Một lát sau, cá chìm xuống đáy bể, một chiếc vảy lấp lánh tia điện từ từ nổi lên——\n\n` +
+      `✨ Nhận được vật phẩm đặc biệt: ${formatQualityText(SPECIAL_ITEMS.lightning_scale.name, "epic")}!`;
   } else if (rarity === "legendary") {
     const scale = { ...SPECIAL_ITEMS.thunder_scale };
     addItem(scale);
     storyMsg =
-      `你将【${formatQualityText(fishDef.name, rarity)}】放入玻璃缸中……\n\n` +
-      `轰——！\n` +
-      `整缸水瞬间沸腾！狂暴的电流如龙蛇般在水中狂舞，${formatQualityText(fishDef.name, rarity)}的身躯被雷霆包裹。\n` +
-      `它非但没有死去，反而在雷电中蜕变——鳞片剥落，凝聚成一片暗金色的鳞片。\n` +
-      `当水面重新平静，那片鳞片静静地浮在水面上，隐隐传来低沉的雷声——\n\n` +
-      `⚡ 获得特殊物品：${formatQualityText(SPECIAL_ITEMS.thunder_scale.name, "legendary")}！`;
+      `Bạn thả 【${formatQualityText(fishDef.name, rarity)}】 vào bể kính……\n\n` +
+      `Ầm——!\n` +
+      `Toàn bộ nước trong bể sôi sùng sục trong nháy mắt! Dòng điện cuồng bạo như rồng rắn múa wild trong nước, thân ${formatQualityText(fishDef.name, rarity)} bị sấm sét bao bọc.\n` +
+      `Nó không những không chết, mà còn biến đổi trong sấm sét——vảy bong ra, ngưng tụ thành một chiếc vảy ánh kim sẫm.\n` +
+      `Khi mặt nước yên lại, chiếc vảy ấy lặng lẽ nổi trên mặt nước, ẩn ẩn vang lên tiếng sấm trầm——\n\n` +
+      `⚡ Nhận được vật phẩm đặc biệt: ${formatQualityText(SPECIAL_ITEMS.thunder_scale.name, "legendary")}!`;
   } else {
     storyMsg =
-      `你将【${formatQualityText(fishDef.name, rarity)}】放进玻璃缸……\n\n` +
-      `噼啪！电流瞬间穿透了鱼身。${formatQualityText(fishDef.name, rarity)}剧烈抽搐了几下，翻起了白肚皮。\n` +
-      `看来需要更好的品种才能在这带电的水中存活。`;
+      `Bạn thả 【${formatQualityText(fishDef.name, rarity)}】 vào bể kính……\n\n` +
+      `Rắc! Dòng điện tức thì xuyên qua thân cá. ${formatQualityText(fishDef.name, rarity)} giật giật vài cái rồi lật trắng bụng.\n` +
+      `Xem ra cần giống tốt hơn mới có thể sống sót trong nước có điện này.`;
   }
 
   setStory(storyMsg);
@@ -148,7 +148,7 @@ export function handleElectroFishConfirm(input) {
 }
 
 /**
- * 用手触摸玻璃缸
+ * Chạm tay vào bể kính
  */
 export function handleElectroTouch() {
   const state = getState();
@@ -156,19 +156,19 @@ export function handleElectroTouch() {
   if (Math.random() < 0.5) {
     state.health = Math.max(0, state.health - 50);
     setStory(
-      "你伸手触碰了玻璃缸壁……\n\n" +
-      "滋滋——！！\n" +
-      "一股强烈的电流瞬间击穿了你的手臂！你被弹开数米远，浑身麻痹。\n" +
-      "手臂上留下了一道焦黑的灼痕，疼痛钻心。\n\n" +
-      `[系统] 你受到电击伤害 ❤️ -50（当前健康度：${state.health}/${GAME_CONSTANTS.MAX_HEALTH}）`
+      "Bạn đưa tay chạm vào thành bể kính……\n\n" +
+      "Xèo xèo——!!\n" +
+      "Một luồng điện mạnh tức thì xuyên qua cánh tay bạn! Bạn bị hất văng ra xa vài mét, toàn thân tê liệt.\n" +
+      "Trên cánh tay còn lại một vết cháy đen, đau buốt tận xương.\n\n" +
+      `[Hệ thống] Bạn chịu sát thương điện giật ❤️ -50 (sức khỏe hiện tại: ${state.health}/${GAME_CONSTANTS.MAX_HEALTH})`
     );
   } else {
     setStory(
-      "你小心翼翼地用手指碰了一下玻璃缸壁——\n\n" +
-      "出乎意料，只是微微有些发麻，并没有什么特别的感觉。\n" +
-      "缸里的水依旧浑浊，电线还在滋滋作响。\n" +
-      "这片鳞片的光芒让你觉得它们不简单，也许该找懂行的人问问。\n\n" +
-      `[系统] 未受伤害（当前健康度：${state.health}/${GAME_CONSTANTS.MAX_HEALTH}）`
+      "Bạn thận trọng dùng ngón tay chạm nhẹ thành bể kính——\n\n" +
+      "Ngờ đâu chỉ hơi tê tê, chẳng có cảm giác đặc biệt nào.\n" +
+      "Nước trong bể vẫn đục ngầu, dây điện vẫn xèo xèo.\n" +
+      "Ánh sáng của những chiếc vảy ấy khiến bạn cảm thấy chúng không tầm thường, có lẽ nên hỏi người am hiểu.\n\n" +
+      `[Hệ thống] Không chịu sát thương (sức khỏe hiện tại: ${state.health}/${GAME_CONSTANTS.MAX_HEALTH})`
     );
   }
 
@@ -181,9 +181,9 @@ export function handleElectroTouch() {
 }
 
 /**
- * 离开玻璃缸
+ * Rời khỏi bể kính
  */
 export function handleElectroLeave() {
-  setStory("你转身离开了那个滋滋作响的玻璃缸，电光在身后渐渐隐去。");
+  setStory("Bạn quay người rời khỏi chiếc bể kính đang xèo xèo, điện quang dần tan biến phía sau.");
   showExploreOptionsState();
 }

@@ -13,39 +13,39 @@ import { refreshIslandMenu } from './index.js';
 
 function getInvestorTitle(state) {
   if (!hasCastleIdentity(state) && state.other.some(i => i.id === SPECIAL_ITEMS.castle_pass.id)) {
-    return "先生";
+    return "Ngài";
   }
   const rankName = getCastleRankName(state);
   const titleMap = {
-    "贵族": "贵族",
-    "子爵": "子爵",
-    "伯爵": "伯爵",
-    "侯爵": "侯爵",
-    "公爵": "公爵",
-    "储君": "储君",
+    "贵族": "Quý tộc",
+    "子爵": "Tử tước",
+    "伯爵": "Bá tước",
+    "侯爵": "Hầu tước",
+    "公爵": "Công tước",
+    "储君": "Trữ quân",
   };
-  return titleMap[rankName] || "先生";
+  return titleMap[rankName] || "Ngài";
 }
 
 export function handleInvest() {
   const state = getState();
   if (!hasCastleIdentity(state) && !state.other.some(i => i.id === SPECIAL_ITEMS.castle_pass.id)) {
-    setStory("一个衣着考究的代理人挡住了你：\"抱歉，只有持有城堡通行证或城堡身份牌的人才能进入卢修斯投资行。\"");
+    setStory("Một người đại diện ăn mặc sang trọng chặn bạn: \"Xin lỗi, chỉ người giữ vé thông hành lâu đài hoặc thẻ thân phận lâu đài mới được vào Hàng đầu tư Lucius.\"");
     refreshIslandMenu();
     return;
   }
   if (state.islandDebt && state.islandDebt.dueDay - state.day < 0) {
-    setStory("你当前的信用不足，业务员不愿意接待你，请还清岛屿相关债务再来吧。");
+    setStory("Tín dụng của bạn hiện không đủ, nhân viên không muốn tiếp bạn, hãy trả hết nợ liên quan đến đảo rồi quay lại.");
     refreshIslandMenu();
     return;
   }
   const title = getInvestorTitle(state);
   setPhase("island_invest");
-  setStory(`尊敬的${title}大人，欢迎来到卢修斯投资行代理行，这里为你提供最好的投资服务！`);
+  setStory(`Kính thưa ${title} đại nhân, chào mừng đến Hàng đại lý đầu tư Lucius, chúng tôi cung cấp dịch vụ đầu tư tốt nhất cho bạn!`);
   setOptions([
-    { text: "进行投资", action: "invest_start" },
-    { text: "投资收益", action: "invest_check" },
-    { text: "离开", action: "invest_leave" },
+    { text: "Thực hiện đầu tư", action: "invest_start" },
+    { text: "Lợi nhuận đầu tư", action: "invest_check" },
+    { text: "Rời đi", action: "invest_leave" },
   ]);
 }
 
@@ -86,19 +86,19 @@ export function handleInvestAction(input) {
 function handleInvestStart() {
   const state = getState();
   if (state.investment !== null) {
-    setStory("你已经有一笔投资了。");
+    setStory("Bạn đã có một khoản đầu tư rồi.");
     setPhase("island_invest");
-    setOptions([{ text: "继续", action: "invest_back" }]);
+    setOptions([{ text: "Tiếp tục", action: "invest_back" }]);
     return;
   }
   setPhase("island_invest");
-  setStory("请选择投资金额：");
+  setStory("Chọn số tiền đầu tư:");
   const opts = INVEST_AMOUNTS.map(amount => ({
-    text: `${amount}皇家币`,
+    text: `${amount} Royal Coin`,
     action: "invest_amount",
     amount,
   }));
-  opts.push({ text: "返回", action: "invest_back" });
+  opts.push({ text: "Quay lại", action: "invest_back" });
   setOptions(opts);
 }
 
@@ -111,14 +111,14 @@ function handleInvestDirection(input) {
   const amount = option.amount;
 
   setPhase("island_invest");
-  setStory(`投资金额：${amount}皇家币\n请选择投资方向：`);
+  setStory(`Số tiền đầu tư: ${amount} Royal Coin\nChọn hướng đầu tư:`);
   const opts = INVEST_DIRECTIONS.map(dir => ({
     text: `${dir.name}`,
     action: "invest_direction",
     directionId: dir.id,
     amount,
   }));
-  opts.push({ text: "返回", action: "invest_back" });
+  opts.push({ text: "Quay lại", action: "invest_back" });
   setOptions(opts);
 }
 
@@ -135,9 +135,9 @@ function handleInvestConfirm(input) {
   const tax = Math.round(amount * GAME_CONSTANTS.ISLAND.INVEST_TAX_RATE);
   const totalCost = amount + tax;
   if (state.royalCoins < totalCost) {
-    setStory(`你的皇家币不足。投资需要${amount}皇家币 + ${tax}皇家币印花税（共${totalCost}），但只有${state.royalCoins}皇家币。`);
+    setStory(`Royal Coin của bạn không đủ. Đầu tư cần ${amount} + ${tax} thuế stamp (tổng ${totalCost}), nhưng chỉ có ${state.royalCoins}.`);
     setPhase("island_invest");
-    setOptions([{ text: "继续", action: "invest_back" }]);
+    setOptions([{ text: "Tiếp tục", action: "invest_back" }]);
     return;
   }
 
@@ -157,18 +157,18 @@ function handleInvestConfirm(input) {
     };
 
     const title = getInvestorTitle(state);
-    setStory(`你将${amount}皇家币投入了${directionName}，缴纳印花税${tax}皇家币。卢修斯微笑着说："明智的选择，${title}大人。${INVEST_DURATION_DAYS}天后再来看看结果吧。"`);
+    setStory(`Bạn đã đầu tư ${amount} Royal Coin vào ${directionName}, nộp thuế ${tax} Royal Coin. Lucius mỉm cười: "Lựa chọn sáng suốt, ${title} đại nhân. ${INVEST_DURATION_DAYS} ngày nữa hãy quay lại xem kết quả."`);
     setPhase("island_invest");
-    setOptions([{ text: "继续", action: "invest_back" }]);
+    setOptions([{ text: "Tiếp tục", action: "invest_back" }]);
   }
 }
 
 function handleInvestCheck() {
   const state = getState();
   if (!state.investment) {
-    setStory("当前还没有进行投资，无收益可领取。");
+    setStory("Hiện chưa có đầu tư nào, không có lợi nhuận để nhận.");
     setPhase("island_invest");
-    setOptions([{ text: "继续", action: "invest_back" }]);
+    setOptions([{ text: "Tiếp tục", action: "invest_back" }]);
     return;
   }
 
@@ -178,17 +178,17 @@ function handleInvestCheck() {
   const daysLeft = state.investment.dueDay - state.day;
 
   if (daysLeft > 0) {
-    setStory(`你的投资还在进行中。\n\n投资方向：${directionName}\n投入金额：${amount}皇家币\n剩余时间：${daysLeft}天`);
+    setStory(`Đầu tư của bạn vẫn đang tiến hành.\n\nHướng đầu tư: ${directionName}\nSố tiền đầu tư: ${amount} Royal Coin\nThời gian còn lại: ${daysLeft} ngày`);
     setPhase("island_invest");
-    setOptions([{ text: "继续", action: "invest_back" }]);
+    setOptions([{ text: "Tiếp tục", action: "invest_back" }]);
     return;
   }
 
   if (!direction) {
-    setStory("投资方向数据异常，投资已取消。");
+    setStory("Dữ liệu hướng đầu tư bất thường, đầu tư đã hủy.");
     state.investment = null;
     setPhase("island_invest");
-    setOptions([{ text: "继续", action: "invest_back" }]);
+    setOptions([{ text: "Tiếp tục", action: "invest_back" }]);
     return;
   }
 
@@ -208,22 +208,22 @@ function handleInvestCheck() {
   const profit = result - amount;
   let profitText;
   if (profit > 0) {
-    profitText = `📈 盈利 +${profit}皇家币`;
+    profitText = `📈 Lãi +${profit} Royal Coin`;
   } else if (profit < 0) {
-    profitText = `📉 亏损 ${profit}皇家币`;
+    profitText = `📉 Lỗ ${profit} Royal Coin`;
   } else {
-    profitText = "持平";
+    profitText = "Hòa vốn";
   }
 
   if (result > 0) {
     addRoyalCoins(result);
   }
-  const taxInfo = state.investment && state.investment.tax ? `\n已缴纳印花税：${state.investment.tax}皇家币` : "";
+  const taxInfo = state.investment && state.investment.tax ? `\nĐã nộp thuế stamp: ${state.investment.tax} Royal Coin` : "";
   state.investment = null;
 
-  setStory(`${selectedOutcome.desc}\n\n投入：${amount}皇家币\n收回：${result}皇家币\n${profitText}${taxInfo}\n当前皇家币：${getState().royalCoins}`);
+  setStory(`${selectedOutcome.desc}\n\nĐầu tư: ${amount} Royal Coin\nThu hồi: ${result} Royal Coin\n${profitText}${taxInfo}\nRoyal Coin hiện tại: ${getState().royalCoins}`);
   setPhase("island_invest");
-  setOptions([{ text: "继续", action: "invest_back" }]);
+  setOptions([{ text: "Tiếp tục", action: "invest_back" }]);
 }
 
 function handleInvestCollect(input) {

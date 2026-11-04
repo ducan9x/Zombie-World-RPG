@@ -1,69 +1,69 @@
-export const DOCTOR_INTRO = "一个戴着厚重眼镜的中年男人——陈博士——坐在研究所的废墟中，手里拿着一管发光的血清。他抬起头推了推眼镜：\"又一个幸存者……我对你没有恶意，但如果你能帮我个忙的话……\"";
+export const DOCTOR_INTRO = "Một người đàn ông trung niên đeo cặp kính dày — Tiến sĩ Chen — ngồi giữa phế tích của viện nghiên cứu, tay cầm một ống huyết thanh phát sáng. Anh ngẩng đầu đẩy gọng kính: \"Lại một người sống sót nữa... tôi không có ác ý với bạn, nhưng nếu bạn có thể giúp tôi một việc...\"";
 
 export const DOCTOR_DIALOGUES = [
-  "\"我研究这个病毒已经三年了，就差最后一步……五十支血清，你拿得出来吗？\"",
-  "\"你能活到现在，一定收集了不少血清吧？我需要它们来完成我的研究。\"",
-  "\"作为交换，我可以给你我的私人物品……一把M700狙击步枪，还有三十发7.62×51mm子弹。\"",
-  "\"我知道这个要求很过分，但这是我的毕生心血……拜托了。\"",
-  "\"如果你凑不齐，就请离开吧。我需要的是真正有能力的人。\"",
+  "\"Tôi đã nghiên cứu virus này ba năm rồi, chỉ còn bước cuối cùng... năm mươi ống huyết thanh, bạn có thể kiếm được không?\"",
+  "\"Bạn có thể sống sót đến giờ, chắc hẳn đã thu thập được không ít huyết thanh nhỉ? Tôi cần chúng để hoàn thành nghiên cứu của mình.\"",
+  "\"Đổi lại, tôi có thể đưa bạn đồ dùng cá nhân của tôi... một khẩu súng bắn tỉa M700, cùng ba mươi viên đạn 7.62×51mm.\"",
+  "\"Tôi biết yêu cầu này rất quá đáng, nhưng đây là tâm huyết cả đời của tôi... xin bạn.\"",
+  "\"Nếu bạn không gom đủ, thì xin hãy rời đi. Tôi cần những người thực sự có năng lực.\"",
 ];
 
-export const ZOMBIE_KING_INTRO = "巢穴深处，一个巨大的身影缓缓站起。它的体型是普通丧尸的三倍，皮肤如同黑色的盔甲，猩红的眼睛死死盯着你。它的身上插满了各种武器残骸，似乎在诉说它战胜过无数挑战者。这就是丧尸巢穴真正的主人——尸王·寂灭。它没有咆哮，但那种压迫感让你的心脏几乎停止跳动。";
+export const ZOMBIE_KING_INTRO = "Sâu trong hang ổ, một thân hình khổng lồ chậm rãi đứng dậy. Kích thước của nó gấp ba lần zombie thường, da như áo giáp đen, đôi mắt đỏ ngầu nhìn chằm chằm vào bạn. Trên người nó cắm đầy mảnh vỡ vũ khí, dường như kể về vô số kẻ thách đấu đã bị nó đánh bại. Đây chính là chủ nhân thực sự của hang zombie —Thi Vương·Tịch Diệt. Nó không gầm rú, nhưng áp lực đó khiến trái tim bạn gần như ngừng đập.";
 
-export const NURSE_ZOMBIE_INTRO = "一个穿着破烂护士服的女性丧尸蜷缩在角落里，你隐约还能看出她胸牌上的名字——「露露薇」。她的眼睛竟然还保留着一丝人类的理智，盯着你手中的食物，喉咙里发出微弱的呜咽声。";
+export const NURSE_ZOMBIE_INTRO = "Một zombie nữ mặc bộ đồ y tá rách rưới co ro trong góc, bạn mơ hồ còn nhìn thấy tên trên thẻ tên của cô — 「Lộ Lộ Vy」. Đôi mắt cô ấy vẫn còn giữ lại một chút lý trí con người, nhìn chằm chằm vào thức ăn trong tay bạn, cổ họng phát ra tiếng rên rỉ yếu ớt.";
 
-export const GAME_INTRO = "丧尸病毒席卷世界，已是第三个年头。漫长的末日里，太多过往被混沌与恐惧冲刷殆尽，你的大多记忆早已模糊消散。此刻你蜷缩在破旧的幸存者帐篷深处，怀中仅有一块干瘪的压缩饼干与半瓶仅剩的饮用水。帐篷外，断断续续的丧尸低吼随风钻透缝隙，沉闷又嘶哑，在死寂的夜色里反复回荡。曾经熟悉的世界，早已彻底倾覆。刺骨的饥饿灼烧胃腑，干渴啃噬喉咙，深入骨髓的恐惧攥紧神经，三重绝望同时压在身上。你必须撑下去，必须想办法活下去。末世流言在幸存者间辗转流传：有人拼凑起希望，建起了曙光阵地；昔日的房地产大亨凯伦，割据一方，构筑起属于自己的末日王国。这两个名字，是这片废土之上，所有幸存者都心知肚明的存在。记记录了如何（捡到的那本生存笔记录了如何在末世活下去，新手请务必认真读完选项11的所有内容）";
+export const GAME_INTRO = "Virus zombie quét qua thế giới, đã là năm thứ ba. Trong những năm dài ngày tận thế, quá nhiều quá khứ bị hỗn loạn và sợ hãi cuốn trôi, hầu hết ký ức của bạn đã mờ nhạt. Giờ đây bạn co ro sâu trong lều của người sống sót rách nát, trong lòng chỉ có một mẩu bánh quy khô và nửa chai nước uống còn lại. Ngoài lều, tiếng gầm zombie đứt quãng len qua khe gió, trầm đục mà khàn khàn, vang vọng trong đêm chết chóc. Thế giới quen thuộc đã hoàn toàn sụp đổ. Cơn đói buốt cháy dạ dày, khát khô cổ họng, nỗi sợ ăn vào tận xương tủy siết chặt thần kinh, ba lớp tuyệt vọng cùng đè nặng lên người. Bạn phải chống đỡ, phải nghĩ cách sống sót. Lời đồn về ngày tận thế lan truyền trong giới người sống sót: có người tập hợp hy vọng, xây dựng nên Dawn Base; cựu ông trùm bất động sản Karen, chiếm cứ một phương, xây dựng vương quốc ngày tận thế của riêng mình. Hai cái tên này, là những tồn tại mà mọi người sống sót trên mảnh đất hoang tàn đều biết rõ. Cuốn nhật ký sống sót nhặt được đã ghi lại cách sinh tồn trong ngày tận thế, người mới nhất định phải đọc kỹ toàn bộ nội dung của lựa chọn 11";
 
-export const GIANT_PUPPET_INTRO = "发射中心的大门被一具巨大的身影堵住了。那是一具被未知力量操控的丧尸傀儡，体型比普通丧尸大了三倍不止。它的四肢被粗糙的金属框架固定，身上缠绕着发着暗红光芒的管线，仿佛某种失控的实验产物。空洞的眼眶中燃烧着幽绿色的火焰，它缓缓转向你，发出一声低沉的咆哮。";
+export const GIANT_PUPPET_INTRO = "Cánh cửa trung tâm phóng bị một thân hình khổng lồ chặn lại. Đó là một con zombie bù nhìn bị điều khiển bởi lực lượng không rõ, kích thước gấp ba lần zombie thường. Tứ chi nó bị khung kim loại thô kệch cố định, trên người quấn những ống dẫn phát ánh sáng đỏ sẫm, như thể sản phẩm của một thí nghiệm mất kiểm soát. Trong hốc mắt trống rỗng cháy ngọn lửa xanh lét, nó chậm rãi quay về phía bạn, phát ra tiếng gầm trầm đục.";
 
-export const ROCKET_PREP_STORY = "你站在发射中心巨大的火箭面前。这架沉睡已久的庞然大物表面布满了灰尘，但主体结构依然完好。如果有人能修好它，也许……真的能飞起来。";
+export const ROCKET_PREP_STORY = "Bạn đứng trước tên lửa khổng lồ tại trung tâm phóng. Bề mặt cỗ máy khổng lồ đang ngủ yên phủ đầy bụi, nhưng cấu trúc chính vẫn còn nguyên vẹn. Nếu có ai đó sửa được nó, có lẽ... thực sự có thể bay lên.";
 
-export const ROCKET_LAUNCH_PREP = `火箭矗立在发射架上，银白色的箭体在昏暗的灯光下反射出冷冽的光芒。所有系统已就绪，倒计时即将开始。
+export const ROCKET_LAUNCH_PREP = `Tên lửa sừng sững trên bệ phóng, thân tên lửa màu bạc phản chiếu ánh sáng lạnh lẽo dưới ánh đèn u ám. Mọi hệ thống đã sẵn sàng, đếm ngược sắp bắt đầu.
 
-陈博士站在舷梯旁，手里拿着一块旧式电子板，最后检查了一遍数据。他抬起头，推了推那副厚重的眼镜："一切准备就绪。火箭可以发射了。"
+Tiến sĩ Chen đứng bên thang máy, tay cầm một tấm bảng điện tử cũ, kiểm tra dữ liệu lần cuối. Anh ngẩng đầu, đẩy gọng kính dày: "Mọi thứ đã sẵn sàng. Tên lửa có thể phóng."
 
-他沉默了片刻，然后轻声说："这是单程票。一旦点火，就没有回头路了。"
+Anh trầm mặc một lát, rồi khẽ nói: "Đây là vé một chiều. Một khi khai hỏa, sẽ không còn đường quay lại."
 
-你深吸一口气，看着眼前这架承载着人类最后希望的飞行器，心中百感交集。
+Bạn hít sâu một hơi, nhìn cỗ máy bay mang hy vọng cuối cùng của nhân loại trước mắt, lòng trăm mối cảm xúc.
 
-你做出了选择。`;
+Bạn đã đưa ra lựa chọn.`;
 
-export const DOCTOR_QUEST1_STORY = `陈博士放下手中的试管，认真地看着你："你问那架火箭？是的，理论上它可以修复。但需要三样东西。"
+export const DOCTOR_QUEST1_STORY = `Tiến sĩ Chen đặt ống nghiệm xuống, nghiêm túc nhìn bạn: "Bạn hỏi về tên lửa đó à? Đúng vậy, về lý thuyết nó có thể sửa chữa. Nhưng cần ba thứ."
 
-他竖起一根手指："第一，我需要一台小核能发电机来提供发射所需的电力。据我所知，末日城堡的地下区域有一批这样的设备——那是旧时代留下的军事储备。但那里被国王封锁了，你需要他的许可才能进入。"
+Anh giơ một ngón tay: "Thứ nhất, tôi cần một máy phát điện hạt nhân nhỏ để cung cấp điện cho vụ phóng. Theo tôi biết, khu vực ngầm của lâu đài ngày tận thế có một lô thiết bị như vậy — đó là kho quân sự thời cũ. Nhưng nơi đó bị nhà vua phong tỏa, bạn cần sự cho phép của ông ta mới được vào."
 
-他叹了口气："不过，国王那个人……恐怕不会轻易答应。"`;;
+Anh thở dài: "Tuy nhiên, nhà vua đó... e rằng sẽ không dễ dàng đồng ý."`;
 
-export const DOCTOR_QUEST1_COMPLETE = `你将小核能发电机放在实验桌上，陈博士的眼睛瞬间亮了起来。他小心翼翼地检查着设备，双手因激动而微微颤抖。
+export const DOCTOR_QUEST1_COMPLETE = `Bạn đặt máy phát điện hạt nhân nhỏ lên bàn thí nghiệm, mắt Tiến sĩ Chen lập tức sáng lên. Anh cẩn thận kiểm tra thiết bị, hai tay run nhẹ vì kích động.
 
-"太好了！这台发电机的核心还在运转！"他立刻开始连接线路，实验室的灯光随之亮了起来，"有了这个，我就能启动研究所的能源开采井了。那口井可以产出纯净能源——火箭推进器的燃料。"
+"Tuyệt vời! Lõi của máy phát này vẫn đang vận hành!" Anh lập tức bắt đầu nối dây, đèn trong phòng thí nghiệm cũng theo đó sáng lên, "Có thứ này, tôi có thể khởi động giếng khai thác năng lượng của viện nghiên cứu. Giếng đó có thể sản xuất năng lượng tinh khiết — nhiên liệu cho động cơ đẩy tên lửa."
 
-他拍了拍发电机的外壳："接下来，我需要30个纯净能源来填充火箭的推进系统。你可以从能源开采井中获取，每天能提取一个。"`;;
+Anh vỗ vỗ vỏ máy phát: "Tiếp theo, tôi cần 30 đơn vị năng lượng tinh khiết để nạp đầy hệ thống động cơ đẩy của tên lửa. Bạn có thể lấy từ giếng khai thác năng lượng, mỗi ngày chiết xuất được một đơn vị."`;
 
-export const DOCTOR_QUEST2_COMPLETE = `陈博士接过纯净能源，逐一检查后小心翼翼地注入火箭的推进系统。仪表盘上的指示灯从红色变成了黄色，又从黄色变成了绿色。
+export const DOCTOR_QUEST2_COMPLETE = `Tiến sĩ Chen nhận lấy năng lượng tinh khiết, kiểm tra từng đơn vị rồi cẩn thận bơm vào hệ thống động cơ đẩy của tên lửa. Đèn chỉ thị trên bảng điều khiển từ đỏ chuyển sang vàng, rồi từ vàng chuyển sang xanh.
 
-"推进系统已就绪。"他擦了擦额头的汗水，"但火箭还需要携带足够的生存物资。毕竟……无论谁坐上那架火箭，都需要在太空中生存。"
+"Hệ thống động cơ đẩy đã sẵn sàng." Anh lau mồ hôi trán, "Nhưng tên lửa còn cần mang theo đủ vật tư sinh tồn. Dù sao... bất cứ ai ngồi trên tên lửa đó, cũng cần sinh tồn trong không gian."
 
-他递给你一张清单："10份医疗物资、10份食物、10份饮品——这是最低限度的储备。"`;;
+Anh đưa bạn một danh sách: "10 phần vật tư y tế, 10 phần thực phẩm, 10 phần đồ uống — đây là mức dự trữ tối thiểu."`;
 
-export const DOCTOR_QUEST3_COMPLETE = `陈博士将所有物资仔细地打包、固定在火箭的储物舱内。他退后一步，看着自己的杰作，眼中满是复杂的情感。
+export const DOCTOR_QUEST3_COMPLETE = `Tiến sĩ Chen cẩn thận đóng gói, cố định mọi vật tư vào khoang chứa của tên lửa. Anh lùi lại một bước, nhìn công trình của mình, trong mắt đầy cảm xúc phức tạp.
 
-"火箭……修好了。"他的声音有些沙哑，"所有系统运行正常，随时可以发射。"
+"Tên lửa... đã sửa xong." Giọng anh khàn khàn, "Mọi hệ thống vận hành bình thường, có thể phóng bất cứ lúc nào."
 
-他转向你，沉默良久，然后轻声说："去发射中心吧。在那里，你将做出最后的选择。"`;;
+Anh quay về phía bạn, trầm mặc rất lâu, rồi khẽ nói: "Hãy đến trung tâm phóng đi. Ở đó, bạn sẽ đưa ra lựa chọn cuối cùng."`;
 
-export const DOCTOR_QUEST1_REJECT = `你摇了摇头。陈博士叹了口气，推了推眼镜："我理解。这不是一个轻松的决定。如果你改变主意，随时来找我。"`;;
+export const DOCTOR_QUEST1_REJECT = `Bạn lắc đầu. Tiến sĩ Chen thở dài, đẩy gọng kính: "Tôi hiểu. Đây không phải là một quyết định dễ dàng. Nếu bạn đổi ý, bất cứ lúc nào cũng có thể tìm tôi."`;
 
-export const ENERGY_WELL_STORY = "研究所深处，一台被陈博士重新启动的能源开采井正在低沉地运转。淡蓝色的能量液体从管道中缓缓流出，散发着微弱的光芒。";
+export const ENERGY_WELL_STORY = "Sâu trong viện nghiên cứu, một chiếc giếng khai thác năng lượng được Tiến sĩ Chen khởi động lại đang trầm đục vận hành. Chất lỏng năng lượng màu xanh nhạt chậm rãi chảy ra từ đường ống, phát ra ánh sáng yếu ớt.";
 
-export const UNDERGROUND_STORY = "你用钥匙打开了厚重的铁门，沿着昏暗的楼梯一路向下。空气越来越冷，墙壁上的应急灯发出微弱的橘色光芒。终于，你来到了一个巨大的地下空间——这里排列着众多小型核电装置，它们安静地运转着，为整座城堡提供电力。";
+export const UNDERGROUND_STORY = "Bạn dùng chìa khóa mở cánh cửa sắt nặng nề, đi xuống cầu thang tối om. Không khí ngày càng lạnh, đèn khẩn cấp trên tường phát ánh sáng cam yếu ớt. Cuối cùng, bạn đến một không gian ngầm khổng lồ — nơi này xếp đầy các thiết bị hạt nhân nhỏ, chúng yên lặng vận hành, cung cấp điện cho cả lâu đài.";
 
-export const KING_UNDERGROUND_STORY = `国王挑了挑眉："地下区域？那里可是王国的命脉——整座城堡的电力都靠那些核电装置维持。"
+export const KING_UNDERGROUND_STORY = `Nhà vua nhướng mày: "Khu vực ngầm? Đó chính là mạch sống của vương quốc — toàn bộ điện của lâu đài đều nhờ các thiết bị hạt nhân đó duy trì."
 
-他沉默了片刻，眼中闪过一丝贪婪："不过嘛……我确实有两把钥匙。我一直很喜欢打猎，如果你能上缴一把AWM狙击步枪……我就把钥匙给你。这可是我的爱好，懂吗？"`;;
+Anh trầm mặc một lát, trong mắt thoáng qua một tia tham lam: "Tuy nhiên... tôi quả thực có hai chiếc chìa khóa. Tôi vẫn luôn thích đi săn, nếu bạn có thể nộp lên một khẩu súng bắn tỉa AWM... tôi sẽ đưa chìa khóa cho bạn. Đó là sở thích của tôi, hiểu chứ?"`;
 
-export const DOCTOR_ENDING8_GONE = `陈博士已经不在了。他留下的那张纸条还贴在实验台上，字迹潦草却坚定：
+export const DOCTOR_ENDING8_GONE = `Tiến sĩ Chen đã không còn ở đây nữa. Tờ giấy anh để lại vẫn dán trên bàn thí nghiệm, chữ viết cẩu thả nhưng kiên định:
 
-"我走了。改良抗体针的制造仪器我留下了，就放在实验台右边。每天可以生产一支——这是我最后能为你做的事。活下去。"
+"Tôi đi rồi. Máy sản xuất kim tiêm kháng thể cải tiến tôi đã để lại, ngay bên phải bàn thí nghiệm. Mỗi ngày có thể sản xuất một ống — đó là điều cuối cùng tôi có thể làm cho bạn. Hãy sống sót."
 
-仪器安静地运转着，仿佛博士从未离开。`;;
+Máy móc yên lặng vận hành, như thể bác sĩ chưa từng rời đi.`;
