@@ -85,7 +85,7 @@
       "prompt": "Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean agile build, alert survivalist posture male survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Thiếu niên khoảng 16-17 tuổi, khuôn mặt trẻ trung, vóc dáng gọn gàng, trang phục sinh tồn kín đáo phù hợp độ tuổi. Giới tính: Nam. Trang phục: Áo khoác sinh tồn cũ sờn rách nhẹ, áo thun tối màu bên trong, quần túi hộp tiện dụng, bốt dã chiến, thắt lưng sinh tồn và túi đeo nhỏ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Thanh thiếu niên, Nam, Sinh tồn cơ bản. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 72.1% alpha transparency"
     },
     {
       "id": "teen_male_tactical",
@@ -110,7 +110,7 @@
       "prompt": "Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean agile build, alert survivalist posture male survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Thiếu niên khoảng 16-17 tuổi, khuôn mặt trẻ trung, vóc dáng gọn gàng, trang phục sinh tồn kín đáo phù hợp độ tuổi. Giới tính: Nam. Trang phục: Áo giáp nhẹ/tactical vest molle, áo combat dã chiến, quần chiến thuật gia cố đệm đầu gối, găng tay chiến thuật, bốt quân sự.",
-      "notes": "Tổ hợp ngoại hình người chơi: Thanh thiếu niên, Nam, Chiến thuật. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 73.7% alpha transparency"
     },
     {
       "id": "teen_male_casual",
@@ -135,7 +135,7 @@
       "prompt": "Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean agile build, alert survivalist posture male survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Thiếu niên khoảng 16-17 tuổi, khuôn mặt trẻ trung, vóc dáng gọn gàng, trang phục sinh tồn kín đáo phù hợp độ tuổi. Giới tính: Nam. Trang phục: Trang phục dân sự đời thường hậu tận thế: áo hoodie hoặc áo sơ mi khoác ngoài bạc màu, quần jeans sờn rách do sinh tồn, giày thể thao/dã ngoại cũ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Thanh thiếu niên, Nam, Thường ngày. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 67.7% alpha transparency"
     },
     {
       "id": "teen_female_survivor",
@@ -160,7 +160,7 @@
       "prompt": "Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean agile build, alert survivalist posture female survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Thiếu niên khoảng 16-17 tuổi, khuôn mặt trẻ trung, vóc dáng gọn gàng, trang phục sinh tồn kín đáo phù hợp độ tuổi. Giới tính: Nữ. Trang phục: Áo khoác sinh tồn cũ sờn rách nhẹ, áo thun tối màu bên trong, quần túi hộp tiện dụng, bốt dã chiến, thắt lưng sinh tồn và túi đeo nhỏ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Thanh thiếu niên, Nữ, Sinh tồn cơ bản. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 72.2% alpha transparency"
     },
     {
       "id": "teen_female_tactical",
@@ -185,7 +185,7 @@
       "prompt": "Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean agile build, alert survivalist posture female survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Thiếu niên khoảng 16-17 tuổi, khuôn mặt trẻ trung, vóc dáng gọn gàng, trang phục sinh tồn kín đáo phù hợp độ tuổi. Giới tính: Nữ. Trang phục: Áo giáp nhẹ/tactical vest molle, áo combat dã chiến, quần chiến thuật gia cố đệm đầu gối, găng tay chiến thuật, bốt quân sự.",
-      "notes": "Tổ hợp ngoại hình người chơi: Thanh thiếu niên, Nữ, Chiến thuật. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 74.9% alpha transparency"
     },
     {
       "id": "teen_female_casual",
@@ -210,7 +210,7 @@
       "prompt": "Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean agile build, alert survivalist posture female survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Thiếu niên khoảng 16-17 tuổi, khuôn mặt trẻ trung, vóc dáng gọn gàng, trang phục sinh tồn kín đáo phù hợp độ tuổi. Giới tính: Nữ. Trang phục: Trang phục dân sự đời thường hậu tận thế: áo hoodie hoặc áo sơ mi khoác ngoài bạc màu, quần jeans sờn rách do sinh tồn, giày thể thao/dã ngoại cũ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Thanh thiếu niên, Nữ, Thường ngày. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 71.9% alpha transparency"
     },
     {
       "id": "young_adult_male_survivor",
@@ -235,7 +235,7 @@
       "prompt": "Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused expression, athletic resilient build, alert ready posture male survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Thanh niên trẻ tuổi 22-25 tuổi, nét mặt kiên định rắn rỏi, vóc dáng thể thao năng động. Giới tính: Nam. Trang phục: Áo khoác sinh tồn cũ sờn rách nhẹ, áo thun tối màu bên trong, quần túi hộp tiện dụng, bốt dã chiến, thắt lưng sinh tồn và túi đeo nhỏ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Thanh niên, Nam, Sinh tồn cơ bản. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 67.5% alpha transparency"
     },
     {
       "id": "young_adult_male_tactical",
@@ -260,7 +260,7 @@
       "prompt": "Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused expression, athletic resilient build, alert ready posture male survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Thanh niên trẻ tuổi 22-25 tuổi, nét mặt kiên định rắn rỏi, vóc dáng thể thao năng động. Giới tính: Nam. Trang phục: Áo giáp nhẹ/tactical vest molle, áo combat dã chiến, quần chiến thuật gia cố đệm đầu gối, găng tay chiến thuật, bốt quân sự.",
-      "notes": "Tổ hợp ngoại hình người chơi: Thanh niên, Nam, Chiến thuật. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 60.2% alpha transparency"
     },
     {
       "id": "young_adult_male_casual",
@@ -281,11 +281,11 @@
       "format": "png",
       "transparent": true,
       "priority": "P0",
-      "status": "COMPLETE",
+      "status": "PENDING",
       "prompt": "Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused expression, athletic resilient build, alert ready posture male survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Thanh niên trẻ tuổi 22-25 tuổi, nét mặt kiên định rắn rỏi, vóc dáng thể thao năng động. Giới tính: Nam. Trang phục: Trang phục dân sự đời thường hậu tận thế: áo hoodie hoặc áo sơ mi khoác ngoài bạc màu, quần jeans sờn rách do sinh tồn, giày thể thao/dã ngoại cũ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Thanh niên, Nam, Thường ngày. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Alpha transparency is 0.0% (solid background)"
     },
     {
       "id": "young_adult_female_survivor",
@@ -306,11 +306,11 @@
       "format": "png",
       "transparent": true,
       "priority": "P0",
-      "status": "COMPLETE",
+      "status": "PENDING",
       "prompt": "Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused expression, athletic resilient build, alert ready posture female survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Thanh niên trẻ tuổi 22-25 tuổi, nét mặt kiên định rắn rỏi, vóc dáng thể thao năng động. Giới tính: Nữ. Trang phục: Áo khoác sinh tồn cũ sờn rách nhẹ, áo thun tối màu bên trong, quần túi hộp tiện dụng, bốt dã chiến, thắt lưng sinh tồn và túi đeo nhỏ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Thanh niên, Nữ, Sinh tồn cơ bản. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Alpha transparency is 0.0% (solid background)"
     },
     {
       "id": "young_adult_female_tactical",
@@ -331,11 +331,11 @@
       "format": "png",
       "transparent": true,
       "priority": "P0",
-      "status": "COMPLETE",
+      "status": "PENDING",
       "prompt": "Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused expression, athletic resilient build, alert ready posture female survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Thanh niên trẻ tuổi 22-25 tuổi, nét mặt kiên định rắn rỏi, vóc dáng thể thao năng động. Giới tính: Nữ. Trang phục: Áo giáp nhẹ/tactical vest molle, áo combat dã chiến, quần chiến thuật gia cố đệm đầu gối, găng tay chiến thuật, bốt quân sự.",
-      "notes": "Tổ hợp ngoại hình người chơi: Thanh niên, Nữ, Chiến thuật. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Alpha transparency is 0.0% (solid background)"
     },
     {
       "id": "young_adult_female_casual",
@@ -356,11 +356,11 @@
       "format": "png",
       "transparent": true,
       "priority": "P0",
-      "status": "COMPLETE",
+      "status": "PENDING",
       "prompt": "Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused expression, athletic resilient build, alert ready posture female survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Thanh niên trẻ tuổi 22-25 tuổi, nét mặt kiên định rắn rỏi, vóc dáng thể thao năng động. Giới tính: Nữ. Trang phục: Trang phục dân sự đời thường hậu tận thế: áo hoodie hoặc áo sơ mi khoác ngoài bạc màu, quần jeans sờn rách do sinh tồn, giày thể thao/dã ngoại cũ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Thanh niên, Nữ, Thường ngày. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Alpha transparency is 0.0% (solid background)"
     },
     {
       "id": "adult_male_survivor",
@@ -381,11 +381,11 @@
       "format": "png",
       "transparent": true,
       "priority": "P0",
-      "status": "COMPLETE",
+      "status": "PENDING",
       "prompt": "Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced facial features, sturdy capable build, vigilant combat-ready posture male survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người trưởng thành 32-38 tuổi, nét mặt dày dạn sương gió, vóc dáng vững chãi từng trải. Giới tính: Nam. Trang phục: Áo khoác sinh tồn cũ sờn rách nhẹ, áo thun tối màu bên trong, quần túi hộp tiện dụng, bốt dã chiến, thắt lưng sinh tồn và túi đeo nhỏ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Trưởng thành, Nam, Sinh tồn cơ bản. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Alpha transparency is 0.0% (solid background)"
     },
     {
       "id": "adult_male_tactical",
@@ -406,11 +406,11 @@
       "format": "png",
       "transparent": true,
       "priority": "P0",
-      "status": "COMPLETE",
+      "status": "PENDING",
       "prompt": "Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced facial features, sturdy capable build, vigilant combat-ready posture male survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người trưởng thành 32-38 tuổi, nét mặt dày dạn sương gió, vóc dáng vững chãi từng trải. Giới tính: Nam. Trang phục: Áo giáp nhẹ/tactical vest molle, áo combat dã chiến, quần chiến thuật gia cố đệm đầu gối, găng tay chiến thuật, bốt quân sự.",
-      "notes": "Tổ hợp ngoại hình người chơi: Trưởng thành, Nam, Chiến thuật. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Alpha transparency is 0.0% (solid background)"
     },
     {
       "id": "adult_male_casual",
@@ -431,11 +431,11 @@
       "format": "png",
       "transparent": true,
       "priority": "P0",
-      "status": "COMPLETE",
+      "status": "PENDING",
       "prompt": "Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced facial features, sturdy capable build, vigilant combat-ready posture male survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người trưởng thành 32-38 tuổi, nét mặt dày dạn sương gió, vóc dáng vững chãi từng trải. Giới tính: Nam. Trang phục: Trang phục dân sự đời thường hậu tận thế: áo hoodie hoặc áo sơ mi khoác ngoài bạc màu, quần jeans sờn rách do sinh tồn, giày thể thao/dã ngoại cũ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Trưởng thành, Nam, Thường ngày. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Alpha transparency is 0.0% (solid background)"
     },
     {
       "id": "adult_female_survivor",
@@ -456,11 +456,11 @@
       "format": "png",
       "transparent": true,
       "priority": "P0",
-      "status": "COMPLETE",
+      "status": "PENDING",
       "prompt": "Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced facial features, sturdy capable build, vigilant combat-ready posture female survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người trưởng thành 32-38 tuổi, nét mặt dày dạn sương gió, vóc dáng vững chãi từng trải. Giới tính: Nữ. Trang phục: Áo khoác sinh tồn cũ sờn rách nhẹ, áo thun tối màu bên trong, quần túi hộp tiện dụng, bốt dã chiến, thắt lưng sinh tồn và túi đeo nhỏ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Trưởng thành, Nữ, Sinh tồn cơ bản. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Alpha transparency is 0.0% (solid background)"
     },
     {
       "id": "adult_female_tactical",
@@ -481,11 +481,11 @@
       "format": "png",
       "transparent": true,
       "priority": "P0",
-      "status": "COMPLETE",
+      "status": "PENDING",
       "prompt": "Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced facial features, sturdy capable build, vigilant combat-ready posture female survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người trưởng thành 32-38 tuổi, nét mặt dày dạn sương gió, vóc dáng vững chãi từng trải. Giới tính: Nữ. Trang phục: Áo giáp nhẹ/tactical vest molle, áo combat dã chiến, quần chiến thuật gia cố đệm đầu gối, găng tay chiến thuật, bốt quân sự.",
-      "notes": "Tổ hợp ngoại hình người chơi: Trưởng thành, Nữ, Chiến thuật. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Alpha transparency is 0.0% (solid background)"
     },
     {
       "id": "adult_female_casual",
@@ -506,11 +506,11 @@
       "format": "png",
       "transparent": true,
       "priority": "P0",
-      "status": "COMPLETE",
+      "status": "PENDING",
       "prompt": "Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced facial features, sturdy capable build, vigilant combat-ready posture female survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người trưởng thành 32-38 tuổi, nét mặt dày dạn sương gió, vóc dáng vững chãi từng trải. Giới tính: Nữ. Trang phục: Trang phục dân sự đời thường hậu tận thế: áo hoodie hoặc áo sơ mi khoác ngoài bạc màu, quần jeans sờn rách do sinh tồn, giày thể thao/dã ngoại cũ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Trưởng thành, Nữ, Thường ngày. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Alpha transparency is 0.0% (solid background)"
     },
     {
       "id": "middle_aged_male_survivor",
@@ -531,11 +531,11 @@
       "format": "png",
       "transparent": true,
       "priority": "P0",
-      "status": "COMPLETE",
+      "status": "PENDING",
       "prompt": "Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prominent age lines, graying hair, calm hardened posture male survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người trung niên khoảng 48-52 tuổi, khuôn mặt khắc khổ có nếp nhăn và râu/tóc điểm bạc, phong thái trầm tĩnh. Giới tính: Nam. Trang phục: Áo khoác sinh tồn cũ sờn rách nhẹ, áo thun tối màu bên trong, quần túi hộp tiện dụng, bốt dã chiến, thắt lưng sinh tồn và túi đeo nhỏ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Trung niên, Nam, Sinh tồn cơ bản. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Alpha transparency is 0.0% (solid background)"
     },
     {
       "id": "middle_aged_male_tactical",
@@ -556,11 +556,11 @@
       "format": "png",
       "transparent": true,
       "priority": "P0",
-      "status": "COMPLETE",
+      "status": "PENDING",
       "prompt": "Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prominent age lines, graying hair, calm hardened posture male survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người trung niên khoảng 48-52 tuổi, khuôn mặt khắc khổ có nếp nhăn và râu/tóc điểm bạc, phong thái trầm tĩnh. Giới tính: Nam. Trang phục: Áo giáp nhẹ/tactical vest molle, áo combat dã chiến, quần chiến thuật gia cố đệm đầu gối, găng tay chiến thuật, bốt quân sự.",
-      "notes": "Tổ hợp ngoại hình người chơi: Trung niên, Nam, Chiến thuật. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Alpha transparency is 0.0% (solid background)"
     },
     {
       "id": "middle_aged_male_casual",
@@ -585,7 +585,7 @@
       "prompt": "Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prominent age lines, graying hair, calm hardened posture male survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người trung niên khoảng 48-52 tuổi, khuôn mặt khắc khổ có nếp nhăn và râu/tóc điểm bạc, phong thái trầm tĩnh. Giới tính: Nam. Trang phục: Trang phục dân sự đời thường hậu tận thế: áo hoodie hoặc áo sơ mi khoác ngoài bạc màu, quần jeans sờn rách do sinh tồn, giày thể thao/dã ngoại cũ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Trung niên, Nam, Thường ngày. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 72.3% alpha transparency"
     },
     {
       "id": "middle_aged_female_survivor",
@@ -610,7 +610,7 @@
       "prompt": "Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prominent age lines, graying hair, calm hardened posture female survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người trung niên khoảng 48-52 tuổi, khuôn mặt khắc khổ có nếp nhăn và râu/tóc điểm bạc, phong thái trầm tĩnh. Giới tính: Nữ. Trang phục: Áo khoác sinh tồn cũ sờn rách nhẹ, áo thun tối màu bên trong, quần túi hộp tiện dụng, bốt dã chiến, thắt lưng sinh tồn và túi đeo nhỏ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Trung niên, Nữ, Sinh tồn cơ bản. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 73.9% alpha transparency"
     },
     {
       "id": "middle_aged_female_tactical",
@@ -635,7 +635,7 @@
       "prompt": "Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prominent age lines, graying hair, calm hardened posture female survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người trung niên khoảng 48-52 tuổi, khuôn mặt khắc khổ có nếp nhăn và râu/tóc điểm bạc, phong thái trầm tĩnh. Giới tính: Nữ. Trang phục: Áo giáp nhẹ/tactical vest molle, áo combat dã chiến, quần chiến thuật gia cố đệm đầu gối, găng tay chiến thuật, bốt quân sự.",
-      "notes": "Tổ hợp ngoại hình người chơi: Trung niên, Nữ, Chiến thuật. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 73.8% alpha transparency"
     },
     {
       "id": "middle_aged_female_casual",
@@ -660,7 +660,7 @@
       "prompt": "Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prominent age lines, graying hair, calm hardened posture female survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người trung niên khoảng 48-52 tuổi, khuôn mặt khắc khổ có nếp nhăn và râu/tóc điểm bạc, phong thái trầm tĩnh. Giới tính: Nữ. Trang phục: Trang phục dân sự đời thường hậu tận thế: áo hoodie hoặc áo sơ mi khoác ngoài bạc màu, quần jeans sờn rách do sinh tồn, giày thể thao/dã ngoại cũ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Trung niên, Nữ, Thường ngày. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 71.0% alpha transparency"
     },
     {
       "id": "elderly_male_survivor",
@@ -685,7 +685,7 @@
       "prompt": "Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles, distinguished silver-gray hair, determined weathered eyes, resolute resilient posture male survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người cao tuổi 65-70 tuổi, nếp nhăn sâu, mái tóc bạc trắng, ánh mắt kiên nghị sắc sảo của người sống sót qua nhiều thập kỷ. Giới tính: Nam. Trang phục: Áo khoác sinh tồn cũ sờn rách nhẹ, áo thun tối màu bên trong, quần túi hộp tiện dụng, bốt dã chiến, thắt lưng sinh tồn và túi đeo nhỏ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Cao tuổi, Nam, Sinh tồn cơ bản. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 65.3% alpha transparency"
     },
     {
       "id": "elderly_male_tactical",
@@ -710,7 +710,7 @@
       "prompt": "Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles, distinguished silver-gray hair, determined weathered eyes, resolute resilient posture male survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người cao tuổi 65-70 tuổi, nếp nhăn sâu, mái tóc bạc trắng, ánh mắt kiên nghị sắc sảo của người sống sót qua nhiều thập kỷ. Giới tính: Nam. Trang phục: Áo giáp nhẹ/tactical vest molle, áo combat dã chiến, quần chiến thuật gia cố đệm đầu gối, găng tay chiến thuật, bốt quân sự.",
-      "notes": "Tổ hợp ngoại hình người chơi: Cao tuổi, Nam, Chiến thuật. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 67.0% alpha transparency"
     },
     {
       "id": "elderly_male_casual",
@@ -735,7 +735,7 @@
       "prompt": "Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles, distinguished silver-gray hair, determined weathered eyes, resolute resilient posture male survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người cao tuổi 65-70 tuổi, nếp nhăn sâu, mái tóc bạc trắng, ánh mắt kiên nghị sắc sảo của người sống sót qua nhiều thập kỷ. Giới tính: Nam. Trang phục: Trang phục dân sự đời thường hậu tận thế: áo hoodie hoặc áo sơ mi khoác ngoài bạc màu, quần jeans sờn rách do sinh tồn, giày thể thao/dã ngoại cũ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Cao tuổi, Nam, Thường ngày. Trạng thái PENDING, chưa sinh ảnh."
+      "notes": "Valid 512x768 RGBA with 71.6% alpha transparency"
     },
     {
       "id": "elderly_female_survivor",
@@ -760,7 +760,7 @@
       "prompt": "Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles, distinguished silver-gray hair, determined weathered eyes, resolute resilient posture female survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người cao tuổi 65-70 tuổi, nếp nhăn sâu, mái tóc bạc trắng, ánh mắt kiên nghị sắc sảo của người sống sót qua nhiều thập kỷ. Giới tính: Nữ. Trang phục: Áo khoác sinh tồn cũ sờn rách nhẹ, áo thun tối màu bên trong, quần túi hộp tiện dụng, bốt dã chiến, thắt lưng sinh tồn và túi đeo nhỏ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Cao tuổi, Nữ, Sinh tồn cơ bản. Trạng thái PENDING, chưa sinh ảnh. (Pending due to Gemini Imagen 429 RESOURCE_EXHAUSTED quota)"
+      "notes": "Incorrect resolution: 1696x2528 (expected 512x768)"
     },
     {
       "id": "elderly_female_tactical",
@@ -785,7 +785,7 @@
       "prompt": "Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles, distinguished silver-gray hair, determined weathered eyes, resolute resilient posture female survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người cao tuổi 65-70 tuổi, nếp nhăn sâu, mái tóc bạc trắng, ánh mắt kiên nghị sắc sảo của người sống sót qua nhiều thập kỷ. Giới tính: Nữ. Trang phục: Áo giáp nhẹ/tactical vest molle, áo combat dã chiến, quần chiến thuật gia cố đệm đầu gối, găng tay chiến thuật, bốt quân sự.",
-      "notes": "Tổ hợp ngoại hình người chơi: Cao tuổi, Nữ, Chiến thuật. Trạng thái PENDING, chưa sinh ảnh. (Pending due to Gemini Imagen 429 RESOURCE_EXHAUSTED quota)"
+      "notes": "Incorrect resolution: 1696x2528 (expected 512x768)"
     },
     {
       "id": "elderly_female_casual",
@@ -810,7 +810,7 @@
       "prompt": "Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles, distinguished silver-gray hair, determined weathered eyes, resolute resilient posture female survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
       "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
       "description": "Người cao tuổi 65-70 tuổi, nếp nhăn sâu, mái tóc bạc trắng, ánh mắt kiên nghị sắc sảo của người sống sót qua nhiều thập kỷ. Giới tính: Nữ. Trang phục: Trang phục dân sự đời thường hậu tận thế: áo hoodie hoặc áo sơ mi khoác ngoài bạc màu, quần jeans sờn rách do sinh tồn, giày thể thao/dã ngoại cũ.",
-      "notes": "Tổ hợp ngoại hình người chơi: Cao tuổi, Nữ, Thường ngày. Trạng thái PENDING, chưa sinh ảnh. (Pending due to Gemini Imagen 429 RESOURCE_EXHAUSTED quota)"
+      "notes": "Incorrect resolution: 1696x2528 (expected 512x768)"
     }
   ]
 }

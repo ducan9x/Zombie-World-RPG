@@ -2814,7 +2814,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 72.1% alpha transparency"
   },
   {
     "id": "char_player_teen_male_tactical",
@@ -2844,7 +2844,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 73.7% alpha transparency"
   },
   {
     "id": "char_player_teen_male_casual",
@@ -2874,7 +2874,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 67.7% alpha transparency"
   },
   {
     "id": "char_player_teen_female_survivor",
@@ -2904,7 +2904,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 72.2% alpha transparency"
   },
   {
     "id": "char_player_teen_female_tactical",
@@ -2934,7 +2934,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 74.9% alpha transparency"
   },
   {
     "id": "char_player_teen_female_casual",
@@ -2964,7 +2964,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 71.9% alpha transparency"
   },
   {
     "id": "char_player_young_adult_male_survivor",
@@ -2994,7 +2994,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 67.5% alpha transparency"
   },
   {
     "id": "char_player_young_adult_male_tactical",
@@ -3024,7 +3024,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 60.2% alpha transparency"
   },
   {
     "id": "char_player_young_adult_male_casual",
@@ -3046,7 +3046,7 @@
     "format": "png",
     "transparent": true,
     "priority": "P0",
-    "status": "complete",
+    "status": "pending",
     "prompt": "Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused expression, athletic resilient build, alert ready posture male survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
     "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
     "usedBy": [
@@ -3054,7 +3054,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Alpha transparency is 0.0% (solid background)"
   },
   {
     "id": "char_player_young_adult_female_survivor",
@@ -3076,7 +3076,7 @@
     "format": "png",
     "transparent": true,
     "priority": "P0",
-    "status": "complete",
+    "status": "pending",
     "prompt": "Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused expression, athletic resilient build, alert ready posture female survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
     "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
     "usedBy": [
@@ -3084,7 +3084,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Alpha transparency is 0.0% (solid background)"
   },
   {
     "id": "char_player_young_adult_female_tactical",
@@ -3106,7 +3106,7 @@
     "format": "png",
     "transparent": true,
     "priority": "P0",
-    "status": "complete",
+    "status": "pending",
     "prompt": "Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused expression, athletic resilient build, alert ready posture female survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
     "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
     "usedBy": [
@@ -3114,7 +3114,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Alpha transparency is 0.0% (solid background)"
   },
   {
     "id": "char_player_young_adult_female_casual",
@@ -3136,7 +3136,7 @@
     "format": "png",
     "transparent": true,
     "priority": "P0",
-    "status": "complete",
+    "status": "pending",
     "prompt": "Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused expression, athletic resilient build, alert ready posture female survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
     "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
     "usedBy": [
@@ -3144,7 +3144,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Alpha transparency is 0.0% (solid background)"
   },
   {
     "id": "char_player_adult_male_survivor",
@@ -3166,7 +3166,7 @@
     "format": "png",
     "transparent": true,
     "priority": "P0",
-    "status": "complete",
+    "status": "pending",
     "prompt": "Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced facial features, sturdy capable build, vigilant combat-ready posture male survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
     "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
     "usedBy": [
@@ -3174,7 +3174,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Alpha transparency is 0.0% (solid background)"
   },
   {
     "id": "char_player_adult_male_tactical",
@@ -3196,7 +3196,7 @@
     "format": "png",
     "transparent": true,
     "priority": "P0",
-    "status": "complete",
+    "status": "pending",
     "prompt": "Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced facial features, sturdy capable build, vigilant combat-ready posture male survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
     "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
     "usedBy": [
@@ -3204,7 +3204,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Alpha transparency is 0.0% (solid background)"
   },
   {
     "id": "char_player_adult_male_casual",
@@ -3226,7 +3226,7 @@
     "format": "png",
     "transparent": true,
     "priority": "P0",
-    "status": "complete",
+    "status": "pending",
     "prompt": "Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced facial features, sturdy capable build, vigilant combat-ready posture male survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
     "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
     "usedBy": [
@@ -3234,7 +3234,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Alpha transparency is 0.0% (solid background)"
   },
   {
     "id": "char_player_adult_female_survivor",
@@ -3256,7 +3256,7 @@
     "format": "png",
     "transparent": true,
     "priority": "P0",
-    "status": "complete",
+    "status": "pending",
     "prompt": "Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced facial features, sturdy capable build, vigilant combat-ready posture female survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
     "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
     "usedBy": [
@@ -3264,7 +3264,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Alpha transparency is 0.0% (solid background)"
   },
   {
     "id": "char_player_adult_female_tactical",
@@ -3286,7 +3286,7 @@
     "format": "png",
     "transparent": true,
     "priority": "P0",
-    "status": "complete",
+    "status": "pending",
     "prompt": "Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced facial features, sturdy capable build, vigilant combat-ready posture female survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
     "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
     "usedBy": [
@@ -3294,7 +3294,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Alpha transparency is 0.0% (solid background)"
   },
   {
     "id": "char_player_adult_female_casual",
@@ -3316,7 +3316,7 @@
     "format": "png",
     "transparent": true,
     "priority": "P0",
-    "status": "complete",
+    "status": "pending",
     "prompt": "Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced facial features, sturdy capable build, vigilant combat-ready posture female survivor, wearing post-apocalyptic civilian casual clothing, a faded slightly weathered hoodie over a worn collared shirt, rugged distressed denim jeans with frayed cuffs and dust smudges, scuffed sturdy hiking sneakers, casual survivalist street style, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
     "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
     "usedBy": [
@@ -3324,7 +3324,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Alpha transparency is 0.0% (solid background)"
   },
   {
     "id": "char_player_middle_aged_male_survivor",
@@ -3346,7 +3346,7 @@
     "format": "png",
     "transparent": true,
     "priority": "P0",
-    "status": "complete",
+    "status": "pending",
     "prompt": "Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prominent age lines, graying hair, calm hardened posture male survivor, wearing a weathered survival field jacket with scuffed patches and rolled-up sleeves over a dark worn undershirt, rugged cargo pants with reinforced knees, scuffed tactical combat boots, utility survival belt with equipment pouches and small canteen, dusty fabrics with realistic fabric frays and dirt smudges, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
     "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
     "usedBy": [
@@ -3354,7 +3354,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Alpha transparency is 0.0% (solid background)"
   },
   {
     "id": "char_player_middle_aged_male_tactical",
@@ -3376,7 +3376,7 @@
     "format": "png",
     "transparent": true,
     "priority": "P0",
-    "status": "complete",
+    "status": "pending",
     "prompt": "Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prominent age lines, graying hair, calm hardened posture male survivor, wearing a low-profile tactical load-bearing vest (molle vest) over a rugged combat shirt, tactical cargo pants with integrated knee pads, heavy-duty military combat boots, tactical fingerless gloves, duty belt with equipment holsters and magazine pouches, realistic utilitarian gear, dark post-apocalyptic survival RPG aesthetic, semi-realistic 3D game character art, dramatic cinematic rim lighting from top-left, gritty realistic textures, standing centered in a natural alert posture, whole body completely visible from head to boots, no cropped limbs, isolated on solid transparent background, strictly no background, no text, no watermark --ar 2:3",
     "negativePrompt": "cropped head, cropped feet, out of frame, cut off, partial body, portrait only, headshot, bust, text, watermark, signature, username, anime kawaii, bright cartoon, chibi, futuristic high-tech sci-fi, cyberpunk neon, superhero, deformed limbs, extra fingers, missing fingers, bad anatomy, blurry, solid background, white box backdrop, checkerboard pattern, decorative scenery, weapons blocking body",
     "usedBy": [
@@ -3384,7 +3384,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Alpha transparency is 0.0% (solid background)"
   },
   {
     "id": "char_player_middle_aged_male_casual",
@@ -3414,7 +3414,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 72.3% alpha transparency"
   },
   {
     "id": "char_player_middle_aged_female_survivor",
@@ -3444,7 +3444,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 73.9% alpha transparency"
   },
   {
     "id": "char_player_middle_aged_female_tactical",
@@ -3474,7 +3474,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 73.8% alpha transparency"
   },
   {
     "id": "char_player_middle_aged_female_casual",
@@ -3504,7 +3504,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 71.0% alpha transparency"
   },
   {
     "id": "char_player_elderly_male_survivor",
@@ -3534,7 +3534,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 65.3% alpha transparency"
   },
   {
     "id": "char_player_elderly_male_tactical",
@@ -3564,7 +3564,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 67.0% alpha transparency"
   },
   {
     "id": "char_player_elderly_male_casual",
@@ -3594,7 +3594,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Valid 512x768 RGBA with 71.6% alpha transparency"
   },
   {
     "id": "char_player_elderly_female_survivor",
@@ -3624,7 +3624,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Incorrect resolution: 1696x2528 (expected 512x768)"
   },
   {
     "id": "char_player_elderly_female_tactical",
@@ -3654,7 +3654,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Incorrect resolution: 1696x2528 (expected 512x768)"
   },
   {
     "id": "char_player_elderly_female_casual",
@@ -3684,7 +3684,7 @@
       "renderStats"
     ],
     "fallback": true,
-    "notes": "Tổ hợp ngoại hình người chơi (Pre-generated Character Assets) 512x768 PNG transparent. Trạng thái PENDING."
+    "notes": "Incorrect resolution: 1696x2528 (expected 512x768)"
   },
   {
     "id": "char_npc_v",
@@ -3709,7 +3709,7 @@
       "Dialogues"
     ],
     "fallback": true,
-    "notes": "Chân dung toàn thân Story NPC 512x768 PNG transparent (npc_co_v.png). Trạng thái PENDING."
+    "notes": "Incorrect resolution: 1696x2528 (expected 512x768)"
   },
   {
     "id": "char_npc_xiaohan",
@@ -3734,7 +3734,7 @@
       "Dialogues"
     ],
     "fallback": true,
-    "notes": "Chân dung toàn thân Story NPC 512x768 PNG transparent (npc_tieu_ham.png). Trạng thái PENDING."
+    "notes": "Incorrect resolution: 1696x2528 (expected 512x768)"
   },
   {
     "id": "char_npc_lili",
@@ -3759,7 +3759,7 @@
       "Dialogues"
     ],
     "fallback": true,
-    "notes": "Chân dung toàn thân Story NPC 512x768 PNG transparent (npc_lili.png). Trạng thái PENDING."
+    "notes": "Incorrect resolution: 1696x2528 (expected 512x768)"
   },
   {
     "id": "char_npc_mumiao",
@@ -3784,7 +3784,7 @@
       "Dialogues"
     ],
     "fallback": true,
-    "notes": "Chân dung toàn thân Story NPC 512x768 PNG transparent (npc_muc_mieu_mieu.png). Trạng thái PENDING."
+    "notes": "Incorrect resolution: 1696x2528 (expected 512x768)"
   },
   {
     "id": "char_npc_vua_karen",
@@ -3809,7 +3809,7 @@
       "Dialogues"
     ],
     "fallback": true,
-    "notes": "Chân dung toàn thân Story NPC 512x768 PNG transparent (npc_vua_karen.png). Trạng thái PENDING."
+    "notes": "Incorrect resolution: 1696x2528 (expected 512x768)"
   },
   {
     "id": "char_npc_tien_si_tran",
@@ -3834,6 +3834,6 @@
       "Dialogues"
     ],
     "fallback": true,
-    "notes": "Chân dung toàn thân Story NPC 512x768 PNG transparent (npc_tien_si_tran.png). Trạng thái PENDING."
+    "notes": "Filename has extra space: \" npc_tien_si_tran.png\""
   }
 ]
