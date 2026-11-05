@@ -26,3 +26,10 @@ build/
 
 # Package lock (commonjs project)
 package-lock.json
+
+# Scratch backups & temporary assets
+scratch/backup_raw_backgrounds/
+scratch/optimized_backgrounds/
+scratch/*.png
+scratch/*.webp
+

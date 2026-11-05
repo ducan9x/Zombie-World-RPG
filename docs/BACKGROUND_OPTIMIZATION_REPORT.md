@@ -4,7 +4,7 @@
 **Thời gian hoàn thành:** 2026-11-05 16:15:00 (ICT)  
 **Công cụ thực hiện:** Sharp v0.35.5 (libvips 8.18.7, libwebp 1.6.0)  
 **Tiêu chuẩn đầu ra:** WebP Lossy chất lượng cao (Quality 85, Effort 6), Kích thước chuẩn **1920×1080**, Tỷ lệ **16:9** (Cover Crop trung tâm), Kênh màu RGB.  
-**Trạng thái an toàn dữ liệu:** Bản sao lưu gốc đã lưu tại `scratch/backup_raw_backgrounds/`. Toàn bộ 28 file đã được kiểm tra nhị phân đạt chuẩn trước khi thay thế.
+**Trạng thái an toàn dữ liệu:** Đã hoàn thành nghiệm thu chất lượng 28 file WebP chuẩn tại `public/assets/backgrounds/`. Thư mục backup tạm thời đã được dọn dẹp để tối ưu hóa kích thước repository. Toàn bộ prompt tái tạo gốc được lưu trữ tại `docs/IMAGE_GENERATION_PROMPTS.md`.
 
 ---
 
@@ -70,7 +70,9 @@
 
 ---
 
-## 4. AN TOÀN DỮ LIỆU & BẢN SAO LƯU
+## 4. AN TOÀN DỮ LIỆU & DỌN DẸP REPOSITORY
 
-- Các file ảnh gốc chất lượng cao nguyên bản (2752×1536 PNG) đã được lưu trữ an toàn tại thư mục `scratch/backup_raw_backgrounds/` để sẵn sàng truy xuất khi cần thiết.
+- 28 file background WebP chuẩn 1920×1080 (7.59 MB) đang hoạt động ổn định và chính thức tại `public/assets/backgrounds/`.
+- Thư mục backup tạm thời `scratch/backup_raw_backgrounds/` (~236 MB) và `scratch/optimized_backgrounds/` (~8.9 MB) đã được dọn dẹp khỏi Git để giải phóng ~245 MB bộ nhớ kho lưu trữ.
+- Toàn bộ metadata và prompt sinh ảnh được lưu trữ vĩnh viễn tại `docs/IMAGE_GENERATION_PROMPTS.md` và `project-docs/assets/batches/batch-02-backgrounds.json`, cho phép tái tạo hoặc nâng cấp độ phân giải bất kỳ lúc nào.
 - Không để lại bất kỳ file rác nào trong `public/assets/backgrounds/`.
