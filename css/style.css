@@ -1,8 +1,8 @@
 /* ============================================================
-   丧尸世界 — 末日生存文字游戏 · 样式表
+   Zombie World — Game sinh tồn văn bản ngày tận thế · Bảng kiểu dáng
    ============================================================ */
 
-/* ── CSS 变量 ── */
+/* ── Biến CSS ── */
 :root {
   --bg-primary: #0b0b14;
   --bg-secondary: #12121e;
@@ -55,7 +55,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 背景装饰 */
+/* Trang trí hình nền */
 body::before {
   content: '';
   position: fixed;
@@ -63,7 +63,7 @@ body::before {
   background: 
     radial-gradient(ellipse 60% 40% at 15% 20%, rgba(0,0,0,0.5) 0%, transparent 60%),
     radial-gradient(ellipse 50% 50% at 85% 80%, rgba(0,0,0,0.4) 0%, transparent 60%),
-    url('../public/image/背景.webp');
+    url('../public/image/hinh_nen.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -108,6 +108,38 @@ body::before {
   text-shadow: none;
 }
 
+/* ── UI Asset Icons (Batch 01 Integration) ── */
+.ui-icon-header-logo {
+  display: block;
+  max-width: 260px;
+  height: auto;
+  margin: 0 auto 6px auto;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.7));
+}
+
+.ui-icon-inline {
+  display: inline-block;
+  vertical-align: -2px;
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6));
+}
+
+.ui-empty-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.35;
+  vertical-align: middle;
+}
+
+.option-item.option-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #game-header .subtitle {
   color: #fff;
   font-size: 11px;
@@ -116,7 +148,211 @@ body::before {
   text-transform: uppercase;
 }
 
-/* ── Name Setup (主菜单) ── */
+/* ── Character Appearance Selector ── */
+.character-appearance-box {
+  width: 320px;
+  background: rgba(20, 24, 34, 0.85);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+.appearance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 6px;
+}
+
+.appearance-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.appearance-status-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.appearance-status-badge.status-pending {
+  background: rgba(237, 137, 54, 0.2);
+  color: #ed8936;
+  border: 1px solid #ed8936;
+}
+
+.appearance-status-badge.status-existing {
+  background: rgba(72, 187, 120, 0.2);
+  color: #48bb78;
+  border: 1px solid #48bb78;
+}
+
+.appearance-preview-card {
+  height: 160px;
+  width: 100%;
+  background: rgba(10, 12, 18, 0.9);
+  border: 1px dashed #40465c;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appearance-preview-img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.appearance-preview-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #a0aec0;
+  text-align: center;
+  padding: 8px;
+}
+
+.appearance-preview-placeholder .placeholder-icon {
+  font-size: 32px;
+  margin-bottom: 2px;
+}
+
+.appearance-preview-placeholder .placeholder-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #e2e8f0;
+}
+
+.appearance-preview-placeholder .placeholder-sub {
+  font-size: 11px;
+  color: #a0aec0;
+}
+
+.appearance-preview-placeholder .placeholder-tag {
+  font-size: 10px;
+  color: #718096;
+  font-family: monospace;
+  margin-top: 4px;
+}
+
+.appearance-selectors {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.selector-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selector-group label {
+  font-size: 12px;
+  color: #cbd5e0 !important;
+  margin: 0;
+}
+
+.appearance-select {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  width: 185px;
+  outline: none;
+  cursor: pointer;
+}
+
+.appearance-select:focus {
+  border-color: #63b3ed;
+}
+
+.appearance-actions {
+  margin-top: 2px;
+}
+
+.appearance-confirm-btn {
+  width: 100%;
+  background: #2b3245;
+  border: 1px solid #4a5568;
+  color: #e2e8f0;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.appearance-confirm-btn:hover {
+  background: #3a445c;
+  border-color: #63b3ed;
+  color: #fff;
+}
+
+.appearance-confirm-btn.confirmed {
+  background: rgba(72, 187, 120, 0.2);
+  border-color: #48bb78;
+  color: #48bb78;
+}
+
+/* Player Avatar in Stats Panel */
+.stat-player-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 6px;
+}
+
+.stat-player-avatar-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-player-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stat-player-avatar-fallback {
+  font-size: 18px;
+}
+
+.stat-player-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.stat-player-info .stat-row {
+  margin-bottom: 2px;
+}
+
+/* ── Name Setup (Menu chính) ── */
 #name-setup {
   display: flex;
   flex-direction: column;
@@ -218,6 +454,27 @@ body::before {
 #zone-2 { flex: 0 0 200px; }
 #zone-3 { flex: 1 1 0; min-width: 0; }
 #zone-4 { flex: 0 0 360px; }
+
+/* ── PixiJS Viewport & Canvas ── */
+#pixi-viewport {
+  width: 100%;
+  max-width: 100%;
+  flex-shrink: 0;
+  margin-bottom: 4px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #1a1a2e;
+  border: 1px solid var(--border);
+  box-sizing: border-box;
+}
+
+#pixi-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin: 0 auto;
+}
 
 .game-zone + .game-zone { border-left: 1px solid var(--border); }
 
@@ -775,7 +1032,8 @@ input[type="number"] { -moz-appearance: textfield; }
 
   #game-header h1 { font-size: 18px; letter-spacing: 2px; }
 
-  #game-header .subtitle {
+
+#game-header .subtitle {
     font-size: 9px;
     margin-top: 0;
   }

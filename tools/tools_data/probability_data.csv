@@ -11,30 +11,30 @@ quality,fishing_quality,uncommon_fish,240,24.00%,84.00%,pct-mid
 quality,fishing_quality,rare_fish,120,12.00%,96.00%,pct
 quality,fishing_quality,epic_fish,35,3.50%,99.50%,pct-high
 quality,fishing_quality,legendary_fish,5,0.50%,100.00%,pct-high
-maps,map_info,danger_level,zombie_rate,Thức ăn,Đồ uống,Trái cây,Thuốc,Đạn,Túi,Cận chiến,Tầm xa,Thuốc lá,Vật liệu,Tay trắng
-maps,doom_castle,safe,0%,—,—,—,—,—,—,—,—,—,—,100%
-maps,dawn_outpost,safe,0%,—,—,—,—,—,—,—,—,—,—,100%
-maps,mountain_lookout,easy,1%,20,20,20,5,5,10,10,—,10,—,—
-maps,village_barn,easy,2%,—,—,50,10,—,—,20,—,—,10,10%
-maps,farm_village,easy,3%,70,—,—,5,—,—,10,—,—,5,10%
-maps,riverside_campsite,low_risk,5%,—,50,—,—,—,30,5,—,5,5,5%
+maps,map_info,danger_level,zombie_rate,food,drink,fruit,medicine,ammo,backpack,melee,ranged,cigarette,material,fist
+maps,doom_castle,safe,0%,—,—,—,—,—,—,—,—,—,—,—,100%
+maps,dawn_outpost,safe,0%,—,—,—,—,—,—,—,—,—,—,—,100%
+maps,mountain_lookout,easy,1%,20,20,20,5,5,10,10,—,10,—,—,—,—
+maps,village_barn,easy,2%,—,—,50,10,—,—,20,—,—,10,—,10%
+maps,farm_village,easy,3%,70,—,—,5,—,—,10,—,—,5,—,10%
+maps,riverside_campsite,low_risk,5%,—,50,—,—,—,30,5,—,5,5,5%,5%
 maps,highway_service,low_risk,10%,30,30,—,10,10,—,10,—,—,—,10%
 maps,university_city,low_risk,12%,20,20,20,10,—,10,—,—,10,—,10%
 maps,suburban_gas_station,low_risk,15%,20,20,—,15,15,—,20,—,—,—,10%
-maps,city_mall,medium_risk,20%,25,25,10,5,5,5,5,—,10,10,—
+maps,city_mall,medium_risk,20%,25,25,10,5,5,5,5,—,10,10,—,—
 maps,residential_area,medium_risk,22%,20,20,—,10,—,10,20,—,10,—,10%
 maps,industrial_zone,medium_risk,24%,10,10,10,10,10,10,10,—,10,10,10%
-maps,harbor_dock,medium_risk,26%,—,20,—,20,10,10,30,5,5,—,—
+maps,harbor_dock,medium_risk,26%,—,20,—,20,10,10,30,5,5,—,—,—
 maps,warehouse_supermarket,medium_risk,28%,10,10,10,10,10,10,—,—,—,30,10%
 maps,factory_warehouse,medium_risk,30%,10,10,10,5,10,10,20,5,10,10,—
 maps,city_hospital,high_risk,35%,5,5,10,60,5,5,5,—,—,—,5%
-maps,police_station,high_risk,40%,—,—,5,10,30,5,20,30,—,—,—
-maps,military_checkpoint,high_risk,45%,10,—,—,10,40,—,—,40,—,—,—
-maps,subway_tunnel,extreme_risk,55%,10,10,10,20,20,—,15,15,—,—,—
-maps,biological_lab,extreme_risk,58%,5,5,5,35,20,—,—,20,10,—,—
-maps,zombie_nest,hell_risk,60%,—,—,—,10,10,—,40,20,20,—,—
-maps,space_base,hell_risk,65%,10,5,5,—,20,—,20,20,20,—,—
-maps,hidden_island,easy,0%,30,30,30,2,2,2,2,2,—,—,—
+maps,police_station,high_risk,40%,—,—,5,10,30,5,20,30,—,—,—,—
+maps,military_checkpoint,high_risk,45%,10,—,—,10,40,—,—,40,—,—,—,—
+maps,subway_tunnel,extreme_risk,55%,10,10,10,20,20,—,15,15,—,—,—,—
+maps,biological_lab,extreme_risk,58%,5,5,5,35,20,—,—,20,10,—,—,—
+maps,zombie_nest,hell_risk,60%,—,—,—,10,10,—,40,20,20,—,—,—
+maps,space_base,hell_risk,65%,10,5,5,—,20,—,20,20,20,—,—,—
+maps,hidden_island,easy,0%,30,30,30,2,2,2,2,2,—,—,—,—
 combat_dodge,zombies,boss,dodge_rate,notes
 combat_dodge,rotten_corpse,,0%,Di chuyển chậm
 combat_dodge,obese_zombie,,0%,Không thể di chuyển
@@ -107,111 +107,3 @@ crit_ranged,M249 SAW,22%,rare
 crit_ranged,MP7,22%,rare
 crit_ranged,type_81,22%,rare
 crit_ranged,SG552,23%,uncommon
-crit_ranged,RPK,23%,rare
-crit_ranged,Vector,23%,rare
-crit_ranged,M4A1,24%,uncommon
-crit_ranged,PKM,24%,epic
-crit_ranged,AUG,25%,rare
-crit_ranged,HK416,25%,rare
-crit_ranged,SCAR-H,26%,rare
-crit_ranged,AN-94,27%,epic
-crit_ranged,SKS,28%,rare
-crit_ranged,royal_pistol,29%,myth
-crit_ranged,EBR14,30%,rare
-crit_ranged,FAL,22%,rare
-crit_ranged,SR25,32%,epic
-crit_ranged,M700,35%,rare
-crit_ranged,Mosin-Nagant,38%,epic
-crit_ranged,AWM,45%,legendary
-crit_ranged,wilderness_bow,52%,myth
-combo_melee,weapon_range,combo_rate
-combo_melee,fist_initial,3%
-combo_melee,common_melee,5%
-combo_melee,uncommon_melee,8%
-combo_melee,rare_melee,12%
-combo_melee,epic_melee,15%
-combo_melee,legendary_melee,18%
-combo_melee,myth_melee,20%
-combo_melee,haige_fish_trident,22%
-combo_melee,imperial_sword,88%
-combo_melee,nine_nine_nine_blade,1%
-drops_zombie,item,probability
-drops_zombie,drop_on_kill,50%
-drops_zombie,drop_is_food,50%
-drops_zombie,zombie_gel_drop,50%
-drops_npc,item,probability_range
-drops_npc,npc_drop_on_kill,80%
-drops_npc,drop_count,2~4
-drops_npc,extra_ammo_count,3~12
-drops_npc,trader_cig_drop,2~5
-drops_npc_ranged,npc_type,probability
-drops_npc_ranged,survivor_has_ranged,30%
-drops_npc_ranged,bandit_has_ranged,40%
-drops_npc_ranged,trader_has_ranged,60%
-drops_npc_ranged,doctor_has_ranged,20%
-ammo,map_level,arrow_chance,type,amount_range
-ammo,low_risk,50%,arrow,3~8
-ammo,medium_risk,30%,arrow,3~8
-ammo,high_risk,10%,arrow,3~8
-ammo,universal_ammo,—,bullet,5~10
-npc_encounter,npc_type,probability
-npc_encounter,npc_encounter_rate,10%
-npc_encounter,survivor_rate,60%
-npc_encounter,trader_rate,20%
-npc_encounter,doctor_rate,10%
-npc_encounter,bandit_rate,10%
-events,map,event,trigger_probability,trigger_time
-events,industrial_zone,explosion,30%,per_exploration
-events,police_station,trap,70%,per_exploration
-events,highway_service,veteran_misfire,50%,on_interaction
-events,highway_service,veteran_give_ammo,50%,no_misfire
-events,subway_tunnel,find_cache,15%,per_exploration
-events,subway_tunnel,collapse,50%,after_event
-events,subway_tunnel,gas,80%,after_event
-events,farm_village,good_food,30%,open_locker
-events,farm_village,cig_in_cave,10%,explore_cave
-events,space_base,special_crate,5%,one_time
-events,industrial_zone,scary_event,60%,on_interaction
-events,industrial_zone,random_food,40%,on_interaction
-events,warehouse_supermarket,sanity_loss,-50,fixed_value
-events,police_station,criminal_data,30%,on_interaction
-weather,weather_type,probability,cumulative
-weather,sunny,40%,40%
-weather,cloudy,30%,70%
-weather,rainy,10%,80%
-weather,hot,5%,85%
-weather,foggy,5%,90%
-weather,acid_rain,5%,95%
-weather,sandstorm,5%,100%
-invest,investment_type,result,probability,return_rate
-invest,real_estate,boom,5%,+50%
-invest,real_estate,rally,15%,+30%
-invest,real_estate,loss,80%,-30%
-invest,food_stable,profit,50%,+10%
-invest,food_stable,break_even,30%,0%
-invest,food_stable,loss,20%,-10%
-invest,entertainment_high_risk,hit,1%,+90%
-invest,Đầu tư giải trí (biến động cực cao),Tốt,4%,+50%
-invest,Đầu tư giải trí (biến động cực cao),Hòa vốn,5%,+10%
-invest,Đầu tư giải trí (biến động cực cao),Lỗ,20%,-40%
-invest,Đầu tư giải trí (biến động cực cao),Lỗ nặng,30%,-60%
-invest,Đầu tư giải trí (biến động cực cao),Mất trắng,40%,-80%
-invest,Đầu tư công nghệ (rủi ro trung bình),Lãi,30%,+20%
-invest,Đầu tư công nghệ (rủi ro trung bình),Hòa vốn,20%,0%
-invest,Đầu tư công nghệ (rủi ro trung bình),Lỗ,50%,-10%
-invest,Đầu tư nông nghiệp (rủi ro thấp lợi nhuận thấp),Mùa màng,10%,+30%
-invest,Đầu tư nông nghiệp (rủi ro thấp lợi nhuận thấp),Lãi,5%,+10%
-invest,Đầu tư nông nghiệp (rủi ro thấp lợi nhuận thấp),Hòa vốn,80%,0%
-invest,Đầu tư nông nghiệp (rủi ro thấp lợi nhuận thấp),Sâu bệnh,5%,-20%
-other,Mục,Phạm vi,Giải thích
-other,Hồi phục mệt mỏi khi ngủ,10~25,Phạm vi ngẫu nhiên
-other,Hồi phục sinh mệnh khi ngủ,20~40,Phạm vi ngẫu nhiên
-other,Hồi phục lý trí khi ngủ,20,Giá trị cố định
-other,Hồi phục lý trí nghỉ phòng quý tộc,30,Giá trị cố định
-other,Hồi phục lý trí nghỉ trên đảo,25,Giá trị cố định
-other,Cho Lulu Wei ăn đồ hộp (độ hảo cảm),+2~3,Phạm vi ngẫu nhiên
-other,Chăm sóc ruộng của Mục Miêu Miêu (độ hảo cảm),+1~3,Phạm vi ngẫu nhiên
-other,V tiểu thư giao dịch đạn,3~12 viên,Phạm vi ngẫu nhiên
-other,Lily giao dịch thuốc,1~3 cái,Phạm vi ngẫu nhiên
-other,Sau khi ngã xuống hồi HP,30%,Tỷ lệ cố định
-other,Lãi suất vay mỗi ngày,10%,Tỷ lệ cố định

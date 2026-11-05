@@ -4,7 +4,8 @@
    → render tổng hợp → khởi tạo UI
    ============================================================ */
 
-import { getState, setName, setPhase, resetState, getItemDisplayName, getGameSettings, toggleClickMode, toggleInputMode, toggleMusic } from './state.js';
+import { getState, setName, setPhase, resetState, getItemDisplayName, getGameSettings, toggleClickMode, toggleInputMode, toggleMusic, setPlayerAppearance, getPlayerAppearance } from './state.js';
+import { getAppearanceConfig, getAppearanceDisplayName, DEFAULT_APPEARANCE } from './data/player-appearance.js';
 import { TIME_PHASES, BASE_LEVELS, ACHIEVEMENTS, GAME_CONSTANTS } from './config.js';
 import { getAllSlots, getBestRecord } from './save.js';
 import { handleSavePage, handleSavePageAction, handleSaveConfirm } from './game/index.js';
@@ -78,28 +79,43 @@ export function renderIdentity(state) {
 export function renderStats(state) {
   const panel = document.getElementById('stats-panel');
   const hpPct = Math.round(state.health / GAME_CONSTANTS.MAX_HEALTH * 100);
+  const appearance = state.playerAppearance || DEFAULT_APPEARANCE;
+  const appearanceConfig = getAppearanceConfig(appearance.age, appearance.gender, appearance.outfit);
+  const appearanceDisplayName = getAppearanceDisplayName(appearance);
+  const avatarPath = appearanceConfig?.path || 'public/assets/characters/player/young_adult_male_survivor.png';
+
   panel.innerHTML = `
 <div class="stats-title">📊 Trạng thái nhân vật</div>
+<div class="stat-player-card">
+  <div class="stat-player-avatar-box">
+    <img class="stat-player-avatar-img" src="${avatarPath}" alt="${state.name}" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+    <div class="stat-player-avatar-fallback" style="display:none;">👤</div>
+  </div>
+  <div class="stat-player-info">
+    <div class="stat-player-name">${state.name || 'Người sống sót'}</div>
+    <div class="stat-player-appearance">${appearanceDisplayName}</div>
+  </div>
+</div>
 <div class="stat-row"><span class="stat-label">Nhân vật</span><span class="stat-value">${state.name}</span></div>
 <div class="stat-row"><span class="stat-label">Thời gian</span><span class="stat-value">Ngày ${state.day} ${TIME_PHASES[state.phaseIndex]} · ${state.weather}</span></div>
 <div class="stat-row"><span class="stat-label">Địa điểm</span><span class="stat-value">${state.location}</span></div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label">❤️ Sức khỏe</span>
+  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_hp.png" alt="" onerror="this.style.display='none'">❤️ Sức khỏe</span>
   <div class="stat-bar-track"><div class="stat-bar-fill hp" style="width:${hpPct}%"></div></div>
   <span class="stat-bar-value hp">${state.health}</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label">🍖 Bụng no</span>
+  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_hunger.png" alt="" onerror="this.style.display='none'">🍖 Bụng no</span>
   <div class="stat-bar-track"><div class="stat-bar-fill hunger" style="width:${state.hunger}%"></div></div>
   <span class="stat-bar-value hunger">${state.hunger}%</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label">💧 Nước</span>
+  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_hydration.png" alt="" onerror="this.style.display='none'">💧 Nước</span>
   <div class="stat-bar-track"><div class="stat-bar-fill thirst" style="width:${state.hydration}%"></div></div>
   <span class="stat-bar-value thirst">${state.hydration}%</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label">🧠 Lý trí</span>
+  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_sanity.png" alt="" onerror="this.style.display='none'">🧠 Lý trí</span>
   <div class="stat-bar-track"><div class="stat-bar-fill sanity" style="width:${state.sanity}%"></div></div>
   <span class="stat-bar-value sanity">${state.sanity}%</span>
 </div>
@@ -109,7 +125,7 @@ export function renderStats(state) {
   <span class="stat-bar-value fatigue">${state.crash}%</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label">🦠 Nhiễm bệnh</span>
+  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_infection.png" alt="" onerror="this.style.display='none'">🦠 Nhiễm bệnh</span>
   <div class="stat-bar-track"><div class="stat-bar-fill infection" style="width:${state.infection}%"></div></div>
   <span class="stat-bar-value infection">${state.infection}%</span>
 </div>
@@ -129,9 +145,9 @@ export function renderWeapons(state) {
   panel.innerHTML = `
 <div class="weapon-panel">
   <div class="panel-title">⚔️ Vũ khí</div>
-  <div class="stat-row"><span class="stat-label">🔪 Cận chiến</span><span class="stat-value">${state.meleeWeapon.name}(sát thương${state.meleeWeapon.damage} liên kích${Math.round((state.meleeWeapon.comboRate || 0) * 100)}%)</span></div>
+  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_melee_slot.png" alt="" onerror="this.style.display='none'">🔪 Cận chiến</span><span class="stat-value">${state.meleeWeapon.name}(sát thương${state.meleeWeapon.damage} liên kích${Math.round((state.meleeWeapon.comboRate || 0) * 100)}%)</span></div>
   <div class="stat-row"><span class="stat-label">🛡️ Độ bền</span><span class="stat-value">${meleeDurability}</span></div>
-  <div class="stat-row"><span class="stat-label">🏹 Tầm xa</span><span class="stat-value">${state.rangedWeapon ? state.rangedWeapon.name : 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_ranged_slot.png" alt="" onerror="this.style.display='none'">🏹 Tầm xa</span><span class="stat-value">${state.rangedWeapon ? state.rangedWeapon.name : 'Không'}</span></div>
   <div class="stat-row"><span class="stat-label">⚙️ Độ nguyên vẹn</span><span class="stat-value">${state.rangedWeapon ? state.rangedWeapon.integrity : 'Không'}</span></div>
   <div class="stat-row"><span class="stat-label">💥 Đạn dược</span><span class="stat-value">${formatAmmo(state)}</span></div>
 </div>`;
@@ -157,7 +173,7 @@ export function renderInventory(state) {
   
   panel.innerHTML = `
 <div class="inventory-panel">
-  <div class="panel-title">🎒 Ba lô</div>
+  <div class="panel-title"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_backpack.png" alt="" onerror="this.style.display='none'">🎒 Ba lô</div>
   <div class="stat-row"><span class="stat-label">Ba lô</span><span class="stat-value">${state.backpack.name}(sức chứa${count}/${state.backpack.capacity})</span></div>
   <div class="stat-row"><span class="stat-label">🍞 Thực phẩm</span><span class="stat-value">${foods.map(f => getItemDisplayName(f)).join(', ') || 'Không'}</span></div>
   <div class="stat-row"><span class="stat-label">🥤 Đồ uống</span><span class="stat-value">${state.drinks.map(d => getItemDisplayName(d)).join(', ') || 'Không'}</span></div>
@@ -184,9 +200,9 @@ export function renderCargo(state) {
   panel.innerHTML = `
 <div class="cargo-panel">
   <div class="panel-title">📦 Hàng hóa</div>
-  <div class="stat-row"><span class="stat-label">🚬 Thuốc lá</span><span class="stat-value">${cigDisplay}</span></div>
-  <div class="stat-row"><span class="stat-label">⛽ Xăng</span><span class="stat-value">${gasDisplay}</span></div>
-  <div class="stat-row"><span class="stat-label">👑 Tiền hoàng gia</span><span class="stat-value">${royalDisplay}</span></div>
+  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_res_cigarette.png" alt="" onerror="this.style.display='none'">🚬 Thuốc lá</span><span class="stat-value">${cigDisplay}</span></div>
+  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_res_gasoline.png" alt="" onerror="this.style.display='none'">⛽ Xăng</span><span class="stat-value">${gasDisplay}</span></div>
+  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_res_royal_coin.png" alt="" onerror="this.style.display='none'">👑 Tiền hoàng gia</span><span class="stat-value">${royalDisplay}</span></div>
   <div class="stat-row"><span class="stat-label">🔋 Năng lượng tinh khiết</span><span class="stat-value">${pureDisplay}</span></div>
   <div class="stat-row"><span class="stat-label">🏰 Nợ lâu đài</span><span class="stat-value">${state.castleDebt ? (() => { const d = state.castleDebt.dueDay - state.day; return d > 0 ? `${state.castleDebt.amount} điếu thuốc lá, còn ${d} ngày` : `${state.castleDebt.amount} điếu thuốc lá, quá hạn ${-d} ngày!`; })() : "Không"}</span></div>
   <div class="stat-row"><span class="stat-label">🏝️ Nợ đảo</span><span class="stat-value">${state.islandDebt ? (() => { const d = state.islandDebt.dueDay - state.day; return d > 0 ? `${state.islandDebt.amount} tiền hoàng gia, còn ${d} ngày` : `${state.islandDebt.amount} tiền hoàng gia, quá hạn ${-d} ngày!`; })() : "Không"}</span></div>
@@ -232,7 +248,7 @@ export function renderOptions(state) {
         const disabledAttr = option.disabled ? ' data-disabled="true"' : '';
         html += `<div class="option-item${disabledClass}" data-index="${i + 1}"${disabledAttr}>${option.text}</div>`;
       } else {
-        html += '<div class="option-item option-empty"></div>';
+        html += '<div class="option-item option-empty"><img class="ui-empty-icon" src="public/assets/ui/ui_placeholder_empty.png" alt="" onerror="this.style.display=\'none\'"></div>';
       }
     }
     area.innerHTML = html;
@@ -251,7 +267,7 @@ export function renderOptions(state) {
         const disabledAttr = option.disabled ? ' data-disabled="true"' : '';
         html += `<div class="option-item${disabledClass}" data-index="${globalIdx + 1}"${disabledAttr}>${option.text}</div>`;
       } else {
-        html += '<div class="option-item option-empty"></div>';
+        html += '<div class="option-item option-empty"><img class="ui-empty-icon" src="public/assets/ui/ui_placeholder_empty.png" alt="" onerror="this.style.display=\'none\'"></div>';
       }
     }
     area.innerHTML = html;
@@ -566,6 +582,89 @@ export function setupPagination() {
   });
 }
 
+/**
+ * Khởi tạo bộ điều khiển lựa chọn ngoại hình nhân vật trên màn hình bắt đầu
+ */
+export function initAppearanceUI() {
+  const ageSelect = document.getElementById('appearance-age-select');
+  const genderSelect = document.getElementById('appearance-gender-select');
+  const outfitSelect = document.getElementById('appearance-outfit-select');
+  const previewImg = document.getElementById('appearance-preview-img');
+  const previewPlaceholder = document.getElementById('appearance-preview-placeholder');
+  const statusBadge = document.getElementById('appearance-status-badge');
+  const placeholderName = document.getElementById('preview-placeholder-name');
+  const placeholderOutfit = document.getElementById('preview-placeholder-outfit');
+  const placeholderTag = document.getElementById('preview-placeholder-tag');
+  const confirmBtn = document.getElementById('confirm-appearance-btn');
+
+  if (!ageSelect || !genderSelect || !outfitSelect) return;
+
+  function updatePreview() {
+    const age = ageSelect.value;
+    const gender = genderSelect.value;
+    const outfit = outfitSelect.value;
+    const config = getAppearanceConfig(age, gender, outfit);
+
+    if (!config) return;
+
+    if (placeholderName) {
+      placeholderName.textContent = `${config.ageName} ${config.genderName}`;
+    }
+    if (placeholderOutfit) {
+      placeholderOutfit.textContent = config.outfitName;
+    }
+    if (placeholderTag) {
+      placeholderTag.textContent = `${config.filename} (${config.status})`;
+    }
+
+    if (statusBadge) {
+      statusBadge.textContent = config.status;
+      statusBadge.className = `appearance-status-badge status-${config.status.toLowerCase()}`;
+    }
+
+    if (previewImg && previewPlaceholder) {
+      previewImg.onload = () => {
+        previewImg.style.display = 'block';
+        previewPlaceholder.style.display = 'none';
+        if (statusBadge) {
+          statusBadge.textContent = 'EXISTING';
+          statusBadge.className = 'appearance-status-badge status-existing';
+        }
+      };
+      previewImg.onerror = () => {
+        previewImg.style.display = 'none';
+        previewPlaceholder.style.display = 'flex';
+        if (statusBadge) {
+          statusBadge.textContent = 'PENDING';
+          statusBadge.className = 'appearance-status-badge status-pending';
+        }
+      };
+      previewImg.src = config.path;
+    }
+
+    setPlayerAppearance(config);
+  }
+
+  ageSelect.addEventListener('change', updatePreview);
+  genderSelect.addEventListener('change', updatePreview);
+  outfitSelect.addEventListener('change', updatePreview);
+
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', () => {
+      updatePreview();
+      confirmBtn.classList.add('confirmed');
+      const originalText = confirmBtn.textContent;
+      confirmBtn.textContent = '✓ Đã chọn ngoại hình!';
+      setTimeout(() => {
+        confirmBtn.classList.remove('confirmed');
+        confirmBtn.textContent = originalText;
+      }, 1500);
+    });
+  }
+
+  updatePreview();
+}
+
 export function initUI() {
   const nameInput = document.getElementById('name-input');
   const newGameBtn = document.getElementById('new-game-btn');
@@ -583,8 +682,14 @@ export function initUI() {
         alert('Vui lòng nhập biệt danh nhân vật');
         return;
       }
+      const age = document.getElementById('appearance-age-select')?.value || 'young_adult';
+      const gender = document.getElementById('appearance-gender-select')?.value || 'male';
+      const outfit = document.getElementById('appearance-outfit-select')?.value || 'survivor';
+      const selectedAppearance = getAppearanceConfig(age, gender, outfit) || { ...DEFAULT_APPEARANCE };
+
       resetState();
       setName(value);
+      setPlayerAppearance(selectedAppearance);
       setPhase('choose');
       startGameMusic();
       renderAll();
@@ -782,4 +887,5 @@ export function initUI() {
   document.getElementById('save-page').style.display = 'none';
   document.getElementById('best-record-page').style.display = 'none';
   document.getElementById('about-page').style.display = 'none';
+  initAppearanceUI();
 }

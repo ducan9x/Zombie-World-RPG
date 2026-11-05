@@ -2,14 +2,14 @@
 
 <p align="center">
   <strong>A pure front-end, data-driven text-based survival adventure</strong><br>
-  🌐 <a href="./README_zh-CN.md">中文</a> | English
+  🌐 <a href="./README_zh-CN.md">Tiếng Việt</a> | English
 </p>
 
 ---
 
 ## 📖 About
 
-**Zombie World** (丧尸世界) is a deep, narrative-driven post-apocalyptic survival RPG that runs entirely in your browser. Scavenge a ruined world, forge alliances or rivalries, uncover a web of conspiracies, and choose your own ending among **14 distinct paths**.
+**Zombie World** (Thế Giới Zombie) is a deep, narrative-driven post-apocalyptic survival RPG that runs entirely in your browser. Scavenge a ruined world, forge alliances or rivalries, uncover a web of conspiracies, and choose your own ending among **14 distinct paths**.
 
 Built with a **zero-dependency pure front-end architecture**. All game data is centralized in `js/data/` — modify config files to adjust balance, add items, or expand content without touching logic code.
 
@@ -167,10 +167,10 @@ Zombie-World-JS-Vision/
 │   └── devtools-auth.js          # SHA-256 auth
 │
 ├── docs/
-│   ├── 通用游戏攻略.md            # Full game guide (CN)
-│   ├── 剧情路线攻略.md            # Story route guide (CN)
-│   ├── 深度剧情解析.md            # Deep story analysis (CN)
-│   ├── 数据维护指南.md            # Data maintenance guide (CN)
+│   ├── huong_dan_tro_choi_tong_quat.md   # Hướng dẫn trò chơi tổng quát
+│   ├── huong_dan_tuyen_truyen.md         # Hướng dẫn tuyến truyện
+│   ├── phan_tich_cot_truyen_chuyen_sau.md # Phân tích cốt truyện chuyên sâu
+│   ├── huong_dan_bao_tri_du_lieu.md      # Hướng dẫn bảo trì dữ liệu
 │   ├── General-Game-Guide.md     # Full game guide (EN)
 │   ├── Story-Route-Guide.md      # Story route guide (EN)
 │   ├── In-Depth-Story-Analysis.md # Deep story analysis (EN)
@@ -276,10 +276,10 @@ Day 60+    ◆ Endgame
 
 | Document | Language | Description |
 |:---------|:---------|:------------|
-| [通用游戏攻略](docs/通用游戏攻略.md) | 🇨🇳 | Complete game guide: beginner to endgame |
-| [剧情路线攻略](docs/剧情路线攻略.md) | 🇨🇳 | Story routes & quest chain walkthrough |
-| [深度剧情解析](docs/深度剧情解析.md) | 🇨🇳 | Deep story analysis: all characters, plotlines & endings |
-| [数据维护指南](docs/数据维护指南.md) | 🇨🇳 | How to maintain game data via config files |
+| [Hướng dẫn trò chơi tổng quát](docs/huong_dan_tro_choi_tong_quat.md) | 🇻🇳 | Toàn bộ hướng dẫn game: từ người mới đến cuối game |
+| [Hướng dẫn tuyến truyện](docs/huong_dan_tuyen_truyen.md) | 🇻🇳 | Hướng dẫn toàn bộ tuyến truyện và chuỗi nhiệm vụ |
+| [Phân tích cốt truyện chuyên sâu](docs/phan_tich_cot_truyen_chuyen_sau.md) | 🇻🇳 | Phân tích cốt truyện sâu: nhân vật, mạch truyện và kết thúc |
+| [Hướng dẫn bảo trì dữ liệu](docs/huong_dan_bao_tri_du_lieu.md) | 🇻🇳 | Cách duy trì và chỉnh sửa dữ liệu game qua các file cấu hình |
 | [General Game Guide](docs/General-Game-Guide.md) | 🇬🇧 | Complete game guide (English) |
 | [Story Route Guide](docs/Story-Route-Guide.md) | 🇬🇧 | Story routes & quest chains (English) |
 | [In-Depth Story Analysis](docs/In-Depth-Story-Analysis.md) | 🇬🇧 | Deep story analysis (English) |

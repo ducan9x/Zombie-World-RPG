@@ -13,7 +13,7 @@ export const MELEE_WEAPONS = [
   { id: "dao_tho_mo", name: "Dao thợ mổ", type: "melee", damage: 42, durability: 50, rarity: "uncommon", comboRate: 0.08 },
   { id: "gay_cam_sat", name: "Gậy Cảnh Sát", type: "melee", damage: 45, durability: 50, rarity: "uncommon", comboRate: 0.08 },
   { id: "cay_nay", name: "Cây Nạy", type: "melee", damage: 48, durability: 50, rarity: "uncommon", comboRate: 0.08 },
-  { id: "bua_be_mot", name: "Búa bẻ 못", type: "melee", damage: 50, durability: 60, rarity: "uncommon", comboRate: 0.08 },
+  { id: "bua_be_mot", name: "Búa nhổ đinh", type: "melee", damage: 50, durability: 60, rarity: "uncommon", comboRate: 0.08 },
   { id: "riu_ngan", name: "Rìu ngắn", type: "melee", damage: 52, durability: 60, rarity: "uncommon", comboRate: 0.08 },
   { id: "riu_cuu_hoa", name: "Rìu cứu hỏa", type: "melee", damage: 55, durability: 70, rarity: "uncommon", comboRate: 0.08 },
   { id: "dao_san", name: "Dao săn", type: "melee", damage: 60, durability: 70, rarity: "uncommon", comboRate: 0.08 },

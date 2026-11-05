@@ -1,7 +1,7 @@
 # Kien truc tong quat — Zombie-World-RPG
 
 ## 1. Thong tin chung
-- Ten game: Zombie World (丧尸世界 — 末日生存文字游戏)
+- Ten game: Zombie World (Thế Giới Zombie — Game sinh tồn văn bản ngày tận thế)
 - Phien ban: V0.2.3
 - The loai: Text-based Survival RPG (mạt thế sinh tồn, văn bản)
 - Phong choi: Single-player, turn-based (luot), quan ly tai nguyen, su kien ngau nhien, nhieu ket cuoc

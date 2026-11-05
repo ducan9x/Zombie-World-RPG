@@ -10,9 +10,9 @@ export const CROPS = [
   { id: "boluomencan", name: "Nhan sam Ba La Môn", matureTurns: 28, yield: 2, seedId: "seed_boluomencan", seedName: "Hạt nhan sam Ba La Môn", hunger: 24, hydration: 8 },
   { id: "luobo", name: "Cà rốt", matureTurns: 26, yield: 2, seedId: "seed_luobo", seedName: "Hạt cà rốt", hunger: 22, hydration: 14 },
   { id: "jiucai", name: "Hẹ", matureTurns: 14, yield: 1, seedId: "seed_jiucai", seedName: "Hạt hẹ", hunger: 22, hydration: 12 },
-  { id: "gouqi", name: "Cứu tinh", matureTurns: 20, yield: 2, seedId: "seed_gouqi", seedName: "Hạt cứu tinh", hunger: 16, hydration: 20 },
+  { id: "gouqi", name: "Kỷ tử", matureTurns: 20, yield: 2, seedId: "seed_gouqi", seedName: "Hạt kỷ tử", hunger: 16, hydration: 20 },
   { id: "suanmo", name: "Rau chua", matureTurns: 16, yield: 1, seedId: "seed_suanmo", seedName: "Hạt rau chua", hunger: 25, hydration: 20 },
-  { id: "heimai", name: "Máy đen", matureTurns: 40, yield: 4, seedId: "seed_heimai", seedName: "Hạt mạch đen", hunger: 18, hydration: 6 },
+  { id: "heimai", name: "Lúa mạch đen", matureTurns: 40, yield: 4, seedId: "seed_heimai", seedName: "Hạt mạch đen", hunger: 18, hydration: 6 },
   { id: "wandou", name: "Đậu Hà Lan", matureTurns: 28, yield: 3, seedId: "seed_wandou", seedName: "Hạt đậu Hà Lan", hunger: 16, hydration: 14 },
 ];
 

@@ -79,13 +79,13 @@ export const SURVIVOR_NPC = [
       v2: { name: "Huấn luyện cầm máu", desc: "Nộp 5 băng gạc", reqAffection: 30, require: { medicine: 5, medicineId: "day_bo_mau" }, reward: { item: "dao_chi_ho", desc: "Chỉ hổ đao×1" }, story: "\"Bạn chưa tính là quá yếu.\" cô ấy ném cho bạn một con Dao Chỉ Hổ. \"Con dao này đi theo tôi giết không ít zombie, đừng làm nó mất mặt.\"" },
       v3: { name: "Nhiệm vụ huyết thanh", desc: "Nộp 8 huyết thanh kháng nhiễm", reqAffection: 60, require: { medicine: 8, medicineId: "huyet_thanh" }, reward: { item: "kiem_long_thao", desc: "Kiếm Long Thảo×1" }, story: "\"Huyết thanh là một trong những tài nguyên quý giá nhất mạt thế.\" cô ấy đưa bạn một thanh Kiếm Long Thảo. \"Bạn xứng đáng dùng cái này rồi.\"" },
       v4: { name: "Thử thách khó", desc: "Nộp 8 hộp y tế chiến địa", reqAffection: 90, require: { medicine: 8, medicineId: "hop_y_te" }, reward: { item: "P226", ammo: { type: "9×19mm", count: 50 }, desc: "P226×1 + 9×19mm×50" }, story: "\"Bạn là người sống sót ngoan cường nhất tôi từng thấy.\" cô ấy cuối cùng nở nụ cười chân thành. \"Con P226 này, là bảo bối cuối cùng của tôi. Đừng làm tôi thất vọng.\"" },
-      v5: { name: "Vật tư cấp cứu", desc: "Nộp 6 gói cấp cứu y tế + 6 huyết thanh kháng nhiễm", reqAffection: 120, require: { items: [{ type: "medicine", id: "gói cấp cứu y tế", count: 6 }, { type: "medicine", id: "huyet_thanh", count: 6 }] }, reward: { item: "UZI", ammo: { type: "9×19mm", count: 50 }, desc: "UZI×1 + 9×19mm×50" }, story: "\"Bạn lớn nhanh thật.\" cô ấy đưa bạn một khẩu UZI và vài hộp đạn. \"Con súng này hỏa lực mạnh, phù hợp đối phó zombie thành đàn. Đừng lãng phí đạn.\"" },
+      v5: { name: "Vật tư cấp cứu", desc: "Nộp 6 gói cấp cứu y tế + 6 huyết thanh kháng nhiễm", reqAffection: 120, require: { items: [{ type: "medicine", id: "goi_cap_cuu", count: 6 }, { type: "medicine", id: "huyet_thanh", count: 6 }] }, reward: { item: "UZI", ammo: { type: "9×19mm", count: 50 }, desc: "UZI×1 + 9×19mm×50" }, story: "\"Bạn lớn nhanh thật.\" cô ấy đưa bạn một khẩu UZI và vài hộp đạn. \"Con súng này hỏa lực mạnh, phù hợp đối phó zombie thành đàn. Đừng lãng phí đạn.\"" },
       v6: { name: "Thử thách cuối cùng", desc: "Nộp tất cả thuốc mỗi loại 2 cái", reqAffection: 150, require: { allMedicine: 2 }, reward: { item: "M4A1", ammo: { type: "5.56×45mm NATO", count: 50 }, desc: "M4A1×1 + 5.56×45mm NATO×50" }, story: "\"Bạn đã vượt qua tôi rồi.\" cô ấy trang trọng đưa bạn một khẩu M4A1. \"Đây là khẩu súng tôi cất giữ nhiều năm, giờ thuộc về bạn. Hãy đi tạo ra một thế giới không còn zombie.\"" }
     }
   },
   {
     id: "xiaohan",
-    name: "Tiểu Hàn",
+    name: "Tiểu Hàm",
     desc: "Một cô gái nụ cười ấm áp, luôn nhiệt tình giúp đỡ mọi người trong trận địa. Túi cô ấy dường như luôn có uống mãi không hết sữa.",
     dialogues: {
       stranger: [
@@ -200,7 +200,7 @@ export const SURVIVOR_NPC = [
   },
   {
     id: "mumiao",
-    name: "Mù Miào Miêu",
+    name: "Mục Miêu Miêu",
     desc: "Một phụ nữ trẻ đội mũ rơm, ngón tay luôn dính đất. Cô ấy là chuyên gia nông nghiệp duy nhất trong trận địa, nghe nói chỉ có cô ấy mới có thể nuôi được hạt giống trồng được giữa mạt thế.",
     canTrade: false,
     canGift: true,
@@ -255,14 +255,14 @@ export const NAMED_NPCS = {
   ma_san: { name: "Mã Tam", hp: 300, damageMin: 40, damageMax: 60, hasRanged: true, dodgeRate: 0.4 },
   shadow: { name: "Hắc Ảnh", hp: 400, damageMin: 50, damageMax: 80, hasRanged: true, dodgeRate: 0.5 },
   zombie_king: { name: "Vua Zombie Im Lặng", hp: 420, damage: 115, hasRanged: false, dodgeRate: 0.25 },
-  banker: { name: "Ngân Hàng Hàng Trưởng", hp: 350, damageMin: 50, damageMax: 80, hasRanged: false, dodgeRate: 0.3 },
+  banker: { name: "Trưởng Ngân Hàng", hp: 350, damageMin: 50, damageMax: 80, hasRanged: false, dodgeRate: 0.3 },
   leader: { name: "Trưởng Trận Địa", hp: 400, damage: 110, hasRanged: false, dodgeRate: 0.25 },
   giant_puppet: { name: "Cỗ Rối Khổng Lồ", hp: 380, damage: 105, hasRanged: false, dodgeRate: 0.20 },
   football_zombie: { name: "Zombie Bóng Bầu Đục", hp: 250, damageMin: 30, damageMax: 55, hasRanged: false, dodgeRate: 0.15 },
   diving_zombie: { name: "Zombie Lặn", hp: 200, damageMin: 35, damageMax: 55, hasRanged: true, dodgeRate: 0.15 },
-  sea_monster: { name: "Hải Thần Khổng Lồ", hp: 600, damage: 80, hasRanged: false, dodgeRate: 0.08 },
+  sea_monster: { name: "Hải Zombie Khổng Lồ", hp: 600, damage: 80, hasRanged: false, dodgeRate: 0.08 },
   king_boss: { name: "Vua Lâu Đài", hp: 450, damage: 100, hasRanged: false, dodgeRate: 0.2 },
-  zhao_boss: { name: "Lão Bin Lão Triệu", hp: 350, damageMin: 70, damageMax: 90, hasRanged: true, dodgeRate: 0.3 },
+  zhao_boss: { name: "Lão Binh Lão Triệu", hp: 350, damageMin: 70, damageMax: 90, hasRanged: true, dodgeRate: 0.3 },
   doctor_boss: { name: "Tiến Sĩ Trần", hp: 300, damageMin: 50, damageMax: 70, hasRanged: true, dodgeRate: 0.35 },
 };
 

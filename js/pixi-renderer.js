@@ -1,19 +1,13 @@
 /* ============================================================
-   PixiJS Renderer — Zombie World RPG (Phase 1.5)
+   PixiJS Renderer — Zombie World RPG (Phase 1.5 - Stage 1)
    
-   Muc tieu: Render the gioi ban do / NPC / item bang WebGL/Canvas,
-             giu nguyen he thong menu/DOM hien tai.
-   
-   Cach hoa dong:
-   - index.html: them the <canvas> va tai PixiJS tu CDN
-   - js/main.js: khoi tao PixiRenderer va goi render() khi state thay doi
-   - js/ui.js: bo sung khu vuc hien thi PixiJS (optional)
-   
-   Ghi nho: DOM UI (stats, inventory, story, options) van duoc giu nguyen,
-            PixiJS chi bo sung tram tran trang cho the gioi.
+   Muc tieu:
+   - Render the gioi ban do / NPC / item bang WebGL/Canvas.
+   - Hoat dong 100% offline su dung local vendor (public/vendor/).
+   - Responsive khong tran vien (no horizontal overflow), giu ty le chuan.
+   - Tai su dung toan bo doi tuong render (Object Pooling), khong leak bo nho.
+   - Asset Manager voi Texture Cache va Procedural Fallback Texture.
    ============================================================ */
-
-import * as PIXI from 'https://cdn.jsdelivr.net/npm/pixi.js@7/dist/pixi.mjs';
 
 // ---------- Mau sac / chat luong hien thi ----------
 const COLORS = {
@@ -23,216 +17,455 @@ const COLORS = {
   safe: 0x00ff88,
   danger: 0xff4757,
   neutral: 0xffa502,
+  border: 0x303446,
 };
+
+// Bien luu tru instance PIXI (nap dong hoac tu local vendor)
+let PIXI = null;
 
 // ---------- PixiRenderer class ----------
 export class PixiRenderer {
   /**
    * @param {Object} options
-   * @param {string} options.containerId - ID the hien thi canvas (mac dinh: 'game-container')
-   * @param {number} options.width - Chieu rong canvas
-   * @param {number} options.height - Chieu cao canvas
+   * @param {string} options.containerId - ID the chua canvas (mac dinh: 'pixi-viewport' hoac fallback 'game-container')
+   * @param {number} options.width - Chieu rong ao (virtual width)
+   * @param {number} options.height - Chieu cao ao (virtual height)
    */
-  constructor({ containerId = 'game-container', width = 640, height = 360 } = {}) {
+  constructor({ containerId = 'pixi-viewport', width = 640, height = 320 } = {}) {
     this.containerId = containerId;
     this.width = width;
     this.height = height;
+
+    // PixiJS Core
     this.app = null;
-    this.background = null;
-    this.worldLayer = null;
-    this.uiLayer = null;
-    this.spriteCache = new Map(); // id -> PIXI.Sprite
     this.enabled = false;
     this.state = null;
+    this._resizeHandler = null;
+
+    // Display Layers
+    this.bgLayer = null;
+    this.worldLayer = null;
+    this.entityLayer = null;
+    this.uiLayer = null;
+
+    // Persistent Reusable Display Objects
+    this.bgSprite = null;
+    this.bgGraphics = null;
+    this.bgBorder = null;
+    this.locText = null;
+    this.dayText = null;
+    this.hpBarBg = null;
+    this.hpBar = null;
+    this.hpIconSprite = null;
+    this.hpLabel = null;
+    this.entityPool = [];
+    this.maxEntities = 6;
+
+    // Asset Manager & Cache
+    this.textureCache = new Map();
+    this.loadingAssets = new Map(); // url -> Promise<PIXI.Texture>
+    this.failedAssets = new Set();
+    this.fallbackTexture = null;
+    this._currentLocation = null;
   }
 
-  // ---------- Khoi tao ----------
-  async init() {
-    const container = document.getElementById(this.containerId);
-    if (!container) {
-      console.warn('[PixiRenderer] Khong tim thay container:', this.containerId);
-      return false;
+  // ---------- Nap thu vien PixiJS (Offline / Local Vendor) ----------
+  async _loadPixiLibrary() {
+    if (PIXI) return PIXI;
+
+    // 1. Kiem tra PIXI da duoc load qua script tag local (public/vendor/pixi.min.js)
+    if (typeof window !== 'undefined' && window.PIXI) {
+      PIXI = window.PIXI;
+      return PIXI;
     }
 
-    // Tao PixiJS Application
-    this.app = new PIXI.Application({
-      width: this.width,
-      height: this.height,
-      backgroundColor: COLORS.bg,
-      antialias: true,
-      resizeTo: window,
-    });
+    // 2. Fallback: Dynamic import local ESM bundle
+    try {
+      const module = await import('../public/vendor/pixi.mjs');
+      PIXI = module.default || module;
+      return PIXI;
+    } catch (err) {
+      console.warn('[PixiRenderer] Khong the nap local vendor pixi.mjs:', err.message);
+    }
 
-    // Dat canvas o day sau game-header, truoc noi dung DOM
-    const canvas = this.app.view;
-    canvas.id = 'pixi-canvas';
-    canvas.style.display = 'block';
-    canvas.style.maxWidth = '100%';
-    canvas.style.height = 'auto';
-    canvas.style.margin = '0 auto';
-    canvas.style.zIndex = '0';
-
-    // Chen canvas vao container (truoc cac phan tu DOM con de DOM o tren)
-    container.insertBefore(canvas, container.firstChild);
-
-    // Tao cac layer
-    this.background = new PIXI.Container();
-    this.worldLayer = new PIXI.Container();
-    this.uiLayer = new PIXI.Container();
-
-    this.app.stage.addChild(this.background);
-    this.app.stage.addChild(this.worldLayer);
-    this.app.stage.addChild(this.uiLayer);
-
-    // Ve nen mac dinh
-    this._drawBackground();
-
-    this.enabled = true;
-    console.log('[PixiRenderer] Da khoi tao PixiJS render.');
-    return true;
+    return null;
   }
 
-  // ---------- Cap nhat render theo state ----------
-  /**
-   * Goi ham nay moi khi state thay doi de cap nhat hien thi PixiJS.
-   * @param {Object} state - Trang thai game hien tai
-   */
+  // ---------- Khoi tao Renderer ----------
+  async init() {
+    try {
+      const pixiLib = await this._loadPixiLibrary();
+      if (!pixiLib) {
+        console.warn('[PixiRenderer] Khong co thu vien PixiJS, he thong se dung DOM UI thuan tuy.');
+        this.enabled = false;
+        return false;
+      }
+
+      // Tim container phu hop: uu tien 'pixi-viewport', fallback ve containerId
+      let container = document.getElementById('pixi-viewport');
+      if (!container) {
+        container = document.getElementById(this.containerId);
+      }
+      if (!container) {
+        console.warn('[PixiRenderer] Khong tim thay container de chen canvas.');
+        this.enabled = false;
+        return false;
+      }
+
+      // Khong dung resizeTo: window de tranh horizontal overflow
+      this.app = new PIXI.Application({
+        width: this.width,
+        height: this.height,
+        backgroundColor: COLORS.bg,
+        antialias: true,
+        autoDensity: true,
+        resolution: typeof window !== 'undefined' ? Math.min(window.devicePixelRatio || 1, 2) : 1,
+      });
+
+      const canvas = this.app.view;
+      canvas.id = 'pixi-canvas';
+      canvas.style.display = 'block';
+      canvas.style.width = '100%';
+      canvas.style.height = 'auto';
+      canvas.style.maxWidth = '100%';
+      canvas.style.margin = '0 auto';
+
+      // Xoa canvas cu neu ton tai
+      const existingCanvas = container.querySelector('#pixi-canvas');
+      if (existingCanvas) existingCanvas.remove();
+
+      container.appendChild(canvas);
+
+      // Khoi tao cac layer co dinh
+      this.bgLayer = new PIXI.Container();
+      this.worldLayer = new PIXI.Container();
+      this.entityLayer = new PIXI.Container();
+      this.uiLayer = new PIXI.Container();
+
+      this.app.stage.addChild(this.bgLayer);
+      this.app.stage.addChild(this.worldLayer);
+      this.app.stage.addChild(this.entityLayer);
+      this.app.stage.addChild(this.uiLayer);
+
+      // Tao fallback texture procedural (khong can anh ngoai)
+      this.fallbackTexture = this._createFallbackTexture();
+
+      // Khoi tao cac doi tuong render tai su dung (Persistent Objects)
+      this._initPersistentObjects();
+
+      // Preload Batch 01 UI Assets
+      this.preloadBatch01().catch(err => {
+        console.warn('[PixiRenderer] Preload Batch 01 warning:', err?.message || err);
+      });
+
+      // Lang nghe su kien resize cua cua so
+      this._resizeHandler = () => this.resize();
+      window.addEventListener('resize', this._resizeHandler);
+
+      this.enabled = true;
+      console.log('[PixiRenderer] Da khoi tao thanh cong PixiJS v' + (PIXI.VERSION || '7') + ' (Offline Local Vendor).');
+      return true;
+    } catch (err) {
+      console.warn('[PixiRenderer] Khoi tao PixiJS that bai:', err.message);
+      this.enabled = false;
+      return false;
+    }
+  }
+
+  // ---------- Tao texture du phong (Procedural Fallback) ----------
+  _createFallbackTexture() {
+    if (!this.app || !this.app.renderer) return null;
+    const g = new PIXI.Graphics();
+    g.beginFill(COLORS.panel);
+    g.drawRect(0, 0, 64, 64);
+    g.endFill();
+    g.lineStyle(2, COLORS.text, 0.7);
+    g.drawRect(1, 1, 62, 62);
+    g.moveTo(6, 6);
+    g.lineTo(58, 58);
+    g.moveTo(58, 6);
+    g.lineTo(6, 58);
+    return this.app.renderer.generateTexture(g);
+  }
+
+  // ---------- Khoi tao cac doi tuong co dinh (Tranh Memory Leak) ----------
+  _initPersistentObjects() {
+    // 1. Background
+    this.bgGraphics = new PIXI.Graphics();
+    this.bgGraphics.beginFill(COLORS.bg);
+    this.bgGraphics.drawRect(0, 0, this.width, this.height);
+    this.bgGraphics.endFill();
+    this.bgLayer.addChild(this.bgGraphics);
+
+    this.bgSprite = new PIXI.Sprite(this.fallbackTexture || PIXI.Texture.WHITE);
+    this.bgSprite.width = this.width;
+    this.bgSprite.height = this.height;
+    this.bgSprite.alpha = 0.4;
+    this.bgLayer.addChild(this.bgSprite);
+
+    this.bgBorder = new PIXI.Graphics();
+    this.bgBorder.lineStyle(2, COLORS.text, 0.4);
+    this.bgBorder.drawRect(4, 4, this.width - 8, this.height - 8);
+    this.bgLayer.addChild(this.bgBorder);
+
+    // 2. Info Layer (Text & HP Bar)
+    this.locText = new PIXI.Text('Dang tai...', {
+      fontFamily: 'JetBrains Mono, monospace',
+      fontSize: 18,
+      fontWeight: 'bold',
+      fill: COLORS.safe,
+      stroke: COLORS.bg,
+      strokeThickness: 2,
+    });
+    this.locText.x = 16;
+    this.locText.y = 12;
+    this.worldLayer.addChild(this.locText);
+
+    this.dayText = new PIXI.Text('', {
+      fontFamily: 'JetBrains Mono, monospace',
+      fontSize: 13,
+      fill: 0xcccccc,
+      stroke: COLORS.bg,
+      strokeThickness: 1,
+    });
+    this.dayText.x = 16;
+    this.dayText.y = 38;
+    this.worldLayer.addChild(this.dayText);
+
+    // HP Icon & Bar
+    this.hpIconSprite = new PIXI.Sprite(this.fallbackTexture || PIXI.Texture.WHITE);
+    this.hpIconSprite.x = 16;
+    this.hpIconSprite.y = 59;
+    this.hpIconSprite.width = 16;
+    this.hpIconSprite.height = 16;
+    this.worldLayer.addChild(this.hpIconSprite);
+
+    this.hpBarBg = new PIXI.Graphics();
+    this.hpBarBg.beginFill(0x222222);
+    this.hpBarBg.drawRect(38, 62, 160, 10);
+    this.hpBarBg.endFill();
+    this.worldLayer.addChild(this.hpBarBg);
+
+    this.hpBar = new PIXI.Graphics();
+    this.worldLayer.addChild(this.hpBar);
+
+    this.hpLabel = new PIXI.Text('HP: 100%', {
+      fontFamily: 'JetBrains Mono, monospace',
+      fontSize: 11,
+      fill: 0xffffff,
+    });
+    this.hpLabel.x = 204;
+    this.hpLabel.y = 60;
+    this.worldLayer.addChild(this.hpLabel);
+
+    // 3. Entity Pool (Chuan bi san 6 slots, bat/tat bang .visible)
+    this.entityPool = [];
+    const startY = 88;
+    for (let i = 0; i < this.maxEntities; i++) {
+      const txt = new PIXI.Text('', {
+        fontFamily: 'JetBrains Mono, monospace',
+        fontSize: 12,
+        fill: 0xffffff,
+      });
+      txt.x = 16;
+      txt.y = startY + i * 20;
+      txt.visible = false;
+      this.entityLayer.addChild(txt);
+      this.entityPool.push(txt);
+    }
+  }
+
+  // ---------- Asset Manager Minimal: Texture Cache & Fallback ----------
+  async loadTexture(url) {
+    if (!this.enabled || !PIXI) return this.fallbackTexture;
+    if (!url) return this.fallbackTexture;
+
+    // 1. Kiem tra cache: da co texture thi tra ve ngay
+    if (this.textureCache.has(url)) {
+      return this.textureCache.get(url);
+    }
+
+    // 2. Neu asset truoc do da load loi, dung ngay fallback khong thu lai
+    if (this.failedAssets.has(url)) {
+      return this.fallbackTexture;
+    }
+
+    // 3. Neu asset dang trong qua trinh load, tra ve chinh Promise dang chay (chia se promise)
+    if (this.loadingAssets.has(url)) {
+      return await this.loadingAssets.get(url);
+    }
+
+    // 4. Tao Promise loading moi va luu vao loadingAssets
+    const loadPromise = (async () => {
+      try {
+        const texture = await PIXI.Assets.load(url);
+        if (texture) {
+          this.textureCache.set(url, texture);
+          return texture;
+        } else {
+          throw new Error('PIXI.Assets.load tra ve texture rong');
+        }
+      } catch (err) {
+        this.failedAssets.add(url);
+        console.warn(`[PixiRenderer] Khong the tai asset: ${url}, su dung fallback.`);
+        return this.fallbackTexture;
+      } finally {
+        this.loadingAssets.delete(url);
+      }
+    })();
+
+    this.loadingAssets.set(url, loadPromise);
+    return await loadPromise;
+  }
+
+  // ---------- Preload Asset Batch 01 (UI Icons & Logo) ----------
+  async preloadBatch01() {
+    const batch01Assets = [
+      'public/assets/ui/ui_game_logo.png',
+      'public/assets/icons/ui_icon_hp.png',
+      'public/assets/icons/ui_icon_sanity.png',
+      'public/assets/icons/ui_icon_hunger.png',
+      'public/assets/icons/ui_icon_hydration.png',
+      'public/assets/icons/ui_icon_infection.png',
+      'public/assets/icons/ui_icon_res_cigarette.png',
+      'public/assets/icons/ui_icon_res_royal_coin.png',
+      'public/assets/icons/ui_icon_res_gasoline.png',
+      'public/assets/icons/ui_icon_backpack.png',
+      'public/assets/icons/ui_icon_melee_slot.png',
+      'public/assets/icons/ui_icon_ranged_slot.png',
+      'public/assets/ui/ui_placeholder_empty.png',
+    ];
+
+    const promises = batch01Assets.map(path => this.loadTexture(path).catch(err => {
+      console.warn(`[PixiRenderer] Preload warning for ${path}:`, err?.message || err);
+    }));
+
+    await Promise.allSettled(promises);
+    if (this.hpIconSprite && this.textureCache.has('public/assets/icons/ui_icon_hp.png')) {
+      this.hpIconSprite.texture = this.textureCache.get('public/assets/icons/ui_icon_hp.png');
+    }
+  }
+
+  // ---------- Cap nhat hien thi theo State (Zero Allocation Render Loop) ----------
   render(state) {
     if (!this.enabled || !this.app) return;
     this.state = state;
 
-    // Xoa world layer (cac doi tuong dong)
-    this.worldLayer.removeChildren();
+    // 1. Cap nhat vi tri & bối cảnh
+    this._updateLocation(state);
 
-    // Ve nen theo vi tri hien tai
-    this._drawBackground(state);
+    // 2. Cap nhat thong tin the gioi (Ngay, HP, trang thai)
+    this._updateWorldInfo(state);
 
-    // Ve thong tin co ban (ten vi tri, ngay, thoi tiet)
-    this._drawWorldInfo(state);
-
-    // Ve NPC / item neu co du lieu (hien tai la placeholder vi chua co sprite)
-    this._drawEntities(state);
-
-    this.app.render();
+    // 3. Cap nhat danh sach thuc the (NPC) qua Object Pool
+    this._updateEntities(state);
   }
 
-  // ---------- Tuong tac ----------
-  resize(width, height) {
-    if (!this.enabled || !this.app) return;
-    this.app.renderer.resize(width, height);
-    this._drawBackground(this.state);
-    this._drawWorldInfo(this.state);
-    this._drawEntities(this.state);
-  }
-
-  destroy() {
-    if (this.app) {
-      this.app.destroy(true);
-      this.app = null;
+  _updateLocation(state) {
+    if (!state) return;
+    const loc = state.location || 'Doanh địa người sống sót';
+    if (this.locText) {
+      this.locText.text = loc;
     }
-    this.enabled = false;
   }
 
-  // ---------- Hai ham con ve nen ----------
-
-  _drawBackground(state) {
-    this.background.removeChildren();
-
-    // Nen gradient don gian
-    const rect = new PIXI.Graphics();
-    rect.beginFill(COLORS.bg);
-    rect.drawRect(0, 0, this.app.screen.width, this.app.screen.height);
-    rect.endFill();
-    this.background.addChild(rect);
-
-    // Vien trang tri
-    const border = new PIXI.Graphics();
-    border.lineStyle(4, COLORS.text, 0.6);
-    border.drawRect(10, 10, this.app.screen.width - 20, this.app.screen.height - 20);
-    this.background.addChild(border);
-  }
-
-  _drawWorldInfo(state) {
+  _updateWorldInfo(state) {
     if (!state) return;
 
-    // Ten vi tri
-    const locText = new PIXI.Text({
-      text: state.location || 'Khong xac dinh',
-      style: {
-        fontFamily: 'JetBrains Mono, monospace',
-        fontSize: 20,
-        fill: COLORS.safe,
-        stroke: COLORS.bg,
-        strokeThickness: 2,
-      },
-    });
-    locText.x = 20;
-    locText.y = 20;
-    this.worldLayer.addChild(locText);
+    if (this.dayText) {
+      const day = state.day || 1;
+      const weather = state.weather || 'Âm u';
+      const status = state.status || 'Bình thường';
+      this.dayText.text = `Ngày ${day}  |  ${weather}  |  ${status}`;
+    }
 
-    // Ngay / thoi tiet / giai doan
-    const dayText = new PIXI.Text({
-      text: `Ngay ${state.day || 1}  |  ${state.weather || ''}  |  ${state.status || ''}`,
-      style: {
-        fontFamily: 'JetBrains Mono, monospace',
-        fontSize: 14,
-        fill: 0xffffff,
-        stroke: COLORS.bg,
-        strokeThickness: 1,
-      },
-    });
-    dayText.x = 20;
-    dayText.y = 50;
-    this.worldLayer.addChild(dayText);
+    // Cap nhat HP Icon va thanh HP
+    if (this.hpIconSprite && this.textureCache.has('public/assets/icons/ui_icon_hp.png')) {
+      this.hpIconSprite.texture = this.textureCache.get('public/assets/icons/ui_icon_hp.png');
+    }
 
-    // Mau cua suc khoe (HP bar)
-    const hpPct = state.health ? Math.round((state.health / 100) * 100) : 0;
-    const hpBarBg = new PIXI.Graphics();
-    hpBarBg.beginFill(0x333333);
-    hpBarBg.drawRect(20, 78, 200, 12);
-    hpBarBg.endFill();
-    this.worldLayer.addChild(hpBarBg);
+    const maxHp = state.maxHealth || 100;
+    const curHp = state.health !== undefined ? state.health : 100;
+    const hpPct = Math.max(0, Math.min(100, Math.round((curHp / maxHp) * 100)));
 
-    const hpBar = new PIXI.Graphics();
-    hpBar.beginFill(hpPct > 30 ? COLORS.safe : COLORS.danger);
-    hpBar.drawRect(20, 78, (hpPct / 100) * 200, 12);
-    hpBar.endFill();
-    this.worldLayer.addChild(hpBar);
+    if (this.hpBar) {
+      this.hpBar.clear();
+      this.hpBar.beginFill(hpPct > 30 ? COLORS.safe : COLORS.danger);
+      this.hpBar.drawRect(38, 62, (hpPct / 100) * 160, 10);
+      this.hpBar.endFill();
+    }
 
-    const hpLabel = new PIXI.Text({
-      text: `HP: ${hpPct}%`,
-      style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 12, fill: 0xffffff },
-    });
-    hpLabel.x = 230;
-    hpLabel.y = 74;
-    this.worldLayer.addChild(hpLabel);
+    if (this.hpLabel) {
+      this.hpLabel.text = `HP: ${hpPct}%`;
+    }
   }
 
-  _drawEntities(state) {
-    // Placeholder: ve cac entity (NPC, item) o vi tri tuong doi
-    // Hien tai chua co toa do trong state, nen chi hien thi danh sach text
+  _updateEntities(state) {
     if (!state) return;
 
     const entities = [];
-
-    // Them nhung NPC co the duoc biet qua affinity
     if (state.npcAffinity) {
-      Object.keys(state.npcAffinity).forEach((npcId, i) => {
-        entities.push({ id: npcId, name: `NPC ${npcId}`, affinity: state.npcAffinity[npcId] });
-      });
+      for (const [npcId, aff] of Object.entries(state.npcAffinity)) {
+        entities.push({ id: npcId, name: `NPC ${npcId}`, affinity: aff });
+      }
     }
 
-    const startY = 110;
-    entities.slice(0, 6).forEach((ent, i) => {
-      const color = ent.affinity > 30 ? COLORS.safe : ent.affinity > 0 ? COLORS.neutral : 0xffffff;
-      const txt = new PIXI.Text({
-        text: `${ent.name} (tham thiet ${ent.affinity})`,
-        style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 13, fill: color },
-      });
-      txt.x = 20;
-      txt.y = startY + i * 22;
-      this.worldLayer.addChild(txt);
-    });
+    for (let i = 0; i < this.maxEntities; i++) {
+      const poolItem = this.entityPool[i];
+      if (!poolItem) continue;
+
+      if (i < entities.length) {
+        const ent = entities[i];
+        const color = ent.affinity > 30 ? COLORS.safe : ent.affinity > 0 ? COLORS.neutral : 0xffffff;
+        poolItem.text = `• ${ent.name} (thân thiết ${ent.affinity})`;
+        poolItem.style.fill = color;
+        poolItem.visible = true;
+      } else {
+        poolItem.visible = false;
+      }
+    }
+  }
+
+  // ---------- Responsive Resize ----------
+  resize() {
+    if (!this.enabled || !this.app || !this.app.renderer) return;
+
+    const container = document.getElementById('pixi-viewport') || document.getElementById(this.containerId);
+    if (!container) return;
+
+    // Canvas CSS da co width: 100%, height: auto nen co gian responsive muot ma.
+    // O day ta chi can render lai mot luot de dam bao stage khong bi blur.
+    if (this.state) {
+      this.render(this.state);
+    }
+  }
+
+  // ---------- Giai phong tai nguyen ----------
+  destroy() {
+    if (this._resizeHandler) {
+      window.removeEventListener('resize', this._resizeHandler);
+      this._resizeHandler = null;
+    }
+
+    if (this.fallbackTexture) {
+      this.fallbackTexture.destroy(true);
+      this.fallbackTexture = null;
+    }
+
+    for (const tex of this.textureCache.values()) {
+      tex.destroy(true);
+    }
+    this.textureCache.clear();
+    this.loadingAssets.clear();
+    this.failedAssets.clear();
+
+    if (this.app) {
+      this.app.destroy(true, { children: true, texture: false, baseTexture: false });
+      this.app = null;
+    }
+
+    this.enabled = false;
+    this.state = null;
   }
 }
 

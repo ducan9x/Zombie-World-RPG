@@ -13,10 +13,63 @@
 <body>
   <div id="game-container">
     <div id="game-header">
+      <img id="header-logo" class="ui-icon-header-logo" src="public/assets/ui/ui_game_logo.png" alt="Thế Giới Zombie Logo" onerror="this.style.display='none'">
       <h1>Thế Giới Zombie</h1>
       <p class="subtitle">Trò chơi chữ sinh tồn ngày tận thế - YOCIM phát triển</p>
     </div>
     <div id="name-setup">
+      <label for="name-input"></label>
+      <div class="character-appearance-box">
+        <div class="appearance-header">
+          <span class="appearance-title">👤 Ngoại hình nhân vật</span>
+          <span id="appearance-status-badge" class="appearance-status-badge status-pending">PENDING</span>
+        </div>
+        
+        <div class="appearance-preview-card">
+          <img id="appearance-preview-img" class="appearance-preview-img" src="public/assets/characters/player/young_adult_male_survivor.png" alt="Ngoại hình nhân vật" style="display:none;">
+          <div id="appearance-preview-placeholder" class="appearance-preview-placeholder">
+            <div class="placeholder-icon">👤</div>
+            <div class="placeholder-title" id="preview-placeholder-name">Thanh niên Nam</div>
+            <div class="placeholder-sub" id="preview-placeholder-outfit">Sinh tồn cơ bản</div>
+            <div class="placeholder-tag" id="preview-placeholder-tag">young_adult_male_survivor.png</div>
+          </div>
+        </div>
+
+        <div class="appearance-selectors">
+          <div class="selector-group">
+            <label for="appearance-age-select">Nhóm tuổi:</label>
+            <select id="appearance-age-select" class="appearance-select">
+              <option value="teen">Thanh thiếu niên</option>
+              <option value="young_adult" selected>Thanh niên</option>
+              <option value="adult">Trưởng thành</option>
+              <option value="middle_aged">Trung niên</option>
+              <option value="elderly">Cao tuổi</option>
+            </select>
+          </div>
+
+          <div class="selector-group">
+            <label for="appearance-gender-select">Giới tính:</label>
+            <select id="appearance-gender-select" class="appearance-select">
+              <option value="male" selected>Nam</option>
+              <option value="female">Nữ</option>
+            </select>
+          </div>
+
+          <div class="selector-group">
+            <label for="appearance-outfit-select">Trang phục:</label>
+            <select id="appearance-outfit-select" class="appearance-select">
+              <option value="survivor" selected>Sinh tồn cơ bản</option>
+              <option value="tactical">Chiến thuật</option>
+              <option value="casual">Thường ngày</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="appearance-actions">
+          <button id="confirm-appearance-btn" type="button" class="appearance-confirm-btn">✓ Xác nhận ngoại hình</button>
+        </div>
+      </div>
+
       <label for="name-input"></label>
       <input type="text" id="name-input" placeholder="Nhập tên nhân vật..." maxlength="10">
       <div class="start-buttons">
@@ -124,6 +177,7 @@
         <div id="inventory-panel"></div>
       </div>
       <div id="zone-3" class="game-zone">
+        <div id="pixi-viewport"></div>
         <div id="story-area" class="panel"></div>
       </div>
       <div id="zone-4" class="game-zone">
@@ -141,6 +195,7 @@
       </div>
     </div>
   </div>
+  <script src="public/vendor/pixi.min.js"></script>
   <script type="module" src="js/main.js"></script>
   <script src="tools/devtools-auth.js"></script>
 </body>

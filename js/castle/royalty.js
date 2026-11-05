@@ -150,30 +150,30 @@ export function handleQueenPast() {
 
 export function handleQueenQuest1() {
   const state = getState();
-  const baiweiCount = state.drinks.filter(i => i.id === "Bai Wei beer").reduce((sum, i) => sum + (i.count || 1), 0);
-  const dongliCount = state.drinks.filter(i => i.id === "Dong Li beer").reduce((sum, i) => sum + (i.count || 1), 0);
+  const baiweiCount = state.drinks.filter(i => i.id === "bia_tram_vi").reduce((sum, i) => sum + (i.count || 1), 0);
+  const dongliCount = state.drinks.filter(i => i.id === "bia_nang_luong").reduce((sum, i) => sum + (i.count || 1), 0);
   const needBaiwei = 5;
   const needDongli = 5;
 
   if (baiweiCount < needBaiwei || dongliCount < needDongli) {
     let msg = "Hoàng hậu thở dài: \"Nhìn thấy chiếc mặt dây chuyền này, lại nhớ đến những chuyện không vui. Giúp tôi lấy chút rượu để giải sầu.\"\n\nVật phẩm cần:";
-    if (baiweiCount < needBaiwei) msg += `\n  Bai Wei beer ${baiweiCount}/${needBaiwei}`;
-    else msg += `\n  Bai Wei beer ${baiweiCount}/${needBaiwei} ✓`;
-    if (dongliCount < needDongli) msg += `\n  Dong Li beer ${dongliCount}/${needDongli}`;
-    else msg += `\n  Dong Li beer ${dongliCount}/${needDongli} ✓`;
+    if (baiweiCount < needBaiwei) msg += `\n  Bia Trăm Vị ${baiweiCount}/${needBaiwei}`;
+    else msg += `\n  Bia Trăm Vị ${baiweiCount}/${needBaiwei} ✓`;
+    if (dongliCount < needDongli) msg += `\n  Bia Năng Lượng ${dongliCount}/${needDongli}`;
+    else msg += `\n  Bia Năng Lượng ${dongliCount}/${needDongli} ✓`;
     setStory(msg);
     refreshCastleInterior();
     return;
   }
 
-  removeItemById("drinks", "Bai Wei beer", needBaiwei);
-  removeItemById("drinks", "Dong Li beer", needDongli);
+  removeItemById("drinks", "bia_tram_vi", needBaiwei);
+  removeItemById("drinks", "bia_nang_luong", needDongli);
   markQuestDone("queenQuest1");
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
-  addItem({ id: "Royal coin", name: "Royal coin", type: "royal_coin", count: 10 });
-  setStory(`Bạn bàyBai Wei beer vàDong Li beer trước mặt hoàng hậu. Cô ấy cầm một chai, ngửa cổ uống một hơi.
+  addItem({ id: "royal_coin", name: "Tiền hoàng gia", type: "royal_coin", count: 10 });
+  setStory(`Bạn bày Bia Trăm Vị và Bia Năng Lượng trước mặt hoàng hậu. Cô ấy cầm một chai, ngửa cổ uống một hơi.
 
 "Anh không biết," cô ấy lau khóe miệng, "chiếc mặt dây chuyền này do chính tay anh ấy làm. Khi đó anh ấy chưa làm vua, chỉ là một ông trùm bất động sản. Anh ấy nói hoa hướng dương luôn hướng về mặt trời, như anh ấy luôn nhìn về phía em."
 
@@ -182,7 +182,7 @@ Cô ấy lại uống một ngụm:
 
 Bạn không trả lời. Có những câu hỏi, đáp án không nằm trong rượu.
 
-🪙 Nhận được[Royal coin]×10`);
+🪙 Nhận được[Tiền hoàng gia]×10`);
   refreshCastleInterior();
 }
 
@@ -202,7 +202,7 @@ export function handleQueenQuest2() {
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
-  addItem({ id: "Royal coin", name: "Royal coin", type: "royal_coin", count: 20 });
+  addItem({ id: "royal_coin", name: "Tiền hoàng gia", type: "royal_coin", count: 20 });
   setStory(`Bạn giao kỷ tử cho hoàng hậu. Cô ấy cẩn thận cất kỹ, như nâng niu báu vật.
 
 "Cảm ơn." Giọng cô ấy rất khẽ, "Bất kể người khác nói gì về anh ấy, anh ấy đối với em……thực sự rất tốt."
@@ -212,7 +212,7 @@ Cô ấy dừng lại, cười khổ:
 
 Bạn nhìn vào mắt cô ấy, nơi đó có ánh sáng, cũng có bóng tối.
 
-🪙 Nhận được[Royal coin]×20`);
+🪙 Nhận được[Tiền hoàng gia]×20`);
   refreshCastleInterior();
 }
 
@@ -235,7 +235,7 @@ export function handleQueenQuest3() {
   advanceTime(1);
   updateStatusEffects();
   checkDeath();
-  addItem({ id: "Royal coin", name: "Royal coin", type: "royal_coin", count: 30 });
+  addItem({ id: "royal_coin", name: "Tiền hoàng gia", type: "royal_coin", count: 30 });
   setStory(`Bạn giao 3 thanh Kiếm Tây cho hoàng hậu. Cô ấy tự tay kiểm tra từng thanh, hài lòng gật đầu.
 
 "Anh ấy luyện kiếm mỗi ngày." Hoàng hậu nhìn lưỡi kiếm lóehàn quang, "Anh ấy nói, chỉ khi tay có kiếm, mới có thể bảo vệ người muốn bảo vệ."
@@ -243,7 +243,7 @@ export function handleQueenQuest3() {
 Cô ấy bỗng khẽ nói:
 "Nhưng anh ấy bảo vệ tất cả mọi người, chỉ không bảo vệ được bản thân. Sức khỏe của anh ấy……ngày càng tệ."
 
-🪙 Nhận được[Royal coin]×30`);
+🪙 Nhận được[Tiền hoàng gia]×30`);
   refreshCastleInterior();
 }
 
@@ -267,7 +267,7 @@ export function handleQueenQuest4() {
 
   markQuestDone("queenQuest4");
   if (checkGoHomeEnding()) return;
-  addItem({ id: "Royal coin", name: "Royal coin", type: "royal_coin", count: 40 });
+  addItem({ id: "royal_coin", name: "Tiền hoàng gia", type: "royal_coin", count: 40 });
   const pass = SPECIAL_ITEMS.castle_pass;
   addItem({ ...pass });
   setStory(`Bạn đưa M700 cho hoàng hậu. Cô ấy nhận lấy khẩu súng, khẽ vuốt ve các hoa văn trên báng súng, trong mắt thoáng qua một tia dịu dàng.
@@ -284,7 +284,7 @@ Cô ấy nhìn ra cửa sổ về phía đêm, khẽ nói:
 Cô ấy quay lại nhìn bạn, nụ cười mang theo sự giải thoát:
 "Thay tôi chăm sóc anh ấy.Cũng thay tôi……chăm sóc anh trai tôi."
 
-🪙 Nhận được[Royal coin]×40!
+🪙 Nhận được[Tiền hoàng gia]×40!
 🎫 Nhận được[Thẻ thông hành lâu đài]!
 
 (Gợi ý: Sở hữu thẻ thông hành lâu đài có thể tự do ra vào lâu đài)`);
@@ -427,10 +427,10 @@ const ROYAL_SHOP_ITEMS = [
 
 export function handleRoyalTrade() {
   const state = getState();
-  setStory(`Hoàng hậu khẽ gật đầu: "Giao dịch hoàng gia? Đương nhiên. Royal coin trong tay bạn có thể đổi được không ít đồ tốt ở đây.\"\n\nRoyal coin hiện tại: ${state.royalCoins}`);
+  setStory(`Hoàng hậu khẽ gật đầu: "Giao dịch hoàng gia? Đương nhiên. tiền hoàng gia trong tay bạn có thể đổi được không ít đồ tốt ở đây.\"\n\ntiền hoàng gia hiện tại: ${state.royalCoins}`);
   setPhase("castle_interior");
   setOptions([
-    { text: "Đổi Royal coin", action: "queen_royal_exchange" },
+    { text: "Đổi tiền hoàng gia", action: "queen_royal_exchange" },
     { text: "Cửa hàng tạp hóa hoàng hậu", action: "queen_royal_shop" },
     { text: "Quay về sảnh", action: "castle_back" },
   ]);
@@ -440,7 +440,7 @@ export function handleRoyalExchange() {
   const state = getState();
   const gouqiCount = state.food.filter(i => i.id === "gouqi").reduce((sum, i) => sum + (i.count || 1), 0);
   const swordCount = state.other.filter(i => i.id === "kiem_tay").length;
-  setStory(`Hoàng hậu: "Bạn có thể dùng vật tư để đổi Royal coin.\"\n\nRoyal coin hiện tại: ${state.royalCoins}\n\nCó thể đổi: \n  Kỷ tử ×${gouqiCount}(2 kỷ tử = 1 Royal coin)\n  Kiếm Tây ×${swordCount}(1 Kiếm Tây = 5 Royal coin)`);
+  setStory(`Hoàng hậu: "Bạn có thể dùng vật tư để đổi tiền hoàng gia.\"\n\ntiền hoàng gia hiện tại: ${state.royalCoins}\n\nCó thể đổi: \n  Kỷ tử ×${gouqiCount}(2 kỷ tử = 1 tiền hoàng gia)\n  Kiếm Tây ×${swordCount}(1 Kiếm Tây = 5 tiền hoàng gia)`);
   setPhase("castle_interior");
   setOptions([
     { text: `Nộp kỷ tử(2→1 coin)×${gouqiCount}`, action: "queen_exchange_gouqi" },
@@ -453,13 +453,13 @@ export function handleExchangeGouqi() {
   const state = getState();
   const gouqiCount = state.food.filter(i => i.id === "gouqi").reduce((sum, i) => sum + (i.count || 1), 0);
   if (gouqiCount < 2) {
-    setStory("Kỷ tử của bạn không đủ, ít nhất cần 2 cái mới đổi được 1 Royal coin.");
+    setStory("Kỷ tử của bạn không đủ, ít nhất cần 2 cái mới đổi được 1 tiền hoàng gia.");
     refreshCastleInterior();
     return;
   }
   removeItemById("food", "gouqi", 2);
-  addItem({ id: "Royal coin", name: "Royal coin", type: "royal_coin", count: 1 });
-  setStory(`Bạn nộp 2 kỷ tử, nhận được 1 Royal coin.\n\nRoyal coin hiện tại: ${state.royalCoins}`);
+  addItem({ id: "royal_coin", name: "Tiền hoàng gia", type: "royal_coin", count: 1 });
+  setStory(`Bạn nộp 2 kỷ tử, nhận được 1 tiền hoàng gia.\n\ntiền hoàng gia hiện tại: ${state.royalCoins}`);
   refreshCastleInterior();
 }
 
@@ -472,8 +472,8 @@ export function handleExchangeSword() {
     return;
   }
   state.other.splice(swordIdx, 1);
-  addItem({ id: "Royal coin", name: "Royal coin", type: "royal_coin", count: 5 });
-  setStory(`Bạn nộp 1 Kiếm Tây, nhận được 5 Royal coin.\n\nRoyal coin hiện tại: ${state.royalCoins}`);
+  addItem({ id: "royal_coin", name: "Tiền hoàng gia", type: "royal_coin", count: 5 });
+  setStory(`Bạn nộp 1 Kiếm Tây, nhận được 5 tiền hoàng gia.\n\ntiền hoàng gia hiện tại: ${state.royalCoins}`);
   refreshCastleInterior();
 }
 
@@ -481,9 +481,9 @@ export function handleRoyalShop() {
   const state = getState();
   let shopList = "Cửa hàng tạp hóa hoàng hậu\n\n";
   ROYAL_SHOP_ITEMS.forEach((item, idx) => {
-    shopList += `  ${idx + 1}. ${item.name} — ${item.price} Royal coin\n`;
+    shopList += `  ${idx + 1}. ${item.name} — ${item.price} tiền hoàng gia\n`;
   });
-  shopList += `\nRoyal coin hiện tại: ${state.royalCoins}`;
+  shopList += `\ntiền hoàng gia hiện tại: ${state.royalCoins}`;
   setStory(shopList);
   setPhase("castle_interior");
   const opts = ROYAL_SHOP_ITEMS.map(item => ({
@@ -502,7 +502,7 @@ export function handleRoyalShopBuy(itemId) {
     return;
   }
   if (state.royalCoins < shopItem.price) {
-    setStory(`Royal coin của bạn không đủ.Cần ${shopItem.price} Royal coin, hiện tại chỉ có ${state.royalCoins}.`);
+    setStory(`tiền hoàng gia của bạn không đủ.Cần ${shopItem.price} tiền hoàng gia, hiện tại chỉ có ${state.royalCoins}.`);
     refreshCastleInterior();
     return;
   }
@@ -527,12 +527,12 @@ export function handleRoyalShopBuy(itemId) {
   if (itemToAdd) {
     const added = addItem(itemToAdd);
     if (!added) {
-      addItem({ id: "Royal coin", name: "Royal coin", type: "royal_coin", count: shopItem.price });
-      setStory("Balo của bạn đã đầy, không thể mua vật phẩm này.Royal coin đã được hoàn lại.");
+      addItem({ id: "royal_coin", name: "Tiền hoàng gia", type: "royal_coin", count: shopItem.price });
+      setStory("Balo của bạn đã đầy, không thể mua vật phẩm này.tiền hoàng gia đã được hoàn lại.");
       refreshCastleInterior();
       return;
     }
   }
-  setStory(`Bạn đã tiêu ${shopItem.price} Royal coin, mua được[${shopItem.name}].\n\nRoyal coin hiện tại: ${state.royalCoins}`);
+  setStory(`Bạn đã tiêu ${shopItem.price} tiền hoàng gia, mua được[${shopItem.name}].\n\ntiền hoàng gia hiện tại: ${state.royalCoins}`);
   refreshCastleInterior();
 }

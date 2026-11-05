@@ -323,7 +323,7 @@ Then, the seventh step—**he goes to the underground subway tunnel to wait for 
 
 **Ending "Being Used as a Gun"**: Old Ma shoots you in the chest in the tunnel. "Shadow, Ma San, the king, Old Zhao, Dr. Chen... you've carried too many lives. Every one of their deaths is recorded in my ledger. I'm just... enforcing justice on behalf of heaven."
 
-**This is the most exquisite narrative trap in the entire game.** You thought you were the protagonist, a hero讨伐 evil; Old Ma made you think he was a mentor of justice. But in the end you'll find—you're just a bullet in his gun. He counted you into the "cleaning list" from the very beginning.
+**This is the most exquisite narrative trap in the entire game.** You thought you were the protagonist, a hero crusading against evil; Old Ma made you think he was a mentor of justice. But in the end you'll find—you're just a bullet in his gun. He counted you into the "cleaning list" from the very beginning.
 
 And how many lives does Old Ma's own ledger carry? Who will settle his score?
 
@@ -392,7 +392,7 @@ The name on her chest badge—Luluwei—is one of the few zombies with a name in
 **Identity**: Mechanic at the abandoned gas station in the suburbs, technician before the apocalypse.
 **Personality**: Pragmatic, enthusiastic, cherishes everything that can still be repaired.
 
-**Interpretation**: Wang Tiezhu is the spokesperson for "technical democratization." A large wrench or iron pipe can be exchanged for ammunition, food, and water. 5 cigarettes for 1 gasoline. He is a pragmatist completely游离于 the power structure—doesn't care who is ruling, only cares about "what was fixed today."
+**Interpretation**: Wang Tiezhu is the spokesperson for "technical democratization." A large wrench or iron pipe can be exchanged for ammunition, food, and water. 5 cigarettes for 1 gasoline. He is a pragmatist completely detached from the power structure—doesn't care who is ruling, only cares about "what was fixed today."
 
 ---
 
@@ -474,7 +474,7 @@ The answer is in the roar of the off-road vehicle's engine, in her saying "Befor
 
 This side arc is the most "fantasy" part of the game. It's completely different from the main zombie narrative—it explores: **The energy of the apocalypse not only destroyed human civilization, but may also awaken older existences than humans.**
 
-The injured mermaid, the giant sea corpse in the deep sea, scales that grow with electricity—these elements remind people of Lovecraftian ocean horror, but the narrative is more偏向 redemption like *The Little Mermaid*. The mermaid's return is not power, but gratitude—"I will remember you—people who are willing to help a mermaid in this cursed world."
+The injured mermaid, the giant sea corpse in the deep sea, scales that grow with electricity—these elements remind people of Lovecraftian ocean horror, but the narrative is more leaning towards redemption like *The Little Mermaid*. The mermaid's return is not power, but gratitude—"I will remember you—people who are willing to help a mermaid in this cursed world."
 
 Old Wolf's motivation for guarding the warehouse has always been a mystery. How did he find the mermaid? Why does he know the secret of the scales? The game hasn't answered these questions yet.
 
@@ -510,7 +510,7 @@ The narrative rhythm is like picking up a water-soaked diary from the ruins, tur
 
 She scatters rye in front of the tombstone, strokes every crop in the experimental field—this is not farming, this is fighting death in the oldest way. The land buries the dead, the land grows food, the food feeds the living. This is the most fundamental life cycle in the apocalypse.
 
-Her secret flower field—in the valley behind the outpost, sunflowers, lavender, and daisies stubbornly growing in the gaps of the ruins—is the most beautiful scene in the entire game. Not because the flowers are好看, but because the existence of this flower field itself is a declaration: **In the ugliest corner of the world, there are still people choosing to guard beauty.**
+Her secret flower field—in the valley behind the outpost, sunflowers, lavender, and daisies stubbornly growing in the gaps of the ruins—is the most beautiful scene in the entire game. Not because the flowers are pretty, but because the existence of this flower field itself is a declaration: **In the ugliest corner of the world, there are still people choosing to guard beauty.**
 
 The Agricultural Master Badge left by her mentor, she hands to you. This is a trust so heavy it's almost hard to take—not "help me guard," but "now it's your turn to remember."
 
@@ -761,7 +761,7 @@ These five loves exist in parallel in the same apocalypse. They have no right or
 
 ### 5.5 Memory and Forgetting
 
-This is the most obscure but also the most贯穿 theme in the game.
+This is the most obscure but also the most pervasive theme in the game.
 
 - Mu Miaomiao uses seeds to fight forgetting—"Look, Mom and Dad, I've already grown it."
 - The leader uses three years of unsent letters to fight forgetting.
@@ -777,11 +777,11 @@ The game finally gives the answer in ending nine: Mu Miaomiao's experimental fie
 
 ## 6. Unresolved Foreshadows (Waiting for Sequel)
 
-Developer's note: "The unresolved foreshadows will have to wait for my sequel."—below is a整理 and speculation of the明显 unresolved foreshadows in the game.
+Developer's note: "The unresolved foreshadows will have to wait for my sequel."—below is a compilation and speculation of the apparent unresolved foreshadows in the game.
 
 ### 6.1 The Mystery of the Virus Origin
 
-Old Ma says Dr. Chen "is the source of the virus spread." No other NPC can confirm or deny this. Dr. Chen himself never正面回答 this question. When he boards the rocket and leaves, he takes the secret with him.
+Old Ma says Dr. Chen "is the source of the virus spread." No other NPC can confirm or deny this. Dr. Chen himself never directly answers this question. When he boards the rocket and leaves, he takes the secret with him.
 
 **Speculation**: The virus is either a product of Dr. Chen's research institute (a leak incident), or a byproduct of humans trying to create "super soldiers" in biochemical experiments. Zombie gel is collected by multiple forces for research, which hints that there may be deeper military or commercial interests behind the virus.
 
@@ -811,7 +811,7 @@ In ending two, the 68-slot dimensional storage backpack that appears after survi
 
 Old Ma proclaims himself "enforcing justice on behalf of heaven," but what is his own role? He calls himself "the accountant on the ledger," but he has all the information about the old world's dark forces—didn't he participate?
 
-**Speculation**: Old Ma may have been a member of the dark forces from the beginning (accountant), but for some reason (unfair division of spoils? Abandoned?)转而清算 all his accomplices. His revenge is not justice, but another form of power struggle.
+**Speculation**: Old Ma may have been a member of the dark forces from the beginning (accountant), but for some reason (unfair division of spoils? Abandoned?)turned to purge all his accomplices. His revenge is not justice, but another form of power struggle.
 
 ### 6.7 Forces Beyond the Castle and Outpost
 
@@ -837,7 +837,7 @@ Ending two only says "in the distance, the voices of other survivors faintly cam
 
 *Zombie World* is not a game about zombies, it's a game about **people**.
 
-Zombies are just the backdrop. The real story happens in those dialogues in the ruins, in that trust exchanged with cigarettes, in that感情 torn apart and sewn back together by an unsent letter.
+Zombies are just the backdrop. The real story happens in those dialogues in the ruins, in that trust exchanged with cigarettes, in that affection torn apart and sewn back together by an unsent letter.
 
 It raises questions but doesn't give answers—can power not corrupt? Can love not possess? Can order not be violent? Can justice not become another excuse for killing?
 

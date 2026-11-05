@@ -6,11 +6,13 @@
    ============================================================ */
   
 import { TIME_PHASES, MELEE_WEAPONS, FOODS, DRINKS, MEDICINES, BACKPACK_TYPES, AFFINITY_THRESHOLDS, AFFINITY_MAX, GAME_CONSTANTS, DEFAULT_ITEM_IDS, GAME_INTRO, SEEDS, AMMO } from './config.js';
+import { DEFAULT_APPEARANCE } from './data/player-appearance.js';
 
 // ---------- Trạng thái ban đầu ----------
 
 const INITIAL_STATE = {
   name: "",
+  playerAppearance: { ...DEFAULT_APPEARANCE },
   day: 1,
   phaseIndex: 0,
   location: "Lều Người Sống Sót",
@@ -26,7 +28,7 @@ const INITIAL_STATE = {
   meleeWeapon: { ...MELEE_WEAPONS.find(w => w.id === DEFAULT_ITEM_IDS.melee), currentDurability: MELEE_WEAPONS.find(w => w.id === DEFAULT_ITEM_IDS.melee).durability },
   rangedWeapon: null,
   ammo: [],
-  backpack: { ...BACKPACK_TYPES.tui },
+  backpack: { ...BACKPACK_TYPES.tui_xach },
   food: [
     { ...FOODS.find(f => f.id === DEFAULT_ITEM_IDS.food), count: 2 }
   ],
@@ -227,6 +229,18 @@ export function resetState() {
 /** Đặt tên nhân vật người chơi */
 export function setName(name) {
   gameState.name = name;
+}
+
+/** Lấy thông tin ngoại hình nhân vật */
+export function getPlayerAppearance() {
+  return gameState.playerAppearance || { ...DEFAULT_APPEARANCE };
+}
+
+/** Đặt thông tin ngoại hình nhân vật */
+export function setPlayerAppearance(appearance) {
+  if (appearance) {
+    gameState.playerAppearance = { ...appearance };
+  }
 }
 
 // ---------- Thuộc tính sinh tồn (thời gian/đói/khát) ----------
@@ -875,6 +889,9 @@ export function removeGasoline(count) {
  * @param {Object} state - Đối tượng trạng thái trò chơi
  */
 export function normalizeState(state) {
+  if (!state.playerAppearance) {
+    state.playerAppearance = { ...DEFAULT_APPEARANCE };
+  }
   if (state.meleeWeapon && state.meleeWeapon.currentDurability == null) {
     if (state.meleeWeapon.durability == null || state.meleeWeapon.durability === Infinity) {
       state.meleeWeapon.durability = Infinity;
@@ -960,7 +977,7 @@ export function normalizeState(state) {
   if (state.npcAffinity && state.npcAffinity.nurseZombie === undefined) state.npcAffinity.nurseZombie = 0;
   if (state.crashTurns === undefined) state.crashTurns = 0;
   if (state.lastBegDay === undefined) state.lastBegDay = 0;
-  if (!state.backpack) state.backpack = { ...BACKPACK_TYPES.tui };
+  if (!state.backpack) state.backpack = { ...BACKPACK_TYPES.tui_xach };
   if (!Array.isArray(state.food)) state.food = [{ ...FOODS.find(f => f.id === DEFAULT_ITEM_IDS.food) }];
   if (!Array.isArray(state.drinks)) state.drinks = [{ ...DRINKS.find(d => d.id === DEFAULT_ITEM_IDS.drink) }];
   if (!Array.isArray(state.medicine)) state.medicine = [];

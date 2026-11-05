@@ -571,7 +571,7 @@ After catching fish on the island, come here to put them in:
 
 **Requirement:** Lightning Scale ×5
 
-**Tip:** Game will提示 you to go to mall electric fish tank
+**Tip:** Game will suggest you to go to mall electric fish tank
 
 **Reward:** Old Wolf Affection +10, unlock Quest 2
 

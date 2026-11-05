@@ -846,7 +846,7 @@ function handleNpcCombat(npc, combatMode = "melee") {
       state.other.push({ ...SPECIAL_ITEMS.silence_badge });
       combatLog.push({ round: "Chiến thắng", text: "Bạn đã đánh bại kẻ thống trị thực sự của tổ zombie! Thân thể nó đổ sập, cả tổ zombie đều rung chuyển. Bạn sống sót qua trận chiến chưa từng có này, đây sẽ là khoảnh khắc đáng nhớ sau mạt thế." });
       combatLog.push({ round: "Chiến thắng", text: "Bạn đã đánh bại Vua Zombie Tịch Diệt! Trong tàn tích của nó, bạn tìm thấy một chiếc huy chương khắc chữ cổ — [Huy chương Tịch Diệt]. Đây là biểu tượng của vinh dự." });
-    } else if (npc.name === "Ngân Hàng Hàng Trưởng") {
+    } else if (npc.name === "Trưởng Ngân Hàng") {
       state.castleDebt = null;
       state.castleDebtTriggered = false;
       state.bankerKilled = true;
@@ -879,9 +879,9 @@ function handleNpcCombat(npc, combatMode = "melee") {
         showExploreOptionsState();
       }
       return;
-    } else if (npc.name === "Lão Bin Lão Triệu") {
+    } else if (npc.name === "Lão Binh Lão Triệu") {
       state.zhaoKilled = true;
-      state.stats.bossesDefeated.push("Lão Bin Lão Triệu");
+      state.stats.bossesDefeated.push("Lão Binh Lão Triệu");
       combatLog.push({ round: "Chiến thắng", text: "Lão Triệu cuối cùng cũng ngã xuống. Khẩu súng trong tay ông ấy lăn sang một bên, mắt vẫn mở, nhìn về bầu trời xám xịt. Có lẽ ông ấy cuối cùng cũng được giải thoát." });
       advanceTime(1);
       updateStatusEffects();

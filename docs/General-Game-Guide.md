@@ -1,403 +1,400 @@
-# 🧟 Doomsday Survival Manual - Complete Game Guide
+# 🧟 Hướng dẫn trò chơi sinh tồn ngày tận thế - Toàn bộ
 
-> This guide is written based on actual in-game mechanics and covers all stages from the beginning to the end.
-> It is recommended for new players to read in the "Quick Start" order, while veteran players can directly check the corresponding chapters.
-
-***
-
-## Table of Contents
-
-- [1. Quick Overview of Basic Mechanics
-- [2. Quick Start: Survival Worker Process
-- [3. Complete Guide: From Recruit to Veteran
-  - [Stage 1: Survival at the Beginning (1~5 Days)
-  - [Stage 2: Accumulation Period (5~15 Days)
-  - [Stage 3: Companion Recruitment (15~30 Days)
-  - [Stage 4: Advanced Armament (30+ Days)
-  - [Stage 5: Endgame Challenge
-- [4. Complete Map Explanation
-- [5. Complete NPC List
-- [6. Item Encyclopedia
-- [7. Advanced Tips
-- [8. Weather System
-- [9. Base Construction
-- [10. Frequently Asked Questions
+> Hướng dẫn này được viết dựa trên cơ chế trò chơi thực tế và bao gồm tất cả các giai đoạn từ đầu đến cuối.
+> Đối với người mới, khuyên đọc theo thứ tự "Khởi động nhanh", còn người chơi cũ có thể tra cứu trực tiếp các mục tương ứng.
 
 ***
 
-## 1. Quick Overview of Basic Mechanics
+## Mục lục
 
-### Time System
+- [1. Tổng quan cơ chế cơ bản]
+- [2. Khởi động nhanh: quy trình làm việc sinh tồn]
+- [3. Hướng dẫn hoàn chỉnh: từ người mới đến cao thủ
+  - [Giai đoạn 1: Sinh tồn đầu kỳ (ngày 1~5)]
+  - [Giai đoạn 2: Giai đoạn tích lũy (ngày 5~15)]
+  - [Giai đoạn 3: Chiêu mộ đồng minh (ngày 15~30)]
+  - [Giai đoạn 4: Nâng cấp vũ khí (ngày 30+)]
+  - [Giai đoạn 5: Thách thức cuối kỳ]
+- [4. Giải thích toàn bộ bản đồ]
+- [5. Danh sách toàn bộ NPC]
+- [6. Bách khoa toàn thư vật phẩm]
+- [7. Mẹo nâng cao]
+- [8. Hệ thống thời tiết]
+- [9. Xây dựng căn cứ]
+- [10. Câu hỏi thường gặp]
 
-One day = **8 turns** (midnight → morning → forenoon → noon → afternoon → evening → night → late night)
+***
 
-### Core Attributes
+## 1. Tổng quan cơ chế cơ bản
 
-| Attribute | Description | Zero/Upper Limit Penalty
+### Hệ thống thời gian
+
+Một ngày = **8 lượt** (nửa đêm → sáng sớm → buổi sáng → trưa → buổi chiều → chiều tối → buổi tối → đêm khuya)
+
+### Chỉ số cốt lõi
+
+| Chỉ số | Mô tả | Phạt khi xuống 0 / đạt tối đa |
 |:-|:-|:-
-| ❤️ Health (HP) | Upper limit 240 | Drops to 0 = Death (Ending 1)
-| 🍖 Hunger | -4 per turn | Drops to 0 then -10 HP per turn
-| 💧 Hydration | -4 per turn | Drops to 0 then -10 HP per turn
-| 🦠 Infection | +2 when hit by zombie | Reaches 100 = Death (Ending 1)
-| 💪 Breakdown | Auto +20 every 16 awake turns | ≥50 shows "breakdown"; ≥100 can't fight/eat/drink/sleep
-| 🧠 Sanity | Upper limit 100, consumed when exploring | Too low affects combat performance (50% chance of halved damage)
+| ❤️ Sinh mệnh (HP) | Giới hạn tối đa 240 | Xuống 0 = Chết (kết thúc 1)
+| 🍖 Độ no | -4 mỗi lượt | Xuống 0 rồi mỗi lượt trừ -10 HP
+| 💧 Độ nước | -4 mỗi lượt | Xuống 0 rồi mỗi lượt trừ -10 HP
+| 🦠 Nhiễm trùng | +2 khi bị zombie tấn công | Đạt 100 = Chết (kết thúc 1)
+| 💪 Mệt mỏi | Tự động +20 mỗi 16 lượt không nghỉ | ≥50 hiển thị "mệt mỏi"; ≥100 không thể chiến đấu/ăn uống/ngủ
+| 🧠 Lý trí | Giới hạn tối đa 100, tiêu hao khi khám phá | Quá thấp ảnh hưởng chiến đấu (50% tỷ lệ sát thương giảm nửa)
 
-### Combat Parameters
+### Tham số chiến đấu
 
-| Parameter | Value
+| Tham số | Giá trị |
 |:-|:-
-| Escape success rate | 25%
-| Ranged dodge rate | 60% (dodge zombie attacks in ranged combat mode)
-| Critical multiplier | 2×
-| Liu Ruyan's coordinated attack | 30% chance, deals 20 extra damage
-| Luluwei's post-battle healing | Auto +20 HP after winning a battle
-| Infection (when hit) | +2 / hit
+| Tỷ lệ chạy trốn thành công | 25%
+| Tỷ lệ né tầm xa | 60% (tránh tấn công zombie trong chiến đấu tầm xa)
+| Tỷ số chí mạng | ×2
+| Hỗ trợ chiến đấu của Liu Ruyan | 30% tỷ lệ, gây 20 sát thương bổ sung
+| Hồi máu sau chiến của Rutile | Tự động hồi +20 HP sau khi chiến thắng một trận
+| Nhiễm trùng (khi bị đánh) | +2 / lần
 
-### Sleep
+### Ngủ
 
-- Consumes **3 turns**
-- Restores HP **+20~40**, Sanity **+20**
+- Tiêu hao **3 lượt**
+- Khôi phục sinh mệnh **+20~40**, lý trí **+20**
 - Reduces Breakdown **-10~25**
-- Base level bonus: +0 / +5 / +10 / +15 / +20 HP
+### Người mới phải biết
 
-### New Players Must Know
-
-- **Dawn Outpost (no enemies) allows infinite survival — sleep, eat, drink, work here
-- **Dawn Outpost work** only consumes 6 hunger + 6 hydration + 3 breakdown, much cheaper than Castle work
-- **Granary can pick fruits every 3 days**, farm has abandoned vegetable fields
-- **Watchtower climb can reduce breakdown**, encounter rate only 1%
-- **Riverside port viewing scenery can also reduce breakdown
-- **Acid rain can't go out**, plan ahead
+- **Trận địa Đợi Sáng (không có quái vật) cho phép sinh tồn vĩnh viễn — ngủ, ăn, uống, làm việc ở đây**
+- **Làm việc tại Trận địa Đợi Sáng chỉ tiêu hao 6 độ no + 6 độ nước + 3 mệt mỏi, rẻ hơn nhiều so với Lâu đài**
+- **Nhà kho có thể hái trái cây mỗi 3 ngày**, vườn thí nghiệm có cây rau bỏ hoang
+- **Leo tháp canh có thể giảm mệt mỏi**, tỷ lệ gặp quái vật chỉ 1%
+- **Ngắm cảnh bến cổng sông cũng có thể giảm mệt mỏi**
+- **Mưa axit không thể ra ngoài**, hãy lên kế hoạch trước
 
 ***
 
-## 2. Quick Start: Survival Worker Process
+## 2. Khởi động nhanh: quy trình làm việc sinh tồn
 
-> Suitable for players who don't want to take risks and want to develop stably
-> Difficulty: ★☆☆☆☆ (Basically won't die)
+> Thích hợp cho người chơi không muốn lấy rủi ro, muốn phát triển ổn định
+> Độ khó: ★☆☆☆☆ (Cơ bản là không chết)
 
-### Core Cycle (One Day 8 Turns)
+### Vòng lặp cốt lõi (Một ngày 8 lượt)
 
 ```
-Work (1 turn) → Work (2 turns) → Work (3 turns) → Work (4 turns)
-→ Beg/conversation (5 turns) → Eat and drink (6 turns) → Sleep (7-8 turns)
+Làm việc (lượt 1) → Làm việc (lượt 2) → Làm việc (lượt 3) → Làm việc (lượt 4)
+→ Đi-buổi-tối-hôm-nay (lượt 5) → Ăn uống (lượt 6) → Ngủ (lượt 7-8)
 ```
 
-### Consumption and Income Calculation
+### Tính toán tiêu hao và thu nhập
 
-| Item | Consumption | Replenishment Method
+| Mục tiêu | Tiêu hao | Cách bổ sung |
 |:-|:-|:-
-| Breakdown +40 (work) | Sleep recovery | Sleep once -10~25 breakdown
-| Hydration -18 (work) | Drink | Beg/outpost search/warehouse
-| Hunger -18 (work) | Eat | Granary 3-day fruit picking, outpost food
+| Mệt mỏi +40 (làm việc) | Ngủ ngơi | Ngủ một lần giảm -10~25 mệt mỏi
+| Độ nước -18 (làm việc) | Uống nước | Đi-buổi-tối-hôm-nay/trận địa tìm/Search kho
+| Độ no -18 (làm việc) | Ăn | Nhà kho 3 ngày hái trái cây/Thức ăn trận địa
 
-**Conclusion:** Work-earned materials are much higher than consumption. As long as you don't go out to fight, **you'll never die**.
+**Kết luận:** Vật tư kiếm được từ làm việc nhiều hơn tiêu hao. Như là không ra ngoài đánh, **bạn sẽ không bao giờ chết**.
 
-### Work Route Map
+### Bản đồ làm việc
 
-1. Every morning first **beg** (talking to outpost NPC has chance to give fruit)
-2. **Work** (note: can't work at night)
-3. Use earned materials **to eat and drink**
-4. **Sleep** to skip night, restore breakdown and health
-5. Every 3 days go to **granary to pick fruits**
-6. Save up enough strength before exploring
+1. Mỗi buổi sáng đầu tiên **đi-buổi-tối-hôm-nay** (đoán NPC tại Trận địa Đợi Sáng có cơ hội cho trái cây)
+2. **Làm việc** (lưu ý: không thể làm việc vào ban đêm)
+3. Sử dụng vật tư thu được **để ăn và uống**
+4. **Ngủ** để bỏ qua đêm, khôi phục mệt mỏi và sinh mệnh
+5. Mỗi 3 ngày đến **Nhà kho hái trái cây**
+6. Tích lũy đủ sức trước khi khám phá
 
 ***
 
 ## 3. Complete Guide: From Recruit to Veteran
 
-### Stage 1: Survival at the Beginning (1~5 Days)
+### Giai đoạn 1: Sinh tồn đầu kỳ (ngày 1~5 days)
 
-**Goal:** Survive + get basic weapon
+**Mục tiêu:** Sinh tồn + nhận vũ khí cơ bản
 
-#### Day 1
+#### Ngày 1
 
-1. ✅ **Go to Dawn Outpost to talk to Miss V** to get the first meeting task (1 food + 1 drink)
-2. ✅ Complete task to get **small dagger** — your first decent weapon
-3. ✅ Go to **rural abandoned granary** (encounter rate only 5%) to search for food and weapons
-4. ✅ Pay attention to health, go home to sleep if uncomfortable
+1. ✅ **Đi Trận địa Đợi Sáng để đối thoại với Cô V** để nhận nhiệm vụ gặp đầu (1 thực phẩm + 1 đồ uống)
+2. ✅ Hoàn thành nhiệm vụ để nhận **tiểu đao** — vũ khí đầu tiên của bạn
+3. ✅ Đi đến **nhà kho nông thôn bỏ hoang** (tỷ lệ gặp quái vật chỉ 5%) để tìm kiếm thực phẩm và vũ khí
+4. ✅ Lưu ý sức khỏe, về nhà nếu không ổn
 
-#### Days 2~5
+#### Ngày 2~5
 
-- 🔄 Daily cycle: Work → Eat → Sleep
-- 🏪 Every 3 days go to granary **pick fruits** (stable food source)
-- 🎒 Go to **riverside campsite** (encounter rate 12%) to search for backpack, goal is **28-slot hiking backpack or better
-- ⚔️ Granary may drop melee weapons, replace small dagger if you get **shovel / crowbar**
+- 🔄 Mỗi ngày vòng lặp: Làm việc → Ăn uống → Ngủ
+- 🏪 Mỗi 3 ngày đến **Nhà kho hái trái cây** (nguồn thực phẩm ổn định)
+- 🎒 Đi đến **bến cổng sông** (tỷ lệ gặp quái vật 12%) để tìm kiếm balo, mục tiêu là **balo 68 ô hoặc tốt hơn**
+- ⚔️ Nhà kho có thể cho vũ khí cận chiến, hãy thay thế tiểu đao nếu tìm thấy **lát sắt / cọc đè**
 
-#### Weapon Transition Route
+#### Vòng lo vũ khí
 
 ```
-Fists (18) → Small dagger (40) → Shovel (38)/Crowbar (48)/Fire axe (55)
-→ Brass knuckles knife (67)/Machete (70) → Rapier (79)/Dragon sword (88)/Long lance (89)
-→ Katana (99)/Tanghengdao (100)/Chainsaw (105) → Universe sword (111)/Fearless blade (115)
-→ Sea song fish fork (128) / Royal silver sword (120)
+Đấm đòn (18) → Tiểu đao (40) → Lát sắt (38)/Cọc đè (48)/Rìu cứu hỏa (55)
+→ Chỉ hổ đao (67)/Đao ngang lớn (70) → Kiếm Tây (79)/Kiếm Long Thảo (88)/Cơ tenants dài (89)
+→ Kiếm samurai (99)/Đao ngang Đường (100)/Máy cắt cây (105) → Kiếm Vũ Trụ (111)/Kiếm không sợ (115)
+→ Công Ngư Sơ (128) / Kiếm bạc hoàng gia (120)
 ```
 
 ***
 
-### Stage 2: Accumulation Period (5~15 Days)
+### Giai đoạn 2: Giai đoạn tích lũy (ngày 5~15)
 
-**Goal:** Save materials, upgrade equipment, prepare to rescue companions
+**Mục tiêu:** Tích lũy vật tư, nâng cấp vũ khí, chuẩn bị cứu đồng minh
 
-#### Recommended Map Order
+#### Bản đồ đề xuất khám phá
 
-| Map | Encounter Rate | Main Output
+| Bản đồ | Tỷ lệ gặp | Vật phẩm chính |
 |:-|:-:|:-
-| Rural abandoned granary | 2% | Food + weapons
-| Mountain farmhouse village | 3% | Food + fruits + seeds
-| Riverside campsite | 5% | Backpack + medicine
-| National highway service area | 10% | Food + ammo + Ma San task
-| University campus | 12% | Food + backpack + Liu Ruyan task line
-| Suburban abandoned gas station | 15% | Ammo + weapons + Wang Tiezhu
+| Nhà kho nông thôn bỏ hoang | 2% | Thực phẩm + vũ khí
+| Làng nông thôn núi sâu | 3% | Thực phẩm + trái cây + hạt giống
+| Khu cắm trại bên sông | 5% | Balo + thuốc
+| Khu dịch vụ quốc lộ | 10% | Thực phẩm + dân dược + nhiệm vụ Mã Tam
+| Trường đại học | 12% | Thực phẩm + balo + nhiệm vụ Liu Ruyan |
+| Trạm xăng ngoại thành | 15% | Dân dược + vũ khí + Vương Thiết Trụ |
 
-#### Key Actions
+#### Hành động chính
 
-1. 🎒 **Find big backpack**: Campsite search corpse, watchtower (drops 64-slot super heavy backpack)
-2. ⚔️ **Farm weapons**: Gas station, industrial park — **Industrial park is a holy place for farming melee weapons!**
-3. 💊 **Stock up medicine**: Focus on stocking **anti-infection serum** and **tourniquet** (needed in large quantities for later tasks)
-4. 🚬 **Save cigarettes**: Cigarettes are hard currency! Lilith recycles melee weapons for cigarettes, black market merchant uses cigarettes to buy everything
-5. 🎣 **Go to island fishing**: After getting Castle identity/pass, go to island fishing, epic/legendary fish can be exchanged for scales at mall's electric glass tank
+1. 🎒 **Tìm balo lớn**: Khu cắm trại tìm thi thể, tháp canh (rơi balo 68 ô siêu lớn)
+2. ⚔️ **Đánh trả vũ khí**: Trạm xăng, khu công nghiệp — **Khu công nghiệp là nơi thiêng liêng để thu hồi vũ khí cận chiến!**
+3. 💊 **Tích lũy thuốc**: Hãy tích lũy **thuốc kháng nhiễm** và **dây bó máu** (cần nhiều cho các nhiệm vụ sau)
+4. 🚬 **Tích lũy thuốc lá**: Thuốc lá là tiền tệ quý giá! Lili thu hồi vũ khí cận thế đổi thuốc lá, thương nhân chợ đen dùng thuốc lá để mua mọi thứ
+5. 🎣 **Đi đảo câu cá**: Sau khi có thân phân lâu đài / thẻ thông hành, hãy đi đảo câu cá, cá'ep/chuẩn dapat được đổi lấy vảy tại thùng kính rò điện của quán bar
 
-#### Can't Fight? What to Do?
+#### Không biết đánh? Làm gì?
 
-- Unhealthy health → **go home to sleep**, don't force it
-- High breakdown → **watchtower climb** (reduce breakdown) or **riverside port view scenery
-- Bring enough food and water before going out
+- Sức khỏe không ổn → **về nhà ngủ**, đừng cố gắng
+- Mệt mỏi cao → **leo tháp canh** (giảm mệt mỏi) hoặc **ngắm cảnh bến cổng sông**
+- Mang đủ thực phẩm và nước trước khi ra ngoài
 
 ***
 
-### Stage 3: Companion Recruitment (15~30 Days)
+### Giai đoạn 3: Chiêu mộ đồng minh (ngày 15~30)
 
-**Goal:** Rescue Liu Ruyan + recruit Luluwei within 30 days
+**Mục tiêu:** Cứu Liu Ruyan + chiêu mộ Rutile trong vòng 30 ngày
 
->- ⚠️ **Liu Ruyan has a time limit: She will completely turn into a zombie after 30 days, can't be rescued anymore!
+>- ⚠️ **Liu Ruyan có thời hạn: cô ấy sẽ biến thành zombie hoàn toàn sau 30 ngày, không thể cứu nữa!
 - 💡 After finding Liu Ruyan, survival notes will automatically add rescue countdown reminder
 
-#### Prerequisite: Get 60+ damage weapon
+#### Điều kiện tiên quyết: Nhận vũ khí 60+ độ sát thương
 
-- Go to **granary / gas station / industrial park** to farm weapons
-- Or do Miss V's tasks to get good weapons
+- Đi đến **nhà kho nông thôn / trạm xăng / khu công nghiệp** để đánh trả vũ khí
+- Hoặc làm nhiệm vụ của Cô V để nhận vũ khí tốt
 
-#### Rescue Liu Ruyan (Time Limited!)
+#### Cứu Liu Ruyan (Có thời hạn!)
 
 ```
-City comprehensive mall (encounter rate 35%)
-    → Find half-infected woman (Liu Ruyan)
-    → Need 3 anti-infection serums to rescue her
-    → Successfully rescued → trigger long plot → take home → get first companion
+Trận địa thương mại giữa thành phố (tỷ lệ gặp 35%)
+    → Tìm người phụ nữ nửa nhiễm (Liu Ruyan)
+    → Cần 3 huyết thanh kháng nhiễm để cứu cô ấy
+    → Cứu thành công → kích hoạt cốt truyện dài → mang về nhà → nhận đồng minh thứ nhất
 ```
 
-**Serum acquisition methods:**
+**Nhận huyết thanh:**
 
-| Method | Description
+| Phương thức | Mô tả |
 |:-|:-
-| 🏥 Suburban large hospital (encounter rate 50%) | 40% chance to drop medicine, farm as fast as possible
-| 🛒 Black market merchant | Random refresh, occasionally has serum
-| 💊 Search medium/hard maps | Police station, research institute, etc. will drop
+| 🏥 Bệnh viện ngoại thành (tỷ lệ gặp 50%) | 40% xác suất rơi thuốc, hãy nhanh tay làm
+| 🛒 Thương nhân chợ đen | Làm mới ngẫu nhiên, thỉnh thoảng có huyết thanh
+| 💊 Tìm kiếm bản đồ trung cấp / cao | Trạm cảnh sát, viện nghiên cứu, v.v. sẽ rơi
 
-**Hospital farming tips:**
-
-- Don't be greedy, fight once then go home to sleep, come back after waking up
-- Bring enough food and water
-- Go with 60+ damage weapon, otherwise can't beat military police zombie (160 HP / 36 damage)
+**Mẹo khám phá bệnh viện:**
+- Đừng tham lam, đánh một vòng rồi về nhà ngủ, thức dậy quay lại
+- Mang đủ thực phẩm và nước
+- Mang vũ khí 60+ sát thương, nếu không đánh không qua zombie quân cảnh (HP 120 / 36 sát thương)
 
 #### Liu Ruyan Task Line (Unlocked after Rescue)
 
-After rescuing Liu Ruyan, go to **university campus → an old classroom to start Liu Ruyan's exclusive task line, total 4 tasks, can finally trigger **ending 12 "Elope". See [Liu Ruyan University Task Line chapter for details.
+Sau khi cứu Liu Ruyan, hãy đi đến **trường đại học → một phòng học cũ để bắt đầu chuỗi nhiệm vụ liên kết Liu Ruyan, tổng cộng 4 nhiệm vụ, cuối cùng có thể kích hoạt **kết thúc 12 "Bỏ chạy cùng". Xem [nhiệm vụ liên kết trường đại học Liu Ruyan chi tiết].
 
-#### Recruit Luluwei (No Time Limit)
+#### Cứu Rutile (Không thời hạn)
 
 ```
-Suburban large hospital (encounter rate 50%)
-    → Find sane nurse zombie (Luluwei)
-    → Feed canned food (peach/beans/beef/military rations/sardines/tuna/saury/mackerel cans)
-    → Affinity reaches 150 → take home → get second companion
+Trận địa bệnh viện ngoại thành (tỷ lệ gặp 50%)
+    → Tìm y tá zombie tỉnh trí (Rutile)
+    → Cho ăn thực phẩm đóng hộp (đào vàng/đậu/bò/cá mòi/cá ngừ/cá thu/cá nuc)
+    → Hảo cảm đạt 150 → mang về nhà → nhận đồng minh thứ hai
 ```
 
-**Tips:** Cans can be farmed at granary, mall, farmhouse. Each feed +2~3 affinity, about 50~75 cans needed.
+**Mẹo:** Thực phẩm đóng hộp có thể thu hoạch ở nhà kho, siêu thị, nông thôn. Mỗi lần cho ăn +2~3 hảo cảm, khoảng 50~75 hộp cần thiết.
 
-#### Companion Roles
+#### Các vai trò đồng minh
 
-| Companion | Acquisition Condition | Daily Output / Combat Effect
+| Đồng minh | Điều kiện nhận | Sản phẩm hàng ngày / Hiệu lực chiến đấu |
 |:-:|:-|:-
-| 🌸 Liu Ruyan | 3 serums (30-day limit) | Daily 2 random items (food / drink / fruit / ammo)
-| 🏥 Luluwei | 150 affinity (no time limit) | Daily 1 medicine (bandage~epinephrine)
-| ⚔️ Liu Ruyan (combat) | Recruited | 30% chance coordinated attack in combat, deals 20 extra damage
-| 💉 Luluwei (post-battle) | Recruited | Auto heal +20 HP after winning battle
+| 🌸 Liu Ruyan | Cứu trong vòng 30 ngày | Mỗi ngày 2 vật phẩm ngẫu nhiên (thực phẩm / đồ uống / trái cây / dân dược)
+| 🏥 Rutile | Hảo cảm 150 (không thời hạn) | Mỗi ngày 1 thuốc (băng dính ~ Epinephrine)
+| ⚔️ Liu Ruyan (chiến đấu) | Đã chiêu mộ | 30% suất hỗ trợ tấn công trong chiến đấu, gây 20 sát thương
+| 💉 Rutile (sau chiến đấu) | Đã chiêu mộ | Tự động hồi +20 HP sau khi chiến thắng
 
 ***
 
-### Stage 4: Advanced Armament (30+ Days)
+### Giai đoạn 4: Nâng cấp vũ khí (ngày 30+)
 
-**Goal:** Get top weapons, challenge hard maps
+**Mục tiêu:** Lấy vũ khí khuyến khích, thách thức bản đồ khó
 
-#### Priority: Do Miss V's Task Line
+#### Ưu tiên: Làm nhiệm vụ của Cô V
 
-| Task | Affinity Requirement | Required Items | Reward | Recommendation
+| Nhiệm vụ | Yêu cầu hảo cảm | Vật phẩm cần | Phần thưởng | Mức độ khuyến khích |
 |:-:|:-:|:-|:-|:-:
-| v1 First meeting | 0 | 1 food + 1 drink | **Small dagger** | ⭐⭐⭐
-| v2 Tourniquet training | 30 | **Tourniquet ×5** | **Brass knuckles knife (66 damage / 12% combo)** | ⭐⭐⭐
-| v3 Serum task | 60 | **Anti-infection serum ×8** | **Dragon sword (88 damage / 12% combo)** | ⭐⭐⭐⭐⭐
-| v4 Hard trial | 90 | Field medical kit ×8 | **P226 + 9mm ×50** | ⭐⭐⭐
-| v5 First aid supplies | 120 | Medical first aid kit ×6 + serum ×6 | **UZI + 9mm ×50** | ⭐⭐⭐⭐
-| v6 Ultimate trial | 150 | All 15 medicines ×2 each | **M4A1 + 5.56×45mm NATO ×50** | ⭐⭐⭐⭐⭐
+| v1 Gặp đầu | 0 | 1 thực phẩm + 1 đồ uống | **Tiểu đao** | ⭐⭐⭐
+| v2 Huấn luyện cầm máu | 30 | **Dây bó máu ×5** | **Chỉ hổ đao (66 sát thương / 12% liên kết)** | ⭐⭐⭐
+| v3 Nhiệm vụ huyết thanh | 60 | **Huyết thanh kháng nhiễm ×8** | **Kiếm Long Thảo (88 sát thương / 12% liên kết)** | ⭐⭐⭐⭐⭐
+| v4 Thử thách khó | 90 | Hộp y tế chiến địa ×8 | **P226 + 9mm ×50** | ⭐⭐⭐
+| v5 Vật tư cấp cứu | 120 | Gói cấp cứu y tế ×6 + huyết thanh ×6 | **UZI + 9mm ×50** | ⭐⭐⭐⭐
+| v6 Thử thách cuối cùng | 150 | Tất cả 15 loại thuốc ×2 mỗi loại | **M4A1 + 5.56×45mm NATO ×50** | ⭐⭐⭐⭐⭐
 
-**Note:** v3 (Dragon sword) is one of the melee graduation weapons, 88 damage + 12% combo rate, highly recommend prioritizing!
+**Lưu ý:** v3 (Kiếm Long Thảo) là vũ khí cận chiến tuyệt vời của giai đoạn hoàn thành, 88 sát thương + 12% tỷ lệ liên kết, rất khuyên nên làm trước!
 
-#### Quickly Farm Affinity
+#### Nâng cấp tình cảm nhanh
 
-- Can talk 4 times a day, +1 affinity each time
-- Gift: Food / drink +3, medicine +5, cigarette +2
-- Lilith special: Food +6, medicine +10
+- Trò chuyện 4 lần mỗi ngày, +1 hảo cảm mỗi lần
+- Tặng quà: Thực phẩm / đồ uống +3, thuốc +5, thuốc lá +2
+- Lili đặc biệt: Thực phẩm +6, thuốc +10
 
-#### Cigarette Acquisition Methods
+#### Cách thu thập thuốc lá
 
-| Method | Output
+| Phương pháp | Sản phẩm |
 |:-|:-
-| Lilith recycles melee weapons | 1 cigarette / weapon
-| Lilith recycles ranged weapons | 2 cigarettes / weapon
-| Search medium/hard maps | Small amount
-| Kill black market merchant | 2~5 cigarettes
-| Castle work | 1 cigarette / time (high consumption)
-| Castle audience (rank 5+) | 2 cigarettes / day
-| Lilith 150 affinity reward | 20 cigarettes (one-time)
+| Lili thu hồi vũ khí cận chiến | 1 thuốc lá / vũ khí
+| Lili thu hồi vũ khí tầm xa | 2 thuốc lá / vũ khí
+| Tìm kiếm bản đồ trung cấp / cao | Một ít
+| Đánh tên thương nhân chợ đen | 2~5 thuốc lá
+| Làm việc tại thành bảo | 1 thuốc lá / lần (tiêu hao lớn)
+| Thăm hỏi thành bảo (quý tộc cấp 5+) | 2 thuốc lá / ngày
+| Thưởng hảo cảm 150 của Lili | 20 thuốc lá (một lần)
 
-#### Important Cigarette Uses
+#### Cách sử dụng thuốc lá quan trọng
 
-| Use | Consumption | Effect
+| Sử dụng | Tiêu hao | Hiệu lực |
 |:-|:-:|:-
-| Black market merchant buys G17 | 10~15 cigarettes | First pistol
-| Black market merchant buys GP100 | 10~15 cigarettes | Powerful revolver
-| Black market merchant buys ammo | 1 cigarette / 3~6 rounds | Important ammo source
-| Black market merchant buys seeds | 1 cigarette / pack | Base planting
-| **Clear infection** (Lilith) | 10 cigarettes | Infection -50
-| **Repair gun** (Lilith) | 10 cigarettes | Gun integrity +50%
-| **Repair crossbow** (Lilith) | 5 cigarettes | Crossbow integrity +50%
-| **Apply for noble identity** | 25 cigarettes | Enter Castle interior
+| Thương nhân chợ đen mua P226 | 10~15 thuốc lá | Pistol đầu tiên
+| Thương nhân chợ đen mua GP100 | 10~15 thuốc lá | Pistol RetrievedStrong
+| Thương nhân chợ đen mua đạn | 1 thuốc lá / 3~6 viên | Nguồn dân dược quan trọng
+| Thương nhân chợ đen mua hạt giống | 1 thuốc lá / gói | Trồng trọt căn cứ
+| **Lili làm sạch nhiễm** | 10 thuốc lá | Giảm nhiễm -50
+| **Lili sửa súng** | 10 thuốc lá | Tăng độ nguyên vẹn vũ khí tầm xa +50%
+| **Lili sửa cung nỏ** | 5 thuốc lá | Tăng độ nguyên vẹn cung nỏ +50%
+| **Làm thẻ quý tộc** | 25 thuốc lá | Vào được nội thành thành bảo
 
 ***
 
-### Stage 5: Endgame Challenge
+### Giai đoạn 5: Thách thức cuối kỳ
 
-#### Boss Battle List
+#### Danh sách BOSS
 
-| Boss | Location | HP | Damage | Dodge | Special | Drop
+| Boss | Vị trí | HP | Sát thương | Lúc tránh | Đặc biệt | Phần thưởng |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-
-| 🔫 Ma San | Service area | 300 | 40~60 | 40% | Ranged | AK47 + 7.62×39mm ×30
-| 😈 Shadow | Warehouse mall | 400 | 50~80 | 50% | Ranged | GP100 + .357 Magnum ×20
-| 👑 Zombie King | Zombie nest | 420 | 115 | 25% | — | Silence badge
-| 💰 Bank manager | Doomsday Castle | 350 | 50~80 | 30% | — | Katana + debt cleared
-| 🪖 Outpost leader | Dawn Outpost | 400 | 110 | 25% | — | (Assassination task)
-| 🤖 Giant zombie puppet | Space base | 380 | 105 | 20% | — | (Rocket line prerequisite)
-| 🏈 Football zombie | University campus | 250 | 30~55 | 15% | — | Liu Ruyan task 2
-| 🏊 Diving zombie | Small island | 200 | 35~55 | 15% | Ranged | Yu Mo task 3
-| 🐙 Giant sea corpse | Riverside port | 600 | 80 | 8% | — | Mermaid legend ending
-| 👑 Castle King | Doomsday Castle | 450 | 100 | 20% | — | Old Ma task line
-| 🪖 Veteran Lao Zhao | Military checkpoint | 350 | 70~90 | 30% | Ranged | Old Ma task line
-| 🔬 Dr. Chen | Biochemical research institute | 300 | 50~70 | 35% | Ranged | Old Ma task line
+| 🔫 Ma Tam | Trạm dịch vụ quốc lộ | 300 | 40~60 | 40% | Tầm xa | AK47 + 7.62×39mm ×30
+| 😈 Hắc Ảnh | Siêu thị trung tâm | 400 | 50~80 | 50% | Tầm xa | GP100 + .357 Magnum ×20
+| 👑 Vua Zombie | Tổ zombie | 420 | 115 | 25% | — | Huy hiệu im lặng
+| 💰 Ngân hàng Hàng Trưởng | Lâu đài Tận thế | 350 | 50~80 | 30% | — | Kiếm Thương Phòng + nợ tiền gommé
+| 🪖 Thủ lĩnh Trận địa | Trận địa Đợi Sáng | 400 | 110 | 25% | — | (Nhiệm vụ ám sát)
+| 🤖 Cỗ Rối Khổng Lồ | Cơ sở Vũ Trụ | 380 | 105 | 20% | — | (Tiền đề nhiệm vụ tên lửa)
+| 🏈 Zombie Bóng Bầu Đục | Trường Đại học | 250 | 30~55 | 15% | — | Nhiệm vụ Liu Ruyan 2
+| 🏊 Zombie Lặn | Đảo Nhỏ | 200 | 35~55 | 15% | Tầm xa | Nhiệm vụ Yumo 3
+| 🐙 Hải Thú Khổng Lồ | Cảng Bến Sông | 600 | 80 | 8% | — | Kết thúc Người Cá Nhân
+| 👑 Vua Lâu Đài | Lâu đài Tận thế | 450 | 100 | 20% | — | Nhiệm vụ liên kết Lão Ma
+| 🪖 Lão Bin Lão Trạm | Trạm Kiểm Tra Quân Sự | 350 | 70~90 | 30% | Tầm xa | Nhiệm vụ liên kết Lão Ma
+| 🔬 Tiến sĩ Trần | Viện Nghiên Cứu Sinh Học | 300 | 50~70 | 35% | Tầm xa | Nhiệm vụ liên kết Lão Ma
 
-#### Boss Battle Tips
+#### Mẹo chiến đấu BOSS
 
-**Ma San (Service Area):**
-- Go with 70+ melee weapon or pistol
-- Bring medicine, his ranged first attack may directly cripple you
-- After winning, AK47 directly brings you into firearms era
+**Ma Tam (Trạm dịch vụ quốc lộ):**
+- Mang vũ khí cận chiến 70+ hoặc súng pistola
+- Mang đủ thuốc, hắn tấn công tầm xa đầu tiên có thể làm bạn bị thương nặng
+- Đánh thắng được AK47, trực tiếp đưa bạn vào thời kỳ vũ khí súng
 
-**Shadow (Warehouse Mall):**
-- Harder than Ma San! Recommend to go with Dragon sword or firearm
-- 50% dodge rate, ranged attack hit rate is very low
-- After winning, GP100 is a powerful revolver
+**Hắc Ảnh (Siêu thị trung tâm):**
+- Khó hơn Ma Tam! Khuyên mang Kiếm Long Thảo hoặc súng
+- Tỷ lệ né tránh 50%, tỉ lệ trúng của súng tầm xa rất thấp
+- Đánh thắng được GP100 là khẩu súng cỡ nòng lớn mạnh
 
-**Zombie King (Zombie Nest):**
-- **Game's strongest zombie enemy, bar none**
-- 115 damage, two hits can kill full-health player
-- Recommend bringing full field medical kits + full durability melee weapon + ranged weapon
-- Recommended equipment: M4A1 + sufficient 5.56 ammo + Universe sword / Chainsaw
-- After winning, get Silence badge, which is one of the key conditions to trigger "Become a new force" ending
+**Vua Zombie (Tổ zombie):**
+- **Quái vật zombie mạnh nhất trong game, không ai sánh được**
+- Sát thương 115, hai đòn có thể làm máu bạn đầy cùng xuống đất
+- Khuyên mang hộp y tế chiến địa đầy đủ + vũ khí cận chiến độ bền cao + vũ khí tầm xa
+- Vũ khí khuyên dùng: M4A1 + đủ đạn 5.56mm + Kiếm Vũ Trụ / Máy cắt cây
+- Đánh thắng được Huy hiệu Im lặng, là một trong những điều kiện chốt lệnh để kích hoạt kết thúc "Trở thành thế lực mới"
 
-**Bank Manager (Doomsday Castle):**
-- Only triggers battle if loan is overdue and not paid
-- 350 HP / 30% dodge, medium difficulty
-- After killing, debt cleared + get Katana (99 damage / epic)
+**Ngân hàng Hàng Trưởng (Lâu đài Tận thế):**
+- Chỉ kích hoạt chiến đấu nếu nợ vay quá hạn không trả
+- HP 350 / né tránh 30%, độ khó trung bình
+- Sau khi đánh thắng, nợ nần bị xóa + nhận được Kiếm Thương Phòng (sát thương 99 / epic)
 
-**Old Ma Task Line Bosses (Castle King/Lao Zhao/Dr. Chen):**
-- Located at Castle interior, military checkpoint, biochemical research institute respectively
-- Need to challenge in order, are step 4/5/6 of Old Ma's assassination task
-- After completing, go to subway tunnel to meet Old Ma to trigger ending 14
+**Các BOSS nhiệm vụ Lão Ma (Vua Lâu Đài/Lão Zhao/Tiến sĩ Trần):**
+- Vị trí: Nội thành Lâu đài / Trạm Kiểm Tra Quân Sự / Viện Nghiên Cứu Sinh Học
+- Cần đánh theo thứ tự, là bước 4/5/6 của nhiệm vụ ám sát Lão Ma
+- Sau khi hoàn thành, đi đến đường hầm métro gặp Lão Ma để kích hoạt kết thúc 14
 
-**Giant Sea Corpse (Riverside Port):**
-- Game's strongest boss, 600 HP, 80 damage
-- Only ranged combat! Need to equip Desert Eagle (Lao Wolf task 3 reward)
-- After winning, trigger ending 13 "Mermaid Legend"
+**Hải Thú Khổng Lồ (Cảng Bến Sông):**
+- Quái vật BOSS mạnh nhất trong trò chơi, HP 600, sát thương 80
+- Chỉ được chiến đấu tầm xa! Cần trang bị Deagle (nhiệm vụ Lão Ma 3)
+- Đánh thắng kích hoạt kết thúc 13 "Truyền thuyết cá nhân nhân"
 
-#### Research Institute Ultimate Trade: Dr. Chen
+#### Nhiệm vụ liên kết Tiến sĩ Chen: giao dịch cuối cùng tại viện nghiên cứu
 
 ```
-Biochemical research institute (encounter rate 58%)
-    → Hand in 30 anti-infection serums
-    → Get M700 sniper rifle (120 damage) + 7.62×51mm ×30
+Viện nghiên cứu sinh học (tỷ lệ gặp 58%)
+    → Nộp 30 huyết thanh kháng nhiễm
+    → Nhận M700 sniper rifle (sát thương 120) + 7.62×51mm ×30
 ```
 
-**M700 is one of the game's strongest obtainable ranged weapons**, second only to AWM (200 damage).
+**M700 là một trong những khẩu súng tầm xa mạnh nhất có thể thu hoạch trong game**, chỉ kém hơn AWM (200 sát thương).
 
-**Dr. Chen Rocket Task Line Prerequisites:** Need to first complete Dr. Chen's serum trade + defeat space base giant zombie puppet. 💡 If prerequisites are not met, game will show specific missing conditions in Dr. Chen's dialogue options.
+**Điều kiện tiên quyết chuỗi nhiệm vụ tên lửa của Tiến sĩ Chen:** Cần trước hết hoàn thành thương đổi huyết thanh của Tiến sĩ Chen + đánh bại Cỗ Rối Khổng Lồ tại cơ sở vũ trụ. Lưu ý: nếu điều kiện tiên quyết chưa thỏa mãn, trò chơi sẽ hiển thị các điều kiện còn thiếu trong đối thoại của Tiến sĩ Chen.
 
-#### Endgame Endings
+#### Kết thúc trò chơi
 
-See [Ending System] chapter below. After completing all main tasks, can trigger "Become a new force" ending, get ultimate melee weapon **Fearless Blade (115 damage / 20% combo / legendary).
+Xem phần [Hệ thống kết thúc] phía dưới. Sau khi hoàn thành tất cả nhiệm vụ chính, có thể kích hoạt kết thúc "Trở thành thế lực mới", nhận vũ khí cận chiến cực đại **Kiếm không sợ (115 sát thương / 20% liên kết / huyền thoại).
 
 ***
 
-## 4. Complete Map Explanation
+### 4. Bản đồ toàn bộ
 
-### 🟢 Safe Maps (0% Encounter Rate)
+### 🟢 Bản đồ an toàn (tỷ lệ gặp 0%)
 
-| Map | Encounter Rate | Features
+| Bản đồ | Tỷ lệ gặp | Đặc điểm |
 |:-|:-:|:-
-| 🏰 Doomsday Castle | 0% | **Social map**, guard / bank / identity / work / Castle interior
-| 🌅 Dawn Outpost | 0% | **Absolutely safe**, all outpost NPCs are here
-| 🏝️ Small island | 0% | Hidden map, need yacht to reach, island bank + NPC
+| 🏰 Lâu đài Tận thế | 0% | **Bản đồ xã hội**, guards / ngân hàng / danh tính / làm việc / nội thành Lâu đài
+| 🌅 Trận địa Đợi Sáng | 0% | **Toàn bộ an toàn**, tất cả NPC Trận địa đều ở đây
+| 🏝️ Đảo Nhỏ | 0% | Bản đồ ẩn, cần game thuyền để đến, ngân hàng đảo + NPC
 
-### 🟡 Low-Risk Maps (Encounter Rate ≤12%)
+### 🟡 Bản đồ nguy hiểm thấp (tỷ lệ gặp ≤12%)
 
-| Map | Encounter Rate | Features
+| Bản đồ | Tỷ lệ gặp | Đặc điểm |
 |:-|:-:|:-
-| 🗼 Mountain abandoned watchtower | 1% | Climb reduces breakdown, drops 56+ slot backpack! Must explore every time
-| 🏚️ Rural abandoned granary | 2% | **New player paradise**, pick fruits every 3 days, drops melee weapons, moldy seeds
-| 🏡 Mountain farmhouse village | 3% | Cave drops ammo, abandoned vegetable field drops seeds / leeks
-| ⛺ Riverside campsite | 5% | Search corpse every 3 days, drops backpack / medicine
-| 🍖 National highway service area | 10% | Ma San boss + service area restaurant task line
-| 🏫 University campus | 12% | Takeaway cabinet free food, backpack, Liu Ruyan old classroom
+| 🗼 Tháp Canh Đỉnh Núi Hoang Vắng | 1% | Leo tháp giảm mệt mỏi, rơi balo 56+ ô! Phải khám phá mỗi lần
+| 🏚️ Nhà Kho Nông Thôn Hoang Hoắc | 2% | **Vùng an toàn cho người mới**, hái trái cây mỗi 3 ngày, rơi vũ khí cận chiến, hạt giống mốc
+| 🏡 Làng Nông Thôn Njema Núi | 3% | Hang động rơi dân dược, vườn rau bỏ hoang rơi hạt giống / lá diệp
+| ⛺ Khu Cắm Trại Bên Sông | 5% | Tìm thi thể mỗi 3 ngày, rơi balo / thuốc
+| 🍖 Khu Dịch Vụ Quốc Lộ | 10% | Thực phẩm + dân dược + nhiệm vụ Mã Tam
+| 🏫 Trường Đại học | 12% | Thực phẩm + balo + nhiệm vụ liên kết Liu Ruyan
 
-### 🟠 Medium-Risk Maps (Encounter Rate 15%~30%)
+### 🟠 Bản đồ nguy hiểm trung cấp (tỷ lệ gặp 15%~30%)
 
-| Map | Encounter Rate | Recommended Equipment | Main Output
+| Bản đồ | Tỷ lệ gặp | Vũ khí đề xuất | Vật phẩm chính |
 |:-|:-:|:-|:-
-| ⛽ Suburban abandoned gas station | 15% | Small dagger+ | Ammo, weapons, Wang Tiezhu exchange gas
-| 🏬 City comprehensive mall | 20% | Crowbar+ | **Liu Ruyan task**, electric glass tank (fish→scales)
-| 🏘️ Old residential community | 22% | Crowbar+ | Medicine, weapons, Lao Wolf exchange medicine, property warehouse
-| 🏭 Industrial park/processing plant | 24% | Crowbar+ | **Melee weapon holy land**, explore workshop
-| ⚓ Riverside port terminal | 26% | Crowbar+ | Ammo, weapons, view scenery reduces breakdown, Castle yacht
-| 🛒 Chain large warehouse mall | 28% | Crowbar+ | **Shadow boss**, building materials, doomsday contraband
-| 🏚️ Abandoned factory warehouse | 30% | Fire axe+ | Ranged weapons, building materials, ammo, Old Ma trade
+| ⛽ Trạm Xăng Ngoại Thành | 15% | Tiểu đao+ | Dân dược, vũ khí, Vương Thiết Trụ đổi xăng
+| 🏬 Siêu Thị Trung Tâm | 20% | Cọc đè+ | **Nhiệm vụ Liu Ruyan**, thùng kính rò điện (cá→vảy)
+| 🏘️ Khu Dân Cư Cũ | 22% | Cọc đè+ | Thuốc, vũ khí, Lão Wolf đổi thuốc, kho vật tư
+| 🏭 Khu Công Nghiệp / Nhà Xưởng | 24% | Cọc đè+ | **Vũ khí cận chiến sacred land**, xưởng khám phá
+| ⚓ Cảng Bến Sông | 26% | Cọc đè+ | Dân dược, vũ khí, ngắm cảnh giảm mệt mỏi, tàu cứu cánh của Lâu đài
+| 🛒 Siêu Thị Kho Tối Đại Liên Khu | 28% | Cọc đè+ | **Boss Hắc Ảnh**, vật liệu xây dựng, hàng cấm ngày tận thế
+| 🏚️ Nhà Kho Nhà Máy Hoang Hoắc | 30% | Rìu cứu hỏa+ | Vũ khí tầm xa, vật liệu xây dựng, dân dược, sự kiện Lão Ma
 
-### 🔴 High-Risk Maps (Encounter Rate 35%+)
+### 🟠 Bản đồ nguy hiểm cao (tỷ lệ gặp 35%+)
 
-| Map | Encounter Rate | Recommended Equipment | Main Output
+| Bản đồ | Tỷ lệ gặp | Vũ khí đề xuất | Vật phẩm chính |
 |:-|:-:|:-|:-
-| 🏥 Suburban large hospital | 35% | **60 damage+ | **Serum farming holy land**, 60% medicine rate, Luluwei
-| 👮 Abandoned police station | 40% | 70 damage+ | **Gun farming holy land**, search evidence room/file cabinet
-| 🪖 Military checkpoint | 45% | 70 damage+ | **Ammo farming holy land**, Lao Zhao 50% ammo / 50% misfire -40 HP
-| 🚇 Underground subway tunnel | 55% | 80 damage+ | Ranged weapons, ammo, Old Ma endgame
-| 🔬 Biochemical research institute | 58% | 80 damage+ | **Dr. Chen M700 task**, medicine, energy mining well
-| 👑 Zombie nest | 60% | **Top equipment** | **Zombie King (ultimate boss)**
-| 🚀 Top-secret space base | **65%** | **Top equipment** | **Highest encounter rate**, launch center (rocket), space capsule 5% drops AWM (only once)
+| 🏥 Bệnh Viện Ngoại Thành | 35% | **Sát thương 60+ | **Nơi thu huyết thanh thượng đẳng**, 60% thuốc, Rutile
+| 👮 Trạm Cảnh Sát Ngoại Thành | 40% | Sát thương 70+ | **Nơi thu súng thượng đẳng**, tra cứu phòng chứng vật / hồ sơ
+| 🪖 Trạm Kiểm Tra Quân Sự | 45% | Sát thương 70+ | **Nơi thu dân dược thượng đẳng**, Lão Zhao 50% dân dược / 50% súng tự nổ -40 HP
+| 🚇 Đường Hầm Địa Ngục | 55% | Sát thương 80+ | Dân dược tầm xa, dân dược, Lão Ma cuối game
+| 🔬 Viện Nghiên Cứu Sinh Học | 58% | Sát thương 80+ | **Nhiệm vụ Tiến sĩ Chen M700**, thuốc, giếng khai thác năng lượng
+| 👑 Tổ Zombie | 60% | **Vũ khí tối thượng** | **Vua Zombie (Boss cuối cùng)**
+| 🚀 Cơ Sở Vũ Trụ Tuyệt Mật | **65%** | **Vũ khí tối thượng** | **Tỷ lệ gặp cao nhất**, trung tâm phóng (tên lửa), tàu không gian 5% rơi AWM (chỉ 1 lần)
 
-### Complete Map Special Actions List
+### Danh sách sự kiện bản đồ toàn bộ
 
-| Map | Action | Condition / Cooldown | Effect / Output
+| Bản đồ | Sự kiện | Điều kiện / thời gian chờ | Hiệu lực / sản phẩm |
 |:-|:-|:-|:-
-| 🗼 Watchtower | Climb | None | Breakdown -10
+| 🗼 Tháp canh | Leo tháp | Không có | Giảm mệt mỏi -10
 | 🗼 Watchtower | Wreath tombstone | Farming master badge + equip shovel | Get Miaomiao diary
 | 🏚️ Granary | Pick fruits | 3-day cooldown | Random fruit
 | 🏚️ Granary | Moldy seeds | Farming master badge, once daily | 1~3 random seeds
@@ -935,17 +932,17 @@ Extra weapons → Lilith recycle → more cigarettes
 |:-|:-:|:-:|:-:|:-|:-
 | Ordinary wandering zombie | 120 | 16 | 5% | Infection(+2) | Weakest zombie, any weapon can fight
 | Decayed corpse | 100 | 24 | 0% | Infection(+2) | Low HP but high damage, quick kill
-| Crawling zombie | 60 | 14 | 20% | Infection(+2) + trip | High dodge, ranged优先
+| Crawling zombie | 60 | 14 | 20% | Infection(+2) + trip | High dodge, ưu tiên đánh tầm xa
 | Fast zombie | 80 | 30 | 35% | Infection(+2) + scream | Very high dodge, use ranged weapon
 | Fat bloated zombie | **240** | 20 | 0% | Infection(+2) + **explode** | Thick HP but low damage, note explode after kill! Keep HP >20
 | Exploding zombie | 120 | 18 | 0% | **Explode** | Explode after kill, keep safe HP
-| Military police zombie | 160 | **36** | 10% | Infection(+2) + **corrode** | High damage + corrode (-5 durability), bring backup weapon! Ranged优先
+| Military police zombie | 160 | **36** | 10% | Infection(+2) + **corrode** | High damage + corrode (-5 durability), bring backup weapon! Ưu tiên đánh tầm xa
 | Group mother zombie | 140 | 16 | 0% | **Summon** small zombies | First turn focus kill, avoid being summoned
 | Iron armor zombie | **280** | 22 | 0% | **Armor** + Infection(+2) | One of thickest HP, need high damage weapon to slowly grind
 | Frost zombie | 150 | 26 | 10% | **Freeze** | Freeze effect affects action, bring enough medicine
-| Tear狂暴 zombie | 200 | **50** | 5% | **Blind** + corrode | One of most dangerous! Blind + corrode double debuff, ranged + high HP first
+| Zombie Cuồng bạo Xé xác | 200 | **50** | 5% | **Blind** + corrode | One of most dangerous! Blind + corrode double debuff, ranged + high HP first
 | Acid spray zombie | 240 | 28 | 5% | **Acid** | High DPS, must quick kill
-| Jumping zombie | 100 | 38 | 35% | **Jump** + Infection(+2) | High dodge + high damage, ranged优先
+| Jumping zombie | 100 | 38 | 35% | **Jump** + Infection(+2) | High dodge + high damage, ưu tiên đánh tầm xa
 | Giant tank zombie | **300** | 40 | 0% | **Explode** | Thickest HP + explode after kill (40 damage), ensure HP >40 before kill
 | Ghost stealth zombie | 80 | 30 | **50%** | **Stealth** | Highest dodge! Ranged dodge 60% can effectively counter
 | Piercing zombie | 180 | **42** | 12% | **Pierce** + corrode | High damage + corrode, bring backup weapon
@@ -955,7 +952,7 @@ Extra weapons → Lilith recycle → more cigarettes
 - Ranged combat mode has **60% chance to dodge zombie attacks**, melee can't dodge
 - Infection-type zombies +2 infection per hit, remember to use debridement medicine / serum after fight
 - Explode-type zombies (fat / tank / exploding) deal extra damage after kill, ensure sufficient HP
-- Military police /狂暴 / piercing zombies' corrode effect damages weapons, ranged weapons also lose integrity when corroded
+- Military police / cuồng bạo / piercing zombies' corrode effect damages weapons, ranged weapons also lose integrity when corroded
 - Escape success rate only 25%, don't count on escape to save life
 
 ### 🌾 Planting System

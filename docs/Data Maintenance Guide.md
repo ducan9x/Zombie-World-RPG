@@ -1,154 +1,154 @@
-# 📋 Zombie World - Data Maintenance Guide
+# 📋 Zombie World - Hướng Dẫn Bảo Trì Dữ Liệu (Data Maintenance Guide)
 
-## Core Principles
+## Nguyên Tắc Cốt Lõi
 
-- **Game data is organized by module in the `js/data/` folder**, with each submodule responsible for different types of data
-- **`js/config.js` serves as a unified re-export entry point**, all data is exposed through `config.js`, other files just need to import from `config.js`
-- Refresh the browser after modifying data files in `js/data/` for changes to take effect
-- Other files (`combat.js`, `maps.js`, `state.js`, etc.) don't need modification
-- Adding new items just requires adding entries in the corresponding submodule array
-- Some constants in `config.js` and `utils.js` are automatically derived (like `NURSE_MEDICINE_POOL`, `V_TRADE_AMMO_TYPES`, `BUILDING_MATERIAL_NAMES`, `BOSS_NAMES`), they update automatically when source data is modified
-
----
-
-## 1. Data Folder Structure and Constant Overview
-
-### 1.1 `js/data/` Folder Structure
-
-| Path | Content | Included Constants |
-|------|------|--------------------|
-| `js/data/items/` | Item data | FOODS, FRUITS, DRINKS, MEDICINES, CIGARETTES, BUILDING_MATERIALS, CROPS, BACKPACK_TYPES, LOOT_BACKPACKS |
-| `js/data/weapons/` | Weapon data | MELEE_WEAPONS, RANGED_WEAPONS, AMMO |
-| `js/data/entities/` | Entity data | ZOMBIES, NPCS, SURVIVOR_NPC, NAMED_NPCS, BOSS_NAMES |
-| `js/data/maps/` | Map data | MAPS, MAP_ACTIONS |
-| `js/data/dialogues/` | Dialogue data | OUTLAW_DIALOGUES, MECHANIC_DIALOGUES, WOLF_DIALOGUES, WAREHOUSE_GUARD_DIALOGUES, NERVOUS_VETERAN_DIALOGUES, MAP_NPC_INTROS, CASTLE_GUARD_DIALOGUES, CASTLE_KING_DIALOGUES, CASTLE_QUEEN_DIALOGUES, CASTLE_BANKER_DIALOGUES, CASTLE_GUARD_HIGH_DIALOGUES, CASTLE_KING_HIGH_DIALOGUES, CASTLE_QUEEN_HIGH_DIALOGUES, CASTLE_BANKER_HIGH_DIALOGUES, CASTLE_REJECTION_DIALOGUES, DOCTOR_INTRO, DOCTOR_DIALOGUES, ZOMBIE_KING_INTRO, NURSE_ZOMBIE_INTRO, LEADER_DIALOGUES, GUYUE_DIALOGUES, LINHAN_DIALOGUES, YUMO_DIALOGUES |
-| `js/data/systems/` | System configs | TIME_PHASES, GAME_CONSTANTS, DEFAULT_ITEM_IDS, AFFINITY_THRESHOLDS, AFFINITY_MAX, BASE_LEVELS, WAREHOUSE_LEVELS, CASTLE_RANKS, KING_QUESTS, SPECIAL_ITEMS, TRADER_WEAPON_SHOP, FIXED_LOOT_DROPS, TRADE_TEMPLATES, ACHIEVEMENTS, ENDING_STORIES, SURVIVAL_NOTES |
-| `js/data/utils.js` | Utility data | CANNED_FOOD_IDS, TOOL_WEAPON_IDS, V_TRADE_AMMO_TYPES, LILI_REWARD_MEDICINE_IDS, XIAOHAN_REWARD_FOOD_IDS |
-
-### 1.2 Constant List
-
-Organized by code structure, all `export` constants and their uses:
-
-| # | Constant Name | Type | Count | Purpose |
-|---|---------------|------|-------|---------|
-| 1 | `TIME_PHASES` | Array | 8 | 8 time phases in a day |
-| 2 | `FOODS` | Array | 19 | Food list |
-| 3 | `FRUITS` | Array | 11 | Fruit list |
-| 4 | `DRINKS` | Array | 12 | Drink list |
-| 5 | `MEDICINES` | Array | 14 | Medicine list |
-| 6 | `NURSE_MEDICINE_POOL` | Array (auto-derived) | 6 | Nurse zombie medicine pool, auto-filtered from `MEDICINES` for `common`+`uncommon` |
-| 7 | `CIGARETTES` | Array | 5 | Cigarette list |
-| 8 | `BUILDING_MATERIALS` | Array | 6 | Building material list |
-| 9 | `CROPS` | Array | 15 | Crop list |
-| 10 | `MELEE_WEAPONS` | Array | 39 | Melee weapon list (including fist) |
-| 11 | `RANGED_WEAPONS` | Array | 44 | Ranged weapon list |
-| 12 | `AMMO` | Array | 13 | Ammunition list |
-| 13 | `ZOMBIES` | Array | 16 | Zombie list |
-| 14 | `NPCS` | Object | 4 | Encounter NPC templates (outlaw/mechanic/black market doctor) |
-| 15 | `SURVIVOR_NPC` | Array | 3 | Outpost NPC full configs (V/Xiaohan/Lili) |
-| 16 | `OUTLAW_DIALOGUES` | Array | 15 | Outlaw dialogues |
-| 17 | `MECHANIC_DIALOGUES` | Array | 5 | Mechanic dialogues |
-| 18 | `WOLF_DIALOGUES` | Array | 5 | Wolf dialogues |
-| 19 | `WAREHOUSE_GUARD_DIALOGUES` | Array | 5 | Warehouse guard dialogues |
-| 20 | `NERVOUS_VETERAN_DIALOGUES` | Array | 5 | Nervous veteran dialogues |
-| 21 | `DOCTOR_INTRO` | String | 1 | Dr. Chen intro text |
-| 22 | `DOCTOR_DIALOGUES` | Array | 5 | Dr. Chen dialogues |
-| 23 | `ZOMBIE_KING_INTRO` | String | 1 | Zombie King intro text |
-| 24 | `BACKPACK_TYPES` | Object | 14 | All backpack type definitions |
-| 25 | `LOOT_BACKPACKS` | Array | 14 | Droppable backpack list (with rarity) |
-| 26 | `MAPS` | Array | 22 | Map list (with loot table) |
-| 27 | `CASTLE_GUARD_DIALOGUES` | Array | 5 | Castle guard dialogues |
-| 28 | `CASTLE_KING_DIALOGUES` | Array | 5 | Castle King dialogues |
-| 29 | `CASTLE_QUEEN_DIALOGUES` | Array | 5 | Castle Queen dialogues |
-| 30 | `CASTLE_BANKER_DIALOGUES` | Array | 5 | Castle Banker dialogues |
-| 31 | `NURSE_ZOMBIE_INTRO` | String | 1 | Nurse Zombie intro text |
-| 32 | `CANNED_FOOD_IDS` | Array | 8 | Canned food ID list |
-| 33 | `SPECIAL_ITEMS` | Object | 18 | Special items (noble ID card/dawn badge/silence badge/6th rank card/dawn captain badge/farming master badge/miaomiao diary/strange recorder/letter to sister/queen's reply/love token/castle pass/car key etc.) |
-| 34 | `BASE_LEVELS` | Array | 5 | Outpost building levels |
-| 35 | `WAREHOUSE_LEVELS` | Array | 8 | Warehouse levels (index 0 is null) |
-| 36 | `AFFINITY_THRESHOLDS` | Array | 5 | Affinity stage thresholds |
-| 37 | `AFFINITY_MAX` | Object | 5 | Affinity max per NPC |
-| 38 | `NAMED_NPCS` | Object | 5 | Boss configs (Ma San/Shadow/Zombie King/Bank Manager/Outpost Leader) |
-| 39 | `BOSS_NAMES` | Array (auto-derived) | 5 | Boss name list, auto-derived from `NAMED_NPCS` |
-| 40 | `GAME_CONSTANTS` | Object | 22 groups | Global game params (including CRASH_MAX/INFECTION_MAX/MAX_HEALTH/TURNS_PER_DAY top-level constants) |
-| 41 | `TOOL_WEAPON_IDS` | Array | 4 | Tool weapon IDs |
-| 42 | `V_TRADE_AMMO_TYPES` | Array (auto-derived) | 11 | V's trade ammo types, auto-filtered from `AMMO` excluding arrows |
-| 43 | `TRADER_WEAPON_SHOP` | Array | 6 | Black market weapon shop list + prices |
-| 44 | `FIXED_LOOT_DROPS` | Object | 7 | Fixed drop configs |
-| 45 | `BUILDING_MATERIAL_NAMES` | Object (auto-derived) | 6 | Building material ID→name map, auto-generated from `BUILDING_MATERIALS` |
-| 46 | `TRADE_TEMPLATES` | Array | 4 | Trade templates |
-| 47 | `SURVIVAL_NOTES` | Array | 7 | Survival notes (7 categories, 25 total tips) |
-| 48 | `ACHIEVEMENTS` | Array | 19 | Achievement list |
-| 49 | `ENDING_STORIES` | Object | 7 | Ending story texts |
-| 50 | `DEFAULT_ITEM_IDS` | Object | 5 | Default item IDs |
-| 51 | `LILI_REWARD_MEDICINE_IDS` | Array | 4 | Lili's reward medicine pool |
-| 52 | `XIAOHAN_REWARD_FOOD_IDS` | Array | 3 | Xiaohan's reward food pool |
-| 53 | `MAP_ACTIONS` | Object | 23 | Map action routing (data-driven) |
-| 54 | `LEADER_DIALOGUES` | Array | 5 | Outpost Leader dialogues |
-| 55 | `MAP_NPC_INTROS` | Object | 13 | Map NPC intro texts |
-| 56 | `CASTLE_REJECTION_DIALOGUES` | Object | 3 | Castle rejection dialogues (V/Xiaohan/Lili) |
-| 57 | `CASTLE_GUARD_HIGH_DIALOGUES` | Array | 5 | Castle guard (high rank) dialogues |
-| 58 | `CASTLE_KING_HIGH_DIALOGUES` | Array | 5 | Castle King (high rank) dialogues |
-| 59 | `CASTLE_QUEEN_HIGH_DIALOGUES` | Array | 5 | Castle Queen (high rank) dialogues |
-| 60 | `CASTLE_BANKER_HIGH_DIALOGUES` | Array | 5 | Castle Banker (high rank) dialogues |
-| 61 | `CASTLE_RANKS` | Array | 6 | Castle nobility ranks |
-| 62 | `KING_QUESTS` | Array | 5 | King's quest chain |
+- **Dữ liệu trò chơi được tổ chức theo module trong thư mục `js/data/`**, mỗi module con chịu trách nhiệm cho các loại dữ liệu khác nhau.
+- **`js/config.js` đóng vai trò là điểm tái xuất (re-export) thống nhất**, tất cả dữ liệu được cung cấp thông qua `config.js`, các tệp khác chỉ cần import từ `config.js`.
+- Làm mới trình duyệt (F5/Refresh) sau khi sửa đổi các tệp dữ liệu trong `js/data/` để thay đổi có hiệu lực.
+- Các tệp khác (`combat.js`, `maps.js`, `state.js`, v.v.) không cần phải sửa đổi.
+- Việc thêm vật phẩm mới chỉ yêu cầu thêm mục vào mảng tương ứng của submodule đó.
+- Một số hằng số trong `config.js` và `utils.js` được suy dẫn tự động (như `NURSE_MEDICINE_POOL`, `V_TRADE_AMMO_TYPES`, `BUILDING_MATERIAL_NAMES`, `BOSS_NAMES`), chúng sẽ tự động cập nhật khi dữ liệu nguồn thay đổi.
 
 ---
 
-## 2. Common Operation Guide
+## 1. Cấu Trúc Thư Mục Dữ Liệu và Tổng Quan Hằng Số
 
-### 2.1 Adding Food
+### 1.1 Cấu Trúc Thư Mục `js/data/`
 
-Add entry at the end of `FOODS` array.
+| Đường dẫn | Nội dung | Các hằng số bao gồm |
+|-----------|----------|---------------------|
+| `js/data/items/` | Dữ liệu vật phẩm | FOODS, FRUITS, DRINKS, MEDICINES, CIGARETTES, BUILDING_MATERIALS, CROPS, BACKPACK_TYPES, LOOT_BACKPACKS |
+| `js/data/weapons/` | Dữ liệu vũ khí | MELEE_WEAPONS, RANGED_WEAPONS, AMMO |
+| `js/data/entities/` | Dữ liệu thực thể | ZOMBIES, NPCS, SURVIVOR_NPC, NAMED_NPCS, BOSS_NAMES |
+| `js/data/maps/` | Dữ liệu bản đồ | MAPS, MAP_ACTIONS |
+| `js/data/dialogues/` | Dữ liệu hội thoại | OUTLAW_DIALOGUES, MECHANIC_DIALOGUES, WOLF_DIALOGUES, WAREHOUSE_GUARD_DIALOGUES, NERVOUS_VETERAN_DIALOGUES, MAP_NPC_INTROS, CASTLE_GUARD_DIALOGUES, CASTLE_KING_DIALOGUES, CASTLE_QUEEN_DIALOGUES, CASTLE_BANKER_DIALOGUES, CASTLE_GUARD_HIGH_DIALOGUES, CASTLE_KING_HIGH_DIALOGUES, CASTLE_QUEEN_HIGH_DIALOGUES, CASTLE_BANKER_HIGH_DIALOGUES, CASTLE_REJECTION_DIALOGUES, DOCTOR_INTRO, DOCTOR_DIALOGUES, ZOMBIE_KING_INTRO, NURSE_ZOMBIE_INTRO, LEADER_DIALOGUES, GUYUE_DIALOGUES, LINHAN_DIALOGUES, YUMO_DIALOGUES |
+| `js/data/systems/` | Cấu hình hệ thống | TIME_PHASES, GAME_CONSTANTS, DEFAULT_ITEM_IDS, AFFINITY_THRESHOLDS, AFFINITY_MAX, BASE_LEVELS, WAREHOUSE_LEVELS, CASTLE_RANKS, KING_QUESTS, SPECIAL_ITEMS, TRADER_WEAPON_SHOP, FIXED_LOOT_DROPS, TRADE_TEMPLATES, ACHIEVEMENTS, ENDING_STORIES, SURVIVAL_NOTES |
+| `js/data/utils.js` | Dữ liệu tiện ích | CANNED_FOOD_IDS, TOOL_WEAPON_IDS, V_TRADE_AMMO_TYPES, LILI_REWARD_MEDICINE_IDS, XIAOHAN_REWARD_FOOD_IDS |
 
-**Field Description:**
+### 1.2 Danh Sách Hằng Số
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | String | ✅ | Unique identifier, globally unique |
-| `name` | String | ✅ | Display name |
-| `type` | String | ✅ | Fixed to `"food"` |
-| `hunger` | Number | ✅ | Satiety restored |
-| `hydration` | Number | ❌ | Hydration restored, skips hydration if omitted |
+Được tổ chức theo cấu trúc mã nguồn, tất cả các hằng số `export` và mục đích sử dụng của chúng:
 
-**Example: Adding "Braised Pork"**
+| # | Tên hằng số | Kiểu | Số lượng | Mục đích sử dụng |
+|---|-------------|------|----------|------------------|
+| 1 | `TIME_PHASES` | Array | 8 | 8 mốc thời gian trong một ngày |
+| 2 | `FOODS` | Array | 19 | Danh sách thức ăn |
+| 3 | `FRUITS` | Array | 11 | Danh sách trái cây |
+| 4 | `DRINKS` | Array | 12 | Danh sách đồ uống |
+| 5 | `MEDICINES` | Array | 14 | Danh sách thuốc men |
+| 6 | `NURSE_MEDICINE_POOL` | Array (suy dẫn tự động) | 6 | Kho thuốc của Zombie Y tá, tự động lọc từ `MEDICINES` cho phẩm chất `common` + `uncommon` |
+| 7 | `CIGARETTES` | Array | 5 | Danh sách thuốc lá |
+| 8 | `BUILDING_MATERIALS` | Array | 6 | Danh sách vật liệu xây dựng |
+| 9 | `CROPS` | Array | 15 | Danh sách cây trồng |
+| 10 | `MELEE_WEAPONS` | Array | 39 | Danh sách vũ khí cận chiến (bao gồm cả nắm đấm) |
+| 11 | `RANGED_WEAPONS` | Array | 44 | Danh sách vũ khí tầm xa |
+| 12 | `AMMO` | Array | 13 | Danh sách đạn dược |
+| 13 | `ZOMBIES` | Array | 16 | Danh sách zombie |
+| 14 | `NPCS` | Object | 4 | Mẫu NPC chạm trán (kẻ ngoài vòng pháp luật / thợ máy / bác sĩ chợ đen) |
+| 15 | `SURVIVOR_NPC` | Array | 3 | Cấu hình đầy đủ của NPC Tiền đồn (V / Tiểu Hàm / Lệ Lệ) |
+| 16 | `OUTLAW_DIALOGUES` | Array | 15 | Lời thoại kẻ ngoài vòng pháp luật |
+| 17 | `MECHANIC_DIALOGUES` | Array | 5 | Lời thoại thợ máy |
+| 18 | `WOLF_DIALOGUES` | Array | 5 | Lời thoại sói |
+| 19 | `WAREHOUSE_GUARD_DIALOGUES` | Array | 5 | Lời thoại lính gác nhà kho |
+| 20 | `NERVOUS_VETERAN_DIALOGUES` | Array | 5 | Lời thoại cựu binh căng thẳng |
+| 21 | `DOCTOR_INTRO` | String | 1 | Đoạn văn giới thiệu Bác sĩ Trần |
+| 22 | `DOCTOR_DIALOGUES` | Array | 5 | Lời thoại Bác sĩ Trần |
+| 23 | `ZOMBIE_KING_INTRO` | String | 1 | Đoạn văn giới thiệu Vua Zombie |
+| 24 | `BACKPACK_TYPES` | Object | 14 | Định nghĩa toàn bộ các loại ba lô |
+| 25 | `LOOT_BACKPACKS` | Array | 14 | Danh sách ba lô có thể rơi ra (kèm độ hiếm) |
+| 26 | `MAPS` | Array | 22 | Danh sách bản đồ (kèm bảng rơi đồ) |
+| 27 | `CASTLE_GUARD_DIALOGUES` | Array | 5 | Lời thoại lính gác lâu đài |
+| 28 | `CASTLE_KING_DIALOGUES` | Array | 5 | Lời thoại Quốc vương lâu đài |
+| 29 | `CASTLE_QUEEN_DIALOGUES` | Array | 5 | Lời thoại Vương hậu lâu đài |
+| 30 | `CASTLE_BANKER_DIALOGUES` | Array | 5 | Lời thoại Giám đốc ngân hàng lâu đài |
+| 31 | `NURSE_ZOMBIE_INTRO` | String | 1 | Đoạn văn giới thiệu Zombie Y tá |
+| 32 | `CANNED_FOOD_IDS` | Array | 8 | Danh sách ID thực phẩm đóng hộp |
+| 33 | `SPECIAL_ITEMS` | Object | 18 | Vật phẩm đặc biệt (thẻ thân phận quý tộc / huy hiệu bình minh / huy hiệu im lặng / thẻ tước vị cấp 6 / huy hiệu đội trưởng tiền phong / huy hiệu bậc thầy nông nghiệp / nhật ký Miêu Miêu / máy ghi âm kỳ lạ / thư gửi em gái / thư hồi âm của vương hậu / tín vật định tình / thẻ thông hành lâu đài / chìa khóa xe hơi v.v.) |
+| 34 | `BASE_LEVELS` | Array | 5 | Cấp bậc công trình tiền đồn |
+| 35 | `WAREHOUSE_LEVELS` | Array | 8 | Cấp độ nhà kho (chỉ số 0 là null) |
+| 36 | `AFFINITY_THRESHOLDS` | Array | 5 | Các ngưỡng giai đoạn độ thân mật |
+| 37 | `AFFINITY_MAX` | Object | 5 | Giới hạn tối đa độ thân mật của từng NPC |
+| 38 | `NAMED_NPCS` | Object | 5 | Cấu hình Boss (Mã Tam / Bóng Tối / Vua Zombie / Giám đốc ngân hàng / Thủ lĩnh tiền đồn) |
+| 39 | `BOSS_NAMES` | Array (suy dẫn tự động) | 5 | Danh sách tên Boss, tự động lấy từ `NAMED_NPCS` |
+| 40 | `GAME_CONSTANTS` | Object | 22 nhóm | Các thông số game toàn cục (bao gồm các hằng số cấp cao nhất CRASH_MAX / INFECTION_MAX / MAX_HEALTH / TURNS_PER_DAY) |
+| 41 | `TOOL_WEAPON_IDS` | Array | 4 | Danh sách ID vũ khí dạng công cụ |
+| 42 | `V_TRADE_AMMO_TYPES` | Array (suy dẫn tự động) | 11 | Các loại đạn giao dịch của V, tự động lọc từ `AMMO` ngoại trừ mũi tên |
+| 43 | `TRADER_WEAPON_SHOP` | Array | 6 | Danh sách cửa hàng vũ khí chợ đen + giá bán |
+| 44 | `FIXED_LOOT_DROPS` | Object | 7 | Cấu hình vật phẩm rơi cố định |
+| 45 | `BUILDING_MATERIAL_NAMES` | Object (suy dẫn tự động) | 6 | Bảng ánh xạ ID → tên vật liệu xây dựng, tự động tạo từ `BUILDING_MATERIALS` |
+| 46 | `TRADE_TEMPLATES` | Array | 4 | Mẫu giao dịch |
+| 47 | `SURVIVAL_NOTES` | Array | 7 | Sổ tay sinh tồn (7 danh mục, tổng cộng 25 mẹo) |
+| 48 | `ACHIEVEMENTS` | Array | 19 | Danh sách thành tựu |
+| 49 | `ENDING_STORIES` | Object | 7 | Nội dung cốt truyện kết thúc |
+| 50 | `DEFAULT_ITEM_IDS` | Object | 5 | ID vật phẩm mặc định |
+| 51 | `LILI_REWARD_MEDICINE_IDS` | Array | 4 | Kho thuốc phần thưởng của Lệ Lệ |
+| 52 | `XIAOHAN_REWARD_FOOD_IDS` | Array | 3 | Kho thức ăn phần thưởng của Tiểu Hàm |
+| 53 | `MAP_ACTIONS` | Object | 23 | Điều hướng hành động bản đồ (hướng theo dữ liệu) |
+| 54 | `LEADER_DIALOGUES` | Array | 5 | Lời thoại Thủ lĩnh tiền đồn |
+| 55 | `MAP_NPC_INTROS` | Object | 13 | Văn bản giới thiệu NPC trên bản đồ |
+| 56 | `CASTLE_REJECTION_DIALOGUES` | Object | 3 | Lời thoại từ chối của Lâu đài (V / Tiểu Hàm / Lệ Lệ) |
+| 57 | `CASTLE_GUARD_HIGH_DIALOGUES` | Array | 5 | Lời thoại lính gác lâu đài (khi tước vị cao) |
+| 58 | `CASTLE_KING_HIGH_DIALOGUES` | Array | 5 | Lời thoại Quốc vương (khi tước vị cao) |
+| 59 | `CASTLE_QUEEN_HIGH_DIALOGUES` | Array | 5 | Lời thoại Vương hậu (khi tước vị cao) |
+| 60 | `CASTLE_BANKER_HIGH_DIALOGUES` | Array | 5 | Lời thoại Giám đốc ngân hàng (khi tước vị cao) |
+| 61 | `CASTLE_RANKS` | Array | 6 | Hệ thống tước vị quý tộc lâu đài |
+| 62 | `KING_QUESTS` | Array | 5 | Chuỗi nhiệm vụ của Quốc vương |
+
+---
+
+## 2. Hướng Dẫn Thao Tác Thường Gặp
+
+### 2.1 Thêm Thức Ăn
+
+Thêm một mục vào cuối mảng `FOODS`.
+
+**Mô tả các trường:**
+
+| Trường | Kiểu | Bắt buộc | Mô tả |
+|--------|------|----------|-------|
+| `id` | String | ✅ | Định danh duy nhất, không trùng lặp trên toàn cục |
+| `name` | String | ✅ | Tên hiển thị |
+| `type` | String | ✅ | Cố định là `"food"` |
+| `hunger` | Number | ✅ | Lượng độ no hồi phục |
+| `hydration` | Number | ❌ | Lượng nước hồi phục, bỏ qua nếu không hồi nước |
+
+**Ví dụ: Thêm "Thịt kho tàu"**
 
 ```js
-// Add at end of FOODS array
-{ id: "braised_pork", name: "Braised Pork", type: "food", hunger: 50, hydration: 10 },
+// Thêm vào cuối mảng FOODS
+{ id: "braised_pork", name: "Thịt kho tàu", type: "food", hunger: 50, hydration: 10 },
 ```
 
-After adding, cheat system automatically supports `/get_food_braised_pork_5` format. Maps with `food` in loot table will automatically include new food.
+Sau khi thêm, hệ thống mã cheat sẽ tự động hỗ trợ định dạng `/get_food_braised_pork_5`. Các bản đồ có `food` trong bảng rơi đồ (`lootTable`) sẽ tự động bao gồm món ăn mới này.
 
 ---
 
-### 2.2 Adding Melee Weapons
+### 2.2 Thêm Vũ Khí Cận Chiến
 
-Add entry at the end of `MELEE_WEAPONS` array.
+Thêm một mục vào cuối mảng `MELEE_WEAPONS`.
 
-**Field Description:**
+**Mô tả các trường:**
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | String | ✅ | Unique identifier |
-| `name` | String | ✅ | Display name |
-| `type` | String | ✅ | Fixed to `"melee"` |
-| `damage` | Number | ✅ | Base damage |
-| `durability` | Number | ✅ | Max durability (fist is `Infinity`) |
-| `rarity` | String | ❌ | Rarity: `common`/`uncommon`/`rare`/`epic`/`legendary`, fist doesn't have this field |
-| `comboRate` | Number | ✅ | Combo chance (0~1) |
+| Trường | Kiểu | Bắt buộc | Mô tả |
+|--------|------|----------|-------|
+| `id` | String | ✅ | Định danh duy nhất |
+| `name` | String | ✅ | Tên hiển thị |
+| `type` | String | ✅ | Cố định là `"melee"` |
+| `damage` | Number | ✅ | Sát thương cơ bản |
+| `durability` | Number | ✅ | Độ bền tối đa (nắm đấm là `Infinity`) |
+| `rarity` | String | ❌ | Độ hiếm: `common` / `uncommon` / `rare` / `epic` / `legendary`, nắm đấm không có trường này |
+| `comboRate` | Number | ✅ | Tỷ lệ đánh liên hoàn / combo (0~1) |
 
-**Example: Adding "Chainsaw Sword"**
+**Ví dụ: Thêm "Kiếm cưa máy"**
 
 ```js
-{ id: "chainsaw_sword", name: "Chainsaw Sword", type: "melee", damage: 110, durability: 90, rarity: "epic", comboRate: 0.16 },
+{ id: "chainsaw_sword", name: "Kiếm cưa máy", type: "melee", damage: 110, durability: 90, rarity: "epic", comboRate: 0.16 },
 ```
 
-**Rarity vs Combo Rate Relationship:**
+**Mối quan hệ giữa Độ hiếm và Tỷ lệ Combo:**
 
-| Rarity | Combo Rate | Damage Range Reference |
-|--------|------------|-----------------------|
+| Độ hiếm | Tỷ lệ Combo | Phạm vi sát thương tham khảo |
+|---------|-------------|------------------------------|
 | common | 0.05 | 30~48 |
 | uncommon | 0.08 | 40~70 |
 | rare | 0.12 | 66~90 |
@@ -157,121 +157,121 @@ Add entry at the end of `MELEE_WEAPONS` array.
 
 ---
 
-### 2.3 Adding Ranged Weapons
+### 2.3 Thêm Vũ Khí Tầm Xa
 
-Adding ranged weapons requires **simultaneously paying attention to ammo links**, steps:
+Thêm vũ khí tầm xa đòi hỏi **đồng thời chú ý đến liên kết đạn dược**, các bước thực hiện:
 
-**Step 1: Add weapon in `RANGED_WEAPONS`**
+**Bước 1: Thêm vũ khí vào `RANGED_WEAPONS`**
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | String | ✅ | Unique identifier |
-| `name` | String | ✅ | Display name |
-| `type` | String | ✅ | Fixed to `"ranged"` |
-| `damage` | Number | ✅ | Base damage |
-| `integrity` | Number | ✅ | Integrity (usually 100) |
-| `ammoType` | String | ✅ | Ammo type used, must match `id` in `AMMO` |
-| `critRate` | Number | ✅ | Crit chance (0~1) |
-| `rarity` | String | ✅ | Rarity |
+| Trường | Kiểu | Bắt buộc | Mô tả |
+|--------|------|----------|-------|
+| `id` | String | ✅ | Định danh duy nhất |
+| `name` | String | ✅ | Tên hiển thị |
+| `type` | String | ✅ | Cố định là `"ranged"` |
+| `damage` | Number | ✅ | Sát thương cơ bản |
+| `integrity` | Number | ✅ | Độ bền / độ hoàn chỉnh (thường là 100) |
+| `ammoType` | String | ✅ | Loại đạn sử dụng, phải khớp với `id` trong `AMMO` |
+| `critRate` | Number | ✅ | Tỷ lệ bạo kích (0~1) |
+| `rarity` | String | ✅ | Độ hiếm |
 
-**Step 2: If new ammo type needed, add in `AMMO`**
+**Bước 2: Nếu cần loại đạn mới, thêm vào `AMMO`**
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | String | ✅ | Ammo unique ID |
-| `name` | String | ✅ | Display name |
-| `type` | String | ✅ | Fixed to `"ammo"` |
-| `compatibleWith` | String[] | ✅ | Compatible weapon ID list |
+| Trường | Kiểu | Bắt buộc | Mô tả |
+|--------|------|----------|-------|
+| `id` | String | ✅ | ID duy nhất của đạn |
+| `name` | String | ✅ | Tên hiển thị |
+| `type` | String | ✅ | Cố định là `"ammo"` |
+| `compatibleWith` | String[] | ✅ | Danh sách ID vũ khí tương thích |
 
-**Step 3: If using existing ammo, add new weapon ID to corresponding ammo's `compatibleWith` array**
+**Bước 3: Nếu sử dụng loại đạn có sẵn, hãy thêm ID vũ khí mới vào mảng `compatibleWith` của loại đạn tương ứng**
 
-**Example: Adding "SCAR-H" (using existing 7.62×51mm)**
+**Ví dụ: Thêm "SCAR-H" (sử dụng loại đạn 7.62×51mm có sẵn)**
 
 ```js
-// 1. Add at end of RANGED_WEAPONS
+// 1. Thêm vào cuối RANGED_WEAPONS
 { id: "scar_h", name: "SCAR-H", type: "ranged", damage: 85, integrity: 100, ammoType: "7.62x51mm", critRate: 0.28, rarity: "rare" },
 
-// 2. Find "7.62x51mm" in AMMO, add "scar_h" to compatibleWith
+// 2. Tìm "7.62x51mm" trong AMMO, thêm "scar_h" vào compatibleWith
 { id: "7.62x51mm", name: "7.62×51mm", type: "ammo", compatibleWith: ["m700", "fal", "ebr14", "sr25", "scar_h"] },
 ```
 
-**Example: Adding "SCAR-H" (using new ammo 7.62×51mm NATO)**
+**Ví dụ: Thêm "SCAR-H" (sử dụng loại đạn mới 7.62×51mm NATO)**
 
 ```js
-// 1. Add at end of RANGED_WEAPONS
+// 1. Thêm vào cuối RANGED_WEAPONS
 { id: "scar_h", name: "SCAR-H", type: "ranged", damage: 85, integrity: 100, ammoType: "7.62x51mm_nato", critRate: 0.28, rarity: "rare" },
 
-// 2. Add new ammo at end of AMMO
+// 2. Thêm loại đạn mới vào cuối AMMO
 { id: "7.62x51mm_nato", name: "7.62×51mm NATO", type: "ammo", compatibleWith: ["scar_h"] },
 ```
 
-**Crit Rate Reference (by weapon category):**
+**Tham khảo tỷ lệ bạo kích (theo dòng vũ khí):**
 
-| Weapon Category | Crit Range | Ammo Type |
-|-----------------|-----------|-----------|
-| Bow/Crossbow | 0 | Arrow |
-| Pistol | 0.15~0.20 | 9×19mm / .357 Magnum |
-| SMG | 0.18~0.23 | 9×19mm |
-| Rifle (5.56) | 0.22~0.25 | 5.56×45mm NATO |
-| Rifle (7.62×39) | 0.20~0.28 | 7.62×39mm |
-| Battle Rifle (7.62×51) | 0.22~0.32 | 7.62×51mm |
-| Sniper | 0.35~0.45 | 7.62×51mm / .300 Win Mag |
+| Dòng vũ khí | Phạm vi bạo kích | Loại đạn |
+|-------------|------------------|----------|
+| Cung / Nỏ | 0 | Mũi tên (Arrow) |
+| Súng ngắn | 0.15~0.20 | 9×19mm / .357 Magnum |
+| Tiểu liên (SMG) | 0.18~0.23 | 9×19mm |
+| Súng trường (5.56) | 0.22~0.25 | 5.56×45mm NATO |
+| Súng trường (7.62×39) | 0.20~0.28 | 7.62×39mm |
+| Súng trường chiến đấu (7.62×51) | 0.22~0.32 | 7.62×51mm |
+| Súng bắn tỉa | 0.35~0.45 | 7.62×51mm / .300 Win Mag |
 | Shotgun | 0.10~0.12 | 12 Gauge |
 
 ---
 
-### 2.4 Adding/Modifying Backpacks
+### 2.4 Thêm/Sửa Đổi Ba Lô
 
-Modifying backpacks requires maintaining both `BACKPACK_TYPES` and `LOOT_BACKPACKS` arrays simultaneously.
+Việc chỉnh sửa ba lô yêu cầu duy trì đồng bộ cả hai mảng `BACKPACK_TYPES` và `LOOT_BACKPACKS`.
 
-**Field Description:**
+**Mô tả các trường:**
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | String | ✅ | Unique identifier, same as `name` |
-| `name` | String | ✅ | Display name |
-| `type` | String | ✅ | Fixed to `"backpack"` (in `BACKPACK_TYPES` it's specific backpack name) |
-| `capacity` | Number | ✅ | Backpack capacity (slots) |
-| `rarity` | String | ❌ | Rarity, only `LOOT_BACKPACKS` needs this |
+| Trường | Kiểu | Bắt buộc | Mô tả |
+|--------|------|----------|-------|
+| `id` | String | ✅ | Định danh duy nhất, giống với `name` |
+| `name` | String | ✅ | Tên hiển thị |
+| `type` | String | ✅ | Cố định là `"backpack"` (trong `BACKPACK_TYPES` là tên loại ba lô cụ thể) |
+| `capacity` | Number | ✅ | Sức chứa ba lô (số ô chứa) |
+| `rarity` | String | ❌ | Độ hiếm, chỉ `LOOT_BACKPACKS` mới cần trường này |
 
-#### `BACKPACK_TYPES` — All backpack type definitions
+#### `BACKPACK_TYPES` — Định nghĩa tất cả các loại ba lô
 
-Acts as full backpack dictionary, **all available backpacks** are registered here. New game initial backpack also selected from here.
+Đóng vai trò là từ điển ba lô hoàn chỉnh, **toàn bộ các loại ba lô khả dụng** đều được đăng ký tại đây. Ba lô ban đầu khi bắt đầu game mới cũng được chọn từ danh sách này.
 
 ```js
 export const BACKPACK_TYPES = {
-  pocket: { id: "pocket", name: "Pocket", type: "pocket", capacity: 15 },
-  // ... existing backpacks
+  pocket: { id: "pocket", name: "Túi quần áo", type: "pocket", capacity: 15 },
+  // ... các ba lô hiện có
 };
 ```
 
-**Add Example:**
+**Ví dụ thêm mới:**
 
 ```js
-// Add new entry in BACKPACK_TYPES
-  light_tactical: { id: "light_tactical", name: "Light Tactical Backpack", type: "light_tactical", capacity: 38 },
+// Thêm mục mới vào BACKPACK_TYPES
+  light_tactical: { id: "light_tactical", name: "Ba lô chiến thuật hạng nhẹ", type: "light_tactical", capacity: 38 },
 ```
 
-#### `LOOT_BACKPACKS` — Droppable backpack list
+#### `LOOT_BACKPACKS` — Danh sách ba lô có thể rơi ra
 
-Controls which backpacks drop as loot and their rarity weights.
+Kiểm soát những ba lô nào có thể rơi ra dưới dạng chiến lợi phẩm và trọng số độ hiếm của chúng.
 
-**Add Example:**
+**Ví dụ thêm mới:**
 
 ```js
-// Add at end of LOOT_BACKPACKS
-{ id: "light_tactical", name: "Light Tactical Backpack", type: "backpack", capacity: 38, rarity: "rare" },
+// Thêm vào cuối LOOT_BACKPACKS
+{ id: "light_tactical", name: "Ba lô chiến thuật hạng nhẹ", type: "backpack", capacity: 38, rarity: "rare" },
 ```
 
-**⚠️ Notes:**
+**⚠️ Lưu ý:**
 
-1. **Both arrays must be in sync**: If only added in `LOOT_BACKPACKS` but not `BACKPACK_TYPES`, new backpack may not be recognized correctly when added to player inventory.
-2. **`id` and `name` must match**: Backpack `id` and `name` must be same, this is a game logic convention.
-3. **New backpack automatically included in drops**: After adding in `LOOT_BACKPACKS`, all maps with `backpack` in `lootTable` will randomly drop this backpack, no need to modify other files.
-4. **Capacity suggestion range**:
+1. **Cả hai mảng phải được đồng bộ**: Nếu chỉ thêm vào `LOOT_BACKPACKS` mà không thêm vào `BACKPACK_TYPES`, ba lô mới có thể không được nhận diện chính xác khi đưa vào hành lý của người chơi.
+2. **`id` và `name` phải trùng khớp**: `id` và `name` của ba lô phải giống nhau, đây là quy ước logic của trò chơi.
+3. **Ba lô mới tự động xuất hiện trong tỷ lệ rơi đồ**: Sau khi thêm vào `LOOT_BACKPACKS`, tất cả các bản đồ có `backpack` trong `lootTable` sẽ ngẫu nhiên rơi ra ba lô này mà không cần sửa đổi các tệp khác.
+4. **Phạm vi sức chứa gợi ý**:
 
-| Rarity | Capacity Reference |
-|--------|---------------------|
+| Độ hiếm | Sức chứa tham khảo |
+|---------|-------------------|
 | common | 18~24 |
 | uncommon | 26~32 |
 | rare | 36~42 |
@@ -279,58 +279,58 @@ Controls which backpacks drop as loot and their rarity weights.
 
 ---
 
-### 2.5 Modifying Boss Drops
+### 2.5 Chỉnh Sửa Rơi Đồ Từ Boss
 
-Modify corresponding entry in `FIXED_LOOT_DROPS`.
+Chỉnh sửa mục tương ứng trong `FIXED_LOOT_DROPS`.
 
-**Current Fixed Drops Overview:**
+**Tổng quan về các vật phẩm rơi cố định hiện tại:**
 
-| Key Name | Source | Current Drop |
-|----------|--------|--------------|
-| `banker_kill` | Kill Bank Manager | Katana (melee) |
-| `leader_gift` | Outpost Leader gift | Tang Hengdao (melee) |
-| `doctor_trade` | Dr. Chen trade | M700 + 7.62×51mm×30 |
-| `outlaw_kill` | Kill Ma San | AK47 + 7.62×39mm×30 |
-| `shadow_kill` | Kill Shadow | GP100 + .357 Magnum×20 |
-| `space_crate` | Space base crate | AWM + .300 Win Mag×30 |
-| `tunnel_cache` | Tunnel cache | 9×19mm×20 + Compressed Biscuit |
+| Tên Khóa (Key) | Nguồn | Vật phẩm rơi hiện tại |
+|----------------|-------|----------------------|
+| `banker_kill` | Tiêu diệt Giám đốc ngân hàng | Katana (cận chiến) |
+| `leader_gift` | Quà tặng từ Thủ lĩnh tiền đồn | Đường Hoành Đao (cận chiến) |
+| `doctor_trade` | Giao dịch với Bác sĩ Trần | M700 + 7.62×51mm×30 |
+| `outlaw_kill` | Tiêu diệt Mã Tam | AK47 + 7.62×39mm×30 |
+| `shadow_kill` | Tiêu diệt Bóng Tối | GP100 + .357 Magnum×20 |
+| `space_crate` | Hòm căn cứ không gian | AWM + .300 Win Mag×30 |
+| `tunnel_cache` | Hòm bí mật đường hầm | 9×19mm×20 + Lương khô nén |
 
-**Example: Change Ma San drop from AK47 to HK416**
+**Ví dụ: Đổi rơi đồ của Mã Tam từ AK47 thành HK416**
 
 ```js
 outlaw_kill: { weaponId: "hk416", type: "ranged", ammoId: "5.56x45mm_nato", ammoCount: 30 },
 ```
 
-**Example: Change Bank Manager drop to ranged weapon**
+**Ví dụ: Đổi rơi đồ của Giám đốc ngân hàng sang vũ khí tầm xa**
 
 ```js
 banker_kill: { weaponId: "ebr14", type: "ranged", ammoId: "7.62x51mm", ammoCount: 30 },
 ```
 
-**Note:** `type` field determines which array to look up weapon, `"melee"` looks up in `MELEE_WEAPONS`, `"ranged"` looks up in `RANGED_WEAPONS`. If drop includes ammo, `ammoId` must match `id` in `AMMO`.
+**Lưu ý:** Trường `type` quyết định mảng tra cứu vũ khí, `"melee"` sẽ tra cứu trong `MELEE_WEAPONS`, `"ranged"` sẽ tra cứu trong `RANGED_WEAPONS`. Nếu vật phẩm rơi bao gồm đạn, `ammoId` phải khớp với `id` trong `AMMO`.
 
 ---
 
-### 2.6 Modifying Black Market Trader Items
+### 2.6 Chỉnh Sửa Vật Phẩm Của Thương Nhân Chợ Đen
 
-Add/remove entries in `TRADER_WEAPON_SHOP`.
+Thêm/xóa các mục trong `TRADER_WEAPON_SHOP`.
 
-**Field Description:**
+**Mô tả các trường:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `weaponId` | String | Weapon ID, must exist in `MELEE_WEAPONS` or `RANGED_WEAPONS` |
-| `type` | String | `"melee"` or `"ranged"` |
-| `costMin` | Number | Min cigarette price |
-| `costMax` | Number | Max cigarette price |
+| Trường | Kiểu | Mô tả |
+|--------|------|-------|
+| `weaponId` | String | ID vũ khí, phải tồn tại trong `MELEE_WEAPONS` hoặc `RANGED_WEAPONS` |
+| `type` | String | `"melee"` hoặc `"ranged"` |
+| `costMin` | Number | Giá thuốc lá tối thiểu |
+| `costMax` | Number | Giá thuốc lá tối đa |
 
-**Example: Add new item "Small Knife"**
+**Ví dụ: Thêm vật phẩm mới "Dao găm nhỏ"**
 
 ```js
 { weaponId: "small_knife", type: "melee", costMin: 3, costMax: 5 },
 ```
 
-**Example: Add "MP5" ranged weapon**
+**Ví dụ: Thêm vũ khí tầm xa "MP5"**
 
 ```js
 { weaponId: "mp5", type: "ranged", costMin: 15, costMax: 20 },
@@ -338,570 +338,570 @@ Add/remove entries in `TRADER_WEAPON_SHOP`.
 
 ---
 
-### 2.7 Modifying Map Drop Rates
+### 2.7 Chỉnh Sửa Tỷ Lệ Rơi Đồ Trên Bản Đồ
 
-Adjust weights in `MAPS` `lootTable`. Weights are relative, don't need to sum to 100, but convention uses sum 100 for clarity.
+Điều chỉnh trọng số trong `lootTable` của `MAPS`. Các trọng số mang tính tương đối, không bắt buộc tổng phải bằng 100, nhưng theo quy ước nên để tổng bằng 100 cho rõ ràng.
 
-**Available `lootTable` keys:**
+**Các khóa khả dụng trong `lootTable`:**
 
-| Key | Description | Corresponding Data Source |
-|-----|-------------|---------------------------|
-| `food` | Food | `FOODS` |
-| `drink` | Drink | `DRINKS` |
-| `fruit` | Fruit | `FRUITS` |
-| `cigarette` | Cigarette | `CIGARETTES` |
-| `medicine` | Medicine | `MEDICINES` (weighted by rarity) |
-| `backpack` | Backpack | `LOOT_BACKPACKS` (weighted by rarity) |
-| `melee` | Melee weapon | `MELEE_WEAPONS` (excluding fist, weighted by rarity) |
-| `ranged` | Ranged weapon | `RANGED_WEAPONS` (weighted by rarity) |
-| `ammo` | Ammo | `AMMO` (low danger maps have higher arrow chance) |
-| `building` | Building material | `BUILDING_MATERIALS` |
-| `empty` | No drop | — |
+| Khóa (Key) | Mô tả | Nguồn dữ liệu tương ứng |
+|------------|-------|-------------------------|
+| `food` | Thức ăn | `FOODS` |
+| `drink` | Đồ uống | `DRINKS` |
+| `fruit` | Trái cây | `FRUITS` |
+| `cigarette` | Thuốc lá | `CIGARETTES` |
+| `medicine` | Thuốc men | `MEDICINES` (tính theo trọng số độ hiếm) |
+| `backpack` | Ba lô | `LOOT_BACKPACKS` (tính theo trọng số độ hiếm) |
+| `melee` | Vũ khí cận chiến | `MELEE_WEAPONS` (loại trừ nắm đấm, tính theo trọng số độ hiếm) |
+| `ranged` | Vũ khí tầm xa | `RANGED_WEAPONS` (tính theo trọng số độ hiếm) |
+| `ammo` | Đạn dược | `AMMO` (bản đồ độ nguy hiểm thấp có tỷ lệ ra tên cao hơn) |
+| `building` | Vật liệu xây dựng | `BUILDING_MATERIALS` |
+| `empty` | Không rơi đồ | — |
 
-**Example: Increase ranged weapon drop rate for "Abandoned Police Station"**
+**Ví dụ: Tăng tỷ lệ rơi vũ khí tầm xa cho "Đồn cảnh sát bỏ hoang"**
 
 ```js
-// Original
-{ id: "abandoned_police_station", name: "Abandoned Police Station", danger: "★★★★ High Risk", encounterRate: 0.55,
+// Gốc
+{ id: "abandoned_police_station", name: "Đồn cảnh sát bỏ hoang", danger: "★★★★ Nguy hiểm cao", encounterRate: 0.55,
   lootTable: { melee: 15, ranged: 15, ammo: 25, medicine: 10, backpack: 10, fruit: 10, food: 5, drink: 5, empty: 5 } },
 
-// Modified: Increase ranged weight to 25, decrease ammo to 15
-{ id: "abandoned_police_station", name: "Abandoned Police Station", danger: "★★★★ High Risk", encounterRate: 0.55,
+// Sửa đổi: Tăng trọng số súng tầm xa lên 25, giảm đạn xuống 15
+{ id: "abandoned_police_station", name: "Đồn cảnh sát bỏ hoang", danger: "★★★★ Nguy hiểm cao", encounterRate: 0.55,
   lootTable: { melee: 15, ranged: 25, ammo: 15, medicine: 10, backpack: 10, fruit: 10, food: 5, drink: 5, empty: 5 } },
 ```
 
 ---
 
-### 2.8 Adjusting Game Balance
+### 2.8 Điều Chỉnh Cân Bằng Trò Chơi
 
-Modify in `GAME_CONSTANTS`, includes the following subcategories:
+Chỉnh sửa trong `GAME_CONSTANTS`, bao gồm các nhóm con sau:
 
-#### Global Caps
+#### Giới Hạn Toàn Cục (Global Caps)
 
 ```js
-CRASH_MAX: 100,              // Crash value cap (crash >= this, player crashes, can't fight/eat/drink/sleep)
-INFECTION_MAX: 100,          // Infection value cap (infection >= this, player dies)
+CRASH_MAX: 100,              // Giới hạn giá trị mệt mỏi / sụp đổ tinh thần (khi >= mức này, nhân vật sụp đổ, không thể chiến đấu/ăn/uống/ngủ)
+INFECTION_MAX: 100,          // Giới hạn nhiễm trùng (khi >= mức này, nhân vật tử vong)
 ```
 
-#### Survival Params (`SURVIVAL`)
+#### Tham Số Sinh Tồn (`SURVIVAL`)
 
 ```js
 SURVIVAL: {
-  HUNGER_DECAY: 4,              // Hunger decay per turn
-  HYDRATION_DECAY: 4,           // Hydration decay per turn
-  CRASH_THRESHOLD_TURNS: 16,    // Crash cycle (crash growth triggers every 16 turns)
-  CRASH_PER_CYCLE: 20,          // Crash growth per cycle
-  STARVATION_DAMAGE: 10,        // Damage from starvation/dehydration
-  INFECTION_THRESHOLD: 50,      // Infection danger threshold
-  CRASH_STATUS_THRESHOLD: 50,   // Crash danger threshold
-  SEVERE_INJURY_THRESHOLD: 30,  // Severe injury threshold
+  HUNGER_DECAY: 4,              // Độ no tiêu hao mỗi lượt
+  HYDRATION_DECAY: 4,           // Độ nước tiêu hao mỗi lượt
+  CRASH_THRESHOLD_TURNS: 16,    // Chu kỳ tích tụ mệt mỏi (kích hoạt tăng mệt mỏi mỗi 16 lượt)
+  CRASH_PER_CYCLE: 20,          // Mệt mỏi tăng thêm mỗi chu kỳ
+  STARVATION_DAMAGE: 10,        // Sát thương do chết đói / mất nước
+  INFECTION_THRESHOLD: 50,      // Ngưỡng cảnh báo nguy hiểm nhiễm trùng
+  CRASH_STATUS_THRESHOLD: 50,   // Ngưỡng cảnh báo nguy hiểm mệt mỏi
+  SEVERE_INJURY_THRESHOLD: 30,  // Ngưỡng trọng thương
 },
 ```
 
-#### Combat Params (`COMBAT`)
+#### Tham Số Chiến Đấu (`COMBAT`)
 
 ```js
 COMBAT: {
-  FLEE_RATE: 0.25,                // Flee success rate
-  FLEE_RATE_TEXT: "Flee (25%)",    // Flee button text (derived from FLEE_RATE)
-  RANGED_DODGE_RATE: 0.6,         // Ranged weapon dodge rate
-  LIURUYAN_ASSIST_DAMAGE: 20,     // V's assist damage
-  LIURUYAN_ASSIST_RATE: 0.3,      // V's assist trigger rate
-  NPC_RANGED_TRIGGER_RATE: 0.4,   // NPC uses ranged weapon chance
-  INFECTION_ON_HIT: 2,            // Infection increase when hit by zombie
-  SUMMONED_ZOMBIE_DAMAGE: 8,      // Summoned zombie damage
-  NURSE_HEAL_AFTER_COMBAT: 20,    // Nurse post-combat heal amount
-  // Zombie ability params
-  ABILITY_SCREECH_CRASH: 5,       // Screech crash increase
-  ABILITY_TRIP_SKIP_RATE: 0.3,    // Trip skip turn rate
-  ABILITY_BLIND_MISS_RATE: 0.5,   // Blind miss rate
-  ABILITY_LEAP_DAMAGE_MULT: 0.6,  // Leap damage multiplier
-  ABILITY_CLOAK_COUNTER_MULT: 0.5,// Cloak counterattack multiplier
-  ABILITY_ARMOR_MULT: 0.5,        // Armor damage reduction multiplier
-  ABILITY_CORRODE_DURABILITY: 5,  // Corrode melee durability
-  ABILITY_CORRODE_INTEGRITY: 5,   // Corrode ranged integrity
-  ABILITY_ACID_DAMAGE_MIN: 15,    // Acid min damage
-  ABILITY_ACID_DAMAGE_MAX: 24,    // Acid max damage
-  ABILITY_CLOAK_AMBUSH_RATE: 0.4, // Cloak ambush rate
-  ABILITY_CLOAK_AMBUSH_MULT: 0.8, // Cloak ambush damage multiplier
-  ABILITY_EXPLOSIVE_MULT: 2,      // Explosive damage multiplier
-  // Loot params
-  ZOMBIE_LOOT_DROP_RATE: 0.5,     // Zombie loot drop rate
-  ZOMBIE_LOOT_FOOD_RATE: 0.5,     // Zombie drops food chance
-  NPC_LOOT_DROP_RATE: 0.8,        // NPC loot drop rate
-  TRADER_CIG_DROP_MIN: 2,         // Trader cigarette drop min
-  TRADER_CIG_DROP_MAX: 5,         // Trader cigarette drop max
-  // NPC combat params
-  NPC_RANGED_OPENING_DAMAGE_MIN: 10, // NPC ranged opening min damage
-  NPC_RANGED_OPENING_DAMAGE_MAX: 24, // NPC ranged opening max damage
-  DEFAULT_NPC_DODGE_RATE: 0.2,       // NPC default dodge rate
-  RANGED_INTEGRITY_LOSS: 5,          // Ranged weapon integrity loss per hit
-  RANGED_SHOT_INTEGRITY_LOSS: 1,   // Ranged shot integrity consumption (per bullet -1)
+  FLEE_RATE: 0.25,                // Tỷ lệ chạy trốn thành công
+  FLEE_RATE_TEXT: "Chạy trốn (25%)", // Văn bản nút chạy trốn (suy dẫn từ FLEE_RATE)
+  RANGED_DODGE_RATE: 0.6,         // Tỷ lệ né tránh vũ khí tầm xa
+  LIURUYAN_ASSIST_DAMAGE: 20,     // Sát thương hỗ trợ của V
+  LIURUYAN_ASSIST_RATE: 0.3,      // Tỷ lệ kích hoạt hỗ trợ của V
+  NPC_RANGED_TRIGGER_RATE: 0.4,   // Xác suất NPC dùng vũ khí tầm xa
+  INFECTION_ON_HIT: 2,            // Nhiễm trùng tăng thêm khi bị zombie đánh trúng
+  SUMMONED_ZOMBIE_DAMAGE: 8,      // Sát thương của zombie được triệu hồi
+  NURSE_HEAL_AFTER_COMBAT: 20,    // Lượng máu Y tá hồi phục sau trận chiến
+  // Tham số kỹ năng Zombie
+  ABILITY_SCREECH_CRASH: 5,       // Tiếng thét tăng mệt mỏi
+  ABILITY_TRIP_SKIP_RATE: 0.3,    // Ngáng chân làm mất lượt
+  ABILITY_BLIND_MISS_RATE: 0.5,   // Mù mắt làm đánh trượt
+  ABILITY_LEAP_DAMAGE_MULT: 0.6,  // Hệ số sát thương vồ tới
+  ABILITY_CLOAK_COUNTER_MULT: 0.5,// Hệ số phản kích khi tàng hình
+  ABILITY_ARMOR_MULT: 0.5,        // Hệ số giảm sát thương nhờ giáp
+  ABILITY_CORRODE_DURABILITY: 5,  // Axit ăn mòn độ bền vũ khí cận chiến
+  ABILITY_CORRODE_INTEGRITY: 5,   // Axit ăn mòn độ bền súng tầm xa
+  ABILITY_ACID_DAMAGE_MIN: 15,    // Sát thương axit tối thiểu
+  ABILITY_ACID_DAMAGE_MAX: 24,    // Sát thương axit tối đa
+  ABILITY_CLOAK_AMBUSH_RATE: 0.4, // Tỷ lệ phục kích khi ẩn nấp
+  ABILITY_CLOAK_AMBUSH_MULT: 0.8, // Hệ số sát thương phục kích ẩn nấp
+  ABILITY_EXPLOSIVE_MULT: 2,      // Hệ số sát thương phát nổ
+  // Tham số rơi đồ chiến lợi phẩm
+  ZOMBIE_LOOT_DROP_RATE: 0.5,     // Tỷ lệ rơi đồ của Zombie
+  ZOMBIE_LOOT_FOOD_RATE: 0.5,     // Tỷ lệ Zombie rơi ra thức ăn
+  NPC_LOOT_DROP_RATE: 0.8,        // Tỷ lệ rơi đồ của NPC
+  TRADER_CIG_DROP_MIN: 2,         // Thuốc lá rơi tối thiểu từ thương nhân
+  TRADER_CIG_DROP_MAX: 5,         // Thuốc lá rơi tối đa từ thương nhân
+  // Tham số chiến đấu của NPC
+  NPC_RANGED_OPENING_DAMAGE_MIN: 10, // Sát thương mở màn tầm xa tối thiểu của NPC
+  NPC_RANGED_OPENING_DAMAGE_MAX: 24, // Sát thương mở màn tầm xa tối đa của NPC
+  DEFAULT_NPC_DODGE_RATE: 0.2,       // Tỷ lệ né tránh mặc định của NPC
+  RANGED_INTEGRITY_LOSS: 5,          // Súng mất độ bền mỗi khi bị đánh trúng
+  RANGED_SHOT_INTEGRITY_LOSS: 1,   // Tiêu hao độ bền khi bắn (mỗi viên -1)
 },
 ```
 
-#### Map Event Damage (`MAP_EVENTS`)
+#### Sát Thương Sự Kiện Bản Đồ (`MAP_EVENTS`)
 
 ```js
 MAP_EVENTS: {
-  FACTORY_EXPLOSION_DAMAGE: 120,      // Factory explosion damage
-  VETERAN_MISFIRE_DAMAGE: 40,         // Veteran misfire damage
-  TUNNEL_COLLAPSE_DAMAGE: 80,         // Tunnel collapse damage
-  TUNNEL_GAS_DAMAGE: 40,              // Tunnel gas damage
-  TUNNEL_GAS_INFECTION: 10,           // Tunnel gas infection
-  TUNNEL_ZOMBIE_SWARM_DAMAGE: 60,     // Tunnel zombie swarm damage
-  FOOD_LOCKER_HUNGER_RESTORE: 30,     // Food locker hunger restore
-  FOOD_LOCKER_HYDRATION_RESTORE: 30,  // Food locker hydration restore
-  FOOD_LOCKER_BAD_FOOD_CRASH: 44,     // Spoiled food crash increase
-  POLICE_TRAP_DAMAGE: 50,             // Police trap damage
-  // New map event params
-  TOWER_CRASH_REDUCTION: 10,          // Watchtower crash reduction
-  FRUIT_REGROW_DAYS: 3,              // Fruit regrow days
-  FRUIT_PICK_COUNT: 3,               // Fruit pick count
-  CAVE_CIG_RATE: 0.1,                // Cave cigarette chance
-  CORPSE_COOLDOWN_DAYS: 3,           // Corpse loot cooldown days
-  FOOD_LOCKER_GOOD_RATE: 0.3,        // Food locker good food chance
-  WOLF_TRADE_FOOD_COST: 3,           // Wolf trade food cost
-  FACTORY_EXPLOSION_RATE: 0.3,       // Factory explosion chance
-  RIVER_CRASH_REDUCTION: 10,         // Riverside crash reduction
-  WAREHOUSE_BUILDING_COST: 10,       // Warehouse building material cost
-  POLICE_TRAP_RATE: 0.7,             // Police trap chance
-  POLICE_AMMO_MIN: 3,                // Police ammo min
-  POLICE_AMMO_MAX: 8,                // Police ammo max
-  VETERAN_MISFIRE_RATE: 0.5,         // Veteran misfire chance
-  VETERAN_AMMO_GIVE_RATE: 0.5,       // Veteran gives ammo chance
-  VETERAN_AMMO_MIN: 3,               // Veteran ammo min
-  VETERAN_AMMO_MAX: 7,               // Veteran ammo max
-  TUNNEL_CACHE_RATE: 0.15,           // Tunnel cache chance
-  TUNNEL_COLLAPSE_RATE: 0.5,         // Tunnel collapse chance
-  TUNNEL_GAS_RATE: 0.8,              // Tunnel gas chance
-  SPACE_CRATE_RATE: 0.05,            // Space base crate chance
+  FACTORY_EXPLOSION_DAMAGE: 120,      // Sát thương vụ nổ nhà máy
+  VETERAN_MISFIRE_DAMAGE: 40,         // Sát thương cựu binh bắn nhầm
+  TUNNEL_COLLAPSE_DAMAGE: 80,         // Sát thương sập hầm
+  TUNNEL_GAS_DAMAGE: 40,              // Sát thương khí độc đường hầm
+  TUNNEL_GAS_INFECTION: 10,           // Nhiễm trùng do khí độc đường hầm
+  TUNNEL_ZOMBIE_SWARM_DAMAGE: 60,     // Sát thương bầy zombie trong hầm
+  FOOD_LOCKER_HUNGER_RESTORE: 30,     // Hồi độ no từ tủ thực phẩm
+  FOOD_LOCKER_HYDRATION_RESTORE: 30,  // Hồi nước từ tủ thực phẩm
+  FOOD_LOCKER_BAD_FOOD_CRASH: 44,     // Tăng mệt mỏi do ăn phải thức ăn hỏng
+  POLICE_TRAP_DAMAGE: 50,             // Sát thương bẫy đồn cảnh sát
+  // Tham số sự kiện bản đồ bổ sung
+  TOWER_CRASH_REDUCTION: 10,          // Giảm mệt mỏi khi leo tháp canh
+  FRUIT_REGROW_DAYS: 3,              // Số ngày quả mọc lại
+  FRUIT_PICK_COUNT: 3,               // Số lượng quả hái được
+  CAVE_CIG_RATE: 0.1,                // Tỷ lệ nhặt được thuốc lá trong hang
+  CORPSE_COOLDOWN_DAYS: 3,           // Số ngày hồi lại xác chết để nhặt đồ
+  FOOD_LOCKER_GOOD_RATE: 0.3,        // Tỷ lệ tủ thực phẩm chứa đồ tốt
+  WOLF_TRADE_FOOD_COST: 3,           // Lượng thức ăn đổi đồ với sói
+  FACTORY_EXPLOSION_RATE: 0.3,       // Tỷ lệ nổ nhà máy
+  RIVER_CRASH_REDUCTION: 10,         // Giảm mệt mỏi bên bờ sông
+  WAREHOUSE_BUILDING_COST: 10,       // Chi phí vật liệu sửa nhà kho
+  POLICE_TRAP_RATE: 0.7,             // Tỷ lệ dính bẫy đồn cảnh sát
+  POLICE_AMMO_MIN: 3,                // Lượng đạn đồn cảnh sát tối thiểu
+  POLICE_AMMO_MAX: 8,                // Lượng đạn đồn cảnh sát tối đa
+  VETERAN_MISFIRE_RATE: 0.5,         // Tỷ lệ cựu binh bắn nhầm
+  VETERAN_AMMO_GIVE_RATE: 0.5,       // Tỷ lệ cựu binh cho đạn
+  VETERAN_AMMO_MIN: 3,               // Lượng đạn cựu binh cho tối thiểu
+  VETERAN_AMMO_MAX: 7,               // Lượng đạn cựu binh cho tối đa
+  TUNNEL_CACHE_RATE: 0.15,           // Tỷ lệ tìm thấy hòm bí mật trong hầm
+  TUNNEL_COLLAPSE_RATE: 0.5,         // Tỷ lệ sập hầm
+  TUNNEL_GAS_RATE: 0.8,              // Tỷ lệ trúng khí độc trong hầm
+  SPACE_CRATE_RATE: 0.05,            // Tỷ lệ nhặt được hòm trạm không gian
 },
 ```
 
-#### Castle Params (`CASTLE`)
+#### Tham Số Lâu Đài (`CASTLE`)
 
 ```js
 CASTLE: {
-  WORK_HUNGER_COST: 18,          // Work hunger cost
-  WORK_HYDRATION_COST: 18,       // Work hydration cost
-  WORK_CRASH_GAIN: 40,           // Work crash gain
-  BALL_CRASH_REDUCTION: 50,      // Ball crash reduction
-  ROOM_HEALTH_RESTORE: 50,       // Room health restore
-  NOBLE_ID_COST: 25,             // Noble ID card cost
-  LOAN_TERM_DAYS: 10,            // Loan term (days)
-  MERCY_EXTENSION_DAYS: 5,       // Grace period (days)
-  // New castle params
-  BANQUET_HUNGER_RESTORE: 50,    // Banquet hunger restore
-  BANQUET_HYDRATION_RESTORE: 50, // Banquet hydration restore
-  GARDEN_MEDICINE_RATE: 0.3,     // Garden medicine chance
-  GARDEN_MEDICINE_COUNT: 3,      // Garden medicine count
-  TREATMENT_AMOUNTS: [10, 30, 50, 80],   // Treatment amounts (by rank)
-  TREATMENT_RANKS: [3, 4, 5, 6],         // Treatment corresponding ranks
-  MEETING_RANK_REQUIRED: 5,     // Meeting required min rank
-  GARDEN_RANK_REQUIRED: 6,      // Garden entry required min rank
-  BANQUET_TIME_COST: 2,         // Banquet time cost (phases)
-  BALL_TIME_COST: 2,            // Ball time cost (phases)
-  ROOM_TIME_COST: 3,            // Room rest time cost (phases)
-  MEETING_TIME_COST: 2,         // Meeting time cost (phases)
+  WORK_HUNGER_COST: 18,          // Tiêu hao độ no khi làm việc
+  WORK_HYDRATION_COST: 18,       // Tiêu hao nước khi làm việc
+  WORK_CRASH_GAIN: 40,           // Mệt mỏi tăng lên khi làm việc
+  BALL_CRASH_REDUCTION: 50,      // Giảm mệt mỏi khi dự vũ hội
+  ROOM_HEALTH_RESTORE: 50,       // Hồi máu khi nghỉ tại phòng khách
+  NOBLE_ID_COST: 25,             // Chi phí mua thẻ căn cước quý tộc (thuốc lá)
+  LOAN_TERM_DAYS: 10,            // Thời hạn vay (ngày)
+  MERCY_EXTENSION_DAYS: 5,       // Thời gian ân hạn gia hạn (ngày)
+  // Tham số lâu đài bổ sung
+  BANQUET_HUNGER_RESTORE: 50,    // Hồi độ no từ quốc yến
+  BANQUET_HYDRATION_RESTORE: 50, // Hồi nước từ quốc yến
+  GARDEN_MEDICINE_RATE: 0.3,     // Tỷ lệ hái được dược liệu trong vườn
+  GARDEN_MEDICINE_COUNT: 3,      // Số lượng dược liệu hái được
+  TREATMENT_AMOUNTS: [10, 30, 50, 80],   // Mức trị liệu (theo tước vị)
+  TREATMENT_RANKS: [3, 4, 5, 6],         // Các tước vị tương ứng với mức trị liệu
+  MEETING_RANK_REQUIRED: 5,     // Tước vị tối thiểu để diện kiến
+  GARDEN_RANK_REQUIRED: 6,      // Tước vị tối thiểu vào ngự hoa viên
+  BANQUET_TIME_COST: 2,         // Thời gian dự yến tiệc (mốc thời gian)
+  BALL_TIME_COST: 2,            // Thời gian dự vũ hội (mốc thời gian)
+  ROOM_TIME_COST: 3,            // Thời gian nghỉ tại phòng (mốc thời gian)
+  MEETING_TIME_COST: 2,         // Thời gian hội đàm (mốc thời gian)
 },
 ```
 
-#### Doctor Params (`DOCTOR`)
+#### Tham Số Bác Sĩ (`DOCTOR`)
 
 ```js
 DOCTOR: {
-  HEAL_AMOUNT: 120,                  // Heal health restore
-  PSYCHOLOGY_CRASH_REDUCTION: 30,    // Psychology crash reduction
-  TREATMENT_ITEM_COST: 5,            // Treatment item cost
-  PSYCHOLOGY_FOOD_COST: 3,           // Psychology food cost
-  SERUM_TRADE_COST: 50,              // Serum trade cost (cigarettes)
+  HEAL_AMOUNT: 120,                  // Máu hồi phục khi chữa trị
+  PSYCHOLOGY_CRASH_REDUCTION: 30,    // Giảm mệt mỏi khi tư vấn tâm lý
+  TREATMENT_ITEM_COST: 5,            // Chi phí vật phẩm để chữa trị
+  PSYCHOLOGY_FOOD_COST: 3,           // Chi phí thức ăn để tư vấn tâm lý
+  SERUM_TRADE_COST: 50,              // Chi phí đổi huyết thanh (thuốc lá)
 },
 ```
 
-#### Rocket Params (`ROCKET`)
+#### Tham Số Tên Lửa (`ROCKET`)
 
 ```js
 ROCKET: {
-  QUEST2_ENERGY_COST: 15,              // Rocket quest 2 pure energy cost (originally 30, reduced)
-  QUEST3_MEDICINE_COST: 10,            // Rocket quest 3 medicine cost
-  QUEST3_FOOD_COST: 10,                // Rocket quest 3 food cost
-  QUEST3_DRINKS_COST: 10,              // Rocket quest 3 drink cost
-  IMPROVED_SERUM_INFECTION_REDUCTION: 90, // Improved serum infection reduction
-  HOPE_AFFINITY_REQUIRED: 150,         // Hope ending required affinity
-  DISMANTLE_WEAPON_ID: "big_wrench",  // Dismantle nuke required weapon
-  DISMANTLE_BACKPACK_ID: "dimensional_storage", // Dismantle nuke required backpack
-  AWM_ID: "awm",                       // AWM weapon ID
+  QUEST2_ENERGY_COST: 15,              // Chi phí năng lượng thuần khiết nhiệm vụ 2 (đã giảm từ 30 xuống)
+  QUEST3_MEDICINE_COST: 10,            // Chi phí thuốc nhiệm vụ 3
+  QUEST3_FOOD_COST: 10,                // Chi phí thức ăn nhiệm vụ 3
+  QUEST3_DRINKS_COST: 10,              // Chi phí đồ uống nhiệm vụ 3
+  IMPROVED_SERUM_INFECTION_REDUCTION: 90, // Lượng nhiễm trùng giảm nhờ huyết thanh cải tiến
+  HOPE_AFFINITY_REQUIRED: 150,         // Độ thân mật cần để mở kết thúc Hy Vọng
+  DISMANTLE_WEAPON_ID: "big_wrench",  // Vũ khí yêu cầu để tháo dỡ bom hạt nhân
+  DISMANTLE_BACKPACK_ID: "dimensional_storage", // Ba lô yêu cầu để tháo dỡ bom hạt nhân
+  AWM_ID: "awm",                       // ID vũ khí AWM
 },
 ```
 
-#### Island Params (`ISLAND`)
+#### Tham Số Đảo Biển (`ISLAND`)
 
 ```js
 ISLAND: {
-  REST_HEALTH_RESTORE: 30,           // Island rest health restore
-  REST_CRASH_REDUCTION: 30,          // Island rest crash reduction
-  REST_TIME_COST: 4,                 // Island rest time cost (phases)
-  YACHT_GASOLINE_COST: 1,            // Yacht gasoline cost
-  YACHT_TIME_COST: 8,                // Yacht time cost (phases)
+  REST_HEALTH_RESTORE: 30,           // Máu hồi phục khi nghỉ ngơi trên đảo
+  REST_CRASH_REDUCTION: 30,          // Giảm mệt mỏi khi nghỉ ngơi trên đảo
+  REST_TIME_COST: 4,                 // Thời gian nghỉ ngơi trên đảo (mốc)
+  YACHT_GASOLINE_COST: 1,            // Tiêu hao xăng khi đi du thuyền
+  YACHT_TIME_COST: 8,                // Thời gian đi du thuyền (mốc)
 },
 ```
 
-#### Fishing Params (`FISHING`)
+#### Tham Số Câu Cá (`FISHING`)
 
 ```js
 FISHING: {
-  CATCH_RATE: 0.6,                   // Fishing success rate
-  CATCH_COUNT_MIN: 1,                // Min catch count
-  CATCH_COUNT_MAX: 3,                // Max catch count
+  CATCH_RATE: 0.6,                   // Tỷ lệ câu cá thành công
+  CATCH_COUNT_MIN: 1,                // Số lượng cá câu được tối thiểu
+  CATCH_COUNT_MAX: 3,                // Số lượng cá câu được tối đa
 },
 ```
 
-#### Duke Yumo Params (`YUMO`)
+#### Tham Số Công Tước Vũ Mặc (`YUMO`)
 
 ```js
 YUMO: {
-  TRADE_ROYAL_COIN_COST: 5,          // Yumo trade royal coin cost
-  LOAN_INTEREST_RATE: 0.1,           // Island bank interest rate
-  LOAN_TERM_DAYS: 30,                // Island bank repayment term
-  LOAN_OVERDUE_PENALTY: 0.1,         // Island bank overdue penalty
+  TRADE_ROYAL_COIN_COST: 5,          // Tiền hoàng gia tiêu tốn khi giao dịch với Vũ Mặc
+  LOAN_INTEREST_RATE: 0.1,           // Lãi suất ngân hàng trên đảo
+  LOAN_TERM_DAYS: 30,                // Kỳ hạn trả nợ ngân hàng đảo
+  LOAN_OVERDUE_PENALTY: 0.1,         // Phạt quá hạn nợ ngân hàng đảo
 },
 ```
 
-#### Weather Probability (`WEATHER`)
+#### Xác Suất Thời Tiết (`WEATHER`)
 
 ```js
 WEATHER: {
   PROBABILITIES: { sunny: 0.40, cloudy: 0.30, rainy: 0.10, hot: 0.05, foggy: 0.05, acid_rain: 0.05, sandstorm: 0.05 },
   EFFECTS: {
-    rainy: { crash: 2 },       // Rain increases crash
-    hot: { hydration: -5 },  // Hot extra hydration consumption
-    sandstorm: { health: -2 },     // Sandstorm health damage
+    rainy: { crash: 2 },       // Trời mưa tăng mệt mỏi
+    hot: { hydration: -5 },    // Nắng gắt hao thêm nước
+    sandstorm: { health: -2 }, // Bão cát gây sát thương máu
   },
 },
 ```
 
-#### Encounter Params (`ENCOUNTER`)
+#### Tham Số Chạm Trán (`ENCOUNTER`)
 
 ```js
 ENCOUNTER: {
-  NPC_RATE: 0.1,                                                    // NPC encounter rate
-  NPC_DISTRIBUTION: { survivor: 0.6, wandering_trader: 0.2, doctor: 0.1, bandit: 0.1 },  // NPC type distribution
+  NPC_RATE: 0.1,                                                    // Tỷ lệ chạm trán NPC
+  NPC_DISTRIBUTION: { survivor: 0.6, wandering_trader: 0.2, doctor: 0.1, bandit: 0.1 },  // Phân bố các loại NPC
 },
 ```
 
-#### Sleep Params (`SLEEP`)
+#### Tham Số Giấc Ngủ (`SLEEP`)
 
 ```js
 SLEEP: {
-  CRASH_REDUCTION_MIN: 10,       // Crash reduction min
-  CRASH_REDUCTION_MAX: 25,       // Crash reduction max
-  HEALTH_RECOVERY_MIN: 20,       // Health recovery min
-  HEALTH_RECOVERY_MAX: 40,       // Health recovery max
-  TIME_COST: 4,                  // Sleep time cost (phases)
+  CRASH_REDUCTION_MIN: 10,       // Mức giảm mệt mỏi tối thiểu
+  CRASH_REDUCTION_MAX: 25,       // Mức giảm mệt mỏi tối đa
+  HEALTH_RECOVERY_MIN: 20,       // Hồi máu tối thiểu
+  HEALTH_RECOVERY_MAX: 40,       // Hồi máu tối đa
+  TIME_COST: 4,                  // Thời gian ngủ (mốc)
 },
 ```
 
-#### Outpost Params (`OUTPOST`)
+#### Tham Số Tiền Đồn (`OUTPOST`)
 
 ```js
 OUTPOST: {
-  WORK_HUNGER_COST: 6,           // Outpost work hunger cost
-  WORK_HYDRATION_COST: 6,        // Outpost work hydration cost
-  WORK_CRASH_GAIN: 5,            // Outpost work crash gain
-  HONOR_WEAPON_ID: "vector",     // Honor reward weapon ID
-  HONOR_AMMO_ID: "9x19mm",      // Honor reward ammo ID
-  HONOR_AMMO_COUNT: 60,          // Honor reward ammo count
-  LEADER_CHAT_AFFINITY: 1,       // Leader chat affinity gain
-  LEADER_GIFT_AFFINITY: 1,       // Gift to leader affinity gain
+  WORK_HUNGER_COST: 6,           // Tiêu hao độ no khi làm việc tại tiền đồn
+  WORK_HYDRATION_COST: 6,        // Tiêu hao nước khi làm việc tại tiền đồn
+  WORK_CRASH_GAIN: 5,            // Mệt mỏi tăng khi làm việc tại tiền đồn
+  HONOR_WEAPON_ID: "vector",     // Vũ khí khen thưởng danh dự
+  HONOR_AMMO_ID: "9x19mm",       // Đạn khen thưởng danh dự
+  HONOR_AMMO_COUNT: 60,          // Số lượng đạn khen thưởng danh dự
+  LEADER_CHAT_AFFINITY: 1,       // Độ thân mật tăng khi trò chuyện với thủ lĩnh
+  LEADER_GIFT_AFFINITY: 1,       // Độ thân mật tăng khi tặng quà thủ lĩnh
 },
 ```
 
-#### Base Params (`BASE`)
+#### Tham Số Căn Cứ (`BASE`)
 
 ```js
 BASE: {
-  UPGRADE_TIME_COST: 8,          // Base upgrade time cost (phases)
-  WAREHOUSE_BASE_CAP: 30,        // Warehouse base capacity
-  WAREHOUSE_CAP_PER_LEVEL: 10,   // Warehouse capacity per level
-  MAX_WAREHOUSE_LEVEL: 7,        // Warehouse max level
-  WAREHOUSE_UPGRADE_TIME: 2,     // Warehouse upgrade time cost (phases)
-  FARMING_CROP_SLOTS: 5,         // Farming crop slots
+  UPGRADE_TIME_COST: 8,          // Thời gian nâng cấp căn cứ (mốc)
+  WAREHOUSE_BASE_CAP: 30,        // Sức chứa cơ bản của nhà kho
+  WAREHOUSE_CAP_PER_LEVEL: 10,   // Sức chứa tăng thêm mỗi cấp nhà kho
+  MAX_WAREHOUSE_LEVEL: 7,        // Cấp độ nhà kho tối đa
+  WAREHOUSE_UPGRADE_TIME: 2,     // Thời gian nâng cấp nhà kho (mốc)
+  FARMING_CROP_SLOTS: 5,         // Số ô trồng trọt
 },
 ```
 
-#### Ending Params (`ENDINGS`)
+#### Tham Số Kết Cục (`ENDINGS`)
 
 ```js
 ENDINGS: {
-  DAY_999_THRESHOLD: 999,               // 999 days ending threshold
-  NEWFORCE_WEAPON_ID: "fearless_blade",       // New force ending weapon ID
-  ENDING_999_BACKPACK_ID: "dimensional_storage", // 999 days ending backpack ID
-  NEWFORCE_BOSS_NAME: "New Force Leader",     // New force boss name
-  ALL_IDS: ["ending_death", "ending_999", "ending_prince", "ending_captain", "ending_newforce", "ending_space", "ending_hope", "ending_stay", "ending_farming", "ending_love_hate", "ending_food", "ending_elopement"],  // All ending ID list
+  DAY_999_THRESHOLD: 999,               // Ngưỡng ngày mở kết thúc 999 ngày
+  NEWFORCE_WEAPON_ID: "fearless_blade",       // Vũ khí thưởng kết cục Lực Lượng Mới
+  ENDING_999_BACKPACK_ID: "dimensional_storage", // Ba lô thưởng kết cục 999 ngày
+  NEWFORCE_BOSS_NAME: "New Force Leader",     // Tên Boss Thủ lĩnh Lực Lượng Mới
+  ALL_IDS: ["ending_death", "ending_999", "ending_prince", "ending_captain", "ending_newforce", "ending_space", "ending_hope", "ending_stay", "ending_farming", "ending_love_hate", "ending_food", "ending_elopement"],  // Danh sách ID toàn bộ các kết cục
 },
 ```
 
-#### Liu Ruyan Params (`LIURUYAN`)
+#### Tham Số Liễu Như Yên (`LIURUYAN`)
 
 ```js
 LIURUYAN: {
-  RESCUE_DEADLINE_DAYS: 30,      // Rescue deadline days
-  SERUM_COST: 3,                 // Serum cost count
+  RESCUE_DEADLINE_DAYS: 30,      // Thời hạn chót giải cứu (ngày)
+  SERUM_COST: 3,                 // Số lượng huyết thanh tiêu hao
 },
 ```
 
-#### Nurse Zombie Params (`NURSE_ZOMBIE`)
+#### Tham Số Zombie Y Tá (`NURSE_ZOMBIE`)
 
 ```js
 NURSE_ZOMBIE: {
-  BRING_HOME_AFFINITY: 150,      // Bring home affinity gain
-  CANNED_AFFINITY_MIN: 2,        // Canned food affinity min
-  CANNED_AFFINITY_MAX: 3,        // Canned food affinity max
-  MAX_AFFINITY: 150,             // Affinity max
+  BRING_HOME_AFFINITY: 150,      // Độ thân mật tăng khi đưa về nhà
+  CANNED_AFFINITY_MIN: 2,        // Độ thân mật tối thiểu khi cho ăn đồ hộp
+  CANNED_AFFINITY_MAX: 3,        // Độ thân mật tối đa khi cho ăn đồ hộp
+  MAX_AFFINITY: 150,             // Giới hạn độ thân mật tối đa
 },
 ```
 
-#### NPC Affinity Params (`NPC`)
+#### Tham Số Độ Thân Mật NPC (`NPC`)
 
 ```js
 NPC: {
-  GIFT_AFFINITY_FOOD: 3,         // Gift food affinity gain
-  GIFT_AFFINITY_DRINKS: 3,       // Gift drinks affinity gain
-  GIFT_AFFINITY_MEDICINE: 5,     // Gift medicine affinity gain
-  GIFT_AFFINITY_CARGO: 2,        // Gift goods affinity gain
-  LILI_GIFT_AFFINITY_FOOD: 6,    // Lili gift food affinity gain
-  LILI_GIFT_AFFINITY_MEDICINE: 10, // Lili gift medicine affinity gain
-  QUEST_AFFINITY_REWARD: 5,      // Quest completion affinity reward
-  MAP_NPC_GIFT_AFFINITY: 2,      // Map NPC gift affinity gain
-  CHAT_AFFINITY: 1,                 // Chat affinity gain
-  V_TRADE_AMMO_MIN: 3,             // V trade ammo min count
-  V_TRADE_AMMO_MAX: 12,            // V trade ammo max count
-  LILI_TRADE_MED_COUNT_MIN: 1,     // Lili trade medicine min count
-  LILI_TRADE_MED_COUNT_MAX: 3,     // Lili trade medicine max count
+  GIFT_AFFINITY_FOOD: 3,         // Thân mật tăng khi tặng thức ăn
+  GIFT_AFFINITY_DRINKS: 3,       // Thân mật tăng khi tặng đồ uống
+  GIFT_AFFINITY_MEDICINE: 5,     // Thân mật tăng khi tặng thuốc
+  GIFT_AFFINITY_CARGO: 2,        // Thân mật tăng khi tặng hàng hóa
+  LILI_GIFT_AFFINITY_FOOD: 6,    // Thân mật tăng khi tặng đồ ăn cho Lệ Lệ
+  LILI_GIFT_AFFINITY_MEDICINE: 10, // Thân mật tăng khi tặng thuốc cho Lệ Lệ
+  QUEST_AFFINITY_REWARD: 5,      // Thân mật thưởng khi hoàn thành nhiệm vụ
+  MAP_NPC_GIFT_AFFINITY: 2,      // Thân mật tăng khi tặng quà cho NPC trên bản đồ
+  CHAT_AFFINITY: 1,              // Thân mật tăng khi trò chuyện
+  V_TRADE_AMMO_MIN: 3,           // Lượng đạn giao dịch tối thiểu của V
+  V_TRADE_AMMO_MAX: 12,          // Lượng đạn giao dịch tối đa của V
+  LILI_TRADE_MED_COUNT_MIN: 1,   // Số lượng thuốc đổi tối thiểu của Lệ Lệ
+  LILI_TRADE_MED_COUNT_MAX: 3,   // Số lượng thuốc đổi tối đa của Lệ Lệ
 },
 ```
 
-#### Achievement Params (`ACHIEVEMENTS`)
+#### Tham Số Thành Tựu (`ACHIEVEMENTS`)
 
 ```js
 ACHIEVEMENTS: {
-  ZOMBIE_KILLS: [                    // Zombie kills achievements
+  ZOMBIE_KILLS: [                    // Thành tựu diệt zombie
     { threshold: 50, id: "zombie_hunter" },
     { threshold: 200, id: "zombie_slayer" },
   ],
-  SURVIVAL_DAYS: [                   // Survival days achievements
+  SURVIVAL_DAYS: [                   // Thành tựu số ngày sinh tồn
     { threshold: 10, id: "survive_10" },
     { threshold: 30, id: "survive_30" },
     { threshold: 100, id: "survive_100" },
   ],
-  EXPLORATION_MAPS: [                // Exploration maps achievements
+  EXPLORATION_MAPS: [                // Thành tựu khám phá bản đồ
     { threshold: 10, id: "explorer" },
     { threshold: 20, id: "collector" },
   ],
 },
 ```
 
-**Note:** Achievement thresholds are now data-driven by `GAME_CONSTANTS.ACHIEVEMENTS`, `checkSurvivalAchievements` and `checkExplorationAchievements` functions in `game.js` iterate these arrays to detect automatically. Adding new achievement levels just adds entries here, no need to modify logic code.
+**Lưu ý:** Các ngưỡng thành tựu hiện nay được định hướng theo dữ liệu bởi `GAME_CONSTANTS.ACHIEVEMENTS`. Các hàm `checkSurvivalAchievements` và `checkExplorationAchievements` trong `game.js` sẽ lặp qua các mảng này để tự động kiểm tra. Việc bổ sung các cấp độ thành tựu mới chỉ cần thêm mục tại đây, không cần sửa đổi mã logic.
 
-#### Loot Params (`LOOT`)
+#### Tham Số Rơi Đồ (`LOOT`)
 
 ```js
 LOOT: {
   RARITY_WEIGHTS: { common: 20, uncommon: 12, rare: 6, epic: 3, legendary: 1 },
-  ARROW_CHANCE_LOW: 0.5,         // Low danger map arrow chance
-  ARROW_CHANCE_MID: 0.3,         // Mid danger map arrow chance
-  ARROW_CHANCE_HIGH: 0.1,        // High danger map arrow chance
-  ARROW_COUNT_MIN: 3,            // Arrow count min
-  ARROW_COUNT_MAX: 8,            // Arrow count max
-  AMMO_COUNT_MIN: 5,             // Ammo count min
-  AMMO_COUNT_MAX: 24,            // Ammo count max
+  ARROW_CHANCE_LOW: 0.5,         // Tỷ lệ rơi tên ở bản đồ nguy hiểm thấp
+  ARROW_CHANCE_MID: 0.3,         // Tỷ lệ rơi tên ở bản đồ nguy hiểm trung bình
+  ARROW_CHANCE_HIGH: 0.1,        // Tỷ lệ rơi tên ở bản đồ nguy hiểm cao
+  ARROW_COUNT_MIN: 3,            // Lượng tên rơi tối thiểu
+  ARROW_COUNT_MAX: 8,            // Lượng tên rơi tối đa
+  AMMO_COUNT_MIN: 5,             // Lượng đạn rơi tối thiểu
+  AMMO_COUNT_MAX: 24,            // Lượng đạn rơi tối đa
 },
 ```
 
-#### Trade Params (`TRADING`)
+#### Tham Số Giao Thương (`TRADING`)
 
 ```js
 TRADING: {
-  AMMO_PER_CIG_MIN: 3,           // Ammo per cigarette min
-  AMMO_PER_CIG_MAX: 6,           // Ammo per cigarette max
+  AMMO_PER_CIG_MIN: 3,           // Lượng đạn tối thiểu mỗi điếu thuốc
+  AMMO_PER_CIG_MAX: 6,           // Lượng đạn tối đa mỗi điếu thuốc
 },
 ```
 
-#### Map Params (`MAP`)
+#### Tham Số Bản Đồ (`MAP`)
 
 ```js
 MAP: {
-  DANGER_MESSAGES: {             // Danger level description texts
-    "☆ Safe": "Looks safe here, good for looting.",
-    "★ Easy": "Occasional zombies, stay alert.",
-    "★★ Low Risk": "Zombies are active occasionally, need to be careful.",
-    "★★★ Medium Risk": "Frequent zombie activity, proceed with caution.",
-    "★★★★ High Risk": "Lots of zombies gathered, extremely dangerous!",
-    "★★★★★ Extreme": "This is hell, don't come without preparation!",
-    "★★★★★★ Inferno": "Death zone, only the strongest can leave alive!",
+  DANGER_MESSAGES: {             // Văn bản mô tả cấp độ nguy hiểm
+    "☆ An toàn": "Nơi này trông khá an toàn, thích hợp để thu thập tài nguyên.",
+    "★ Dễ dàng": "Thỉnh thoảng có vài con zombie lảng vảng, hãy giữ cảnh giác.",
+    "★★ Nguy hiểm thấp": "Zombie thỉnh thoảng hoạt động, cần cẩn thận một chút.",
+    "★★★ Nguy hiểm trung bình": "Zombie xuất hiện thường xuyên, hãy di chuyển cẩn trọng.",
+    "★★★★ Nguy hiểm cao": "Rất nhiều zombie tụ tập, cực kỳ nguy hiểm!",
+    "★★★★★ Cực độ": "Đây thực sự là địa ngục, đừng dại dột đến nếu chưa chuẩn bị kỹ!",
+    "★★★★★★ Hỏa ngục": "Vùng đất chết, chỉ có kẻ mạnh nhất mới có thể sống sót trở về!",
   },
 },
 ```
 
 ---
 
-### 2.9 Adding Maps
+### 2.9 Thêm Bản Đồ
 
-Add new entry in `MAPS` array.
+Thêm mục mới vào mảng `MAPS`.
 
-**Field Description:**
+**Mô tả các trường:**
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | String | ✅ | Unique identifier, also used for zombie pool assignment |
-| `name` | String | ✅ | Display name |
-| `danger` | String | ✅ | Danger level display text |
-| `encounterRate` | Number | ✅ | Encounter rate (0~1), 0 means no zombie encounters |
-| `noZombie` | Boolean | ❌ | Set to `true` for no zombies at all |
-| `lootTable` | Object | ✅ | Loot weight table |
+| Trường | Kiểu | Bắt buộc | Mô tả |
+|--------|------|----------|-------|
+| `id` | String | ✅ | Định danh duy nhất, đồng thời dùng để gán nhóm zombie |
+| `name` | String | ✅ | Tên hiển thị |
+| `danger` | String | ✅ | Văn bản hiển thị mức độ nguy hiểm |
+| `encounterRate` | Number | ✅ | Tỷ lệ chạm trán (0~1), 0 nghĩa là không chạm trán zombie |
+| `noZombie` | Boolean | ❌ | Đặt thành `true` nếu bản đồ hoàn toàn không có zombie |
+| `lootTable` | Object | ✅ | Bảng trọng số rơi đồ |
 
-**Danger Level Reference:**
+**Tham khảo cấp độ nguy hiểm:**
 
-| Level | `danger` Value | `encounterRate` Reference |
-|-------|----------------|--------------------------|
-| Safe | `"☆ Safe"` | 0 |
-| Easy | `"★ Easy"` | 0.03~0.10 |
-| Low Risk | `"★★ Low Risk"` | 0.12~0.20 |
-| Medium Risk | `"★★★ Medium Risk"` | 0.35~0.40 |
-| High Risk | `"★★★★ High Risk"` | 0.50~0.55 |
-| Extreme | `"★★★★★ Extreme"` | 0.60~0.70 |
-| Inferno | `"★★★★★★ Inferno"` | 0.80~0.90 |
+| Cấp độ | Giá trị `danger` | Tham khảo `encounterRate` |
+|--------|-------------------|----------------------------|
+| An toàn | `"☆ Safe"` | 0 |
+| Dễ dàng | `"★ Easy"` | 0.03~0.10 |
+| Nguy hiểm thấp | `"★★ Low Risk"` | 0.12~0.20 |
+| Nguy hiểm trung bình | `"★★★ Medium Risk"` | 0.35~0.40 |
+| Nguy hiểm cao | `"★★★★ High Risk"` | 0.50~0.55 |
+| Cực độ | `"★★★★★ Extreme"` | 0.60~0.70 |
+| Hỏa ngục | `"★★★★★★ Inferno"` | 0.80~0.90 |
 
-**Example: Adding "Abandoned Subway Station"**
+**Ví dụ: Thêm "Ga tàu điện ngầm bỏ hoang"**
 
 ```js
 {
   id: "abandoned_subway",
-  name: "Abandoned Subway Station",
+  name: "Ga tàu điện ngầm bỏ hoang",
   danger: "★★★★ High Risk",
   encounterRate: 0.5,
   lootTable: { ammo: 20, ranged: 10, melee: 10, food: 15, drink: 15, medicine: 10, fruit: 10, backpack: 5, empty: 5 }
 },
 ```
 
-**⚠️ Important Reminder:** After adding new map, also need to add map ID to zombie pool map in `getRandomZombie` function's `poolMap`, otherwise new map will default to low danger zombie pool:
+**⚠️ Lưu ý quan trọng:** Sau khi thêm bản đồ mới, bạn cũng cần thêm ID bản đồ đó vào bảng ánh xạ nhóm zombie trong đối tượng `poolMap` của hàm `getRandomZombie`, nếu không bản đồ mới sẽ mặc định dùng nhóm zombie nguy hiểm thấp:
 
 ```js
 const poolMap = {
-  // ... existing mappings ...
-  "abandoned_subway": highPool,  // Add this line
+  // ... các ánh xạ hiện có ...
+  "abandoned_subway": highPool,  // Thêm dòng này
 };
 ```
 
 ---
 
-### 2.10 Modifying NPC Quests
+### 2.10 Chỉnh Sửa Nhiệm Vụ NPC
 
-Modify in `SURVIVOR_NPC`'s `quests` object.
+Chỉnh sửa trong đối tượng `quests` của `SURVIVOR_NPC`.
 
-**Quest Field Description:**
+**Mô tả các trường của nhiệm vụ:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `name` | String | Quest name |
-| `desc` | String | Quest description |
-| `reqAffinity` | Number | Required affinity |
-| `require` | Object | Submit requirements |
-| `reward` | Object | Rewards |
-| `story` | String | Quest story text |
+| Trường | Kiểu | Mô tả |
+|--------|------|-------|
+| `name` | String | Tên nhiệm vụ |
+| `desc` | String | Mô tả nhiệm vụ |
+| `reqAffinity` | Number | Độ thân mật yêu cầu |
+| `require` | Object | Yêu cầu giao nộp |
+| `reward` | Object | Phần thưởng |
+| `story` | String | Nội dung cốt truyện nhiệm vụ |
 
-**`require` supported formats:**
+**Các định dạng `require` được hỗ trợ:**
 
 ```js
-// Food + drink
+// Thức ăn + đồ uống
 require: { food: 1, drinks: 1 }
 
-// Specific medicine
+// Loại thuốc cụ thể
 require: { medicine: 5, medicineId: "tourniquet" }
 
-// Specific drink
+// Loại đồ uống cụ thể
 require: { drinks: 10, drinkId: "pure_milk" }
 
-// Multiple item combination
+// Kết hợp nhiều vật phẩm
 require: { items: [{ type: "medicine", id: "medical_kit", count: 6 }, { type: "medicine", id: "anti_infection_serum", count: 6 }] }
 
-// All medicines N each
+// Mỗi loại thuốc N món
 require: { allMedicine: 2 }
 
-// All canned foods 1 each
+// Mỗi loại đồ hộp 1 món
 require: { allCanned: 1 }
 
-// All fruits 1 each
+// Mỗi loại trái cây 1 quả
 require: { allFruits: 1 }
 
-// All drinks + all foods 1 each
+// Mỗi loại đồ uống + mỗi loại thức ăn 1 món
 require: { allDrinks: 1, allFoods: 1 }
 ```
 
-**`reward` supported formats:**
+**Các định dạng `reward` được hỗ trợ:**
 
 ```js
-// Single item
-reward: { item: "small_knife", desc: "Small Knife ×1" }
+// Vật phẩm đơn lẻ
+reward: { item: "small_knife", desc: "Dao găm nhỏ ×1" }
 
-// Item + ammo
+// Vật phẩm + đạn
 reward: { item: "p226", ammo: { type: "9x19mm", count: 50 }, desc: "P226 ×1 + 9×19mm ×50" }
 
-// Multiple items
-reward: { itemStack: [{ id: "surgery_kit", count: 3 }], desc: "Surgery Kit ×3" }
+// Nhiều vật phẩm
+reward: { itemStack: [{ id: "surgery_kit", count: 3 }], desc: "Bộ dụng cụ phẫu thuật ×3" }
 
-// Cigarettes + ammo
-reward: { cigarettes: 20, ammo: { type: "9x19mm", count: 50 }, desc: "Random Cigarettes ×20 + 9×19mm ×50" }
+// Thuốc lá + đạn
+reward: { cigarettes: 20, ammo: { type: "9x19mm", count: 50 }, desc: "Thuốc lá ngẫu nhiên ×20 + 9×19mm ×50" }
 ```
 
-**Example: Modify V's v1 quest reward**
+**Ví dụ: Sửa đổi phần thưởng nhiệm vụ v1 của V**
 
 ```js
-v1: { name: "First Meeting Quest", desc: "Submit 1 food + 1 drink", reqAffinity: 0, require: { food: 1, drinks: 1 }, reward: { item: "big_wrench", desc: "Big Wrench ×1" }, story: "\"Can't fight on an empty stomach. Give me food, I'll give you a tool.\" She tapped the wall with a wrench." },
+v1: { name: "Nhiệm vụ lần đầu gặp gỡ", desc: "Nộp 1 thức ăn + 1 đồ uống", reqAffinity: 0, require: { food: 1, drinks: 1 }, reward: { item: "big_wrench", desc: "Cờ lê lớn ×1" }, story: ""Đói bụng thì không thể chiến đấu được. Cho tôi đồ ăn, tôi sẽ cho bạn công cụ." Cô ấy gõ gõ chiếc cờ lê lên tường." },
 ```
 
 ---
 
-### 2.11 Modifying Default Items
+### 2.11 Chỉnh Sửa Vật Phẩm Mặc Định
 
-Modify in `DEFAULT_ITEM_IDS`.
+Chỉnh sửa trong `DEFAULT_ITEM_IDS`.
 
 ```js
 export const DEFAULT_ITEM_IDS = {
-  melee: "fist",        // Default melee weapon
-  food: "compressed_biscuit",     // Default food
-  drink: "mineral_water",      // Default drink
-  seed: "seed",         // Default seed (corresponding seed in BUILDING_MATERIALS)
-  serum: "anti_infection_serum",  // Default serum
+  melee: "fist",                  // Vũ khí cận chiến mặc định
+  food: "compressed_biscuit",     // Thức ăn mặc định
+  drink: "mineral_water",         // Đồ uống mặc định
+  seed: "seed",                   // Hạt giống mặc định (tương ứng với hạt giống trong BUILDING_MATERIALS)
+  serum: "anti_infection_serum",  // Huyết thanh mặc định
 };
 ```
 
-**Note:** Modifying `melee` value affects new game initial weapon, this ID must exist in `MELEE_WEAPONS`.
+**Lưu ý:** Việc sửa đổi giá trị `melee` sẽ ảnh hưởng đến vũ khí ban đầu khi bắt đầu chơi game mới, ID này bắt buộc phải tồn tại trong `MELEE_WEAPONS`.
 
 ---
 
-### 2.12 Modifying NPC Trade Pools
+### 2.12 Chỉnh Sửa Kho Đổi Đồ Của NPC
 
-#### Lili Trade Reward Medicine Pool
+#### Kho Thuốc Đổi Thưởng Của Lệ Lệ (Lili)
 
 ```js
 export const LILI_REWARD_MEDICINE_IDS = ["tourniquet", "debridement_powder", "antibiotics", "anti_infection_serum"];
 ```
 
-Adding new medicine ID expands Lili's trade reward range:
+Thêm ID thuốc mới sẽ mở rộng phạm vi phần thưởng đổi thuốc của Lệ Lệ:
 
 ```js
 export const LILI_REWARD_MEDICINE_IDS = ["tourniquet", "debridement_powder", "antibiotics", "anti_infection_serum", "surgery_kit"];
 ```
 
-#### Xiaohan Trade Reward Food Pool
+#### Kho Thức Ăn Đổi Thưởng Của Tô Tiểu Hàm (Xiaohan)
 
 ```js
 export const XIAOHAN_REWARD_FOOD_IDS = ["compressed_biscuit", "wheat_bread", "beef_canned"];
 ```
 
-Adding new food ID expands Xiaohan's trade reward range:
+Thêm ID thức ăn mới sẽ mở rộng phạm vi phần thưởng đổi thức ăn của Tiểu Hàm:
 
 ```js
 export const XIAOHAN_REWARD_FOOD_IDS = ["compressed_biscuit", "wheat_bread", "beef_canned", "military_rations_canned"];
@@ -909,19 +909,19 @@ export const XIAOHAN_REWARD_FOOD_IDS = ["compressed_biscuit", "wheat_bread", "be
 
 ---
 
-### 2.13 Modifying Survival Notes
+### 2.13 Chỉnh Sửa Sổ Tay Sinh Tồn
 
-Add/remove categories or entries in `SURVIVAL_NOTES` array.
+Thêm/xóa danh mục hoặc các mục hướng dẫn trong mảng `SURVIVAL_NOTES`.
 
-**Data Structure Description:**
+**Mô tả cấu trúc dữ liệu:**
 
 ```js
 SURVIVAL_NOTES = [
   {
-    id: "category_id",        // Unique identifier, for routing
-    name: "Category Name",      // Display category title
-    entries: [             // Entry array in this category
-      { title: "Entry Title", content: "Entry Content" },
+    id: "category_id",        // Định danh duy nhất, dùng để điều hướng
+    name: "Tên danh mục",      // Tiêu đề danh mục hiển thị
+    entries: [                // Mảng các mục trong danh mục này
+      { title: "Tiêu đề mục", content: "Nội dung mục" },
       ...
     ]
   },
@@ -929,139 +929,139 @@ SURVIVAL_NOTES = [
 ]
 ```
 
-**Dynamic Entries:** Some entries in survival notes are dynamically generated by code, not in `SURVIVAL_NOTES` data:
-- **New Force Progress** (`note_newforce`): Automatically appears when player completes any new force prerequisite, shows 6 conditions completion progress (X/6)
-- **Liu Ruyan Rescue** (`note_liuruyan`): Automatically appears when player discovers Liu Ruyan, shows rescue remaining days
+**Các mục động:** Một số mục trong sổ tay sinh tồn được tạo động bằng mã lệnh, không nằm cố định trong dữ liệu `SURVIVAL_NOTES`:
+- **Tiến độ Lực Lượng Mới** (`note_newforce`): Tự động xuất hiện khi người chơi hoàn thành bất kỳ điều kiện tiên quyết nào của Lực Lượng Mới, hiển thị tiến độ hoàn thành 6 điều kiện (X/6).
+- **Giải cứu Liễu Như Yên** (`note_liuruyan`): Tự động xuất hiện khi người chơi phát hiện Liễu Như Yên, hiển thị số ngày còn lại để giải cứu.
 
-These dynamic entries are generated by `buildNewforceStory(state)` and `buildLiuruyanStory(state)` functions in `game/notes.js`.
+Các mục động này được sinh ra bởi các hàm `buildNewforceStory(state)` và `buildLiuruyanStory(state)` trong file `game/notes.js`.
 
-**Example: Add new entry in "Basic Survival" category**
+**Ví dụ: Thêm một mục mới vào danh mục "Sinh tồn cơ bản"**
 
 ```js
 {
   id: "basic_survival",
-  name: "Basic Survival",
+  name: "Sinh tồn cơ bản",
   entries: [
-    { title: "Time and Turns", content: "A day is divided into 8 phases..." },
-    { title: "Core Stats", content: "Satiety and hydration..." },
-    { title: "Home and Safety", content: "At home..." },
-    // New entry
-    { title: "Sleep Recovery", content: "Sleeping restores health, reduces crash, and skips night phases." },
+    { title: "Thời gian và Lượt", content: "Một ngày được chia thành 8 mốc thời gian..." },
+    { title: "Các chỉ số cốt lõi", content: "Độ no và độ nước..." },
+    { title: "Nơi trú ẩn và An toàn", content: "Tại nhà..." },
+    // Mục mới
+    { title: "Hồi phục bằng Giấc ngủ", content: "Ngủ giúp hồi phục thể lực, giảm mệt mỏi và bỏ qua các mốc thời gian ban đêm." },
   ]
 }
 ```
 
-**Example: Add new category**
+**Ví dụ: Thêm danh mục mới**
 
 ```js
-// Add at end of SURVIVAL_NOTES array
+// Thêm vào cuối mảng SURVIVAL_NOTES
 {
   id: "crafting",
-  name: "Crafting System",
+  name: "Hệ thống chế tạo",
   entries: [
-    { title: "Basic Crafting", content: "Collect materials to craft advanced equipment and items." },
+    { title: "Chế tạo cơ bản", content: "Thu thập nguyên liệu để chế tạo các trang bị và vật phẩm nâng cao." },
   ]
 }
 ```
 
-**Note:** If new category is added, need to confirm category routing handling in `handleSurvivalNotesAction` function in `game.js`, but data layer only needs to modify `config.js`.
+**Lưu ý:** Nếu thêm danh mục mới, bạn cần kiểm tra phần xử lý điều hướng danh mục trong hàm `handleSurvivalNotesAction` tại `game.js`, tuy nhiên ở tầng dữ liệu thì chỉ cần sửa `config.js`.
 
 ---
 
-### 2.14 Modifying Achievement Config
+### 2.14 Chỉnh Sửa Cấu Hình Thành Tựu
 
-Add/remove entries in `ACHIEVEMENTS` array.
+Thêm/xóa các mục trong mảng `ACHIEVEMENTS`.
 
-**Data Structure Description:**
+**Mô tả cấu trúc dữ liệu:**
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | String | ✅ | Unique identifier, for achievement unlock detection |
-| `name` | String | ✅ | Achievement display name |
-| `desc` | String | ✅ | Achievement description text |
-| `icon` | String | ✅ | Achievement icon (suggest using emoji) |
+| Trường | Kiểu | Bắt buộc | Mô tả |
+|--------|------|----------|-------|
+| `id` | String | ✅ | Định danh duy nhất, dùng để kiểm tra mở khóa thành tựu |
+| `name` | String | ✅ | Tên hiển thị của thành tựu |
+| `desc` | String | ✅ | Văn bản mô tả thành tựu |
+| `icon` | String | ✅ | Biểu tượng thành tựu (khuyến nghị dùng emoji) |
 
-**Example: Add new achievement**
+**Ví dụ: Thêm thành tựu mới**
 
 ```js
-// Add at end of ACHIEVEMENTS array
-{ id: "rich_man", name: "Rich Man", desc: "Cumulatively obtained 100 cigarettes", icon: "🚬" },
+// Thêm vào cuối mảng ACHIEVEMENTS
+{ id: "rich_man", name: "Đại gia", desc: "Tích lũy thu thập được 100 điếu thuốc lá", icon: "🚬" },
 ```
 
-**⚠️ Important:** For survival days and exploration maps achievements, thresholds are now data-driven by `GAME_CONSTANTS.ACHIEVEMENTS.SURVIVAL_DAYS` and `GAME_CONSTANTS.ACHIEVEMENTS.EXPLORATION_MAPS`, detection functions in `game.js` automatically iterate these arrays. Adding new achievement levels just adds entries in `constants.js`. For other achievements (like kills, base upgrades, etc.), still need to manually add detection logic in `game.js`.
+**⚠️ Quan trọng:** Đối với các thành tựu về số ngày sinh tồn và khám phá bản đồ, các ngưỡng hiện nay được điều khiển bằng dữ liệu thông qua `GAME_CONSTANTS.ACHIEVEMENTS.SURVIVAL_DAYS` và `GAME_CONSTANTS.ACHIEVEMENTS.EXPLORATION_MAPS`, các hàm kiểm tra trong `game.js` sẽ tự động lặp qua các mảng này. Việc bổ sung cấp độ thành tựu mới chỉ cần thêm mục vào `constants.js`. Đối với các thành tựu khác (như số lượng hạ gục, nâng cấp căn cứ, v.v.), bạn vẫn cần bổ sung logic kiểm tra thủ công trong `game.js`.
 
-**Existing Achievement ID vs Unlock Conditions Reference:**
+**Bảng tra cứu ID thành tựu hiện có vs Điều kiện mở khóa:**
 
-| Achievement ID | Condition | Detection Timing |
-|----------------|-----------|-----------------|
-| `survive_10` | Survival days >= 10 | Daily start |
-| `survive_30` | Survival days >= 30 | Daily start |
-| `survive_100` | Survival days >= 100 | Daily start |
-| `zombie_hunter` | Zombie kills >= 50 | Combat win |
-| `zombie_slayer` | Zombie kills >= 200 | Combat win |
-| `explorer` | Explored maps >= 10 | Map exploration |
-| `collector` | Explored all maps | Map exploration |
-| `base_upgrade` | Base maxed | Base upgrade |
-| `companion_recruit` | Recruited first companion | Companion rescue |
-| `boss_killer` | Defeated first boss | Boss combat win |
-| `noble_status` | Obtained noble ID | Castle purchase |
-| `dawn_member` | Joined Dawn Outpost | Outpost join |
+| ID Thành tựu | Điều kiện | Thời điểm kiểm tra |
+|--------------|-----------|--------------------|
+| `survive_10` | Số ngày sinh tồn >= 10 | Bắt đầu ngày mới |
+| `survive_30` | Số ngày sinh tồn >= 30 | Bắt đầu ngày mới |
+| `survive_100` | Số ngày sinh tồn >= 100 | Bắt đầu ngày mới |
+| `zombie_hunter` | Tiêu diệt zombie >= 50 | Thắng trận chiến |
+| `zombie_slayer` | Tiêu diệt zombie >= 200 | Thắng trận chiến |
+| `explorer` | Khám phá bản đồ >= 10 | Khám phá bản đồ |
+| `collector` | Khám phá toàn bộ bản đồ | Khám phá bản đồ |
+| `base_upgrade` | Căn cứ đạt cấp tối đa | Nâng cấp căn cứ |
+| `companion_recruit` | Chiêu mộ người đồng hành đầu tiên | Giải cứu đồng hành |
+| `boss_killer` | Đánh bại Boss đầu tiên | Đánh bại Boss |
+| `noble_status` | Sở hữu căn cước quý tộc | Mua tại lâu đài |
+| `dawn_member` | Gia nhập Tiền đồn Bình Minh | Gia nhập tiền đồn |
 
 ---
 
-## 3. `js/data/` Folder Structure and Expansion Guide
+## 3. Cấu Trúc Thư Mục `js/data/` và Hướng Dẫn Mở Rộng
 
-### 3.1 Folder Organization Principle
+### 3.1 Nguyên Tắc Tổ Chức Thư Mục
 
-`js/data/` folder divided into subdirectories by data type, each subdirectory contains:
+Thư mục `js/data/` được phân chia thành các thư mục con theo loại dữ liệu, mỗi thư mục con chứa:
 
-- **Data files**: Defines specific constants and data
-- **`index.js`**: Unified export of all constants in this directory
+- **Các tệp dữ liệu**: Định nghĩa các hằng số và dữ liệu cụ thể.
+- **`index.js`**: Xuất thống nhất toàn bộ các hằng số trong thư mục đó.
 
-`js/data/index.js` serves as top-level entry, re-exports all constants from subdirectories' `index.js`. `js/config.js` then imports and re-exports from `js/data/index.js`, while providing utility functions.
+`js/data/index.js` đóng vai trò là điểm vào cấp cao nhất, tái xuất tất cả các hằng số từ file `index.js` của các thư mục con. Sau đó `js/config.js` sẽ import và tái xuất từ `js/data/index.js`, đồng thời cung cấp các hàm tiện ích.
 
-### 3.2 Export Chain
+### 3.2 Chuỗi Xuất Khẩu (Export Chain)
 
 ```
-Data file (like foods.js)
-  → Subdirectory index.js (like items/index.js)
+Tệp dữ liệu (ví dụ: foods.js)
+  → index.js của thư mục con (ví dụ: items/index.js)
     → js/data/index.js
-      → js/config.js (re-export + utility functions)
-        → Other modules (like game.js, combat.js, etc.)
+      → js/config.js (tái xuất + hàm tiện ích)
+        → Các module khác (như game.js, combat.js, v.v.)
 ```
 
-### 3.3 How to Add New Data Files
+### 3.3 Cách Thêm Tệp Dữ Liệu Mới
 
-**Step 1: Create data file in corresponding subdirectory**
+**Bước 1: Tạo tệp dữ liệu trong thư mục con tương ứng**
 
-For example, add new `crops-ext.js` in `js/data/items/`:
+Ví dụ: thêm tệp mới `crops-ext.js` trong `js/data/items/`:
 
 ```js
 // js/data/items/crops-ext.js
 export const SPECIAL_CROPS = [
-  { id: "mutant_seed", name: "Mutant Seed", matureTurns: 10, yield: { food: "universal_injection" } },
+  { id: "mutant_seed", name: "Hạt giống đột biến", matureTurns: 10, yield: { food: "universal_injection" } },
 ];
 ```
 
-**Step 2: Add export in subdirectory's `index.js`**
+**Bước 2: Thêm lệnh export trong `index.js` của thư mục con**
 
 ```js
 // js/data/items/index.js
 export { FOODS, FRUITS } from './foods.js';
 export { DRINKS } from './drinks.js';
-// ... existing exports ...
-export { SPECIAL_CROPS } from './crops-ext.js';  // New
+// ... các export hiện có ...
+export { SPECIAL_CROPS } from './crops-ext.js';  // Mới thêm
 ```
 
-**Step 3: Import in `js/config.js` (if needed in utility functions)**
+**Bước 3: Import vào `js/config.js` (nếu cần dùng trong hàm tiện ích)**
 
-If new constant needs to be used in `config.js`'s utility functions, need to add to import statements; otherwise `export * from './data/index.js'` will automatically re-export, no extra operation needed.
+Nếu hằng số mới cần được sử dụng trong các hàm tiện ích của `config.js`, bạn cần thêm vào câu lệnh import; nếu không, lệnh `export * from './data/index.js'` sẽ tự động tái xuất hằng số đó mà không cần làm thêm thao tác nào.
 
-### 3.4 How to Add New Subdirectory
+### 3.4 Cách Thêm Thư Mục Con Mới
 
-If need to create entirely new data category (like `js/data/quests/`):
+Nếu cần tạo một danh mục dữ liệu hoàn toàn mới (ví dụ: `js/data/quests/`):
 
-**Step 1: Create subdirectory and files**
+**Bước 1: Tạo thư mục con và các tệp**
 
 ```
 js/data/quests/
@@ -1069,188 +1069,188 @@ js/data/quests/
   └── main-quests.js
 ```
 
-**Step 2: Add export in `js/data/index.js`**
+**Bước 2: Thêm lệnh export vào `js/data/index.js`**
 
 ```js
 export * from './quests/index.js';
 ```
 
-**Step 3: Export constants in subdirectory's `index.js`**
+**Bước 3: Export các hằng số trong `index.js` của thư mục con**
 
 ```js
 // js/data/quests/index.js
 export { MAIN_QUESTS } from './main-quests.js';
 ```
 
-### 3.5 Notes
+### 3.5 Các Điểm Lưu Ý
 
-1. **All constants eventually exported through `config.js`**: Other modules should import from `config.js`, not directly from `js/data/` subdirectories
-2. **Derived constants in `utils.js`**: Derived constants like `CANNED_FOOD_IDS`, `TOOL_WEAPON_IDS`, `V_TRADE_AMMO_TYPES` are defined in `js/data/utils.js`, they depend on other submodules' data
-3. **After adding new subdirectory**: Make sure to add `export *` statement in `js/data/index.js`, otherwise constants won't be exported
-4. **File naming**: Use lowercase and hyphens (like `building-materials.js`, `map-actions.js`)
+1. **Toàn bộ hằng số cuối cùng đều được export qua `config.js`**: Các module khác nên import từ `config.js`, không nên import trực tiếp từ các thư mục con của `js/data/`.
+2. **Các hằng số suy dẫn trong `utils.js`**: Các hằng số phái sinh như `CANNED_FOOD_IDS`, `TOOL_WEAPON_IDS`, `V_TRADE_AMMO_TYPES` được định nghĩa trong `js/data/utils.js`, chúng phụ thuộc vào dữ liệu của các submodule khác.
+3. **Sau khi thêm thư mục con mới**: Đảm bảo đã thêm câu lệnh `export *` vào `js/data/index.js`, nếu không các hằng số sẽ không được đưa ra ngoài.
+4. **Quy tắc đặt tên tệp**: Sử dụng chữ thường và dấu gạch nối (ví dụ: `building-materials.js`, `map-actions.js`).
 
 ---
 
-## 4. Rarity System Explanation
+## 4. Giải Thích Hệ Thống Độ Hiếm
 
-Game uses 5-tier rarity system, affects drop chance and weapon stats:
+Trò chơi áp dụng hệ thống phân cấp 5 mức độ hiếm, ảnh hưởng đến tỷ lệ rơi đồ và chỉ số vũ khí:
 
-### Rarity Levels
+### Các Cấp Độ Hiếm
 
-| Rarity | English | Chinese | Drop Weight | Color Reference |
-|--------|---------|---------|-------------|-----------------|
-| common | common | Common | 20 | White/Gray |
-| uncommon | uncommon | Uncommon | 12 | Green |
-| rare | rare | Rare | 6 | Blue |
-| epic | epic | Epic | 3 | Purple |
-| legendary | legendary | Legendary | 1 | Orange/Gold |
+| Độ hiếm (Mã) | Tiếng Anh | Tiếng Việt | Trọng số rơi | Màu sắc tham khảo |
+|--------------|-----------|------------|--------------|-------------------|
+| common | common | Thường | 20 | Trắng / Xám |
+| uncommon | uncommon | Tốt (Không phổ biến) | 12 | Xanh lá |
+| rare | rare | Hiếm | 6 | Xanh dương |
+| epic | epic | Sử thi | 3 | Tím |
+| legendary | legendary | Huyền thoại | 1 | Cam / Vàng kim |
 
-### Drop Weight Explanation
+### Giải Thích Trọng Số Rơi Đồ
 
-Drop weights are used for weighted random selection in `pickRandomLoot` function. Higher weight = higher chance. Actual probability calculation:
+Trọng số rơi đồ được sử dụng để chọn ngẫu nhiên có trọng số trong hàm `pickRandomLoot`. Trọng số càng cao = xác suất xuất hiện càng lớn. Công thức tính xác suất thực tế:
 
 ```
-Rarity chance = This rarity weight / Sum of all rarity weights
+Tỷ lệ của độ hiếm = Trọng số độ hiếm này / Tổng trọng số tất cả độ hiếm
 ```
 
-Taking melee weapons as example (weight sum = 20+12+6+3+1 = 42):
+Lấy vũ khí cận chiến làm ví dụ (tổng trọng số = 20 + 12 + 6 + 3 + 1 = 42):
 
-| Rarity | Weight | Approximate Chance |
-|--------|--------|---------------------|
+| Độ hiếm | Trọng số | Tỷ lệ xấp xỉ |
+|---------|----------|--------------|
 | common | 20 | 47.6% |
 | uncommon | 12 | 28.6% |
 | rare | 6 | 14.3% |
 | epic | 3 | 7.1% |
 | legendary | 1 | 2.4% |
 
-### Melee Weapon Combo Rate vs Rarity Relationship
+### Quan Hệ Giữa Tỷ Lệ Đòn Kép (Combo Rate) và Độ Hiếm Của Vũ Khí Cận Chiến
 
-| Rarity | Combo Rate | Existing Weapon Examples |
-|--------|------------|-------------------------|
-| (Fist) | 0 | Fist |
-| common | 0.05 | Kitchen Knife, Club, Pickaxe, Small Hammer, Frying Pan, Big Wrench, Baseball Bat, Iron Pipe, Shovel |
-| uncommon | 0.08 | Small Knife, Butcher Knife, Baton, Crowbar, Claw Hammer, Hatchet, Fire Axe, Hunting Knife, Military Knife |
-| rare | 0.12 | Brass Knuckles, Machete, Zhanma Dao, Nine Section Whip, Fencing Sword, Meteor Hammer, Steel Wakizashi, Dragon Stealing Sword, Long Cavalry Spear |
-| epic | 0.15 | Dual Blades, Malay Sword, Katana, Tang Hengdao, Chainsaw |
-| legendary | 0.18~0.20 | Hero's Sword, Universe Sword, Imperial Sword, **Fearless Blade**, Royal Silver Sword (0.20) |
+| Độ hiếm | Tỷ lệ Combo | Ví dụ vũ khí hiện có |
+|---------|-------------|----------------------|
+| (Nắm đấm) | 0 | Nắm đấm |
+| common | 0.05 | Dao làm bếp, Gậy gỗ, Cuốc, Búa nhỏ, Chảo rán, Cờ lê lớn, Gậy bóng chày, Ống sắt, Xẻng |
+| uncommon | 0.08 | Dao găm nhỏ, Dao mổ thịt, Dùi cui, Xà bén, Búa nhổ đinh, Rìu tay, Rìu cứu hỏa, Dao săn, Dao quân đội |
+| rare | 0.12 | Nắm đấm gai (Brass Knuckles), Dao rựa Machete, Trảm Mã Đao, Roi chín khúc, Kiếm giác đấu, Chùy sao chổi (Meteor Hammer), Dao ngắn Wakizashi thép, Ảo Long Kiếm, Trường thương kỵ binh |
+| epic | 0.15 | Song đao, Kiếm Mã Lai (Kris), Katana, Đường Hoành Đao, Cưa máy |
+| legendary | 0.18~0.20 | Kiếm Dũng Giả (Hero's Sword), Kiếm Càn Khôn, Kiếm Hoàng Đế, **Lưỡi Đao Vô Úy (Fearless Blade)**, Ngân Kiếm Hoàng Gia (0.20) |
 
-### Ranged Weapon Crit Rate Range
+### Phạm Vi Tỷ Lệ Bạo Kích Của Vũ Khí Tầm Xa
 
-Ranged weapon crit rate is related to weapon category, not directly tied to rarity:
+Tỷ lệ bạo kích của súng tầm xa gắn liền với từng dòng vũ khí, không hoàn toàn phụ thuộc vào độ hiếm:
 
-| Weapon Category | Crit Range | Rarity Range |
-|-----------------|-----------|--------------|
-| Bow/Crossbow | 0 | common~rare |
-| Pistol | 0.15~0.20 | common~rare |
-| SMG | 0.18~0.23 | uncommon |
-| LMG | 0.22~0.23 | rare |
-| Rifle (5.56) | 0.22~0.27 | uncommon~epic |
-| Rifle (7.62×39) | 0.20~0.28 | uncommon~rare |
-| Battle Rifle (7.62×51) | 0.22~0.32 | rare~epic |
-| Sniper | 0.35~0.45 | rare~legendary |
-| Exclusive Weapon | 0.29~0.52 | legendary |
-| Shotgun | 0.10~0.12 | uncommon~rare |
+| Dòng vũ khí | Phạm vi bạo kích | Phạm vi độ hiếm |
+|-------------|------------------|-----------------|
+| Cung / Nỏ | 0 | common ~ rare |
+| Súng ngắn | 0.15~0.20 | common ~ rare |
+| Tiểu liên (SMG) | 0.18~0.23 | uncommon |
+| Súng máy hạng nhẹ (LMG) | 0.22~0.23 | rare |
+| Súng trường (5.56) | 0.22~0.27 | uncommon ~ epic |
+| Súng trường (7.62×39) | 0.20~0.28 | uncommon ~ rare |
+| Súng trường chiến đấu (7.62×51) | 0.22~0.32 | rare ~ epic |
+| Súng bắn tỉa | 0.35~0.45 | rare ~ legendary |
+| Vũ khí độc quyền | 0.29~0.52 | legendary |
+| Shotgun | 0.10~0.12 | uncommon ~ rare |
 
-### Medicine Rarity
+### Độ Hiếm Thuốc Men
 
-| Rarity | Medicine |
-|--------|----------|
-| common | Bandage, Glucose Solution, Zombie Gel |
-| uncommon | Painkillers, Epinephrine, Tourniquet, Debridement Powder |
-| rare | Surgery Kit, Antibiotics, Anti-Infection Serum |
-| epic | Medical Kit, Field Medical Kit |
-| legendary | Universal Injection, Improved Serum |
+| Độ hiếm | Tên thuốc men |
+|---------|---------------|
+| common | Băng gạc, Dung dịch Glucose, Gel Zombie |
+| uncommon | Thuốc giảm đau, Epinephrine, Garo cầm máu (Tourniquet), Bột làm sạch vết thương (Debridement Powder) |
+| rare | Bộ dụng cụ phẫu thuật, Thuốc kháng sinh, Huyết thanh chống lây nhiễm |
+| epic | Hộp cứu thương y tế, Hộp cứu thương dã chiến |
+| legendary | Ống tiêm vạn năng (Universal Injection), Huyết thanh cải tiến |
 
-### Backpack Rarity
+### Độ Hiếm Ba Lô
 
-| Rarity | Backpack | Capacity |
-|--------|----------|----------|
-| common | Handbag, Small Waist Pack, Small Backpack, Canvas Backpack | 18, 20, 22, 24 |
-| uncommon | Fashion Backpack, Sports Backpack, Hiking Backpack | 26, 28, 32 |
-| rare | Military Backpack, Tactical Backpack, Special Ops Backpack | 36, 39, 42 |
-| epic | Large Hiking Backpack, Extra Large Travel Backpack, Extra Large Heavy Duty Backpack | 48, 56, 64 |
-| legendary | Dimensional Storage Backpack | 68 |
+| Độ hiếm | Tên ba lô | Sức chứa |
+|---------|-----------|----------|
+| common | Túi xách tay, Túi đeo hông nhỏ, Ba lô nhỏ, Ba lô vải bố | 18, 20, 22, 24 |
+| uncommon | Ba lô thời trang, Ba lô thể thao, Ba lô leo núi | 26, 28, 32 |
+| rare | Ba lô quân đội, Ba lô chiến thuật, Ba lô đặc nhiệm | 36, 39, 42 |
+| epic | Ba lô leo núi cỡ lớn, Ba lô du lịch cực lớn, Ba lô dã chiến hạng nặng cực lớn | 48, 56, 64 |
+| legendary | Ba lô kho chứa không gian đa chiều (Dimensional Storage) | 68 |
 
-### Special Items (SPECIAL_ITEMS)
+### Vật Phẩm Đặc Biệt (`SPECIAL_ITEMS`)
 
-| Key Name | ID | Name | Description |
-|----------|-----|------|-------------|
-| `noble_id` | `noble_id` | Noble ID Card | Basic noble identity |
-| `viscount_id` | `viscount_id` | Viscount ID Card | Viscount rank |
-| `count_id` | `count_id` | Count ID Card | Count rank |
-| `marquis_id` | `marquis_id` | Marquis ID Card | Marquis rank |
-| `duke_id` | `duke_id` | Duke ID Card | Duke rank |
-| `crown_prince_id` | `crown_prince_id` | Crown Prince ID Card | Crown Prince rank |
-| `dawn_badge` | `dawn_badge` | Dawn Badge | Dawn Outpost member |
-| `dawn_captain_badge` | `dawn_captain_badge` | Dawn Captain Badge | Dawn Vanguard Captain |
-| `silence_badge` | `silence_badge` | Silence Badge | Defeated Zombie King·Silence souvenir |
-| `underground_key` | `underground_key` | Underground Key | Basement key |
-| `farming_master_badge` | `farming_master_badge` | Farming Master Badge | Farming master souvenir |
-| `miaomiao_diary` | `miaomiao_diary` | Miaomiao's Diary | Miaomiao's diary |
-| `strange_recorder` | `strange_recorder` | Strange Recorder | Recorder |
-| `letter_to_sister` | `letter_to_sister` | Letter to Sister | Outpost Leader's letter |
-| `queen_reply` | `queen_reply` | Queen's Reply | Queen's reply |
-| `love_token` | `love_token` | Love Token | Sunflower pendant |
-| `castle_pass` | `castle_pass` | Castle Pass | Castle access pass |
-| `car_key` | `car_key` | Car Key | Liu Ruyan quest 3 reward, quest 4 prerequisite |
+| Khóa (Key) | ID | Tên hiển thị | Mô tả |
+|------------|----|--------------|-------|
+| `noble_id` | `noble_id` | Thẻ căn cước quý tộc | Thân phận quý tộc cơ bản |
+| `viscount_id` | `viscount_id` | Thẻ Tử tước | Tước vị Tử tước |
+| `count_id` | `count_id` | Thẻ Bá tước | Tước vị Bá tước |
+| `marquis_id` | `marquis_id` | Thẻ Hầu tước | Tước vị Hầu tước |
+| `duke_id` | `duke_id` | Thẻ Công tước | Tước vị Công tước |
+| `crown_prince_id` | `crown_prince_id` | Thẻ Thái tử | Tước vị Hoàng Thái tử |
+| `dawn_badge` | `dawn_badge` | Huy hiệu Bình Minh | Thành viên Tiền đồn Bình Minh |
+| `dawn_captain_badge` | `dawn_captain_badge` | Huy hiệu Đội trưởng Bình Minh | Đội trưởng tiên phong Bình Minh |
+| `silence_badge` | `silence_badge` | Huy hiệu Im Lặng | Vật kỷ niệm tiêu diệt Vua Zombie·Tĩnh Lặng |
+| `underground_key` | `underground_key` | Chìa khóa hầm | Chìa khóa tầng hầm |
+| `farming_master_badge` | `farming_master_badge` | Huy hiệu Bậc thầy nông nghiệp | Kỷ niệm chương cao thủ trồng trọt |
+| `miaomiao_diary` | `miaomiao_diary` | Nhật ký của Miêu Miêu | Cuốn nhật ký của Miêu Miêu |
+| `strange_recorder` | `strange_recorder` | Máy ghi âm kỳ lạ | Chiếc máy ghi âm |
+| `letter_to_sister` | `letter_to_sister` | Thư gửi em gái | Lá thư của Thủ lĩnh tiền đồn |
+| `queen_reply` | `queen_reply` | Thư hồi âm của Vương hậu | Hồi âm của Vương hậu |
+| `love_token` | `love_token` | Tín vật định tình | Mặt dây chuyền hoa hướng dương |
+| `castle_pass` | `castle_pass` | Giấy thông hành lâu đài | Giấy phép ra vào lâu đài |
+| `car_key` | `car_key` | Chìa khóa xe hơi | Thưởng nhiệm vụ 3 của Liễu Như Yên, điều kiện cho nhiệm vụ 4 |
 
-### Castle Ranks (CASTLE_RANKS)
+### Tước Vị Quý Tộc Lâu Đài (`CASTLE_RANKS`)
 
-Game has total 6 rank system:
+Trò chơi có tổng cộng hệ thống 6 bậc tước vị:
 
-| Rank | Name | rank Value | ID Card |
-|------|------|-----------|---------|
-| 1 | Noble | 1 | `noble_id` |
-| 2 | Viscount | 2 | `viscount_id` |
-| 3 | Count | 3 | `count_id` |
-| 4 | Marquis | 4 | `marquis_id` |
-| 5 | Duke | 5 | `duke_id` |
-| 6 | Crown Prince | 6 | `crown_prince_id` |
+| Cấp | Tên tước vị | Giá trị rank | Thẻ căn cước tương ứng |
+|-----|-------------|--------------|------------------------|
+| 1 | Quý tộc | 1 | `noble_id` |
+| 2 | Tử tước | 2 | `viscount_id` |
+| 3 | Bá tước | 3 | `count_id` |
+| 4 | Hầu tước | 4 | `marquis_id` |
+| 5 | Công tước | 5 | `duke_id` |
+| 6 | Hoàng Thái tử | 6 | `crown_prince_id` |
 
-### Achievement List (ACHIEVEMENTS)
+### Danh Sách Thành Tựu (`ACHIEVEMENTS`)
 
-The game has a total of 17 achievements, including 5 ending achievements:
+Trò chơi có tổng cộng 17 thành tựu (mở rộng lên 19 bao gồm thành tựu cốt truyện), trong đó có 5 thành tựu kết cục:
 
-| Achievement ID | Name | Condition |
-|----------------|------|-----------|
-| `survive_10` | Survive 10 Days | Days >= 10 |
-| `survive_30` | Survive 30 Days | Days >= 30 |
-| `survive_100` | Survive 100 Days | Days >= 100 |
-| `zombie_hunter` | Zombie Hunter | Kills >= 50 |
-| `zombie_slayer` | Zombie Slayer | Kills >= 200 |
-| `explorer` | Explorer | Explored maps >= 10 |
-| `collector` | Collector | Explored all maps |
-| `base_upgrade` | Home | Base maxed |
-| `companion_recruit` | Companion | Recruited first companion |
-| `boss_killer` | Boss Hunter | Defeated first boss |
-| `noble_status` | Noble Status | Obtained noble identity |
-| `dawn_member` | Dawn | Joined Dawn Outpost |
-| `ending_farming` | I'm Not the Farmer God | Achieved ending: I'm Not the Farmer God |
-| `ending_love_hate` | Love and Hate | Achieved ending: Love and Hate |
-| `ending_death` | The End | Achieved ending: Death |
-| `ending_999` | Unknown Future | Achieved ending: Unknown Future |
-| `ending_prince` | Addiction to Power | Achieved ending: Addiction to Power |
-| `ending_captain` | Shine Bright | Achieved ending: Shine Bright |
-| `ending_newforce` | Become a New Force | Achieved ending: Become a New Force |
+| ID Thành tựu | Tên thành tựu | Điều kiện |
+|--------------|---------------|-----------|
+| `survive_10` | Sinh tồn 10 ngày | Số ngày >= 10 |
+| `survive_30` | Sinh tồn 30 ngày | Số ngày >= 30 |
+| `survive_100` | Sinh tồn 100 ngày | Số ngày >= 100 |
+| `zombie_hunter` | Thợ săn Zombie | Tiêu diệt >= 50 |
+| `zombie_slayer` | Kẻ tàn sát Zombie | Tiêu diệt >= 200 |
+| `explorer` | Nhà thám hiểm | Bản đồ khám phá >= 10 |
+| `collector` | Nhà sưu tập | Khám phá toàn bộ bản đồ |
+| `base_upgrade` | Tổ ấm | Căn cứ đạt cấp tối đa |
+| `companion_recruit` | Bạn đồng hành | Chiêu mộ được bạn đồng hành đầu tiên |
+| `boss_killer` | Thợ săn Boss | Tiêu diệt Boss đầu tiên |
+| `noble_status` | Thân phận Quý tộc | Đạt được thân phận quý tộc |
+| `dawn_member` | Tia sáng Bình Minh | Gia nhập Tiền đồn Bình Minh |
+| `ending_farming` | Ta Không Phải Nông Thần | Đạt kết cục: Ta Không Phải Nông Thần |
+| `ending_love_hate` | Dây Dưa Yêu Hận | Đạt kết cục: Dây Dưa Yêu Hận |
+| `ending_death` | Điểm Kết Thúc | Đạt kết cục: Cái Chết |
+| `ending_999` | Tương Lai Bất Định | Đạt kết cục: Tương Lai Bất Định |
+| `ending_prince` | Nghiện Quyền Lực | Đạt kết cục: Nghiện Quyền Lực |
+| `ending_captain` | Tỏa Ánh Hào Quang | Đạt kết cục: Tỏa Ánh Hào Quang |
+| `ending_newforce` | Trở Thành Lực Lượng Mới | Đạt kết cục: Trở Thành Lực Lượng Mới |
 
 ---
 
-## 5. Data Relationship Diagram
+## 5. Sơ Đồ Quan Hệ Dữ Liệu
 
-The following constants have reference relationships, please note linkage when modifying:
+Các hằng số sau đây có mối quan hệ tham chiếu chặt chẽ lẫn nhau, hãy lưu ý liên kết đồng bộ khi chỉnh sửa:
 
-### Ammunition ↔ Weapon (Bidirectional Relationship)
+### Đạn Dược ↔ Vũ Khí (Mối Quan Hệ Hai Chiều)
 
 ```
 AMMO.compatibleWith[]  ←→  RANGED_WEAPONS.ammoType
 ```
 
-- Every ranged weapon's `ammoType` must have a corresponding entry in `AMMO`
-- Every ammunition's `compatibleWith` must include all weapon IDs using that ammunition
-- **When adding a new ranged weapon**: If using existing ammunition, add the weapon ID to the ammunition's `compatibleWith`
-- **When adding new ammunition**: Ensure all weapons using that ammunition are in `compatibleWith`
+- Mỗi `ammoType` của vũ khí tầm xa phải có mục tương ứng tồn tại trong `AMMO`.
+- Mỗi `compatibleWith` của loại đạn phải chứa toàn bộ ID của các vũ khí sử dụng loại đạn đó.
+- **Khi thêm súng tầm xa mới**: Nếu sử dụng loại đạn có sẵn, hãy thêm ID vũ khí vào mảng `compatibleWith` của loại đạn đó.
+- **Khi thêm loại đạn mới**: Đảm bảo tất cả các vũ khí sử dụng loại đạn này đều được liệt kê trong `compatibleWith`.
 
-### Fixed Drops → Item Arrays
+### Rơi Đồ Cố Định → Các Mảng Vật Phẩm
 
 ```
 FIXED_LOOT_DROPS.weaponId  →  MELEE_WEAPONS / RANGED_WEAPONS
@@ -1258,10 +1258,10 @@ FIXED_LOOT_DROPS.ammoId    →  AMMO
 FIXED_LOOT_DROPS.foodId    →  FOODS
 ```
 
-- When `type` field is `"melee"`, `weaponId` looks up from `MELEE_WEAPONS`
-- When `type` field is `"ranged"`, `weaponId` looks up from `RANGED_WEAPONS`
+- Khi trường `type` là `"melee"`, `weaponId` sẽ được tìm trong `MELEE_WEAPONS`.
+- Khi trường `type` là `"ranged"`, `weaponId` sẽ được tìm trong `RANGED_WEAPONS`.
 
-### Default Items → Various Item Arrays
+### Vật Phẩm Mặc Định → Các Mảng Vật Phẩm Khác Nhau
 
 ```
 DEFAULT_ITEM_IDS.melee  →  MELEE_WEAPONS
@@ -1271,67 +1271,67 @@ DEFAULT_ITEM_IDS.seed   →  BUILDING_MATERIALS
 DEFAULT_ITEM_IDS.serum  →  MEDICINES
 ```
 
-### Automatic Derivation Relationships
+### Các Mối Quan Hệ Suy Dẫn Tự Động
 
 ```
-NURSE_MEDICINE_POOL  ←  MEDICINES.filter(rarity === "common" || rarity === "uncommon")
-V_TRADE_AMMO_TYPES   ←  AMMO.filter(id !== "arrow").map(id)
-BUILDING_MATERIAL_NAMES  ←  BUILDING_MATERIALS traverse generate {id: name}
-BOSS_NAMES           ←  NAMED_NPCS traverse generate name array
+NURSE_MEDICINE_POOL      ←  MEDICINES.filter(rarity === "common" || rarity === "uncommon")
+V_TRADE_AMMO_TYPES       ←  AMMO.filter(id !== "arrow").map(id)
+BUILDING_MATERIAL_NAMES  ←  Duyệt BUILDING_MATERIALS tự tạo {id: name}
+BOSS_NAMES               ←  Duyệt NAMED_NPCS tự tạo mảng name
 ```
 
-After modifying source data, these derived constants will update automatically, no manual modification needed.
+Sau khi sửa đổi dữ liệu gốc, các hằng số suy dẫn này sẽ tự động cập nhật mà không cần can thiệp thủ công.
 
-### Boss Name Derivation
-
-```
-NAMED_NPCS  →  BOSS_NAMES (Auto-derived)
-```
-
-`BOSS_NAMES` is automatically generated via `Object.values(NAMED_NPCS).map(npc => npc.name)`. After adding or modifying entries in `NAMED_NPCS`, `BOSS_NAMES` will update automatically.
-
-### Map Action Routing
+### Suy Dẫn Tên Boss
 
 ```
-MAP_ACTIONS  →  routing.js (Data-driven routing)
+NAMED_NPCS  →  BOSS_NAMES (Suy dẫn tự động)
 ```
 
-`MAP_ACTIONS` defines available action buttons and corresponding action identifiers for each map. `routing.js` routes to corresponding processing logic based on action identifiers. When adding new map actions, need to simultaneously add entry in `MAP_ACTIONS` and corresponding processing function in `routing.js`.
+`BOSS_NAMES` được sinh tự động thông qua `Object.values(NAMED_NPCS).map(npc => npc.name)`. Sau khi thêm hoặc sửa đổi các mục trong `NAMED_NPCS`, `BOSS_NAMES` sẽ tự cập nhật.
 
-### Map NPC Introduction Text
-
-```
-MAP_NPC_INTROS  →  maps.js (NPC introduction text)
-```
-
-`MAP_NPC_INTROS` stores appearance introduction text, combat text, and leave text for map NPCs. During map exploration, corresponding introduction is displayed based on NPC type.
-
-### Outpost Leader Dialogues
+### Định Tuyến Hành Động Bản Đồ
 
 ```
-LEADER_DIALOGUES  →  outpost.js (Leader dialogues)
+MAP_ACTIONS  →  routing.js (Định tuyến hướng theo dữ liệu)
 ```
 
-`LEADER_DIALOGUES` stores the outpost leader's dialogue content, randomly selected for display during outpost interaction.
+`MAP_ACTIONS` định nghĩa các nút thao tác khả dụng và mã định danh hành động tương ứng cho từng bản đồ. `routing.js` sẽ định tuyến đến logic xử lý tương ứng dựa trên mã hành động. Khi thêm hành động bản đồ mới, cần đồng thời thêm mục vào `MAP_ACTIONS` và hàm xử lý tương ứng trong `routing.js`.
 
-### Castle Rejection Dialogues
-
-```
-CASTLE_REJECTION_DIALOGUES  →  npcs/index.js (Rejection dialogues)
-```
-
-`CASTLE_REJECTION_DIALOGUES` stores dialogue text when outpost NPCs refuse interaction when player has a castle identity card. Keys are NPC IDs (v, xiaohan, lili).
-
-### NPC Quest Rewards → Item Arrays
+### Văn Bản Giới Thiệu NPC Bản Đồ
 
 ```
-SURVIVOR_NPC.quests.reward.item      →  MELEE_WEAPONS / RANGED_WEAPONS
-SURVIVOR_NPC.quests.reward.ammo.type →  AMMO
+MAP_NPC_INTROS  →  maps.js (Văn bản giới thiệu NPC)
+```
+
+`MAP_NPC_INTROS` lưu trữ văn bản xuất hiện, đối thoại khi chiến đấu và văn bản rời đi của các NPC trên bản đồ. Trong quá trình khám phá bản đồ, phần giới thiệu tương ứng sẽ hiển thị dựa theo loại NPC.
+
+### Lời Thoại Của Thủ Lĩnh Tiền Đồn
+
+```
+LEADER_DIALOGUES  →  outpost.js (Đối thoại thủ lĩnh)
+```
+
+`LEADER_DIALOGUES` chứa nội dung đối thoại của thủ lĩnh tiền đồn, được chọn ngẫu nhiên để hiển thị khi tương tác tại tiền đồn.
+
+### Lời Thoại Từ Chối Của Lâu Đài
+
+```
+CASTLE_REJECTION_DIALOGUES  →  npcs/index.js (Đối thoại từ chối)
+```
+
+`CASTLE_REJECTION_DIALOGUES` lưu trữ văn bản thoại khi NPC tiền đồn từ chối tiếp xúc nếu người chơi sở hữu thẻ căn cước lâu đài. Khóa là ID của NPC (`v`, `xiaohan`, `lili`).
+
+### Phần Thưởng Nhiệm Vụ NPC → Các Mảng Vật Phẩm
+
+```
+SURVIVOR_NPC.quests.reward.item        →  MELEE_WEAPONS / RANGED_WEAPONS
+SURVIVOR_NPC.quests.reward.ammo.type   →  AMMO
 SURVIVOR_NPC.quests.require.medicineId →  MEDICINES
 SURVIVOR_NPC.quests.require.drinkId    →  DRINKS
 ```
 
-### Trading Related
+### Liên Quan Đến Giao Thương
 
 ```
 TRADER_WEAPON_SHOP.weaponId  →  MELEE_WEAPONS / RANGED_WEAPONS
@@ -1340,217 +1340,217 @@ XIAOHAN_REWARD_FOOD_IDS      →  FOODS
 TRADE_TEMPLATES.ammoType     →  AMMO
 ```
 
-### Map → Zombie Pool
+### Bản Đồ → Nhóm Zombie (Zombie Pool)
 
 ```
-MAPS.id  →  getRandomZombie() poolMap mapping
+MAPS.id  →  Ánh xạ poolMap trong getRandomZombie()
 ```
 
-After adding new map ID, need to add corresponding mapping in `poolMap`.
+Sau khi thêm ID bản đồ mới, cần thêm ánh xạ tương ứng vào `poolMap`.
 
-### Canned Food List
-
-```
-CANNED_FOOD_IDS  →  FOODS (subset)
-```
-
-Used for Su Xiaohan's "Canned Food Collection" quest. If adding new canned food items, need to update this array synchronously.
-
-### Tool Weapons
+### Danh Sách Thực Phẩm Đóng Hộp
 
 ```
-TOOL_WEAPON_IDS  →  MELEE_WEAPONS (subset)
+CANNED_FOOD_IDS  →  FOODS (Tập con)
 ```
 
-Identifies which melee weapons belong to the "tool" category.
+Sử dụng cho nhiệm vụ "Thu thập đồ hộp" của Tô Tiểu Hàm. Nếu thêm món đồ hộp mới, cần cập nhật mảng này đồng bộ.
+
+### Vũ Khí Công Cụ
+
+```
+TOOL_WEAPON_IDS  →  MELEE_WEAPONS (Tập con)
+```
+
+Dùng để xác định những vũ khí cận chiến nào thuộc nhóm "công cụ lao động".
 
 ---
 
-## 6. Notes
+## 6. Các Điểm Cần Lưu Ý
 
-### 1. IDs Must Be Globally Unique
+### 1. ID Phải Là Duy Nhất Trên Toàn Cục
 
-Each item's `id` must be unique within its array. It is recommended to keep unique across arrays to avoid confusion.
+Mỗi `id` của vật phẩm phải là duy nhất trong mảng của nó. Khuyến nghị duy trì tính duy nhất trên toàn bộ các mảng để tránh nhầm lẫn.
 
-### 2. Modifying IDs Will Affect Save Compatibility
+### 2. Sửa Đổi ID Sẽ Ảnh Hưởng Đến Tính Tương Thích Của File Lưu Game
 
-Player saves store item `id`s. If you modify an item's `id`, old saves referencing that `id` will not match correctly. **If you need to rename, it is recommended to only modify the `name` field and keep `id` unchanged.**
+File lưu của người chơi lưu trữ các chuỗi `id` của vật phẩm. Nếu bạn sửa đổi `id` của một vật phẩm, các file lưu cũ tham chiếu đến `id` đó sẽ không khớp được. **Nếu chỉ muốn đổi tên, khuyến nghị chỉ sửa trường `name` và giữ nguyên trường `id`.**
 
-### 3. Adding New Items Does Not Require Modifying Other Files
+### 3. Thêm Vật Phẩm Mới Không Cần Sửa Đổi Các Tệp Khác
 
-Just add entries in the corresponding array, the drop system, cheat system, etc., will automatically recognize new items.
+Chỉ cần thêm các mục vào mảng tương ứng, hệ thống rơi đồ, hệ thống mã cheat, v.v., sẽ tự động nhận diện các vật phẩm mới.
 
-### 4. Deleting Items Requires Checking All References
+### 4. Xóa Vật Phẩm Phải Kiểm Tra Toàn Bộ Vị Trí Tham Chiếu
 
-Before deleting an item, must check the following locations for references to it:
-- `weaponId`, `ammoId`, `foodId` in `FIXED_LOOT_DROPS`
-- Various fields in `DEFAULT_ITEM_IDS`
-- `compatibleWith` in `AMMO`
-- `weaponId` in `TRADER_WEAPON_SHOP`
-- `require` and `reward` of quests in `SURVIVOR_NPC`
-- `LILI_REWARD_MEDICINE_IDS` and `XIAOHAN_REWARD_FOOD_IDS`
+Trước khi xóa một vật phẩm, bắt buộc phải kiểm tra các vị trí sau xem có tham chiếu đến nó hay không:
+- `weaponId`, `ammoId`, `foodId` trong `FIXED_LOOT_DROPS`
+- Các trường trong `DEFAULT_ITEM_IDS`
+- `compatibleWith` trong `AMMO`
+- `weaponId` trong `TRADER_WEAPON_SHOP`
+- `require` và `reward` của các nhiệm vụ trong `SURVIVOR_NPC`
+- `LILI_REWARD_MEDICINE_IDS` và `XIAOHAN_REWARD_FOOD_IDS`
 - `CANNED_FOOD_IDS`
 - `TOOL_WEAPON_IDS`
-- `ammoType` in `TRADE_TEMPLATES`
+- `ammoType` trong `TRADE_TEMPLATES`
 
-### 5. rarity Field Must Be One of 5 Values
+### 5. Trường `rarity` Bắt Buộc Phải Là 1 Trong 5 Giá Trị Hợp Lệ
 
-Valid rarity values: `"common"`, `"uncommon"`, `"rare"`, `"epic"`, `"legendary"`. If using a rarity not among these 5 values, the weighted random in the drop system will use default weight 1, which may lead to unexpected behavior.
+Các giá trị hợp lệ: `"common"`, `"uncommon"`, `"rare"`, `"epic"`, `"legendary"`. Nếu sử dụng độ hiếm nằm ngoài 5 giá trị này, thuật toán chọn ngẫu nhiên có trọng số trong hệ thống rơi đồ sẽ áp dụng trọng số mặc định là 1, có thể gây ra hành vi không mong muốn.
 
-### 6. Ammunition compatibleWith Must Correspond to Weapon ammoType
+### 6. Trường `compatibleWith` Của Đạn Phải Khớp Với `ammoType` Của Vũ Khí
 
-- Every ranged weapon's `ammoType` must exist in `AMMO`
-- Every ammunition's `compatibleWith` in `AMMO` must include all weapons using that ammunition
-- Both must be synchronized, otherwise will cause ammunition cannot be loaded or weapon cannot fire
+- Mỗi `ammoType` của súng tầm xa phải tồn tại trong `AMMO`.
+- Mỗi `compatibleWith` của đạn trong `AMMO` phải bao gồm tất cả các vũ khí sử dụng loại đạn đó.
+- Cả hai phải được đồng bộ hóa hoàn toàn, nếu không sẽ dẫn đến việc không thể nạp đạn hoặc súng không thể bắn.
 
-### 7. type in FIXED_LOOT_DROPS Determines Lookup Range
+### 7. Trường `type` Trong `FIXED_LOOT_DROPS` Quyết Định Phạm Vi Tra Cứu
 
-- `type: "melee"` → lookup `weaponId` from `MELEE_WEAPONS`
-- `type: "ranged"` → lookup `weaponId` from `RANGED_WEAPONS`
-- If `type` does not match actual weapon type, corresponding weapon will not be found
+- `type: "melee"` → tra cứu `weaponId` từ `MELEE_WEAPONS`
+- `type: "ranged"` → tra cứu `weaponId` từ `RANGED_WEAPONS`
+- Nếu `type` không khớp với loại vũ khí thực tế, hệ thống sẽ không tìm thấy vũ khí tương ứng.
 
-### 8. Map ID and Zombie Pool Mapping
+### 8. Ánh Xạ Giữa ID Bản Đồ và Nhóm Zombie (Zombie Pool)
 
-`getRandomZombie` function uses map `id` to exactly match zombie pool. When adding a new map, be sure to add mapping in `poolMap`, otherwise will default to low danger zombie pool.
+Hàm `getRandomZombie` sử dụng `id` bản đồ để khớp chính xác nhóm zombie. Khi thêm bản đồ mới, hãy chắc chắn bổ sung ánh xạ trong `poolMap`, nếu không game sẽ mặc định gán nhóm zombie cấp nguy hiểm thấp.
 
-### 9. Cheat Command Format
+### 9. Định Dạng Lệnh Cheat
 
-The cheat system uses item type and ID to generate commands, format is `/get_{type}_{id}_{count}`. Where `type` corresponds to item's `type` field value. For example:
+Hệ thống mã gian lận (cheat) sử dụng loại vật phẩm và ID để tạo lệnh, định dạng là `/get_{type}_{id}_{count}`. Trong đó `type` tương ứng với giá trị trường `type` của vật phẩm. Ví dụ:
 - `/get_food_compressed_biscuit_5`
 - `/get_melee_katana_1`
 - `/get_ranged_ak47_1`
 - `/get_medicine_antibiotics_3`
 
-### 10. Royal Coin System
+### 10. Hệ Thống Tiền Hoàng Gia (Royal Coin)
 
-Royal coins (`royal_coin`) is an independent currency, does not occupy backpack space, stored in `state.royalCoins`.
-- Added via `addItem({ type: "royal_coin", count: N })`
-- Deducted via `removeRoyalCoins(N)`
-- Old saves automatically complement `royalCoins: 0` via `normalizeState()`
+Tiền hoàng gia (`royal_coin`) là một loại tiền tệ độc lập, không chiếm ô chứa trong ba lô, được lưu trong `state.royalCoins`.
+- Nhận thêm thông qua `addItem({ type: "royal_coin", count: N })`
+- Khấu trừ thông qua `removeRoyalCoins(N)`
+- Các file lưu cũ tự động bù đắp `royalCoins: 0` thông qua hàm `normalizeState()`
 
-### 11. Gasoline System
+### 11. Hệ Thống Xăng (Gasoline)
 
-Gasoline is a stackable special cargo, does not occupy backpack slots, stored in `state.gasoline`.
-- Added via `addGasoline(N)`
-- Deducted via `removeGasoline(N)`, returns actual deducted amount
-- Can also be added via `addItem({ type: "gasoline", count: N })` (internally calls `addGasoline`)
-- Can also be deducted via `removeItem("gasoline", N)` (internally calls `removeGasoline`)
-- Old saves automatically complement `gasoline: 0` via `normalizeState()`
-- Cheat code: `/get_gasoline_gasoline_5` (obtain 5 each time)
-- Gasoline displayed alongside cigarettes and royal coins in UI cargo panel
-- Gasoline supports discard and NPC gifting functions
+Xăng là loại hàng hóa đặc biệt có thể cộng dồn, không chiếm ô chứa trong ba lô, được lưu trong `state.gasoline`.
+- Nhận thêm thông qua `addGasoline(N)`
+- Khấu trừ thông qua `removeGasoline(N)`, hàm trả về số lượng thực tế đã trừ
+- Cũng có thể nhận thông qua `addItem({ type: "gasoline", count: N })` (bên trong gọi `addGasoline`)
+- Cũng có thể trừ thông qua `removeItem("gasoline", N)` (bên trong gọi `removeGasoline`)
+- Các file lưu cũ tự động bù đắp `gasoline: 0` thông qua `normalizeState()`
+- Mã cheat: `/get_gasoline_gasoline_5` (nhận 5 thùng mỗi lần)
+- Xăng được hiển thị cùng với thuốc lá và tiền hoàng gia trên bảng hàng hóa của giao diện
+- Hỗ trợ chức năng vứt bỏ và tặng quà cho NPC
 
-### 12. Story Exclusive Weapons
+### 12. Vũ Khí Độc Quyền Theo Cốt Truyện
 
-Some weapons are only obtained through specific stories, cannot be randomly obtained from drop pools:
-- **Prairie Bow** (Mu Miaomiao quest 3 reward) — excluded in `pickRandomLoot`
-- **Royal Short Gun** (Queen grocery store purchase) — excluded in `pickRandomLoot`
-- **Royal Silver Sword** (Queen grocery store purchase) — excluded in `pickRandomLoot`
-- **Fearless Blade** (New Force ending reward) — excluded in `pickRandomLoot`
+Một số vũ khí chỉ có thể nhận được qua các nhánh cốt truyện cụ thể, không thể ngẫu nhiên nhận được từ các bảng rơi đồ:
+- **Cung Thảo Nguyên (Prairie Bow)** (thưởng nhiệm vụ 3 của Mục Miêu Miêu) — bị loại trừ trong `pickRandomLoot`
+- **Súng Ngắn Hoàng Gia (Royal Short Gun)** (mua tại cửa hàng tạp hóa của Vương hậu) — bị loại trừ trong `pickRandomLoot`
+- **Ngân Kiếm Hoàng Gia (Royal Silver Sword)** (mua tại cửa hàng tạp hóa của Vương hậu) — bị loại trừ trong `pickRandomLoot`
+- **Lưỡi Đao Vô Úy (Fearless Blade)** (phần thưởng kết cục Lực Lượng Mới) — bị loại trừ trong `pickRandomLoot`
 
-### 13. Interaction Design Standards
+### 13. Chuẩn Mực Thiết Kế Tương Tác
 
-When adding or modifying NPC interactions, need to follow these standards:
+Khi thêm hoặc sửa đổi tương tác của NPC, cần tuân thủ các quy chuẩn sau:
 
-1. **No Early Return**: NPC interaction entry functions must not use `if (!condition) { setStory(); refreshMenu(); return; }` pattern. Should always display NPC dialogue page and at least one "Back" option, only display dialogue text + Back option when conditions not met.
+1. **Không Return Sớm (No Early Return)**: Các hàm điểm vào tương tác NPC không được dùng mẫu `if (!condition) { setStory(); refreshMenu(); return; }`. Luôn phải hiển thị trang đối thoại của NPC và ít nhất một lựa chọn "Quay lại" (Back); khi không đủ điều kiện chỉ hiển thị lời thoại + nút Quay lại.
 
-2. **Crash Value 100% Behavior**: When crash value is full, player cannot fight, eat, drink, or sleep. When refusing to eat/drink, should prompt for available medical items (painkillers/epinephrine, etc.) to restore morale. When crash is full, only allow use of crash-lowering medicines.
+2. **Hành Vi Khi Điểm Mệt Mỏi Đạt 100%**: Khi giá trị mệt mỏi đầy (100%), người chơi không thể chiến đấu, ăn, uống hay ngủ. Khi từ chối ăn/uống, phải gợi ý các vật phẩm y tế khả dụng (thuốc giảm đau / epinephrine, v.v.) để phục hồi tinh thần. Khi mệt mỏi đầy, chỉ cho phép dùng các loại thuốc giảm mệt mỏi.
 
-3. **Trade Backpack Space Pre-check**: Before deducting player items, trade system should check if backpack has enough space for reward items, refuse trade if insufficient space.
+3. **Kiểm Tra Trước Ô Trống Ba Lô Khi Giao Thương**: Trước khi khấu trừ vật phẩm của người chơi, hệ thống giao dịch phải kiểm tra xem ba lô có đủ chỗ chứa cho các vật phẩm thưởng hay không; nếu không đủ chỗ thì từ chối giao dịch.
 
-4. **Dangerous Operation Warning**: Irreversible choices (like Ma San quest 4) and high-risk operations (like eating strange meat +10 infection) should display ⚠ warning.
+4. **Cảnh Báo Thao Tác Nguy Hiểm**: Các lựa chọn không thể đảo ngược (như nhiệm vụ 4 của Mã Tam) và các hành động có rủi ro cao (như ăn thịt kỳ lạ +10 nhiễm trùng) cần hiển thị biểu tượng cảnh báo ⚠.
 
-5. **Disabled Option Feedback**: When clicking disabled options, should display "Conditions not met" prompt instead of silent no response.
+5. **Phản Hồi Cho Tùy Chọn Bị Vô Hiệu Hóa**: Khi nhấp vào các tùy chọn đang bị vô hiệu hóa (disabled), cần hiển thị thông báo "Chưa đáp ứng điều kiện" thay vì hoàn toàn im lặng không có phản hồi.
 
-6. **Return After Using Consumables**: After using food/drinks/medicine, should return to corresponding selection interface instead of main menu, for convenient continuous use.
+6. **Quay Lại Sau Khi Sử Dụng Vật Phẩm Tiêu Hao**: Sau khi sử dụng thức ăn / đồ uống / thuốc men, giao diện nên quay lại trang chọn vật phẩm tương ứng thay vì quay về menu chính, giúp người chơi thuận tiện sử dụng liên tục.
 
-7. **Black Market Trader Ammo Quantity Selection**: When purchasing ammunition, support quantity selection (1/5/10/all cigarettes), no longer consume all cigarettes at once.
+7. **Chọn Số Lượng Đạn Khi Mua Từ Thương Nhân Chợ Đen**: Khi mua đạn dược, hỗ trợ lựa chọn số lượng (1 / 5 / 10 / toàn bộ thuốc lá), không còn bắt buộc tiêu hao toàn bộ thuốc lá trong một lần.
 
-8. **Liu Ruyan Rescue Reminder**: After discovering Liu Ruyan, survival notes automatically add rescue countdown. `state.liuruyanDiscovered` field tracks if discovered.
+8. **Nhắc Nhở Giải Cứu Liễu Như Yên**: Sau khi phát hiện Liễu Như Yên, sổ tay sinh tồn sẽ tự động thêm bộ đếm ngược thời gian giải cứu. Trường `state.liuruyanDiscovered` theo dõi trạng thái đã phát hiện hay chưa.
 
-9. **New Force Progress Tracking**: After completing any New Force prerequisite, survival notes automatically add progress entry (X/6).
+9. **Theo Dõi Tiến Độ Lực Lượng Mới**: Sau khi hoàn thành bất kỳ điều kiện tiên quyết nào của Lực Lượng Mới, sổ tay sinh tồn sẽ tự động thêm mục tiến độ (X/6).
 
-10. **Rocket Hope Ending Affinity Progress**: When selecting "Take important people", display current affinity progress for V/Xiaohan/Lili.
-
----
-
-## 6.5. Code Module Structure
-
-### Castle Module (`js/castle/`)
-
-Original `castle/index.js` (1033 lines) has been split into 7 submodules by function area:
-
-| Submodule | Function Area | Included Functions |
-|-----------|---------------|--------------------|
-| `castle/outpost.js` | Castle exterior + guard interaction | handleCastleOutpost, refreshCastleOutpost, handleCastleExploreBlocked, handleGuardChat, handleGuardEnter, handleGuardBribe, handleGuardLeave, handleCastleGuard, handleCastleGuardAction |
-| `castle/interior.js` | Castle interior interface/explore/routing | enterCastleInterior, showCastleInterior, refreshCastleInterior, handleCastleInteriorExplore, handleCastleInteriorAction, handleLeaveCastleInterior, handleLeaveCastle |
-| `castle/royalty.js` | Royal family dialogues + banquet/ball/guest room + salary | handleCastleKing, handleCastleQueen, handleCastleBanquet, handleCastleBall, handleCastleRoom, handleCastleSalary |
-| `castle/services.js` | Treatment/meeting/garden/reissue/work | handleCastleTreatment, handleTreatConfirm, handleCastleMeeting, handleCastleGarden, handleCastleTitleReissue, handleCastleWork |
-| `castle/king-quest.js` | Complete king quest chain | handleCastleKingQuest, checkKingQuestRequire, handleKingQuestSubmit, removeKingQuestItems |
-| `castle/identity.js` | Identity apply/cancel | handleCastleIdentity, handleIdentityApply, handleIdentityCancel, refreshCastleIdentity, handleCastleIdentityAction |
-| `castle/bank.js` | Bank/loan/manager interaction | handleCastleBank, handleBankLoan, handleLoanSubmit, handleBankRepay, handleBankBanker, handleBankerMercy, refreshCastleBank, handleBankerFight, handleCastleBankAction, handleCastleBankerAction |
-
-`castle/index.js` serves as unified entry, re-exports all functions from submodules, external import paths remain unchanged.
-
-### Game Module (`js/game/`)
-
-Original `game.js` (1779 lines) has been split into 8 submodules by function area:
-
-| Submodule | Function Area | Included Functions |
-|-----------|---------------|--------------------|
-| `game/endings.js` | Ending system | triggerEnding, checkEndingTrigger, checkEndingTriggerAfterAction, checkGoHomeEnding, handleEndingAction |
-| `game/base-actions.js` | Base construction | handleBaseBuild, handleBaseBuildAction |
-| `game/consumables.js` | Sleep/eat/drink/medicine | handleSleep, handleEatSelect, handleDrinkSelect, handleMedicineSelect, handleFoodAction, handleDrinkAction, handleMedicineAction, handleSelectionPhase |
-| `game/navigation.js` | Map navigation | handleGoOut, handleGoHome, handleMapAction |
-| `game/exploration.js` | Exploration system | handleExplore, handleExploreAction |
-| `game/save.js` | Save system | handleSavePage, renderSaveSlotsAsOptions, handleSavePageAction, handleSaveConfirm |
-| `game/notes.js` | Survival notes | buildSurvivalNotes, handleSurvivalNotesAction, handleSurvivalNotesDetailAction |
-| `game/achievements.js` | Achievement system | tryUnlockAchievement, checkSurvivalAchievements, checkExplorationAchievements |
-
-`game/index.js` retains main routing functions `handleChooseAction` and `handleAction`, and unified exports all functions. External import paths updated from `'./game.js'` to `'./game/index.js'`.
-
-### Inter-module Dependencies
-
-- `castle/outpost.js` ↔ `castle/interior.js`: Mutual imports (ES modules support runtime circular references)
-- `castle/interior.js` → `castle/royalty.js`, `castle/services.js`, `castle/king-quest.js`: Routing calls
-- `game/index.js` → all `game/` submodules: Main route distribution
-- `game/endings.js` → `game/achievements.js`: Endings trigger achievements
-- `game/navigation.js` → `game/endings.js`: Check endings when going home
-- `game/exploration.js` → `game/consumables.js`, `game/navigation.js`: Consume/navigate after exploration
-
-### How to Locate When Modifying Code
-
-| Requirement | Modify File |
-|-------------|-------------|
-| Modify castle guard interaction | `castle/outpost.js` |
-| Modify castle interior menu | `castle/interior.js` |
-| Modify banquet/ball/guest room | `castle/royalty.js` |
-| Modify treatment/meeting/garden | `castle/services.js` |
-| Modify king quests | `castle/king-quest.js` |
-| Modify identity apply | `castle/identity.js` |
-| Modify bank/loan | `castle/bank.js` |
-| Modify ending logic | `game/endings.js` |
-| Modify base construction | `game/base-actions.js` |
-| Modify sleep/eat/drink/medicine | `game/consumables.js` |
-| Modify map navigation | `game/navigation.js` |
-| Modify exploration system | `game/exploration.js` |
-| Modify save system | `game/save.js` |
-| Modify survival notes | `game/notes.js` |
-| Modify achievement system | `game/achievements.js` |
-| Modify main menu routing | `game/index.js` |
+10. **Tiến Độ Độ Thân Mật Cho Kết Cục Hy Vọng Bằng Tên Lửa**: Khi chọn "Đưa những người quan trọng đi cùng", hiển thị tiến độ độ thân mật hiện tại của V / Tiểu Hàm / Lệ Lệ.
 
 ---
 
-## 7. Quick Reference Table
+## 6.5. Cấu Trúc Module Mã Nguồn
 
-| Constant Name | Data Type | Entry Count | Main Fields |
-|---------------|-----------|-------------|-------------|
-| `TIME_PHASES` | string[] | 8 | Time phase names |
+### Module Lâu Đài (`js/castle/`)
+
+Tệp `castle/index.js` gốc (1033 dòng) đã được tách thành 7 submodule theo từng phân vùng chức năng:
+
+| Submodule | Phân vùng chức năng | Các hàm bao gồm |
+|-----------|---------------------|-----------------|
+| `castle/outpost.js` | Bên ngoài lâu đài + tương tác lính gác | handleCastleOutpost, refreshCastleOutpost, handleCastleExploreBlocked, handleGuardChat, handleGuardEnter, handleGuardBribe, handleGuardLeave, handleCastleGuard, handleCastleGuardAction |
+| `castle/interior.js` | Giao diện bên trong lâu đài / khám phá / định tuyến | enterCastleInterior, showCastleInterior, refreshCastleInterior, handleCastleInteriorExplore, handleCastleInteriorAction, handleLeaveCastleInterior, handleLeaveCastle |
+| `castle/royalty.js` | Hội thoại hoàng gia + yến tiệc / vũ hội / phòng khách + nhận bổng lộc | handleCastleKing, handleCastleQueen, handleCastleBanquet, handleCastleBall, handleCastleRoom, handleCastleSalary |
+| `castle/services.js` | Trị liệu / hội kiến / ngự hoa viên / cấp lại tước vị / làm việc | handleCastleTreatment, handleTreatConfirm, handleCastleMeeting, handleCastleGarden, handleCastleTitleReissue, handleCastleWork |
+| `castle/king-quest.js` | Toàn bộ chuỗi nhiệm vụ Quốc vương | handleCastleKingQuest, checkKingQuestRequire, handleKingQuestSubmit, removeKingQuestItems |
+| `castle/identity.js` | Đăng ký / hủy bỏ thân phận quý tộc | handleCastleIdentity, handleIdentityApply, handleIdentityCancel, refreshCastleIdentity, handleCastleIdentityAction |
+| `castle/bank.js` | Ngân hàng / vay nợ / tương tác Giám đốc ngân hàng | handleCastleBank, handleBankLoan, handleLoanSubmit, handleBankRepay, handleBankBanker, handleBankerMercy, refreshCastleBank, handleBankerFight, handleCastleBankAction, handleCastleBankerAction |
+
+`castle/index.js` đóng vai trò là điểm vào thống nhất, tái xuất tất cả các hàm từ các submodule, đường dẫn import từ bên ngoài không thay đổi.
+
+### Module Game (`js/game/`)
+
+Tệp `game.js` gốc (1779 dòng) đã được tách thành 8 submodule theo từng phân vùng chức năng:
+
+| Submodule | Phân vùng chức năng | Các hàm bao gồm |
+|-----------|---------------------|-----------------|
+| `game/endings.js` | Hệ thống kết cục | triggerEnding, checkEndingTrigger, checkEndingTriggerAfterAction, checkGoHomeEnding, handleEndingAction |
+| `game/base-actions.js` | Xây dựng căn cứ | handleBaseBuild, handleBaseBuildAction |
+| `game/consumables.js` | Ngủ / ăn / uống / dùng thuốc | handleSleep, handleEatSelect, handleDrinkSelect, handleMedicineSelect, handleFoodAction, handleDrinkAction, handleMedicineAction, handleSelectionPhase |
+| `game/navigation.js` | Điều hướng bản đồ | handleGoOut, handleGoHome, handleMapAction |
+| `game/exploration.js` | Hệ thống khám phá | handleExplore, handleExploreAction |
+| `game/save.js` | Hệ thống lưu game (Save) | handleSavePage, renderSaveSlotsAsOptions, handleSavePageAction, handleSaveConfirm |
+| `game/notes.js` | Sổ tay sinh tồn | buildSurvivalNotes, handleSurvivalNotesAction, handleSurvivalNotesDetailAction |
+| `game/achievements.js` | Hệ thống thành tựu | tryUnlockAchievement, checkSurvivalAchievements, checkExplorationAchievements |
+
+`game/index.js` giữ lại các hàm điều hướng chính `handleChooseAction` và `handleAction`, đồng thời xuất thống nhất toàn bộ các hàm. Đường dẫn import từ bên ngoài được cập nhật từ `'./game.js'` thành `'./game/index.js'`.
+
+### Phụ Thuộc Lẫn Nhau Giữa Các Module
+
+- `castle/outpost.js` ↔ `castle/interior.js`: Import lẫn nhau (các module ES hỗ trợ tham chiếu vòng tại thời điểm runtime)
+- `castle/interior.js` → `castle/royalty.js`, `castle/services.js`, `castle/king-quest.js`: Lời gọi điều hướng
+- `game/index.js` → toàn bộ các submodule `game/`: Phân phối điều hướng chính
+- `game/endings.js` → `game/achievements.js`: Kết thúc kích hoạt thành tựu
+- `game/navigation.js` → `game/endings.js`: Kiểm tra kết thúc khi trở về nhà
+- `game/exploration.js` → `game/consumables.js`, `game/navigation.js`: Tiêu thụ / điều hướng sau khi thám hiểm
+
+### Cách Định Vị Vị Trí Khi Sửa Code
+
+| Yêu cầu cần sửa | Tệp cần chỉnh sửa |
+|-----------------|-------------------|
+| Sửa tương tác lính gác lâu đài | `castle/outpost.js` |
+| Sửa menu bên trong lâu đài | `castle/interior.js` |
+| Sửa yến tiệc / vũ hội / phòng khách | `castle/royalty.js` |
+| Sửa trị liệu / hội kiến / ngự hoa viên | `castle/services.js` |
+| Sửa nhiệm vụ Quốc vương | `castle/king-quest.js` |
+| Sửa đăng ký thân phận quý tộc | `castle/identity.js` |
+| Sửa ngân hàng / khoản vay | `castle/bank.js` |
+| Sửa logic kết cục | `game/endings.js` |
+| Sửa xây dựng căn cứ | `game/base-actions.js` |
+| Sửa ngủ / ăn / uống / dùng thuốc | `game/consumables.js` |
+| Sửa điều hướng bản đồ | `game/navigation.js` |
+| Sửa hệ thống khám phá | `game/exploration.js` |
+| Sửa hệ thống lưu file | `game/save.js` |
+| Sửa sổ tay sinh tồn | `game/notes.js` |
+| Sửa hệ thống thành tựu | `game/achievements.js` |
+| Sửa điều hướng menu chính | `game/index.js` |
+
+---
+
+## 7. Bảng Tra Cứu Nhanh
+
+| Tên hằng số | Kiểu dữ liệu | Số lượng mục | Các trường chính |
+|-------------|--------------|--------------|------------------|
+| `TIME_PHASES` | string[] | 8 | Tên các mốc thời gian |
 | `FOODS` | object[] | 19 | id, name, type, hunger, hydration? |
 | `FRUITS` | object[] | 11 | id, name, type, hunger, hydration |
 | `DRINKS` | object[] | 12 | id, name, type, hydration, effects? |
 | `MEDICINES` | object[] | 14 | id, name, type, effects{health?,infection?,crash?}, rarity |
-| `NURSE_MEDICINE_POOL` | object[] | 6 | (Auto-derived from MEDICINES) |
+| `NURSE_MEDICINE_POOL` | object[] | 6 | (Suy dẫn tự động từ MEDICINES) |
 | `CIGARETTES` | object[] | 5 | id, name, type |
 | `BUILDING_MATERIALS` | object[] | 6 | id, name, type |
 | `CROPS` | object[] | 15 | id, name, matureTurns, yield, seedId, seedName, hunger, hydration |
@@ -1561,49 +1561,49 @@ Original `game.js` (1779 lines) has been split into 8 submodules by function are
 | `NPCS` | object | 4 | {type: {name, hpMin, hpMax, damageMin, damageMax, hasRanged}} |
 | `SURVIVOR_NPC` | object[] | 3 | id, name, desc, dialogues{}, tips[], quests{} |
 | `NAMED_NPCS` | object | 5 | {key: {name, hp, damageMin?, damageMax?, damage?, hasRanged, dodgeRate}} |
-| `BOSS_NAMES` | string[] | 5 | (Auto-derived from NAMED_NPCS) |
+| `BOSS_NAMES` | string[] | 5 | (Suy dẫn tự động từ NAMED_NPCS) |
 | `BACKPACK_TYPES` | object | 14 | {name: {id, name, type, capacity}} |
 | `LOOT_BACKPACKS` | object[] | 14 | id, name, type, capacity, rarity |
 | `MAPS` | object[] | 22 | id, name, danger, encounterRate, noZombie?, lootTable{} |
 | `MAP_ACTIONS` | object | 23 | {mapId: [{text, action}]} |
 | `MAP_NPC_INTROS` | object | 13 | {key: appearance/combat/leave text} |
-| `OUTLAW_DIALOGUES` | string[] | 15 | Outlaw dialogue text |
-| `MECHANIC_DIALOGUES` | string[] | 5 | Mechanic dialogue text |
-| `WOLF_DIALOGUES` | string[] | 5 | Wolf dialogue text |
-| `WAREHOUSE_GUARD_DIALOGUES` | string[] | 5 | Warehouse guard dialogue text |
-| `NERVOUS_VETERAN_DIALOGUES` | string[] | 5 | Nervous veteran dialogue text |
-| `CASTLE_GUARD_DIALOGUES` | string[] | 5 | Castle guard dialogue text |
-| `CASTLE_KING_DIALOGUES` | string[] | 5 | Castle King dialogue text |
-| `CASTLE_QUEEN_DIALOGUES` | string[] | 5 | Castle Queen dialogue text |
-| `CASTLE_BANKER_DIALOGUES` | string[] | 5 | Castle Banker dialogue text |
-| `CASTLE_GUARD_HIGH_DIALOGUES` | string[] | 5 | Castle guard (high rank) dialogue text |
-| `CASTLE_KING_HIGH_DIALOGUES` | string[] | 5 | Castle King (high rank) dialogue text |
-| `CASTLE_QUEEN_HIGH_DIALOGUES` | string[] | 5 | Castle Queen (high rank) dialogue text |
-| `CASTLE_BANKER_HIGH_DIALOGUES` | string[] | 5 | Castle Banker (high rank) dialogue text |
-| `CASTLE_REJECTION_DIALOGUES` | object | 3 | {npcId: rejection dialogue text} |
-| `DOCTOR_INTRO` | string | 1 | Dr. Chen appearance text |
-| `DOCTOR_DIALOGUES` | string[] | 5 | Dr. Chen dialogue text |
-| `ZOMBIE_KING_INTRO` | string | 1 | Zombie King appearance text |
-| `NURSE_ZOMBIE_INTRO` | string | 1 | Nurse Zombie appearance text |
-| `LEADER_DIALOGUES` | string[] | 5 | Outpost leader dialogue text |
+| `OUTLAW_DIALOGUES` | string[] | 15 | Lời thoại kẻ ngoài vòng pháp luật |
+| `MECHANIC_DIALOGUES` | string[] | 5 | Lời thoại thợ máy |
+| `WOLF_DIALOGUES` | string[] | 5 | Lời thoại sói |
+| `WAREHOUSE_GUARD_DIALOGUES` | string[] | 5 | Lời thoại lính gác nhà kho |
+| `NERVOUS_VETERAN_DIALOGUES` | string[] | 5 | Lời thoại cựu binh căng thẳng |
+| `CASTLE_GUARD_DIALOGUES` | string[] | 5 | Lời thoại lính gác lâu đài |
+| `CASTLE_KING_DIALOGUES` | string[] | 5 | Lời thoại Quốc vương lâu đài |
+| `CASTLE_QUEEN_DIALOGUES` | string[] | 5 | Lời thoại Vương hậu lâu đài |
+| `CASTLE_BANKER_DIALOGUES` | string[] | 5 | Lời thoại Giám đốc ngân hàng lâu đài |
+| `CASTLE_GUARD_HIGH_DIALOGUES` | string[] | 5 | Lời thoại lính gác lâu đài (tước vị cao) |
+| `CASTLE_KING_HIGH_DIALOGUES` | string[] | 5 | Lời thoại Quốc vương lâu đài (tước vị cao) |
+| `CASTLE_QUEEN_HIGH_DIALOGUES` | string[] | 5 | Lời thoại Vương hậu lâu đài (tước vị cao) |
+| `CASTLE_BANKER_HIGH_DIALOGUES` | string[] | 5 | Lời thoại Giám đốc ngân hàng lâu đài (tước vị cao) |
+| `CASTLE_REJECTION_DIALOGUES` | object | 3 | {npcId: Lời thoại từ chối} |
+| `DOCTOR_INTRO` | string | 1 | Đoạn giới thiệu Bác sĩ Trần |
+| `DOCTOR_DIALOGUES` | string[] | 5 | Lời thoại Bác sĩ Trần |
+| `ZOMBIE_KING_INTRO` | string | 1 | Đoạn giới thiệu Vua Zombie |
+| `NURSE_ZOMBIE_INTRO` | string | 1 | Đoạn giới thiệu Zombie Y tá |
+| `LEADER_DIALOGUES` | string[] | 5 | Lời thoại Thủ lĩnh tiền đồn |
 | `SPECIAL_ITEMS` | object | 18 | {key: {id, name, type}} |
 | `CASTLE_RANKS` | object[] | 6 | id, rank, name, itemId |
 | `KING_QUESTS` | object[] | 5 | id, name, desc, story, submitStory, require, reward, prereqQuest |
 | `BASE_LEVELS` | object[] | 5 | name, bonus, cost{}? |
-| `WAREHOUSE_LEVELS` | (object\|null)[] | 8 | {wood?, building_mat?, stone?, nails?, glass?} |
+| `WAREHOUSE_LEVELS` | (object|null)[] | 8 | {wood?, building_mat?, stone?, nails?, glass?} |
 | `AFFINITY_THRESHOLDS` | object[] | 5 | min, label, stage |
 | `AFFINITY_MAX` | object | 5 | {npcId: maxValue} |
-| `GAME_CONSTANTS` | object | 22 groups | CRASH_MAX, INFECTION_MAX, MAX_HEALTH, TURNS_PER_DAY, SURVIVAL{}, COMBAT{}, MAP_EVENTS{}, CASTLE{}, ISLAND{}, DOCTOR{}, ROCKET{}, WEATHER{}, ENCOUNTER{}, SLEEP{}, OUTPOST{}, BASE{}, ENDINGS{}, FISHING{}, YUMO{}, LIURUYAN{}, NURSE_ZOMBIE{}, NPC{}, LOOT{}, ACHIEVEMENTS{}, TRADING{}, MAP{} |
-| `TOOL_WEAPON_IDS` | string[] | 4 | Melee weapon IDs |
-| `V_TRADE_AMMO_TYPES` | string[] | 11 | (Auto-derived from AMMO) |
+| `GAME_CONSTANTS` | object | 22 nhóm | CRASH_MAX, INFECTION_MAX, MAX_HEALTH, TURNS_PER_DAY, SURVIVAL{}, COMBAT{}, MAP_EVENTS{}, CASTLE{}, ISLAND{}, DOCTOR{}, ROCKET{}, WEATHER{}, ENCOUNTER{}, SLEEP{}, OUTPOST{}, BASE{}, ENDINGS{}, FISHING{}, YUMO{}, LIURUYAN{}, NURSE_ZOMBIE{}, NPC{}, LOOT{}, ACHIEVEMENTS{}, TRADING{}, MAP{} |
+| `TOOL_WEAPON_IDS` | string[] | 4 | Danh sách ID vũ khí công cụ |
+| `V_TRADE_AMMO_TYPES` | string[] | 11 | (Suy dẫn tự động từ AMMO) |
 | `TRADER_WEAPON_SHOP` | object[] | 6 | weaponId, type, costMin, costMax |
 | `FIXED_LOOT_DROPS` | object | 7 | {key: {weaponId?, type?, ammoId?, ammoCount?, foodId?}} |
 | `TRADE_TEMPLATES` | object[] | 4 | ammoType, ammoPerItem |
 | `DEFAULT_ITEM_IDS` | object | 5 | melee, food, drink, seed, serum |
-| `LILI_REWARD_MEDICINE_IDS` | string[] | 4 | Medicine IDs |
-| `XIAOHAN_REWARD_FOOD_IDS` | string[] | 3 | Food IDs |
-| `BUILDING_MATERIAL_NAMES` | object | 6 | (Auto-derived from BUILDING_MATERIALS) |
-| `CANNED_FOOD_IDS` | string[] | 8 | Canned food IDs |
+| `LILI_REWARD_MEDICINE_IDS` | string[] | 4 | Danh sách ID thuốc men |
+| `XIAOHAN_REWARD_FOOD_IDS` | string[] | 3 | Danh sách ID thức ăn |
+| `BUILDING_MATERIAL_NAMES` | object | 6 | (Suy dẫn tự động từ BUILDING_MATERIALS) |
+| `CANNED_FOOD_IDS` | string[] | 8 | Danh sách ID thực phẩm đóng hộp |
 | `SURVIVAL_NOTES` | object[] | 7 | id, name, entries[{title, content}] |
 | `ACHIEVEMENTS` | object[] | 19 | id, name, desc, icon |
-| `ENDING_STORIES` | object | 7 | {endingId: story text} |
+| `ENDING_STORIES` | object | 7 | {endingId: Nội dung truyện} |

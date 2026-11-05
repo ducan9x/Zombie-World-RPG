@@ -1,297 +1,183 @@
 category,sub_category,name,id,rarity,stats,desc
-Vũ khí cận chiến,Vũ khí cận chiến,拳头,拳头,,"sát thương:18 độ bền:∞ liên kích:3%","最基础的徒手攻击方式"
-Vũ khí cận chiến,Vũ khí cận chiến,菜刀,菜刀,common,"sát thương:20 độ bền:50 liên kích:5%","厨房用菜刀，勉强可用"
-Vũ khí cận chiến,Vũ khí cận chiến,棍棒,棍棒,common,"sát thương:22 độ bền:50 liên kích:5%","简单的木质棍棒"
-Vũ khí cận chiến,Vũ khí cận chiến,鹤嘴锄,鹤嘴锄,common,"sát thương:24 độ bền:50 liên kích:5%","兼顾挖掘与战斗"
-Vũ khí cận chiến,Vũ khí cận chiến,小铁锤,小铁锤,common,"sát thương:26 độ bền:50 liên kích:5%","小巧的铁质锤子"
-Vũ khí cận chiến,Vũ khí cận chiến,平底锅,平底锅,common,"sát thương:28 độ bền:60 liên kích:5%","厨房神器，可攻可守"
-Vũ khí cận chiến,Vũ khí cận chiến,大扳手,大扳手,common,"sát thương:30 độ bền:50 liên kích:5%","重型工具扳手"
-Vũ khí cận chiến,Vũ khí cận chiến,棒球棍,棒球棍,common,"sát thương:32 độ bền:50 liên kích:5%","铝合金棒球棍"
-Vũ khí cận chiến,Vũ khí cận chiến,铁管,铁管,common,"sát thương:35 độ bền:50 liên kích:5%","生锈的铁管"
-Vũ khí cận chiến,Vũ khí cận chiến,铁铲,铁铲,common,"sát thương:38 độ bền:50 liên kích:5%","工兵铁铲"
-Vũ khí cận chiến,Vũ khí cận chiến,小匕首,小匕首,uncommon,"sát thương:40 độ bền:40 liên kích:8%","轻便的匕首"
-Vũ khí cận chiến,Vũ khí cận chiến,屠刀,屠刀,uncommon,"sát thương:42 độ bền:50 liên kích:8%","屠宰用的锋利刀具"
-Vũ khí cận chiến,Vũ khí cận chiến,警棍,警棍,uncommon,"sát thương:45 độ bền:50 liên kích:8%","警用制式装备"
-Vũ khí cận chiến,Vũ khí cận chiến,撬棍,撬棍,uncommon,"sát thương:48 độ bền:50 liên kích:8%","万能撬棍"
-Vũ khí cận chiến,Vũ khí cận chiến,羊角锤,羊角锤,uncommon,"sát thương:50 độ bền:60 liên kích:8%","羊角造型的铁锤"
-Vũ khí cận chiến,Vũ khí cận chiến,短柄斧,短柄斧,uncommon,"sát thương:52 độ bền:60 liên kích:8%","短柄手斧"
-Vũ khí cận chiến,Vũ khí cận chiến,消防斧,消防斧,uncommon,"sát thương:55 độ bền:70 liên kích:8%","破拆消防斧"
-Vũ khí cận chiến,Vũ khí cận chiến,狩猎刀,狩猎刀,uncommon,"sát thương:60 độ bền:70 liên kích:8%","专业狩猎刀具"
-Vũ khí cận chiến,Vũ khí cận chiến,军用刀,军用刀,uncommon,"sát thương:65 độ bền:70 liên kích:8%","军用制式刀具"
-Vũ khí cận chiến,Vũ khí cận chiến,指虎刀,指虎刀,rare,"sát thương:67 độ bền:90 liên kích:12%","指虎与刀的结合体"
-Vũ khí cận chiến,Vũ khí cận chiến,大砍刀,大砍刀,rare,"sát thương:70 độ bền:60 liên kích:12%","重型砍刀"
-Vũ khí cận chiến,Vũ khí cận chiến,斩马刀,斩马刀,rare,"sát thương:72 độ bền:60 liên kích:12%","古代斩马刀"
-Vũ khí cận chiến,Vũ khí cận chiến,九节鞭,九节鞭,rare,"sát thương:75 độ bền:90 liên kích:12%","九节钢鞭"
-Vũ khí cận chiến,Vũ khí cận chiến,西洋剑,西洋剑,rare,"sát thương:79 độ bền:70 liên kích:12%","轻灵的西洋剑"
-Vũ khí cận chiến,Vũ khí cận chiến,流星锤,流星锤,rare,"sát thương:80 độ bền:50 liên kích:12%","流星飞锤"
-Vũ khí cận chiến,Vũ khí cận chiến,钢胁差,钢胁差,rare,"sát thương:83 độ bền:30 liên kích:12%","精钢胁差"
-Vũ khí cận chiến,Vũ khí cận chiến,龙抄剑,龙抄剑,rare,"sát thương:88 độ bền:66 liên kích:12%","龙纹抄剑"
-Vũ khí cận chiến,Vũ khí cận chiến,长骑枪,长骑枪,rare,"sát thương:89 độ bền:80 liên kích:12%","骑兵长枪"
-Vũ khí cận chiến,Vũ khí cận chiến,双刃剑,双刃剑,epic,"sát thương:90 độ bền:100 liên kích:15%","双刃大剑"
-Vũ khí cận chiến,Vũ khí cận chiến,马来剑,马来剑,epic,"sát thương:95 độ bền:70 liên kích:15%","马来风格弯剑"
-Vũ khí cận chiến,Vũ khí cận chiến,武士刀,武士刀,epic,"sát thương:99 độ bền:40 liên kích:15%","东洋武士刀"
-Vũ khí cận chiến,Vũ khí cận chiến,唐横刀,唐横刀,epic,"sát thương:100 độ bền:80 liên kích:15%","唐朝横刀"
-Vũ khí cận chiến,Vũ khí cận chiến,电锯,电锯,epic,"sát thương:105 độ bền:120 liên kích:15%","轰鸣的电锯"
-Vũ khí cận chiến,Vũ khí cận chiến,勇者之剑,勇者之剑,legendary,"sát thương:109 độ bền:50 liên kích:18%","勇者专属之剑"
-Vũ khí cận chiến,Vũ khí cận chiến,寰宇之剑,寰宇之剑,legendary,"sát thương:111 độ bền:222 liên kích:18%","寰宇之刃"
-Vũ khí cận chiến,Vũ khí cận chiến,无畏之刃,无畏之刃,myth,"sát thương:115 độ bền:100 liên kích:20%","勇者无畏之刃"
-Vũ khí cận chiến,Vũ khí cận chiến,皇家银剑,皇家银剑,myth,"sát thương:120 độ bền:120 liên kích:20%","皇家银制长剑"
-Vũ khí cận chiến,Vũ khí cận chiến,尚方宝剑,尚方宝剑,legendary,"sát thương:18 độ bền:555 liên kích:88%","尚方宝剑，如朕亲临"
-Vũ khí cận chiến,Vũ khí cận chiến,九九九刀,九九九刀,legendary,"sát thương:999 độ bền:1 liên kích:1%","一击必杀，一击必毁"
-Vũ khí cận chiến,Vũ khí cận chiến,海歌渔叉,海歌渔叉,myth,"sát thương:128 độ bền:150 liên kích:22%","人鱼族圣物，蕴含海洋之力的传奇渔叉"
-Vũ khí tầm xa,Vũ khí tầm xa,木弓,木弓,common,"sát thương:18 bạo kích:5% Đạn:箭矢","简易的木制弓箭"
-Vũ khí tầm xa,Vũ khí tầm xa,反曲弓,反曲弓,common,"sát thương:24 bạo kích:6% Đạn:箭矢","反曲结构弓"
-Vũ khí tầm xa,Vũ khí tầm xa,复合弓,复合弓,uncommon,"sát thương:32 bạo kích:8% Đạn:箭矢","现代复合弓"
-Vũ khí tầm xa,Vũ khí tầm xa,十字弩,十字弩,uncommon,"sát thương:40 bạo kích:9% Đạn:箭矢","经典十字弩"
-Vũ khí tầm xa,Vũ khí tầm xa,折叠弩,折叠弩,rare,"sát thương:48 bạo kích:10% Đạn:箭矢","可折叠便携弩"
-Vũ khí tầm xa,Vũ khí tầm xa,狙击弩,狙击弩,rare,"sát thương:50 bạo kích:11% Đạn:箭矢","精准狙击弩"
-Vũ khí tầm xa,Vũ khí tầm xa,USP9,USP9,common,"sát thương:32 bạo kích:16% Đạn:9×19mm","德国制手枪"
-Vũ khí tầm xa,Vũ khí tầm xa,G17,G17,common,"sát thương:30 bạo kích:15% Đạn:9×19mm","格洛克17手枪"
-Vũ khí tầm xa,Vũ khí tầm xa,P226,P226,common,"sát thương:28 bạo kích:18% Đạn:9×19mm","西格绍尔P226"
-Vũ khí tầm xa,Vũ khí tầm xa,GP100,GP100,common,"sát thương:49 bạo kích:20% Đạn:.357 Magnum","鲁格GP100左轮"
-Vũ khí tầm xa,Vũ khí tầm xa,M1911,M1911,common,"sát thương:36 bạo kích:18% Đạn:.45 ACP","经典M1911手枪"
-Vũ khí tầm xa,Vũ khí tầm xa,沙漠之鹰,沙漠之鹰,rare,"sát thương:65 bạo kích:12% Đạn:.50 AE","大威力沙漠之鹰"
-Vũ khí tầm xa,Vũ khí tầm xa,UZI,UZI,uncommon,"sát thương:42 bạo kích:18% Đạn:9×19mm","乌兹冲锋枪"
-Vũ khí tầm xa,Vũ khí tầm xa,MP5,MP5,uncommon,"sát thương:45 bạo kích:20% Đạn:9×19mm","MP5冲锋枪"
-Vũ khí tầm xa,Vũ khí tầm xa,MP7,MP7,rare,"sát thương:48 bạo kích:22% Đạn:9×19mm","MP7个人防卫武器"
-Vũ khí tầm xa,Vũ khí tầm xa,Vector,Vector,rare,"sát thương:50 bạo kích:23% Đạn:9×19mm","Kriss Vector冲锋枪"
-Vũ khí tầm xa,Vũ khí tầm xa,P90,P90,uncommon,"sát thương:40 bạo kích:21% Đạn:5.7×28mm","P90冲锋枪"
-Vũ khí tầm xa,Vũ khí tầm xa,UMP45,UMP45,rare,"sát thương:52 bạo kích:19% Đạn:.45 ACP","UMP45冲锋枪"
-Vũ khí tầm xa,Vũ khí tầm xa,M16A4,M16A4,uncommon,"sát thương:49 bạo kích:22% Đạn:5.56×45mm NATO","M16A4突击步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,M4A1,M4A1,uncommon,"sát thương:50 bạo kích:24% Đạn:5.56×45mm NATO","M4A1卡宾枪"
-Vũ khí tầm xa,Vũ khí tầm xa,HK416,HK416,rare,"sát thương:52 bạo kích:25% Đạn:5.56×45mm NATO","HK416突击步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,SG552,SG552,uncommon,"sát thương:53 bạo kích:23% Đạn:5.56×45mm NATO","SG552突击步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,AUG,AUG,rare,"sát thương:55 bạo kích:25% Đạn:5.56×45mm NATO","斯泰尔AUG突击步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,AK47,AK47,rare,"sát thương:55 bạo kích:20% Đạn:7.62×39mm","AK-47突击步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,AKM,AKM,rare,"sát thương:57 bạo kích:20% Đạn:7.62×39mm","AKM改进型"
-Vũ khí tầm xa,Vũ khí tầm xa,81式,81式,rare,"sát thương:60 bạo kích:22% Đạn:7.62×39mm","81式自动步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,SKS,SKS,rare,"sát thương:65 bạo kích:28% Đạn:7.62×39mm","SKS半自动步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,M249 SAW,M249 SAW,rare,"sát thương:58 bạo kích:22% Đạn:5.56×45mm NATO","M249班用机枪"
-Vũ khí tầm xa,Vũ khí tầm xa,RPK,RPK,rare,"sát thương:62 bạo kích:23% Đạn:7.62×39mm","RPK轻机枪"
-Vũ khí tầm xa,Vũ khí tầm xa,MG42,MG42,rare,"sát thương:65 bạo kích:21% Đạn:7.92×57mm","MG42通用机枪"
-Vũ khí tầm xa,Vũ khí tầm xa,PKM,PKM,epic,"sát thương:68 bạo kích:24% Đạn:7.62×54mmR","PKM通用机枪"
-Vũ khí tầm xa,Vũ khí tầm xa,M60,M60,rare,"sát thương:63 bạo kích:22% Đạn:7.62×51mm","M60通用机枪"
-Vũ khí tầm xa,Vũ khí tầm xa,FAL,FAL,rare,"sát thương:72 bạo kích:22% Đạn:7.62×51mm","FAL自动步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,EBR14,EBR14,rare,"sát thương:80 bạo kích:30% Đạn:7.62×51mm","M14 EBR战斗步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,SR25,SR25,epic,"sát thương:95 bạo kích:32% Đạn:7.62×51mm","SR25狙击步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,SCAR-H,SCAR-H,rare,"sát thương:68 bạo kích:26% Đạn:7.62×51mm","SCAR-H战斗步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,AN-94,AN-94,epic,"sát thương:56 bạo kích:27% Đạn:5.56×45mm NATO","AN-94突击步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,M700,M700,rare,"sát thương:120 bạo kích:35% Đạn:7.62×51mm","雷明顿M700狙击步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,Mosin-Nagant,Mosin-Nagant,epic,"sát thương:135 bạo kích:38% Đạn:7.62×54mmR","莫辛-纳甘步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,AWM,AWM,legendary,"sát thương:200 bạo kích:45% Đạn:.300 Winchester Magnum","AWM狙击步枪"
-Vũ khí tầm xa,Vũ khí tầm xa,M870,M870,uncommon,"sát thương:80 bạo kích:10% Đạn:12号霰弹","M870霰弹枪"
-Vũ khí tầm xa,Vũ khí tầm xa,AA12,AA12,uncommon,"sát thương:88 bạo kích:12% Đạn:12号霰弹","AA12霰弹枪"
-Vũ khí tầm xa,Vũ khí tầm xa,SPAS-12,SPAS-12,rare,"sát thương:95 bạo kích:11% Đạn:12号霰弹","SPAS-12霰弹枪"
-Vũ khí tầm xa,Vũ khí tầm xa,原野之弓,原野之弓,myth,"sát thương:52 bạo kích:52% độ bền:520 Đạn:箭矢","原野之王的传说之弓"
-Vũ khí tầm xa,Vũ khí tầm xa,皇家短枪,皇家短枪,myth,"sát thương:99 bạo kích:29% Đạn:.357 Magnum","皇家短管手枪"
-Đạn,Đạn,箭矢,箭矢,,,弓弩专用Đạn
-Đạn,Đạn,.357 Magnum,.357 Magnum,,,GP100左轮使用
-Đạn,Đạn,.45 ACP,.45 ACP,,,M1911/UMP45使用
-Đạn,Đạn,.50 AE,.50 AE,,,沙漠之鹰使用
-Đạn,Đạn,9×19mm,9×19mm,,,常见手枪/冲锋枪Đạn
-Đạn,Đạn,5.7×28mm,5.7×28mm,,,P90使用
-Đạn,Đạn,7.62×39mm,7.62×39mm,,,AK系列步枪使用
-Đạn,Đạn,5.56×45mm NATO,5.56×45mm NATO,,,M4/HK416/AUG使用
-Đạn,Đạn,7.62×51mm,7.62×51mm,,,M700/FAL/SR25使用
-Đạn,Đạn,7.62×54mmR,7.62×54mmR,,,Mosin/PKM使用
-Đạn,Đạn,7.92×57mm,7.92×57mm,,,MG42使用
-Đạn,Đạn,.300 Winchester Magnum,.300 Winchester Magnum,,,AWM使用
-Đạn,Đạn,12号霰弹,12号霰弹,,,霰弹枪使用
-Thực phẩm,普通Thực phẩm,花生米,花生米,common,"no+5","香脆花生米"
-Thực phẩm,普通Thực phẩm,兰花豆,兰花豆,common,"no+5","五香兰花豆"
-Thực phẩm,普通Thực phẩm,小坚果,小坚果,common,"no+10","混合小坚果"
-Thực phẩm,普通Thực phẩm,棒棒糖,棒棒糖,common,"no+10","甜蜜棒棒糖"
-Thực phẩm,普通Thực phẩm,能量棒,能量棒,common,"no+20","高能能量棒"
-Thực phẩm,普通Thực phẩm,巧克力,巧克力,common,"no+20","纯黑巧克力"
-Thực phẩm,普通Thực phẩm,干脆面,干脆面,common,"no+20","香脆方便面"
-Thực phẩm,普通Thực phẩm,银耳羹,银耳羹,common,"no+20 nước+20","银耳羹"
-Thực phẩm,普通Thực phẩm,海苔脆,海苔脆,common,"no+20","酥脆海苔片"
-Thực phẩm,普通Thực phẩm,压缩饼干,压缩饼干,common,"no+30","军用压缩饼干"
-Thực phẩm,普通Thực phẩm,小麦面包,小麦面包,common,"no+30","全麦面包"
-Thực phẩm,普通Thực phẩm,黄桃罐头,黄桃罐头,common,"no+40 nước+10","黄桃罐头"
-Thực phẩm,普通Thực phẩm,豆类罐头,豆类罐头,common,"no+40 nước+10","混合豆类罐头"
-Thực phẩm,普通Thực phẩm,牛肉罐头,牛肉罐头,common,"no+40 nước+10","红烧牛肉罐头"
-Thực phẩm,普通Thực phẩm,军粮罐头,军粮罐头,common,"no+60 nước+10","军粮罐头"
-Thực phẩm,普通Thực phẩm,沙丁鱼罐头,沙丁鱼罐头,common,"no+40 nước+15","沙丁鱼罐头"
-Thực phẩm,普通Thực phẩm,金枪鱼罐头,金枪鱼罐头,common,"no+40 nước+15","金枪鱼罐头"
-Thực phẩm,普通Thực phẩm,秋刀鱼罐头,秋刀鱼罐头,common,"no+40 nước+15","秋刀鱼罐头"
-Thực phẩm,普通Thực phẩm,青花鱼罐头,青花鱼罐头,common,"no+40 nước+15","青花鱼罐头"
-Trái cây,Trái cây,苹果,苹果,,"no+18 nước+18","新鲜红苹果"
-Trái cây,Trái cây,香蕉,香蕉,,"no+20 nước+20","新鲜香蕉"
-Trái cây,Trái cây,橙子,橙子,,"no+15 nước+15","新鲜橙子"
-Trái cây,Trái cây,雪梨,雪梨,,"no+15 nước+15","新鲜雪梨"
-Trái cây,Trái cây,葡萄,葡萄,,"no+15 nước+15","新鲜葡萄"
-Trái cây,Trái cây,西瓜,西瓜,,"no+30 nước+30","新鲜西瓜"
-Trái cây,Trái cây,草莓,草莓,,"no+12 nước+12","新鲜草莓"
-Trái cây,Trái cây,蓝莓,蓝莓,,"no+5 nước+5","新鲜蓝莓"
-Trái cây,Trái cây,桃子,桃子,,"no+18 nước+18","新鲜桃子"
-Trái cây,Trái cây,芒果,芒果,,"no+22 nước+22","新鲜芒果"
-Trái cây,Trái cây,柿子,柿子,,"no+15 nước+15","新鲜柿子"
-Đồ uống,Đồ uống,矿泉水,矿泉水,,"nước+40","瓶装矿泉水"
-Đồ uống,Đồ uống,椰子汁,椰子汁,,"nước+45","椰汁饮料"
-Đồ uống,Đồ uống,果粒橙,果粒橙,,"nước+30","果粒橙汁"
-Đồ uống,Đồ uống,纯牛奶,纯牛奶,,"nước+35","纯牛奶"
-Đồ uống,Đồ uống,优酸乳,优酸乳,,"nước+35","优酸乳Đồ uống"
-Đồ uống,Đồ uống,苹果醋,苹果醋,,"nước+35","苹果醋饮料"
-Đồ uống,Đồ uống,魔爪饮料,魔爪饮料,,"nước+60","魔爪功能饮料"
-Đồ uống,Đồ uống,电解质水,电解质水,,"nước+60","电解质水"
-Đồ uống,Đồ uống,运动饮料,运动饮料,,"nước+60","运动功能饮料"
-Đồ uống,Đồ uống,百味啤酒,百味啤酒,,"nước+5 精神-10","百味啤酒"
-Đồ uống,Đồ uống,动力啤酒,动力啤酒,,"nước+5 精神-10","动力啤酒"
-Đồ uống,Đồ uống,高度白酒,高度白酒,,"精神-30","高度白酒"
-Thuốc,Thuốc,创可贴,创可贴,common,"HP+10","简易创可贴"
-Thuốc,Thuốc,葡萄糖服液,葡萄糖服液,common,"HP+25 nước+15","葡萄糖口服液"
-Thuốc,Thuốc,镇定剂,镇定剂,uncommon,"lý trí+30","镇定并恢复lý trí"
-Thuốc,Thuốc,止痛片,止痛片,uncommon,"lý trí+15 精神-5","止痛药片"
-Thuốc,Thuốc,肾上腺素,肾上腺素,uncommon,"HP+20 精神-10","肾上腺素针剂"
-Thuốc,Thuốc,止血带,止血带,uncommon,"HP+30","止血带"
-Thuốc,Thuốc,清创药,清创药,uncommon,"nhiễm-25","清创消毒药物"
-Thuốc,Thuốc,手术包,手术包,rare,"HP+25 精神-10","手术急救包"
-Thuốc,Thuốc,抗生素,抗生素,rare,"HP+35 nhiễm-25","广谱抗生素"
-Thuốc,Thuốc,抗nhiễm血清,抗nhiễm血清,rare,"nhiễm-60","抗nhiễm血清"
-Thuốc,Thuốc,医用急救包,医用急救包,epic,"HP+70","医用急救包"
-Thuốc,Thuốc,战地医疗箱,战地医疗箱,epic,"HP+120 精神-30","战地医疗箱"
-Thuốc,Thuốc,万能针剂,万能针剂,legendary,"HP+150 精神-50 nhiễm-50 nước+20","万能针剂"
-Thuốc,Thuốc,改良抗体针,改良抗体针,myth,"nhiễm-90","改良抗体针剂"
-Thuốc,Thuốc,Zombie凝胶,Zombie凝胶,myth,"nhiễm+2",Zombie体内析出的黏稠物质
-Balo,Balo,小腰包,小腰包,common,"dung lượng20","小巧腰包"
-Balo,Balo,小书包,小书包,common,"dung lượng22","小学生书包"
-Balo,Balo,手提包,手提包,common,"dung lượng18","手提包"
-Balo,Balo,帆布Balo,帆布Balo,common,"dung lượng24","帆布材质Balo"
-Balo,Balo,时尚Balo,时尚Balo,uncommon,"dung lượng26","时尚款式Balo"
-Balo,Balo,运动Balo,运动Balo,uncommon,"dung lượng28","运动型Balo"
-Balo,Balo,登山Balo,登山Balo,uncommon,"dung lượng32","登山专用Balo"
-Balo,Balo,军用Balo,军用Balo,rare,"dung lượng36","军用制式Balo"
-Balo,Balo,战术Balo,战术Balo,rare,"dung lượng39","战术Balo"
-Balo,Balo,特种Balo,特种Balo,rare,"dung lượng42","特种部队Balo"
-Balo,Balo,大型登山Balo,大型登山Balo,epic,"dung lượng48","大型登山Balo"
-Balo,Balo,超大旅行Balo,超大旅行Balo,epic,"dung lượng56","超大旅行Balo"
-Balo,Balo,超大负重Balo,超大负重Balo,epic,"dung lượng64","超大负重Balo"
-Balo,Balo,次元收纳Balo,次元收纳Balo,legendary,"dung lượng68","次元收纳Balo"
-Cây trồng,Cây trồng,牛皮菜,牛皮菜,,"chín:12回合 sản lượng:1 no:18 nước:15","牛皮菜Cây trồng"
-Cây trồng,Cây trồng,马齿苋,马齿苋,,"chín:14回合 sản lượng:1 no:22 nước:18","马齿苋Cây trồng"
-Cây trồng,Cây trồng,菊苣,菊苣,,"chín:16回合 sản lượng:2 no:12 nước:12","菊苣Cây trồng"
-Cây trồng,Cây trồng,洋姜,洋姜,,"chín:20回合 sản lượng:2 no:16 nước:10","洋姜Cây trồng"
-Cây trồng,Cây trồng,木薯,木薯,,"chín:36回合 sản lượng:3 no:20 nước:8","木薯Cây trồng"
-Cây trồng,Cây trồng,红薯,红薯,,"chín:32回合 sản lượng:3 no:18 nước:12","红薯Cây trồng"
-Cây trồng,Cây trồng,土豆,土豆,,"chín:24回合 sản lượng:2 no:20 nước:10","土豆Cây trồng"
-Cây trồng,Cây trồng,芜菁,芜菁,,"chín:22回合 sản lượng:2 no:18 nước:12","芜菁Cây trồng"
-Cây trồng,Cây trồng,婆罗门参,婆罗门参,,"chín:28回合 sản lượng:2 no:24 nước:8","婆罗门参Cây trồng"
-Cây trồng,Cây trồng,胡萝卜,胡萝卜,,"chín:26回合 sản lượng:2 no:22 nước:14","胡萝卜Cây trồng"
-Cây trồng,Cây trồng,韭菜,韭菜,,"chín:14回合 sản lượng:1 no:22 nước:12","韭菜Cây trồng"
-Cây trồng,Cây trồng,枸杞,枸杞,,"chín:20回合 sản lượng:2 no:16 nước:20","枸杞Cây trồng"
-Cây trồng,Cây trồng,酸模,酸模,,"chín:16回合 sản lượng:1 no:25 nước:20","酸模Cây trồng"
-Cây trồng,Cây trồng,黑麦,黑麦,,"chín:40回合 sản lượng:4 no:18 nước:6","黑麦Cây trồng"
-Cây trồng,Cây trồng,豌豆,豌豆,,"chín:28回合 sản lượng:3 no:16 nước:14","豌豆Cây trồng"
-Cá,Cá,灰背鲻鱼,灰背鲻鱼,common,,độc không thể ăn
-Cá,Cá,铁皮沙丁鱼,铁皮沙丁鱼,common,,độc không thể ăn
-Cá,Cá,钝头海鲫,钝头海鲫,common,,độc không thể ăn
-Cá,Cá,黑尾鲭鱼,黑尾鲭鱼,common,,độc không thể ăn
-Cá,Cá,辐纹梭鱼,辐纹梭鱼,uncommon,,độc không thể ăn
-Cá,Cá,锈甲比目鱼,锈甲比目鱼,uncommon,,độc không thể ăn
-Cá,Cá,双头石斑,双头石斑,uncommon,,độc không thể ăn
-Cá,Cá,污水鳗,污水鳗,uncommon,,độc không thể ăn
-Cá,Cá,腐尸鳕鱼,腐尸鳕鱼,rare,,độc không thể ăn
-Cá,Cá,裂脊狼鱼,裂脊狼鱼,rare,,độc không thể ăn
-Cá,Cá,胶质灯笼鱼,胶质灯笼鱼,rare,,độc không thể ăn
-Cá,Cá,多须鲷王,多须鲷王,rare,,độc không thể ăn
-Cá,Cá,亡骸巨鳕,亡骸巨鳕,epic,,độc không thể ăn
-Cá,Cá,海疫触手鱼,海疫触手鱼,epic,,độc không thể ăn
-Cá,Cá,沉船幽鲛,沉船幽鲛,epic,,độc không thể ăn
-Cá,Cá,渊核巨鱼,渊核巨鱼,legendary,,độc không thể ăn
-Vật liệu xây dựng,Vật liệu xây dựng,木材,木材,,,Vật liệu xây cơ sở
-Vật liệu xây dựng,Vật liệu xây dựng,石头,石头,,,Vật liệu xây cơ sở
-Vật liệu xây dựng,Vật liệu xây dựng,铁钉,铁钉,,,Vật liệu xây cơ sở
-Vật liệu xây dựng,Vật liệu xây dựng,玻璃,玻璃,,,Vật liệu xây cơ sở
-Vật liệu xây dựng,Vật liệu xây dựng,建筑材料,建筑材料,,,Vật liệu xây cơ sở
-Vật liệu xây dựng,Vật liệu xây dựng,纯净能源,纯净能源,,,Nhiên liệu tên lửa
-Vật liệu xây dựng,Vật liệu xây dựng,小核能发电机,小核能发电机,,,Thiết bị cần cho tên lửa
-Vật phẩm đặc biệt,身份牌,贵族身份牌,贵族身份牌,,,Chứng nhận quý tộc thành bảo
-Vật phẩm đặc biệt,身份牌,子爵身份牌,子爵身份牌,,,Chứng nhận tử tước
-Vật phẩm đặc biệt,身份牌,伯爵身份牌,伯爵身份牌,,,Chứng nhận bá tước
-Vật phẩm đặc biệt,身份牌,侯爵身份牌,侯爵身份牌,,,Chứng nhận hầu tước
-Vật phẩm đặc biệt,身份牌,公爵身份牌,公爵身份牌,,,Chứng nhận công tước
-Vật phẩm đặc biệt,身份牌,储君身份牌,储君身份牌,,,Chứng nhận thái tử
-Vật phẩm đặc biệt,徽章,曙光徽章,曙光徽章,,,Chứng nhận trận địa bình minh
-Vật phẩm đặc biệt,徽章,曙光队长徽章,曙光队长徽章,,,Chứng nhận đội trưởng tiền phong bình minh
-Vật phẩm đặc biệt,徽章,寂灭徽章,寂灭徽章,,,Kỷ niệm đánh bại zombie chi vương
-Vật phẩm đặc biệt,徽章,农业大师徽章,农业大师徽章,,,Kỷ niệm đại sư nông nghiệp
-Vật phẩm đặc biệt,任务道具,苗苗日记本,苗苗日记本,,,Nhật ký Miao Miao
-Vật phẩm đặc biệt,任务道具,奇怪Bút ghi âm,奇怪Bút ghi âm,,,Bút ghi âm
-Vật phẩm đặc biệt,任务道具,给妹妹的信,给妹妹的信,,,Thư của thủ lĩnh trận địa
-Vật phẩm đặc biệt,任务道具,Thư hồi của hoàng hậu,Thư hồi của hoàng hậu,,,Thư hồi của hoàng hậu
-Vật phẩm đặc biệt,任务道具,定情信物,定情信物,,,Mặt dây chuyền hoa hướng dương
-Vật phẩm đặc biệt,任务道具,城堡通行证,城堡通行证,,,Chứng nhận thông hành thành bảo
-Vật phẩm đặc biệt,任务道具,车钥匙,车钥匙,,,Chìa khóa xe việt dã của Liu Ruyan
-Vật phẩm đặc biệt,任务道具,地下钥匙,地下钥匙,,,Chìa khóa đến khu vực ngầm thành bảo
-Vật phẩm đặc biệt,任务道具,闪电鳞片,闪电鳞片,,,Vảy đặc biệt sản xuất từ bể kính rò điện
-Vật phẩm đặc biệt,任务道具,通雷鳞片,通雷鳞片,,,Vảy hiếm sản xuất từ bể kính rò điện
-Vật phẩm đặc biệt,任务道具,犯罪资料,犯罪资料,,,Hồ sơ vụ án尘封 nhiều năm (có thể xếp chồng)
-Vật phẩm đặc biệt,Tiền tệ,Điếu thuốc,Điếu thuốc,,,末日硬通货 不占Balo空间
-Vật phẩm đặc biệt,Tiền tệ,皇家币,皇家币,,,皇家交易Tiền tệ 不占Balo空间
-Vật phẩm đặc biệt,Tiền tệ,Xăng,Xăng,,,游艇/越野车燃料 不占Balo空间
-Đồ uống quán bar,Đồ uống quán bar,心动彩虹啤,心动彩虹啤,,"精神-20","心动彩虹啤酒"
-Đồ uống quán bar,Đồ uống quán bar,蜜糖陷阱,蜜糖陷阱,,"精神-40","蜜糖陷阱"
-Đồ uống quán bar,Đồ uống quán bar,爱神伏特加,爱神伏特加,,"精神-50","爱神伏特加"
-Đồ uống quán bar,Đồ uống quán bar,烈火之吻,烈火之吻,,"精神-60","烈火之吻"
-Đồ uống quán bar,Đồ uống quán bar,流浪者的歌谣,流浪者的歌谣,,"精神-70","流浪者的歌谣"
-Đồ uống quán bar,Đồ uống quán bar,皇后白兰地,皇后白兰地,,"精神-80","皇后白兰地"
-Đồ uống quán bar,Đồ uống quán bar,星辰幻梦,星辰幻梦,,"精神-90","星辰幻梦"
-Đồ uống quán bar,Đồ uống quán bar,鎏金玫瑰,鎏金玫瑰,,"精神-100","鎏金玫瑰"
-Đồ uống quán bar,Đồ uống quán bar,诗人的低语,诗人的低语,,"no+20 nước+20 精神-100","诗人的低语"
-Đồ uống quán bar,Đồ uống quán bar,国王特调酒,国王特调酒,,"no+30 nước+30 精神-100","国王特调酒"
-Đồ uống quán bar,Đồ uống quán bar,帝国陈年酿,帝国陈年酿,,"no+40 nước+40 精神-100","帝国陈年酿"
-Đồ uống quán bar,Đồ uống quán bar,末日救赎,末日救赎,,"no+60 nước+60 精神-100","末日救赎"
-Đồ uống quán bar,Đồ uống quán bar,伴舞的女郎,伴舞的女郎,,"no+80 nước+80 精神-100","伴舞的女郎"
-Đồ uống quán bar,Đồ uống quán bar,虚空之触,虚空之触,,"no+100 nước+100 精神-100","虚空之触"
-Đồ uống quán bar,Đồ uống quán bar,深渊凝视,深渊凝视,,"精神-100","深渊凝视"
-Đồ uống quán bar,Đồ uống quán bar,Trái cây龙王套,Trái cây龙王套,,"no+100 nước+100 精神-100","Trái cây龙王套"
-Zombie,普通Zombie,普通游荡Zombie,普通游荡Zombie,,"HP:120 sát thương:16 闪避:5% 能力:nhiễm","最基础的Zombie"
-Zombie,普通Zombie,腐烂腐尸,腐烂腐尸,,"HP:100 sát thương:24 闪避:0% 能力:nhiễm","腐烂的腐尸"
-Zombie,普通Zombie,爬行尸,爬行尸,,"HP:60 sát thương:14 闪避:20% 能力:nhiễm/绊倒","爬行前进的Zombie"
-Zombie,普通Zombie,疾行Zombie,疾行Zombie,,"HP:80 sát thương:30 闪避:35% 能力:nhiễm/尖叫","速度极快的Zombie"
-Zombie,普通Zombie,肥胖臃肿尸,肥胖臃肿尸,,"HP:240 sát thương:20 闪避:0% 能力:nhiễm/自爆","肥胖臃肿的Zombie"
-Zombie,普通Zombie,爆裂尸,爆裂尸,,"HP:120 sát thương:18 闪避:0% 能力:爆炸","会爆炸的Zombie"
-Zombie,精英Zombie,军警Zombie,军警Zombie,,"HP:160 sát thương:36 闪避:10% 能力:nhiễm/腐蚀","军警变异Zombie"
-Zombie,精英Zombie,群居尸母,群居尸母,,"HP:140 sát thương:16 闪避:0% 能力:召唤","能召唤同类的尸母"
-Zombie,精英Zombie,铁甲尸,铁甲尸,,"HP:280 sát thương:22 闪避:0% 能力:护甲/nhiễm","身披铁甲的Zombie"
-Zombie,精英Zombie,冰霜尸,冰霜尸,,"HP:150 sát thương:26 闪避:10% 能力:冰冻","散发寒气的Zombie"
-Zombie,精英Zombie,撕裂狂暴尸,撕裂狂暴尸,,"HP:200 sát thương:50 闪避:5% 能力:致盲/腐蚀","狂暴撕裂者"
-Zombie,精英Zombie,酸液喷射尸,酸液喷射尸,,"HP:240 sát thương:28 闪避:5% 能力:酸液","喷射酸液的Zombie"
-Zombie,精英Zombie,跳跃尸,跳跃尸,,"HP:100 sát thương:38 闪避:35% 能力:跳跃/nhiễm","弹跳力惊人的Zombie"
-Zombie,精英Zombie,巨型坦克尸,巨型坦克尸,,"HP:300 sát thương:40 闪避:0% 能力:自爆","体型巨大的坦克尸"
-Zombie,精英Zombie,幽灵潜行尸,幽灵潜行尸,,"HP:80 sát thương:30 闪避:50% 能力:隐身","会隐身的潜行尸"
-Zombie,精英Zombie,穿刺尸,穿刺尸,,"HP:180 sát thương:42 闪避:12% 能力:穿刺/腐蚀","具备穿刺能力的Zombie"
-BOSS,BOSS,马三,马三,,"HP:300 sát thương:40~60 闪避:40%","远程攻击"
-BOSS,BOSS,黑影,黑影,,"HP:400 sát thương:50~80 闪避:50%","远程攻击"
-BOSS,BOSS,沉默的Zombie之王,沉默的Zombie之王,,"HP:420 sát thương:115 闪避:25%","Zombie之王"
-BOSS,BOSS,银行行长,银行行长,,"HP:350 sát thương:50~80 闪避:30%","银行行长"
-BOSS,BOSS,阵地首领,阵地首领,,"HP:420 sát thương:115 闪避:25%","阵地首领"
-BOSS,BOSS,巨型Zombie傀儡,巨型Zombie傀儡,,"HP:380 sát thương:105 闪避:20%","巨型Zombie傀儡"
-BOSS,BOSS,橄榄球Zombie,橄榄球Zombie,,"HP:250 sát thương:30~55 闪避:15%","橄榄球Zombie"
-BOSS,BOSS,潜水Zombie,潜水Zombie,,"HP:200 sát thương:35~55 闪避:15%","远程攻击"
-BOSS,BOSS,巨型海尸,巨型海尸,,"HP:600 sát thương:80 闪避:8%","深海远古BOSS 只能远程攻击"
-BOSS,BOSS,城堡国王,城堡国王,,"HP:450 sát thương:100 闪避:20%","城堡国王BOSS"
-BOSS,BOSS,老兵老赵,老兵老赵,,"HP:350 sát thương:70~90 闪避:30%","远程攻击BOSS"
-BOSS,BOSS,陈博士,陈博士,,"HP:300 sát thương:50~70 闪避:35%","远程攻击BOSS"
-NPC,特种兵,V小姐,V小姐,,,"眼神凌厉的女杀手 独来独往"
-NPC,幼儿园老师,苏小涵,苏小涵,,,"笑容温暖的女孩 幼儿园老师"
-NPC,武器商,莉莉丝,莉莉丝,,,"古灵精怪的少女 武器回收/修理/治疗nhiễm"
-NPC,农业专家,沐苗苗,沐苗苗,,,"植物学博士 农业专家"
-NPC,公爵,余墨公爵,余墨公爵,,,"岛屿封地公爵"
-NPC,地图NPC,马三,马三,,,"满身纹身的壮汉 食人魔"
-NPC,地图NPC,黑影,黑影,,,"黑衣蒙面杀手"
-NPC,地图NPC,王铁柱,王铁柱,,,"满身油污的机械师 兑换Xăng"
-NPC,地图NPC,老狼,老狼,,,"瘦骨嶙峋的孤僻老头"
-NPC,地图NPC,受伤人鱼,受伤人鱼,,,"被困在物业仓库的神秘人鱼"
-NPC,地图NPC,老马,老马,,,"工厂仓库守卫"
-NPC,地图NPC,老赵,老赵,,,"PTSD老兵"
-NPC,地图NPC,柳如烟,柳如烟,,,"考研大学生 私奔结局"
-NPC,地图NPC,陈博士,陈博士,,,"研究病毒三年的科学家 火箭链"
-NPC,地图NPC,露露薇,露露薇,,,"半nhiễm护士 清醒Zombie"
-NPC,城堡NPC,国王,国王,,,"末日城堡之王 房地产大亨"
-NPC,城堡NPC,皇后,皇后,,,"国王之妻 首领之妹"
-NPC,城堡NPC,顾月,顾月,,,"国王崇拜者"
-NPC,城堡NPC,林寒,林寒,,,"战略分析师"
-NPC,城堡NPC,银行行长,银行行长,,,"势利眼"
-NPC,阵地NPC,阵地首领,阵地首领,,,"沉默的守护者"
+Vũ khí cận chiến,Vũ khí cận chiến,Đấm đấm,tui_xach,,,"sát thương:18 độ bendu:∞ liên kích:3%","Cách tấn công bằng tay cơ bản nhất"
+Vũ khí cận chiến,Vũ khí cận chiến,Dao Bếp,dao_bep,common,"sát thương:20 độ bendu:50 liên kích:5%","Dao bếp bếp chính, có thể dùng"
+Vũ khí cận chiến,Vũ khí cận chiến,Gậy gỗ,gay_go,common,"sát thương:22 độ bendu:50 liên kích:5%","Gậy gỗ đơn giản"
+Vũ khí cận chiến,Vũ khí cận chiến,Cào Cuốc,cao_cuoc,common,"sát thương:24 độ bendu:50 liên kích:5%","Cào cuốc dùng cho cả khoan và chiến đấu"
+Vũ khí cận chiến,Vũ khí cerc chiến,Búa sắt nhỏ,bua_sat_nho,common,"sát thương:26 độ bendu:50 liên kích:5%","Búa sắt nhỏ gọn"
+Vũ khí cận chiến,Vũ khí cerc chiến,Chảo Áp,chao_ap,common,"sát thương:28 độ bendu:60 liên kích:5%","Chảo áp, có thể tấn công và phòng thủ"
+Vũ khí cận chiến,Vũ khí cerc chiến,Cờ Lê Lớn,can_xich_lon,common,"sát thương:30 độ bendu:50 liên kích:5%","Cờ lê lớn"
+Vũ khí cận chiến,Vũ khí cerc chiến,Gậy bóng chày,gay_bong_chay,common,"sát thương:32 độ bendu:50 liên kích:5%","Gậy bóng chày hợp kim nhôm"
+Vũ khí cận chiến,Vũ khí cerc chiến,Ống sắt,ong_sat,common,"sát thương:35 độ bendu:50 liên kích:5%","Ống sắt gỉ sét"
+Vũ khí cận chiến,Vũ khí cerc chiến,Xẻng Sắt,xeng_sat,common,"sát thương:38 độ bendu:50 liên kích:5%","Xẻng sĩ bộ"
+Vũ khí cận chiến,Vũ khí cerc chiến,Dao Găm Nhỏ,dao_gam_nho,uncommon,"sát thương:40 độ bendu:40 liên kích:8%","Dao găm nhẹ nhàng"
+Vũ khí cận chiến,Vũ khí cerc 전쟁,Dao thợ mổ,dao_tho_mo,uncommon,"sát thương:42 độ bendu:50 liên kích:8%","Dao mổ chuyên dụng"
+Vũ khí cận chiến,Vũ khí cerc chiến,Gậy Cảnh Sát,gay_cam_sat,uncommon,"sát thương:45 độ bendu:50 liên kích:8%","Trang thiết bị cảnh sát chuẩn"
+Vũ khí cận chiến,Vũ khí cerc chiến,Cây Nạy,cay_nay,uncommon,"sát thương:48 độ bendu:50 liên kích:8%","Cây nảy đa năng"
+Vũ khí cận chiến,Vũ khí cerc chiến,Búa bẻ 못,bua_be_mot,uncommon,"sát thương:50 độ bendu:60 liên kích:8%","Búa hình mỏ cừu"
+Vũ khí cận chiến,Vũ khí cerc chiến,Rìu ngắn,riu_ngan,uncommon,"sát thương:52 độ bendu:60 liên kích:8%","Rìu ngắn tay"
+Vũ khí cận chiến,Vũ khí cerc chiến,Rìu cứu hỏa,riu_cuu_hoa,uncommon,"sát thương:55 độ bendu:70 liên kích:8%","Rìu cứu hỏa phá hủy"
+Vũ khí cận chiến,Vũ khí cerc chiến,Dao săn,dao_san,uncommon,"sát thương:60 độ bendu:70 liên kích:8%","Đao săn chuyên nghiệp"
+Vũ khí cận chiến,Vũ khí cerc chiến,Dao quân đội,dao_quan_doi,uncommon,"sát thương:65 độ bendu:70 liên kích:8%","Đạo quân đội chuẩn"
+Vũ khí cận chiến,Vũ khí cerc chiến,Dao Chỉ Hổ,dao_chi_ho,rare,"sát thương:67 độ bendu:90 liên kích:12%","Kết hợp chỉ hổ và dao"
+Vũ khí cận chiến,Vũ khí cerc chiến,Đao Chém Lớn,dao_kham_lon,rare,"sát thương:70 độ bendu:60 liên kích:12%","Đao chém lớn"
+Vũ khí cận chiến,Vũ khí cerc chiến,Đao Trampling Mã,dao_tram_ma,rare,"sát thương:72 độ bendu:60 liên kích:12%","Đao trample mã cổ đại"
+Vũ khí cận chiến,Vũ khí cerc chiến,Roi Chín Đốt,roi_chin_dot,rare,"sát thương:75 độ bendu:90 liên kích:12%","Roi thép chín đốt"
+Vũ khí cận chiến,Vũ khí cerc chiến,Kiếm Tây,kiem_tay,rare,"sát thương:79 độ bendu:70 liên kích:12%","Kiếm tây nhẹ nhàng"
+Vũ khí cận chiến,Vũ khí cerc chiến,Búa sao băng,bua_sao_bang,rare,"sát thương:80 độ bendu:50 liên kích:12%","Búa sao băng bay"
+Vũ khí cận chiến,Vũ khí cerc chiến,Kiếm Thép Ngắn,kiem_thep_sap,rare,"sát thương:83 độ bendu:30 liên kích:12%","Kiếm thép ngắn"
+Vũ khí cận chiến,Vũ khí cerc chiến,Kiếm Long Thảo,kiem_long_thao,rare,"sát thương:88 độ bendu:66 liên kích:12%","Kiếm Long Thảo văn đồng"
+Vũ khí cận chiến,Vũ khí cerc chiến,Giáo Kỵ Binh,sung_ky_binh,rare,"sát thương:89 độ bendu:80 liên kích:12%","Cung giáo kỵ binh"
+Vũ khí cận chiến,Vũ khí cerc chiến,Kiếm hai lưỡi,kiem_hai_luoi,epic,"sát thương:90 độ bendu:100 liên kích:15%","Kiếm hai lưỡi lớn"
+Vũ khí cận chiến,Vũ khí cerc chiến,Kiếm Melayu,kiem_melayu,epic,"sát thương:95 độ bendu:70 liên kích:15%","Kiếm đường Melayu"
+Vũ khí cận chiến,Vũ khí cerc chiến,Đao Samurai,dao_samurai,epic,"sát thương:99 độ bendu:40 liên kích:15%","Đao samurai phương Đông"
+Vũ khí cận chiến,Vũ khí cerc chiến,Đao Ngang Đường,dao_ngang_duong,epic,"sát thương:100 độ bendu:80 liên kích:15%","Đao ngang Đường triều đại"
+Vũ khí cận chiến,Vũ khí cerc chiến,Máy cắt cây,may_cat_cay,epic,"sát thương:105 độ bendu:120 liên kích:15%","Máy cắt cây gầm rú"
+Vũ khí cận chiến,Vũ khí cerc chiến,Kiếm Dũng Sĩ,kiem_dung_si,legendary,"sát thương:109 độ bendu:50 liên kích:18%","Kiếm Dũng Sĩ thuộc tư"
+Vũ khí cận chiến,Vũ khí cerc chiến,Kiếm Vũ Trụ,kiem_vu_tru,legendary,"sát thương:111 độ bendu:222 liên kích:18%","Kiếm Vũ Trụ"
+Vũ khí cận chiến,Vũ khí cerc chiến,Kiếm Vô Uy,kiem_vo_uy,myth,"sát thương:115 độ bendu:100 liên kích:20%","Kiếm Vô Uy của Dũng Sĩ"
+Vũ khí cận chiến,Vũ khí cerc chiến,Kiếm bạc hoàng gia,kiem_bac_hoang_gia,myth,"sát thương:120 độ bendu:120 liên kích:20%","Kiếm bạc hoàng gia"
+Vũ khí cận chiến,Vũ khí cerc chiến,Kiếm Thương Phòng,kiem_thuong_phong,legendary,"sát thương:18 độ bendu:555 liên kích:88%","Kiếm Thương Phòng, như vua hiện thân"
+Vũ khí cận chiến,Vũ khí cerc chiến,Dao 999,dao_999,legendary,"sát thương:999 độ bendu:1 liên kích:1%","Một đòn phải chết, một đòn phải hủy diệt"
+Vũ khí cận chiến,Vũ khí cerc chiến,Đinh Ba Hải Ca,dinh_ba_hai_ca,myth,"sát thương:128 độ bendu:150 liên kích:22%","Công Ngư Sơ, săn vos saint-object của dân cá nhân nhầm từ đại dương"
+Vũ khí tầm xa,ranged,cung_go,Cung gỗ,/get_ranged_cung_go_1,sát thương:18 bạo kích:5%(Thường/Đạn mũi tên)
+Vũ khí tầm xa,ranged,cung_cong_nguoc,Cung cong ngược,/get_ranged_cung_cong_nguoc_1,sát thương:24 bạo kích:6%(Thường/Đạn mũi tên)
+Vũ khí tầm xa,ranged,cung_ket_hop,Cung kết hợp,/get_ranged_cung_ket_hop_1,sát thương:32 bạo kích:8%(Ưu tú/Đạn mũi tên)
+Vũ khí tầm xa,ranged,no_thap_tu,Nỏ Thập Tự,/get_ranged_no_thap_tu_1,sát thương:40 bạo kích:9%(Ưu tú/Đạn mũi tên)
+Vũ khí tầm xa,ranged,no_gap,Cối nỏ gấp,/get_ranged_no_gap_1,sát thương:48 bạo kích:10%(Hiếm/Đạn mũi tên)
+Vũ khí tầm xa,ranged,no_san_ban,Cối nỏ săn bắn,/get_ranged_no_san_ban_1,sát thương:56 bạo kích:11%(Hiếm/Đạn mũi tên)
+Vũ khí tầm xa,ranged,P226,P226,/get_ranged_P226_1,sát thương:32 bạo kích:16%(Thường/9×19mm)
+Vũ khí tầm xa,ranged,G17,G17,/get_ranged_G17_1,sát thương:30 bạo kích:15%(Thường/9×19mm)
+Vũ khí tầm xa,ranged,USP9,USP9,/get_ranged_USP9_1,sát thương:36 bạo kích:18%(Thường/9×19mm)
+Vũ khí tầm xa,ranged,M1911,M1911,/get_ranged_M1911_1,sát thương:36 bạo kích:18%(Thường/.45 ACP)
+Vũ khí tầm xa,ranged,GP100,GP100,/get_ranged_GP100_1,sát thương:49 bạo kích:20%(Thường/.357 Magnum)
+Vũ khí tầm xa,ranged,sung_sa_mac,Deagle (Sa Mạc),/get_ranged_sung_sa_mac_1,sát thương:65 bạo kích:12%(Hiếm/.50 AE)
+Vũ khí tầm xa,ranged,sung_hoang_gia,Súng Ngắn Hoàng Gia,/get_ranged_sung_hoang_gia_1,sát thương:99 độ bền:100 liên kích:29%(Mythic)
+Vũ khí tầm xa,ranged,P90,P90,/get_ranged_P90_1,sát thương:40 bạo kích:21%(Ưu tú/5.7×28mm)
+Vũ khí tầm xa,ranged,UZI,UZI,/get_ranged_UZI_1,sát thương:42 bạo kích:18%(Ưu tú/9×19mm)
+Vũ khí tầm xa,ranged,MP5,MP5,/get_ranged_MP5_1,sát thương:45 bạo kích:20%(Ưu tú/9×19mm)
+Vũ khí tầm xa,ranged,MP7,MP7,/get_ranged_MP7_1,sát thương:48 bạo kích:22%(Ưu tú/9×19mm)
+Vũ khí tầm xa,ranged,Vector,Vector,/get_ranged_Vector_1,sát thương:50 bạo kích:23%(Ưu tú/9×19mm)
+Vũ khí tầm xa,ranged,UMP45,UMP45,/get_ranged_UMP45_1,sát thương:52 bạo kích:19%(Ưu tú/.45 ACP)
+Vũ khí tầm xa,ranged,M16A4,M16A4,/get_ranged_M16A4_1,sát thương:49 bạo kích:22%(Ưu tú/5.56×45mm NATO)
+Vũ khí tầm xa,ranged,M4A1,M4A1,/get_ranged_M4A1_1,sát thương:50 bạo kích:24%(Ưu tú/5.56×45mm NATO)
+Vũ khí tầm xa,ranged,HK416,HK416,/get_ranged_HK416_1,sát thương:52 bạo kích:25%(Ưu tú/5.56×45mm NATO)
+Vũ khí tầm xa,ranged,SG552,SG552,/get_ranged_SG552_1,sát thương:53 bạo kích:23%(Ưu tú/5.56×45mm NATO)
+Vũ khí tầm xa,ranged,AUG,AUG,/get_ranged_AUG_1,sát thương:55 bạo kích:25%(Hiếm/5.56×45mm NATO)
+Vũ khí tầm xa,ranged,AK47,AK47,/get_ranged_AK47_1,sát thương:55 bạo kích:20%(Ưu tú/7.62×39mm)
+Vũ khí tầm xa,ranged,AKM,AKM,/get_ranged_AKM_1,sát thương:57 bạo kích:20%(Ưu tú/7.62×39mm)
+Vũ khí tầm xa,ranged,sung_81,Súng Kiểu 81,/get_ranged_sung_81_1,sát thương:60 bạo kích:22%(Ưu tú/7.62×39mm)
+Vũ khí tầm xa,ranged,SKS,SKS,/get_ranged_SKS_1,sát thương:65 bạo kích:28%(Hiếm/7.62×39mm)
+Vũ khí tầm xa,ranged,M249,M249 SAW,/get_ranged_M249_1,sát thương:58 bạo kích:22%(Hiếm/5.56×45mm NATO)
+Vũ khí tầm xa,ranged,RPK,RPK,/get_ranged_RPK_1,sát thương:62 bạo kích:23%(Hiếm/7.62×39mm)
+Vũ khí tầm xa,ranged,MG42,MG42,/get_ranged_MG42_1,sát thương:65 bạo kích:21%(Hiếm/7.92×57mm)
+Vũ khí tầm xa,ranged,PKM,PKM,/get_ranged_PKM_1,sát thương:68 bạo kích:24%(Sử thi/7.62×54mmR)
+Vũ khí tầm xa,ranged,M60,M60,/get_ranged_M60_1,sát thương:63 bạo kích:22%(Hiếm/7.62×51mm)
+Vũ khí tầm xa,ranged,FAL,FAL,/get_ranged_FAL_1,sát thương:72 bạo kích:22%(Hiếm/7.62×51mm)
+Vũ khí tầm xa,ranged,EBR14,EBR14,/get_ranged_EBR14_1,sát thương:80 bạo kích:30%(Hiếm/7.62×51mm)
+Vũ khí tầm xa,ranged,SR25,SR25,/get_ranged_SR25_1,sát thương:95 bạo kích:32%(Sử thi/7.62×51mm)
+Vũ khí tầm xa,ranged,SCARH,SCAR-H,/get_ranged_SCARH_1,sát thương:68 bạo kích:26%(Hiếm/7.62×51mm)
+Vũ khí tầm xa,ranged,AN94,AN-94,/get_ranged_AN94_1,sát thương:56 bạo kích:27%(Sử thi/5.56×45mm NATO)
+Vũ khí tầm xa,ranged,M700,M700,/get_ranged_M700_1,sát thương:120 bạo kích:35%(Hiếm/7.62×51mm)
+Vũ khí tầm xa,ranged,Mosin,Mosin-Nagant,/get_ranged_Mosin_1,sát thương:135 bạo kích:38%(Sử thi/7.62×54mmR)
+Vũ khí tầm xa,ranged,AWM,AWM,/get_ranged_AWM_1,sát thương:200 bạo kích:45%(Transcendent/.300 Winchester Magnum)
+Vũ khí tầm xa,ranged,M870,M870,/get_ranged_M870_1,sát thương:80 bạo kích:10%(Ưu tú/Đạn shotgun 12 gauge)
+Vũ khí tầm xa,ranged,AA12,AA12,/get_ranged_AA12_1,sát thương:88 bạo kích:12%(Ưu tú/Đạn shotgun 12 gauge)
+Vũ khí tầm xa,ranged,SPAS12,SPAS-12,/get_ranged_SPAS12_1,sát thương:95 bạo kích:11%(Hiếm/Đạn shotgun 12 gauge)
+Vũ khí tầm xa,ranged,cung_dong_que,Cung đồng quê,/get_ranged_cung_dong_que_1,sát thương:52 bạo kích:52 độ bền:520 Đạn:Mũi tên(Transcendent)
+Vũ khí tầm xa,ranged,sung_hoang_gia,Súng Ngắn Hoàng Gia,/get_ranged_sung_hoang_gia_1,sát thương:99 bạo kích:29% Đạn:.357 Magnum(Transcendent)
+Dân dược,ammo,mui_ten,Mũi tên,/get_ammo_mui_ten_100,Dân dược cung nỏ
+Dân dược,ammo,.357 Magnum,.357 Magnum,/get_ammo_.357 Magnum_50,Pistol GP100 sử dụng
+Dân dược,ammo,.45 ACP,.45 ACP,/get_ammo_.45 ACP_50,M1911/UMP45 sử dụng
+Dân dược,ammo,.50 AE,.50 AE,/get_ammo_.50 AE_30,Pistol Đá Sát sử dụng
+Dân dược,ammo,9×19mm,9×19mm,/get_ammo_9mm_100,Dân dược pistol/SMG phổ biến
+Dân dược,ammo,5.7×28mm,5.7×28mm,/get_ammo_5.7×28mm_100,P90 sử dụng
+Dân dược,ammo,7.62×39mm,7.62×39mm,/get_ammo_762_100,Súng AK sử dụng
+Dân dược,ammo,5.56×45mm NATO,5.56×45mm NATO,/get_ammo_556_100,M4/HK416/AUG sử dụng
+Dân dược,ammo,7.62×51mm,7.62×51mm,/get_ammo_76251_50,M700/FAL/SR25 sử dụng
+Dân dược,ammo,7.62×54mmR,7.62×54mmR,/get_ammo_7.62×54mmR_50,Mosin/PKM sử dụng
+Dân dược,ammo,7.92×57mm,7.92×57mm,/get_ammo_7.92×57mm_50,MG42 sử dụng
+Dân dược,ammo,.300 Winchester Magnum,.300 Winchester Magnum,/get_ammo_300_30,Pistol săn AWM sử dụng
+Dân dược,ammo,dan_12,Đạn shotgun 12,/get_ammo_dan_12_50,Súng shotgun sử dụng
+Vật liệu xây dựng,building,wood,Gỗ,/get_building_wood_10,Vật liệu xây cơ sở
+Vật liệu xây dựng,building,building_mat,Vật liệu xây dựng,/get_building_building_mat_10,Vật liệu xây cơ sở
+Vật liệu xây dựng,building,stone,Đá,/get_building_stone_10,Vật liệu xây cơ sở
+Vật liệu xây dựng,building,nails,M đóng,/get_building_nails_10,Vật liệu xây cơ sở
+Vật liệu xây dựng,building,glass,Kính,/get_building_glass_10,Vật liệu xây cơ sở
+Vật liệu xây dựng,building,pure_energy,Năng lượng tinh khiết,/get_building_pure_energy_30,Nhiên liệu tên lửa
+Vật liệu xây dựng,building,small_nuclear_generator,Máy phát điện hạt nhân nhỏ,/get_building_small_nuclear_generator_1,Thiết bị cần cho tên lửa
+Hạt giống,seed,seed_niupicai,Hạt Cây trồng cáu bò,/get_seed_seed_niupicai_10,Cây trồng cáu bò
+Hạt giống,seed,seed_machixian,Hạt Cây trồng xà lách bò,/get_seed_seed_machixian_10,Cây trồng xà lách bò
+Hạt giống,seed,seed_juju,Hạt Cây trồng lá diệp,/get_seed_seed_juju_10,Cây trồng lá diệp
+Hạt giống,seed,seed_yangjiang,Hạt Cây trồng hành tây phương,/get_seed_seed_yangjiang_10,Cây trồng hành tây phương
+Hạt giống,seed,seed_mushu,Hạt Cây trồng mộc hoa,/get_seed_seed_mushu_10,Cây trồng mộc hoa
+Hạt giống,seed,seed_hongshu,Hạt Cây trồng khoai lang,/get_seed_seed_hongshu_10,Cây trồng khoai lang
+Hạt giống,seed,seed_tudou,Hạt Cây trồng khoai tây,/get_seed_seed_tudou_10,Cây trồng khoai tây
+Hạt giống,seed,seed_wujing,Hạt Cây trồng cải trắng,/get_seed_seed_wujing_10,Cây trồng cải trắng
+Hạt giống,seed,seed_boluomencan,Hạt Cây trồng nhân sâm Ba La Môn,/get_seed_seed_boluomencan_10,Cây trồng nhân sâm Ba La Môn
+Hạt giống,seed,seed_luobo,Hạt Cây trồng cà rốt,/get_seed_seed_luobo_10,Cây trồng cà rốt
+Hạt giống,seed,seed_jiucai,Hạt Cây trồng hẹ,/get_seed_seed_jiucai_10,Cây trồng hẹ
+Hạt giống,seed,seed_gouqi,Hạt Cây trồng quả nhân sâm,/get_seed_seed_gouqi_10,Cây trồng quả nhân sâm
+Hạt giống,seed,seed_suanmo,Hạt Cây trồng rau chua,/get_seed_seed_suanmo_10,Cây trồng rau chua
+Hạt giống,seed,seed_heimai,Hạt Cây trồng mạch đen,/get_seed_seed_heimai_10,Cây trồng mạch đen
+Hạt giống,seed,seed_wandou,Hạt Cây trồng đậu Hà Lan,/get_seed_seed_wandou_10,Cây trồng đậu Hà Lan
+Cây trồng,crop,niupicai,Cây trồng cáu bò,/get_crop_niupicai_10,no+8 nước+12(từ trồng)
+Cây trồng,crop,machixian,Cây trồng xà lách bò,/get_crop_machixian_10,no+6 nước+15(từ trồng)
+Cây trồng,crop,juju,Cây trồng lá diệp,/get_crop_juju_10,no+10 nước+10(từ trồng)
+Cây trồng,crop,yangjiang,Cây trồng hành tây phương,/get_crop_yangjiang_10,no+18(từ trồng)
+Cây trồng,crop,mushu,Cây trồng mộc hoa,/get_crop_mushu_10,no+30(từ trồng)
+Cây trồng,crop,hongshu,Cây trồng khoai lang,/get_crop_hongshu_10,no+28 nước+8(từ trồng)
+Cây trồng,crop,tudou,Cây trồng khoai tây,/get_crop_tudou_10,no+22(come từ trồng)
+Cây trồng,crop,wujing,Cây trồng cải trắng,/get_crop_wujing_10,no+20 nước+5(từ trồng)
+Cây trồng,crop,boluomencan,Cây trồng nhân sâm Ba La Môn,/get_crop_boluomencan_10,no+24(từ trồng)
+Cây trồng,crop,luobo,Cây trồng cà rốt,/get_crop_luobo_10,no+18 nước+14(từ trồng)
+Cây trồng,crop,jiucai,Cây trồng hẹ,/get_crop_jiucai_10,no+8 nước+8(từ trồng)
+Cây trồng,crop,gouqi,Cây trồng quả nhân sâm,/get_crop_gouqi_10,no+10 nước+15(từ trồng)
+Cây trồng,crop,suanmo,Cây trồng rau chua,/get_crop_suanmo_10,no+8 nước+18(từ trồng)
+Cây trồng,crop,heimai,Cây trồng mạch đen,/get_crop_heimai_10,no+32(từ trồng)
+Cây trồng,crop,wandou,Cây trồng đậu Hà Lan,/get_crop_wandou_10,no+20 nước+10(từ trồng)
+Cá,fish,grey_mullet,Cá lốc xám,/get_fish_grey_mullet_1,(Thường)
+Cá,fish,iron_sardine,Cá mòi sắt,/get_fish_iron_sardine_1,(Thường)
+Cá,fish,blunt_seabream,Cá lốc đùn đầu,/get_fish_blunt_seabream_1,(Thường)
+Cá,fish,blacktail_mackerel,Cá thu đen đuôi,/get_fish_blacktail_mackerel_1,(Thường)
+Cá,fish,ray_barracuda,Cá nhân ký vằn,/get_fish_ray_barracuda_1,(Ưu tú)
+Cá,fish,rust_flounder,Cá đính xỉn màu,/get_fish_rust_flounder_1,(Ưu tú)
+Cá,fish,twin_grouper,Cá đá hai đầu,/get_fish_twin_grouper_1,(Ưu tú)
+Cá,fish,sewage_eel,Cá nhếch bùn thải,/get_fish_sewage_eel_1,(Ưu tú)
+Cá,fish,corpse_cod,Cá mã thây chết,/get_fish_corpse_cod_1,(Hiếm)
+Cá,fish,spine_wolffish,Cá sói xương nứt,/get_fish_spine_wolffish_1,(Hiếm)
+Cá,fish,gel_lanternfish,Cá lồng gel,/get_fish_gel_lanternfish_1,(Hiếm)
+Cá,fish,multi_barb_king,Vua cá rậm nhiều,/get_fish_multi_barb_king_1,(Hiếm)
+Cá,fish,dead_giant_cod,Cá mã khổng lồ chết,/get_fish_dead_giant_cod_1,(Sử thi)
+Cá,fish,plague_tentacle,Côn trùng dịch bệnh,/get_fish_plague_tentacle_1,(Sử thi)
+Cá,fish,wreck_ghost_shark,Cá m Ong hutdown,/get_fish_wreck_ghost_shark_1,(Sử thi)
+Cá,fish,abyss_core_fish,Cá lõi vực thẳm,/get_fish_abyss_core_fish_1,(Transcendent)
+Vật liệu xây dựng,building,wood,Gỗ,/get_building_wood_10,Vật liệu xây cơ sở
+Vật liệu xây dựng,building,building_mat,Vật liệu xây dựng,/get_building_building_mat_10,Vật liệu xây cơ sở
+Vật liệu xây dựng,building,stone,Đá,/get_building_stone_10,Vật liệu xây cơ sở
+Vật liệu xây dựng,building,nails,M đóng,/get_building_nails_10,Vật liệu xây cơ sở
+Vật liệu xây dựng,building,glass,Kính,/get_building_glass_10,Vật liệu xây cơ sở
+Vật liệu xây dựng,building,pure_energy,Năng lượng tinh khiết,/get_building_pure_energy_30,Nhiên liệu tên lửa
+Vật liệu xây dựng,building,small_nuclear_generator,Máy phát điện hạt nhân nhỏ,/get_building_small_nuclear_generator_1,Thiết bị cần cho tên lửa
+Vật phẩm đặc biệt,special,noble_id,Thẻ thân phận quý tộc,/get_special_noble_id_1,Thẻ thân phận quý tộc thành bảo
+Vật phẩm đặc biệt,special,viscount_id,Thẻ thân phận tử tước,/get_special_viscount_id_1,Chứng nhận tử tước
+Vật phẩm đặc biệt,special,count_id,Thẻ thân phận bá tước,/get_special_count_id_1,Chứng nhận bá tước
+Vật phẩm đặc biệt,special,marquis_id,Thẻ thân phận hầu tước,/get_special_marquis_id_1,Chứng nhận hầu tước
+Vật phẩm đặc biệt,special,duke_id,Thẻ thân phận công tước,/get_special_duke_id_1,Chứng nhận công tước
+Vật phẩm đặc biệt,special,crown_prince_id,Thẻ thân phận thái tử,/get_special_crown_prince_id_1,Chứng nhận thái tử
+Vật phẩm đặc biệt,special,dawn_badge,Huy hiệu trương địa bình minh,/get_special_dawn_badge_1,Chứng nhận trận địa bình minh
+Vật phẩm đặc biệt,special,dawn_captain_badge,Huy hiệu đội trưởng tường địa bình minh,/get_special_dawn_captain_badge_1,Chứng nhận đội trưởng tiền phong bình minh
+Vật phẩm đặc biệt,special,silence_badge,Huy hiệu im lặng,/get_special_silence_badge_1,Kỷ niệm đánh bại Vua Zombie
+Vật phẩm đặc biệt,special,underground_key,Chìa khóa vùng ngầm thành bảo,/get_special_underground_key_1,Chìa khóa đến vùng ngầm thành bảo
+Vật phẩm đặc biệt,special,farming_master_badge,Huy hiệu nông thôn đại sư,/get_special_farming_master_badge_1,Kỷ niệm đại sư nông nghiệp
+Vật phẩm đặc biệt,special,miaomiao_diary,Nhật ký Miao Miao,/get_special_miaomiao_diary_1,Nhật ký Miao Miao
+Vật phẩm đặc biệt,special,strange_recorder,Bút ghi âm kỳ lạ,/get_special_strange_recorder_1,Bút ghi âm
+Vật phẩm đặc biệt,special,letter_to_sister,Thư của thủ lĩnh trận địa,/get_special_letter_to_sister_1,Thư của thủ lĩnh trận địa
+Vật phẩm đặc biệt,special,love_token,Mặt dây chuyền hoa hướng dương,/get_special_love_token_1,Mặt dây chuyền hoa hướng dương
+Vật phẩm đặc biệt,special,castle_pass,Thẻ thông hành thành bảo,/get_special_castle_pass_1,Chứng nhận thông hành thành bảo
+Vật phẩm đặc biệt,special,car_key,Chìa khóa xe việt dã của Liu Ruyan,/get_special_car_key_1,Chìa khóa xe việt dã của Liu Ruyan
+Vật phẩm đặc biệt,special,lightning_scale,Vảy đặc biệt sản xuất từ bể kính rò điện (cá epic),/get_special_lightning_scale_1,Vảy đặc biệt sản xuất từ bể kính rò điện (cá epic)
+Vật phẩm đặc biệt,special,thunder_scale,Vảy hiếm sản xuất từ bể kính rò điện (cá truyền thuyết),/get_special_thunder_scale_1,Vảy hiếm sản xuất từ bể kính rò điện (cá truyền thuyết)
+Vật phẩm đặc biệt,special,crime_data,Hồ sơ vụ án bị bụi phủ nhiều năm (có thể xếp chồng),/get_special_crime_data_1,Hồ sơ vụ án bị bụi phủ nhiều năm (có thể xếp chồng)
+Sửa thuộc tính,health,Giá trị sinh mệnh,/get_health_100,Tăng giá trị sinh mệnh (tối đa 240)
+Sửa thuộc tính,full,Khôi phục hoàn toàn,/get_full_1,Khôi phục toàn bộ thuộc tính về giá trị tối đa
+Sửa thuộc tính,day,Ngày đẩy lên,/get_day_10,Đẩy trò chơi ngày

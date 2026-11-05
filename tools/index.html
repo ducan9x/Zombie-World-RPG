@@ -495,7 +495,7 @@ function render() {
   const total = state.all.length;
   const showing = state.filtered.length;
 
-  stats.innerHTML = `<span>Tổng cộng <strong>${total}</strong> mã gian lận${state.category !== 'all' ? `, danh mục：${state.category}` : ''}</span><span>Hiện đang hiển thị：<strong>${showing}</strong> mã</span>`;
+  stats.innerHTML = `<span>Tổng cộng <strong>${total}</strong> mã gian lận${state.category !== 'all' ? `, danh mục: ${state.category}` : ''}</span><span>Hiện đang hiển thị: <strong>${showing}</strong> mã</span>`;
 
   if (showing === 0) {
     grid.innerHTML = `<div class="empty">
@@ -562,7 +562,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderCategories();
     filter();
   } catch (e) {
-    document.getElementById('loading').innerHTML = `<p style="color:var(--accent)">❌ Tải thất bại：${e.message}</p>`;
+    document.getElementById('loading').innerHTML = `<p style="color:var(--accent)">❌ Tải thất bại: ${e.message}</p>`;
   }
 
   const input = document.getElementById('searchInput');
