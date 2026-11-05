@@ -1,9 +1,9 @@
 # ĐẶC TẢ CHI TIẾT TẠO ẢNH BATCH 03 — PLAYER APPEARANCE & STORY NPCS
 ## DỰ ÁN: ZOMBIE WORLD RPG — PHASE 1.5 GRAPHICS EXPANSION
 
-**Thời gian cập nhật:** 2026-11-05 17:10:00 (ICT)  
-**Phiên bản đặc tả:** v2.5 (Chuẩn hóa toàn diện 36 Character Assets: 30 Player + 6 Story NPCs)  
-**Trạng thái triển khai:** `PENDING_GENERATION` (Đã chuẩn hóa kiến trúc, manifest và prompt tạo ảnh; chưa sinh ảnh)
+**Thời gian cập nhật:** 2026-11-05 21:05:00 (ICT)  
+**Phiên bản đặc tả:** v2.6 (Đã tạo và xử lý thành công 27/36 Character Assets; 9 assets pending do quota Imagen)  
+**Trạng thái triển khai:** `PARTIALLY_COMPLETE` (27 COMPLETE, 9 PENDING QUOTA)
 
 ---
 
@@ -87,36 +87,36 @@ cropped head, cropped feet, out of frame, cut off, partial body, portrait only, 
 
 | STT | Mã Tổ Hợp (ID) | Độ Tuổi | Giới Tính | Trang Phục | Tên File (`public/assets/characters/player/`) | Prompt Chuẩn Hóa | Trạng Thái |
 |:---:|---|---|---|---|---|---|:---:|
-| 1 | `teen_male_survivor` | Thanh thiếu niên | Nam | Sinh tồn cơ bản | `teen_male_survivor.png` | `Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean ...` | `PENDING` |
-| 2 | `teen_male_tactical` | Thanh thiếu niên | Nam | Chiến thuật | `teen_male_tactical.png` | `Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean ...` | `PENDING` |
-| 3 | `teen_male_casual` | Thanh thiếu niên | Nam | Thường ngày | `teen_male_casual.png` | `Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean ...` | `PENDING` |
-| 4 | `teen_female_survivor` | Thanh thiếu niên | Nữ | Sinh tồn cơ bản | `teen_female_survivor.png` | `Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean ...` | `PENDING` |
-| 5 | `teen_female_tactical` | Thanh thiếu niên | Nữ | Chiến thuật | `teen_female_tactical.png` | `Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean ...` | `PENDING` |
-| 6 | `teen_female_casual` | Thanh thiếu niên | Nữ | Thường ngày | `teen_female_casual.png` | `Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean ...` | `PENDING` |
-| 7 | `young_adult_male_survivor` | Thanh niên | Nam | Sinh tồn cơ bản | `young_adult_male_survivor.png` | `Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused...` | `PENDING` |
-| 8 | `young_adult_male_tactical` | Thanh niên | Nam | Chiến thuật | `young_adult_male_tactical.png` | `Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused...` | `PENDING` |
-| 9 | `young_adult_male_casual` | Thanh niên | Nam | Thường ngày | `young_adult_male_casual.png` | `Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused...` | `PENDING` |
-| 10 | `young_adult_female_survivor` | Thanh niên | Nữ | Sinh tồn cơ bản | `young_adult_female_survivor.png` | `Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused...` | `PENDING` |
-| 11 | `young_adult_female_tactical` | Thanh niên | Nữ | Chiến thuật | `young_adult_female_tactical.png` | `Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused...` | `PENDING` |
-| 12 | `young_adult_female_casual` | Thanh niên | Nữ | Thường ngày | `young_adult_female_casual.png` | `Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused...` | `PENDING` |
-| 13 | `adult_male_survivor` | Trưởng thành | Nam | Sinh tồn cơ bản | `adult_male_survivor.png` | `Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced faci...` | `PENDING` |
-| 14 | `adult_male_tactical` | Trưởng thành | Nam | Chiến thuật | `adult_male_tactical.png` | `Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced faci...` | `PENDING` |
-| 15 | `adult_male_casual` | Trưởng thành | Nam | Thường ngày | `adult_male_casual.png` | `Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced faci...` | `PENDING` |
-| 16 | `adult_female_survivor` | Trưởng thành | Nữ | Sinh tồn cơ bản | `adult_female_survivor.png` | `Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced faci...` | `PENDING` |
-| 17 | `adult_female_tactical` | Trưởng thành | Nữ | Chiến thuật | `adult_female_tactical.png` | `Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced faci...` | `PENDING` |
-| 18 | `adult_female_casual` | Trưởng thành | Nữ | Thường ngày | `adult_female_casual.png` | `Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced faci...` | `PENDING` |
-| 19 | `middle_aged_male_survivor` | Trung niên | Nam | Sinh tồn cơ bản | `middle_aged_male_survivor.png` | `Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prom...` | `PENDING` |
-| 20 | `middle_aged_male_tactical` | Trung niên | Nam | Chiến thuật | `middle_aged_male_tactical.png` | `Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prom...` | `PENDING` |
-| 21 | `middle_aged_male_casual` | Trung niên | Nam | Thường ngày | `middle_aged_male_casual.png` | `Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prom...` | `PENDING` |
-| 22 | `middle_aged_female_survivor` | Trung niên | Nữ | Sinh tồn cơ bản | `middle_aged_female_survivor.png` | `Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prom...` | `PENDING` |
-| 23 | `middle_aged_female_tactical` | Trung niên | Nữ | Chiến thuật | `middle_aged_female_tactical.png` | `Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prom...` | `PENDING` |
-| 24 | `middle_aged_female_casual` | Trung niên | Nữ | Thường ngày | `middle_aged_female_casual.png` | `Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prom...` | `PENDING` |
-| 25 | `elderly_male_survivor` | Cao tuổi | Nam | Sinh tồn cơ bản | `elderly_male_survivor.png` | `Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles...` | `PENDING` |
-| 26 | `elderly_male_tactical` | Cao tuổi | Nam | Chiến thuật | `elderly_male_tactical.png` | `Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles...` | `PENDING` |
-| 27 | `elderly_male_casual` | Cao tuổi | Nam | Thường ngày | `elderly_male_casual.png` | `Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles...` | `PENDING` |
-| 28 | `elderly_female_survivor` | Cao tuổi | Nữ | Sinh tồn cơ bản | `elderly_female_survivor.png` | `Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles...` | `PENDING` |
-| 29 | `elderly_female_tactical` | Cao tuổi | Nữ | Chiến thuật | `elderly_female_tactical.png` | `Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles...` | `PENDING` |
-| 30 | `elderly_female_casual` | Cao tuổi | Nữ | Thường ngày | `elderly_female_casual.png` | `Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles...` | `PENDING` |
+| 1 | `teen_male_survivor` | Thanh thiếu niên | Nam | Sinh tồn cơ bản | `teen_male_survivor.png` | `Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean ...` | `COMPLETE` |
+| 2 | `teen_male_tactical` | Thanh thiếu niên | Nam | Chiến thuật | `teen_male_tactical.png` | `Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean ...` | `COMPLETE` |
+| 3 | `teen_male_casual` | Thanh thiếu niên | Nam | Thường ngày | `teen_male_casual.png` | `Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean ...` | `COMPLETE` |
+| 4 | `teen_female_survivor` | Thanh thiếu niên | Nữ | Sinh tồn cơ bản | `teen_female_survivor.png` | `Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean ...` | `COMPLETE` |
+| 5 | `teen_female_tactical` | Thanh thiếu niên | Nữ | Chiến thuật | `teen_female_tactical.png` | `Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean ...` | `COMPLETE` |
+| 6 | `teen_female_casual` | Thanh thiếu niên | Nữ | Thường ngày | `teen_female_casual.png` | `Full-body character concept art of a teenage youth around 16-17 years old with youthful facial features, lean ...` | `COMPLETE` |
+| 7 | `young_adult_male_survivor` | Thanh niên | Nam | Sinh tồn cơ bản | `young_adult_male_survivor.png` | `Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused...` | `COMPLETE` |
+| 8 | `young_adult_male_tactical` | Thanh niên | Nam | Chiến thuật | `young_adult_male_tactical.png` | `Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused...` | `COMPLETE` |
+| 9 | `young_adult_male_casual` | Thanh niên | Nam | Thường ngày | `young_adult_male_casual.png` | `Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused...` | `COMPLETE` |
+| 10 | `young_adult_female_survivor` | Thanh niên | Nữ | Sinh tồn cơ bản | `young_adult_female_survivor.png` | `Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused...` | `COMPLETE` |
+| 11 | `young_adult_female_tactical` | Thanh niên | Nữ | Chiến thuật | `young_adult_female_tactical.png` | `Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused...` | `COMPLETE` |
+| 12 | `young_adult_female_casual` | Thanh niên | Nữ | Thường ngày | `young_adult_female_casual.png` | `Full-body character concept art of a young adult around 22-24 years old with determined sharp eyes and focused...` | `COMPLETE` |
+| 13 | `adult_male_survivor` | Trưởng thành | Nam | Sinh tồn cơ bản | `adult_male_survivor.png` | `Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced faci...` | `COMPLETE` |
+| 14 | `adult_male_tactical` | Trưởng thành | Nam | Chiến thuật | `adult_male_tactical.png` | `Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced faci...` | `COMPLETE` |
+| 15 | `adult_male_casual` | Trưởng thành | Nam | Thường ngày | `adult_male_casual.png` | `Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced faci...` | `COMPLETE` |
+| 16 | `adult_female_survivor` | Trưởng thành | Nữ | Sinh tồn cơ bản | `adult_female_survivor.png` | `Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced faci...` | `COMPLETE` |
+| 17 | `adult_female_tactical` | Trưởng thành | Nữ | Chiến thuật | `adult_female_tactical.png` | `Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced faci...` | `COMPLETE` |
+| 18 | `adult_female_casual` | Trưởng thành | Nữ | Thường ngày | `adult_female_casual.png` | `Full-body character concept art of a battle-hardened adult around 35 years old with weathered experienced faci...` | `COMPLETE` |
+| 19 | `middle_aged_male_survivor` | Trung niên | Nam | Sinh tồn cơ bản | `middle_aged_male_survivor.png` | `Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prom...` | `COMPLETE` |
+| 20 | `middle_aged_male_tactical` | Trung niên | Nam | Chiến thuật | `middle_aged_male_tactical.png` | `Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prom...` | `COMPLETE` |
+| 21 | `middle_aged_male_casual` | Trung niên | Nam | Thường ngày | `middle_aged_male_casual.png` | `Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prom...` | `COMPLETE` |
+| 22 | `middle_aged_female_survivor` | Trung niên | Nữ | Sinh tồn cơ bản | `middle_aged_female_survivor.png` | `Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prom...` | `COMPLETE` |
+| 23 | `middle_aged_female_tactical` | Trung niên | Nữ | Chiến thuật | `middle_aged_female_tactical.png` | `Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prom...` | `COMPLETE` |
+| 24 | `middle_aged_female_casual` | Trung niên | Nữ | Thường ngày | `middle_aged_female_casual.png` | `Full-body character concept art of a middle-aged survivor around 50 years old with rugged weathered face, prom...` | `COMPLETE` |
+| 25 | `elderly_male_survivor` | Cao tuổi | Nam | Sinh tồn cơ bản | `elderly_male_survivor.png` | `Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles...` | `COMPLETE` |
+| 26 | `elderly_male_tactical` | Cao tuổi | Nam | Chiến thuật | `elderly_male_tactical.png` | `Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles...` | `COMPLETE` |
+| 27 | `elderly_male_casual` | Cao tuổi | Nam | Thường ngày | `elderly_male_casual.png` | `Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles...` | `COMPLETE` |
+| 28 | `elderly_female_survivor` | Cao tuổi | Nữ | Sinh tồn cơ bản | `elderly_female_survivor.png` | `Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles...` | `PENDING (Quota 429)` |
+| 29 | `elderly_female_tactical` | Cao tuổi | Nữ | Chiến thuật | `elderly_female_tactical.png` | `Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles...` | `PENDING (Quota 429)` |
+| 30 | `elderly_female_casual` | Cao tuổi | Nữ | Thường ngày | `elderly_female_casual.png` | `Full-body character concept art of a elderly veteran survivor around 65-70 years old with deep facial wrinkles...` | `PENDING (Quota 429)` |
 
 ---
 
