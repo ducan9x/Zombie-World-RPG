@@ -80,6 +80,28 @@ export class WorldMapRenderer {
     this.app = app;
     this.container = new PIXI.Container();
     this.container.visible = false;
+    this.container.eventMode = 'static';
+    if (typeof PIXI !== 'undefined' && PIXI.Rectangle) {
+      this.container.hitArea = new PIXI.Rectangle(0, 0, 640, 320);
+    }
+
+    // Touch tap handler on container for bounded nearest-POI selection (Issue 2)
+    this.container.on('pointerdown', (event) => {
+      if (this.isActionPending) return;
+      let local = null;
+      if (event && typeof event.getLocalPosition === 'function') {
+        local = event.getLocalPosition(this.contentContainer);
+      } else if (event && event.data && typeof event.data.getLocalPosition === 'function') {
+        local = event.data.getLocalPosition(this.contentContainer);
+      } else if (event && event.global && this.contentContainer?.toLocal) {
+        local = this.contentContainer.toLocal(event.global);
+      }
+      if (!local) return;
+      const match = this.findNearestPOI(local.x, local.y, 24);
+      if (match && match.mapId) {
+        this.selectPOI(match.mapId);
+      }
+    });
 
     // Content container for zooming & panning
     this.contentContainer = new PIXI.Container();
@@ -513,16 +535,23 @@ export class WorldMapRenderer {
       const markerContainer = new PIXI.Container();
       const markerW = coord.width || 2;
       const posX = coord.tileX * TILE_SIZE + (markerW * TILE_SIZE) / 2;
-      const posY = coord.tileY * TILE_SIZE + 10;
+      // Tránh clipping viền trên canvas (như lau_dai_tan_the) với posY tối thiểu 22px
+      const posY = Math.max(22, coord.tileY * TILE_SIZE + 10);
       markerContainer.x = posX;
       markerContainer.y = posY;
       markerContainer.eventMode = 'static';
       markerContainer.cursor = 'pointer';
 
+      // Thiết lập vùng chạm mở rộng (44px) hỗ trợ thao tác cảm ứng mobile
+      // (Khoảng cách giữa các POI gần nhau nhất >= 48px nên bán kính 22px không bị chồng lấn)
+      if (typeof PIXI !== 'undefined' && PIXI.Circle) {
+        markerContainer.hitArea = new PIXI.Circle(0, 0, 22);
+      }
+
       // Vòng tròn định vị / Target Reticle
       const reticle = new PIXI.Graphics();
       reticle.lineStyle(1.5, dangerInfo.color, 0.4);
-      reticle.drawCircle(0, 0, 15);
+      reticle.drawCircle(0, 0, 16);
       reticle.visible = false;
       markerContainer.addChild(reticle);
 
@@ -575,30 +604,70 @@ export class WorldMapRenderer {
 
       // POI Click Handler
       markerContainer.on('pointerdown', () => {
-        if (this.isActionPending) return;
-        this.isActionPending = true;
-
-        // Visual click feedback
-        icon.scale.set(1.25, 1.25);
-        reticle.clear();
-        reticle.lineStyle(2.5, 0x22c55e, 1);
-        reticle.drawCircle(0, 0, 18);
-
-        // Tìm lại index mới nhất tại thời điểm click
-        const currentState = getState();
-        const currentOptions = currentState.options || [];
-        const targetIndex = currentOptions.findIndex(o => o.map && o.map.id === mapId);
-
-        if (targetIndex !== -1) {
-          handleAction(targetIndex + 1);
-          renderAll();
-        }
-        setTimeout(() => { this.isActionPending = false; }, 300);
+        this.selectPOI(mapId);
       });
 
       this.markerLayer.addChild(markerContainer);
       this.markerMap[mapId] = { container: markerContainer, icon, reticle, onHover, onOut };
     }
+  }
+
+  selectPOI(mapId) {
+    if (this.isActionPending) return;
+    this.isActionPending = true;
+
+    // Visual click feedback
+    const marker = this.markerMap[mapId];
+    if (marker) {
+      if (marker.icon) marker.icon.scale.set(1.25, 1.25);
+      if (marker.reticle) {
+        marker.reticle.clear();
+        marker.reticle.lineStyle(2.5, 0x22c55e, 1);
+        marker.reticle.drawCircle(0, 0, 22);
+        marker.reticle.visible = true;
+      }
+    }
+
+    // Tìm lại index mới nhất tại thời điểm click
+    const currentState = getState();
+    const currentOptions = currentState.options || [];
+    const targetIndex = currentOptions.findIndex(o => o.map && o.map.id === mapId);
+
+    if (targetIndex !== -1) {
+      handleAction(targetIndex + 1);
+      renderAll();
+    }
+    setTimeout(() => { this.isActionPending = false; }, 300);
+  }
+
+  findNearestPOI(localX, localY, maxScreenDist = 24) {
+    if (!this.markerMap || Object.keys(this.markerMap).length === 0) return null;
+
+    const canvas = this.app?.view;
+    const displayedWidth = (canvas && canvas.clientWidth > 0) ? canvas.clientWidth : 640;
+    const currentScale = (displayedWidth / 640) * (this.zoomLevel || 1.0);
+    const maxLogicalDist = maxScreenDist / (currentScale || 1.0);
+
+    let bestPOI = null;
+    let minLogicalDist = Infinity;
+
+    for (const [mapId, marker] of Object.entries(this.markerMap)) {
+      const c = marker.container;
+      if (!c || !c.visible) continue;
+      const d = Math.hypot(localX - c.x, localY - c.y);
+      if (d <= maxLogicalDist && d < minLogicalDist) {
+        minLogicalDist = d;
+        bestPOI = {
+          mapId,
+          x: c.x,
+          y: c.y,
+          distLogical: d,
+          distScreen: d * currentScale
+        };
+      }
+    }
+
+    return bestPOI;
   }
 
   updatePlayerToken(state) {

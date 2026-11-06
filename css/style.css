@@ -485,7 +485,6 @@ body::before {
   max-width: 100%;
   box-sizing: border-box;
 }
-}
 
 .start-buttons button {
   width: 100%;
@@ -544,6 +543,7 @@ body::before {
 #pixi-viewport {
   width: 100%;
   max-width: 100%;
+  aspect-ratio: 2 / 1;
   flex-shrink: 0;
   margin-bottom: 4px;
   border-radius: 4px;
@@ -555,10 +555,12 @@ body::before {
 
 #pixi-canvas {
   display: block;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  aspect-ratio: 2 / 1;
   margin: 0 auto;
+  touch-action: manipulation;
 }
 
 .game-zone + .game-zone { border-left: 1px solid var(--border); }
@@ -1155,12 +1157,43 @@ input[type="number"] { -moz-appearance: textfield; }
     max-width: 1920px;
     margin: 0 auto;
   }
+
+  #mobile-gameplay-header {
+    display: none !important;
+  }
+
+  #zone-1, #zone-2, #zone-3, #zone-4 {
+    display: flex !important;
+  }
 }
 
 /* ── Tablet Reference Tier (768px – 1023px) ── */
 @media (min-width: 768px) and (max-width: 1023px) {
   #game-container {
     padding: 0 4px calc(var(--sab));
+  }
+
+  #mobile-gameplay-header {
+    display: none !important;
+  }
+}
+
+/* ── Tablet & Desktop: Hide Mobile Header & Preserve Dual-Pane Warehouse ── */
+@media (min-width: 768px) {
+  #mobile-gameplay-header {
+    display: none !important;
+  }
+  #wh-mobile-tabs {
+    display: none !important;
+  }
+  .warehouse-dual-container {
+    display: flex !important;
+    flex-direction: row !important;
+  }
+  #wh-pane-backpack,
+  #wh-pane-warehouse {
+    display: flex !important;
+    flex: 1 1 0 !important;
   }
 }
 
@@ -1306,6 +1339,382 @@ input[type="number"] { -moz-appearance: textfield; }
   .achievement-panel,
   .about-panel {
     padding: 16px 14px;
+  }
+}
+
+/* ── Mobile Layout (< 768px) – Single Column Mobile Gameplay Interface (Phase 09.3) ── */
+@media (max-width: 767px) {
+  #game-container {
+    padding: 0 4px calc(var(--sab, 0px));
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* Eliminate the 40%/60% grid & establish single-column mobile layout */
+  #game-content {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    gap: 0 !important;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Mobile Gameplay Header: Sticky HUD + View Switcher */
+  #mobile-gameplay-header {
+    display: flex !important;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    flex-shrink: 0;
+    width: 100%;
+    background: rgba(15, 17, 26, 0.98);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    box-sizing: border-box;
+  }
+
+  /* Compact Survival HUD */
+  #mobile-survival-hud {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 5px 6px 4px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .mobile-hud-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    line-height: 1.2;
+    color: #a8b5c4;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mobile-hud-datetime {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mobile-hud-datetime .hud-sep {
+    color: rgba(255, 255, 255, 0.3);
+    margin: 0 1px;
+  }
+
+  .mobile-hud-location {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-weight: 600;
+    color: #e0e6ed;
+    max-width: 48%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mobile-hud-vitals-row {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mobile-hud-pill {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background: rgba(26, 30, 46, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    padding: 3px 5px;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .mobile-hud-pill .ui-icon-inline {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+  }
+
+  .mobile-hud-pill .pill-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #8b99a8;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .mobile-hud-pill .pill-val {
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    color: #ffffff;
+    margin-left: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mobile-hud-pill .pill-mini-track {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-hud-pill .pill-mini-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+  }
+
+  .pill-mini-fill.fill-hp { background: #e74c3c; }
+  .pill-mini-fill.fill-hunger { background: #f39c12; }
+  .pill-mini-fill.fill-thirst { background: #3498db; }
+
+  /* Mobile View Switcher */
+  #mobile-view-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 3px 6px 5px;
+    box-sizing: border-box;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .mobile-tab-btn {
+    flex: 1 1 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: rgba(28, 32, 50, 0.7);
+    color: #8f9ba8;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 6px 2px;
+    box-sizing: border-box;
+    touch-action: manipulation;
+  }
+
+  .mobile-tab-btn:hover {
+    background: rgba(40, 48, 74, 0.85);
+    color: #d1d8e0;
+  }
+
+  .mobile-tab-btn.is-active {
+    background: rgba(46, 88, 140, 0.55);
+    color: #ffffff;
+    border-color: var(--accent, #4a9eff);
+    box-shadow: 0 0 10px rgba(74, 158, 255, 0.25);
+  }
+
+  .mobile-tab-btn:focus-visible {
+    outline: 2px solid var(--accent, #4a9eff);
+    outline-offset: -1px;
+  }
+
+  .mobile-tab-btn .tab-icon {
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .mobile-tab-btn .tab-label {
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.2px;
+  }
+
+  /* Zone Display Control via data-mobile-view */
+  .game-zone {
+    overflow: visible !important;
+    min-height: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    clip-path: none !important;
+    border-left: none !important;
+  }
+
+  .game-zone + .game-zone {
+    border-left: none !important;
+  }
+
+  /* Active view: Map / Gameplay */
+  #game-content[data-mobile-view="gameplay"] #zone-1,
+  #game-content[data-mobile-view="gameplay"] #zone-2 {
+    display: none !important;
+  }
+
+  #game-content[data-mobile-view="gameplay"] #zone-3,
+  #game-content[data-mobile-view="gameplay"] #zone-4 {
+    display: flex !important;
+    width: 100% !important;
+    flex: none !important;
+  }
+
+  /* Active view: Inventory */
+  #game-content[data-mobile-view="inventory"] #zone-1,
+  #game-content[data-mobile-view="inventory"] #zone-3,
+  #game-content[data-mobile-view="inventory"] #zone-4 {
+    display: none !important;
+  }
+
+  #game-content[data-mobile-view="inventory"] #zone-2 {
+    display: flex !important;
+    width: 100% !important;
+    flex: none !important;
+    padding: 6px 4px calc(16px + var(--sab, 0px));
+  }
+
+  /* Active view: Character */
+  #game-content[data-mobile-view="character"] #zone-2,
+  #game-content[data-mobile-view="character"] #zone-3,
+  #game-content[data-mobile-view="character"] #zone-4 {
+    display: none !important;
+  }
+
+  #game-content[data-mobile-view="character"] #zone-1 {
+    display: flex !important;
+    width: 100% !important;
+    flex: none !important;
+    padding: 6px 4px calc(16px + var(--sab, 0px));
+  }
+
+  /* Gameplay View: Viewport full width & Narrative */
+  #pixi-viewport {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 4px 0 !important;
+    box-sizing: border-box;
+  }
+
+  #zone-3 > #story-area {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    height: auto !important;
+    overflow-y: visible !important;
+    padding: 8px 10px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* Action Dock */
+  #zone-4 {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 8px;
+    margin-top: 4px;
+    padding-bottom: calc(16px + var(--sab, 0px));
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  #zone-4 > #options-area {
+    overflow-y: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  #zone-4 > #options-area .option-item {
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 13px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  #pagination-area {
+    padding: 8px 0;
+    min-height: 44px;
+  }
+
+  .pagination-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  #zone-4 > #input-area {
+    padding: 8px 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    box-sizing: border-box;
+  }
+
+  #action-input {
+    min-height: 44px;
+    font-size: 16px;
+    flex: 1;
+    box-sizing: border-box;
+  }
+
+  #submit-btn {
+    min-height: 44px;
+    padding: 0 16px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  /* Inventory mobile styling */
+  #zone-2 > #weapon-panel {
+    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  #zone-2 > #inventory-panel {
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  #zone-2 > #inventory-panel .inventory-panel {
+    height: auto;
+    overflow-y: visible;
+  }
+
+  /* Character mobile styling */
+  #identity-panel, #stats-panel, #cargo-panel {
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 
@@ -2640,6 +3049,10 @@ input[type="number"] { -moz-appearance: textfield; }
 }
 
 /* ── Warehouse Modal Styles ── */
+#wh-mobile-tabs {
+  display: none;
+}
+
 .warehouse-modal-box {
   width: 880px;
   max-width: 95vw;
@@ -3028,33 +3441,1090 @@ input[type="number"] { -moz-appearance: textfield; }
   color: #64748b;
 }
 
-/* ── Mobile Modal & Warehouse Responsiveness (Batch 08 Phase 8.4) ── */
-@media (max-width: 640px) {
+/* ============================================================
+   BATCH 09 – PHASE 09.4: SUB-SCREENS, INVENTORY & MODALS REDESIGN
+   Mobile layout (< 768px): touch targets >= 44px, single active
+   warehouse pane, fluid sub-screens, zero overflow.
+   ============================================================ */
+@media (max-width: 767px) {
+  /* ── 1. Inventory Category Navigation (Single Horizontal Row) ── */
+  .inv-tabs-scroll {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    gap: 6px !important;
+    padding: 6px 4px 8px !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .inv-tabs-scroll::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .inv-tab {
+    min-height: 44px !important;
+    min-width: 44px !important;
+    padding: 8px 14px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    flex-shrink: 0 !important;
+    border-radius: 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    touch-action: manipulation;
+  }
+
+  .inv-tab-count {
+    font-size: 11px !important;
+    margin-left: 5px !important;
+    padding: 1px 4px !important;
+    background: rgba(0, 0, 0, 0.35) !important;
+    border-radius: 4px !important;
+  }
+
+  /* ── 2. Inventory Cards Grid (Responsive 2 Columns on Mobile) ── */
+  .inv-cards-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(136px, 1fr)) !important;
+    gap: 8px !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+    padding: 6px 2px !important;
+    box-sizing: border-box !important;
+  }
+
+  .inv-card {
+    min-height: 84px !important;
+    padding: 8px 6px !important;
+    border-radius: 6px !important;
+    box-sizing: border-box !important;
+    touch-action: manipulation;
+  }
+
+  .inv-card-icon-box {
+    width: 36px !important;
+    height: 36px !important;
+    margin: 4px 0 !important;
+  }
+
+  .inv-card-icon {
+    max-width: 32px !important;
+    max-height: 32px !important;
+  }
+
+  .inv-card-name {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    white-space: normal !important;
+    max-height: 2.6em !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin-top: 2px !important;
+  }
+
+  .inv-card-subtext {
+    font-size: 10px !important;
+  }
+
+  .inv-badge-count {
+    font-size: 11px !important;
+    padding: 2px 5px !important;
+    border-radius: 8px !important;
+    top: 3px !important;
+    right: 3px !important;
+  }
+
+  .inv-badge-equipped {
+    font-size: 10px !important;
+    padding: 2px 4px !important;
+    top: 3px !important;
+    left: 3px !important;
+  }
+
+  /* ── 3. Inventory Detail Panel & Action Buttons ── */
+  .inv-detail-panel {
+    padding: 12px 14px !important;
+    border-radius: 8px !important;
+    margin-top: 10px !important;
+    box-sizing: border-box !important;
+  }
+
+  .inv-detail-name {
+    font-size: 14px !important;
+  }
+
+  .inv-detail-tag {
+    font-size: 11px !important;
+    padding: 2px 6px !important;
+  }
+
+  .inv-detail-close {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 18px !important;
+    touch-action: manipulation;
+  }
+
+  .inv-detail-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px 12px !important;
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+  }
+
+  .inv-detail-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    margin-top: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .inv-action-btn {
+    min-height: 44px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    padding: 12px 16px !important;
+    border-radius: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    touch-action: manipulation;
+  }
+
+  .inv-action-btn.btn-discard {
+    margin-top: 6px !important;
+    background: #3e1818 !important;
+    border-color: #8c2e2e !important;
+    color: #ff8a80 !important;
+  }
+
+  /* ── 4. Warehouse Modal (Single Active Pane Switcher) ── */
   .warehouse-modal-box {
-    width: 95vw;
-    max-width: calc(100vw - 32px);
-    height: 90vh;
-    max-height: 90vh;
+    width: 96vw !important;
+    max-width: calc(100vw - 16px) !important;
+    height: 94vh !important;
+    max-height: calc(var(--vh-dynamic, 100vh) - 16px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-radius: 8px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
+
+  .warehouse-modal-box .modal-header {
+    flex-shrink: 0 !important;
+    padding: 10px 12px !important;
+  }
+
+  #wh-mobile-tabs {
+    display: flex !important;
+    flex-shrink: 0 !important;
+    gap: 6px !important;
+    padding: 6px 10px !important;
+    background: rgba(15, 20, 27, 0.95) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
+  .wh-tab-btn {
+    flex: 1 1 0 !important;
+    min-height: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    background: rgba(30, 41, 59, 0.6) !important;
+    color: #94a3b8 !important;
+    border: 1px solid rgba(148, 163, 184, 0.2) !important;
+    border-radius: 6px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    padding: 6px 8px !important;
+    touch-action: manipulation;
+    transition: all 0.2s ease !important;
+    box-sizing: border-box !important;
+  }
+
+  .wh-tab-btn:hover {
+    background: rgba(51, 65, 85, 0.8) !important;
+    color: #e2e8f0 !important;
+  }
+
+  .wh-tab-btn.is-active {
+    background: rgba(34, 197, 94, 0.18) !important;
+    border-color: #22c55e !important;
+    color: #4ade80 !important;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.2) !important;
+  }
+
+  .wh-tab-btn:focus-visible {
+    outline: 2px solid #22c55e !important;
+    outline-offset: -1px !important;
+  }
+
   .warehouse-dual-container {
-    flex-direction: column;
-    overflow-y: auto;
-    padding: 8px;
-    gap: 8px;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    padding: 8px !important;
+    gap: 0 !important;
+    background: #11151c !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
   }
-  .wh-pane {
-    min-height: 180px;
+
+  /* Single Active Pane Visibility */
+  .warehouse-dual-container[data-active-pane="backpack"] #wh-pane-warehouse {
+    display: none !important;
   }
+  .warehouse-dual-container[data-active-pane="backpack"] #wh-pane-backpack {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    width: 100% !important;
+  }
+
+  .warehouse-dual-container[data-active-pane="warehouse"] #wh-pane-backpack {
+    display: none !important;
+  }
+  .warehouse-dual-container[data-active-pane="warehouse"] #wh-pane-warehouse {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    width: 100% !important;
+  }
+
   .wh-cards-grid {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 6px;
-    padding: 6px;
+    flex: 1 1 auto !important;
+    grid-template-columns: repeat(auto-fill, minmax(136px, 1fr)) !important;
+    gap: 8px !important;
+    padding: 8px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    min-height: 0 !important;
+    box-sizing: border-box !important;
   }
+
+  .wh-item-card {
+    min-height: 80px !important;
+    padding: 8px 6px !important;
+    border-radius: 6px !important;
+    touch-action: manipulation;
+    box-sizing: border-box !important;
+  }
+
+  .wh-item-card-name {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    font-weight: 600 !important;
+  }
+
+  .wh-action-bar {
+    flex-shrink: 0 !important;
+    padding: 8px 12px !important;
+    background: #141922 !important;
+    border-top: 1px solid rgba(148, 163, 184, 0.15) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    box-sizing: border-box !important;
+  }
+
+  .wh-transfer-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+
+  .wh-btn-transfer {
+    min-height: 44px !important;
+    padding: 10px 14px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    border-radius: 6px !important;
+    flex: 1 1 calc(50% - 6px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    touch-action: manipulation;
+  }
+
+  #warehouse-modal-close {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 20px !important;
+    touch-action: manipulation;
+  }
+
+  /* ── 5. Discard Modal Redesign ── */
   .discard-modal-box {
-    width: 95vw;
-    max-width: min(380px, calc(100vw - 32px));
+    width: 94vw !important;
+    max-width: min(380px, calc(100vw - 16px)) !important;
+    border-radius: 8px !important;
+    box-sizing: border-box !important;
   }
+
+  .discard-modal-body {
+    padding: 12px 14px !important;
+    gap: 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .discard-qty-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .discard-qty-controls {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .discard-qty-btn {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    border-radius: 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+  }
+
+  .discard-qty-controls input[type="number"] {
+    flex: 1 1 64px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+  }
+
+  .discard-qty-all-btn {
+    height: 44px !important;
+    min-height: 44px !important;
+    padding: 0 16px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    border-radius: 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+  }
+
+  .discard-modal-actions {
+    display: flex !important;
+    gap: 8px !important;
+    padding: 12px 14px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
+  .discard-modal-actions button {
+    flex: 1 1 0 !important;
+    min-height: 44px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    padding: 12px 16px !important;
+    border-radius: 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    touch-action: manipulation;
+  }
+
+  #discard-modal-close {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 20px !important;
+    touch-action: manipulation;
+  }
+
+  /* ── 6. Supporting Screens Mobile Usability & Fluid Scroll ── */
+  .save-panel,
+  .best-record-panel,
+  .achievement-panel,
+  .settings-panel,
+  .player-tools-panel,
+  .about-panel {
+    padding: 14px 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    max-height: calc(var(--vh-dynamic, 100vh) - 16px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-radius: 8px !important;
+  }
+
+  #save-slots-area {
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    min-height: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .save-panel .option-item {
+    min-height: 44px !important;
+    padding: 12px 14px !important;
+    font-size: 13px !important;
+    display: flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+    touch-action: manipulation;
+  }
+
+  #best-record-content,
+  #achievement-content,
+  #about-content,
+  #settings-content {
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    min-height: 0 !important;
+    padding-bottom: 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  .settings-toggle-btn {
+    min-height: 52px !important;
+    padding: 12px 14px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+    touch-action: manipulation;
+  }
+
+  .achievement-item {
+    min-height: 44px !important;
+    padding: 10px 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .pt-tab-btn {
+    min-height: 44px !important;
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    box-sizing: border-box !important;
+  }
+
+  .player-tools-nav {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+
   .player-tools-frame-container {
-    height: 380px;
+    flex: 1 1 auto !important;
+    min-height: 320px !important;
+    height: calc(var(--vh-dynamic, 100vh) - 180px) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Legacy 640px breakpoint support for Batch 08 Phase 8.4 compatibility */
+  @media (max-width: 640px) {
+    .warehouse-modal-box {
+      max-width: calc(100vw - 16px);
+    }
+  }
+
+  /* Universal Return Button Styling on Mobile */
+  .save-actions button,
+  #save-return-btn,
+  #best-record-return-btn,
+  #achievement-return-btn,
+  #settings-return-btn,
+  #player-tools-return-btn,
+  #about-return-btn {
+    min-height: 44px !important;
+    min-width: 130px !important;
+    padding: 10px 24px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    touch-action: manipulation;
+  }
+
+  /* Name setup buttons touch sizing */
+  #name-input {
+    min-height: 44px !important;
+    font-size: 16px !important;
+  }
+
+  .start-buttons button {
+    min-height: 44px !important;
+    padding: 12px 18px !important;
+    touch-action: manipulation;
+  }
+
+  /* ============================================================
+     BATCH 09 – PHASE 09.5: COMBAT & STORY MOBILE EXPERIENCE
+     Compact Tactical HUD, Fluid Story Stream, 44px Action Dock
+     ============================================================ */
+
+  /* ── 1. Compact Enemy Combat HUD (< 768px) ── */
+  .combat-hud {
+    background: linear-gradient(135deg, rgba(26, 16, 22, 0.95), rgba(15, 15, 26, 0.95)) !important;
+    border: 1px solid rgba(233, 69, 96, 0.35) !important;
+    border-radius: 6px !important;
+    padding: 8px 10px !important;
+    margin-bottom: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .combat-hud-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 6px !important;
+    padding-bottom: 4px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .combat-hud-badge {
+    font-size: 9.5px !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  .combat-hud-status-badge {
+    font-size: 10.5px !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+  }
+
+  .combat-enemy-card {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .combat-enemy-visual {
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    min-height: 56px !important;
+    border-radius: 6px !important;
+    background: radial-gradient(circle at 50% 50%, rgba(233, 69, 96, 0.22) 0%, rgba(0, 0, 0, 0.6) 80%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .combat-enemy-sprite {
+    max-width: 90% !important;
+    max-height: 90% !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.85)) !important;
+  }
+
+  .combat-defeated-overlay {
+    font-size: 8.5px !important;
+    padding: 2px 4px !important;
+    border-radius: 3px !important;
+    white-space: nowrap !important;
+    transform: translate(-50%, -50%) rotate(-8deg) !important;
+  }
+
+  .combat-enemy-details {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .combat-enemy-name {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 3px !important;
+    line-height: 1.25 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
+  }
+
+  .combat-enemy-hp-container {
+    margin-bottom: 4px !important;
+    width: 100% !important;
+  }
+
+  .combat-hp-label {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    font-size: 11px !important;
+    color: #94a3b8 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .combat-hp-values {
+    font-size: 11.5px !important;
+    font-family: var(--font-mono) !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+  }
+
+  .combat-hp-track {
+    width: 100% !important;
+    height: 8px !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 4px !important;
+    overflow: hidden !important;
+  }
+
+  .combat-enemy-meta {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    font-size: 11px !important;
+    color: #94a3b8 !important;
+    margin-bottom: 3px !important;
+  }
+
+  .combat-ability-list {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+  }
+
+  .combat-ability-tag {
+    font-size: 9.5px !important;
+    padding: 1px 5px !important;
+    border-radius: 3px !important;
+    background: rgba(233, 69, 96, 0.12) !important;
+    border: 1px solid rgba(233, 69, 96, 0.3) !important;
+    color: #fca5a5 !important;
+  }
+
+  /* ── 2. Narrative Feed & Combat Log Container ── */
+  #zone-3 > #story-area {
+    padding: 8px 10px !important;
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    color: #e2e8f0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .combat-story-text {
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    color: #e2e8f0 !important;
+    margin-top: 6px !important;
+  }
+
+  .combat-log-container {
+    margin-top: 8px !important;
+    padding: 8px 10px !important;
+    background: rgba(11, 11, 20, 0.7) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 6px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .combat-log-title {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    margin-bottom: 6px !important;
+    padding-bottom: 3px !important;
+    color: #94a3b8 !important;
+  }
+
+  .combat-log-body {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+    width: 100% !important;
+  }
+
+  .combat-log-row {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    padding: 4px 6px !important;
+    border-radius: 4px !important;
+    gap: 6px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ── 3. Action Dock & Touch-Friendly Option Items (>= 44px) ── */
+  #zone-4 {
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding-top: 8px !important;
+    margin-top: 4px !important;
+    padding-bottom: calc(16px + var(--sab, 0px)) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  #zone-4 > #options-area {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-y: visible !important;
+    height: auto !important;
+  }
+
+  #zone-4 > #options-area .option-item {
+    min-height: 44px !important;
+    padding: 10px 14px !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+    border-radius: 6px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: #f1f5f9 !important;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.1s ease, background 0.15s ease !important;
+  }
+
+  #zone-4 > #options-area .option-item:active {
+    transform: scale(0.98) !important;
+    background: rgba(74, 158, 255, 0.22) !important;
+    border-color: #38bdf8 !important;
+  }
+
+  #zone-4 > #options-area .option-item::before {
+    min-width: 22px !important;
+    width: 22px !important;
+    height: 22px !important;
+    line-height: 22px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    border-radius: 4px !important;
+    margin-right: 8px !important;
+    flex-shrink: 0 !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #e2e8f0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Pagination Bar Touch Controls */
+  #pagination-area {
+    padding: 8px 0 !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .pagination-btn {
+    min-height: 44px !important;
+    min-width: 44px !important;
+    padding: 8px 14px !important;
+    font-size: 16px !important;
+    border-radius: 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+    color: #f8fafc !important;
+  }
+
+  .page-info {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    font-family: var(--font-mono) !important;
+    color: #cbd5e1 !important;
+  }
+
+  /* Command Line Input Area */
+  #zone-4 > #input-area {
+    padding: 8px 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    display: flex !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  #action-input {
+    min-height: 44px !important;
+    font-size: 16px !important;
+    padding: 10px 12px !important;
+    flex: 1 1 auto !important;
+    border-radius: 6px !important;
+    background: #0f172a !important;
+    border: 1px solid #334155 !important;
+    color: #ffffff !important;
+    box-sizing: border-box !important;
+  }
+
+  #submit-btn {
+    min-height: 44px !important;
+    min-width: 80px !important;
+    padding: 0 16px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    border-radius: 6px !important;
+    background: #2563eb !important;
+    border: 1px solid #3b82f6 !important;
+    color: #ffffff !important;
+    box-sizing: border-box !important;
+    touch-action: manipulation;
+  }
+
+  /* ============================================================
+     BATCH 09 – PHASE 09.6: PIXIJS CANVAS & WORLD MAP MOBILE OPTIMIZATION
+     Responsive 2:1 Viewport Scaling, Touch POI & Map Controls
+     ============================================================ */
+  #pixi-viewport {
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 2 / 1 !important;
+    margin: 4px 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  #pixi-canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    aspect-ratio: 2 / 1 !important;
+    touch-action: manipulation;
+  }
+
+  /* Map View Switcher & Controls Toolbar (< 768px) */
+  .map-view-toggle-bar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 6px 0 !important;
+    margin-bottom: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    flex-wrap: wrap !important;
+  }
+
+  .map-toolbar-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+    flex: 1 1 auto !important;
+  }
+
+  .map-toolbar-right {
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .map-ctrl-btn {
+    min-height: 44px !important;
+    min-width: 44px !important;
+    padding: 10px 14px !important;
+    font-size: 12px !important;
+    border-radius: 6px !important;
+    touch-action: manipulation;
+  }
+
+  .map-toggle-btn {
+    min-height: 44px !important;
+    min-width: 44px !important;
+    padding: 10px 14px !important;
+    font-size: 12px !important;
+    border-radius: 6px !important;
+    touch-action: manipulation;
+  }
+}
+
+/* ============================================================
+   BATCH 09 – PHASE 09.6: MOBILE LANDSCAPE VIEWPORT & CANVAS OPTIMIZATION
+   Supports 667x375, 844x390, 932x430 devices in landscape orientation
+   Side-by-side Layout: Zone 3 (Left 54%) + Zone 4 (Right 46%)
+   ============================================================ */
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 1023px) {
+  #mobile-gameplay-header {
+    display: flex !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+  }
+
+  #mobile-survival-hud {
+    padding: 2px 8px !important;
+  }
+
+  .mobile-hud-top-row {
+    font-size: 10px !important;
+  }
+
+  .mobile-tab-btn {
+    min-height: 36px !important;
+    padding: 4px 10px !important;
+    font-size: 11px !important;
+  }
+
+  #game-content {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-content: flex-start !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  #game-content:not([data-mobile-view]) #zone-1,
+  #game-content:not([data-mobile-view]) #zone-2,
+  #game-content[data-mobile-view="gameplay"] #zone-1,
+  #game-content[data-mobile-view="gameplay"] #zone-2 {
+    display: none !important;
+  }
+
+  #game-content:not([data-mobile-view]) #zone-3,
+  #game-content[data-mobile-view="gameplay"] #zone-3 {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 54% !important;
+    max-width: 58% !important;
+    min-width: 0 !important;
+    overflow-y: auto !important;
+    padding: 4px 6px !important;
+    box-sizing: border-box !important;
+  }
+
+  #game-content:not([data-mobile-view]) #zone-4,
+  #game-content[data-mobile-view="gameplay"] #zone-4 {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 46% !important;
+    max-width: 46% !important;
+    min-width: 0 !important;
+    overflow-y: auto !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-top: none !important;
+    padding: 4px 8px calc(12px + var(--sab, 0px)) !important;
+    box-sizing: border-box !important;
+  }
+
+  #game-content[data-mobile-view="inventory"] #zone-1,
+  #game-content[data-mobile-view="inventory"] #zone-3,
+  #game-content[data-mobile-view="inventory"] #zone-4 {
+    display: none !important;
+  }
+  #game-content[data-mobile-view="inventory"] #zone-2 {
+    display: flex !important;
+    width: 100% !important;
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+  }
+
+  #game-content[data-mobile-view="character"] #zone-2,
+  #game-content[data-mobile-view="character"] #zone-3,
+  #game-content[data-mobile-view="character"] #zone-4 {
+    display: none !important;
+  }
+  #game-content[data-mobile-view="character"] #zone-1 {
+    display: flex !important;
+    width: 100% !important;
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+  }
+
+  #pixi-viewport {
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 2 / 1 !important;
+    margin: 2px 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  #pixi-canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    aspect-ratio: 2 / 1 !important;
+    touch-action: manipulation;
+  }
+
+  .map-ctrl-btn,
+  .map-toggle-btn {
+    min-height: 44px !important;
+    min-width: 44px !important;
+    padding: 8px 12px !important;
+    font-size: 11px !important;
+    border-radius: 6px !important;
+    touch-action: manipulation;
   }
 }

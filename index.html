@@ -219,15 +219,28 @@
           </div>
           <button id="warehouse-modal-close" class="modal-close-btn" title="Đóng kho">✕</button>
         </div>
-        <div class="warehouse-dual-container">
-          <div class="wh-pane wh-pane-left">
+
+        <!-- Mobile Warehouse Switcher Tabs (Phase 09.4) -->
+        <nav id="wh-mobile-tabs" class="wh-mobile-tabs" role="tablist" aria-label="Chuyển đổi kho và ba lô">
+          <button type="button" id="wh-tab-backpack" role="tab" class="wh-tab-btn is-active" aria-selected="true" tabindex="0" aria-controls="wh-pane-backpack" data-pane="backpack">
+            <span class="wh-tab-icon">🎒</span>
+            <span class="wh-tab-label">Ba lô cá nhân</span>
+          </button>
+          <button type="button" id="wh-tab-warehouse" role="tab" class="wh-tab-btn" aria-selected="false" tabindex="-1" aria-controls="wh-pane-warehouse" data-pane="warehouse">
+            <span class="wh-tab-icon">📦</span>
+            <span class="wh-tab-label">Kho căn cứ</span>
+          </button>
+        </nav>
+
+        <div class="warehouse-dual-container" data-active-pane="backpack">
+          <div id="wh-pane-backpack" class="wh-pane wh-pane-left">
             <div class="wh-pane-header">
               <span class="wh-pane-title">🎒 Ba lô cá nhân</span>
               <span id="wh-backpack-cap" class="wh-cap-indicator">0/20 ô</span>
             </div>
             <div id="wh-backpack-grid" class="wh-cards-grid"></div>
           </div>
-          <div class="wh-pane wh-pane-right">
+          <div id="wh-pane-warehouse" class="wh-pane wh-pane-right">
             <div class="wh-pane-header">
               <span class="wh-pane-title">📦 Kho chứa căn cứ</span>
               <span id="wh-warehouse-cap" class="wh-cap-indicator">0/20 ô</span>
@@ -245,7 +258,62 @@
       </div>
     </div>
 
-    <div id="game-content" style="display:none;">
+    <div id="game-content" style="display:none;" data-mobile-view="gameplay">
+      <!-- Mobile Gameplay Header (HUD + View Switcher) - Phase 09.3 -->
+      <div id="mobile-gameplay-header" class="mobile-gameplay-header">
+        <!-- Compact Survival HUD -->
+        <div id="mobile-survival-hud" class="mobile-survival-hud" aria-label="Thông số sinh tồn cơ bản">
+          <div class="mobile-hud-top-row">
+            <div class="mobile-hud-datetime" id="mobile-hud-datetime">
+              <span class="hud-icon">📅</span>
+              <span id="mobile-hud-day-text" class="hud-text">Ngày 1 Sáng</span>
+              <span class="hud-sep">·</span>
+              <span id="mobile-hud-weather-text" class="hud-text">Nắng</span>
+            </div>
+            <div class="mobile-hud-location" id="mobile-hud-location" title="Vị trí hiện tại">
+              <span class="hud-icon">📍</span>
+              <span id="mobile-hud-location-text" class="hud-text">Trại sinh tồn</span>
+            </div>
+          </div>
+          <div class="mobile-hud-vitals-row">
+            <div class="mobile-hud-pill pill-hp" title="Sức khỏe (HP)">
+              <img class="ui-icon-inline" src="public/assets/icons/ui_icon_hp.png" alt="HP" onerror="this.style.display='none'">
+              <span class="pill-label">HP</span>
+              <span id="mobile-hud-hp-val" class="pill-val">100</span>
+              <div class="pill-mini-track"><div id="mobile-hud-hp-bar" class="pill-mini-fill fill-hp" style="width: 100%;"></div></div>
+            </div>
+            <div class="mobile-hud-pill pill-hunger" title="Bụng no">
+              <img class="ui-icon-inline" src="public/assets/icons/ui_icon_hunger.png" alt="No" onerror="this.style.display='none'">
+              <span class="pill-label">No</span>
+              <span id="mobile-hud-hunger-val" class="pill-val">100%</span>
+              <div class="pill-mini-track"><div id="mobile-hud-hunger-bar" class="pill-mini-fill fill-hunger" style="width: 100%;"></div></div>
+            </div>
+            <div class="mobile-hud-pill pill-thirst" title="Nước uống">
+              <img class="ui-icon-inline" src="public/assets/icons/ui_icon_hydration.png" alt="Nước" onerror="this.style.display='none'">
+              <span class="pill-label">Nước</span>
+              <span id="mobile-hud-thirst-val" class="pill-val">100%</span>
+              <div class="pill-mini-track"><div id="mobile-hud-thirst-bar" class="pill-mini-fill fill-thirst" style="width: 100%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile View Switcher -->
+        <nav id="mobile-view-tabs" class="mobile-view-switcher" role="tablist" aria-label="Chuyển đổi giao diện gameplay">
+          <button type="button" id="tab-btn-gameplay" role="tab" class="mobile-tab-btn is-active" aria-selected="true" tabindex="0" aria-controls="zone-3 zone-4" data-view="gameplay">
+            <span class="tab-icon">🗺️</span>
+            <span class="tab-label">Bản đồ</span>
+          </button>
+          <button type="button" id="tab-btn-inventory" role="tab" class="mobile-tab-btn" aria-selected="false" tabindex="-1" aria-controls="zone-2" data-view="inventory">
+            <span class="tab-icon">🎒</span>
+            <span class="tab-label">Túi đồ</span>
+          </button>
+          <button type="button" id="tab-btn-character" role="tab" class="mobile-tab-btn" aria-selected="false" tabindex="-1" aria-controls="zone-1" data-view="character">
+            <span class="tab-icon">👤</span>
+            <span class="tab-label">Nhân vật</span>
+          </button>
+        </nav>
+      </div>
+
       <div id="zone-1" class="game-zone">
         <div id="identity-panel"></div>
         <div id="stats-panel"></div>

@@ -500,6 +500,17 @@ export function scrollStoryToBottomIfNeeded(storyArea) {
   if (distanceFromBottom <= threshold) {
     storyArea.scrollTop = storyArea.scrollHeight;
   }
+
+  // Tự động cuộn theo dõi trên giao diện di động (#game-content là scroll container chính)
+  if (typeof document !== 'undefined') {
+    const gameContent = document.getElementById('game-content');
+    if (gameContent && gameContent.clientHeight > 0 && gameContent.scrollHeight > gameContent.clientHeight) {
+      const gcDistanceFromBottom = gameContent.scrollHeight - (gameContent.scrollTop + gameContent.clientHeight);
+      if (gcDistanceFromBottom <= threshold) {
+        gameContent.scrollTop = gameContent.scrollHeight;
+      }
+    }
+  }
 }
 
 export function renderSettingsPage() {
@@ -534,6 +545,138 @@ export function renderSettingsPage() {
         <span class="rocker-status">${settings.musicEnabled ? 'BẬT' : 'TẮT'}</span>
       </div>`;
   }
+}
+
+// ---------- Quản lý chuyển đổi giao diện di động (Phase 09.3) ----------
+
+let currentMobileView = 'gameplay';
+const mobileViewScrollPositions = {
+  gameplay: 0,
+  inventory: 0,
+  character: 0
+};
+
+export function getMobileView() {
+  return currentMobileView;
+}
+
+export function setMobileView(viewName) {
+  if (!['gameplay', 'inventory', 'character'].includes(viewName)) return;
+
+  const gameContent = document.getElementById('game-content');
+  if (gameContent) {
+    // Lưu lại vị trí cuộn của view hiện tại
+    mobileViewScrollPositions[currentMobileView] = gameContent.scrollTop || 0;
+
+    // Cập nhật trạng thái view
+    currentMobileView = viewName;
+    if (typeof gameContent.setAttribute === 'function') {
+      gameContent.setAttribute('data-mobile-view', viewName);
+    }
+
+    // Khôi phục vị trí cuộn của view đích
+    gameContent.scrollTop = mobileViewScrollPositions[viewName] || 0;
+  }
+
+  // Cập nhật trạng thái tab và ARIA
+  const tabs = typeof document.querySelectorAll === 'function' ? document.querySelectorAll('.mobile-tab-btn') : [];
+  if (tabs && tabs.forEach) {
+    tabs.forEach(tab => {
+      const tabView = typeof tab.getAttribute === 'function' ? tab.getAttribute('data-view') : tab.dataset?.view;
+      const isTarget = tabView === viewName;
+      if (tab.classList && typeof tab.classList.toggle === 'function') {
+        tab.classList.toggle('is-active', isTarget);
+      }
+      if (typeof tab.setAttribute === 'function') {
+        tab.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+        tab.setAttribute('tabindex', isTarget ? '0' : '-1');
+      }
+    });
+  }
+
+  // Khôi phục và đảm bảo hiển thị PixiJS khi quay lại màn hình trận địa
+  if (viewName === 'gameplay' && pixiRenderer && pixiRenderer.enabled) {
+    pixiRenderer.resize(true);
+  }
+}
+
+export function setupMobileNav() {
+  const tabsNav = document.getElementById('mobile-view-tabs');
+  if (!tabsNav) return;
+
+  const tabs = typeof tabsNav.querySelectorAll === 'function' ? Array.from(tabsNav.querySelectorAll('.mobile-tab-btn')) : [];
+  tabs.forEach((tab, index) => {
+    if (typeof tab.addEventListener !== 'function') return;
+    tab.addEventListener('click', () => {
+      const view = typeof tab.getAttribute === 'function' ? tab.getAttribute('data-view') : tab.dataset?.view;
+      if (view) setMobileView(view);
+    });
+
+    tab.addEventListener('keydown', (e) => {
+      let targetIndex = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        targetIndex = (index + 1) % tabs.length;
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        targetIndex = (index - 1 + tabs.length) % tabs.length;
+      } else if (e.key === 'Home') {
+        targetIndex = 0;
+      } else if (e.key === 'End') {
+        targetIndex = tabs.length - 1;
+      }
+      if (targetIndex !== null) {
+        e.preventDefault();
+        if (typeof tabs[targetIndex].focus === 'function') tabs[targetIndex].focus();
+        const view = typeof tabs[targetIndex].getAttribute === 'function' ? tabs[targetIndex].getAttribute('data-view') : tabs[targetIndex].dataset?.view;
+        if (view) setMobileView(view);
+      }
+    });
+  });
+
+  const gameContent = document.getElementById('game-content');
+  if (gameContent && typeof gameContent.getAttribute === 'function') {
+    if (!gameContent.getAttribute('data-mobile-view') && typeof gameContent.setAttribute === 'function') {
+      gameContent.setAttribute('data-mobile-view', 'gameplay');
+    }
+  }
+}
+
+/**
+ * Render thanh Survival HUD thu gọn trên thiết bị di động (Phase 09.3)
+ * @param {Object} state - Đối tượng trạng thái game
+ */
+export function renderMobileSurvivalHUD(state) {
+  const hud = document.getElementById('mobile-survival-hud');
+  if (!hud || !state) return;
+
+  const dayEl = document.getElementById('mobile-hud-day-text');
+  const weatherEl = document.getElementById('mobile-hud-weather-text');
+  const locEl = document.getElementById('mobile-hud-location-text');
+  const hpVal = document.getElementById('mobile-hud-hp-val');
+  const hpBar = document.getElementById('mobile-hud-hp-bar');
+  const hungerVal = document.getElementById('mobile-hud-hunger-val');
+  const hungerBar = document.getElementById('mobile-hud-hunger-bar');
+  const thirstVal = document.getElementById('mobile-hud-thirst-val');
+  const thirstBar = document.getElementById('mobile-hud-thirst-bar');
+
+  if (dayEl) dayEl.textContent = `Ngày ${state.day} ${TIME_PHASES[state.phaseIndex] || ''}`;
+  if (weatherEl) weatherEl.textContent = state.weather || '';
+  if (locEl) locEl.textContent = state.location || 'Chưa rõ';
+
+  const hp = typeof state.health === 'number' ? state.health : 100;
+  const maxHp = GAME_CONSTANTS.MAX_HEALTH || 100;
+  const hpPct = Math.max(0, Math.min(100, Math.round(hp / maxHp * 100)));
+  if (hpVal) hpVal.textContent = hp;
+  if (hpBar) hpBar.style.width = `${hpPct}%`;
+
+  const hunger = typeof state.hunger === 'number' ? state.hunger : 100;
+  const hungerPct = Math.max(0, Math.min(100, hunger));
+  if (hungerVal) hungerVal.textContent = `${hungerPct}%`;
+  if (hungerBar) hungerBar.style.width = `${hungerPct}%`;
+
+  const thirst = typeof state.hydration === 'number' ? state.hydration : 100;
+  const thirstPct = Math.max(0, Math.min(100, thirst));
+  if (thirstVal) thirstVal.textContent = `${thirstPct}%`;
+  if (thirstBar) thirstBar.style.width = `${thirstPct}%`;
 }
 
 // ---------- Render tổng hợp ----------
@@ -618,6 +761,7 @@ export function renderAll() {
     bestRecordPage.style.display = 'none';
     achievementPage.style.display = 'none';
     aboutPage.style.display = 'none';
+    renderMobileSurvivalHUD(state);
     renderStats(state);
     renderWeapons(state);
     renderInventory(state);
@@ -653,6 +797,7 @@ export function renderAll() {
   bestRecordPage.style.display = 'none';
   achievementPage.style.display = 'none';
 
+  renderMobileSurvivalHUD(state);
   renderStats(state);
   renderWeapons(state);
   renderInventory(state);
@@ -1042,4 +1187,5 @@ export function initUI() {
   document.getElementById('best-record-page').style.display = 'none';
   document.getElementById('about-page').style.display = 'none';
   initAppearanceUI();
+  setupMobileNav();
 }

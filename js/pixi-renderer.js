@@ -43,6 +43,8 @@ export class PixiRenderer {
     this.enabled = false;
     this.state = null;
     this._resizeHandler = null;
+    this._resizeDebounceTimer = null;
+    this._resizeObserver = null;
 
     // Display Layers
     this.bgLayer = null;
@@ -101,6 +103,11 @@ export class PixiRenderer {
   // ---------- Khoi tao Renderer ----------
   async init() {
     try {
+      if (this.app) {
+        this.enabled = true;
+        return true;
+      }
+
       const pixiLib = await this._loadPixiLibrary();
       if (!pixiLib) {
         console.warn('[PixiRenderer] Khong co thu vien PixiJS, he thong se dung DOM UI thuan tuy.');
@@ -172,9 +179,24 @@ export class PixiRenderer {
         console.warn('[PixiRenderer] Preload Batch 01 warning:', err?.message || err);
       });
 
-      // Lang nghe su kien resize cua cua so
+      // Lang nghe su kien resize & orientationchange voi debounce
       this._resizeHandler = () => this.resize();
-      window.addEventListener('resize', this._resizeHandler);
+      if (typeof window !== 'undefined') {
+        window.addEventListener('resize', this._resizeHandler);
+        window.addEventListener('orientationchange', this._resizeHandler);
+
+        // Theo doi thay doi kich thuoc container bang ResizeObserver
+        if (window.ResizeObserver && container) {
+          this._resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+              if (entry.contentRect && entry.contentRect.width > 0) {
+                this.resize();
+              }
+            }
+          });
+          this._resizeObserver.observe(container);
+        }
+      }
 
       this.enabled = true;
       console.log('[PixiRenderer] Da khoi tao thanh cong PixiJS v' + (PIXI.VERSION || '7') + ' (Offline Local Vendor).');
@@ -502,14 +524,47 @@ export class PixiRenderer {
   }
 
   // ---------- Responsive Resize ----------
-  resize() {
+  resize(immediate = false) {
+    if (!this.enabled || !this.app || !this.app.renderer) return;
+
+    if (this._resizeDebounceTimer) {
+      clearTimeout(this._resizeDebounceTimer);
+      this._resizeDebounceTimer = null;
+    }
+
+    if (immediate) {
+      this.applyResize();
+    } else {
+      this._resizeDebounceTimer = setTimeout(() => {
+        this.applyResize();
+      }, 60);
+    }
+  }
+
+  applyResize() {
     if (!this.enabled || !this.app || !this.app.renderer) return;
 
     const container = document.getElementById('pixi-viewport') || document.getElementById(this.containerId);
     if (!container) return;
 
-    // Canvas CSS da co width: 100%, height: auto nen co gian responsive muot ma.
-    // O day ta chi can render lai mot luot de dam bao stage khong bi blur.
+    // Kiem tra cap nhat resolution neu DPR thay doi
+    if (typeof window !== 'undefined') {
+      const targetDpr = Math.min(window.devicePixelRatio || 1, 2);
+      if (this.app.renderer.resolution !== targetDpr) {
+        this.app.renderer.resolution = targetDpr;
+        this.app.renderer.resize(this.width, this.height);
+      }
+    }
+
+    // Dam bao canvas inline style luon la 100% width, height auto giu ty le chuan
+    const canvas = this.app.view;
+    if (canvas) {
+      canvas.style.width = '100%';
+      canvas.style.height = 'auto';
+      canvas.style.maxWidth = '100%';
+    }
+
+    // Render lai mot luot de dam bao stage khong bi blur hoac lech toa do
     if (this.state) {
       this.render(this.state);
     }
@@ -531,9 +586,20 @@ export class PixiRenderer {
 
   // ---------- Giai phong tai nguyen ----------
   destroy() {
-    if (this._resizeHandler) {
+    if (this._resizeDebounceTimer) {
+      clearTimeout(this._resizeDebounceTimer);
+      this._resizeDebounceTimer = null;
+    }
+
+    if (this._resizeHandler && typeof window !== 'undefined') {
       window.removeEventListener('resize', this._resizeHandler);
+      window.removeEventListener('orientationchange', this._resizeHandler);
       this._resizeHandler = null;
+    }
+
+    if (this._resizeObserver) {
+      this._resizeObserver.disconnect();
+      this._resizeObserver = null;
     }
 
     if (this.worldMapRenderer) {

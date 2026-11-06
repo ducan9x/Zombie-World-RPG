@@ -24,6 +24,101 @@ let selectedSide = null; // 'backpack' | 'warehouse' | null
 let selectedBackpackItem = null;
 let selectedWarehouseIndex = null;
 let onWarehouseUpdateCallback = null;
+let activeMobileWarehousePane = 'backpack'; // 'backpack' | 'warehouse'
+
+/**
+ * Lấy tab đang hoạt động của kho trên di động
+ */
+export function getMobileWarehousePane() {
+  return activeMobileWarehousePane;
+}
+
+/**
+ * Đặt tab kho đang hoạt động trên di động ('backpack' | 'warehouse')
+ * @param {string} pane
+ */
+export function setMobileWarehousePane(pane) {
+  activeMobileWarehousePane = (pane === 'warehouse') ? 'warehouse' : 'backpack';
+  updateMobileWarehouseTabsUI();
+}
+
+/**
+ * Cập nhật giao diện tabs kho di động và thuộc tính data-active-pane
+ */
+export function updateMobileWarehouseTabsUI() {
+  if (typeof document === 'undefined') return;
+
+  const modal = (typeof document.getElementById === 'function') ? document.getElementById('warehouse-modal') : null;
+  const container = (typeof document.querySelector === 'function')
+    ? document.querySelector('.warehouse-dual-container')
+    : null;
+
+  if (container && typeof container.setAttribute === 'function') {
+    container.setAttribute('data-active-pane', activeMobileWarehousePane);
+  }
+  if (modal && typeof modal.setAttribute === 'function') {
+    modal.setAttribute('data-active-pane', activeMobileWarehousePane);
+  }
+
+  const backpackTab = (typeof document.getElementById === 'function') ? document.getElementById('wh-tab-backpack') : null;
+  const warehouseTab = (typeof document.getElementById === 'function') ? document.getElementById('wh-tab-warehouse') : null;
+
+  const isBackpack = activeMobileWarehousePane === 'backpack';
+
+  if (backpackTab && backpackTab.classList) {
+    backpackTab.classList.toggle('is-active', isBackpack);
+    if (typeof backpackTab.setAttribute === 'function') {
+      backpackTab.setAttribute('aria-selected', isBackpack ? 'true' : 'false');
+      backpackTab.setAttribute('tabindex', isBackpack ? '0' : '-1');
+    }
+  }
+
+  if (warehouseTab && warehouseTab.classList) {
+    warehouseTab.classList.toggle('is-active', !isBackpack);
+    if (typeof warehouseTab.setAttribute === 'function') {
+      warehouseTab.setAttribute('aria-selected', !isBackpack ? 'true' : 'false');
+      warehouseTab.setAttribute('tabindex', !isBackpack ? '0' : '-1');
+    }
+  }
+}
+
+function initMobileWarehouseTabs() {
+  if (typeof document === 'undefined') return;
+  const backpackTab = document.getElementById('wh-tab-backpack');
+  const warehouseTab = document.getElementById('wh-tab-warehouse');
+
+  if (backpackTab) {
+    backpackTab.onclick = (e) => {
+      e.stopPropagation();
+      setMobileWarehousePane('backpack');
+    };
+    backpackTab.onkeydown = (e) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        setMobileWarehousePane('warehouse');
+        const next = document.getElementById('wh-tab-warehouse');
+        if (next && typeof next.focus === 'function') next.focus();
+      }
+    };
+  }
+
+  if (warehouseTab) {
+    warehouseTab.onclick = (e) => {
+      e.stopPropagation();
+      setMobileWarehousePane('warehouse');
+    };
+    warehouseTab.onkeydown = (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        setMobileWarehousePane('backpack');
+        const prev = document.getElementById('wh-tab-backpack');
+        if (prev && typeof prev.focus === 'function') prev.focus();
+      }
+    };
+  }
+
+  updateMobileWarehouseTabsUI();
+}
 
 function handleWarehouseKeyDown(e) {
   if (e.key === 'Escape') {
@@ -60,6 +155,7 @@ export function openWarehouseModal(state, onUpdate) {
   selectedSide = null;
   selectedBackpackItem = null;
   selectedWarehouseIndex = null;
+  activeMobileWarehousePane = 'backpack';
 
   const closeBtn = document.getElementById('warehouse-modal-close');
   if (closeBtn) {
@@ -73,6 +169,8 @@ export function openWarehouseModal(state, onUpdate) {
       closeWarehouseModal();
     }
   };
+
+  initMobileWarehouseTabs();
 
   modal.style.display = 'flex';
   document.addEventListener('keydown', handleWarehouseKeyDown);
@@ -204,6 +302,9 @@ export function renderWarehouseModal(state) {
 
   // 3. Render Action Bar
   renderWarehouseActionBar(state);
+
+  // 4. Update Mobile Tabs UI
+  updateMobileWarehouseTabsUI();
 }
 
 /**

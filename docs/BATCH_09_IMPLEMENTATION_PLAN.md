@@ -86,68 +86,110 @@ In strict alignment with WCAG 2.5.5 and Apple Human Interface Guidelines:
 
 ---
 
-### Phase 09.3: Game Zones Mobile Layout & Navigation
-- **Focus:** Zones 1–4 Reorganization on Mobile Screens.
-- **Key Tasks:**
-  1. **Top Mini-HUD Component:** Construct an unobtrusive, compact header strip showing Player HP bar, Hunger/Thirst indicators, Current Location, and Day/Time.
-  2. **Mobile Viewport Switcher / Tabs:** Allow seamless mobile switching between:
-     - `[🗺️ Trận địa / Bản đồ]` (Zone 3 Visual Viewport + Narrative Feed + Zone 4 Actions).
-     - `[🎒 Túi đồ]` (Zone 2 Inventory Panel & Equipment).
-     - `[👤 Nhân vật]` (Zone 1 Detailed Character Stats, Buffs, and Attributes).
-  3. Ensure that when switching views on mobile, the underlying DOM state and event listeners in `#zone-1`, `#zone-2`, `#zone-3`, and `#zone-4` are strictly preserved without recreation or memory leaks.
-  4. Keep all 4 zones simultaneously visible and side-by-side on desktop (`min-width: 1024px`).
-- **Validation:** Seamless touch-switching; stats and inventory remain fully interactive; zero impact on game state.
+### Phase 09.3: Game Zones Mobile Layout & Navigation [COMPLETED]
+- **Status:** COMPLETED (Report: `docs/BATCH_09_PHASE_09_3_REPORT.md`)
+- **Focus:** Zones 1–4 Reorganization on Mobile Screens & Mobile-First Navigation Architecture.
+- **Completed Tasks:**
+  1. **Eliminated Compressed 2x2 Grid on Mobile (< 768px):** Replaced squeezed 40%/60% column grid with a Mobile-First single-column flow (`display: flex; flex-direction: column`).
+  2. **Top Mini-HUD Component (`#mobile-survival-hud`):** Compact sticky header displaying Player HP bar, Hunger/Thirst indicators, Current Location, and Day/Time without horizontal overflow.
+  3. **Mobile View Switcher (`#mobile-view-tabs`):** Touch-friendly WAI-ARIA tab switcher enabling instantaneous navigation between:
+     - `[🗺️ Bản đồ]` (Zone 3 Viewport + Narrative Feed + Zone 4 Actions).
+     - `[🎒 Túi đồ]` (Zone 2 Weapons & Equipment + Inventory Panel).
+     - `[👤 Nhân vật]` (Zone 1 Identity, Character Vitals & Cargo).
+  4. **Strict DOM & PixiJS State Preservation:** Zero DOM destruction, zero component unmounting, zero PixiJS recreation or canvas leaks across tab switches.
+  5. **Unified Scroll Architecture:** `#game-content` acts as the single primary vertical scroll owner with sticky header, completely eliminating scroll trapping.
+  6. **Desktop & Tablet Preservation:** At widths ≥ 1024px, the 4-zone dashboard (200px, 200px, flex 1, 360px) is 100% preserved; Tablet (768px–1023px) preserves 2x2 grid without clipping.
+- **Validation:** 95/95 regression tests PASS + 8/8 Phase 09.3 audit tests PASS (103/103 total); exact headless Chromium bounding boxes verified across all 8 viewports (320px–1920px).
 
 ---
 
-### Phase 09.4: Sub-screens, Menus & Modals Mobile Polish
+### Phase 09.4: Sub-screens, Menus & Modals Mobile Polish [COMPLETED]
+- **Status:** COMPLETED (Report: `docs/BATCH_09_PHASE_09_4_REPORT.md`)
 - **Focus:** Modals, Full-page Views, and Auxiliary Dialogs.
-- **Key Tasks:**
-  1. **Inventory Panel Refactoring (`#inventory-panel`):**
-     - Replace wrapping category tabs with a single-row horizontal touch-scroll bar (`.inv-tabs-bar`).
-     - Responsive item card grid (`repeat(auto-fill, minmax(130px, 1fr))`) ensuring 2 columns on 320px–360px phones.
-     - Enlarge action buttons (`Sử dụng`, `Trang bị`, `Bỏ`) to touch-compliant hitboxes.
-  2. **Warehouse Modal (`#warehouse-modal`):**
-     - Replace crushed vertical stacking on screens ≤ 640px with a segmented pane switcher (`[🎒 Túi đồ] | [📦 Kho căn cứ]`).
-     - Ensure full single-scroll per pane for effortless transfer operations.
-  3. **Destructive Discard Modal (`#discard-confirm-modal`):**
-     - Enlarge quick-selection chips (`1`, `5`, `10`, `Tất cả`) to 44px touch targets.
-  4. **Player Auxiliary Tools (`#player-tools-page`):**
-     - Convert fixed 380px iframe to flexible container: `height: calc(100dvh - 140px); min-height: 320px;`.
-  5. **Main Menu (`#name-setup`) & Standalone Pages:**
-     - Make character setup container scrollable so the virtual keyboard does not obscure inputs.
-     - Fluid responsive grids for Achievements and Save Slots.
-- **Validation:** All modals open, scroll, operate, and close cleanly on 320px–430px viewports without horizontal clipping.
+- **Completed Tasks:**
+  1. **Inventory Category Navigation (`#inventory-panel`):**
+     - Replaced wrapping category tabs with a single horizontal touch-scrolling bar (`.inv-tabs-scroll`).
+     - Preserved all 7 categories (`Tất cả`, `Vũ khí`, `Trang bị`, `Thực phẩm`, `Đồ uống`, `Y tế`, `Vật liệu & Khác`).
+     - Category tabs formatted with touch target height `min-height: 44px; padding: 8px 14px;`.
+  2. **Inventory Responsive Cards Grid (`.inv-cards-grid`):**
+     - Configured adaptive column layout (`repeat(auto-fill, minmax(136px, 1fr))`) achieving an optimal 2-column layout on 320px–430px screens.
+     - Preserved item icon, formatted name, quantity badge, and subtext with zero horizontal overflow.
+  3. **Item Action Controls & Safe Destructive UX:**
+     - All primary action buttons (`.inv-action-btn`) expand to touch-friendly targets of at least 44px height (`min-height: 44px;`).
+     - Destructive action (`.btn-discard`) distinctly styled with red warning styling and 6px top margin.
+     - Detail panel close button has 44×44px hit region.
+  4. **Warehouse Modal Mobile Single-Pane Architecture (`#warehouse-modal`):**
+     - Implemented `#wh-mobile-tabs` with accessible tabs (`[🎒 Ba lô cá nhân]` and `[📦 Kho căn cứ]`).
+     - Controlled via `data-active-pane="backpack" | "warehouse"` on `.warehouse-dual-container`.
+     - Only the active pane is displayed on screens < 768px; desktop (≥ 768px) retains dual-pane layout.
+     - Transfer buttons (`.wh-btn-transfer`) formatted with touch target `min-height: 44px;`.
+  5. **Discard Confirmation Modal (`#discard-confirm-modal`):**
+     - Stepper buttons (`#discard-qty-minus`, `#discard-qty-plus`, `#discard-qty-all`) upgraded to 44×44px targets.
+     - Stepper input height 44px with 16px font; confirm/cancel buttons 44px height.
+     - Zero horizontal overflow at 320px width (94vw, max 380px).
+  6. **Supporting Sub-screens Fluid Usability:**
+     - Upgraded `#save-page`, `#best-record-page`, `#achievement-page`, `#settings-page`, `#player-tools-page`, `#about-page`, and `#name-setup` with fluid heights (`max-height: calc(var(--vh-dynamic, 100vh) - 16px)`).
+     - Universal return buttons (`#save-return-btn`, etc.) styled to minimum 44px height and 130px width.
+     - Settings rocker switches (`.settings-toggle-btn`) feature 52px touch targets with rocker LEDs.
+     - Player tools iframe uses fluid container with `min-height: 320px;`.
+  7. **Desktop Dual-Pane & Layout Preservation:**
+     - `#wh-mobile-tabs` strictly hidden (`display: none !important`) at ≥ 768px.
+     - Desktop dual-pane warehouse and 4-zone dashboard 100% preserved.
+- **Validation:** 108/108 regression tests PASS across 10 test suites; 10 visual screenshots captured in `docs/screenshots/phase09_4/`.
 
 ---
 
-### Phase 09.5: Combat, Narrative & Action Dock Mobile Polish
+### Phase 09.5: Combat, Narrative & Action Dock Mobile Polish [COMPLETED]
 - **Focus:** Core Survival & Combat Loop Experience.
-- **Key Tasks:**
-  1. **Narrative Feed (`#story-area`):**
-     - Set comfortable mobile typography (14px, line-height 1.65).
-     - Ensure silky-smooth momentum touch scrolling (`-webkit-overflow-scrolling: touch`).
-     - Auto-scroll to latest event on new narrative logs.
-  2. **Combat HUD (`.combat-enemy-card`):**
-     - Transform enemy card on mobile into a compact tactical banner (48×48px sprite, horizontal HP/Shield bars, status pills).
-     - Save vertical height so combat action logs in `#story-area` remain visible in real time.
-  3. **Action Dock (`#zone-4`):**
-     - Elevate `.option-item` to 44px+ min-height with prominent numbered badges.
-     - Modernize `.pagination-area` with touch-friendly 44×44px page navigation buttons.
-     - Ensure `#action-input` has `font-size: 16px` to avoid iOS browser zoom on focus.
-- **Validation:** Complete combat encounters playable single-handedly on small screens without scroll frustration.
+- **Key Accomplishments:**
+  1. **Compact Tactical Enemy HUD (`.combat-hud`, `.combat-enemy-card`):**
+     - Transformed vertical card into compact horizontal tactical strip (~82px height), saving > 115px vertical space.
+     - 56×56px avatar with `object-fit: cover; object-position: top center;` preventing sprite distortion.
+     - 14px bold title with `word-break: break-word` preventing overflow on long enemy/boss names.
+     - Streamlined 8px HP track and dual values label.
+     - Crimson aura and elite badges preserved for boss encounters.
+  2. **Narrative Feed Readability & Semantic Combat Logs (`#story-area`):**
+     - Set comfortable 13.5px typography with 1.6 line-height on `< 768px` via `#zone-3 > #story-area`.
+     - Preserved backward compatibility with legacy 480px test assertions.
+     - Styled 6 semantic combat log event classes: `.combat-log-player-hit`, `.combat-log-enemy-hit`, `.combat-log-crit`, `.combat-log-dodge`, `.combat-log-victory`, `.combat-log-defeat`.
+     - Removed nested scroll traps (`.combat-log-body` overflow: visible).
+  3. **Smart Story Scrolling (`scrollStoryToBottomIfNeeded`):**
+     - Auto-scrolls when reading active events ($\le 80\text{px}$ distance threshold) across both `#story-area` and `#game-content`.
+     - Intelligently preserves scroll position when inspecting combat backlog ($> 80\text{px}$).
+  4. **Action Dock & Pagination Ergonomics (`#zone-4`):**
+     - Elevated `.option-item` to WCAG 2.5.5 touch target standard (`min-height: 44px !important`, padding `10px 14px`).
+     - Enhanced numbered badges (`22×22px`) and active press scale feedback (`0.985`).
+     - Upgraded pagination controls (`#prev-page-btn`, `#next-page-btn`) to `44×44px` hit areas.
+     - Action text input (`#action-input`) set to `min-height: 44px` and `font-size: 16px` to prevent iOS Safari auto-zoom.
+     - Submit button (`#submit-btn`) styled with `min-height: 44px; min-width: 44px`.
+  5. **Desktop & Tablet Dashboard Preservation:**
+     - Desktop 4-zone dashboard and 96×120px enemy visual card 100% intact at $\ge 1024\text{px}$.
+- **Validation:** 115/115 regression tests PASS across 11 test suites; 8 visual screenshots captured in `docs/screenshots/phase09_5/`.
 
 ---
 
-### Phase 09.6: PixiJS Canvas & Graphical World Map Viewport Scaling
+### Phase 09.6: PixiJS Canvas & Graphical World Map Viewport Scaling [COMPLETED]
 - **Focus:** 2D Viewport Scaling, Aspect Ratio Integrity, and Map Interaction.
-- **Key Tasks:**
-  1. Enable full-width rendering for `#pixi-viewport` on mobile devices (`width: 100%; aspect-ratio: 2 / 1;`).
-  2. At 360px screen width, canvas renders at a crisp `356 × 178px` (more than 2.5× the current crushed 140×70px area!).
-  3. Maintain fixed internal coordinate system (640 × 320) via PixiJS stage scaling to prevent map distortion.
-  4. Optimize touch-tap hitboxes for POI map markers (minimum 32×32px virtual touch zone with radar reticle).
-  5. Ensure debounced canvas resize listener handles orientation changes (portrait ↔ landscape) smoothly.
-- **Validation:** Graphical world map, terrain tiles, roads, and POIs remain sharp, readable, and interactive.
+- **Key Accomplishments:**
+  1. **Responsive 2:1 Viewport Scaling (`#pixi-viewport`, `#pixi-canvas`):**
+     - Enforced `aspect-ratio: 2 / 1;` on viewport and canvas across all viewports.
+     - Canvas fills 100% available width without horizontal overflow (310×155px at 320px, 380×190px at 390px, 420×210px at 430px).
+     - Applied `touch-action: manipulation;` to eliminate tap delay and prevent accidental browser zoom.
+  2. **POI Coordinates & Non-Overlapping 44px Hit Targets:**
+     - Verified all 22 locations in `MAP_COORDINATES` with minimum neighbor distance $\ge 44\text{px}$ (48.0px min distance).
+     - Enlarged touch hit area using `markerContainer.hitArea = new PIXI.Circle(0, 0, 22);` with zero overlap.
+     - Fixed top-boundary clipping for `lau_dai_tan_the` by clamping $posY \ge 22\text{px}$.
+     - Clamped tactical info card (220×76px) strictly within canvas bounds ($[8, 412]\text{px} \times [8, 236]\text{px}$).
+  3. **High-DPI Retina Rendering & 2.0 DPR Cap:**
+     - Capped renderer resolution at `Math.min(window.devicePixelRatio || 1, 2)` to deliver crisp supersampled retina graphics while preserving GPU memory and battery.
+     - Supported dynamic DPR synchronization on device scale changes.
+  4. **Centralized Debounced Resize & Lifecycle Stability:**
+     - Implemented 60ms debounced resize controller listening to window `resize`, `orientationchange`, and container `ResizeObserver`.
+     - Supported immediate synchronous resize on mobile tab switch (`pixiRenderer.resize(true)`).
+     - Passed 20-cycle view switching stress test with zero memory leaks or ticker duplicates.
+  5. **Desktop & Tablet Dashboard Preservation:**
+     - 4-zone horizontal command center intact at $\ge 1024\text{px}$; tablet adaptive 2-column layout intact at $768\text{px}–1023\text{px}$.
+- **Validation:** 122/122 regression tests PASS across 12 test suites; 9 visual screenshots captured in `docs/screenshots/phase09_6/`.
 
 ---
 
