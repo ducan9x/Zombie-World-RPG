@@ -60,7 +60,7 @@ export function handlePoliceArchive() {
     if (added) {
       state.crimeDataCount = (state.crimeDataCount || 0) + 1;
       const target = state.oldMaStep >= 1 ? 10 : "?";
-      setStory(`Sâu trong tủ hồ sơ phủ đầy bụi bạn lục ra một tập hồ sơ ố vàng.\n\nĐây là một vụ án treo phủ bụi từ lâu — danh tính người chết không rõ, số vụ án đã bị bôi đen, trong hồ sơ điều tra nhiều lần xuất hiện một cái tên: "Lão Mã".\n\n📁 Nhận được [Tài liệu tội phạm] (${state.crimeDataCount}/${target})`);
+      setStory(`Sâu trong tủ hồ sơ phủ đầy bụi bạn lục ra một tập hồ sơ ố vàng.\n\nĐây là một vụ án treo phủ bụi từ lâu — danh tính người chết không rõ, số vụ án đã bị bôi đen, trong hồ sơ điều tra nhiều lần xuất hiện một cái tên: "Lão Mã".\n\n[Thu được] [Tài liệu tội phạm] (${state.crimeDataCount}/${target})`);
     } else {
       setStory("Bạn lục được một túi hồ sơ ghi \"Tuyệt mật\", nhưng túi đã đầy, không thể mang.");
     }

@@ -206,7 +206,7 @@ export function handleWolfQuest1Submit() {
     `"Thật ra……tôi vẫn đang nghiên cứu những thứ sâu hơn. Truyền thuyết nói trong biển sâu có một loại sinh vật,\n` +
     `vảy của chúng chứa lực lượng sấm sét. Còn những vảy sấm sét này, chỉ là sản phẩm sơ cấp nhất……\n` +
     `nếu cậu có thể lấy được 'vảy thông lôi' cao cấp hơn, nhớ tìm tôi."\n\n` +
-    `✅ Nhiệm vụ "thu thập vảy" hoàn thành! Độ thiện cảm lão sói +10.`
+    `[Thành công] Nhiệm vụ "thu thập vảy" hoàn thành! Độ thiện cảm lão sói +10.`
   );
 
   advanceTime(1);
@@ -283,8 +283,8 @@ export function handleWolfQuest2Submit() {
     `Cô ấy bị nhốt ở đó rất lâu rồi, tôi không dám để ai đến gần cô ấy.\n` +
     `Nhưng giờ đây, cậu đã chứng minh thành ý của mình——cậu có thể đi xem cô ấy.\n` +
     `Mang theo vảy của cậu, có lẽ……cậu có thể giúp được cô ấy."\n\n` +
-    `✅ Nhiệm vụ "nhà sưu tầm" hoàn thành! Độ thiện cảm lão sói +15.\n` +
-    `🔓 [Kho vật nghiệp] tại khu dân cư cũ đã mở!`
+    `[Thành công] Nhiệm vụ "nhà sưu tầm" hoàn thành! Độ thiện cảm lão sói +15.\n` +
+    `[Mở khóa] [Kho vật nghiệp] tại khu dân cư cũ đã mở!`
   );
 
   advanceTime(1);
@@ -388,8 +388,8 @@ export function handleWolfQuest3Submit() {
     `"Đây là thứ tôi mua ở chợ đen thời còn trẻ, tốn không ít công sức. Tầm bắn xa, sát thương lớn,\n` +
     `đối phó con quái vật biển sâu đó, hẳn sẽ có tác dụng."\n\n` +
     `Ông ấy vỗ vai bạn: "Chuẩn bị xong thì tìm tôi. Đối thủ thực sự, ở dưới biển sâu."\n\n` +
-    `✅ Nhiệm vụ "chuẩn bị ra khơi" hoàn thành! Độ thiện cảm lão sói +20.\n` +
-    `🎁 Nhận được: ${deagleItem ? deagleItem.name : "Desert Eagle"}×1 + ${GAME_CONSTANTS.WOLF.QUEST3_REWARD_AMMO}×${GAME_CONSTANTS.WOLF.QUEST3_REWARD_AMMO_COUNT}`
+    `[Thành công] Nhiệm vụ "chuẩn bị ra khơi" hoàn thành! Độ thiện cảm lão sói +20.\n` +
+    `[Phần thưởng] Nhận được: ${deagleItem ? deagleItem.name : "Desert Eagle"}×1 + ${GAME_CONSTANTS.WOLF.QUEST3_REWARD_AMMO}×${GAME_CONSTANTS.WOLF.QUEST3_REWARD_AMMO_COUNT}`
   );
 
   advanceTime(1);
@@ -440,7 +440,7 @@ export function handleWolfQuest4() {
     `Vảy của cô ấy lấp lánh ánh sáng yếu trên mặt biển âm u, trong mắt vừa có sợ hãi, vừa có quyết tuyệt.\n\n` +
     `"Chuẩn bị xong chưa? " lão sói siết chặt súng săn.\n` +
     `"Trận này, hoặc là đưa quái vật trở về vực sâu……hoặc chúng ta đều chôn thây trong bụng cá."\n\n` +
-    `⚠ Hải thi khổng lồ chỉ có thể dùng vũ khí tầm xa để tấn công, cận chiến vô hiệu!`
+    `[Cảnh báo] Hải thi khổng lồ chỉ có thể dùng vũ khí tầm xa để tấn công, cận chiến vô hiệu!`
   );
 
   setOptions([
@@ -502,7 +502,7 @@ export function handleWolfQuest4Fight() {
     `"Là nó! " lão sói hét lớn. Người cá bị thương cất lên một khúc hát kỳ lạ mà bi thương,\n` +
     `một rào cản mỏng manh bao trùm thuyền cá——đó là chút che chở cuối cùng cô ấy có thể cung cấp.\n\n` +
     `[Hải thi khổng lồ]HP:${npc.hp} Sát thương:${npc.damage}\n` +
-    `⚠ Quái vật này chỉ có thể dùng vũ khí tầm xa để tấn công!\n\n` +
+    `[Cảnh báo] Quái vật này chỉ có thể dùng vũ khí tầm xa để tấn công!\n\n` +
     `[Cận chiến]${state.meleeWeapon.name}\n` +
     `[Tầm xa]${state.rangedWeapon.name} (đạn:${ammo ? ammo.count : 0} viên hoàn chỉnh:${state.rangedWeapon.integrity}%)`
   );
@@ -585,8 +585,8 @@ export function handleMermaidInteract() {
       `Cô ấy trao đinh ba vào tay bạn, trong mắt lấp lánh nước mắt:\n` +
       `"Xin hãy giúp lão sói……giúp chúng tôi tiêu diệt con quái vật biển sâu đó.\n` +
       `Chỉ khi nó chết, tôi mới thực sự tự do quay về biển cả."\n\n` +
-      `🎁 Nhận được: [Đinh ba hải ca]!\n` +
-      `🔓 Nhiệm vụ 3 của lão sói "chuẩn bị ra khơi" đã mở!` +
+      `[Thu được] [Đinh ba hải ca]!\n` +
+      `[Mở khóa] Nhiệm vụ 3 của lão sói "chuẩn bị ra khơi" đã mở!` +
       affInfo;
   }
 
@@ -676,7 +676,7 @@ function handleMermaidSubmitScale(scaleId, affinityGain) {
           `"Đi nói với lão sói……về chuyện con quái vật biển sâu. Nó không nên tồn tại ở thế giới này.\n` +
           `Các bạn cần liên thủ——tôi sẽ dẫn đường cho các bạn trong biển."`;
       } else {
-        storyMsg += `\n\n⚠ Balo đã đầy, không thể nhận Đinh Ba Hải Ca! Vui lòng dọn dẹp balo rồi quay lại.`;
+        storyMsg += `\n\n[Cảnh báo] Balo đã đầy, không thể nhận Đinh Ba Hải Ca! Vui lòng dọn dẹp balo rồi quay lại.`;
         // Độ thiện cảm giữ nguyên, nhưng lùi lại một chút để người chơi có thể kích hoạt lại
         state.npcAffinity.mermaid = GAME_CONSTANTS.WOLF.MERMAID_MAX_AFFINITY - 1;
         setStory(storyMsg);
@@ -684,7 +684,7 @@ function handleMermaidSubmitScale(scaleId, affinityGain) {
         return;
       }
     }
-    storyMsg += `\n\n🎁 Nhận được: [Đinh ba hải ca]!\n🔓 Nhiệm vụ 3 của lão sói "chuẩn bị ra khơi" đã mở!`;
+    storyMsg += `\n\n[Thu được] [Đinh ba hải ca]!\n[Mở khóa] Nhiệm vụ 3 của lão sói "chuẩn bị ra khơi" đã mở!`;
   }
 
   setStory(storyMsg);

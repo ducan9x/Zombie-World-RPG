@@ -44,23 +44,27 @@ function formatTimestamp(date) {
  */
 export function getAllSlots() {
   const slots = [];
-  for (let i = 0; i < MAX_SLOTS; i++) {
-    const raw = localStorage.getItem(getSlotKey(i));
-    if (!raw) {
-      slots.push(null);
-      continue;
+  try {
+    for (let i = 0; i < MAX_SLOTS; i++) {
+      try {
+        const raw = localStorage.getItem(getSlotKey(i));
+        if (!raw) {
+          slots.push(null);
+          continue;
+        }
+        const parsed = JSON.parse(raw);
+        slots.push({
+          slotId: parsed.slotId,
+          nickname: parsed.nickname,
+          day: parsed.day,
+          timestamp: parsed.timestamp
+        });
+      } catch (e) {
+        slots.push(null);
+      }
     }
-    try {
-      const parsed = JSON.parse(raw);
-      slots.push({
-        slotId: parsed.slotId,
-        nickname: parsed.nickname,
-        day: parsed.day,
-        timestamp: parsed.timestamp
-      });
-    } catch (e) {
-      slots.push(null);
-    }
+  } catch (e) {
+    return Array.from({ length: MAX_SLOTS }, () => null);
   }
   return slots;
 }
@@ -85,6 +89,10 @@ export function saveGame(slotId, gameState, nickname) {
     delete cleanState._barAction;
     delete cleanState._streetAction;
     delete cleanState._investAction;
+    delete cleanState._selectedInvItem;
+    delete cleanState._invTab;
+    delete cleanState._lastCombatEnemy;
+    delete cleanState._optionPage;
     const saveData = {
       slotId,
       nickname,
@@ -106,9 +114,9 @@ export function saveGame(slotId, gameState, nickname) {
  */
 export function loadGame(slotId) {
   if (slotId < 0 || slotId >= MAX_SLOTS) return null;
-  const raw = localStorage.getItem(getSlotKey(slotId));
-  if (!raw) return null;
   try {
+    const raw = localStorage.getItem(getSlotKey(slotId));
+    if (!raw) return null;
     const saveData = JSON.parse(raw);
     if (saveData.gameState) {
       normalizeState(saveData.gameState);
@@ -126,8 +134,12 @@ export function loadGame(slotId) {
  */
 export function deleteSlot(slotId) {
   if (slotId < 0 || slotId >= MAX_SLOTS) return false;
-  localStorage.removeItem(getSlotKey(slotId));
-  return true;
+  try {
+    localStorage.removeItem(getSlotKey(slotId));
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 export function autoSave(gameState, nickname) {
@@ -141,9 +153,9 @@ export function autoSave(gameState, nickname) {
  * @returns {Object|null} dữ liệu kỷ lục tốt nhất, hoặc null (chưa có kỷ lục)
  */
 export function getBestRecord() {
-  const raw = localStorage.getItem(BEST_RECORD_KEY);
-  if (!raw) return null;
   try {
+    const raw = localStorage.getItem(BEST_RECORD_KEY);
+    if (!raw) return null;
     return JSON.parse(raw);
   } catch (e) {
     return null;
@@ -183,6 +195,10 @@ export function updateBestRecord(gameState) {
     }
   };
 
-  localStorage.setItem(BEST_RECORD_KEY, JSON.stringify(record));
-  return true;
+  try {
+    localStorage.setItem(BEST_RECORD_KEY, JSON.stringify(record));
+    return true;
+  } catch (e) {
+    return false;
+  }
 }

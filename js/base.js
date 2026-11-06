@@ -43,6 +43,10 @@ import {
   handleSeedSelect,
 } from './farming.js';
 
+import {
+  openWarehouseModal,
+} from './warehouse-ui.js';
+
 // ---------- Nâng cấp căn cứ ----------
 
 export function getBaseName(level) {
@@ -235,8 +239,12 @@ export function handleOpenWarehouse() {
   setOptions([
     { text: "Cất vật phẩm", action: "warehouse_deposit" },
     { text: "Lấy vật phẩm", action: "warehouse_withdraw" },
+    { text: "Mở kho đồ hai cột", action: "warehouse_open_modal" },
     { text: "Quay lại", action: "back_to_base" },
   ]);
+  if (typeof document !== 'undefined' && document.getElementById('warehouse-modal')) {
+    openWarehouseModal(state);
+  }
 }
 
 export function handleWarehouseDeposit() {
@@ -355,6 +363,11 @@ export function handleWarehouseMenuAction(input) {
   const action = state.options[optIdx].action;
   if (action === "warehouse_deposit") handleWarehouseDeposit();
   else if (action === "warehouse_withdraw") handleWarehouseWithdraw();
+  else if (action === "warehouse_open_modal") {
+    if (typeof document !== 'undefined' && document.getElementById('warehouse-modal')) {
+      openWarehouseModal(state);
+    }
+  }
   else showBaseBuildOptions();
 }
 

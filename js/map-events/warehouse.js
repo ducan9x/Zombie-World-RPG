@@ -142,17 +142,17 @@ export function handleOldMaQuestInteract() {
     // Kích hoạt lần đầu
     state.oldMaStep = 1;
     const q = OLDMAN_QUESTS[0];
-    setStory(q.intro + `\n\n📋 Nhiệm vụ hiện tại: ${q.name}\n📝 ${q.desc}\n💰 Phần thưởng: ${q.reward} điếu thuốc lá`);
+    setStory(q.intro + `\n\n[Nhiệm vụ]: ${q.name}\n[Chi tiết]: ${q.desc}\n[Phần thưởng]: ${q.reward} điếu thuốc lá`);
   } else if (state.oldMaStep >= 1 && state.oldMaStep <= 6) {
     const q = OLDMAN_QUESTS[state.oldMaStep - 1];
     const canSubmit = checkOldMaQuestCondition(state, q);
     let story = `Lão Mã ngồi xổm ở góc kho, thấy bạn đến thì nhe răng cười.`;
-    story += `\n\n📋 Nhiệm vụ hiện tại: ${q.name}\n📝 ${q.desc}\n💰 Phần thưởng: ${q.reward} điếu thuốc lá`;
+    story += `\n\n[Nhiệm vụ]: ${q.name}\n[Chi tiết]: ${q.desc}\n[Phần thưởng]: ${q.reward} điếu thuốc lá`;
     if (q.type === "collect") {
-      story += `\n📁 Tiến độ: ${state.crimeDataCount}/${q.require}`;
+      story += `\n[Tiến độ]: ${state.crimeDataCount}/${q.require}`;
     }
     if (canSubmit) {
-      story += `\n\n✅ Điều kiện nhiệm vụ đã thỏa mãn!`;
+      story += `\n\n[Hoàn thành] Điều kiện nhiệm vụ đã thỏa mãn!`;
     }
     setStory(story);
   } else if (state.oldMaStep === 7) {
@@ -268,10 +268,10 @@ export function handleOldMaQuestSubmit() {
   if (state.oldMaStep <= 6) {
     // Nhiệm vụ tiếp theo
     const nextQ = OLDMAN_QUESTS[state.oldMaStep - 1];
-    setStory(`Lão Mã nhận lấy đồ, trên mặt lộ vẻ hài lòng: \"Làm tốt lắm!Đây là ${q.reward} điếu thuốc lá của bạn.\"\n\nAnh ấy thu lại nụ cười, ghé sát bạn nói: ${nextQ.intro}\n\n📋 Nhiệm vụ mới: ${nextQ.name}\n📝 ${nextQ.desc}\n💰 Phần thưởng: ${nextQ.reward} điếu thuốc lá`);
+    setStory(`Lão Mã nhận lấy đồ, trên mặt lộ vẻ hài lòng: \"Làm tốt lắm!Đây là ${q.reward} điếu thuốc lá của bạn.\"\n\nAnh ấy thu lại nụ cười, ghé sát bạn nói: ${nextQ.intro}\n\n[Nhiệm vụ mới]: ${nextQ.name}\n[Chi tiết]: ${nextQ.desc}\n[Phần thưởng]: ${nextQ.reward} điếu thuốc lá`);
   } else if (state.oldMaStep === 7) {
     const finalQ = OLDMAN_QUESTS[6];
-    setStory(`Lão Mã nhận lấy đồ, cười lớn: \"${q.reward} điếu thuốc, cầm lấy!\"\n\n${finalQ.intro}\n\n📋 Nhiệm vụ cuối cùng: ${finalQ.name}\n📝 ${finalQ.desc}`);
+    setStory(`Lão Mã nhận lấy đồ, cười lớn: \"${q.reward} điếu thuốc, cầm lấy!\"\n\n${finalQ.intro}\n\n[Nhiệm vụ cuối cùng]: ${finalQ.name}\n[Chi tiết]: ${finalQ.desc}`);
   }
 
   advanceTime(1);

@@ -1,0 +1,675 @@
+{
+  "frames": {
+    "bld_castle_fortress_128": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 128,
+        "h": 96
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 128,
+        "h": 96
+      },
+      "sourceSize": {
+        "w": 128,
+        "h": 96
+      }
+    },
+    "bld_hospital_ruined_96": {
+      "frame": {
+        "x": 128,
+        "y": 0,
+        "w": 96,
+        "h": 64
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 96,
+        "h": 64
+      },
+      "sourceSize": {
+        "w": 96,
+        "h": 64
+      }
+    },
+    "bld_industrial_warehouse_96": {
+      "frame": {
+        "x": 224,
+        "y": 0,
+        "w": 96,
+        "h": 64
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 96,
+        "h": 64
+      },
+      "sourceSize": {
+        "w": 96,
+        "h": 64
+      }
+    },
+    "bld_abandoned_house_64": {
+      "frame": {
+        "x": 320,
+        "y": 0,
+        "w": 64,
+        "h": 64
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 64,
+        "h": 64
+      },
+      "sourceSize": {
+        "w": 64,
+        "h": 64
+      }
+    },
+    "bld_gas_station_64": {
+      "frame": {
+        "x": 384,
+        "y": 0,
+        "w": 64,
+        "h": 64
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 64,
+        "h": 64
+      },
+      "sourceSize": {
+        "w": 64,
+        "h": 64
+      }
+    },
+    "bld_watchtower_fortified_64": {
+      "frame": {
+        "x": 448,
+        "y": 0,
+        "w": 64,
+        "h": 64
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 64,
+        "h": 64
+      },
+      "sourceSize": {
+        "w": 64,
+        "h": 64
+      }
+    },
+    "terrain_asphalt_dark_32": {
+      "frame": {
+        "x": 0,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "terrain_bio_blight_32": {
+      "frame": {
+        "x": 32,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "terrain_concrete_cracked_32": {
+      "frame": {
+        "x": 64,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "terrain_dirt_wasteland_32": {
+      "frame": {
+        "x": 96,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "terrain_grass_dead_32": {
+      "frame": {
+        "x": 128,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "terrain_gravel_coarse_32": {
+      "frame": {
+        "x": 160,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "terrain_rock_cliff_32": {
+      "frame": {
+        "x": 192,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "terrain_water_toxic_32": {
+      "frame": {
+        "x": 224,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "road_asphalt_h_32": {
+      "frame": {
+        "x": 256,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "road_asphalt_v_32": {
+      "frame": {
+        "x": 288,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "road_broken_cracked_32": {
+      "frame": {
+        "x": 320,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "road_corner_32": {
+      "frame": {
+        "x": 352,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "road_crossroads_32": {
+      "frame": {
+        "x": 384,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "road_edge_32": {
+      "frame": {
+        "x": 416,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "road_sidewalk_pavement_32": {
+      "frame": {
+        "x": 448,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "road_t_junction_32": {
+      "frame": {
+        "x": 480,
+        "y": 96,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "prop_barricade_sandbag_32": {
+      "frame": {
+        "x": 0,
+        "y": 128,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "prop_boulder_rock_32": {
+      "frame": {
+        "x": 32,
+        "y": 128,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "prop_dead_bush_32": {
+      "frame": {
+        "x": 64,
+        "y": 128,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "prop_fence_barbed_wire_32": {
+      "frame": {
+        "x": 96,
+        "y": 128,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "prop_oil_drum_rust_32": {
+      "frame": {
+        "x": 128,
+        "y": 128,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "prop_rubble_debris_32": {
+      "frame": {
+        "x": 160,
+        "y": 128,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "prop_vehicle_wreck_small_32": {
+      "frame": {
+        "x": 192,
+        "y": 128,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "marker_danger_skull_32": {
+      "frame": {
+        "x": 224,
+        "y": 128,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "marker_player_token_32": {
+      "frame": {
+        "x": 256,
+        "y": 128,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "marker_poi_active_32": {
+      "frame": {
+        "x": 288,
+        "y": 128,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    },
+    "marker_poi_unexplored_32": {
+      "frame": {
+        "x": 320,
+        "y": 128,
+        "w": 32,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      }
+    }
+  },
+  "meta": {
+    "app": "Zombie World RPG Tileset Packer v2",
+    "version": "2.0",
+    "image": "world_map_tileset.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 512,
+      "h": 512
+    },
+    "scale": "1"
+  }
+}

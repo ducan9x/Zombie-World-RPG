@@ -90,7 +90,7 @@ export function handleKillZombieWoman() {
   const zombieDef = getRandomZombie(state.currentMap);
   setPhase("pre_combat");
   state._pendingZombie = zombieDef;
-  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Cơ thể bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường! Khuyến nghị nghỉ ngơi trước rồi hãy khám phá." : "";
+  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n[Cảnh báo] Cơ thể bạn cực kỳ mệt mỏi, không thể chiến đấu bình thường! Khuyến nghị nghỉ ngơi trước rồi hãy khám phá." : "";
   setStory(`Người phụ nữ từng đó đã hoàn toàn biến thành zombie, cô ấy gầm lên lao về phía bạn!${crashWarning}`);
   setOptions([
     { text: "Chiến đấu cận chiến", action: "combat_melee" },

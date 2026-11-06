@@ -127,10 +127,16 @@
     </div>
     <div id="player-tools-page" style="display:none;">
       <div class="panel player-tools-panel">
-        <div class="panel-title">Công cụ người chơi</div>
-        <div id="player-tools-content">
-          <button id="pt-probability-btn" class="player-tools-btn">📊 Tra cứu xác suất</button>
-          <button id="pt-encyclopedia-btn" class="player-tools-btn">📖 Bách khoa toàn thư</button>
+        <div class="player-tools-header">
+          <div class="panel-title">🛠️ Công cụ người chơi</div>
+          <div class="player-tools-nav">
+            <button id="pt-tab-probability" class="pt-tab-btn is-active">📊 Tra cứu xác suất</button>
+            <button id="pt-tab-encyclopedia" class="pt-tab-btn">📖 Bách khoa toàn thư</button>
+            <button id="pt-open-external-btn" class="pt-tab-btn pt-external-btn" title="Mở trang hiện tại trong tab trình duyệt mới">↗ Mở tab mới</button>
+          </div>
+        </div>
+        <div id="player-tools-frame-container" class="player-tools-frame-container">
+          <iframe id="player-tools-frame" src="about:blank" class="player-tools-iframe" title="Công cụ người chơi"></iframe>
         </div>
         <div class="save-actions">
           <button id="player-tools-return-btn">Quay lại</button>
@@ -166,6 +172,79 @@
         </div>
       </div>
     </div>
+    <!-- Modal xác nhận vứt bỏ vật phẩm (Batch 08 Phase 8.3) -->
+    <div id="discard-confirm-modal" class="modal-overlay" style="display:none;">
+      <div class="modal-box discard-modal-box">
+        <div class="modal-header">
+          <span class="modal-title">⚠️ Xác nhận vứt bỏ</span>
+          <button id="discard-modal-close" class="modal-close-btn" title="Hủy bỏ">✕</button>
+        </div>
+        <div class="discard-modal-body">
+          <div class="discard-item-preview">
+            <div class="discard-icon-box">
+              <img id="discard-item-icon" src="public/assets/icons/ui_placeholder_empty.png" alt="">
+            </div>
+            <div class="discard-item-info">
+              <div id="discard-item-name" class="discard-item-name">Tên vật phẩm</div>
+              <div id="discard-item-stock" class="discard-item-stock">Số lượng có: 1</div>
+            </div>
+          </div>
+          <div class="discard-warning-banner">
+            ⚠️ CẢNH BÁO: Vật phẩm bị vứt bỏ sẽ mất vĩnh viễn và không thể thu hồi lại!
+          </div>
+          <div id="discard-qty-row" class="discard-qty-row" style="display:none;">
+            <label for="discard-qty-input">Số lượng muốn vứt:</label>
+            <div class="discard-qty-controls">
+              <button id="discard-qty-minus" type="button" class="discard-qty-btn">-</button>
+              <input id="discard-qty-input" type="number" min="1" max="1" value="1">
+              <button id="discard-qty-plus" type="button" class="discard-qty-btn">+</button>
+              <button id="discard-qty-all" type="button" class="discard-qty-all-btn">Tất cả</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions discard-modal-actions">
+          <button id="discard-cancel-btn" class="modal-btn-secondary">Hủy bỏ</button>
+          <button id="discard-confirm-btn" class="modal-btn-danger">Xác nhận vứt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Kho căn cứ hai cột (Batch 08 Phase 8.3) -->
+    <div id="warehouse-modal" class="modal-overlay" style="display:none;">
+      <div class="modal-box warehouse-modal-box">
+        <div class="modal-header">
+          <div class="warehouse-header-info">
+            <span class="modal-title">📦 KHO CĂN CỨ VÀ BA LÔ</span>
+            <span id="wh-level-badge" class="wh-level-badge">Lv1</span>
+          </div>
+          <button id="warehouse-modal-close" class="modal-close-btn" title="Đóng kho">✕</button>
+        </div>
+        <div class="warehouse-dual-container">
+          <div class="wh-pane wh-pane-left">
+            <div class="wh-pane-header">
+              <span class="wh-pane-title">🎒 Ba lô cá nhân</span>
+              <span id="wh-backpack-cap" class="wh-cap-indicator">0/20 ô</span>
+            </div>
+            <div id="wh-backpack-grid" class="wh-cards-grid"></div>
+          </div>
+          <div class="wh-pane wh-pane-right">
+            <div class="wh-pane-header">
+              <span class="wh-pane-title">📦 Kho chứa căn cứ</span>
+              <span id="wh-warehouse-cap" class="wh-cap-indicator">0/20 ô</span>
+            </div>
+            <div id="wh-warehouse-grid" class="wh-cards-grid"></div>
+          </div>
+        </div>
+        <div id="wh-action-bar" class="wh-action-bar">
+          <div id="wh-selected-info" class="wh-selected-info">
+            <span class="wh-hint">Nhấp vào một vật phẩm ở Ba lô hoặc Kho để chuyển đồ</span>
+          </div>
+          <div id="wh-transfer-buttons" class="wh-transfer-buttons" style="display:none;"></div>
+        </div>
+        <div id="wh-status-msg" class="wh-status-msg"></div>
+      </div>
+    </div>
+
     <div id="game-content" style="display:none;">
       <div id="zone-1" class="game-zone">
         <div id="identity-panel"></div>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zombie World RPG — Visual Map Prototype (Phase 7.2B)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="prototype-container">
+    <header class="prototype-header">
+      <div class="header-left">
+        <span class="badge">BATCH 07</span>
+        <h1>Visual Map Prototype & Renderer Validation</h1>
+      </div>
+      <div class="header-right">
+        <span class="status-indicator">ISOLATED PROTOTYPE</span>
+      </div>
+    </header>
+
+    <main class="prototype-main">
+      <div class="viewport-card">
+        <div class="viewport-header">
+          <span class="viewport-title">🗺️ Bản Đồ Sa Bàn Phế Thổ (640 × 320 Virtual PixiJS Viewport)</span>
+          <div class="viewport-controls">
+            <button id="btn-zoom-out" title="Thu nhỏ">🔍 -</button>
+            <button id="btn-zoom-reset" title="Đặt lại tỷ lệ">100%</button>
+            <button id="btn-zoom-in" title="Phóng to">🔍 +</button>
+            <button id="btn-toggle-grid" title="Bật/Tắt Lưới 32px">📐 Lưới</button>
+          </div>
+        </div>
+        
+        <div id="pixi-prototype-mount"></div>
+
+        <div class="viewport-footer">
+          <div class="legend-item"><span class="legend-color legend-safe"></span> An toàn / Căn cứ</div>
+          <div class="legend-item"><span class="legend-color legend-medium"></span> Nguy hiểm trung bình</div>
+          <div class="legend-item"><span class="legend-color legend-danger"></span> Tuyệt cảnh / Tử địa</div>
+          <div class="legend-item"><span class="legend-color legend-player"></span> Người chơi</div>
+          <div class="legend-hint">💡 Rê chuột để xem thông tin • Nhấp chuột để khảo sát POI</div>
+        </div>
+      </div>
+
+      <aside class="info-sidebar">
+        <div class="card info-card">
+          <h2 class="card-title">📍 Chi tiết Điểm Thám Hiểm (POI Inspector)</h2>
+          <div id="poi-details" class="poi-details-empty">
+            <p>Chưa chọn điểm thám hiểm nào.</p>
+            <p class="hint">Nhấp vào một biểu tượng POI trên bản đồ để kiểm tra thông số kiến trúc.</p>
+          </div>
+        </div>
+
+        <div class="card metrics-card">
+          <h2 class="card-title">⚡ Thông số Hiệu Năng Renderer</h2>
+          <div class="metric-row"><span class="metric-label">Khung nhìn ảo:</span> <span class="metric-val">640 × 320 px</span></div>
+          <div class="metric-row"><span class="metric-label">Kích thước Grid:</span> <span class="metric-val">20 × 10 (200 base tiles)</span></div>
+          <div class="metric-row"><span class="metric-label">Tổng Sprite Render:</span> <span class="metric-val" id="metric-sprite-count">248 sprites</span></div>
+          <div class="metric-row"><span class="metric-label">Texture Atlas:</span> <span class="metric-val">512 × 512 (1 Draw Call)</span></div>
+          <div class="metric-row"><span class="metric-label">Scale Mode:</span> <span class="metric-val">NEAREST (Pixel-Perfect)</span></div>
+          <div class="metric-row"><span class="metric-label">FPS ước tính:</span> <span class="metric-val text-green" id="metric-fps">60 FPS</span></div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="../../public/vendor/pixi.min.js"></script>
+  <script src="map-prototype.js"></script>
+</body>
+</html>
+

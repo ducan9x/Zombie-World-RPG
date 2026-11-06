@@ -130,7 +130,7 @@ export function handleOutlawFoodChat() {
     setStory(MAP_NPC_INTROS.outlaw_food_quest4);
     setPhase("explore");
     setOptions([
-      { text: "Chấp nhận lời mời của Mã Tam (⚠ Điều này sẽ thay đổi số phận bạn)", action: "outlaw_food_accept" },
+      { text: "Chấp nhận lời mời của Mã Tam (Lưu ý: Điều này sẽ thay đổi số phận bạn)", action: "outlaw_food_accept" },
       { text: "Từ chối", action: "outlaw_food_refuse" },
     ]);
     return;

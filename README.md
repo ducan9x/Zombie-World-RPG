@@ -79,7 +79,10 @@ Zombie-World-JS-Vision/
 │   ├── config.js                 # 🎯 Data hub (re-exports from js/data/)
 │   ├── state.js                  # Game state management
 │   ├── combat.js                 # Combat system (melee/ranged/NPC)
-│   ├── ui.js                     # UI rendering (panels, stats, inventory)
+│   ├── combat-hud.js             # ⚔️ Combat Visual HUD (Batch 04 sprites, dynamic HP, logs)
+│   ├── ui.js                     # UI rendering (panels, stats, options pagination)
+│   ├── inventory-ui.js           # 🎒 Visual Survival Inventory (7 tabs, card grid, live mapping)
+│   ├── pixi-renderer.js          # 🎨 PixiJS v7.4.3 offline 2D graphics renderer
 │   ├── routing.js                # Scene router
 │   ├── equipment.js              # Equipment management
 │   ├── trading.js                # Barter & shop logic
@@ -219,10 +222,13 @@ cd Zombie-World-JS-Vision
 
 2. Start a local server (pick one):
 ```bash
-# Node.js
-npx serve -l 3000
+# Node.js built-in offline server (port 9999)
+npm start
 
-# Python
+# Run full automated regression test suite (35 test cases)
+npm test
+
+# Python alternative
 python -m http.server 3000
 ```
 

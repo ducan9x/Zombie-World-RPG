@@ -31,7 +31,7 @@ export function handleVeteranInteract() {
   ];
   // Chuỗi nhiệm vụ Lão Mã: tiêu diệt Lão Triệu
   if (state.oldMaStep >= 5 && !state.zhaoKilled) {
-    opts.splice(2, 0, { text: "🔪 Tiêu diệt Lão Triệu", action: "kill_zhao" });
+    opts.splice(2, 0, { text: "[Tấn công] Tiêu diệt Lão Triệu", action: "kill_zhao" });
   }
   if (state.zhaoKilled) {
     setStory("Thi thể Lão Triệu vẫn còn nằm trên đất, trạm kiểm soát quân sự trống không.");
@@ -123,8 +123,8 @@ export function handleKillZhao() {
   setPhase("pre_combat_npc");
   const meleeName = state.meleeWeapon.name;
   const rangedName = state.rangedWeapon ? state.rangedWeapon.name : "Không";
-  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n⚠ Cơ thể bạn cực kỳ kiệt sức, không thể chiến đấu bình thường!" : "";
-  setStory(`Bạn nắm chặt vũ khí, bước về phía Lão Triệu. Lão Triệu cảnh giác quay người, súng trường lập tức giơ lên——"Lại là ngươi?! Đứng yên! Đừng động!"\n\nÁnh mắt điên loạn của hắn nói cho bạn biết không còn đường lui.\n\n⚔️ ${zhao.name}\n❤️ HP:${zhao.hp} | ⚡ Sát thương:${zhao.damageMin}-${zhao.damageMax}\n\n[Cận chiến] ${meleeName}\n[Tầm xa] ${rangedName}${crashWarning}`);
+  const crashWarning = state.crash >= GAME_CONSTANTS.FATIGUE_MAX ? "\n\n[Cảnh báo] Cơ thể bạn cực kỳ kiệt sức, không thể chiến đấu bình thường!" : "";
+  setStory(`Bạn nắm chặt vũ khí, bước về phía Lão Triệu. Lão Triệu cảnh giác quay người, súng trường lập tức giơ lên——"Lại là ngươi?! Đứng yên! Đừng động!"\n\nÁnh mắt điên loạn của hắn nói cho bạn biết không còn đường lui.\n\n[Mục tiêu] ${zhao.name}\nHP: ${zhao.hp} | Sát thương: ${zhao.damageMin}-${zhao.damageMax}\n\n[Cận chiến] ${meleeName}\n[Tầm xa] ${rangedName}${crashWarning}`);
   const opts = [
     { text: "Cận chiến", action: "combat_npc_melee" }
   ];

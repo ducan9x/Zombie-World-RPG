@@ -9,6 +9,8 @@
    - Asset Manager voi Texture Cache va Procedural Fallback Texture.
    ============================================================ */
 
+import { WorldMapRenderer } from './map-renderer.js';
+
 // ---------- Mau sac / chat luong hien thi ----------
 const COLORS = {
   bg: 0x1a1a2e,
@@ -67,6 +69,11 @@ export class PixiRenderer {
     this.failedAssets = new Set();
     this.fallbackTexture = null;
     this._currentLocation = null;
+    this._currentBgUrl = null;
+
+    // World Map Graphical Renderer (Batch 07 Phase 7.3)
+    this.worldMapRenderer = null;
+    this.mapViewMode = 'graphical'; // 'graphical' | 'textual'
   }
 
   // ---------- Nap thu vien PixiJS (Offline / Local Vendor) ----------
@@ -152,6 +159,13 @@ export class PixiRenderer {
 
       // Khoi tao cac doi tuong render tai su dung (Persistent Objects)
       this._initPersistentObjects();
+
+      // Khoi tao World Map Renderer (Batch 07 Phase 7.3)
+      this.worldMapRenderer = new WorldMapRenderer(this.app);
+      this.worldLayer.addChild(this.worldMapRenderer.container);
+      this.worldMapRenderer.loadAssets().catch(err => {
+        console.warn('[PixiRenderer] WorldMapRenderer asset load warning:', err?.message || err);
+      });
 
       // Preload Batch 01 UI Assets
       this.preloadBatch01().catch(err => {
@@ -351,6 +365,37 @@ export class PixiRenderer {
     if (!this.enabled || !this.app) return;
     this.state = state;
 
+    // Kiem tra hien thi ban do sa ban (Batch 07 Phase 7.3)
+    if (state && state.phase === 'map_select') {
+      if (this.mapViewMode === 'graphical') {
+        if (this.locText) this.locText.visible = false;
+        if (this.dayText) this.dayText.visible = false;
+        if (this.hpBarBg) this.hpBarBg.visible = false;
+        if (this.hpBar) this.hpBar.visible = false;
+        if (this.hpIconSprite) this.hpIconSprite.visible = false;
+        if (this.hpLabel) this.hpLabel.visible = false;
+        for (const p of this.entityPool) p.visible = false;
+        if (this.bgLayer) this.bgLayer.visible = false;
+
+        if (this.worldMapRenderer) {
+          this.worldMapRenderer.render(state);
+        }
+        return;
+      }
+    }
+
+    // Phuc hoi hien thi HUD mac dinh khi khong o man hinh map_select
+    if (this.bgLayer) this.bgLayer.visible = true;
+    if (this.worldMapRenderer) {
+      this.worldMapRenderer.render({ ...state, phase: 'idle' });
+    }
+    if (this.locText) this.locText.visible = true;
+    if (this.dayText) this.dayText.visible = true;
+    if (this.hpBarBg) this.hpBarBg.visible = true;
+    if (this.hpBar) this.hpBar.visible = true;
+    if (this.hpIconSprite) this.hpIconSprite.visible = true;
+    if (this.hpLabel) this.hpLabel.visible = true;
+
     // 1. Cap nhat vi tri & bối cảnh
     this._updateLocation(state);
 
@@ -367,6 +412,36 @@ export class PixiRenderer {
     if (this.locText) {
       this.locText.text = loc;
     }
+
+    const bgUrl = this._resolveBackground(state);
+    if (bgUrl && this.bgSprite && this._currentBgUrl !== bgUrl) {
+      this._currentBgUrl = bgUrl;
+      this.loadTexture(bgUrl).then(tex => {
+        if (tex && this.bgSprite && this._currentBgUrl === bgUrl) {
+          this.bgSprite.texture = tex;
+          this.bgSprite.alpha = 0.55;
+        }
+      }).catch(() => {});
+    }
+  }
+
+  _resolveBackground(state) {
+    if (!state) return null;
+    const phase = state.phase;
+    if (phase === 'castle_bank') {
+      return 'public/assets/backgrounds/map_lau_dai_bank_bg.webp';
+    }
+    if (phase === 'castle_treatment') {
+      return 'public/assets/backgrounds/map_lau_dai_y_te_bg.webp';
+    }
+    if (phase === 'trading_post' || (state.story && state.story.includes('Trạm giao dịch Dawn'))) {
+      return 'public/assets/backgrounds/map_tram_giao_dich_bg.webp';
+    }
+    const mapId = state.currentMap?.id;
+    if (mapId) {
+      return `public/assets/backgrounds/map_${mapId}_bg.webp`;
+    }
+    return null;
   }
 
   _updateWorldInfo(state) {
@@ -440,11 +515,30 @@ export class PixiRenderer {
     }
   }
 
+  // ---------- Chuyen doi che do xem Ban do Sa ban / Danh sach chu ----------
+  toggleMapViewMode() {
+    this.mapViewMode = (this.mapViewMode === 'graphical') ? 'textual' : 'graphical';
+    if (this.state) this.render(this.state);
+    return this.mapViewMode;
+  }
+
+  setMapViewMode(mode) {
+    if (mode === 'graphical' || mode === 'textual') {
+      this.mapViewMode = mode;
+      if (this.state) this.render(this.state);
+    }
+  }
+
   // ---------- Giai phong tai nguyen ----------
   destroy() {
     if (this._resizeHandler) {
       window.removeEventListener('resize', this._resizeHandler);
       this._resizeHandler = null;
+    }
+
+    if (this.worldMapRenderer) {
+      this.worldMapRenderer.destroy();
+      this.worldMapRenderer = null;
     }
 
     if (this.fallbackTexture) {

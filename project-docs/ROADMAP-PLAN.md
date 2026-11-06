@@ -8,8 +8,8 @@ Xem CHI TIET trang thai o bang tong quan va tung bang chi tiet duoi day.
 | Phase | Ten | Trang thai | Tinh nang da hoan thien / Tong so | Ghi chu |
 |-------|-----|------------|-----------------------------------|---------|
 | Phase 1 | Hoan thien Core | Da hoan thanh | 4 / 4 | |
-| Phase 1.5 | Tich hop PixiJS | Dang thuc hien | 0 / 2 | Da tao js/pixi-renderer.js, ket noi CDN PixiJS, cap nhat js/main.js |
-| Phase 2 | Cai thien Gameplay | Chua bat dau | 0 / 4 | |
+| Phase 1.5 | Tich hop PixiJS | Da hoan thanh | 2 / 2 | Offline local vendor v7.4.3, responsive canvas, zero-allocation render |
+| Phase 2 | Cai thien Gameplay & UI | Dang thuc hien | 2 / 4 | Da hoan thanh Combat HUD, Visual Inventory Card Grid, Pagination; dang tiep tuc Gameplay systems |
 | Phase 3 | Mo rong Content | Chua bat dau | 0 / 4 | |
 | Phase 4 | Advanced Systems | Chua bat dau | 0 / 4 | |
 | **Tong ket** | **Toan bo** | **Da hoan thanh mot phan** | **4 / 18** | Cap nhat khi moi tinh nang duoc thuc hien xong |
@@ -40,7 +40,7 @@ Cach cap nhat: khi moi tinh nang duot code xong, thay "Chua bat dau" thanh "Da h
 |-----------|----------|---------|-------------|-------------------|-------------------|-------------------|---------------------|
 | He thong Level/EXP | Them state.level, state.exp, nang cap cap | Progression ro rang hon | Trung | js/state.js, js/game/index.js | js/state.js | Trung (thay doi state) | Chua bat dau |
 | He thong Crafting don gian | Hop thanh vat pham tu nguyen lieu co san | Giam su ngau nhien cua loot | Trung | js/data/items/*.js, js/game/index.js | js/game/index.js, js/ui.js | Trung | Chua bat dau |
-| Cai thien UI Combat | Panel chien dau biet liet, hien HP zombie, damage log | Tra nhiem chien dau tot hon | Cao | js/ui.js, js/combat.js | js/ui.js, js/combat.js | Cao (thay doi render luong) | Chua bat dau |
+| Cai thien UI Combat | Panel chien dau truc quan, hien sprite doi thu, HP bar dong, damage log | Trai nghiem chien dau tot hon | Cao | js/ui.js, js/combat.js, js/combat-hud.js | js/ui.js, js/combat-hud.js, css/style.css | Thap (bao toan 100% logic combat) | Da hoan thanh (Batch 06 Phase 2 & 4.1) |
 | He thong thoi tac anh huong combat | Mua giam do chuan xac, nong tang met nhanh | Chien thuat nhieu hon | Trung | js/data/systems/constants.js, js/combat.js | js/combat.js | Trung | Chua bat dau |
 
 ## Phase 3 - Mo rong Content (Uu tien trung binh)

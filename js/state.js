@@ -1214,7 +1214,9 @@ export function getGameSettings() {
 }
 
 export function saveGameSettings(settings) {
-  localStorage.setItem('zombieWorldGameSettings', JSON.stringify(settings));
+  try {
+    localStorage.setItem('zombieWorldGameSettings', JSON.stringify(settings));
+  } catch (e) {}
 }
 
 export function toggleClickMode() {

@@ -2,12 +2,12 @@
   "batchId": "batch-02-backgrounds",
   "title": "Batch 02: Backgrounds & Locations",
   "description": "Bộ asset hình nền và bản đồ địa điểm sinh tồn mạt thế cho Zombie World RPG theo phong cách Dark Cinematic Post-apocalyptic RPG.",
-  "assetCount": 27,
+  "assetCount": 30,
   "targetFormat": "WebP 1920x1080",
   "styleGuide": "Dark Post-apocalyptic Survival RPG. Gritty desaturated palette (cold grays, moss green, rusty brown, scorched red), cinematic twilight/overcast lighting, volumetric fog, wide shot 16:9, clean composition with central 70% safe area for UI text, no human characters, no text, no watermark.",
   "prioritySummary": {
     "P0": 9,
-    "P1": 13,
+    "P1": 16,
     "P2": 5
   },
   "assets": [
@@ -605,6 +605,69 @@
       ],
       "fallback": true,
       "notes": "Background 1920x1080 cho map_nha_kho_nha_may_bg. Safe area 70% trung tâm."
+    },
+    {
+      "id": "map_lau_dai_bank_bg",
+      "name": "Castle Bank Interior Background",
+      "category": "backgrounds",
+      "description": "Ngân Hàng Lâu Đài: Nội thất pháo đài gothic cải tạo, quầy giao dịch bọc thép, lồng an toàn kim loại, ánh đèn ấm áp.",
+      "prompt": "First-person perspective of a repurposed fortified castle bank interior in a dark post-apocalyptic survival RPG. High vaulted stone arches reinforced with welded steel plates and rusty iron bars, an improvised bulletproof banking counter made of salvaged sheet metal and heavy timber, iron safe deposit cages, warm golden gas lamp and flickering Edison bulb lighting, cinematic environmental art, no humans, no text --ar 16:9",
+      "file": "public/assets/backgrounds/map_lau_dai_bank_bg.webp",
+      "width": 1920,
+      "height": 1080,
+      "aspectRatio": "16:9",
+      "format": "webp",
+      "transparent": false,
+      "priority": "P1",
+      "status": "generated",
+      "usedBy": [
+        "CastleBank",
+        "PixiRenderer"
+      ],
+      "fallback": true,
+      "notes": "Background 1920x1080 cho map_lau_dai_bank_bg. Batch 08 Phase 8.2."
+    },
+    {
+      "id": "map_lau_dai_y_te_bg",
+      "name": "Castle Treatment Center Background",
+      "category": "backgrounds",
+      "description": "Phòng Y Tế Lâu Đài: Cơ sở y tế dã chiến kiên cố, giường bệnh dã chiến, khay phẫu thuật inox, ánh đèn khẩn cấp.",
+      "prompt": "First-person wide shot of an improvised medical clinic and treatment room inside a fortified survivor settlement. Worn concrete walls, vintage hospital beds with clean olive-drab blankets and canvas privacy curtains, stainless steel surgical trays with sterilized medical tools, IV drip stands, emergency red and amber hazard lamps, dim sterile post-apocalyptic military field hospital atmosphere, no humans, no text --ar 16:9",
+      "file": "public/assets/backgrounds/map_lau_dai_y_te_bg.webp",
+      "width": 1920,
+      "height": 1080,
+      "aspectRatio": "16:9",
+      "format": "webp",
+      "transparent": false,
+      "priority": "P1",
+      "status": "generated",
+      "usedBy": [
+        "CastleTreatment",
+        "PixiRenderer"
+      ],
+      "fallback": true,
+      "notes": "Background 1920x1080 cho map_lau_dai_y_te_bg. Batch 08 Phase 8.2."
+    },
+    {
+      "id": "map_tram_giao_dich_bg",
+      "name": "Settlement Trading Post Background",
+      "category": "backgrounds",
+      "description": "Trạm Giao Dịch Vật Tư: Điểm giao thương trao đổi vật tư sinh tồn, vách tôn lượn sóng, quầy cân đồng, kệ chứa nhu yếu phẩm.",
+      "prompt": "Atmospheric interior view of a bustling makeshift survivor trading post and barter market. Heavy corrugated metal walls, wooden barter counter with a vintage brass balance scale, rustic wooden shelves stacked with scavenged canned goods, fuel jerrycans, and ammo crates, hanging warm tungsten lanterns casting deep shadows, gritty apocalyptic commerce atmosphere, no humans, no text --ar 16:9",
+      "file": "public/assets/backgrounds/map_tram_giao_dich_bg.webp",
+      "width": 1920,
+      "height": 1080,
+      "aspectRatio": "16:9",
+      "format": "webp",
+      "transparent": false,
+      "priority": "P1",
+      "status": "generated",
+      "usedBy": [
+        "TradingPost",
+        "PixiRenderer"
+      ],
+      "fallback": true,
+      "notes": "Background 1920x1080 cho map_tram_giao_dich_bg. Batch 08 Phase 8.2."
     }
   ]
 }

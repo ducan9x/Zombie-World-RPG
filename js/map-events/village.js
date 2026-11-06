@@ -108,7 +108,7 @@ export function handleAbandonedField() {
   }
   let msg = "Bạn dọn cỏ dại và tưới nước sông đơn giản cho chúng, theo cách Mục Miêu Miêu dạy, bạn thu hoạch được 2 cây hẹ.";
   if (added < 2) {
-    msg += "\n\n⚠️ Một phần hẹ không cho vào được do balo đã đầy.";
+    msg += "\n\n[Lưu ý] Một phần hẹ không cho vào được do balo đã đầy.";
   }
   advanceTime(1);
   updateStatusEffects();

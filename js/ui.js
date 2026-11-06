@@ -13,6 +13,9 @@ import { returnToMenu } from './routing.js';
 import { handleAction } from './game/index.js';
 import { getIdentityDisplayName } from './faction.js';
 import { INVEST_DIRECTIONS } from './data/island/investment.js';
+import { formatStoryWithCombatHUD } from './combat-hud.js';
+import { renderInventoryComponent } from './inventory-ui.js';
+import { pixiRenderer } from './pixi-renderer.js';
 
 const bgMusic = new Audio('./public/music/backmusic.mp3');
 bgMusic.loop = true;
@@ -100,32 +103,32 @@ export function renderStats(state) {
 <div class="stat-row"><span class="stat-label">Thời gian</span><span class="stat-value">Ngày ${state.day} ${TIME_PHASES[state.phaseIndex]} · ${state.weather}</span></div>
 <div class="stat-row"><span class="stat-label">Địa điểm</span><span class="stat-value">${state.location}</span></div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_hp.png" alt="" onerror="this.style.display='none'">❤️ Sức khỏe</span>
+  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_hp.png" alt="" onerror="this.style.display='none'">Sức khỏe</span>
   <div class="stat-bar-track"><div class="stat-bar-fill hp" style="width:${hpPct}%"></div></div>
   <span class="stat-bar-value hp">${state.health}</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_hunger.png" alt="" onerror="this.style.display='none'">🍖 Bụng no</span>
+  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_hunger.png" alt="" onerror="this.style.display='none'">Bụng no</span>
   <div class="stat-bar-track"><div class="stat-bar-fill hunger" style="width:${state.hunger}%"></div></div>
   <span class="stat-bar-value hunger">${state.hunger}%</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_hydration.png" alt="" onerror="this.style.display='none'">💧 Nước</span>
+  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_hydration.png" alt="" onerror="this.style.display='none'">Nước</span>
   <div class="stat-bar-track"><div class="stat-bar-fill thirst" style="width:${state.hydration}%"></div></div>
   <span class="stat-bar-value thirst">${state.hydration}%</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_sanity.png" alt="" onerror="this.style.display='none'">🧠 Lý trí</span>
+  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_sanity.png" alt="" onerror="this.style.display='none'">Lý trí</span>
   <div class="stat-bar-track"><div class="stat-bar-fill sanity" style="width:${state.sanity}%"></div></div>
   <span class="stat-bar-value sanity">${state.sanity}%</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label">💪 Mệt mỏi</span>
+  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_fatigue.png" alt="" onerror="this.style.display='none'">Mệt mỏi</span>
   <div class="stat-bar-track"><div class="stat-bar-fill fatigue" style="width:${state.crash}%"></div></div>
   <span class="stat-bar-value fatigue">${state.crash}%</span>
 </div>
 <div class="stat-bar-row">
-  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_infection.png" alt="" onerror="this.style.display='none'">🦠 Nhiễm bệnh</span>
+  <span class="stat-bar-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_infection.png" alt="" onerror="this.style.display='none'">Nhiễm bệnh</span>
   <div class="stat-bar-track"><div class="stat-bar-fill infection" style="width:${state.infection}%"></div></div>
   <span class="stat-bar-value infection">${state.infection}%</span>
 </div>
@@ -145,9 +148,9 @@ export function renderWeapons(state) {
   panel.innerHTML = `
 <div class="weapon-panel">
   <div class="panel-title">⚔️ Vũ khí</div>
-  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_melee_slot.png" alt="" onerror="this.style.display='none'">🔪 Cận chiến</span><span class="stat-value">${state.meleeWeapon.name}(sát thương${state.meleeWeapon.damage} liên kích${Math.round((state.meleeWeapon.comboRate || 0) * 100)}%)</span></div>
-  <div class="stat-row"><span class="stat-label">🛡️ Độ bền</span><span class="stat-value">${meleeDurability}</span></div>
-  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_ranged_slot.png" alt="" onerror="this.style.display='none'">🏹 Tầm xa</span><span class="stat-value">${state.rangedWeapon ? state.rangedWeapon.name : 'Không'}</span></div>
+  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_melee_slot.png" alt="" onerror="this.style.display='none'">Cận chiến</span><span class="stat-value">${state.meleeWeapon.name}(sát thương${state.meleeWeapon.damage} liên kích${Math.round((state.meleeWeapon.comboRate || 0) * 100)}%)</span></div>
+  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_durability.png" alt="" onerror="this.style.display='none'">Độ bền</span><span class="stat-value">${meleeDurability}</span></div>
+  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_ranged_slot.png" alt="" onerror="this.style.display='none'">Tầm xa</span><span class="stat-value">${state.rangedWeapon ? state.rangedWeapon.name : 'Không'}</span></div>
   <div class="stat-row"><span class="stat-label">⚙️ Độ nguyên vẹn</span><span class="stat-value">${state.rangedWeapon ? state.rangedWeapon.integrity : 'Không'}</span></div>
   <div class="stat-row"><span class="stat-label">💥 Đạn dược</span><span class="stat-value">${formatAmmo(state)}</span></div>
 </div>`;
@@ -158,33 +161,7 @@ export function renderWeapons(state) {
  * @param {Object} state - Đối tượng trạng thái game
  */
 export function renderInventory(state) {
-  const panel = document.getElementById('inventory-panel');
-  const count = getBackpackCount(state);
-  
-  // Lọc riêng thực phẩm, cá, trái cây
-  const foods = state.food.filter(f => f.type === "food" || f.type === "fruit");
-  const fish = state.food.filter(f => f.type === "fish");
-  
-  // Phân loại "khác" thành vũ khí, súng, vật liệu xây dựng, khác
-  const meleeItems = state.other.filter(o => o.type === "melee");
-  const rangedItems = state.other.filter(o => o.type === "ranged");
-  const buildingItems = state.other.filter(o => o.type === "building");
-  const otherItems = state.other.filter(o => o.type !== "melee" && o.type !== "ranged" && o.type !== "building");
-  
-  panel.innerHTML = `
-<div class="inventory-panel">
-  <div class="panel-title"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_backpack.png" alt="" onerror="this.style.display='none'">🎒 Ba lô</div>
-  <div class="stat-row"><span class="stat-label">Ba lô</span><span class="stat-value">${state.backpack.name}(sức chứa${count}/${state.backpack.capacity})</span></div>
-  <div class="stat-row"><span class="stat-label">🍞 Thực phẩm</span><span class="stat-value">${foods.map(f => getItemDisplayName(f)).join(', ') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">🥤 Đồ uống</span><span class="stat-value">${state.drinks.map(d => getItemDisplayName(d)).join(', ') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">💊 Y tế</span><span class="stat-value">${state.medicine.map(m => getItemDisplayName(m)).join(', ') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">🐟 Cá</span><span class="stat-value">${fish.map(f => getItemDisplayName(f)).join(', ') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">⚔️ Vũ khí</span><span class="stat-value">${meleeItems.map(o => getItemDisplayName(o)).join(', ') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">🔫 Súng</span><span class="stat-value">${rangedItems.map(o => getItemDisplayName(o)).join(', ') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">🧱 Vật liệu xây dựng</span><span class="stat-value">${buildingItems.map(o => getItemDisplayName(o)).join(', ') || 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">🌱 Hạt giống</span><span class="stat-value">${state.seeds ? state.seeds.map(s => getItemDisplayName(s)).join(', ') || 'Không' : 'Không'}</span></div>
-  <div class="stat-row"><span class="stat-label">🧰 Khác</span><span class="stat-value">${otherItems.map(o => getItemDisplayName(o)).join(', ') || 'Không'}</span></div>
-</div>`;
+  renderInventoryComponent(state, renderAll);
 }
 
 /**
@@ -200,11 +177,11 @@ export function renderCargo(state) {
   panel.innerHTML = `
 <div class="cargo-panel">
   <div class="panel-title">📦 Hàng hóa</div>
-  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_res_cigarette.png" alt="" onerror="this.style.display='none'">🚬 Thuốc lá</span><span class="stat-value">${cigDisplay}</span></div>
-  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_res_gasoline.png" alt="" onerror="this.style.display='none'">⛽ Xăng</span><span class="stat-value">${gasDisplay}</span></div>
-  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_res_royal_coin.png" alt="" onerror="this.style.display='none'">👑 Tiền hoàng gia</span><span class="stat-value">${royalDisplay}</span></div>
-  <div class="stat-row"><span class="stat-label">🔋 Năng lượng tinh khiết</span><span class="stat-value">${pureDisplay}</span></div>
-  <div class="stat-row"><span class="stat-label">🏰 Nợ lâu đài</span><span class="stat-value">${state.castleDebt ? (() => { const d = state.castleDebt.dueDay - state.day; return d > 0 ? `${state.castleDebt.amount} điếu thuốc lá, còn ${d} ngày` : `${state.castleDebt.amount} điếu thuốc lá, quá hạn ${-d} ngày!`; })() : "Không"}</span></div>
+  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_res_cigarette.png" alt="" onerror="this.style.display='none'">Thuốc lá</span><span class="stat-value">${cigDisplay}</span></div>
+  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_res_gasoline.png" alt="" onerror="this.style.display='none'">Xăng</span><span class="stat-value">${gasDisplay}</span></div>
+  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_res_royal_coin.png" alt="" onerror="this.style.display='none'">Tiền hoàng gia</span><span class="stat-value">${royalDisplay}</span></div>
+  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_pure_energy.png" alt="" onerror="this.style.display='none'">Năng lượng tinh khiết</span><span class="stat-value">${pureDisplay}</span></div>
+  <div class="stat-row"><span class="stat-label"><img class="ui-icon-inline" src="public/assets/icons/ui_icon_castle_debt.png" alt="" onerror="this.style.display='none'">Nợ lâu đài</span><span class="stat-value">${state.castleDebt ? (() => { const d = state.castleDebt.dueDay - state.day; return d > 0 ? `${state.castleDebt.amount} điếu thuốc lá, còn ${d} ngày` : `${state.castleDebt.amount} điếu thuốc lá, quá hạn ${-d} ngày!`; })() : "Không"}</span></div>
   <div class="stat-row"><span class="stat-label">🏝️ Nợ đảo</span><span class="stat-value">${state.islandDebt ? (() => { const d = state.islandDebt.dueDay - state.day; return d > 0 ? `${state.islandDebt.amount} tiền hoàng gia, còn ${d} ngày` : `${state.islandDebt.amount} tiền hoàng gia, quá hạn ${-d} ngày!`; })() : "Không"}</span></div>
   <div class="stat-row"><span class="stat-label">📈 Đầu tư</span><span class="stat-value">${state.investment ? (() => { const dir = INVEST_DIRECTIONS.find(d => d.id === state.investment.directionId); const daysLeft = state.investment.dueDay - state.day; return daysLeft > 0 ? `${dir ? dir.name : state.investment.directionId}, ${state.investment.amount} xu, còn ${daysLeft} ngày` : `${dir ? dir.name : state.investment.directionId}, ${state.investment.amount} xu, đã đáo hạn!`; })() : "Không"}</span></div>
 </div>`;
@@ -216,7 +193,8 @@ export function renderCargo(state) {
  */
 export function renderStory(state) {
   const area = document.getElementById('story-area');
-  area.innerHTML = state.story;
+  if (!area) return;
+  area.innerHTML = formatStoryWithCombatHUD(state.story, state);
 }
 
 /**
@@ -234,52 +212,152 @@ export function renderOptions(state) {
 
   const options = state.options || [];
   const pageSize = 30;
-  const page = state._optionPage || 0;
+  let page = state._optionPage || 0;
   const totalPages = Math.ceil(options.length / pageSize);
 
-  if (totalPages <= 1) {
-    paginationArea.style.display = 'none';
-    const totalSlots = 30;
-    let html = '';
-    for (let i = 0; i < totalSlots; i++) {
-      if (i < options.length) {
-        const option = options[i];
-        const disabledClass = option.disabled ? ' option-disabled' : '';
-        const disabledAttr = option.disabled ? ' data-disabled="true"' : '';
-        html += `<div class="option-item${disabledClass}" data-index="${i + 1}"${disabledAttr}>${option.text}</div>`;
-      } else {
-        html += '<div class="option-item option-empty"><img class="ui-empty-icon" src="public/assets/ui/ui_placeholder_empty.png" alt="" onerror="this.style.display=\'none\'"></div>';
-      }
+  // Dam bao trang hop le khi danh sach thay doi
+  if (totalPages > 0 && page >= totalPages) {
+    page = totalPages - 1;
+    state._optionPage = page;
+  }
+
+  let toggleBarHtml = '';
+  if (state.phase === 'map_select') {
+    const isGraph = !pixiRenderer || pixiRenderer.mapViewMode === 'graphical';
+    const zoomText = pixiRenderer?.worldMapRenderer?.zoomLevel ? `${pixiRenderer.worldMapRenderer.zoomLevel.toFixed(1)}x` : '1.0x';
+    const gridText = pixiRenderer?.worldMapRenderer?.showGrid ? 'Lưới: Bật' : 'Lưới: Tắt';
+
+    if (isGraph) {
+      toggleBarHtml = `
+      <div class="map-view-toggle-bar">
+        <div class="map-toolbar-left">
+          <button id="map-zoom-btn" class="map-ctrl-btn" type="button" title="Thu phóng bản đồ">🔍 Zoom: ${zoomText}</button>
+          <button id="map-grid-btn" class="map-ctrl-btn" type="button" title="Bật/tắt lưới tọa độ quân sự">📐 ${gridText}</button>
+          <button id="map-recenter-btn" class="map-ctrl-btn" type="button" title="Định vị nhân vật">🎯 Vị trí</button>
+        </div>
+        <div class="map-toolbar-right">
+          <button id="map-view-toggle-btn" class="map-toggle-btn" type="button">📋 Xem Chữ</button>
+        </div>
+      </div>`;
+    } else {
+      toggleBarHtml = `
+      <div class="map-view-toggle-bar">
+        <div class="map-toolbar-right">
+          <button id="map-view-toggle-btn" class="map-toggle-btn" type="button">🗺️ Xem Sa bàn</button>
+        </div>
+      </div>`;
     }
-    area.innerHTML = html;
+  }
+
+  if (options.length === 0) {
+    paginationArea.style.display = 'none';
+    area.innerHTML = toggleBarHtml + '<div class="option-no-action">Không có hành động khả dụng</div>';
+  } else if (totalPages <= 1) {
+    paginationArea.style.display = 'none';
+    let html = '';
+    for (let i = 0; i < options.length; i++) {
+      const option = options[i];
+      const disabledClass = option.disabled ? ' option-disabled' : '';
+      const disabledAttr = option.disabled ? ' data-disabled="true"' : '';
+      html += `<div class="option-item${disabledClass}" data-index="${i + 1}"${disabledAttr}>${option.text}</div>`;
+    }
+    area.innerHTML = toggleBarHtml + html;
   } else {
     paginationArea.style.display = 'flex';
     const start = page * pageSize;
     const end = Math.min(start + pageSize, options.length);
     const pageOptions = options.slice(start, end);
-    const totalSlots = 30;
     let html = '';
-    for (let i = 0; i < totalSlots; i++) {
-      if (i < pageOptions.length) {
-        const option = pageOptions[i];
-        const globalIdx = start + i;
-        const disabledClass = option.disabled ? ' option-disabled' : '';
-        const disabledAttr = option.disabled ? ' data-disabled="true"' : '';
-        html += `<div class="option-item${disabledClass}" data-index="${globalIdx + 1}"${disabledAttr}>${option.text}</div>`;
-      } else {
-        html += '<div class="option-item option-empty"><img class="ui-empty-icon" src="public/assets/ui/ui_placeholder_empty.png" alt="" onerror="this.style.display=\'none\'"></div>';
-      }
+    for (let i = 0; i < pageOptions.length; i++) {
+      const option = pageOptions[i];
+      const globalIdx = start + i;
+      const disabledClass = option.disabled ? ' option-disabled' : '';
+      const disabledAttr = option.disabled ? ' data-disabled="true"' : '';
+      html += `<div class="option-item${disabledClass}" data-index="${globalIdx + 1}"${disabledAttr}>${option.text}</div>`;
     }
-    area.innerHTML = html;
+    area.innerHTML = toggleBarHtml + html;
 
     prevBtn.disabled = (page === 0);
     nextBtn.disabled = (page >= totalPages - 1);
     pageInfo.textContent = `${page + 1}/${totalPages}`;
   }
 
+  // Update scroll hint visibility only when scrolling is actually needed
+  const scrollHint = document.querySelector ? document.querySelector('.scroll-hint') : null;
+  if (scrollHint && scrollHint.classList) {
+    const isOverflowing = (area.scrollHeight > area.clientHeight && area.clientHeight > 0) || (options.length > 6);
+    if (isOverflowing) {
+      scrollHint.classList.add('is-scrollable');
+    } else {
+      scrollHint.classList.remove('is-scrollable');
+    }
+  }
+
+  const toggleBtn = area.querySelector ? area.querySelector('#map-view-toggle-btn') : null;
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (pixiRenderer) pixiRenderer.toggleMapViewMode();
+      renderAll();
+    });
+  }
+
+  const zoomBtn = area.querySelector ? area.querySelector('#map-zoom-btn') : null;
+  if (zoomBtn) {
+    zoomBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (pixiRenderer?.worldMapRenderer) {
+        const nextZoom = pixiRenderer.worldMapRenderer.cycleZoom();
+        zoomBtn.textContent = `🔍 Zoom: ${nextZoom.toFixed(1)}x`;
+      }
+    });
+  }
+
+  const gridBtn = area.querySelector ? area.querySelector('#map-grid-btn') : null;
+  if (gridBtn) {
+    gridBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (pixiRenderer?.worldMapRenderer) {
+        const isGrid = pixiRenderer.worldMapRenderer.toggleGrid();
+        gridBtn.textContent = `📐 Lưới: ${isGrid ? 'Bật' : 'Tắt'}`;
+      }
+    });
+  }
+
+  const recenterBtn = area.querySelector ? area.querySelector('#map-recenter-btn') : null;
+  if (recenterBtn) {
+    recenterBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (pixiRenderer?.worldMapRenderer) {
+        pixiRenderer.worldMapRenderer.recenterToPlayer();
+      }
+    });
+  }
+
+  // Bidirectional hover between text options and canvas map
+  if (state.phase === 'map_select') {
+    const mapItems = area.querySelectorAll('.option-item');
+    mapItems.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        const idx = parseInt(item.getAttribute('data-index'), 10) - 1;
+        const opt = (state.options || [])[idx];
+        if (opt?.map && pixiRenderer?.worldMapRenderer) {
+          pixiRenderer.worldMapRenderer.highlightPOI(opt.map.id);
+        }
+      });
+      item.addEventListener('mouseleave', () => {
+        const idx = parseInt(item.getAttribute('data-index'), 10) - 1;
+        const opt = (state.options || [])[idx];
+        if (opt?.map && pixiRenderer?.worldMapRenderer) {
+          pixiRenderer.worldMapRenderer.unhighlightPOI(opt.map.id);
+        }
+      });
+    });
+  }
+
   const settings = getGameSettings();
   if (settings.clickMode) {
-    const items = area.querySelectorAll('.option-item:not([data-disabled="true"]):not(.option-empty)');
+    const items = area.querySelectorAll('.option-item:not([data-disabled="true"])');
     items.forEach(item => {
       item.addEventListener('click', () => {
         const index = parseInt(item.getAttribute('data-index'), 10);
@@ -410,22 +488,51 @@ export function renderAchievementPage() {
   area.innerHTML = html;
 }
 
+/**
+ * Cuộn mượt story-area xuống cuối khi người chơi đang ở gần đáy (<= 80px)
+ * Giữ nguyên vị trí cuộn khi người chơi đang chủ động cuộn lên đọc log/cốt truyện cũ
+ * @param {HTMLElement} storyArea
+ */
+export function scrollStoryToBottomIfNeeded(storyArea) {
+  if (!storyArea) return;
+  const threshold = 80;
+  const distanceFromBottom = storyArea.scrollHeight - (storyArea.scrollTop + storyArea.clientHeight);
+  if (distanceFromBottom <= threshold) {
+    storyArea.scrollTop = storyArea.scrollHeight;
+  }
+}
+
 export function renderSettingsPage() {
   const settings = getGameSettings();
   const clickBtn = document.getElementById('click-mode-btn');
   const inputBtn = document.getElementById('input-mode-btn');
   const musicBtn = document.getElementById('music-btn');
   if (clickBtn) {
-    clickBtn.textContent = 'Chế độ nhấp: ' + (settings.clickMode ? 'Bật' : 'Tắt');
     clickBtn.className = 'settings-toggle-btn ' + (settings.clickMode ? 'on' : 'off');
+    clickBtn.innerHTML = `
+      <span class="rocker-label">Chế độ nhấp</span>
+      <div class="rocker-switch ${settings.clickMode ? 'is-on' : 'is-off'}">
+        <span class="rocker-led ${settings.clickMode ? 'led-active' : ''}"></span>
+        <span class="rocker-status">${settings.clickMode ? 'BẬT' : 'TẮT'}</span>
+      </div>`;
   }
   if (inputBtn) {
-    inputBtn.textContent = 'Chế độ nhập: ' + (settings.inputMode ? 'Bật' : 'Tắt');
     inputBtn.className = 'settings-toggle-btn ' + (settings.inputMode ? 'on' : 'off');
+    inputBtn.innerHTML = `
+      <span class="rocker-label">Chế độ nhập</span>
+      <div class="rocker-switch ${settings.inputMode ? 'is-on' : 'is-off'}">
+        <span class="rocker-led ${settings.inputMode ? 'led-active' : ''}"></span>
+        <span class="rocker-status">${settings.inputMode ? 'BẬT' : 'TẮT'}</span>
+      </div>`;
   }
   if (musicBtn) {
-    musicBtn.textContent = 'Nhạc game: ' + (settings.musicEnabled ? 'Bật' : 'Tắt');
     musicBtn.className = 'settings-toggle-btn ' + (settings.musicEnabled ? 'on' : 'off');
+    musicBtn.innerHTML = `
+      <span class="rocker-label">Nhạc game</span>
+      <div class="rocker-switch ${settings.musicEnabled ? 'is-on' : 'is-off'}">
+        <span class="rocker-led ${settings.musicEnabled ? 'led-active' : ''}"></span>
+        <span class="rocker-status">${settings.musicEnabled ? 'BẬT' : 'TẮT'}</span>
+      </div>`;
   }
 }
 
@@ -519,7 +626,10 @@ export function renderAll() {
     renderStory(state);
     renderOptions(state);
     const storyArea = document.getElementById('story-area');
-    storyArea.scrollTop = storyArea.scrollHeight;
+    scrollStoryToBottomIfNeeded(storyArea);
+    if (pixiRenderer && pixiRenderer.enabled) {
+      pixiRenderer.render(state);
+    }
     return;
   }
 
@@ -552,7 +662,11 @@ export function renderAll() {
   renderOptions(state);
 
   const storyArea = document.getElementById('story-area');
-  storyArea.scrollTop = storyArea.scrollHeight;
+  scrollStoryToBottomIfNeeded(storyArea);
+
+  if (pixiRenderer && pixiRenderer.enabled) {
+    pixiRenderer.render(state);
+  }
 }
 
 // ---------- Khởi tạo UI ----------
@@ -813,40 +927,80 @@ export function initUI() {
   }
 
   const playerToolsBtn = document.getElementById('player-tools-btn');
+  const ptTabProbability = document.getElementById('pt-tab-probability');
+  const ptTabEncyclopedia = document.getElementById('pt-tab-encyclopedia');
+  const ptOpenExternalBtn = document.getElementById('pt-open-external-btn');
+  const ptFrame = document.getElementById('player-tools-frame');
+  const ptReturnBtn = document.getElementById('player-tools-return-btn');
+  let currentToolUrl = 'tools/probability.html';
+
+  function switchPlayerTool(url) {
+    currentToolUrl = url;
+    if (ptFrame) {
+      ptFrame.src = url;
+    }
+    if (ptTabProbability) {
+      ptTabProbability.classList.toggle('is-active', url.includes('probability'));
+    }
+    if (ptTabEncyclopedia) {
+      ptTabEncyclopedia.classList.toggle('is-active', url.includes('encyclopedia'));
+    }
+  }
 
   if (playerToolsBtn) {
     playerToolsBtn.addEventListener('click', () => {
       document.getElementById('name-setup').style.display = 'none';
       document.getElementById('player-tools-page').style.display = 'block';
+      switchPlayerTool('tools/probability.html');
+    });
+  }
+
+  if (ptTabProbability) {
+    ptTabProbability.addEventListener('click', () => {
+      switchPlayerTool('tools/probability.html');
+    });
+  }
+
+  if (ptTabEncyclopedia) {
+    ptTabEncyclopedia.addEventListener('click', () => {
+      switchPlayerTool('tools/encyclopedia.html');
+    });
+  }
+
+  if (ptOpenExternalBtn) {
+    ptOpenExternalBtn.addEventListener('click', () => {
+      window.open(currentToolUrl, '_blank');
     });
   }
 
   const ptProbabilityBtn = document.getElementById('pt-probability-btn');
   if (ptProbabilityBtn) {
     ptProbabilityBtn.addEventListener('click', () => {
-      window.open('tools/probability.html', '_blank');
+      switchPlayerTool('tools/probability.html');
     });
   }
 
   const ptEncyclopediaBtn = document.getElementById('pt-encyclopedia-btn');
   if (ptEncyclopediaBtn) {
     ptEncyclopediaBtn.addEventListener('click', () => {
-      window.open('tools/encyclopedia.html', '_blank');
+      switchPlayerTool('tools/encyclopedia.html');
     });
   }
 
   const ptGamepediaBtn = document.getElementById('pt-gamepedia-btn');
   if (ptGamepediaBtn) {
     ptGamepediaBtn.addEventListener('click', () => {
-      window.open('tools/encyclopedia.html', '_blank');
+      switchPlayerTool('tools/encyclopedia.html');
     });
   }
 
-  const ptReturnBtn = document.getElementById('player-tools-return-btn');
   if (ptReturnBtn) {
     ptReturnBtn.addEventListener('click', () => {
       document.getElementById('name-setup').style.display = 'flex';
       document.getElementById('player-tools-page').style.display = 'none';
+      if (ptFrame) {
+        ptFrame.src = 'about:blank';
+      }
     });
   }
 

@@ -84,6 +84,7 @@ function handlePreCombatChoice(input) {
 
   if (action === "combat_flee") {
     if (Math.random() < GAME_CONSTANTS.COMBAT.FLEE_RATE) {
+      state._lastCombatEnemy = null;
       setStory(`Bạn đã thoát khỏi sự truy đuổi của ${state._pendingZombie?.name || "zombie"}!`);
       advanceTime(1);
       updateStatusEffects();
@@ -463,6 +464,13 @@ function handleCombat(zombieDef, combatMode = "melee") {
     checkDeath();
   }
 
+  state._lastCombatEnemy = {
+    ...zombieDef,
+    finalHp: Math.max(0, zombie.currentHp),
+    hp: zombieDef.hp,
+    maxHp: zombieDef.hp
+  };
+
   const logText = combatLog.map(entry => {
     if (typeof entry.round === "number") {
       return `[Lượt ${entry.round}] ${entry.text}`;
@@ -531,6 +539,7 @@ function handlePreCombatNpcChoice(input) {
   if (action === "combat_npc_flee") {
     const wasDivingZombie = !!state._divingZombieCombat;
     if (Math.random() < GAME_CONSTANTS.COMBAT.FLEE_RATE) {
+      state._lastCombatEnemy = null;
       if (wasDivingZombie) delete state._divingZombieCombat;
       setStory(`Bạn đã thoát khỏi sự truy đuổi của ${state._pendingNpc?.name || "kẻ địch"}!`);
       advanceTime(1);
@@ -641,6 +650,13 @@ function handleSurvivorAction(input) {
  */
 function handleNpcCombat(npc, combatMode = "melee") {
   const state = getState();
+  const initialNpcHp = npc.hp || npc.maxHp || 100;
+  state._lastCombatEnemy = {
+    ...npc,
+    hp: initialNpcHp,
+    maxHp: initialNpcHp,
+    finalHp: Math.max(0, npc.hp || 0)
+  };
   state._tripped = 0;
   state._frozen = 0;
   state._blindTurns = 0;
@@ -796,6 +812,10 @@ function handleNpcCombat(npc, combatMode = "melee") {
       state.health = Math.max(0, state.health);
       combatLog.push({ round, text: `${npc.name} gây ${npcDamage} điểm sát thương cho bạn.` });
     }
+  }
+
+  if (state._lastCombatEnemy) {
+    state._lastCombatEnemy.finalHp = Math.max(0, npc.hp || 0);
   }
 
   if (npc.hp <= 0) {

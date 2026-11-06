@@ -250,10 +250,13 @@ cd Zombie-World-JS-Vision
 2. Khởi động máy chủ cục bộ bằng một trong các phương thức sau:
 
 ```bash
-# Node.js
-npx serve -l 3000
+# Node.js built-in offline server (port 9999)
+npm start
 
-# Python
+# Chạy toàn bộ bộ kiểm thử hồi quy tự động (35 test cases)
+npm test
+
+# Hoặc dùng Python
 python -m http.server 3000
 ```
 

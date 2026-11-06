@@ -120,7 +120,7 @@ export function handleElectroFishConfirm(input) {
       `Ngay khi cá chạm nước, điện quang bắn tung tóe! Dòng điện xèo xèo quấn lấy thân cá, nhưng không điện chết nó.\n` +
       `${formatQualityText(fishDef.name, rarity)} rung lên dữ dội trong dòng điện, vảy bắt đầu khúc xạ ánh sáng xanh trắng chói lòa.\n` +
       `Một lát sau, cá chìm xuống đáy bể, một chiếc vảy lấp lánh tia điện từ từ nổi lên——\n\n` +
-      `✨ Nhận được vật phẩm đặc biệt: ${formatQualityText(SPECIAL_ITEMS.lightning_scale.name, "epic")}!`;
+      `[Đặc biệt] Nhận được vật phẩm: ${formatQualityText(SPECIAL_ITEMS.lightning_scale.name, "epic")}!`;
   } else if (rarity === "legendary") {
     const scale = { ...SPECIAL_ITEMS.thunder_scale };
     addItem(scale);
@@ -130,7 +130,7 @@ export function handleElectroFishConfirm(input) {
       `Toàn bộ nước trong bể sôi sùng sục trong nháy mắt! Dòng điện cuồng bạo như rồng rắn múa wild trong nước, thân ${formatQualityText(fishDef.name, rarity)} bị sấm sét bao bọc.\n` +
       `Nó không những không chết, mà còn biến đổi trong sấm sét——vảy bong ra, ngưng tụ thành một chiếc vảy ánh kim sẫm.\n` +
       `Khi mặt nước yên lại, chiếc vảy ấy lặng lẽ nổi trên mặt nước, ẩn ẩn vang lên tiếng sấm trầm——\n\n` +
-      `⚡ Nhận được vật phẩm đặc biệt: ${formatQualityText(SPECIAL_ITEMS.thunder_scale.name, "legendary")}!`;
+      `[Đặc biệt] Nhận được vật phẩm: ${formatQualityText(SPECIAL_ITEMS.thunder_scale.name, "legendary")}!`;
   } else {
     storyMsg =
       `Bạn thả [${formatQualityText(fishDef.name, rarity)}] vào bể kính……\n\n` +
@@ -160,7 +160,7 @@ export function handleElectroTouch() {
       "Xèo xèo——!!\n" +
       "Một luồng điện mạnh tức thì xuyên qua cánh tay bạn! Bạn bị hất văng ra xa vài mét, toàn thân tê liệt.\n" +
       "Trên cánh tay còn lại một vết cháy đen, đau buốt tận xương.\n\n" +
-      `[Hệ thống] Bạn chịu sát thương điện giật ❤️ -50 (sức khỏe hiện tại: ${state.health}/${GAME_CONSTANTS.MAX_HEALTH})`
+      `[Hệ thống] Bạn chịu sát thương điện giật [HP -50] (sức khỏe hiện tại: ${state.health}/${GAME_CONSTANTS.MAX_HEALTH})`
     );
   } else {
     setStory(
