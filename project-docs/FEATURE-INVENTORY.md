@@ -26,6 +26,7 @@ Trang thai: Hoan thien / Dang phat trien / Chua co / Chua xac minh.
 | Chien dau zombie | Pre-combat chon cuan/tam xa/chay; vong lap turn-based; tinh damage, ne, crit/dau dau, nhiem, do ben | js/combat.js | Hoan thien |
 | Thang/thua chien dau | Zombie chet -> het luot; nguoi choi chet hoac nhiem 100% -> gameOver | js/combat.js, js/state.js | Hoan thien |
 | Ket thuc game | 14 ket cuoc, moi ket cuoc co dieu kien biet liet; nut Choi lai/Tiep tuc | js/game/endings.js | Hoan thien |
+| Transactional AutoSave & Recovery | API hoan/flush autosave nguyen tu, xu ly ngoai le, normalize recovery checkpoint | js/state.js, tests/test_autosave_transaction.cjs | Hoan thien nen tang (chua mo gameplay ham) |
 
 ## B. Character System
 | Tinh nang | Mo ta | File lien quan | Trang thai |

@@ -168,6 +168,62 @@ let gameState = JSON.parse(JSON.stringify(INITIAL_STATE));
 let _autoSaveCallback = null;
 export function setAutoSaveCallback(cb) { _autoSaveCallback = cb; }
 
+// ==================== Transactional AutoSave API ====================
+let _autoSaveSuspendDepth = 0;
+let _pendingAutoSave = false;
+
+/** Tạm hoãn autosave khi bắt đầu một chuỗi hành động nguyên tử */
+export function suspendAutoSave() {
+  _autoSaveSuspendDepth++;
+}
+
+/** Kiểm tra autosave có đang bị tạm hoãn không */
+export function isAutoSaveSuspended() {
+  return _autoSaveSuspendDepth > 0;
+}
+
+/** Kiểm tra có yêu cầu autosave đang chờ không */
+export function isAutoSavePending() {
+  return _pendingAutoSave;
+}
+
+/** Flush autosave tại điểm nhất quán nếu có yêu cầu lưu đang chờ */
+export function flushAutoSave() {
+  if (_autoSaveSuspendDepth > 0) {
+    _autoSaveSuspendDepth--;
+  }
+  if (_autoSaveSuspendDepth > 0) {
+    return { flushed: false, depth: _autoSaveSuspendDepth, reason: 'nested' };
+  }
+  if (!_pendingAutoSave) {
+    return { flushed: false, depth: 0, reason: 'no_pending' };
+  }
+  _pendingAutoSave = false;
+  if (gameState.gameOver || gameState.health <= 0) {
+    return { flushed: false, depth: 0, reason: 'player_dead' };
+  }
+  if (!_autoSaveCallback) {
+    return { flushed: false, depth: 0, reason: 'no_callback' };
+  }
+  try {
+    const result = _autoSaveCallback(gameState);
+    if (result === false) {
+      console.warn("[AutoSave] Callback returned false (save failed or storage quota exceeded).");
+      return { flushed: true, success: false, reason: 'callback_returned_false' };
+    }
+    return { flushed: true, success: true };
+  } catch (err) {
+    console.warn("[AutoSave] Callback threw exception:", err);
+    return { flushed: true, success: false, error: err, reason: 'callback_threw' };
+  }
+}
+
+/** Hủy bỏ hoàn toàn yêu cầu autosave đang chờ và đưa depth về 0 */
+export function cancelPendingAutoSave() {
+  _autoSaveSuspendDepth = 0;
+  _pendingAutoSave = false;
+}
+
 // Công cụ nội bộ: giới hạn giá trị trong khoảng [min, max]
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
@@ -224,6 +280,7 @@ export function getState() {
 /** Đặt lại trạng thái trò chơi về giá trị ban đầu */
 export function resetState() {
   gameState = JSON.parse(JSON.stringify(INITIAL_STATE));
+  cancelPendingAutoSave();
 }
 
 /** Đặt tên nhân vật người chơi */
@@ -272,8 +329,12 @@ export function advanceTime(steps = 1) {
         if (!gameState.unlockedAchievements.includes(entry.id)) gameState.unlockedAchievements.push(entry.id);
       }
     }
-    if (gameState.day % 5 === 0 && gameState.day > 0 && _autoSaveCallback) {
-      _autoSaveCallback(gameState);
+    if (gameState.day % 5 === 0 && gameState.day > 0) {
+      if (_autoSaveSuspendDepth > 0) {
+        _pendingAutoSave = true;
+      } else if (_autoSaveCallback) {
+        _autoSaveCallback(gameState);
+      }
     }
   }
 
@@ -614,6 +675,7 @@ export function checkDeath() {
   if (gameState.health <= 0 || gameState.infection >= GAME_CONSTANTS.INFECTION_MAX) {
     gameState._playerDied = true;
     gameState.gameOver = true;
+    cancelPendingAutoSave();
     return true;
   }
   return false;
@@ -820,6 +882,9 @@ export function setCurrentMap(map) {
 /** Đặt giai đoạn trò chơi hiện tại */
 export function setPhase(phase) {
   gameState.phase = phase;
+  if (phase === "ending" || phase === "main_menu") {
+    cancelPendingAutoSave();
+  }
 }
 
 /** Đặt văn bản cốt truyện hiện tại */
@@ -943,6 +1008,13 @@ export function normalizeState(state) {
   if (state.lastMoldySeedsDay === undefined) state.lastMoldySeedsDay = 0;
   if (state.lastAbandonedFieldDay === undefined) state.lastAbandonedFieldDay = 0;
   if (state.lastLootCorpseDay === undefined) state.lastLootCorpseDay = 0;
+  if (state.lastCellarRaidDay === undefined) state.lastCellarRaidDay = 0;
+
+  if (state.phase === "cellar_expedition") {
+    state.phase = "explore";
+    state.lastCellarRaidDay = state.day;
+    delete state._cellarSession;
+  }
   if (state.outlawKilled === undefined) state.outlawKilled = false;
   if (state.hasEatenStrangeMeat === undefined) state.hasEatenStrangeMeat = false;
   if (state.maSanQuest1Done === undefined) state.maSanQuest1Done = false;

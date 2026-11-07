@@ -8,6 +8,13 @@ Neu thay doi ke hoach, cap nhat them ROADMAP-PLAN.md.
 
 ## Lich su cap nhat
 
+### 2026-11-07 — Bước nền tảng: Transactional AutoSave & Recovery API
+
+- `js/state.js`: Bổ sung Transactional AutoSave API (`suspendAutoSave`, `flushAutoSave`, `cancelPendingAutoSave`, `isAutoSaveSuspended`, `isAutoSavePending`). Hoãn ghi đĩa autosave khi đang trong chuỗi hành động nguyên tử, flush tại điểm hoàn tất nhất quán khi survival/decay/death checks đã tính xong. Bổ sung cleanup tự động tại `resetState`, `checkDeath`, `setPhase("ending")`, `setPhase("main_menu")`.
+- `js/state.js` (`normalizeState`): Thêm chuẩn hóa `lastCellarRaidDay` (mặc định 0). Thêm cơ chế Recovery cho phase `cellar_expedition`: đưa về `explore`, gán cooldown 3 ngày theo ngày checkpoint (`lastCellarRaidDay = day`), xóa `_cellarSession` và không can thiệp transaction runtime.
+- `tests/test_autosave_transaction.cjs`: Tạo mới test suite 14 ca kiểm thử kiểm chứng: hành vi autosave ngoài transaction không đổi, hoãn autosave trong transaction, snapshot flush có kết quả survival decay và weather effects, starvation damage, nesting support không mất pending, callback trả false hoặc throw error xử lý an toàn (thử 1 lần, hủy pending, depth=0), tử vong do infection hủy autosave, reset/main_menu dọn sạch transaction, finally cleanup, và normalize save khác giữ nguyên transaction runtime.
+- *Lưu ý*: Chỉ triển khai API nền tảng và recovery; chưa triển khai hầm ngầm, bảng loot hay combat mới.
+
 ### 2026-11-07 — Batch 10: triển khai Field Terminal sau phê duyệt
 
 - `index.html`, `css/ui/*.css`: shell/layout/identity mới, bottom navigation bốn mục, responsive mobile mặc định và enhancement desktop; ngừng nạp CSS layout cũ và Google Fonts.

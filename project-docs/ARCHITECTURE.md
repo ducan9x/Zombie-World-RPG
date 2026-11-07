@@ -77,6 +77,11 @@ Zombie-World-RPG/
 - `advanceTime(steps)`: tang luot, ngay, thoi tiet, doí/khát (-4/luot), met mỏi (+10 moi 24 luot khong nghi), giam mua troc, auto-save moi 5 ngay.
 - `updateStatusEffects()`: tru HP neu doí/khát, xay chuoi `status` (Dói, Khát, Nhiem trung, Met mỏi, Rối loạn, Ảo giac, Trọng thuong).
 - `checkDeath()`: neu `health <= 0` hoac `infection >= 100` -> `gameOver = true`.
+- Transactional AutoSave & Recovery API:
+  - `suspendAutoSave()`, `flushAutoSave()`, `cancelPendingAutoSave()`, `isAutoSaveSuspended()`, `isAutoSavePending()`: cho phep tam hoan autosave trong chuoi hanh dong nguyen tu nhieu buoc va flush tai diem hoan tat nhat quan (khi survival decay, weather effects, reward va status da tinh xong).
+  - Tu dong cleanup khi `resetState()`, `checkDeath()`, `setPhase("ending")`, `setPhase("main_menu")`.
+  - Khong retry khi callback that bai (callback tra false hoac throw error: canh bao va huy pending, tra ket qua ro rang cho caller).
+  - Recovery qua `normalizeState`: nạp save có `cellar_expedition` đưa về `explore`, gán cooldown 3 ngày theo ngày checkpoint (`lastCellarRaidDay = day`), xóa `_cellarSession` và không can thiệp transaction runtime.
 
 ## 6. Phase (trang thai) game
 Cac phase chinh duoc phan bo qua `switch (phase)` trong `handleAction()` (game/index.js) va `renderAll()` (ui.js):
