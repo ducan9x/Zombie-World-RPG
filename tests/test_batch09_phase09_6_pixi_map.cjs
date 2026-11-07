@@ -184,9 +184,12 @@ try {
 // TEST 7: Headless Chromium Bounding-Box Across Viewport Matrix
 // ------------------------------------------------------------
 try {
+  if (fs.readFileSync('index.html', 'utf8').includes('id="primary-nav"')) {
+    record(7, 'Production Field Terminal Pixi/map browser acceptance', true, require('./helpers/current-ui-audit.cjs')());
+  } else {
   const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
   if (!fs.existsSync(chromePath)) {
-    record(7, 'Headless Chromium Bounding-Box Across Viewports', true, 'Skipped: Chrome binary not found');
+    record(7, 'Headless Chromium Bounding-Box Across Viewports', false, 'BLOCKED: Chrome binary not found');
   } else {
     let rawHtml = fs.readFileSync('index.html', 'utf8');
     const cssContent = fs.readFileSync('css/style.css', 'utf8');
@@ -377,6 +380,7 @@ try {
     } else {
       record(7, 'Headless Chromium Bounding-Box Across Viewport Matrix', false, 'Failed to extract measurements dump from DOM');
     }
+  }
   }
 } catch (err) {
   record(7, 'Headless Chromium Bounding-Box Across Viewport Matrix', false, err.message);

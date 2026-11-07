@@ -4,24 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Thế Giới Zombie — Trò chơi chữ sinh tồn ngày tận thế</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="theme-color" content="#0b1010">
+  <link rel="stylesheet" href="css/ui/tokens.css">
+  <link rel="stylesheet" href="css/ui/foundation.css">
+  <link rel="stylesheet" href="css/ui/components.css">
+  <link rel="stylesheet" href="css/ui/screens.css">
   <link rel="icon" href="public/icon/icon.png">
 </head>
 <body>
+  <a class="skip-link" href="#app-main">Đến nội dung chính</a>
   <div id="game-container">
     <div id="game-header">
       <img id="header-logo" class="ui-icon-header-logo" src="public/assets/ui/ui_game_logo.png" alt="Thế Giới Zombie Logo" onerror="this.style.display='none'">
-      <h1>Thế Giới Zombie</h1>
-      <p class="subtitle">Trò chơi chữ sinh tồn ngày tận thế - YOCIM phát triển</p>
+      <p class="eyebrow">FIELD TERMINAL / NĂM THỨ BA</p>
+      <h1>THẾ GIỚI<br><span>ZOMBIE</span></h1>
+      <p class="subtitle">Thế giới đã sụp đổ.<br>Câu chuyện sống sót của bạn bắt đầu ở đây.</p>
     </div>
     <div id="name-setup">
-      <label for="name-input"></label>
+      <div class="setup-heading"><p class="eyebrow">HỒ SƠ NGƯỜI SỐNG SÓT</p><h2>Để lại một cái tên.</h2><p>Chọn ngoại hình và chuẩn bị bước vào vùng hoang tàn.</p></div>
+      <details class="appearance-disclosure"><summary>Tùy chỉnh ngoại hình <span aria-hidden="true">＋</span></summary>
       <div class="character-appearance-box">
         <div class="appearance-header">
-          <span class="appearance-title">👤 Ngoại hình nhân vật</span>
+            <span class="appearance-title">Nhận diện nhân vật</span>
           <span id="appearance-status-badge" class="appearance-status-badge status-pending">PENDING</span>
         </div>
         
@@ -70,12 +74,14 @@
         </div>
       </div>
 
-      <label for="name-input"></label>
-      <input type="text" id="name-input" placeholder="Nhập tên nhân vật..." maxlength="10">
+      </details>
+      <label for="name-input">Tên người sống sót</label>
+      <input type="text" id="name-input" placeholder="Nhập tên nhân vật..." maxlength="10" autocomplete="off" aria-describedby="name-feedback">
+      <p id="name-feedback" class="inline-feedback" role="status"></p>
       <div class="start-buttons">
-        <button id="new-game-btn">Trò chơi mới</button>
+        <button id="new-game-btn" class="primary">Bắt đầu sống sót <span aria-hidden="true">↗</span></button>
         <button id="load-game-btn">Tải lưu</button>
-        <button id="best-record-btn">Xem thời gian</button>
+        <button id="best-record-btn">Kỷ lục sống sót</button>
         <button id="achievement-btn">Thành tích</button>
         <button id="settings-btn">Cài đặt</button>
         <button id="player-tools-btn">Công cụ người chơi</button>
@@ -259,10 +265,11 @@
     </div>
 
     <div id="game-content" style="display:none;" data-mobile-view="gameplay">
+      <div id="terminal-bar"><a class="terminal-brand" href="#" aria-label="Về hiện trường">ZW<span> / FIELD TERMINAL</span></a><span id="terminal-context">Kết nối ngoại tuyến</span><button id="terminal-system-btn" type="button" aria-label="Mở hệ thống">☰</button></div>
       <!-- Mobile Gameplay Header (HUD + View Switcher) - Phase 09.3 -->
       <div id="mobile-gameplay-header" class="mobile-gameplay-header">
         <!-- Compact Survival HUD -->
-        <div id="mobile-survival-hud" class="mobile-survival-hud" aria-label="Thông số sinh tồn cơ bản">
+        <button type="button" id="mobile-survival-hud" class="mobile-survival-hud" aria-label="Xem hồ sơ và thông số sinh tồn đầy đủ">
           <div class="mobile-hud-top-row">
             <div class="mobile-hud-datetime" id="mobile-hud-datetime">
               <span class="hud-icon">📅</span>
@@ -295,7 +302,8 @@
               <div class="pill-mini-track"><div id="mobile-hud-thirst-bar" class="pill-mini-fill fill-thirst" style="width: 100%;"></div></div>
             </div>
           </div>
-        </div>
+          <span id="survival-alerts" class="survival-alerts" hidden></span>
+        </button>
 
         <!-- Mobile View Switcher -->
         <nav id="mobile-view-tabs" class="mobile-view-switcher" role="tablist" aria-label="Chuyển đổi giao diện gameplay">
@@ -314,6 +322,25 @@
         </nav>
       </div>
 
+      <main id="app-main" tabindex="-1">
+        <header id="screen-heading"><div><p id="screen-kicker" class="eyebrow">NHẬT KÝ SINH TỒN</p><h2 id="screen-title">Hiện trường</h2></div><span id="screen-phase" class="context-tag"></span></header>
+        <section id="field-screen" aria-label="Hiện trường"></section>
+        <section id="loadout-screen" aria-label="Hành trang" hidden>
+          <div class="section-tabs" aria-label="Mục hành trang"><button type="button" data-loadout="bag" aria-pressed="true">Túi đồ</button><button type="button" data-loadout="equipment" aria-pressed="false">Trang bị</button><button type="button" data-loadout="profile" aria-pressed="false">Hồ sơ</button></div>
+          <div id="loadout-bag"></div><div id="loadout-equipment" hidden></div><div id="loadout-profile" hidden></div>
+        </section>
+        <section id="journal-screen" aria-label="Hồ sơ sinh tồn" hidden><div id="journal-content"></div><div class="service-links"><button id="journal-achievements" type="button">Bộ sưu tập thành tích ↗</button><button id="journal-records" type="button">Kỷ lục sống sót ↗</button></div></section>
+        <section id="system-screen" aria-label="Hệ thống" hidden><p class="screen-intro">Thiết bị của bạn. Dữ liệu của bạn. Mọi thao tác lưu vẫn tuân theo trạng thái an toàn của trò chơi.</p><div id="system-actions" class="service-links"></div></section>
+        <section id="utility-screen" aria-label="Công cụ và thiết lập" hidden><button id="utility-back" class="back-button" type="button">← Quay lại</button><div id="utility-content"></div></section>
+      </main>
+
+      <nav id="primary-nav" aria-label="Điều hướng chính">
+        <button type="button" data-route="field" aria-current="page"><span aria-hidden="true">⌖</span>Hiện trường</button>
+        <button type="button" data-route="loadout"><span aria-hidden="true">▣</span>Hành trang</button>
+        <button type="button" data-route="journal"><span aria-hidden="true">▤</span>Hồ sơ</button>
+        <button type="button" data-route="system"><span aria-hidden="true">⚙</span>Hệ thống</button>
+      </nav>
+
       <div id="zone-1" class="game-zone">
         <div id="identity-panel"></div>
         <div id="stats-panel"></div>
@@ -329,7 +356,7 @@
       </div>
       <div id="zone-4" class="game-zone">
         <div id="options-area"></div>
-        <div class="scroll-hint">← Khu vực tùy chọn có thể cuộn, hãy cuộn để chọn hành động →</div>
+        <div class="scroll-hint">Các lựa chọn khả dụng</div>
         <div id="pagination-area" class="pagination-area" style="display:none;">
           <button id="prev-page-btn" class="pagination-btn" disabled>⬅️</button>
           <span id="page-info" class="page-info"></span>
@@ -342,6 +369,8 @@
       </div>
     </div>
   </div>
+  <div id="inventory-sheet" class="modal-overlay" style="display:none;"></div>
+  <dialog id="notice-dialog" aria-labelledby="notice-title"><div class="dialog-content"><p class="eyebrow">FIELD TERMINAL</p><h2 id="notice-title">Thông báo</h2><p id="notice-message"></p><button id="notice-dismiss" class="primary" type="button">Đã hiểu</button></div></dialog>
   <script src="public/vendor/pixi.min.js"></script>
   <script type="module" src="js/main.js"></script>
   <script src="tools/devtools-auth.js"></script>

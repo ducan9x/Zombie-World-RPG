@@ -1,5 +1,19 @@
 # Kien truc tong quat — Zombie-World-RPG
 
+## Cập nhật hiện hành — Batch 10 Field Terminal (2026-11-07)
+
+- Giao diện đang chạy là shell Mobile-First mới trong `index.html`, `css/ui/{tokens,foundation,components,screens}.css`; không nạp `css/style.css` và không giữ dashboard desktop bốn vùng.
+- `main.js` khởi tạo legacy bindings rồi `presentation/app.js`; `ui.js` giữ public renderer APIs/hosts tương thích và phát refresh qua `setPresentationRefresh`. App quản lý route Hiện trường/Hành trang/Hồ sơ/Hệ thống, subview và scroll/focus trong bộ nhớ, không ghi route vào save hoặc `state.phase`.
+- `presentation/game-adapter.js` nhận token state/phase/options/option reference, resolve lại chỉ số gốc 1-based và gọi handler cũ đúng một lần. Save dùng đúng dedicated handlers cũ; không bypass `handleSavePage` guards.
+- `presentation/screens.js` phân loại màn theo phase/data để trình bày; `presentation/overlays.js` quản lý focus trap, inert background, scroll và lớp modal. Không chứa công thức gameplay.
+- Inventory detail mới là sheet, vẫn gọi `executeInventoryAction`; warehouse giữ hai đường xử lý hiện hữu. Chỉ template/control markup của hai file UI đó thay đổi, transfer/item logic được khóa bằng hash regression.
+- PixiJS v7.4.3 giữ một app/canvas, `sceneOnly` bỏ HUD canvas trùng với HUD DOM; map selection và gameplay routing không đổi. Các DOM hosts cũ còn là integration seams, không còn quyết định layout cũ.
+- Tools dùng `tools/presentation.js` và `css/ui/tools.css`, danh mục disclosure, table-to-card presentation, iframe tự báo chiều cao cùng origin; CSV và công thức không đổi. Font hệ thống/local, không Google Fonts.
+- Có 126 module trong `js/`. `npm test` chạy 12 suite; `npm run test:batch10` chạy contracts và Chrome production UI; `npm run test:all` thêm final map audit và toàn bộ tests mới. Browser discovery hỗ trợ Windows/macOS/Linux, cấu hình `CHROME_PATH`; thiếu browser là BLOCKED/exit khác 0.
+- `css/style.css` và nhánh browser fixture cũ được giữ làm tài liệu/test lịch sử, không phải UI đang phục vụ. Phần mô tả kiến trúc cũ phía dưới cần đọc trong bối cảnh lịch sử này.
+
+Chi tiết nghiệm thu và giới hạn: `batch-09/batch-09-final-acceptance-report.md`.
+
 ## 1. Thong tin chung
 - Ten game: Zombie World (Thế Giới Zombie — Game sinh tồn văn bản ngày tận thế)
 - Phien ban: V0.2.3

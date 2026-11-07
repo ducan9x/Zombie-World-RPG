@@ -8,6 +8,24 @@ Neu thay doi ke hoach, cap nhat them ROADMAP-PLAN.md.
 
 ## Lich su cap nhat
 
+### 2026-11-07 — Batch 10: triển khai Field Terminal sau phê duyệt
+
+- `index.html`, `css/ui/*.css`: shell/layout/identity mới, bottom navigation bốn mục, responsive mobile mặc định và enhancement desktop; ngừng nạp CSS layout cũ và Google Fonts.
+- `js/presentation/{app,game-adapter,overlays,screens}.js`, `js/main.js`, `js/ui.js`: presentation-only routing, refresh facade, stale-token command guard, semantic options, numeric save input, accessible notices, journal và crop projections.
+- `js/inventory-ui.js`, `js/warehouse-ui.js`: thẻ là buttons, inventory sheet và render event; item executor và transfer algorithms không đổi. `js/pixi-renderer.js`: scene-only HUD suppression/home background, không đổi game/map rules.
+- `tools/{presentation.js,probability.html,encyclopedia.html,index.html}`, `css/ui/tools.css`: reader mobile/cards/disclosure, local fonts, height bridge; sửa selector UI search bách khoa sai cú pháp, không đổi CSV/content/calculations.
+- `tests/helpers/*.cjs`, `tests/test_batch10_{contracts,browser}.cjs`, bốn suite Batch 09, `package.json`: Chromium discovery/CDP thật, browser gates thay fixture desktop đã nghỉ, giữ non-browser assertions cũ; thêm `test:batch10`/`test:all`, thiếu browser không được ghi PASS.
+- Cập nhật ARCHITECTURE/GAMEPLAY-FLOW/FEATURE-INVENTORY/ROADMAP và hồ sơ bàn giao; 24 screenshots thực cho 12 màn mobile/desktop. Không sửa 117 module Core/data, không đổi save schema/assets hoặc hai scratch harness có thay đổi trước đó.
+- README bổ sung cách chạy UI/tests, yêu cầu Node.js 22+/Chromium và giới hạn nghiệm thu; execution log lưu tại `project-docs/batch-09/batch-10-test-output.txt`.
+- Automated tests đạt; không tuyên bố đã nghiệm thu thiết bị thật, mọi quest/economy branch, mọi save lịch sử hoặc performance. Xem final acceptance report.
+
+### 2026-11-07 — Batch 10 / Stage A: kiểm toán và đề xuất UI Mobile-First
+
+- Chỉ thêm tài liệu trong `project-docs/batch-09/` theo tên đường dẫn bàn giao được yêu cầu: architecture audit, design system đề xuất, migration plan và regression baseline.
+- Kiểm kê UI/API/Game Core, rủi ro logic lẫn trong inventory/warehouse UI, navigation và Pixi coupling; chưa triển khai Stage B–F, chưa migration màn hình.
+- Baseline chạy trong bản sao tạm để bảo toàn scratch đang thay đổi: 95/95 đến Phase 8.4 đạt; npm test dừng ở browser test Phase 09.3 do hardcoded Chrome macOS; chạy riêng các suite còn lại và ghi rõ browser skip của Phase 09.6, không tính skip là xác minh mobile.
+- Không sửa mã nguồn, test, asset, gameplay, save schema hoặc các harness có thay đổi sẵn. Chưa có ảnh UI mới hay final acceptance; chờ người dùng phê duyệt kiến trúc.
+
 | Ngay | File sua | Noi dung thay doi | Nguoi sua |
 |------|----------|-------------------|-----------|
 | 2026-11-04 | Toan bo source | Dich toan bo giao dien nguoi dung tu Trung sang Viet (UI, menu, dialog, thong bao, nut bam,...) | Localization agent |

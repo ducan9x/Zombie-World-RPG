@@ -11,7 +11,17 @@
 
 **Zombie World** (Thế Giới Zombie) is a deep, narrative-driven post-apocalyptic survival RPG that runs entirely in your browser. Scavenge a ruined world, forge alliances or rivalries, uncover a web of conspiracies, and choose your own ending among **14 distinct paths**.
 
-Built with a **zero-dependency pure front-end architecture**. All game data is centralized in `js/data/` — modify config files to adjust balance, add items, or expand content without touching logic code.
+Built with a **client-only front-end architecture** (Vanilla JavaScript and bundled PixiJS 7.4.3). The package also includes `sharp` for asset tooling. All game data is centralized in `js/data/`.
+
+## Field Terminal — Mobile-first UI (Batch 10)
+
+The new interface uses Field / Loadout / Journal / System navigation without changing the existing gameplay engine or save format. Start the local static server with `npm start`, then open `http://localhost:9999`.
+
+- `npm test`: existing regression suites, with production-browser acceptance replacing retired four-zone browser fixtures.
+- `npm run test:batch10`: Core-preservation contracts and real Chromium UI journeys.
+- `npm run test:all`: all of the above plus the final map audit.
+- New browser tooling requires Node.js 22+ and an installed Chrome/Chromium/Edge. Set `CHROME_PATH` or `CHROMIUM_PATH` if discovery cannot locate it. A missing browser is a failure, not a passing skip.
+- [Handover and verification limits (Vietnamese)](project-docs/batch-09/batch-09-final-acceptance-report.md). Physical iOS/Android and full performance acceptance are still pending.
 
 ---
 

@@ -16,6 +16,16 @@ import { INVEST_DIRECTIONS } from './data/island/investment.js';
 import { formatStoryWithCombatHUD } from './combat-hud.js';
 import { renderInventoryComponent } from './inventory-ui.js';
 import { pixiRenderer } from './pixi-renderer.js';
+import { captureOption, dispatchOption } from './presentation/game-adapter.js';
+
+let presentationRefresh = null;
+export function setPresentationRefresh(callback) { presentationRefresh = callback; }
+
+export function showNotice(message) {
+  if (typeof window !== 'undefined' && typeof window.CustomEvent === 'function' && document.getElementById('notice-dialog')) {
+    window.dispatchEvent(new CustomEvent('game:notice', { detail: message }));
+  } else if (typeof alert === 'function') alert(message);
+}
 
 const bgMusic = new Audio('./public/music/backmusic.mp3');
 bgMusic.loop = true;
@@ -259,7 +269,7 @@ export function renderOptions(state) {
       const option = options[i];
       const disabledClass = option.disabled ? ' option-disabled' : '';
       const disabledAttr = option.disabled ? ' data-disabled="true"' : '';
-      html += `<div class="option-item${disabledClass}" data-index="${i + 1}"${disabledAttr}>${option.text}</div>`;
+      html += `<button type="button" class="option-item${disabledClass}" data-index="${i + 1}"${disabledAttr} ${option.disabled ? 'disabled' : ''}><span class="option-number">${i + 1}</span><span class="option-label">${option.text}</span></button>`;
     }
     area.innerHTML = toggleBarHtml + html;
   } else {
@@ -273,7 +283,7 @@ export function renderOptions(state) {
       const globalIdx = start + i;
       const disabledClass = option.disabled ? ' option-disabled' : '';
       const disabledAttr = option.disabled ? ' data-disabled="true"' : '';
-      html += `<div class="option-item${disabledClass}" data-index="${globalIdx + 1}"${disabledAttr}>${option.text}</div>`;
+      html += `<button type="button" class="option-item${disabledClass}" data-index="${globalIdx + 1}"${disabledAttr} ${option.disabled ? 'disabled' : ''}><span class="option-number">${globalIdx + 1}</span><span class="option-label">${option.text}</span></button>`;
     }
     area.innerHTML = toggleBarHtml + html;
 
@@ -359,13 +369,13 @@ export function renderOptions(state) {
   if (settings.clickMode) {
     const items = area.querySelectorAll('.option-item:not([data-disabled="true"])');
     items.forEach(item => {
+      const token = captureOption(state, options[parseInt(item.getAttribute('data-index'), 10) - 1]);
       item.addEventListener('click', () => {
-        const index = parseInt(item.getAttribute('data-index'), 10);
-        handleAction(index);
-        renderAll();
+        dispatchOption(token, renderAll);
       });
     });
   }
+  if (!settings.clickMode) area.querySelectorAll('button.option-item').forEach(item => { item.disabled = true; item.title = 'Chế độ nhập: dùng số lựa chọn bên dưới'; });
 }
 
 // ---------- Trang lưu trữ / kỷ lục tốt nhất ----------
@@ -519,6 +529,7 @@ export function renderSettingsPage() {
   const inputBtn = document.getElementById('input-mode-btn');
   const musicBtn = document.getElementById('music-btn');
   if (clickBtn) {
+    clickBtn.setAttribute?.('aria-pressed', String(settings.clickMode));
     clickBtn.className = 'settings-toggle-btn ' + (settings.clickMode ? 'on' : 'off');
     clickBtn.innerHTML = `
       <span class="rocker-label">Chế độ nhấp</span>
@@ -528,6 +539,7 @@ export function renderSettingsPage() {
       </div>`;
   }
   if (inputBtn) {
+    inputBtn.setAttribute?.('aria-pressed', String(settings.inputMode));
     inputBtn.className = 'settings-toggle-btn ' + (settings.inputMode ? 'on' : 'off');
     inputBtn.innerHTML = `
       <span class="rocker-label">Chế độ nhập</span>
@@ -537,6 +549,7 @@ export function renderSettingsPage() {
       </div>`;
   }
   if (musicBtn) {
+    musicBtn.setAttribute?.('aria-pressed', String(settings.musicEnabled));
     musicBtn.className = 'settings-toggle-btn ' + (settings.musicEnabled ? 'on' : 'off');
     musicBtn.innerHTML = `
       <span class="rocker-label">Nhạc game</span>
@@ -685,6 +698,11 @@ export function renderMobileSurvivalHUD(state) {
  * Render tổng hợp tất cả bảng điều khiển UI, điều khiển hiển thị giao diện theo giai đoạn game
  */
 export function renderAll() {
+  try { renderPanels(); }
+  finally { if (presentationRefresh) presentationRefresh(); }
+}
+
+function renderPanels() {
   const state = getState();
   const settings = getGameSettings();
 
@@ -729,23 +747,19 @@ export function renderAll() {
     if (state.options && state.options.length > 0) {
       saveOpts.style.display = 'block';
       saveOpts.innerHTML = state.options.map((option, i) =>
-        `<div class="option-item" data-index="${i + 1}">${i + 1}. ${option.text}</div>`
+        `<button type="button" class="option-item" data-index="${i + 1}"><span class="option-number">${i + 1}</span><span class="option-label">${option.text}</span></button>`
       ).join('');
       const clickSettings = getGameSettings();
       if (clickSettings.clickMode) {
         const items = saveOpts.querySelectorAll('.option-item');
         items.forEach(item => {
+          const token = captureOption(state, state.options[parseInt(item.getAttribute('data-index'), 10) - 1]);
           item.addEventListener('click', () => {
-            const index = parseInt(item.getAttribute('data-index'), 10);
-            if (state.phase === 'save_page') {
-              handleSavePageAction(index);
-            } else if (state.phase === 'save_confirm') {
-              handleSaveConfirm(index);
-            }
-            renderAll();
+            dispatchOption(token, renderAll, token.phase === 'save_page' ? handleSavePageAction : handleSaveConfirm);
           });
         });
       }
+      if (!clickSettings.clickMode) saveOpts.querySelectorAll('button').forEach(item => { item.disabled = true; });
     } else {
       saveOpts.style.display = 'none';
     }
@@ -938,7 +952,10 @@ export function initUI() {
     newGameBtn.addEventListener('click', () => {
       const value = nameInput.value.trim();
       if (!value) {
-        alert('Vui lòng nhập biệt danh nhân vật');
+        const feedback = document.getElementById('name-feedback');
+        if (feedback) feedback.textContent = 'Vui lòng nhập biệt danh nhân vật';
+        else showNotice('Vui lòng nhập biệt danh nhân vật');
+        nameInput.focus();
         return;
       }
       const age = document.getElementById('appearance-age-select')?.value || 'young_adult';
@@ -1039,7 +1056,7 @@ export function initUI() {
     clickModeBtn.addEventListener('click', () => {
       const result = toggleClickMode();
       if (!result) {
-        alert('Phải giữ ít nhất một chế độ thao tác');
+        showNotice('Phải giữ ít nhất một chế độ thao tác');
       }
       renderSettingsPage();
     });
@@ -1049,7 +1066,7 @@ export function initUI() {
     inputModeBtn.addEventListener('click', () => {
       const result = toggleInputMode();
       if (!result) {
-        alert('Phải giữ ít nhất một chế độ thao tác');
+        showNotice('Phải giữ ít nhất một chế độ thao tác');
       }
       renderSettingsPage();
     });

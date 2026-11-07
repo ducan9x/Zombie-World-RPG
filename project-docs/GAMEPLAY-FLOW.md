@@ -1,5 +1,17 @@
 # Gameplay Flow — Zombie-World-RPG
 
+## Luồng trình bày Batch 10 (2026-11-07)
+
+- Menu mới: tên nhân vật và bắt đầu/tải lưu là chính; chọn ngoại hình mở qua disclosure. Trình tự reset/name/appearance/choose và nhạc giữ nguyên.
+- Thanh dưới: Hiện trường, Hành trang (Túi/Trang bị/Hồ sơ), Hồ sơ sinh tồn, Hệ thống. Chuyển view chỉ thay presentation state, không tiêu lượt, đổi options/phase hoặc gọi RNG.
+- Hiện trường render mọi phase/options của engine bằng semantic buttons đánh số gốc; map, encounter/result, base/crops, recipes và services có ngữ cảnh riêng. Nội dung và branches không đổi.
+- Túi mở item sheet, destructive actions có confirm sheet, warehouse fullscreen logistics trên mobile; mutation vẫn qua các executors cũ.
+- Mở Save từ Hệ thống gọi gateway cũ; transient phases vẫn bị chặn. Cả click-mode và numeric input đều hoạt động ở save screen. Back của gameplay vẫn qua action/handler thật, không snapshot/restore hoặc teleport.
+- Combat vẫn tính cả trận trong engine sau lựa chọn cận/tầm/chạy; UI chỉ hiển thị pre-combat và log kết quả. Terminal endings chỉ có restart nếu Core cung cấp.
+- Tools chạy offline khi được phục vụ local; không hứa cold hosted offline startup khi chưa có caching/service worker.
+
+Các bước gameplay bên dưới giữ nguyên; thay đổi là đường truy cập và cách trình bày, không phải công thức hay thời gian.
+
 ## 1. Luong choi tu dau den cuoi
 1. Mo trinh duyet tai `index.html`.
 2. `main.js` khoi tao, hien form nhap ten nhan vat (`#name-setup`).

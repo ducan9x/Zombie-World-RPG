@@ -3,7 +3,8 @@
    Thứ tự sắp xếp: Nhập → Ràng buộc đầu vào → Khởi tạo
    ============================================================ */
 
-import { renderAll, initUI, setupPagination } from './ui.js';
+import { renderAll, initUI, setupPagination, setPresentationRefresh, showNotice } from './ui.js';
+import { initPresentation } from './presentation/app.js';
 import { handleAction } from './game/index.js';
 import { processCheatCommand } from './cheats.js';
 import { getState, setStory, setAutoSaveCallback } from './state.js';
@@ -40,7 +41,7 @@ function setupActionInput() {
 
     const value = parseInt(rawValue, 10);
     if (isNaN(value) || value < 1) {
-      alert('Vui lòng nhập đúng lựa chọn');
+      showNotice('Vui lòng nhập đúng lựa chọn');
       input.value = '';
       input.focus();
       return;
@@ -49,7 +50,7 @@ function setupActionInput() {
     renderAll();
     if (pixiRenderer.enabled) pixiRenderer.render(getState());
     input.value = '';
-    input.focus();
+    // Keep the virtual keyboard closed after touch actions; keyboard users retain focus.
   }
 
   btn.addEventListener('click', submitAction);
@@ -67,6 +68,7 @@ function setupActionInput() {
 async function init() {
   setAutoSaveCallback((state) => saveGame(0, state, state.name));
   initUI();
+  initPresentation({ setRefresh: setPresentationRefresh, renderAll });
   setupPagination();
   setupActionInput();
   renderAll();

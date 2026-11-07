@@ -1,5 +1,15 @@
 # Roadmap Plan — Zombie-World-RPG
 
+## Batch 10 — Field Terminal (cập nhật 2026-11-07)
+
+- Stage A: hoàn thành audit/API map và đề xuất, sau đó người dùng phê duyệt toàn quyền triển khai.
+- Stage B/C: đã triển khai design tokens/components, shell Mobile-First, navigation/presentation controller, guarded option adapter, HUD, overlay lifecycle và Pixi scene-only.
+- Stage D: các nhóm UI đã tích hợp vào shell mới; generic phase renderer giữ mọi action/branch, item/kho dùng logic cũ. Các dịch vụ NPC/commerce chưa có bespoke layout cho từng trường hợp.
+- Stage E: đã có progressive enhancement tablet/desktop, không bảo toàn dashboard cũ; production layout checks ở 320/360/375/390/430/768/1024/1280/1366/1920px.
+- Stage F: automated acceptance Chromium đã đạt; **device acceptance chưa đóng**. Còn iOS/Android thật, WebKit/Firefox, toàn bộ branch/save fixtures và performance profiling. Không đánh dấu phát hành đa thiết bị hoàn tất.
+- Deliverables: `project-docs/batch-09/` theo tên đường dẫn yêu cầu cho Batch 10, gồm audit/design/migration/regression/final acceptance và screenshots mobile/desktop.
+- Batch 09 cũ đã tới 09.6; 09.7 cũ không tự coi là đã hoàn thành chỉ vì có UI mới. Lịch sử/roadmap phía dưới được giữ, không ghi đè tiến độ cũ.
+
 Ke hoach trien khai 4 giai doi. Moi lan thuc hien giai doi, cap nhat trang thai vao file nay.
 Xem CHI TIET trang thai o bang tong quan va tung bang chi tiet duoi day.
 

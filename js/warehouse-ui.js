@@ -238,13 +238,13 @@ export function renderWarehouseModal(state) {
         const iconUrl = getItemIconPath(item.id, item.type);
         const countBadge = (item.count && item.count > 1) ? `<span class="wh-item-card-count">x${item.count}</span>` : '';
         return `
-          <div class="wh-item-card ${isSelected ? 'is-selected' : ''}" data-uid="${item.uid}" title="${item.name}">
+          <button type="button" class="wh-item-card ${isSelected ? 'is-selected' : ''}" data-uid="${item.uid}" title="${item.name}">
             ${countBadge}
             <div class="wh-item-card-icon-box">
               <img src="${iconUrl}" alt="" onerror="this.src='public/assets/icons/ui_placeholder_empty.png'">
             </div>
             <div class="wh-item-card-name">${formatQualityName(item)}</div>
-          </div>
+          </button>
         `;
       }).join('');
 
@@ -276,13 +276,13 @@ export function renderWarehouseModal(state) {
         const iconUrl = getItemIconPath(item.id, item.type);
         const countBadge = (item.count && item.count > 1) ? `<span class="wh-item-card-count">x${item.count}</span>` : '';
         return `
-          <div class="wh-item-card ${isSelected ? 'is-selected' : ''}" data-wh-index="${index}" title="${item.name}">
+          <button type="button" class="wh-item-card ${isSelected ? 'is-selected' : ''}" data-wh-index="${index}" title="${item.name}">
             ${countBadge}
             <div class="wh-item-card-icon-box">
               <img src="${iconUrl}" alt="" onerror="this.src='public/assets/icons/ui_placeholder_empty.png'">
             </div>
             <div class="wh-item-card-name">${formatQualityName(item)}</div>
-          </div>
+          </button>
         `;
       }).join('');
 

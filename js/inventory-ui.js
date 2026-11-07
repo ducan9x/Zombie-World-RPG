@@ -894,14 +894,14 @@ export function renderInventoryComponent(state, rerenderCallback) {
         : ((item.count || 1) > 1 ? `<span class="inv-badge-count">×${item.count}</span>` : '');
 
       return `
-<div class="${cardClasses.join(' ')}" data-uid="${item.uid}" title="${item.name}">
+<button type="button" class="${cardClasses.join(' ')}" data-uid="${item.uid}" title="${item.name}">
   ${badgeHtml}
   <div class="inv-card-icon-box">
     <img class="inv-card-icon" src="${iconUrl}" alt="${item.name}" onerror="this.src='public/assets/icons/ui_placeholder_empty.png'">
   </div>
   <div class="inv-card-name">${formatQualityName(item)}</div>
   <div class="inv-card-subtext">${shortStat}</div>
-</div>`;
+</button>`;
     }).join('');
 
     contentHtml = `<div class="inv-cards-grid">${cardsHtml}</div>`;
@@ -970,4 +970,7 @@ export function renderInventoryComponent(state, rerenderCallback) {
       }
     });
   });
+  if (typeof document.dispatchEvent === 'function' && typeof CustomEvent === 'function') {
+    document.dispatchEvent(new CustomEvent('inventory:rendered'));
+  }
 }

@@ -1,0 +1,32 @@
+/* Standalone reader and embedded tools share the Field Terminal identity. */
+body { font: 16px/1.65 var(--ui-font); background: var(--ui-bg); color: var(--ui-text); min-height: 0; }
+.app { display: flex; flex-direction: column; min-height: 0; max-width: 1080px; margin: auto; }
+.tool-categories { margin: 16px; border: 1px solid var(--ui-border); border-radius: 8px; background: var(--ui-surface); }
+.tool-categories > summary { padding: 12px 16px; min-height: 48px; cursor: pointer; color: var(--ui-accent); }
+.tool-categories .sidebar { position: static; height: auto; width: auto; padding: 8px; overflow: visible; background: transparent; border: 0; }
+.sidebar-title { display: none; }
+.nav-item { min-height: 44px; display: flex; align-items: center; gap: 8px; color: var(--ui-text); padding: 12px; border: 1px solid transparent; font-size: .875rem; }
+.nav-item.active { background: var(--ui-raised); color: var(--ui-accent); border-color: var(--ui-border); }
+.nav-item .badge { background: var(--ui-raised); color: var(--ui-muted); font-size: .75rem; }
+.main { min-width: 0; width: 100%; padding: 16px; max-width: none; }
+.page-header { border-color: var(--ui-border); }
+.page-header h1 { font-size: 1.5rem; color: var(--ui-text); }
+.page-header p { color: var(--ui-muted); font-size: .875rem; }
+.search-bar input { min-height: 48px; font: 16px var(--ui-font); color: var(--ui-text); background: var(--ui-surface); border-color: var(--ui-border); }
+.card-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; }
+.card { min-width: 0; background: var(--ui-surface); border: 1px solid var(--ui-border); padding: 16px; overflow-wrap: anywhere; }
+.card-name, h2, h3 { color: var(--ui-text); }
+.card-desc, .card-stats, .sub-category-title { color: var(--ui-muted); font-size: .875rem; }
+.info-box { padding: 16px; color: var(--ui-muted); background: var(--ui-surface); border-color: var(--ui-border); overflow-wrap: anywhere; font-size: .875rem; }
+.sub-table { overflow: visible; }
+table { display: block; width: 100%; min-width: 0; border: 0; margin: 16px 0 24px; }
+thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+tbody { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; }
+tr { display: block; border: 1px solid var(--ui-border); background: var(--ui-surface); border-radius: 8px; padding: 12px; }
+td, td.num { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 12px; padding: 8px 0; text-align: right; border-bottom: 1px solid var(--ui-border); font-size: .8125rem; color: var(--ui-text); overflow-wrap: anywhere; white-space: normal; }
+td::before { content: attr(data-label); color: var(--ui-muted); text-align: left; }
+td:last-child { border-bottom: 0; }
+.container { width: 100%; max-width: 1100px; padding: 16px; margin: auto; }
+.categories, .category-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.category-btn, .copy-btn { min-height: 44px; font-size: .875rem; }
+@media (min-width: 768px) { .card-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } tbody { grid-template-columns: repeat(2,minmax(0,1fr)); } .main { padding: 24px; } }

@@ -1,0 +1,134 @@
+/* Shared primitives. No gameplay formulas or desktop-zone assumptions. */
+.panel, .identity-panel, .weapon-panel, .cargo-panel { min-width: 0; }
+.panel-title, .stats-title { color: var(--ui-muted); font: 700 .75rem/1.5 var(--ui-mono); letter-spacing: .08em; margin-bottom: 16px; }
+.stat-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--ui-border); font-size: .875rem; }
+.stat-label { color: var(--ui-muted); flex: 1; }
+.stat-value { text-align: right; max-width: 63%; overflow-wrap: anywhere; }
+.stat-bar-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin: 18px 0; font-size: .875rem; }
+.stat-bar-track { grid-row: 2; grid-column: 1 / -1; height: 5px; background: var(--ui-raised); overflow: hidden; }
+.stat-bar-fill { height: 100%; max-width: 100%; background: var(--ui-health); }
+.stat-bar-fill.thirst { background: var(--ui-water); }
+.stat-bar-fill.fatigue, .stat-bar-fill.hunger { background: var(--ui-warning); }
+.stat-bar-fill.infection { background: var(--ui-danger); }
+.stat-bar-value { grid-column: 2; grid-row: 1; font-family: var(--ui-mono); }
+.stat-player-card { display: flex; gap: 20px; align-items: center; margin-bottom: 24px; }
+.stat-player-avatar-box { width: 76px; height: 100px; flex: 0 0 auto; background: var(--ui-raised); border-radius: 8px; overflow: hidden; }
+.stat-player-avatar-img { width: 100%; height: 100%; object-position: top; }
+.stat-player-name { font-size: 1.25rem; font-weight: 700; overflow-wrap: anywhere; }
+.stat-player-appearance { color: var(--ui-muted); font-size: .875rem; }
+.section-tabs { display: flex; gap: 4px; padding: 4px; margin-bottom: 24px; border: 1px solid var(--ui-border); border-radius: 8px; }
+.section-tabs button { flex: 1; background: transparent; padding-inline: 6px; border-color: transparent; font-size: .875rem; }
+.section-tabs button[aria-pressed=true] { color: var(--ui-accent); background: var(--ui-raised); }
+.service-links { display: grid; gap: 12px; }
+.service-links button { min-height: 60px; text-align: left; background: var(--ui-surface); }
+.service-links button::after { content: '↗'; float: right; color: var(--ui-accent); margin-left: 8px; }
+.screen-intro { color: var(--ui-muted); margin-bottom: 24px; }
+.back-button { margin-bottom: 24px; background: transparent; }
+.option-item { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 52px; padding: 14px; text-align: left; background: var(--ui-surface); border: 1px solid var(--ui-border); border-radius: 6px; color: var(--ui-text); cursor: pointer; }
+.option-number { font: .75rem var(--ui-mono); color: var(--ui-accent); min-width: 24px; }
+.option-label { min-width: 0; overflow-wrap: anywhere; }
+.option-disabled { opacity: .6; cursor: not-allowed; }
+.option-no-action { color: var(--ui-muted); padding: 16px; }
+.pagination-area { justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; }
+.pagination-btn { min-width: 52px; }
+.scroll-hint { display: none; }
+#input-area { gap: 8px; margin-top: 16px; }
+#input-area:not([style*="none"]) { display: flex; }
+#action-input { min-width: 0; }
+.map-view-toggle-bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; grid-column: 1/-1; margin-bottom: 8px; }
+.map-toolbar-left, .map-toolbar-right { display: flex; flex-wrap: wrap; gap: 8px; }
+.map-ctrl-btn, .map-toggle-btn { font-size: .8125rem; padding: 10px; }
+.map-hover-highlight { outline: 2px solid var(--ui-accent); }
+/* Inventory is a dedicated screen, not a permanent sidebar. */
+.inv-header { margin-bottom: 20px; }
+.inv-header-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.inv-header-title { font-weight: 700; }
+.inv-capacity-text { font: .8125rem var(--ui-mono); white-space: nowrap; color: var(--ui-accent); }
+.inv-capacity-track { height: 4px; background: var(--ui-raised); margin-top: 12px; }
+.inv-capacity-fill { height: 100%; background: var(--ui-accent); }
+.cap-full, .cap-warning { color: var(--ui-warning); }
+.inv-tabs-scroll { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.inv-tab { font-size: .8125rem; padding: 10px 12px; background: transparent; }
+.inv-tab.is-active { border-color: var(--ui-accent); color: var(--ui-accent); }
+.inv-tab-count { color: var(--ui-muted); }
+.inv-cards-grid, .wh-cards-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.inv-card, .wh-item-card { display: flex; position: relative; flex-direction: column; align-items: flex-start; min-width: 0; min-height: 152px; padding: 12px; border: 1px solid var(--ui-border); border-radius: var(--ui-radius); background: var(--ui-surface); text-align: left; }
+.inv-card.is-selected, .wh-item-card.is-selected { border-color: var(--ui-accent); background: var(--ui-raised); }
+.inv-card-icon-box, .wh-item-card-icon-box { width: 100%; height: 72px; display: grid; place-items: center; margin-bottom: 10px; }
+.inv-card-icon, .wh-item-card-icon-box img { width: 64px; height: 64px; }
+.inv-card-name, .wh-item-card-name { font-size: .875rem; overflow-wrap: anywhere; }
+.inv-card-subtext { color: var(--ui-muted); font-size: .75rem; margin-top: 4px; }
+.inv-badge-equipped, .inv-badge-count, .wh-item-card-count { position: absolute; top: 8px; right: 8px; font: .625rem/1.5 var(--ui-mono); background: var(--ui-raised); color: var(--ui-accent); padding: 3px 6px; border-radius: 4px; }
+.inv-detail-panel { margin-top: 24px; border-top: 2px solid var(--ui-accent); padding-top: 20px; scroll-margin-top: 16px; }
+.inv-detail-panel.modal-box { margin: 0; padding: 20px; border-top: 2px solid var(--ui-accent); }
+.inv-detail-header, .inv-detail-title-group { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.inv-detail-header { justify-content: space-between; }
+.inv-detail-title-group > div { min-width: 0; }
+.inv-detail-icon { width: 56px; height: 56px; }
+.inv-detail-name { font-size: 1.125rem; font-weight: 700; overflow-wrap: anywhere; }
+.inv-detail-tag { color: var(--ui-muted); font-size: .8125rem; }
+.inv-detail-close { flex: 0 0 44px; }
+.inv-stat-item { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--ui-border); padding: 10px 0; font-size: .875rem; }
+.inv-stat-label { color: var(--ui-muted); }
+.inv-detail-actions { display: grid; gap: 8px; margin-top: 20px; }
+.inv-empty-state, .inv-detail-hint, .wh-empty-pane { padding: 32px 12px; text-align: center; color: var(--ui-muted); }
+.inv-empty-icon { height: 60px; width: 60px; }
+.btn-discard, .modal-btn-danger { color: var(--ui-danger); border-color: var(--ui-danger); }
+.text-warn, .text-yellow { color: var(--ui-warning); }
+.text-green { color: var(--ui-health); }
+.text-blue, .text-cyan { color: var(--ui-water); }
+/* One modal surface; focus and scroll are managed by overlays.js. */
+.modal-overlay { position: fixed; inset: 0; z-index: 200; background: #000b; padding: max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left)); align-items: flex-end; justify-content: center; }
+.modal-box { width: 100%; max-width: 600px; max-height: calc(100dvh - 24px); overflow-y: auto; background: var(--ui-surface); border: 1px solid var(--ui-border); border-radius: 16px; padding: 20px; }
+.modal-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.modal-title { font-weight: 700; }
+.modal-close-btn { flex: 0 0 44px; }
+.modal-actions { display: flex; gap: 12px; margin-top: 24px; }
+.modal-actions button { flex: 1; }
+.discard-item-preview { display: flex; gap: 16px; align-items: center; }
+.discard-icon-box img { width: 64px; height: 64px; }
+.discard-item-name { overflow-wrap: anywhere; font-weight: 700; }
+.discard-item-stock { font-size: .875rem; color: var(--ui-muted); }
+.discard-warning-banner { padding: 16px 0; color: var(--ui-warning); font-size: .875rem; }
+.discard-qty-row { flex-direction: column; gap: 8px; }
+.discard-qty-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.discard-qty-controls input { width: 64px; flex: 1; }
+.warehouse-header-info { min-width: 0; }
+.wh-level-badge { display: block; color: var(--ui-accent); font: .75rem/1.5 var(--ui-mono); }
+.wh-mobile-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+.wh-tab-btn { flex: 1; font-size: .8125rem; }
+.wh-tab-btn.is-active { color: var(--ui-accent); border-color: var(--ui-accent); }
+.wh-pane-header { display: flex; gap: 12px; justify-content: space-between; font-size: .8125rem; margin-bottom: 16px; }
+.warehouse-dual-container[data-active-pane=backpack] .wh-pane-right, .warehouse-dual-container[data-active-pane=warehouse] .wh-pane-left { display: none; }
+.wh-action-bar { border-top: 1px solid var(--ui-border); margin-top: 20px; padding-top: 16px; }
+.wh-selected-info, .wh-status-msg { font-size: .875rem; color: var(--ui-muted); overflow-wrap: anywhere; }
+.wh-transfer-buttons { gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.wh-transfer-buttons button { flex: 1; }
+dialog { color: var(--ui-text); background: var(--ui-surface); border: 1px solid var(--ui-border); border-radius: 16px; width: min(440px,calc(100% - 24px)); padding: 24px; }
+dialog::backdrop { background: #000b; }
+.dialog-content { display: grid; gap: 20px; }
+/* Encounter: real pre-combat choices and resolved log, never simulated turns. */
+.combat-hud { margin-bottom: 24px; }
+.combat-hud-header { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; font: .6875rem/1.5 var(--ui-mono); color: var(--ui-danger); margin-bottom: 16px; }
+.combat-enemy-card { display: grid; grid-template-columns: 80px minmax(0,1fr); align-items: center; gap: 16px; padding: 16px; background: var(--ui-surface); border: 1px solid var(--ui-border); border-left: 3px solid var(--ui-danger); border-radius: 8px; }
+.combat-enemy-visual { height: 112px; position: relative; }
+.combat-enemy-sprite { width: 100%; height: 100%; object-position: top; }
+.combat-enemy-name { font-size: 1.125rem; font-weight: 700; }
+.combat-enemy-details { min-width: 0; overflow-wrap: anywhere; }
+.combat-hp-label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font: .75rem/1.5 var(--ui-mono); margin: 8px 0; }
+.combat-hp-track { height: 5px; background: var(--ui-raised); }
+.combat-hp-fill { height: 100%; background: var(--ui-danger); }
+.combat-enemy-meta, .combat-ability-list { font-size: .75rem; color: var(--ui-muted); display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.combat-ability-tag { border: 1px solid var(--ui-border); border-radius: 4px; padding: 2px 6px; }
+.combat-defeated-overlay { position: absolute; bottom: 0; font-size: .625rem; background: var(--ui-bg); color: var(--ui-accent); }
+.combat-log-container { margin-top: 24px; border-top: 1px solid var(--ui-border); }
+.combat-log-title { font: .75rem/1.5 var(--ui-mono); padding: 16px 0; color: var(--ui-accent); }
+.combat-log-row { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #28332e; font-size: .875rem; }
+.combat-log-icon, .combat-log-bullet { flex: 0 0 20px; }
+.combat-log-text { min-width: 0; }
+.combat-log-enemy-hit, .combat-log-defeat { color: var(--ui-danger); }
+.combat-log-victory { color: var(--ui-health); }
+.combat-log-crit, .combat-log-status { color: var(--ui-warning); }
+.combat-epilogue-text { margin-top: 24px; }
+@media (min-width: 600px) { .inv-cards-grid { grid-template-columns: repeat(3,minmax(0,1fr)); } .modal-overlay { align-items: center; } }
+@media (min-width: 900px) { .warehouse-modal-box { max-width: 860px; } .warehouse-dual-container { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; } .warehouse-dual-container .wh-pane { display: block !important; } .wh-mobile-tabs { display: none; } }

@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bách khoa toàn thư — Thế Giới Zombie</title>
   <link rel="icon" href="../public/icon/icon.png">
+  <script type="module" src="presentation.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -300,7 +301,7 @@ function renderAll(data, container) {
       const grid = title.parentElement.querySelectorAll('.card-grid');
       let hasAny = false;
       grid.forEach(g => {
-        if (g.querySelector('.card[style=""') || g.querySelector('.card:not([style*="display"])')) hasAny = true;
+        if (g.querySelector('.card[style=""]') || g.querySelector('.card:not([style*="display"])')) hasAny = true;
         if (g.querySelector('.card') && !g.querySelector('.card[style*="display: none"]')) hasAny = true;
       });
     });

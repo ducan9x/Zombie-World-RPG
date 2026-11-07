@@ -426,6 +426,13 @@ export class PixiRenderer {
 
     // 3. Cap nhat danh sach thuc the (NPC) qua Object Pool
     this._updateEntities(state);
+    // Field Terminal owns the accessible HUD. Keep this renderer as a scene,
+    // without changing its default contract for legacy consumers or tests.
+    if (this.sceneOnly) {
+      for (const object of [this.locText, this.dayText, this.hpBarBg, this.hpBar, this.hpIconSprite, this.hpLabel, this.bgBorder, ...this.entityPool]) {
+        if (object) object.visible = false;
+      }
+    }
   }
 
   _updateLocation(state) {
@@ -463,7 +470,7 @@ export class PixiRenderer {
     if (mapId) {
       return `public/assets/backgrounds/map_${mapId}_bg.webp`;
     }
-    return null;
+    return this.sceneOnly ? 'public/assets/backgrounds/ui_main_menu_bg.webp' : null;
   }
 
   _updateWorldInfo(state) {

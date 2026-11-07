@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "node --experimental-vm-modules tests/test_batch06_final_validation.cjs && node --experimental-vm-modules tests/test_phase3_1_regression.cjs && node --experimental-vm-modules tests/test_batch05_item_icons.cjs && node --experimental-vm-modules tests/test_batch07_map_integration.cjs && node --experimental-vm-modules tests/test_batch07_phase7_4_ux.cjs && node --experimental-vm-modules tests/test_batch08_phase8_2_consistency.cjs && node --experimental-vm-modules tests/test_batch08_phase8_3_ux.cjs && node --experimental-vm-modules tests/test_batch08_phase8_4_final_qa.cjs && node --experimental-vm-modules tests/test_batch09_phase09_3_mobile_layout.cjs && node --experimental-vm-modules tests/test_batch09_phase09_4_subscreens.cjs && node --experimental-vm-modules tests/test_batch09_phase09_5_combat_story.cjs && node --experimental-vm-modules tests/test_batch09_phase09_6_pixi_map.cjs",
+    "test:batch10": "node --experimental-vm-modules tests/test_batch10_contracts.cjs && node tests/test_batch10_browser.cjs",
+    "test:all": "npm test && node --experimental-vm-modules tests/audit_batch07_final.cjs && npm run test:batch10",
     "start": "node server.js"
   },
   "keywords": [],

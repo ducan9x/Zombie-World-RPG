@@ -1,0 +1,403 @@
+
+> zombie-world@1.0.0 test:all
+> npm test && node --experimental-vm-modules tests/audit_batch07_final.cjs && npm run test:batch10
+
+
+> zombie-world@1.0.0 test
+> node --experimental-vm-modules tests/test_batch06_final_validation.cjs && node --experimental-vm-modules tests/test_phase3_1_regression.cjs && node --experimental-vm-modules tests/test_batch05_item_icons.cjs && node --experimental-vm-modules tests/test_batch07_map_integration.cjs && node --experimental-vm-modules tests/test_batch07_phase7_4_ux.cjs && node --experimental-vm-modules tests/test_batch08_phase8_2_consistency.cjs && node --experimental-vm-modules tests/test_batch08_phase8_3_ux.cjs && node --experimental-vm-modules tests/test_batch08_phase8_4_final_qa.cjs && node --experimental-vm-modules tests/test_batch09_phase09_3_mobile_layout.cjs && node --experimental-vm-modules tests/test_batch09_phase09_4_subscreens.cjs && node --experimental-vm-modules tests/test_batch09_phase09_5_combat_story.cjs && node --experimental-vm-modules tests/test_batch09_phase09_6_pixi_map.cjs
+
+====================================================
+   BATCH 06 – PHASE 4.1: FINAL ACCEPTANCE AUDIT     
+====================================================
+
+(node:5472) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] #1 Fatigue icon: File: 2048x2048, HTML contains icon: true, Emoji 💪 removed: true
+[PASS] #2 Pure Energy icon: File: 2048x2048, HTML contains icon: true, Emoji 🔋 removed: true
+[PASS] #3 Castle Debt icon: File: 2048x2048, HTML contains icon: true, Emoji 🏰 removed: true
+[PASS] #4 Durability icon: File: 2048x2048, HTML contains icon: true, Emoji 🛡️ removed: true
+[PASS] #5 Không còn icon trùng emoji: Checked 9 HUD stat rows. Double-icon collision detected: false
+[PASS] #6 Options pagination: Single page: hidden=true, no placeholders=true; Multi-page: page=1/2, prevDisabled=true
+[PASS] #7 Combat enemy sprite: HUD generated: true, Sprite image embedded: true
+[PASS] #8 Combat HP bar: HP Bar rendered: true, Dynamic HP tracking: true
+[PASS] #9 Combat log: Differentiated logs: Player=true, Enemy=true, Crit=true, Dodge=true
+[PASS] #10 Combat victory / defeat / flee: Defeated state: true, Flee dismissed HUD: true
+[PASS] #11 Inventory category: Categories segmented: Food=1, Med=1, Materials=1, Weapons=2
+[PASS] #12 Inventory actions: Executed action 'eat': Food count 2->1, Hunger 50->65
+[PASS] #13 Inventory index mapping: Targeted item_b consumed cleanly, item_a untouched (count=2)
+[PASS] #14 Backpack capacity: Calculated sum=15 / capacity=25 (Matches gameplay getBackpackCount)
+[PASS] #15 Save / Load: Temporary UI keys stripped=true, Game state preserved=true
+[PASS] #16 Desktop responsive: 4-zone layout verified with clean container boundaries
+[PASS] #17 Tablet responsive: Media query max-width 768px verified with 2x2 grid and 14px icon scaling
+[PASS] #18 Mobile responsive: Media query max-width 480px verified with mobile typography
+[PASS] #19 Runtime console: All 9 JS ES modules verified with zero syntax errors
+[PASS] #20 Asset loading: Verified 15 UI assets on disk. Missing assets: None
+
+====================================================
+TOTAL AUDIT ITEMS: 20 | PASS: 20 | FAIL: 0
+====================================================
+
+=== RUNNING BATCH 06 PHASE 3.1 REGRESSION AUDIT ===
+
+(node:17192) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] Test 1: Lọc thực phẩm rồi sử dụng vật phẩm - Thịt hộp count=2, Bánh mì count=2, hunger=70
+[PASS] Test 2: Lọc thuốc rồi sử dụng vật phẩm - med_01 count=3, med_02 consumed, health=75
+[PASS] Test 3: Lọc nguyên liệu rồi vứt bỏ - Gỗ count=10, Đá count=4
+[PASS] Test 4: Chọn item rồi chuyển category - Selected item reset to null: true
+[PASS] Test 5: Sử dụng hết số lượng item - Food length=0, selection=null
+[PASS] Test 6: Vứt bỏ item đang chọn - Other length=0, selection=null
+[PASS] Test 7: Click nhanh nút sử dụng nhiều lần - Count decreased once: true, hunger=10
+[PASS] Test 8: Trang bị vũ khí từ inventory - Equipped weapon=Dao Găm Nhỏ
+[PASS] Test 9: Tháo vũ khí - Equipped after unequip=Nắm Đấm, Stored in other: true
+[PASS] Test 10: Đổi balo - New backpack=Balo leo núi, capacity=34
+[PASS] Test 11: Inventory có item stack - Calculated capacity count=28/30
+[PASS] Test 12: Save / Load - Saved without UI selection: true, Food preserved: true
+[PASS] Test 13: Inventory rỗng - Rendered empty state without error: true
+[PASS] Test 14: Item bị xóa từ gameplay khác - Stale selection auto-cleared: true
+[PASS] Test 15: RenderAll liên tục - Clean idempotent rendering verified
+
+=== AUDIT SUMMARY ===
+TOTAL TESTS: 15 | PASSED: 15 | FAILED: 0
+====================================================
+   BATCH 05 – PHASE 1: ITEM ICON INTEGRATION TEST   
+====================================================
+
+(node:5844) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] #1: Mapping dictionary contains 162 mapped game items (>= 140)
+[PASS] #2: All mapped SwisserAI WebP files (100x100 and 256x256) exist on disk
+[PASS] #3: Food item (banh_mi_lua_mi) maps to bread.webp in 100 and 256 sizes
+[PASS] #4: Drink item (nuoc_khoang) maps to water_bottle.webp
+[PASS] #5: Medical item (bang_keo) maps to bandage.webp
+[PASS] #6: Backpack item (balo_le_nui) maps to backpack.webp
+[PASS] #7: Melee tool item (bua_sat_nho) maps to hammer.webp
+[PASS] #8: Ammo item (9×19mm) maps to pistol_ammo.webp
+[PASS] #9: Unmapped melee weapon safely falls back to ui_icon_melee_slot.png
+[PASS] #10: Unmapped ranged weapon safely falls back to ui_icon_ranged_slot.png
+[PASS] #11: Pure energy item uses custom Batch 06 icon
+[PASS] #12: Explicit item.icon takes precedence over mapped icon
+[PASS] #13: Null/empty item safely falls back to ui_placeholder_empty.png
+[PASS] #14: getItemIconEntry correctly retrieves quality & packCategory metadata
+
+====================================================
+TOTAL AUDIT ITEMS: 14 | PASS: 14 | FAIL: 0
+====================================================
+
+====================================================
+   BATCH 07 – PHASE 7.3: MAP INTEGRATION TEST AUDIT  
+====================================================
+
+(node:16708) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] #1 Open graphical map: phase=map_select, options count=23, back option present=true
+[PASS] #2 Close graphical map: phase=choose, returnedHome=true, options reset=true
+[PASS] #3 Reopen map repeatedly: 5 consecutive open/close cycles executed cleanly without state drift
+[PASS] #4 POI click invokes navigation handler: Target option #3 chosen: Time advanced 1 turn (PhaseIndex 0->1, Hunger 100->96)
+[PASS] #5 Current location updates via gameplay logic: state.location="Tháp Canh Đỉnh Núi Hoang Vắng", currentMap.id="thap_canh_bo_roi", mapsExplored recorded=true
+[PASS] #6 Player token updates to current location: Location "thap_canh_bo_roi" mapped to [0, 4]; Home at [4, 4]
+[PASS] #7 Textual Fast Travel preserved & consistent: Options rendered with toggle bar: true, 22 maps in options: true, back option present: true
+[PASS] #8 Hidden locations cannot be selected: dao_nho in options: false, dao_nho.hidden: true, absent from MAP_COORDINATES: true
+[PASS] #9 Invalid/unmapped POIs fallback safely: Crashed: false, Player token fell back to home X: 144 (expected 144)
+[PASS] #10 Save/Load compatibility preserved: Raw save stripped transient keys: true, Location preserved: true, Day & stats intact: true
+[PASS] #11 Opening/closing map does not mutate state: Day: 3->3, Hunger: 75->75, Health: 100->100, Food: 3->3
+[PASS] #12 Combat & other screens remain unaffected: Combat phase preserved: true, Inventory state intact: true, Combat render clean: true
+
+====================================================
+TOTAL AUDIT ITEMS: 12 | PASS: 12 | FAIL: 0
+====================================================
+
+====================================================
+   BATCH 07 – PHASE 7.4: MAP UX & POLISH AUDIT      
+====================================================
+
+(node:11100) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] #1 POI hover & tactical card feedback: Card visible on hover: true, Title: "Lâu đài Tận thế", Badge: "[AN TOÀN]", Hidden on out: true
+[PASS] #2 Zoom controls & cycling: 1.25x (scale=1.25) -> 1.5x (scale=1.5) -> 1.0x cycle (scale=1)
+[PASS] #3 Tactical grid toggle: Initial: false -> Toggled: true -> Toggled: false
+[PASS] #4 Viewport boundaries & clamping: At 1.5x: [x=0, y=0] within [-320, -160]; Reset 1.0x: [0, 0]
+[PASS] #5 Renderer cleanup & zero lifecycle leaks: Animations: 24 -> 0, Ticker handlers remaining in memory: 0
+[PASS] #6 Repeated map open/close cycles: 10 rapid open/close cycles completed with clean container visibility toggle
+[PASS] #7 No duplicate event handlers & action debouncing: Debounce guard verified: isActionPending prevented double-trigger
+[PASS] #8 Zero gameplay mutation from visual UX interactions: Day: 4/4, Hunger: 80/80, Health: 90/90, Location: "Lều Người Sống Sót"
+
+====================================================
+TOTAL AUDIT ITEMS: 8 | PASS: 8 | FAIL: 0
+====================================================
+
+====================================================
+   BATCH 08 – PHASE 8.2: ASSET & UI CONSISTENCY TEST
+====================================================
+
+(node:16900) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] #1: Zero decorative emojis in js/map-events (found: 0)
+[PASS] #2: All 3 settlement interior backgrounds exist and are >100KB WebP
+[PASS] #3: _resolveBackground correctly maps castle_bank, castle_treatment, and trading_post
+[PASS] #4: ITEM_ICON_MAP expanded with stone, strange_recorder, generator, gel, and seeds
+[PASS] #5: All newly mapped SwisserAI WebP assets (100x100 & 256x256) exist on disk
+[PASS] #6: Total mapped items count is 162 (increased from 143)
+
+====================================================
+TOTAL AUDIT ITEMS: 6 | PASS: 6 | FAIL: 0
+====================================================
+
+====================================================
+   BATCH 08 – PHASE 8.3: GAMEPLAY UX & FLOW TEST    
+====================================================
+
+(node:1276) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] #1: Discard modal cancel safety (Opened: true, Cancelled cleanly, count untouched: true)
+[PASS] #2: Discard partial quantity (2 of 5) (Remaining count: 3 (expected 3))
+[PASS] #3: Discard all quantity (Food array length: 0 (expected 0))
+[PASS] #4: Warehouse dual-pane open & capacity badges (Badge: "Cấp 2 (2/40 ô)", WH Cap: "2/40 ô", BP Cap: "6/20 ô")
+[PASS] #5: Warehouse deposit & stack merge (WH slots: 1, WH count: 5, BP food empty: true)
+[PASS] #6: Warehouse full capacity guard (Blocked: true, Count: 30/30, Error shown: true)
+[PASS] #7: Warehouse withdraw & backpack stacking (BP drinks count: 4, WH empty: true)
+[PASS] #8: Player tools internalized tabs & clean disposal (Tab 1: tools/probability.html, Tab 2: tools/encyclopedia.html, Ext URL: tools/encyclopedia.html, Disposed: true)
+[PASS] #9: Tactical settings rocker switches & LED state (ClickMode ON with LED: true, InputMode OFF: true)
+[PASS] #10: Narrative scroll preservation (threshold <= 80px) (At bottom auto-scrolled: true, Scrolled up preserved: true)
+
+====================================================
+TOTAL AUDIT ITEMS: 10 | PASS: 10 | FAIL: 0
+====================================================
+
+====================================================
+   BATCH 08 – PHASE 8.4: FINAL QA & RELEASE AUDIT   
+====================================================
+
+(node:18864) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] #1: Source code syntax & module integrity (Verified 126 ES modules with zero syntax/import errors)
+[PASS] #2: Asset integrity & Boss sprite paths (Doctor: public/assets/characters/npcs/npc_tien_si_tran.png (true), King: public/assets/characters/npcs/npc_vua_karen.png (true))
+[PASS] #3: Character init & appearance asset resolution (Name: Survivor_QA, Path: public/assets/characters/player/young_adult_male_survivor.png)
+[PASS] #4: World Map POI and coordinate graph consistency (Total POIs: 23, Missing Coordinates: 0)
+[PASS] #5: Combat damage and status effect processing (HP: 100->85, Inf: 10, Fatigue: 5)
+[PASS] #6: Save/Load normalization of legacy state (Warehouse initialized: true, Appearance: true, Crops: true)
+[PASS] #7: Corrupted data & storage quota crash immunity (Corrupted load: true, Handled storage exceptions cleanly: true)
+[PASS] #8: Transient UI state stripped from saves (Transient keys found in save payload: false)
+[PASS] #9: Mobile responsive media queries (768px, 640px, 480px) (768px: true, 640px: true, 480px: true, Warehouse flex-col: true)
+[PASS] #10: Production server security and MIME configuration (Start script: true, WebP MIME: true, Traversal guard: true)
+
+====================================================
+TOTAL AUDIT ITEMS: 10 | PASS: 10 | FAIL: 0
+====================================================
+
+====================================================
+   BATCH 09 – PHASE 09.3: MOBILE LAYOUT AUDIT       
+====================================================
+
+[PASS] #1: Mobile Header & Navigation DOM Structure (Header: true, HUD: true, Tabs: true, Buttons: true)
+[PASS] #2: Survival HUD Vitals & Telemetry Binds (HP: true, Hunger: true, Thirst: true, Day: true, Location: true)
+[PASS] #3: WAI-ARIA Roles & Accessibility Attributes (Tablist: true, RoleTab: true, AriaSelected: true, AriaControls: true)
+[PASS] #4: Mobile Stylesheet Rules & 40/60 Grid Elimination (Query <768px: true, SingleCol: true, StickyHeader: true, ZoneRules: true)
+[PASS] #5: Desktop & Tablet Layout Protection Rules (Desktop: true, Tablet: true, HeaderHidden: true, AllZonesDesktop: true)
+(node:19788) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] #6: JS Navigation & Mobile View Switching Cycle (Init: gameplay, Inv: inventory, Char: character, Gameplay: gameplay)
+[PASS] #7: Survival HUD Live State Synchronization (HP: 85 (28%), Hunger: 60%, Day: Ngày 4 Sáng sớm, Loc: Trạm Y Tế Bỏ Hoang)
+[PASS] #8: Production Field Terminal browser acceptance (replaces retired four-zone fixture) (BATCH10 BROWSER: 81 PASS / 0 FAIL / 0 SKIP)
+
+====================================================
+TOTAL AUDIT ITEMS: 8 | PASS: 8 | FAIL: 0
+====================================================
+
+====================================================
+   BATCH 09 – PHASE 09.4: SUBSCREENS & MODALS AUDIT  
+====================================================
+
+[PASS] #1: Warehouse Modal Mobile Switcher DOM Structure (WhTabs: true, BackpackTab: true, WarehouseTab: true, Panes: true)
+[PASS] #2: Discard Modal & Sub-screens DOM Structure (DiscardControls: true, ReturnButtons: true)
+[PASS] #3: Stylesheet Touch Targets & Rules Inspection (<768px) (InvTabs44: true, InvCardsGrid: true, Actions44: true, WhTabs44: true, Discard44: true, Return44: true)
+[PASS] #4: Desktop & Tablet Layout Protection Rules (MinWidth768: true, HideWhTabs: true, DualPaneRow: true, BothPanes: true)
+(node:13768) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] #5: JS Mobile Warehouse Tabs Switcher Logic (Init: backpack, SwitchToWh: warehouse (attr=true), SwitchToBp: backpack (attr=true))
+[PASS] #6: Inventory Live Category & Card Rendering (ScrollTabs: true, 7Categories: true, Grid: true, CardRendered: true)
+[PASS] #7: Production Field Terminal subscreens browser acceptance (BATCH10 BROWSER: 81 PASS / 0 FAIL / 0 SKIP)
+
+====================================================
+TOTAL AUDIT ITEMS: 7 | PASS: 7 | FAIL: 0
+====================================================
+
+====================================================
+   BATCH 09 – PHASE 09.5: COMBAT & STORY AUDIT      
+====================================================
+
+[PASS] #1: Compact Combat HUD Stylesheet Rules (<768px) (HudCompact: true, VisualCompact: true, NameClamp: true, Track8px: true, LogBodyVisible: true)
+(node:1792) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] #2: Enemy Classification & HUD Data Binding (BossClass: BOSS CHIẾN DỊCH, MutantClass: ZOMBIE ĐỘT BIẾN, HpRendered: true, Sprite: public/assets/zombies/zombie_king.png)
+[PASS] #3: Combat Log Differentiation & Visual Categories (PlayerHit: true, EnemyHit: true, Crit: true, Dodge: true, Victory: true, Defeat: true)
+[PASS] #4: Smart Auto-Scroll & History Scroll Preservation (NearBottomScrolled: true, HistoryPreserved: true)
+[PASS] #5: Action Dock Touch Sizing Inspection (<768px) (Option44: true, Badge22: true, Pagination44: true, Input16px: true, Submit44: true)
+[PASS] #6: Desktop Combat & Dashboard Preservation Rules (MinWidth1024: true, DesktopZones: true, DesktopCard120px: true)
+[PASS] #7: Production Field Terminal combat/story browser acceptance (BATCH10 BROWSER: 81 PASS / 0 FAIL / 0 SKIP)
+
+====================================================
+TOTAL AUDIT ITEMS: 7 | PASS: 7 | FAIL: 0
+====================================================
+
+====================================================
+   BATCH 09 – PHASE 09.6: PIXI CANVAS & MAP AUDIT   
+====================================================
+
+[PASS] #1: CSS Viewport & Canvas 2:1 Aspect Ratio & Mobile Controls (ViewportAspect: true, CanvasAspect: true, MobileViewport: true, CtrlBtn44: true, ToggleBtn44: true)
+[PASS] #2: POI Coordinates, Boundary Safety & 44px Hit Areas (POIs: 22/22, MinDistance: 48.0px (lang_nong_trai_nui-khu_cong_nghiep), AllInBounds: true)
+[PASS] #3: PixiRenderer Lifecycle, Debounced Resize & DPR Cap (IdempotentInit: true, Debounce: true, Orientation: true, Observer: true, DprCap: true, Cleanup: true)
+[PASS] #4: World Map HitArea, Card Clamping & Zoom Levels (HitAreaCircle22: true, CardClamp: true, ReticleFeedback: true, ZoomLevels: true)
+[PASS] #5: Repeated View Switching (20 Cycles) Stability (Cycles: 20, ImmediateResizes: 40, ReRenders: 40, Stable: true)
+[PASS] #6: Graphical Combat Transition & State Isolation (MapSelectBranch: true, IdleTransition: true, ResolveBg: true)
+[PASS] #7: Production Field Terminal Pixi/map browser acceptance (BATCH10 BROWSER: 81 PASS / 0 FAIL / 0 SKIP)
+[PASS] #8: Mobile Landscape Architecture & Zero Canvas Collapse (LandscapeQuery: true, SideBySide54_46: true, Ratio2to1: true, RowFlex: true)
+[PASS] #9: Deterministic Screen-Space POI Touch Hit-Testing & Closest Neighbors (FindNearest: true, SelectPOI: true, ClosestPairDifferentiated: true, EdgePOIsAccessible: true, EmptyIgnored: true)
+
+====================================================
+TOTAL AUDIT ITEMS: 9 | PASS: 9 | FAIL: 0
+====================================================
+
+====================================================
+   BATCH 07 – PHASE 7.5: FINAL ACCEPTANCE AUDIT     
+====================================================
+
+>>> [STEP 1: PHYSICAL ASSET & ATLAS AUDIT] <<<
+[PASS] [Asset] #1 Atlas files on disk: JSON: true, PNG: true, WebP: true
+[PASS] [Asset] #2 Atlas dimensions & frames: Dimensions: 512x512 (512x512 PoT: true), Total Frames: 33
+[PASS] [Asset] #3 Frame boundary conformance: Out of bounds frames: 0
+[PASS] [Asset] #4 Individual fallback tiles: Found 33 individual PNG tile assets on disk
+
+>>> [STEP 2: POI MAPPING VS MAPS DEFINITION AUDIT] <<<
+(node:2800) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] [Mapping] #5 All non-hidden locations mapped in 20x10 grid: Mapped count: 22/22 non-hidden locations; Unmapped or out-of-bounds: None
+[PASS] [Mapping] #6 Hidden location protection (dao_nho): dao_nho excluded from MAP_COORDINATES: true
+[PASS] [Mapping] #7 Danger level resolution & color coding: All 23 map danger ranks resolved cleanly
+
+>>> [STEP 3: 20-CYCLE REOPEN & LIFECYCLE AUDIT] <<<
+[PASS] [Lifecycle] #8 20-Cycle Reopen & Ticker Cleanup: 20 consecutive open/close cycles executed. Active tickers remaining: 0 (Expected: 0)
+
+>>> [STEP 4: DUAL CONTROL & GAMEPLAY EXECUTION AUDIT] <<<
+[PASS] [Gameplay] #9 Fast Travel execution via existing pipeline: Target: "benh_vien_ngoai_thanh", Location: "Bệnh Viện Ngoại Thành", PhaseIndex: 0->1, Explored recorded: true
+[PASS] [Gameplay] #10 Player token relocation to destination: Token X: 336 (expected 336)
+
+>>> [STEP 5: SAVE/LOAD COMPATIBILITY AUDIT] <<<
+[PASS] [SaveLoad] #11 Save/Load roundtrip & UI state purity: Transient keys stripped: true, Location preserved on load: "Bệnh Viện Ngoại Thành"
+
+====================================================
+FINAL ACCEPTANCE AUDIT TOTALS: 11 CHECKS | 11 PASS | 0 FAIL
+====================================================
+
+
+> zombie-world@1.0.0 test:batch10
+> node --experimental-vm-modules tests/test_batch10_contracts.cjs && node tests/test_batch10_browser.cjs
+
+[PASS] 1: 117 authoritative Core/data modules remain byte-equivalent (normalized EOL)
+[PASS] 2: Inventory command implementation unchanged
+[PASS] 3: Warehouse transfer implementations unchanged
+(node:17848) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[PASS] 4: Differential sleep: exact state, options, RNG and storage
+[PASS] 5: Differential eat selection: exact state, options, RNG and storage
+[PASS] 6: Differential drink selection: exact state, options, RNG and storage
+[PASS] 7: Differential medicine selection: exact state, options, RNG and storage
+[PASS] 8: Differential equipment selection: exact state, options, RNG and storage
+[PASS] 9: Differential goOut / map options: exact state, options, RNG and storage
+[PASS] 10: Differential discard selection: exact state, options, RNG and storage
+[PASS] 11: Differential save gateway: exact state, options, RNG and storage
+[PASS] 12: Differential partner harvest: exact state, options, RNG and storage
+[PASS] 13: Differential base building: exact state, options, RNG and storage
+[PASS] 14: Differential survival notes: exact state, options, RNG and storage
+[PASS] 15: Differential main menu: exact state, options, RNG and storage
+[PASS] 16: Stale options token rejected without mutation
+[PASS] 17: Unregistered option cannot dispatch by matching label
+[PASS] 18: Disabled command remains Core-owned and has identical result
+[PASS] 19: Missing-field historical-shaped save normalizes through original loader
+[PASS] 20: Corrupt save fails safely through original loader
+[PASS] 21: All 11 slots retain original metadata contract
+[PASS] 22: Shell has no external font or script dependency
+BATCH10 CONTRACTS: 22 PASS / 0 FAIL
+Real browser: C:\Program Files\Google\Chrome\Application\chrome.exe
+[PASS] 1: New styles load and app initializes
+[PASS] 2: 320px character setup stays within viewport
+[PASS] 3: 375px character setup stays within viewport
+[PASS] 4: 430px character setup stays within viewport
+[PASS] 5: Empty name stays in setup and reports inline validation
+[PASS] 6: Create character enters canonical choose phase
+[PASS] 7: Pure navigation preserves entire game state
+[PASS] 8: One persistent Pixi canvas
+[PASS] 9: Touch event opens loadout without consuming a turn
+[PASS] 10: 320px field: no overflow and all buttons >=44 CSS px ({"width":320,"scroll":320,"small":[],"main":320})
+[PASS] 11: 320px loadout: no overflow and all buttons >=44 CSS px ({"width":320,"scroll":320,"small":[],"main":320})
+[PASS] 12: 320px journal: no overflow and all buttons >=44 CSS px ({"width":320,"scroll":320,"small":[],"main":320})
+[PASS] 13: 320px system: no overflow and all buttons >=44 CSS px ({"width":320,"scroll":320,"small":[],"main":320})
+[PASS] 14: 360px field: no overflow and all buttons >=44 CSS px ({"width":360,"scroll":360,"small":[],"main":360})
+[PASS] 15: 360px loadout: no overflow and all buttons >=44 CSS px ({"width":360,"scroll":360,"small":[],"main":360})
+[PASS] 16: 360px journal: no overflow and all buttons >=44 CSS px ({"width":360,"scroll":360,"small":[],"main":360})
+[PASS] 17: 360px system: no overflow and all buttons >=44 CSS px ({"width":360,"scroll":360,"small":[],"main":360})
+[PASS] 18: 375px field: no overflow and all buttons >=44 CSS px ({"width":375,"scroll":375,"small":[],"main":375})
+[PASS] 19: 375px loadout: no overflow and all buttons >=44 CSS px ({"width":375,"scroll":375,"small":[],"main":375})
+[PASS] 20: 375px journal: no overflow and all buttons >=44 CSS px ({"width":375,"scroll":375,"small":[],"main":375})
+[PASS] 21: 375px system: no overflow and all buttons >=44 CSS px ({"width":375,"scroll":375,"small":[],"main":375})
+[PASS] 22: 390px field: no overflow and all buttons >=44 CSS px ({"width":390,"scroll":390,"small":[],"main":390})
+[PASS] 23: 390px loadout: no overflow and all buttons >=44 CSS px ({"width":390,"scroll":390,"small":[],"main":390})
+[PASS] 24: 390px journal: no overflow and all buttons >=44 CSS px ({"width":390,"scroll":390,"small":[],"main":390})
+[PASS] 25: 390px system: no overflow and all buttons >=44 CSS px ({"width":390,"scroll":390,"small":[],"main":390})
+[PASS] 26: 430px field: no overflow and all buttons >=44 CSS px ({"width":430,"scroll":430,"small":[],"main":430})
+[PASS] 27: 430px loadout: no overflow and all buttons >=44 CSS px ({"width":430,"scroll":430,"small":[],"main":430})
+[PASS] 28: 430px journal: no overflow and all buttons >=44 CSS px ({"width":430,"scroll":430,"small":[],"main":430})
+[PASS] 29: 430px system: no overflow and all buttons >=44 CSS px ({"width":430,"scroll":430,"small":[],"main":430})
+[PASS] 30: 768px field: no overflow and all buttons >=44 CSS px ({"width":768,"scroll":768,"small":[],"main":766})
+[PASS] 31: 768px loadout: no overflow and all buttons >=44 CSS px ({"width":768,"scroll":768,"small":[],"main":766})
+[PASS] 32: 768px journal: no overflow and all buttons >=44 CSS px ({"width":768,"scroll":768,"small":[],"main":766})
+[PASS] 33: 768px system: no overflow and all buttons >=44 CSS px ({"width":768,"scroll":768,"small":[],"main":766})
+[PASS] 34: 1024px field: no overflow and all buttons >=44 CSS px ({"width":1024,"scroll":1024,"small":[],"main":1022})
+[PASS] 35: 1024px loadout: no overflow and all buttons >=44 CSS px ({"width":1024,"scroll":1024,"small":[],"main":1022})
+[PASS] 36: 1024px journal: no overflow and all buttons >=44 CSS px ({"width":1024,"scroll":1024,"small":[],"main":1022})
+[PASS] 37: 1024px system: no overflow and all buttons >=44 CSS px ({"width":1024,"scroll":1024,"small":[],"main":1022})
+[PASS] 38: 1280px field: no overflow and all buttons >=44 CSS px ({"width":1280,"scroll":1280,"small":[],"main":1198})
+[PASS] 39: 1280px loadout: no overflow and all buttons >=44 CSS px ({"width":1280,"scroll":1280,"small":[],"main":1198})
+[PASS] 40: 1280px journal: no overflow and all buttons >=44 CSS px ({"width":1280,"scroll":1280,"small":[],"main":1198})
+[PASS] 41: 1280px system: no overflow and all buttons >=44 CSS px ({"width":1280,"scroll":1280,"small":[],"main":1198})
+[PASS] 42: 1366px field: no overflow and all buttons >=44 CSS px ({"width":1366,"scroll":1366,"small":[],"main":1198})
+[PASS] 43: 1366px loadout: no overflow and all buttons >=44 CSS px ({"width":1366,"scroll":1366,"small":[],"main":1198})
+[PASS] 44: 1366px journal: no overflow and all buttons >=44 CSS px ({"width":1366,"scroll":1366,"small":[],"main":1198})
+[PASS] 45: 1366px system: no overflow and all buttons >=44 CSS px ({"width":1366,"scroll":1366,"small":[],"main":1198})
+[PASS] 46: 1920px field: no overflow and all buttons >=44 CSS px ({"width":1920,"scroll":1920,"small":[],"main":1198})
+[PASS] 47: 1920px loadout: no overflow and all buttons >=44 CSS px ({"width":1920,"scroll":1920,"small":[],"main":1198})
+[PASS] 48: 1920px journal: no overflow and all buttons >=44 CSS px ({"width":1920,"scroll":1920,"small":[],"main":1198})
+[PASS] 49: 1920px system: no overflow and all buttons >=44 CSS px ({"width":1920,"scroll":1920,"small":[],"main":1198})
+[PASS] 50: Map enters through original goOut option
+[PASS] 51: Touching a Pixi POI travels to its real map through Core exactly once
+[PASS] 52: Item detail exposes real inventory action
+[PASS] 53: Inventory consumes exactly one real item
+[PASS] 54: Destructive confirmation takes focus above item sheet
+[PASS] 55: Cancel discard preserves inventory and returns to detail sheet
+[PASS] 56: Settings opens within shell, not hidden by legacy display writes
+[PASS] 57: Input-only preference disables click choices, retains numeric entry
+[PASS] 58: Cannot disable the last control mode; accessible notice opens
+[PASS] 59: Save screen uses canonical phase and shows all slots
+[PASS] 60: Save numeric input is visible in input-only mode
+[PASS] 61: Save slot 1 writes unchanged protocol
+[PASS] 62: Load slot restores character and routes to saved map through Core
+[PASS] 63: Base screen exposes real crop slots without advancing time
+[PASS] 64: Warehouse opens via real base options
+[PASS] 65: Warehouse focus is inside dialog
+[PASS] 66: Warehouse deposits one item through existing transfer API
+[PASS] 67: Modal close restores background interactivity
+[PASS] 68: Encounter screen presents pending enemy without running combat
+[PASS] 69: Save shortcut cannot bypass transient combat guard
+[PASS] 70: Actual combat resolves through Core and presents its real log
+[PASS] 71: Recipe screen retains every original recipe and disabled eligibility
+[PASS] 72: Twenty view cycles retain a single Pixi application canvas
+[PASS] 73: Low landscape retains readable content area
+[PASS] 74: 200% text scaling avoids horizontal document overflow
+[PASS] 75: Terminal ending hides navigation and only exposes Core restart
+[PASS] 76: Restart returns to character setup
+[PASS] 77: probability: CSV loaded offline-local and 320px reader has no horizontal overflow
+[PASS] 78: encyclopedia: CSV loaded offline-local and 320px reader has no horizontal overflow
+[PASS] 79: Encyclopedia search executes without selector exception
+[PASS] 80: No uncaught JavaScript exceptions ([])
+[PASS] 81: No external HTTP dependency during tested journeys
+BATCH10 BROWSER: 81 PASS / 0 FAIL / 0 SKIP

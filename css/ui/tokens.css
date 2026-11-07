@@ -1,0 +1,19 @@
+:root {
+  color-scheme: dark;
+  --ui-bg: #0b1010;
+  --ui-surface: #151d1c;
+  --ui-raised: #202b28;
+  --ui-border: #3b4a44;
+  --ui-text: #f0f3e9;
+  --ui-muted: #b6c2b7;
+  --ui-accent: #d1e58b;
+  --ui-health: #9acd9c;
+  --ui-water: #8fc9dc;
+  --ui-warning: #e8bc74;
+  --ui-danger: #f28b82;
+  --ui-radius: 10px;
+  --ui-gutter: 12px;
+  --ui-font: 'Segoe UI', system-ui, sans-serif;
+  --ui-mono: Consolas, ui-monospace, monospace;
+}
+@media (min-width: 360px) { :root { --ui-gutter: 16px; } }

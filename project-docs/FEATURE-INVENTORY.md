@@ -1,5 +1,15 @@
 # Feature Inventory — Zombie-World-RPG
 
+## Trạng thái UI hiện hành — Batch 10 (2026-11-07)
+
+- Đã thay shell, navigation, typography, tokens, responsive layout và presentation toàn bộ nhóm màn qua lớp Field Terminal; không giữ dashboard desktop cũ.
+- Các screen chuyên biệt: setup, field/map, encounter/result, loadout/profile, inventory sheet, discard, base/crop projection, warehouse, journal, save/load, settings, achievements/record, About, endgame và tools. NPC/quest/trade/castle/outpost/island tiếp tục đầy đủ options qua renderer mới dùng chung; chưa có layout bespoke cho từng NPC/service.
+- Có chế biến món ăn theo `SEAFOOD_MEAL_RECIPES` tại Lâm Hàn (`island/linhan.js`); mục “không có crafting” cũ không bao quát chức năng này. Không thêm hệ crafting tổng quát, skill/EXP hay greenhouse mới.
+- Browser regression thực: 10 độ rộng 320–1920px cho bốn primary routes, POI touch, item/discard/kho, numeric save/load, combat/endings và tools. Không suy ra đã thử mọi nhánh NPC/economy hoặc thiết bị thật.
+- Chưa hoàn tất nghiệm thu iOS/Android thật, Firefox/WebKit, performance/memory profiling và toàn bộ saves lịch sử. Xem báo cáo acceptance để phân biệt integrated và verified.
+
+Các bảng cũ phía dưới là inventory lịch sử, không phải mô tả layout Batch 10 đang chạy.
+
 Danh sach toan bo tinh nang, phan loai theo nhom A-G.
 Trang thai: Hoan thien / Dang phat trien / Chua co / Chua xac minh.
 

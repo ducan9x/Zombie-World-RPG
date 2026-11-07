@@ -279,7 +279,10 @@ async function runAudit() {
   // ==========================================================
   // TEST 7: Headless Chromium Exact Bounding-Box Across 8 Viewports
   // ==========================================================
-  {
+  if (fs.readFileSync('index.html', 'utf8').includes('id="primary-nav"')) {
+    try { record(7, 'Production Field Terminal combat/story browser acceptance', true, require('./helpers/current-ui-audit.cjs')()); }
+    catch (error) { record(7, 'Production Field Terminal combat/story browser acceptance', false, error.message); }
+  } else {
     const VIEWPORTS = [
       { name: 'Mobile 320x640', w: 320, h: 640, isMobile: true },
       { name: 'Mobile 360x800', w: 360, h: 800, isMobile: true },
